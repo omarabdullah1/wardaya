@@ -40,7 +40,7 @@ class SearchScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                   child: Material(
-                    elevation: 2.8, // Set the elevation for shadow
+                    elevation: 2.8, // Set the elevation for shadoww
                     borderRadius: BorderRadius.circular(30.0),
 
                     child: SizedBox(
