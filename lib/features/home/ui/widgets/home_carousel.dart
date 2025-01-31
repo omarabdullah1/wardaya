@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
+import 'package:wardaya/core/theming/colors.dart';
 
 class HomeCarouselSlider extends StatefulWidget {
   const HomeCarouselSlider({super.key});
@@ -14,6 +15,7 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
   final PageController _controller = PageController();
 
   final List<String> _images = [
+    'assets/images/flowers.png',
     'assets/images/flowers.png',
     'assets/images/flowers.png',
     'assets/images/flowers.png',
@@ -55,7 +57,7 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
                   dotHeight: 4.0,
                   paintStyle: PaintingStyle.fill,
                   dotColor: Colors.grey,
-                  activeDotColor: Color(0xff074E59),
+                  activeDotColor: ColorsManager.mainRose,
                 ),
               ),
             ),

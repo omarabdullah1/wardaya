@@ -71,7 +71,6 @@ flutter:
       fonts:
         - asset: assets/fonts/Kammerlander-Bold.ttf
         - asset: assets/fonts/Kammerlander-Regular.ttf
-  #   - family: Poppins
-  #     fonts:
-  #       - asset: assets/fonts/Poppins-Bold.ttf
-  #       - asset: assets/fonts/Poppins-Regular.ttf
+    - family: WardayaIcons 
+      fonts:
+        - asset: assets/fonts/WardayaIcons.ttf  

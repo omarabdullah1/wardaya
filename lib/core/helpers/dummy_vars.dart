@@ -97,10 +97,10 @@ final List<String> brandsTitles = [
   'Mubkhar',
   'Hanoverian',
   'Damas',
-  'Sweet Atelier by Mona Mosly',
+  'Hanoverian',
   'Levo',
   'September Studio',
-  'Sweet Atelier by Mona Mosly',
+  'Damas',
   'Levo',
   'September Studio',
 ];

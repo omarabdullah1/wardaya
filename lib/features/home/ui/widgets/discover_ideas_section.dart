@@ -1,26 +1,29 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:wardaya/core/theming/colors.dart';
 
 class DiscoverIdeasSection extends StatelessWidget {
   const DiscoverIdeasSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(top: 40, left: 20),
+    return Padding(
+      padding: const EdgeInsets.only(top: 40, left: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Discover New Ideas',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Colors.teal,
+            style: GoogleFonts.ebGaramond(
+              fontSize: 32.sp,
+              fontWeight: FontWeight.w400,
+              color: ColorsManager.mainRose,
             ),
           ),
-          SizedBox(height: 20),
-          SizedBox(
+          const SizedBox(height: 20),
+          const SizedBox(
             height: 300, // Adjust this based on your card height
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,

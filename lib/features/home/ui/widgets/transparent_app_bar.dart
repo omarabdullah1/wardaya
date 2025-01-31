@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/routing/routes.dart';
 
+import '../../../../core/theming/styles.dart';
+
 class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
   const TransparentAppBar({super.key});
 
@@ -39,14 +41,11 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            child: Text(
-              'WARDAYA',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 40.sp,
-                fontWeight: FontWeight.w200,
-                letterSpacing: 2,
-                fontFamily: 'Kammerlander',
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                'WARDAYA',
+                style: TextStylesKammer.font35WhiteRegular,
               ),
             ),
           ),

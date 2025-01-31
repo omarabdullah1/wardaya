@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../featres/home/ui/home_screen.dart';
-import '../../featres/search/ui/search_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wardaya/core/di/dependency_injection.dart';
+import 'package:wardaya/features/layout/logic/cubit/layout_cubit.dart';
+import '../../features/layout/ui/home_layout.dart';
+import '../../features/search/ui/search_screen.dart';
 import 'routes.dart';
 
 class AppRouter {
@@ -20,9 +23,12 @@ class AppRouter {
       //       child: const LoginScreen(),
       //     ),
       //   );
-      case Routes.homeScreen:
+      case Routes.homeLayout:
         return MaterialPageRoute(
-          builder: (_) => const HomeScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<LayoutCubit>(),
+            child: const HomeLayout(),
+          ),
         );
       case Routes.searchScreen:
         return MaterialPageRoute(

@@ -1,42 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ColorsManager {
-  static const Color mainBlue = Color(0xFF07838F);
-  static const Color softShadePinkishWhite = Color(0xFFF7F4F4);
-  static const Color lightBlue = Color(0xFF00C0A9);
-  static const Color mintBlue = Color(0xFF00D1B8);
-  static const Color darkCyan = Color(0xFF39A1AB);
-  static const Color lighterBlue = Color(0xFFF7F4F4);
-  static const Color lighterLightBlue = Color(0xFFCECECE);
+  static const Color mainRose = Color(0xFFB76D68);
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
+  static const Color black87 = Color(0xDD000000);
   static const Color obacity30black = Color(0x4D000000);
-  static const Color gray = Color(0xFF757575);
-  static const Color darkGray = Color(0xFF4A4A4A);
-  static const Color lightGray = Color(0xFFC2C2C2);
-  static const Color lighterGray = Color(0xFFEDEDED);
-  static const Color lightLighterGray = Color(0xFF707070);
-  static const Color moreLightGray = Color(0xFFFDFDFF);
-  static const Color moreLighterGray = Color(0xFFF5F5F5);
-  static const Color powderBlue = Color(0xFFE8EBF0);
+  static const Color grey = Color(0xFF9E9E9E);
+  static const Color lightGrey = Color(0xFFD9D9D9);
+  static const Color darkGray = Color(0xFF515151);
+  static const Color offWhite = Color(0xFFF7F6F2);
   static const Color transparent = Color(0x00000000);
-  static const Color coolGray = Color(0xFF6B7088);
-  static const Color adobeGray = Color(0xFFBEBEBE);
-  static const Color goldenOrange = Color(0xFFFFAB07);
-  static const Color vividGreen = Color(0xFF01BD36);
-  static const Color darkRed = Color(0xFFAB0202);
-  static const Color mediumPurple = Color(0xFF8B40D6);
-  static const Color deepAqua = Color(0xFF008E7D);
-  static const Color slateGray = Color(0xFF565D6D);
-  static const Color mediumGray = Color(0xFF9C9C9C);
-  static const Color charcoalBlue = Color(0xFF04192C);
-  static const Color limeGreen = Color(0xFF70D162);
-  static const Color neonGreen = Color(0xFF02EF61);
-  static const Color mintGreen = Color(0xFF43EE7D);
-  static const Color mediumDarkGrayShade = Color(0xFF444444);
-  static const Color mediumGrayShade = Color(0xFF636363);
-  static const Color darkCharcoalGray = Color(0xFF373737);
-  static const Color aliceBlue = Color(0xFFF4F8FF);
-  static const Color babyBlue = Color(0xFFE9FBFF);
-  static const Color mintFrost = Color(0xFFe4f8f5);
 }
