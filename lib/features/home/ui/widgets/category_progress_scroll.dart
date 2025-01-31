@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 
+import '../../../../core/theming/colors.dart';
+
 class CategoryProgressScroll extends StatefulWidget {
   final List<String> categoriesImages;
   final List<String> titles;
@@ -127,11 +129,12 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
         ),
         SizedBox(height: 18.h),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: context.pOH(3).w),
+          padding: EdgeInsets.symmetric(horizontal: context.pOW(5).w),
           child: LinearProgressIndicator(
             value: _scrollProgress,
             backgroundColor: Colors.grey[200],
-            valueColor: const AlwaysStoppedAnimation<Color>(Color(0xff074E59)),
+            valueColor:
+                const AlwaysStoppedAnimation<Color>(ColorsManager.mainRose),
             minHeight: 1.5,
           ),
         ),
@@ -139,15 +142,16 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
     );
   }
 
-  Widget _buildCategoryItem(
-      {Key? key,
-      required int index,
-      required String title,
-      required String imagePath,
-      required BuildContext context}) {
+  Widget _buildCategoryItem({
+    Key? key,
+    required int index,
+    required String title,
+    required String imagePath,
+    required BuildContext context,
+  }) {
     return Container(
       key: key, // Assign the key to the first item
-      margin: const EdgeInsets.only(right: 15),
+      margin: const EdgeInsetsDirectional.only(start: 15),
       child: Column(
         children: [
           Container(
@@ -158,7 +162,10 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
                 imagePath.isNullOrEmpty() ? context.pOH(6).h : context.pOH(7).h,
             decoration: imagePath.isNullOrEmpty()
                 ? const BoxDecoration(
-                    shape: BoxShape.rectangle, color: Color(0xffF0E9E0))
+                    shape: BoxShape.rectangle,
+                    color: Color(0xffF0E9E0),
+                    borderRadius: BorderRadius.all(Radius.circular(12.5)),
+                  )
                 : BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(imagePath),
@@ -167,14 +174,15 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
                   ),
           ),
           SizedBox(height: 5.h),
-          Text(
-            title,
-            style: GoogleFonts.inter(
-              color: const Color(0xff074E59),
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w400,
+          if (!title.isNullOrEmpty())
+            Text(
+              title,
+              style: GoogleFonts.inter(
+                color: ColorsManager.mainRose,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w400,
+              ),
             ),
-          ),
         ],
       ),
     );

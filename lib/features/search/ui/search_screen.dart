@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
+import 'package:wardaya/core/theming/colors.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -12,8 +13,8 @@ class SearchScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xffF7F6F2),
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(
-            kToolbarHeight + 20), // Add some extra space for padding
+        preferredSize: Size.fromHeight(
+            kToolbarHeight + 30.h), // Add some extra space for padding
         child: Container(
           padding: const EdgeInsets.symmetric(
             horizontal: 16,
@@ -27,7 +28,7 @@ class SearchScreen extends StatelessWidget {
               IconButton(
                 icon: const Icon(
                   Icons.arrow_back_ios,
-                  color: Color(0xff074E59),
+                  color: ColorsManager.mainRose,
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -42,19 +43,18 @@ class SearchScreen extends StatelessWidget {
                   child: Material(
                     elevation: 2.8, // Set the elevation for shadoww
                     borderRadius: BorderRadius.circular(30.0),
-
                     child: SizedBox(
                       height: 40.h,
                       child: CupertinoSearchTextField(
                         placeholder: 'Search for flowers, gifts, and more',
                         style: GoogleFonts.inter(
-                          color: Colors.black,
+                          color: ColorsManager.grey,
                           fontWeight: FontWeight.w400,
                           fontSize: 13.sp,
                         ),
                         prefixIcon: const Icon(
                           CupertinoIcons.search,
-                          color: Color(0xff074E59),
+                          color: ColorsManager.mainRose,
                         ),
                         itemSize: 24,
                         itemColor: Colors.black,
@@ -80,24 +80,26 @@ class SearchScreen extends StatelessWidget {
               // Handle button press
             },
             style: ElevatedButton.styleFrom(
-              fixedSize: Size(context.pOW(45).w, context.pOH(4.0).h),
+              fixedSize: Size(context.screenWidth.w, 40.h),
               alignment: AlignmentDirectional.center,
-              backgroundColor: const Color(0xff074E59),
+              backgroundColor: ColorsManager.mainRose,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
               ),
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
             ),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.search, color: Colors.white),
-                SizedBox(width: 8.0),
-                Text(
-                  'Search',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-              ],
+            child: const Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.search, color: Colors.white),
+                  SizedBox(width: 8.0),
+                  Text(
+                    'Search',
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

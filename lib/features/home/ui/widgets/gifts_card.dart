@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
+import 'package:wardaya/core/theming/colors.dart';
 
 class GiftsCardBuilder extends StatelessWidget {
   final List prices;
@@ -41,7 +42,7 @@ class GiftsCardBuilder extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 20.h,
+              height: 10.h,
             ),
             // Product Box 3
             Row(
@@ -63,7 +64,7 @@ class GiftsCardBuilder extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
 
         // 3. Button
         SizedBox(
@@ -75,7 +76,7 @@ class GiftsCardBuilder extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(28),
                 side: const BorderSide(
-                  color: Colors.teal, // Button border
+                  color: ColorsManager.darkGray, // Button border
                   width: 1.0, // Button border width
                 ),
               ),
@@ -88,7 +89,10 @@ class GiftsCardBuilder extends StatelessWidget {
               child: Text(
                 buttonText,
                 style: GoogleFonts.inter(
-                    fontWeight: FontWeight.w700, fontSize: 14.0.sp),
+                  color: ColorsManager.darkGray,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 14.0.sp,
+                ),
               ),
             ),
           ),
@@ -110,11 +114,11 @@ class GiftsCardBuilder extends StatelessWidget {
         children: [
           // Placeholder for the product images
           Container(
-            width: context.pOW(35).w,
-            height: context.pOH(12.5).h,
+            width: context.pOW(38).w,
+            height: context.pOH(13).h,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: Colors.grey.shade300,
+              color: ColorsManager.lightGrey,
             ),
           ),
           const SizedBox(height: 10),
@@ -125,7 +129,7 @@ class GiftsCardBuilder extends StatelessWidget {
                 text: 'SAR ',
                 style: GoogleFonts.inter(
                   fontWeight: FontWeight.w400,
-                  color: Colors.teal,
+                  color: ColorsManager.mainRose,
                   fontSize: 11.sp,
                 ),
                 children: [
@@ -133,7 +137,7 @@ class GiftsCardBuilder extends StatelessWidget {
                     text: '$price',
                     style: GoogleFonts.inter(
                       fontWeight: FontWeight.bold,
-                      color: Colors.teal,
+                      color: ColorsManager.mainRose,
                       fontSize: 13.sp,
                     ),
                   ),
@@ -146,7 +150,7 @@ class GiftsCardBuilder extends StatelessWidget {
             style: GoogleFonts.inter(
               fontSize: 13.sp,
               fontWeight: FontWeight.w400,
-              color: Colors.teal,
+              color: ColorsManager.mainRose,
             ),
           ),
         ],
