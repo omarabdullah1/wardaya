@@ -1,0 +1,4 @@
+enum NetZeroFormsEnum{
+  employee,
+  bussiness,
+}
