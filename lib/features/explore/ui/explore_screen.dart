@@ -55,7 +55,7 @@ class ExploreScreen extends StatelessWidget {
                         context.pushNamed(Routes.momentsScreen);
                       },
                     ),
-                    Spacer(),
+                    const Spacer(),
                     ExploreCardItem(
                       imageUrl:
                           'https://s3-alpha-sig.figma.com/img/18dc/f83a/beb6a599c1c021e02d83dbbbbd0ea135?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=l4B7WhxNeG2VUTv-juNjMGiFxWhjbHy0~UxktKCKBIMfyh7p258zDIxE1ljehsH1ytYYCfUZVTkGt9qRbsXZfIDhypfAvLL0Ww1JFaa1S4E8s2KW~5R4~KBsfSi8epMOz1n3RO5BzVsNi8cZnJNQCFrv75OiCkR2C8RkT6IewTjiuxz1OFeAyFi1OgIeFZRvQa8IwEoOG9e9T7iflb1u4rmfmkmV9AbbpT7crmk7WkYrEru44CzFp-X0gkIgFQckLUI0QXG9~zQMLcEEXj9I7EibtHj3q8QmYXRHahtnl1lkne-5Hi911SFZDpSJkXKoIB-xGjxbA3BzXkYqnbNUkg__',
@@ -231,39 +231,39 @@ class ExploreScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCategoryCard({required String imageUrl, required String label}) {
-    return Stack(
-      children: [
-        Container(
-          height: 180,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            image: DecorationImage(
-              image: CachedNetworkImageProvider(
-                imageUrl,
-              ),
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        Positioned(
-          bottom: 10,
-          left: 10,
-          right: 10,
-          child: Center(
-            child: Text(
-              label,
-              style: const TextStyle(
-                color: ColorsManager.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+  // Widget _buildCategoryCard({required String imageUrl, required String label}) {
+  //   return Stack(
+  //     children: [
+  //       Container(
+  //         height: 180,
+  //         decoration: BoxDecoration(
+  //           borderRadius: BorderRadius.circular(12),
+  //           image: DecorationImage(
+  //             image: CachedNetworkImageProvider(
+  //               imageUrl,
+  //             ),
+  //             fit: BoxFit.cover,
+  //           ),
+  //         ),
+  //       ),
+  //       Positioned(
+  //         bottom: 10,
+  //         left: 10,
+  //         right: 10,
+  //         child: Center(
+  //           child: Text(
+  //             label,
+  //             style: const TextStyle(
+  //               color: ColorsManager.white,
+  //               fontWeight: FontWeight.bold,
+  //               fontSize: 16,
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget _buildCategoryButton(
       {required String text,

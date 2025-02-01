@@ -3,13 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wardaya/features/explore/ui/explore_screen.dart';
 import 'package:wardaya/features/home/ui/home_screen.dart';
 
-import '../../../core/helpers/extensions.dart';
 import '../../../core/theming/colors.dart';
 
+import '../../cart/ui/cart_screen.dart';
 import '../logic/cubit/layout_cubit.dart';
 import '../logic/cubit/layout_state.dart';
 import 'widgets/bottom_nav_bar_widget.dart';
-import 'widgets/screen_title_builder.dart';
 
 class HomeLayout extends StatefulWidget {
   const HomeLayout({super.key});
@@ -35,8 +34,8 @@ class _HomeLayoutState extends State<HomeLayout> {
                       return const HomeScreen();
                     case 1:
                       return const ExploreScreen();
-                    // case 2:
-                    //   return const SearchScreen();
+                    case 2:
+                      return const CartScreen();
 
                     // case 3:
                     //   return const MoreScreen();
