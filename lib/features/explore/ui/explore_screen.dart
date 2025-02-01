@@ -45,18 +45,24 @@ class ExploreScreen extends StatelessWidget {
               SizedBox(height: 20.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0.w),
-                child: const Row(
+                child: Row(
                   children: [
                     ExploreCardItem(
                       imageUrl:
                           'https://s3-alpha-sig.figma.com/img/8e3e/9429/5f9afb33f407be39848aa2053e8f09bc?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=X5~lhyoouM3Jy0awOt~p0N2sY2agbolhlbp1Mux25iZgVjcF0kYkpKS5rMfmLve2khXMiIhiSG9tXqvSFlzc55wk6-VymbYXh3PmDSW-rB0tS7Uzg6349logsqj57~lNmGuOeCKF9Hz2IrxHN2zX0U~-50pe9nolHyeGd1S-n5OhbCYc~SIvZSDgLSPSdygF2ENrIgJj-ydNkWvl2bTuREtTLkJ631e86OyJFaA6bBgWK1wSpMDGko5vMZQXYKeLtTcvHs0BJy6uKcYPjXONYM3ZCoSGbm7EE2AchwPkgfv87AYL57NGNG~Dw6L~gx6kDIwwsJi~r5L8rs~Vtao6Qw__',
                       lable: 'Moments',
+                      onTap: () {
+                        context.pushNamed(Routes.momentsScreen);
+                      },
                     ),
                     Spacer(),
                     ExploreCardItem(
                       imageUrl:
                           'https://s3-alpha-sig.figma.com/img/18dc/f83a/beb6a599c1c021e02d83dbbbbd0ea135?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=l4B7WhxNeG2VUTv-juNjMGiFxWhjbHy0~UxktKCKBIMfyh7p258zDIxE1ljehsH1ytYYCfUZVTkGt9qRbsXZfIDhypfAvLL0Ww1JFaa1S4E8s2KW~5R4~KBsfSi8epMOz1n3RO5BzVsNi8cZnJNQCFrv75OiCkR2C8RkT6IewTjiuxz1OFeAyFi1OgIeFZRvQa8IwEoOG9e9T7iflb1u4rmfmkmV9AbbpT7crmk7WkYrEru44CzFp-X0gkIgFQckLUI0QXG9~zQMLcEEXj9I7EibtHj3q8QmYXRHahtnl1lkne-5Hi911SFZDpSJkXKoIB-xGjxbA3BzXkYqnbNUkg__',
                       lable: 'Recipients',
+                      onTap: () {
+                        context.pushNamed(Routes.recipientsScreen);
+                      },
                     ),
                   ],
                 ),
@@ -67,6 +73,9 @@ class ExploreScreen extends StatelessWidget {
                 child: _buildCategoryButton(
                   text: 'Flowers & Plants',
                   imagePath: 'assets/images/flowersAndPlants.png',
+                  onTap: () {
+                    context.pushNamed(Routes.flowersPlantsScreen);
+                  },
                 ),
               ),
               const SizedBox(height: 10),
@@ -75,6 +84,9 @@ class ExploreScreen extends StatelessWidget {
                 child: _buildCategoryButton(
                   text: 'Flowers & Gifts',
                   imagePath: 'assets/images/flowersAndGifts.png',
+                  onTap: () {
+                    context.pushNamed(Routes.flowersGiftsScreen);
+                  },
                 ),
               ),
               SizedBox(height: 20.h),
@@ -254,31 +266,38 @@ class ExploreScreen extends StatelessWidget {
   }
 
   Widget _buildCategoryButton(
-      {required String text, required String imagePath}) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: ColorsManager.lightGrey.withAlpha(76),
-          width: 0.85,
+      {required String text,
+      required String imagePath,
+      required Function onTap}) {
+    return InkWell(
+      onTap: () {
+        onTap();
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: ColorsManager.lightGrey.withAlpha(76),
+            width: 0.85,
+          ),
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(text,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                  color: ColorsManager.mainRose,
-                )),
-            Image.asset(
-              imagePath,
-              height: 60.h,
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(text,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
+                    color: ColorsManager.mainRose,
+                  )),
+              Image.asset(
+                imagePath,
+                height: 60.h,
+              ),
+            ],
+          ),
         ),
       ),
     );

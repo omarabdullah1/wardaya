@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <desc>Created with Fabric.js 5.2.4</desc>
+  <desc>Created with Fabric.js 5.2.4</desc>
+  <desc>Created with Fabric.js 5.2.4</desc>
+  <g transform="matrix(1, -0.005609, 0, 1, 274.074371, 440.918274)" id="08d9d777-2f35-4923-8ba2-f9f87cc80b83" style=""/>
+  <g transform="matrix(1, -0.005609, 0, 1, 274.074371, 440.918274)" id="b6f93025-a43a-41e1-9505-8ea8261548eb" style="">
+    <rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1; visibility: hidden;" vector-effect="non-scaling-stroke" x="-540" y="-540" rx="0" ry="0" width="1080" height="1080"/>
+  </g>
+  <g transform="matrix(22.59866, -0.126761, 0, 22.59866, 249.630661, 276.582642)" style="">
+    <g transform="matrix(1, 0, 0, 1, 0, 4.85)" vector-effect="non-scaling-stroke"/>
+    <g transform="matrix(1, 0, 0, 1, 0.01, 4.85)" vector-effect="non-scaling-stroke"/>
+    <g transform="matrix(1.049794, 0, 0, 1.049794, -0.61592, -5.513886)" vector-effect="non-scaling-stroke" style="">
+      <g>
+        <g>
+          <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(183, 109, 104); fill-opacity: 0.7; fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke" d="M 5.052 -1.116 C 5.034 1.381 3.037 3.329 0.526 3.302 C -1.963 3.274 -3.904 1.261 -3.864 -1.251 C -3.826 -3.697 -1.851 -5.622 0.609 -5.616 C 3.109 -5.609 5.07 -3.623 5.052 -1.116 Z M 0.571 -4.06 C -0.983 -4.042 -2.306 -2.713 -2.308 -1.161 C -2.31 0.39 -0.99 1.724 0.564 1.746 C 2.151 1.766 3.531 0.377 3.496 -1.206 C 3.464 -2.761 2.116 -4.075 0.571 -4.06 Z" stroke-linecap="round"/>
+          <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(183, 109, 104); fill-opacity: 0.7; fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke" d="M 0.643 13.844 C -0.903 13.844 -2.446 13.86 -3.992 13.84 C -5.866 13.812 -7.008 12.683 -7.028 10.817 C -7.037 9.911 -7.13 8.998 -6.847 8.102 C -6.266 6.258 -4.742 4.989 -2.827 4.943 C -0.546 4.888 1.739 4.878 4.02 4.945 C 6.32 5.013 8.05 6.837 8.215 9.137 C 8.458 12.531 7.643 14.105 3.804 13.854 C 2.752 13.787 1.697 13.844 0.643 13.844 Z M 0.548 12.296 C 2.02 12.296 3.491 12.291 4.964 12.298 C 5.593 12.3 6.151 12.175 6.48 11.57 C 7.635 9.448 6.089 6.569 3.684 6.48 C 1.619 6.405 -0.451 6.44 -2.518 6.476 C -3.688 6.496 -4.599 7.034 -5.151 8.098 C -5.559 8.88 -5.502 9.73 -5.487 10.568 C -5.466 11.806 -4.997 12.282 -3.762 12.296 C -2.326 12.309 -0.888 12.296 0.548 12.296 Z" stroke-linecap="round"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
