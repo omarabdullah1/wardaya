@@ -516,93 +516,147 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       },
                       child: Container(
                         decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(16)),
+                          color: ColorsManager.lighterGrey,
+                          borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(20)), // Rounded corners
                         ),
                         child: Column(
+                          mainAxisSize:
+                              MainAxisSize.min, // Important for correct sizing
+                          crossAxisAlignment:
+                              CrossAxisAlignment.start, // Align to the start
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Filter Options',
-                                    style: GoogleFonts.inter(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                            Material(
+                              elevation: 1.0,
+                              shadowColor: ColorsManager.grey,
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  color: ColorsManager.white,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
                                   ),
-                                  IconButton(
-                                    icon: const Icon(Icons.close),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Flexible(
+                                        flex: 3,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'Filters',
+                                              style: GoogleFonts.ebGaramond(
+                                                fontSize: 30.sp,
+                                                fontWeight: FontWeight.w400,
+                                                color: ColorsManager.mainRose,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Flexible(
+                                        flex: 1,
+                                        child: InkWell(
+                                          onTap: () => context.pop(),
+                                          child: Container(
+                                            decoration: const BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: ColorsManager.lighterGrey,
+                                            ),
+                                            child: const Padding(
+                                              padding: EdgeInsets.all(8.0),
+                                              child: Icon(
+                                                Icons.close,
+                                                color: ColorsManager.mainRose,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
                             ),
+                            const SizedBox(height: 20), // Spacing after title
                             Expanded(
-                              child: ListView(
-                                controller: scrollController,
-                                children: <Widget>[
-                                  _buildBottomSheetFilter(
-                                      "Category",
-                                      "category",
-                                      [
-                                        "All",
-                                        "Cakes",
-                                        "Flowers",
-                                        "Sweets & Chocolate",
-                                        "Jewelry",
-                                        "Perfumes",
-                                        "Vouchers"
-                                      ],
-                                      setState),
-                                  _buildBottomSheetFilter(
-                                      "Occasion",
-                                      "occasion",
-                                      [
-                                        "All",
-                                        "Birthday",
-                                        "Anniversary",
-                                        "General"
-                                      ],
-                                      setState),
-                                  _buildBottomSheetFilter(
-                                      "Recipient",
-                                      "recipient",
-                                      [
-                                        "All",
-                                        "Adult",
-                                        "Partner",
-                                        "Child",
-                                        "Parent",
-                                        "Friend",
-                                        "Any"
-                                      ],
-                                      setState),
-                                  _buildBottomSheetFilter(
-                                      "Color",
-                                      "color",
-                                      [
-                                        "All",
-                                        "Red",
-                                        "Brown",
-                                        "Multi",
-                                        "White",
-                                        "Gold",
-                                        "Silver",
-                                        "None"
-                                      ],
-                                      setState),
-                                ],
+                              // Use Expanded to fill available space
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20.0),
+                                child: SingleChildScrollView(
+                                  // Use SingleChildScrollView if content might overflow
+                                  child: Column(
+                                    children: <Widget>[
+                                      _buildBottomSheetFilter(
+                                          "Category",
+                                          "category",
+                                          [
+                                            "All",
+                                            "Cakes",
+                                            "Flowers",
+                                            "Sweets & Chocolate",
+                                            "Jewelry",
+                                            "Perfumes",
+                                            "Vouchers"
+                                          ],
+                                          setState),
+                                      _buildBottomSheetFilter(
+                                          "Occasion",
+                                          "occasion",
+                                          [
+                                            "All",
+                                            "Birthday",
+                                            "Anniversary",
+                                            "General"
+                                          ],
+                                          setState),
+                                      _buildBottomSheetFilter(
+                                          "Recipient",
+                                          "recipient",
+                                          [
+                                            "All",
+                                            "Adult",
+                                            "Partner",
+                                            "Child",
+                                            "Parent",
+                                            "Friend",
+                                            "Any"
+                                          ],
+                                          setState),
+                                      _buildBottomSheetFilter(
+                                          "Color",
+                                          "color",
+                                          [
+                                            "All",
+                                            "Red",
+                                            "Brown",
+                                            "Multi",
+                                            "White",
+                                            "Gold",
+                                            "Silver",
+                                            "None"
+                                          ],
+                                          setState),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
-                            _buildBottomSheetButton(
-                                setState), // Apply and Show all
+                            const SizedBox(height: 20), // Spacing before button
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: _buildBottomSheetButton(setState),
+                            ),
                           ],
                         ),
                       ),
@@ -619,17 +673,84 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   Widget _buildBottomSheetButton(StateSetter setModalState) {
     int filteredCount = _calculateFilteredCount();
+    return ElevatedButton(
+      onPressed: () {
+        setState(() {
+          _selectedFilters = Map.from(_tempFilters);
+          _applyFilters();
+        });
+        Navigator.pop(context);
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: ColorsManager.mainRose, // Set background color
+        foregroundColor: Colors.white, // Set text color
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25), // Set rounded corners
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 15), // Set padding
+        textStyle: GoogleFonts.inter(
+          fontSize: 16.0.sp,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+      child: Center(
+          child: Text('Show $filteredCount Products')), // Center the text
+    );
+  }
+
+  Widget _buildBottomSheetFilter(String title, String filterType,
+      List<String> options, StateSetter setModalState) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: ElevatedButton(
-        onPressed: () {
-          setState(() {
-            _selectedFilters = Map.from(_tempFilters);
-            _applyFilters();
-          });
-          Navigator.pop(context);
-        },
-        child: Text('Show $filteredCount Products'),
+      padding: const EdgeInsets.only(top: 16.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: ColorsManager.white,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: ExpansionTile(
+          iconColor: ColorsManager.mainRose,
+          collapsedIconColor: ColorsManager.mainRose,
+          backgroundColor: ColorsManager.white,
+          title: Text(
+            title,
+            style: GoogleFonts.inter(
+              fontSize: 16.0.sp,
+              fontWeight: FontWeight.w500,
+              color: ColorsManager.mainRose,
+            ),
+          ),
+          childrenPadding: const EdgeInsets.symmetric(
+              horizontal: 20), // Add padding to the children
+          expandedCrossAxisAlignment:
+              CrossAxisAlignment.start, // Align children to start
+          children: options
+              .map(
+                (option) => RadioListTile<String>(
+                  controlAffinity: ListTileControlAffinity.trailing,
+                  fillColor: WidgetStateProperty.all(ColorsManager.mainRose),
+                  title: Text(
+                    option,
+                    style: GoogleFonts.inter(
+                      fontSize: 14.0.sp,
+                      fontWeight: FontWeight.normal,
+                      color: ColorsManager.mainRose,
+                    ),
+                  ),
+                  value: option,
+                  groupValue: _tempFilters[filterType],
+                  onChanged: (value) {
+                    setModalState(() {
+                      if (value == "All") {
+                        _tempFilters[filterType] = null;
+                      } else {
+                        _tempFilters[filterType] = value;
+                      }
+                    });
+                  },
+                ),
+              )
+              .toList(),
+        ),
       ),
     );
   }
@@ -667,28 +788,5 @@ class _CategoryScreenState extends State<CategoryScreen> {
           priceMatch;
     }).toList();
     return filteredProducts.length;
-  }
-
-  Widget _buildBottomSheetFilter(String title, String filterType,
-      List<String> options, StateSetter setModalState) {
-    return ExpansionTile(
-      title: Text(title),
-      children: options
-          .map((option) => RadioListTile<String>(
-                title: Text(option),
-                value: option,
-                groupValue: _tempFilters[filterType],
-                onChanged: (value) {
-                  setModalState(() {
-                    if (value == "All") {
-                      _tempFilters[filterType] = null;
-                    } else {
-                      _tempFilters[filterType] = value;
-                    }
-                  });
-                },
-              ))
-          .toList(),
-    );
   }
 }
