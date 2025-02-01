@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:wardaya/core/theming/colors.dart';
 
 import '../../../../core/theming/wardaya_icons_icons.dart';
@@ -17,7 +19,7 @@ class BottomNavBarWidget extends StatelessWidget {
       builder: (context, state) {
         return Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: ColorsManager.offWhite,
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withAlpha(25),
@@ -30,10 +32,15 @@ class BottomNavBarWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildNavItem(WardayaIcons.home, 'HOME', 0, context),
-                _buildNavItem(CupertinoIcons.search, 'EXPLORE', 1, context),
-                _buildNavItem(WardayaIcons.cart, 'CART', 2, context),
-                _buildNavItem(WardayaIcons.profile, 'MY ACCOUNT', 3, context),
+                _buildNavItem('assets/svgs/home.svg', 'HOME', 0, context,
+                    height: 25.0),
+                _buildNavItem('assets/svgs/explore.svg', 'EXPLORE', 1, context,
+                    height: 22.0),
+                _buildNavItem('assets/svgs/cart.svg', 'CART', 2, context,
+                    height: 25.0),
+                _buildNavItem(
+                    'assets/svgs/profile.svg', 'MY ACCOUNT', 3, context,
+                    height: 25.0),
               ],
             ),
           ),
@@ -43,7 +50,8 @@ class BottomNavBarWidget extends StatelessWidget {
   }
 
   Widget _buildNavItem(
-      IconData icon, String label, int index, BuildContext context) {
+      String icon, String label, int index, BuildContext context,
+      {double height = 31}) {
     final currentIndex = context.watch<LayoutCubit>().currentIndex;
     return InkWell(
       onTap: () {
@@ -52,23 +60,26 @@ class BottomNavBarWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
+          SvgPicture.asset(
             icon,
-            color: currentIndex == index
-                ? ColorsManager.mainRose
-                : ColorsManager.grey,
-            size: icon == CupertinoIcons.search ? 32 : 24,
+            colorFilter: ColorFilter.mode(
+              currentIndex == index
+                  ? ColorsManager.mainRose
+                  : ColorsManager.grey,
+              BlendMode.srcIn,
+            ),
+            height: height,
           ),
           const SizedBox(height: 4),
           Text(
             label,
-            style: TextStyle(
+            style: GoogleFonts.inter(
               fontSize: 10.sp,
               color: currentIndex == index
                   ? ColorsManager.mainRose
                   : ColorsManager.grey,
               fontWeight:
-                  currentIndex == index ? FontWeight.bold : FontWeight.normal,
+                  currentIndex == index ? FontWeight.bold : FontWeight.w400,
             ),
           ),
         ],
