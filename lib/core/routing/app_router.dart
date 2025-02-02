@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wardaya/core/di/dependency_injection.dart';
+import 'package:wardaya/features/authentication/ui/create_account.dart';
 import 'package:wardaya/features/category/ui/category_screen.dart';
 import 'package:wardaya/features/explore/ui/recipients_screen.dart';
 import 'package:wardaya/features/layout/logic/cubit/layout_cubit.dart';
+import '../../features/authentication/logic/cubit/login_cubit.dart';
+import '../../features/authentication/ui/forget_password.dart';
+import '../../features/authentication/ui/login_screen.dart';
 import '../../features/explore/ui/flowers_gifts.dart';
 import '../../features/explore/ui/flowers_planets.dart';
 import '../../features/explore/ui/moments_screen.dart';
@@ -22,13 +26,13 @@ class AppRouter {
       // return MaterialPageRoute(
       //   builder: (_) => const OnboardingScreen(),
       // );
-      // case Routes.loginScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => BlocProvider(
-      //       create: (context) => getIt<LoginCubit>(),
-      //       child: const LoginScreen(),
-      //     ),
-      //   );
+      case Routes.loginScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<LoginCubit>(),
+            child: const SignInScreen(),
+          ),
+        );
       case Routes.homeLayout:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -64,34 +68,20 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const ProductDetailsScreen(),
         );
+      case Routes.forgetPasswordScreen:
+        return MaterialPageRoute(
+          builder: (_) => const ForgetPasswordScreen(),
+        );
+      case Routes.createAccountScreen:
+        return MaterialPageRoute(
+          builder: (_) => const CreateAccountScreen(),
+        );
       // case Routes.homeLayout:
       //   return MaterialPageRoute(
       //     builder: (_) => BlocProvider(
       //       create: (context) =>
       //           getIt<LayoutCubit>()..changeIndex(arguments as int),
       //       child: const HomeLayout(),
-      //     ),
-      //   );
-      // case Routes.peerCommunity:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const PeerCommunityScreen(),
-      //   );
-      // case Routes.resources:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const ResourcesScreen(),
-      //   );
-      // case Routes.academy:
-      //   return MaterialPageRoute(
-      //     builder: (_) => BlocProvider(
-      //       create: (context) => getIt<GreenHubCubit>()..getCourses(),
-      //       child: const AcademyScreen(),
-      //     ),
-      //   );
-      // case Routes.chat:
-      //   return MaterialPageRoute(
-      //     builder: (_) => BlocProvider(
-      //       create: (context) => getIt<ChatCubit>(),
-      //       child: const ChatScreen(),
       //     ),
       //   );
       // case Routes.profile:
@@ -110,25 +100,7 @@ class AppRouter {
       //   return MaterialPageRoute(
       //     builder: (_) => const FrequentlyAskedQuestionsScreen(),
       //   );
-      // case Routes.guid:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const GuidScreen(),
-      //   );
-      // case Routes.privacyPolicy:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const PrivacyPolicyScreen(),
-      //   );
-      // case Routes.manualInputScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => BlocProvider(
-      //       create: (context) => NetZeroCubit(),
-      //       child: const ManualInputScreen(),
-      //     ),
-      //   );
-      // case Routes.afterSubmittingScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const AfterSubmittingScreen(),
-      //   );
+
       default:
         return null;
     }
