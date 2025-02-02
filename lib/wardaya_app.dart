@@ -29,7 +29,8 @@ class WardayaApp extends StatelessWidget {
             scaffoldBackgroundColor: Colors.white,
           ),
           debugShowCheckedModeBanner: false,
-          initialRoute: isLoggedInUser ? Routes.homeLayout : Routes.homeLayout,
+          initialRoute:
+              isLoggedInUser ? Routes.loginScreen : Routes.loginScreen,
           onGenerateRoute: appRouter.generateRoute,
         ));
   }
