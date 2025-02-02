@@ -5,6 +5,7 @@ import 'package:wardaya/features/authentication/ui/create_account.dart';
 import 'package:wardaya/features/category/ui/category_screen.dart';
 import 'package:wardaya/features/explore/ui/recipients_screen.dart';
 import 'package:wardaya/features/layout/logic/cubit/layout_cubit.dart';
+import 'package:wardaya/features/profile/ui/profile_screen.dart';
 import '../../features/authentication/logic/cubit/login_cubit.dart';
 import '../../features/authentication/ui/forget_password.dart';
 import '../../features/authentication/ui/login_screen.dart';
@@ -13,6 +14,8 @@ import '../../features/explore/ui/flowers_planets.dart';
 import '../../features/explore/ui/moments_screen.dart';
 import '../../features/layout/ui/home_layout.dart';
 import '../../features/product_details/ui/product_details_screen.dart';
+import '../../features/profile/ui/faq_screen.dart';
+import '../../features/profile/ui/tac_screen.dart';
 import '../../features/search/ui/search_screen.dart';
 import 'routes.dart';
 
@@ -75,6 +78,18 @@ class AppRouter {
       case Routes.createAccountScreen:
         return MaterialPageRoute(
           builder: (_) => const CreateAccountScreen(),
+        );
+      case Routes.profileScreen:
+        return MaterialPageRoute(
+          builder: (_) => const ProfileScreen(),
+        );
+      case Routes.faqScreen:
+        return MaterialPageRoute(
+          builder: (_) => const FAQScreen(),
+        );
+      case Routes.tacScreen:
+        return MaterialPageRoute(
+          builder: (_) => const TACScreen(),
         );
       // case Routes.homeLayout:
       //   return MaterialPageRoute(

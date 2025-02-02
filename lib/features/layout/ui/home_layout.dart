@@ -6,6 +6,7 @@ import 'package:wardaya/features/home/ui/home_screen.dart';
 import '../../../core/theming/colors.dart';
 
 import '../../cart/ui/cart_screen.dart';
+import '../../profile/ui/profile_screen.dart';
 import '../logic/cubit/layout_cubit.dart';
 import '../logic/cubit/layout_state.dart';
 import 'widgets/bottom_nav_bar_widget.dart';
@@ -36,9 +37,8 @@ class _HomeLayoutState extends State<HomeLayout> {
                       return const ExploreScreen();
                     case 2:
                       return const CartScreen();
-
-                    // case 3:
-                    //   return const MoreScreen();
+                    case 3:
+                      return const ProfileScreen();
                     default:
                       return const HomeScreen();
                   }
