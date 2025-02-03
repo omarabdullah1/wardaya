@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5299 -11.8662 634.5616 409.7103" width="634.562px" height="409.711px">
+  <g style="" transform="matrix(22.761682510375977, -0.0000010000002248489182, 0, 22.761682510375977, 321.19342041015625, 192.98895263671872)">
+    <g transform="matrix(1 0 0 1 4.94 0)">
+      <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(183,109,104); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke" transform=" translate(-18.94, -9)" d="M 24.109 12.952 L 27.8785 16.7462 L 26.6332 18 L 22.8645 14.2049 C 21.4623 15.3366 19.7182 15.9522 17.921 15.9496 C 13.5486 15.9496 10 12.3769 10 7.9748 C 10 3.57271 13.5486 0 17.921 0 C 22.2934 0 25.8419 3.57271 25.8419 7.9748 C 25.8445 9.78419 25.2331 11.5402 24.109 12.952 Z M 22.3435 12.2945 C 23.4602 11.1379 24.084 9.5878 24.0817 7.9748 C 24.0817 4.54829 21.3244 1.77218 17.921 1.77218 C 14.5176 1.77218 11.7602 4.54829 11.7602 7.9748 C 11.7602 11.4013 14.5176 14.1774 17.921 14.1774 C 19.5231 14.1797 21.0627 13.5517 22.2115 12.4274 L 22.3435 12.2945 Z" stroke-linecap="round"/>
+    </g>
+    <g transform="matrix(1 0 0 1 -10 -6.5)">
+      <rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(183,109,104); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke" x="-4" y="-0.5" rx="0" ry="0" width="8" height="1"/>
+    </g>
+    <g transform="matrix(1 0 0 1 -10 -0.5)">
+      <rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(183,109,104); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke" x="-4" y="-0.5" rx="0" ry="0" width="8" height="1"/>
+    </g>
+    <g transform="matrix(1 0 0 1 -10 5.5)">
+      <rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(183,109,104); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke" x="-4" y="-0.5" rx="0" ry="0" width="8" height="1"/>
+    </g>
+  </g>
+</svg>

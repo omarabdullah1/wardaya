@@ -97,10 +97,10 @@ final List<String> brandsTitles = [
   'Mubkhar',
   'Hanoverian',
   'Damas',
-  'Sweet Atelier by Mona Mosly',
+  'Hanoverian',
   'Levo',
   'September Studio',
-  'Sweet Atelier by Mona Mosly',
+  'Damas',
   'Levo',
   'September Studio',
 ];
@@ -116,4 +116,148 @@ final List<int> prices = [
   750,
   409,
   409,
+];
+final List<String> recipients = [
+  "Mother",
+  "Father",
+  "Children",
+  "Husband",
+  "Wife",
+  "Grandmother",
+  "Grandfather",
+  "Aunt",
+  "Uncle",
+  "Friends",
+  "Colleagues",
+];
+final List<String> recipientsImages = [
+  'assets/images/categories/mother.png',
+  'assets/images/categories/father.png',
+  'assets/images/categories/children.png',
+  'assets/images/categories/husband.png',
+  'assets/images/categories/wife.png',
+  'assets/images/categories/grandmother.png',
+  'assets/images/categories/grandfather.png',
+  'assets/images/categories/friends.png',
+  'assets/images/categories/aunt.png',
+  'assets/images/categories/uncle.png',
+  'assets/images/categories/colleague.png',
+];
+
+class Product {
+  final String name;
+  final double price;
+  final String imageUrl;
+  final String category;
+  final String occasion;
+  final String recipient;
+  final String color;
+
+  Product(
+      {required this.name,
+      required this.price,
+      required this.imageUrl,
+      required this.category,
+      required this.occasion,
+      required this.recipient,
+      required this.color});
+}
+
+List<Product> allProducts = [
+  Product(
+      name: "Helen's Happy Birthday Drawing Cake",
+      price: 200,
+      imageUrl: "",
+      category: "Cakes",
+      occasion: "Birthday",
+      recipient: "Adult",
+      color: "Multi"),
+  Product(
+      name: "Elegant Rose Bouquet",
+      price: 150,
+      imageUrl: "",
+      category: "Flowers",
+      occasion: "Anniversary",
+      recipient: "Partner",
+      color: "Red"),
+  Product(
+      name: "Birthday Chocolate Cake",
+      price: 180,
+      imageUrl: "",
+      category: "Cakes",
+      occasion: "Birthday",
+      recipient: "Child",
+      color: "Brown"),
+  Product(
+      name: "Mixed Flower Arrangement",
+      price: 220,
+      imageUrl: "",
+      category: "Flowers",
+      occasion: "General",
+      recipient: "Parent",
+      color: "Multi"),
+  Product(
+      name: "Simple Birthday Cake",
+      price: 200,
+      imageUrl: "",
+      category: "Cakes",
+      occasion: "Birthday",
+      recipient: "Friend",
+      color: "White"),
+  Product(
+      name: "Chocolate Sweet Box",
+      price: 120,
+      imageUrl: "",
+      category: "Sweets & Chocolate",
+      occasion: "General",
+      recipient: "Friend",
+      color: "Brown"),
+  Product(
+      name: "Golden Necklace",
+      price: 300,
+      imageUrl: "",
+      category: "Jewelry",
+      occasion: "Anniversary",
+      recipient: "Partner",
+      color: "Gold"),
+  Product(
+      name: "Classic Perfume",
+      price: 250,
+      imageUrl: "",
+      category: "Perfumes",
+      occasion: "Birthday",
+      recipient: "Adult",
+      color: "None"),
+  Product(
+      name: "Gift Card",
+      price: 50,
+      imageUrl: "",
+      category: "Vouchers",
+      occasion: "General",
+      recipient: "Any",
+      color: "None"),
+  Product(
+      name: "Delicious Donut Box",
+      price: 90,
+      imageUrl: "",
+      category: "Sweets & Chocolate",
+      occasion: "General",
+      recipient: "Friend",
+      color: "Multi"),
+  Product(
+      name: "Silver Ring",
+      price: 120,
+      imageUrl: "",
+      category: "Jewelry",
+      occasion: "Anniversary",
+      recipient: "Partner",
+      color: "Silver"),
+  Product(
+      name: "Elegant Woman Perfume",
+      price: 350,
+      imageUrl: "",
+      category: "Perfumes",
+      occasion: "Birthday",
+      recipient: "Adult",
+      color: "None"),
 ];

@@ -21,15 +21,16 @@ class WardayaApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Wardaya',
           theme: ThemeData(
-            primaryColor: ColorsManager.mainBlue,
+            primaryColor: ColorsManager.mainRose,
             colorScheme: const ColorScheme.light(
-              primary: ColorsManager.mainBlue,
-              secondary: ColorsManager.lightBlue,
+              primary: ColorsManager.mainRose,
+              secondary: ColorsManager.white,
             ),
             scaffoldBackgroundColor: Colors.white,
           ),
           debugShowCheckedModeBanner: false,
-          initialRoute: isLoggedInUser ? Routes.homeScreen : Routes.homeScreen,
+          initialRoute:
+              isLoggedInUser ? Routes.loginScreen : Routes.loginScreen,
           onGenerateRoute: appRouter.generateRoute,
         ));
   }
