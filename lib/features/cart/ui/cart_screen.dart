@@ -327,13 +327,13 @@ class _CartScreenState extends State<CartScreen> {
                         ),
                         SizedBox(height: 18.h),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Column(
                               children: [
                                 Container(
                                   width:
-                                      context.pOW(context.screenWidth / 11).w,
+                                      context.pOW(context.screenWidth * 0.08).w,
                                   height: context.pOH(13).h,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
@@ -363,7 +363,7 @@ class _CartScreenState extends State<CartScreen> {
                               children: [
                                 Container(
                                   width:
-                                      context.pOW(context.screenWidth / 11).w,
+                                      context.pOW(context.screenWidth * 0.08).w,
                                   height: (context.pOH(13) - 1.5).h,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(4),
