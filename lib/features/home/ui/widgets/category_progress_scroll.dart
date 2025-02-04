@@ -84,7 +84,7 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
     return Column(
       children: [
         SizedBox(
-          height: context.pOH(20).h,
+          height: context.pOH(22).h,
           child: SingleChildScrollView(
             controller: _scrollController,
             scrollDirection: Axis.horizontal,
