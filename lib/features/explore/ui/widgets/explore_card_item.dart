@@ -32,7 +32,7 @@ class ExploreCardItem extends StatelessWidget {
                 color: Colors.black26,
                 imageUrl: imageUrl,
                 fit: BoxFit.cover,
-                width: (context.screenWidth / 2.5).w,
+                width: (context.screenWidth * 0.35).w,
                 height: context.pOW(40).h,
                 placeholder: (context, url) => _buildShadedPlaceholder(context),
                 errorWidget: (context, url, error) => const Icon(Icons.error),

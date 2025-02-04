@@ -26,13 +26,14 @@ class GiftsCardBuilder extends StatelessWidget {
           children: [
             // Product Box 1
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _buildProductBox(
                   price: prices[0],
                   name: names[0],
                   context: context,
                 ),
-                const Spacer(),
+                // const Spacer(),
                 // Product Box 2
                 _buildProductBox(
                   price: prices[1],
@@ -46,13 +47,14 @@ class GiftsCardBuilder extends StatelessWidget {
             ),
             // Product Box 3
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _buildProductBox(
                   price: prices[2],
                   name: names[2],
                   context: context,
                 ),
-                const Spacer(),
+                // const Spacer(),
 
                 // Product Box 4
                 _buildProductBox(
@@ -114,7 +116,7 @@ class GiftsCardBuilder extends StatelessWidget {
         children: [
           // Placeholder for the product images
           Container(
-            width: context.pOW(38).w,
+            width: context.pOW(35).w,
             height: context.pOH(13).h,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),

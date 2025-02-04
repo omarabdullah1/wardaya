@@ -46,6 +46,7 @@ class ExploreScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ExploreCardItem(
                       imageUrl:
@@ -55,7 +56,7 @@ class ExploreScreen extends StatelessWidget {
                         context.pushNamed(Routes.momentsScreen);
                       },
                     ),
-                    const Spacer(),
+                    // const Spacer(),
                     ExploreCardItem(
                       imageUrl:
                           'https://s3-alpha-sig.figma.com/img/18dc/f83a/beb6a599c1c021e02d83dbbbbd0ea135?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=l4B7WhxNeG2VUTv-juNjMGiFxWhjbHy0~UxktKCKBIMfyh7p258zDIxE1ljehsH1ytYYCfUZVTkGt9qRbsXZfIDhypfAvLL0Ww1JFaa1S4E8s2KW~5R4~KBsfSi8epMOz1n3RO5BzVsNi8cZnJNQCFrv75OiCkR2C8RkT6IewTjiuxz1OFeAyFi1OgIeFZRvQa8IwEoOG9e9T7iflb1u4rmfmkmV9AbbpT7crmk7WkYrEru44CzFp-X0gkIgFQckLUI0QXG9~zQMLcEEXj9I7EibtHj3q8QmYXRHahtnl1lkne-5Hi911SFZDpSJkXKoIB-xGjxbA3BzXkYqnbNUkg__',
@@ -94,7 +95,7 @@ class ExploreScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                 child: Center(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Column(
                         // Use a Column for vertical arrangement of image and text
@@ -107,7 +108,7 @@ class ExploreScreen extends StatelessWidget {
                               imageUrl:
                                   'https://s3-alpha-sig.figma.com/img/3c72/dafa/f6a7554e169094afc9930b29928dcf6a?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bv9xtf8S7H~h1inrrSYPGzeAOmapN~WBJzwPGMaYSA8STI70bXnN2TzXc31H3wqHGdtapwoVIuSN1B8GTmebYLwGCVbVflnTYIpsNFTxMFozEs5Aho7zikfp86lif8PWpFMYkYqmeHce92gQPiJE3Iiw0~Y1LG1Ny1KsyLkQ0Q6pjEUGNeY8gTrFaMfsbwfjHnZLDCvDPgBramwPzgazxVFYQZBboGYEC2NIeTn9cjz46CZZAycwlZvmadO0wAQO4sFNKIUbESj9MA32lFhojPK60wJAVcCDzLh41j3UpbuH0sNeqn9O12cvsP9A8RFFC4rqrYjQ8mxAvm2zncF6NQ__',
                               fit: BoxFit.cover,
-                              width: (context.screenWidth / 2.5).w,
+                              width: (context.screenWidth * 0.38).w,
                               height: context.pOW(25).h,
                               placeholder: (context, url) =>
                                   _buildShadedPlaceholder(context),
@@ -127,7 +128,7 @@ class ExploreScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const Spacer(),
+                      // const Spacer(),
                       Column(
                         // Column for the second image and text
                         children: [
@@ -139,7 +140,7 @@ class ExploreScreen extends StatelessWidget {
                               imageUrl:
                                   'https://s3-alpha-sig.figma.com/img/f60e/e0fa/aec08996e634c5a4b34f2465507dc91e?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=sEQZ4IZ0XMxPf1pZ~8bAcGMhPC59SPvDn69mZuZHQuPSf~-AZzBQxwBajOiGJbPdQ2a4OE7hxa9wNs773EKbnbwEXTnAQ1x8oSWsjVSVOCFAGUrNi4KXRxG-5KZXBhn8ed7it~4CBO8Wf8~P6Y21YU5cesOQuPJQ9ak14Y9RbuJrEuyLLxtzo4W56~JUCuCT7WJ9ANWEycSO6I79Q6uWXZ9PZaF89cnvxR0OeGOSvc~Ls87g1cx1Fhobn7UnwziL~MpasSFZBPAEV6hpFC-brln6cMHAPymoD4O5xjGh-K-Co3vDmjQbzpzxol7qhwabukd97jUpIkp2zpZEISwOgg__', // Or 'assets/images/floral_subscription.png'
                               fit: BoxFit.cover,
-                              width: (context.screenWidth / 2.5).w,
+                              width: (context.screenWidth * 0.38).w,
                               height: context.pOW(25).h,
                               placeholder: (context, url) =>
                                   _buildShadedPlaceholder(context),
