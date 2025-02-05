@@ -6,6 +6,7 @@ import 'package:wardaya/features/category/ui/category_screen.dart';
 import 'package:wardaya/features/explore/ui/recipients_screen.dart';
 import 'package:wardaya/features/layout/logic/cubit/layout_cubit.dart';
 import 'package:wardaya/features/profile/ui/profile_screen.dart';
+import 'package:wardaya/features/splash/ui/splash_screen.dart';
 import '../../features/authentication/logic/cubit/login_cubit.dart';
 import '../../features/authentication/ui/forget_password.dart';
 import '../../features/authentication/ui/login_screen.dart';
@@ -29,6 +30,10 @@ class AppRouter {
       // return MaterialPageRoute(
       //   builder: (_) => const OnboardingScreen(),
       // );
+      case Routes.splashScreen:
+        return MaterialPageRoute(
+          builder: (_) => const SplashScreen(),
+        );
       case Routes.loginScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
