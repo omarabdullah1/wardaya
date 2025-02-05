@@ -84,7 +84,6 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
     return Column(
       children: [
         SizedBox(
-          height: context.pOH(22).h,
           child: SingleChildScrollView(
             controller: _scrollController,
             scrollDirection: Axis.horizontal,
@@ -158,8 +157,9 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
             width: imagePath.isNullOrEmpty()
                 ? context.pOW(28).w
                 : context.pOW(20).w,
-            height:
-                imagePath.isNullOrEmpty() ? context.pOH(6).h : context.pOH(7).h,
+            height: imagePath.isNullOrEmpty()
+                ? context.pOH(8).h
+                : context.pOH(10).h,
             decoration: imagePath.isNullOrEmpty()
                 ? const BoxDecoration(
                     shape: BoxShape.rectangle,

@@ -19,7 +19,7 @@ class SplashScreen extends StatelessWidget {
         child: const SignInScreen(),
       ),
       curve: Curves.elasticInOut,
-      durationInSeconds: 15,
+      durationInSeconds: 4,
       backgroundColor: ColorsManager.mainRose,
       child: Image.asset(
         'assets/images/logo/Wardaya_Application_splash.gif',
