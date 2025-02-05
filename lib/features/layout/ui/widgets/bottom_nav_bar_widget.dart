@@ -25,19 +25,19 @@ class BottomNavBarWidget extends StatelessWidget {
             ],
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.only(bottom: 15, top: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _buildNavItem('assets/svgs/home.svg', 'HOME', 0, context,
-                    height: 25.0),
+                    height: 23.0.h),
                 _buildNavItem('assets/svgs/explore.svg', 'EXPLORE', 1, context,
-                    height: 22.0),
+                    height: 23.0.h),
                 _buildNavItem('assets/svgs/cart.svg', 'CART', 2, context,
-                    height: 25.0),
+                    height: 23.0.h),
                 _buildNavItem(
                     'assets/svgs/profile.svg', 'MY ACCOUNT', 3, context,
-                    height: 25.0),
+                    height: 23.0.h),
               ],
             ),
           ),
@@ -67,7 +67,7 @@ class BottomNavBarWidget extends StatelessWidget {
             ),
             height: height,
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 8.h),
           Text(
             label,
             style: GoogleFonts.inter(
