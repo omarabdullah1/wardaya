@@ -115,6 +115,7 @@ class _CartScreenState extends State<CartScreen> {
                     children: [
                       SvgPicture.asset(
                         'assets/svgs/delivery.svg',
+                        height: 30.h,
                       ),
                       SizedBox(width: 8.w),
                       Column(
@@ -313,6 +314,7 @@ class _CartScreenState extends State<CartScreen> {
                           children: [
                             SvgPicture.asset(
                               'assets/svgs/gift_card.svg',
+                              height: 30.h,
                             ),
                             SizedBox(width: 11.w),
                             Text(
@@ -332,9 +334,8 @@ class _CartScreenState extends State<CartScreen> {
                             Column(
                               children: [
                                 Container(
-                                  width:
-                                      context.pOW(context.screenWidth * 0.08).w,
-                                  height: context.pOH(13).h,
+                                  width: context.screenWidth * 0.35.w,
+                                  height: context.screenHeight * 0.2.h,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
                                     image: const DecorationImage(
@@ -346,8 +347,7 @@ class _CartScreenState extends State<CartScreen> {
                                   ),
                                 ),
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
+                                  padding: const EdgeInsets.all(12.0),
                                   child: Text(
                                     'Select Gift Card',
                                     style: GoogleFonts.inter(
@@ -362,9 +362,8 @@ class _CartScreenState extends State<CartScreen> {
                             Column(
                               children: [
                                 Container(
-                                  width:
-                                      context.pOW(context.screenWidth * 0.08).w,
-                                  height: (context.pOH(13) - 1.5).h,
+                                  width: context.screenWidth * 0.35.w,
+                                  height: context.screenHeight * 0.2.h,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(4),
                                     border: const DashedBorder.fromBorderSide(
@@ -375,22 +374,27 @@ class _CartScreenState extends State<CartScreen> {
                                       ),
                                     ),
                                   ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SvgPicture.asset(
-                                        'assets/svgs/small_logo.svg',
-                                      ),
-                                      SizedBox(height: 5.h),
-                                      Text(
-                                        'Tap to add\na message',
-                                        style: GoogleFonts.inter(
-                                          color: ColorsManager.mainRose,
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 14.0.sp,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(
+                                          'assets/svgs/small_logo.svg',
+                                          height: 40.0.h,
                                         ),
-                                      ),
-                                    ],
+                                        SizedBox(height: 5.h),
+                                        Text(
+                                          'Tap to add\na message',
+                                          style: GoogleFonts.inter(
+                                            color: ColorsManager.mainRose,
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 14.0.sp,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -524,8 +528,8 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection> {
         MediaQuery.of(context).size.width; // For responsiveness
 
     return Container(
-      width: screenWidth * 0.9, // 90% of screen width
-      height: 500, // Or calculate height dynamically if needed
+      width: screenWidth * 0.9.w, // 90% of screen width
+      height: 500.h, // Or calculate height dynamically if needed
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -541,6 +545,7 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection> {
               children: [
                 SvgPicture.asset(
                   'assets/svgs/ballons.svg',
+                  height: 30.h,
                 ),
                 SizedBox(width: 11.w),
                 Text(
@@ -618,7 +623,8 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection> {
               child: Padding(
                 padding: const EdgeInsets.all(3.0),
                 child: Container(
-                  height: context.pOH(12).h,
+                  // width: context.screenWidth * 0.35.w,
+                  height: context.screenHeight * 0.2.h,
                   decoration: BoxDecoration(
                     color: ColorsManager.lightGrey, // Placeholder
                     borderRadius: BorderRadius.circular(10),
