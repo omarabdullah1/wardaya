@@ -335,7 +335,7 @@ class _CartScreenState extends State<CartScreen> {
                               children: [
                                 Container(
                                   width: context.screenWidth * 0.35.w,
-                                  height: context.screenHeight * 0.15.h,
+                                  height: context.screenHeight * 0.13.h,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
                                     image: const DecorationImage(
@@ -363,7 +363,7 @@ class _CartScreenState extends State<CartScreen> {
                               children: [
                                 Container(
                                   width: context.screenWidth * 0.35.w,
-                                  height: context.screenHeight * 0.15.h,
+                                  height: context.screenHeight * 0.13.h,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(4),
                                     border: const DashedBorder.fromBorderSide(
@@ -376,24 +376,27 @@ class _CartScreenState extends State<CartScreen> {
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(12.0),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        SvgPicture.asset(
-                                          'assets/svgs/small_logo.svg',
-                                          height: 40.0.h,
-                                        ),
-                                        SizedBox(height: 5.h),
-                                        Text(
-                                          'Tap to add\na message',
-                                          style: GoogleFonts.inter(
-                                            color: ColorsManager.mainRose,
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 14.0.sp,
+                                    child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            'assets/svgs/small_logo.svg',
+                                            height: 40.0.h,
                                           ),
-                                        ),
-                                      ],
+                                          SizedBox(height: 5.h),
+                                          Text(
+                                            'Tap to add\na message',
+                                            style: GoogleFonts.inter(
+                                              color: ColorsManager.mainRose,
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 14.0.sp,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
