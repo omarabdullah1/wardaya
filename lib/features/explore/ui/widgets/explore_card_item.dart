@@ -23,8 +23,8 @@ class ExploreCardItem extends StatelessWidget {
         onTap();
       },
       child: SizedBox(
-        width: context.screenWidth * 0.43.w,
-        height: context.screenHeight * 0.30.h,
+        width: context.screenWidth * 0.38.w,
+        height: context.screenHeight * 0.23.h,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Stack(
@@ -34,8 +34,8 @@ class ExploreCardItem extends StatelessWidget {
                 color: Colors.black26,
                 imageUrl: imageUrl,
                 fit: BoxFit.cover,
-                width: context.screenWidth * 0.43.w,
-                height: context.screenHeight * 0.30.h,
+                width: context.screenWidth * 0.38.w,
+                height: context.screenHeight * 0.23.h,
                 placeholder: (context, url) => _buildShadedPlaceholder(context),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),

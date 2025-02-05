@@ -335,7 +335,7 @@ class _CartScreenState extends State<CartScreen> {
                               children: [
                                 Container(
                                   width: context.screenWidth * 0.35.w,
-                                  height: context.screenHeight * 0.2.h,
+                                  height: context.screenHeight * 0.15.h,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
                                     image: const DecorationImage(
@@ -363,7 +363,7 @@ class _CartScreenState extends State<CartScreen> {
                               children: [
                                 Container(
                                   width: context.screenWidth * 0.35.w,
-                                  height: context.screenHeight * 0.2.h,
+                                  height: context.screenHeight * 0.15.h,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(4),
                                     border: const DashedBorder.fromBorderSide(
@@ -529,7 +529,7 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection> {
 
     return Container(
       width: screenWidth * 0.9.w, // 90% of screen width
-      height: 500.h, // Or calculate height dynamically if needed
+      height: 450.h, // Or calculate height dynamically if needed
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -624,7 +624,7 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection> {
                 padding: const EdgeInsets.all(3.0),
                 child: Container(
                   // width: context.screenWidth * 0.35.w,
-                  height: context.screenHeight * 0.2.h,
+                  height: context.screenHeight * 0.12.h,
                   decoration: BoxDecoration(
                     color: ColorsManager.lightGrey, // Placeholder
                     borderRadius: BorderRadius.circular(10),

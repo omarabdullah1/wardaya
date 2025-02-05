@@ -108,8 +108,8 @@ class ExploreScreen extends StatelessWidget {
                               imageUrl:
                                   'https://s3-alpha-sig.figma.com/img/3c72/dafa/f6a7554e169094afc9930b29928dcf6a?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bv9xtf8S7H~h1inrrSYPGzeAOmapN~WBJzwPGMaYSA8STI70bXnN2TzXc31H3wqHGdtapwoVIuSN1B8GTmebYLwGCVbVflnTYIpsNFTxMFozEs5Aho7zikfp86lif8PWpFMYkYqmeHce92gQPiJE3Iiw0~Y1LG1Ny1KsyLkQ0Q6pjEUGNeY8gTrFaMfsbwfjHnZLDCvDPgBramwPzgazxVFYQZBboGYEC2NIeTn9cjz46CZZAycwlZvmadO0wAQO4sFNKIUbESj9MA32lFhojPK60wJAVcCDzLh41j3UpbuH0sNeqn9O12cvsP9A8RFFC4rqrYjQ8mxAvm2zncF6NQ__',
                               fit: BoxFit.cover,
-                              width: context.screenWidth * 0.44.w,
-                              height: context.screenHeight * 0.30.h,
+                              width: context.screenWidth * 0.38.w,
+        height: context.screenHeight * 0.23.h,
                               placeholder: (context, url) =>
                                   _buildShadedPlaceholder(context),
                               errorWidget: (context, url, error) =>
@@ -141,8 +141,8 @@ class ExploreScreen extends StatelessWidget {
                                   'https://s3-alpha-sig.figma.com/img/f60e/e0fa/aec08996e634c5a4b34f2465507dc91e?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=sEQZ4IZ0XMxPf1pZ~8bAcGMhPC59SPvDn69mZuZHQuPSf~-AZzBQxwBajOiGJbPdQ2a4OE7hxa9wNs773EKbnbwEXTnAQ1x8oSWsjVSVOCFAGUrNi4KXRxG-5KZXBhn8ed7it~4CBO8Wf8~P6Y21YU5cesOQuPJQ9ak14Y9RbuJrEuyLLxtzo4W56~JUCuCT7WJ9ANWEycSO6I79Q6uWXZ9PZaF89cnvxR0OeGOSvc~Ls87g1cx1Fhobn7UnwziL~MpasSFZBPAEV6hpFC-brln6cMHAPymoD4O5xjGh-K-Co3vDmjQbzpzxol7qhwabukd97jUpIkp2zpZEISwOgg__', // Or 'assets/images/floral_subscription.png'
                               fit: BoxFit.cover,
 
-                              width: context.screenWidth * 0.44.w,
-                              height: context.screenHeight * 0.30.h,
+                              width: context.screenWidth * 0.38.w,
+        height: context.screenHeight * 0.23.h,
                               placeholder: (context, url) =>
                                   _buildShadedPlaceholder(context),
                               errorWidget: (context, url, error) =>
