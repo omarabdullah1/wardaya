@@ -155,8 +155,8 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
         children: [
           Container(
             width: imagePath.isNullOrEmpty()
-                ? context.pOW(31).w
-                : context.pOW(20).w,
+                ? context.pOW(30).w
+                : context.pOW(25).w,
             height: imagePath.isNullOrEmpty()
                 ? context.pOH(8).h
                 : context.pOH(10).h,
