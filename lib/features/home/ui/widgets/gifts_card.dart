@@ -121,8 +121,8 @@ class GiftsCardBuilder extends StatelessWidget {
         children: [
           // Placeholder for the product images
           Container(
-            width: context.screenWidth * 0.42.w,
-            height: context.screenHeight * 0.16.h,
+            width: 165.w,
+            height: 150.h,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               color: ColorsManager.lightGrey,
