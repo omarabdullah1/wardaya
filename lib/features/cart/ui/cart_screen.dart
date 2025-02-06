@@ -426,8 +426,8 @@ class _CartScreenState extends State<CartScreen> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(3.0),
                                         child: Container(
-                                          width: context.screenWidth * 0.37.w,
-                                          height: context.screenHeight * 0.15.h,
+                                          width: 145.w,
+                                          height: 125.h,
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10),
@@ -471,8 +471,8 @@ class _CartScreenState extends State<CartScreen> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(3.0),
                                         child: Container(
-                                          width: context.screenWidth * 0.37.w,
-                                          height: context.screenHeight * 0.15.h,
+                                          width: 145.w,
+                                          height: 125.h,
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10),
@@ -685,7 +685,7 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection> {
                 padding: const EdgeInsets.all(3.0),
                 child: Container(
                   // width: context.screenWidth * 0.35.w,
-                  height: context.screenHeight * 0.15.h,
+                  height: 120.h,
                   decoration: BoxDecoration(
                     color: ColorsManager.lightGrey, // Placeholder
                     borderRadius: BorderRadius.circular(10),
