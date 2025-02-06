@@ -11,7 +11,8 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF7F6F2),
+      backgroundColor: ColorsManager.offWhite,
+      resizeToAvoidBottomInset: true,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(
             kToolbarHeight + 30.h), // Add some extra space for padding
@@ -73,35 +74,42 @@ class SearchScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              // Handle button press
-            },
-            style: ElevatedButton.styleFrom(
-              fixedSize: Size(context.screenWidth.w, 40.h),
-              alignment: AlignmentDirectional.center,
-              backgroundColor: ColorsManager.mainRose,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16.0,
+          vertical: 25.0,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                // Handle button press
+              },
+              style: ElevatedButton.styleFrom(
+                fixedSize: Size(context.screenWidth.w, 40.h),
+                alignment: AlignmentDirectional.center,
+                backgroundColor: ColorsManager.mainRose,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
               ),
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-            ),
-            child: const Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.search, color: Colors.white),
-                  SizedBox(width: 8.0),
-                  Text(
-                    'Search',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                ],
+              child: const Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.search, color: Colors.white),
+                    SizedBox(width: 8.0),
+                    Text(
+                      'Search',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
+          ],
         ),
       ),
     );

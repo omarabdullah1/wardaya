@@ -8,8 +8,8 @@ import '../../../core/helpers/dummy_vars.dart';
 import '../../../core/routing/routes.dart';
 
 class CategoryScreen extends StatefulWidget {
-  final String title;
-  const CategoryScreen({super.key, required this.title});
+  final List arguments;
+  const CategoryScreen({super.key, required this.arguments});
 
   @override
   State<CategoryScreen> createState() => _CategoryScreenState();
@@ -37,7 +37,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           },
         ),
         title: Text(
-          widget.title,
+          widget.arguments[0],
           style: GoogleFonts.ebGaramond(
             color: ColorsManager.mainRose,
             fontWeight: FontWeight.w400,
@@ -159,7 +159,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           ),
           showCheckmark: false,
           label: Text(
-            widget.title,
+            widget.arguments[0],
             style: GoogleFonts.inter(
               color: ColorsManager.mainRose,
               fontWeight: FontWeight.w400,
@@ -401,7 +401,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
         return GestureDetector(
           onTap: () {
             setState(() {});
-            context.pushNamed(Routes.productDetailsScreen);
+            (widget.arguments[1] as BuildContext).pushNamed(
+                Routes.productDetailsScreen,
+                arguments: widget.arguments[1]);
           },
           child: _buildProductItem(products[index]),
         );

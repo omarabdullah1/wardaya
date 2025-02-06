@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
 
 import '../../features/authentication/logic/cubit/login_cubit.dart';
 import '../../features/layout/logic/cubit/layout_cubit.dart';
@@ -13,6 +14,7 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<LoginCubit>(() => LoginCubit(/*getIt()*/));
 
   getIt.registerFactory<LayoutCubit>(() => LayoutCubit());
+  getIt.registerFactory<CartCubit>(() => CartCubit());
   // getIt.registerFactory<NetZeroCubit>(() => NetZeroCubit());
   // getIt.registerFactory<PaginationCubit>(() => PaginationCubit());
 

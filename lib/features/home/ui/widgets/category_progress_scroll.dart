@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 
+import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
 
 class CategoryProgressScroll extends StatefulWidget {
@@ -41,7 +42,7 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
       final renderBox =
           _itemKey.currentContext!.findRenderObject() as RenderBox;
       setState(() {
-        _itemWidth = renderBox.size.width + 15; // Item width + margin
+        _itemWidth = renderBox.size.width + 20; // Item width + margin
       });
     }
   }
@@ -148,42 +149,47 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
     required String imagePath,
     required BuildContext context,
   }) {
-    return Container(
-      key: key, // Assign the key to the first item
-      margin: const EdgeInsetsDirectional.only(start: 15),
-      child: Column(
-        children: [
-          Container(
-            width: imagePath.isNullOrEmpty()
-                ? context.pOW(30).w
-                : context.pOW(25).w,
-            height: imagePath.isNullOrEmpty()
-                ? context.pOH(8).h
-                : context.pOH(10).h,
-            decoration: imagePath.isNullOrEmpty()
-                ? const BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    color: Color(0xffF0E9E0),
-                    borderRadius: BorderRadius.all(Radius.circular(12.5)),
-                  )
-                : BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(imagePath),
-                      fit: BoxFit.cover,
+    return InkWell(
+      onTap: () {
+        context.pushNamed(Routes.categoryScreen,
+            arguments: [widget.titles[widget.titles.indexOf(title)], context]);
+      },
+      child: Container(
+        key: key, // Assign the key to the first item
+        margin: const EdgeInsetsDirectional.only(start: 15),
+        child: Column(
+          children: [
+            Container(
+              width: context.pOW(28).w,
+              height: imagePath.isNullOrEmpty()
+                  ? context.pOH(7).h
+                  : context.pOH(10).h,
+              decoration: imagePath.isNullOrEmpty()
+                  ? BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      color: ColorsManager.mainRose.withAlpha(30),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(12.5)),
+                    )
+                  : BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(imagePath),
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-          ),
-          SizedBox(height: 5.h),
-          if (!title.isNullOrEmpty())
-            Text(
-              title,
-              style: GoogleFonts.inter(
-                color: ColorsManager.mainRose,
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w400,
-              ),
             ),
-        ],
+            SizedBox(height: 5.h),
+            if (!title.isNullOrEmpty())
+              Text(
+                title,
+                style: GoogleFonts.inter(
+                  color: ColorsManager.mainRose,
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
