@@ -23,8 +23,8 @@ class ExploreCardItem extends StatelessWidget {
         onTap();
       },
       child: SizedBox(
-        width: context.screenWidth * 0.43.w,
-        height: context.screenHeight * 0.30.h,
+        width: context.screenWidth * 0.42.w,
+        height: context.screenHeight * 0.20.h,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Stack(

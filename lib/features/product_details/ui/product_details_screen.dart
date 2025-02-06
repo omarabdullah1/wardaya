@@ -1,14 +1,17 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
+import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({super.key});
+  final BuildContext cartContext;
+  const ProductDetailsScreen({super.key, required this.cartContext});
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
@@ -28,7 +31,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           padding: const EdgeInsets.all(16.0),
           child: ElevatedButton(
             onPressed: () {
-              // Handle add to cart logic
+              setState(() {
+                widget.cartContext.read<CartCubit>().changeLength(
+                    widget.cartContext.read<CartCubit>().cartItems + 1);
+              });
             }, // Centered text
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 8),

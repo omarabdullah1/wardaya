@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 
+import '../../../../core/routing/routes.dart';
+
 class GiftsCardBuilder extends StatelessWidget {
   final List prices;
   final List names;
@@ -26,7 +28,7 @@ class GiftsCardBuilder extends StatelessWidget {
           children: [
             // Product Box 1
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _buildProductBox(
                   price: prices[0],
@@ -47,7 +49,7 @@ class GiftsCardBuilder extends StatelessWidget {
             ),
             // Product Box 3
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _buildProductBox(
                   price: prices[2],
@@ -73,8 +75,8 @@ class GiftsCardBuilder extends StatelessWidget {
           width: double.infinity,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.white, // Button background
-              foregroundColor: Colors.teal.shade700, // Text color
+              backgroundColor: ColorsManager.offWhite, // Button background
+              foregroundColor: ColorsManager.offWhite, // Text color
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(28),
                 side: const BorderSide(
@@ -108,18 +110,21 @@ class GiftsCardBuilder extends StatelessWidget {
     required String name,
     required BuildContext context,
   }) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
+    return InkWell(
+      onTap: () {
+        context.pushNamed(Routes.productDetailsScreen, arguments: context);
+        // Navigate to the product details page
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Placeholder for the product images
           Container(
-            width: context.pOW(35).w,
-            height: context.pOH(13).h,
+            width: context.screenWidth * 0.42.w,
+            height: context.screenHeight * 0.16.h,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(8),
               color: ColorsManager.lightGrey,
             ),
           ),

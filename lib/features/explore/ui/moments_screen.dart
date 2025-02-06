@@ -7,7 +7,8 @@ import '../../../core/routing/routes.dart';
 import '../../../core/theming/colors.dart';
 
 class MomentsScreen extends StatelessWidget {
-  const MomentsScreen({super.key});
+  final BuildContext cartContext;
+  const MomentsScreen({super.key, required this.cartContext});
   @override
   Widget build(BuildContext context) {
     // Sample data for moments (replace with your actual data)
@@ -68,8 +69,8 @@ class MomentsScreen extends StatelessWidget {
   Widget _buildMomentItem(BuildContext context, String moment) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context)
-            .pushNamed(Routes.categoryScreen, arguments: moment);
+        cartContext.pushReplacementNamed(Routes.categoryScreen,
+            arguments: [moment, cartContext]);
       },
       child: Column(
         children: [

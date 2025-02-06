@@ -286,8 +286,12 @@ class ProfileScreen extends StatelessWidget {
                       color: ColorsManager.lightGrey,
                       height: 0.0,
                     ),
-                    _buildOptionRow(context, 'Delete My Account',
-                        'assets/svgs/delete_account.svg'),
+                    _buildOptionRow(
+                      context,
+                      'Delete My Account',
+                      'assets/svgs/delete_account.svg',
+                      color: ColorsManager.red,
+                    ),
                   ],
                 ),
               ),
@@ -306,6 +310,7 @@ class ProfileScreen extends StatelessWidget {
     bool showArrow = true,
     Widget? trailing,
     VoidCallback? onTap, // Add an onTap callback
+    Color? color,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -315,13 +320,18 @@ class ProfileScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Row(
             children: [
-              SvgPicture.asset(svg),
+              SvgPicture.asset(
+                svg,
+                colorFilter: color != null
+                    ? ColorFilter.mode(color, BlendMode.srcIn)
+                    : null,
+              ),
               const SizedBox(width: 10),
               Text(title,
                   style: GoogleFonts.inter(
                     fontWeight: FontWeight.w400,
                     fontSize: 14.0.sp,
-                    color: ColorsManager.darkGray,
+                    color: color ?? ColorsManager.darkGray,
                   )),
               const Spacer(),
               if (showArrow)

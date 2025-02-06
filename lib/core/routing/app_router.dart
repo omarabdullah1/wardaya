@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wardaya/core/di/dependency_injection.dart';
 import 'package:wardaya/features/authentication/ui/create_account.dart';
+import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
 import 'package:wardaya/features/category/ui/category_screen.dart';
 import 'package:wardaya/features/explore/ui/recipients_screen.dart';
 import 'package:wardaya/features/layout/logic/cubit/layout_cubit.dart';
@@ -43,8 +44,15 @@ class AppRouter {
         );
       case Routes.homeLayout:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<LayoutCubit>(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => getIt<CartCubit>(),
+              ),
+              BlocProvider(
+                create: (context) => getIt<LayoutCubit>(),
+              ),
+            ],
             child: const HomeLayout(),
           ),
         );
@@ -54,27 +62,39 @@ class AppRouter {
         );
       case Routes.momentsScreen:
         return MaterialPageRoute(
-          builder: (_) => const MomentsScreen(),
+          builder: (_) => MomentsScreen(
+            cartContext: (arguments as BuildContext),
+          ),
         );
       case Routes.recipientsScreen:
         return MaterialPageRoute(
-          builder: (_) => const RecipientsScreen(),
+          builder: (_) => RecipientsScreen(
+            cartContext: (arguments as BuildContext),
+          ),
         );
       case Routes.flowersPlantsScreen:
         return MaterialPageRoute(
-          builder: (_) => const FlowersPlantsScreen(),
+          builder: (_) => FlowersPlantsScreen(
+            cartContext: (arguments as BuildContext),
+          ),
         );
       case Routes.flowersGiftsScreen:
         return MaterialPageRoute(
-          builder: (_) => const FlowersGiftsScreen(),
+          builder: (_) => FlowersGiftsScreen(
+            cartContext: (arguments as BuildContext),
+          ),
         );
       case Routes.categoryScreen:
         return MaterialPageRoute(
-          builder: (_) => CategoryScreen(title: arguments as String),
+          builder: (_) => CategoryScreen(
+            arguments: (arguments as List),
+          ),
         );
       case Routes.productDetailsScreen:
         return MaterialPageRoute(
-          builder: (_) => const ProductDetailsScreen(),
+          builder: (_) => ProductDetailsScreen(
+            cartContext: arguments as BuildContext,
+          ),
         );
       case Routes.forgetPasswordScreen:
         return MaterialPageRoute(
