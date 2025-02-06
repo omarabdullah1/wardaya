@@ -8,7 +8,8 @@ import '../../../core/routing/routes.dart';
 import '../../../core/theming/colors.dart';
 
 class RecipientsScreen extends StatelessWidget {
-  const RecipientsScreen({super.key});
+  final BuildContext cartContext;
+  const RecipientsScreen({super.key, required this.cartContext});
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +60,8 @@ class RecipientsScreen extends StatelessWidget {
       BuildContext context, String recipient, String recipientImage) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context)
-            .pushNamed(Routes.categoryScreen, arguments: recipient);
+        Navigator.of(context).pushNamed(Routes.categoryScreen,
+            arguments: [recipient, cartContext]);
       },
       child: Column(
         children: [
