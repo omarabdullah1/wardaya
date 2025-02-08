@@ -206,7 +206,7 @@ class _PreviewBottomSheetState extends State<PreviewBottomSheet> {
                   ),
                   SizedBox(width: 10.w),
                   SizedBox(
-                    width: context.screenWidth * 0.55.w,
+                    width: context.screenWidth * 0.50.w,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
