@@ -505,10 +505,8 @@ class _CartScreenState extends State<CartScreen> {
                                               padding:
                                                   const EdgeInsets.all(3.0),
                                               child: Container(
-                                                width: context.screenWidth *
-                                                    0.37.w,
-                                                height: context.screenHeight *
-                                                    0.15.h,
+                                                width: 145.w,
+                                                height: 125.h,
                                                 decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(10),

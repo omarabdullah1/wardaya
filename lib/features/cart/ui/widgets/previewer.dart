@@ -205,10 +205,18 @@ class _LinkPreviewGeneratorState extends State<LinkPreviewGenerator> {
                       width: double.infinity,
                       height: 200, // Adjust as needed
                     )
-                  : const Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Center(child: Text("No preview available.")),
+                  : Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Center(
+                    child: SvgPicture.asset(
+                      'assets/svgs/small_logo.svg',
+                      colorFilter: const ColorFilter.mode(
+                        ColorsManager.lightGrey,
+                        BlendMode.srcIn,
+                      ),
                     ),
+                  ),
+                ),
     );
   }
 }

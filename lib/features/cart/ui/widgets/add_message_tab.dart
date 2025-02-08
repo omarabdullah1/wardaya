@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/features/cart/ui/widgets/previewer.dart';
@@ -143,7 +142,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                         label: 'From:',
                         controller: cartCubit.fromController,
                         hint: 'Optional',
-                        widthFactor: 0.43,
+                        widthFactor: 0.40,
                         trailing: InkWell(
                           onTap: () => _showSignatureBottomSheet(context),
                           child: InkWell(
@@ -191,27 +190,32 @@ class _AddMessageTabState extends State<AddMessageTab> {
                             ),
                           ),
                           SizedBox(width: 10.w),
-                          SizedBox(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  context.read<CartCubit>().linkController.text,
-                                  style: GoogleFonts.inter(
-                                    color: ColorsManager.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16.sp,
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: SizedBox(
+                              width: context.screenWidth*0.4.w,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    context.read<CartCubit>().linkController.text,
+                                    style: GoogleFonts.inter(
+                                      color: ColorsManager.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16.sp,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ),
-                                Text(
-                                  'Added as a QR Code',
-                                  style: GoogleFonts.inter(
-                                    color: ColorsManager.lightGrey,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 10.sp,
+                                  Text(
+                                    'Added as a QR Code',
+                                    style: GoogleFonts.inter(
+                                      color: ColorsManager.lightGrey,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 10.sp,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                           const Spacer(),
@@ -499,7 +503,12 @@ class _AddMessageTabState extends State<AddMessageTab> {
         height: 450.h,
         child: SuggestedMessagesBottomSheet(
           onMessageSelected: (String message) {
-            context.watch<CartCubit>().messageController.text = message;
+final cubit=context.read<CartCubit>();
+           cubit .setMessageData(
+            to: cubit.to,
+            message: message,
+            from: cubit.from,
+           );
           },
         ),
       ),
