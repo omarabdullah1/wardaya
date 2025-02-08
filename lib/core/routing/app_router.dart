@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wardaya/core/di/dependency_injection.dart';
 import 'package:wardaya/features/authentication/ui/create_account.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
+import 'package:wardaya/features/cart/ui/customize_gift_card_screen.dart';
 import 'package:wardaya/features/category/ui/category_screen.dart';
 import 'package:wardaya/features/explore/ui/recipients_screen.dart';
 import 'package:wardaya/features/layout/logic/cubit/layout_cubit.dart';
@@ -11,6 +12,7 @@ import 'package:wardaya/features/splash/ui/splash_screen.dart';
 import '../../features/authentication/logic/cubit/login_cubit.dart';
 import '../../features/authentication/ui/forget_password.dart';
 import '../../features/authentication/ui/login_screen.dart';
+import '../../features/cart/ui/record_screen.dart';
 import '../../features/explore/ui/flowers_gifts.dart';
 import '../../features/explore/ui/flowers_planets.dart';
 import '../../features/explore/ui/moments_screen.dart';
@@ -116,6 +118,41 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const TACScreen(),
         );
+      case Routes.customizeGiftCardScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) {
+            final List args = arguments as List;
+            final BuildContext parentContext = args[1] as BuildContext;
+            final CartCubit cartCubit =
+                BlocProvider.of<CartCubit>(parentContext);
+
+            return BlocProvider.value(
+              value: cartCubit,
+              child: CustomizeGiftCardScreen(
+                initialTabIndex: args[0] as int,
+                cartContext: parentContext,
+              ),
+            );
+          },
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+            const curve = Curves.ease;
+
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
+        );
+      case Routes.recordScreen:
+        return MaterialPageRoute(
+          builder: (_) => const RecordScreen(),
+        );
+
       // case Routes.homeLayout:
       //   return MaterialPageRoute(
       //     builder: (_) => BlocProvider(
