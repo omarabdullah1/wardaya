@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import '../logic/cubit/cart_cubit.dart';
@@ -92,7 +93,7 @@ class _CustomizeGiftCardScreenState extends State<CustomizeGiftCardScreen>
       appBar: AppBar(
         backgroundColor: ColorsManager.white,
         title: Text(
-          'Customize Gift Card',
+          context.el.customizeGiftCard,
           style: GoogleFonts.inter(
             color: ColorsManager.mainRose,
             fontSize: 18.sp,
@@ -116,9 +117,9 @@ class _CustomizeGiftCardScreenState extends State<CustomizeGiftCardScreen>
             fontWeight: FontWeight.w500,
             fontSize: 14.sp,
           ),
-          tabs: const [
-            Tab(text: 'Select Card'),
-            Tab(text: 'Add a Message'),
+          tabs: [
+            Tab(text: context.el.selectCard),
+            Tab(text: context.el.addMessage),
           ],
         ),
       ),
@@ -167,7 +168,7 @@ class _CustomizeGiftCardScreenState extends State<CustomizeGiftCardScreen>
               onPressed: _showPreview,
               child: FittedBox(
                 child: Text(
-                  'Preview',
+                  context.el.preview,
                   style: GoogleFonts.inter(
                     fontWeight: FontWeight.w700,
                     fontSize: 15.sp,
@@ -187,7 +188,7 @@ class _CustomizeGiftCardScreenState extends State<CustomizeGiftCardScreen>
               onPressed: _saveAndContinue,
               child: FittedBox(
                 child: Text(
-                  'Save & Continue',
+                  context.el.saveAndContinue,
                   style: GoogleFonts.inter(
                     fontWeight: FontWeight.w700,
                     fontSize: 15.sp,

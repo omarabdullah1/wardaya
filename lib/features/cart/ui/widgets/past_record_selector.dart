@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart'; // Assuming you're using SVGs for the icons
+import 'package:localization/localization.dart';
 
 import 'package:wardaya/core/theming/colors.dart'; // Assuming you use the theme colors
 
@@ -21,17 +22,24 @@ class PastRecordSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: ColorsManager
-            .offWhite, // Replace with your desired background color
+        color: ColorsManager.offWhite,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _buildTabItem(context, 0, 'Record Video',
-              'assets/svgs/video.svg'), // Replace with your icon path
-          _buildTabItem(context, 1, 'Past a Link',
-              'assets/svgs/link.svg'), // Replace with  your icon path
+          _buildTabItem(
+            context,
+            0,
+            context.el.recordVideoTab,
+            'assets/svgs/video.svg',
+          ),
+          _buildTabItem(
+            context,
+            1,
+            context.el.pasteLinkTab,
+            'assets/svgs/link.svg',
+          ),
         ],
       ),
     );

@@ -1,9 +1,12 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
+import 'package:wardaya/core/blocs/general/cubit/general_cubit.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 
@@ -19,7 +22,7 @@ class ProfileScreen extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(
-          'Profile',
+          context.el.profileScreenTitle,
           style: GoogleFonts.ebGaramond(
             color: ColorsManager.mainRose,
             fontWeight: FontWeight.w400,
@@ -68,7 +71,7 @@ class ProfileScreen extends StatelessWidget {
                               width: 10.0.w,
                             ),
                             Text(
-                              'View/Edit My Profile',
+                              context.el.viewEditProfile,
                               style: GoogleFonts.inter(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12.0.sp,
@@ -94,38 +97,38 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    _buildOptionRow(
-                        context, 'My Orders', 'assets/svgs/orders_truck.svg'),
+                    _buildOptionRow(context, context.el.myOrders,
+                        'assets/svgs/orders_truck.svg'),
                     const Divider(
                       color: ColorsManager.lightGrey,
                       height: 0.0,
                     ),
-                    _buildOptionRow(context, 'My Subscriptions',
+                    _buildOptionRow(context, context.el.mySubscriptions,
                         'assets/svgs/subscription.svg'),
                     const Divider(
                       color: ColorsManager.lightGrey,
                       height: 0.0,
                     ),
-                    _buildOptionRow(
-                        context, 'Invoices', 'assets/svgs/invoices.svg'),
+                    _buildOptionRow(context, context.el.invoices,
+                        'assets/svgs/invoices.svg'),
                     const Divider(
                       color: ColorsManager.lightGrey,
                       height: 0.0,
                     ),
-                    _buildOptionRow(context, 'Saved Addresses',
+                    _buildOptionRow(context, context.el.savedAddresses,
                         'assets/svgs/addresses.svg'),
                     const Divider(
                       color: ColorsManager.lightGrey,
                       height: 0.0,
                     ),
-                    _buildOptionRow(
-                        context, 'Occasions', 'assets/svgs/occassions.svg'),
+                    _buildOptionRow(context, context.el.occasions,
+                        'assets/svgs/occassions.svg'),
                     const Divider(
                       color: ColorsManager.lightGrey,
                       height: 0.0,
                     ),
-                    _buildOptionRow(
-                        context, 'Favourite Gifts', 'assets/svgs/fav_gifs.svg'),
+                    _buildOptionRow(context, context.el.favouriteGifts,
+                        'assets/svgs/fav_gifs.svg'),
                   ],
                 ),
               ),
@@ -142,7 +145,7 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     _buildOptionRow(
                       context,
-                      'Wardaya Points',
+                      context.el.wardayaPoints,
                       'assets/svgs/points.svg',
                       showArrow: false,
                       trailing: Container(
@@ -172,7 +175,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     _buildOptionRow(
                       context,
-                      'Wardaya Wallet',
+                      context.el.wardayaWallet,
                       'assets/svgs/wallet.svg',
                       showArrow: false,
                       trailing: Container(
@@ -186,7 +189,7 @@ class ProfileScreen extends StatelessWidget {
                             vertical: 2,
                           ),
                           child: Text(
-                            'SAR 0',
+                            '${context.el.currencySar} 0',
                             style: GoogleFonts.inter(
                               fontWeight: FontWeight.bold,
                               fontSize: 12.0.sp,
@@ -210,7 +213,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    _buildOptionRow(context, 'Customer Care',
+                    _buildOptionRow(context, context.el.customerCare,
                         'assets/svgs/customer_care.svg', onTap: () {
                       _showCustomerCareBottomSheet(context);
                     }),
@@ -218,20 +221,22 @@ class ProfileScreen extends StatelessWidget {
                       color: ColorsManager.lightGrey,
                       height: 0.0,
                     ),
-                    _buildOptionRow(
-                      context,
-                      'Language',
-                      'assets/svgs/language.svg',
-                      showArrow: false,
-                      trailing: Text(
-                        'العربية',
-                        style: GoogleFonts.lusitana(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 18.0.sp,
-                          color: ColorsManager.mainRose,
-                        ),
-                      ),
-                    ),
+                    _buildOptionRow(context, context.el.language,
+                        'assets/svgs/language.svg',
+                        showArrow: false,
+                        trailing: Text(
+                          context.read<GeneralCubit>().lang == 'ar'
+                              ? context.el.arabic
+                              : context.el.english,
+                          style: GoogleFonts.lusitana(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 18.0.sp,
+                            color: ColorsManager.mainRose,
+                          ),
+                        ), onTap: () {
+                      var cubit = context.read<GeneralCubit>();
+                      cubit.changeLanguage(cubit.lang == 'ar' ? 'en' : 'ar');
+                    }),
                   ],
                 ),
               ),
@@ -248,7 +253,7 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     _buildOptionRow(
                       context,
-                      'FAQ',
+                      context.el.faq,
                       'assets/svgs/faq.svg',
                       onTap: () {
                         context.pushNamed(Routes.faqScreen);
@@ -260,7 +265,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     _buildOptionRow(
                       context,
-                      'Terms & Conditions',
+                      context.el.termsConditions,
                       'assets/svgs/tac.svg',
                       onTap: () {
                         context.pushNamed(Routes.tacScreen);
@@ -281,14 +286,17 @@ class ProfileScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     _buildOptionRow(
-                        context, 'Logout', 'assets/svgs/logout.svg'),
+                      context,
+                      context.el.logout,
+                      'assets/svgs/logout.svg',
+                    ),
                     const Divider(
                       color: ColorsManager.lightGrey,
                       height: 0.0,
                     ),
                     _buildOptionRow(
                       context,
-                      'Delete My Account',
+                      context.el.deleteAccount,
                       'assets/svgs/delete_account.svg',
                       color: ColorsManager.red,
                     ),

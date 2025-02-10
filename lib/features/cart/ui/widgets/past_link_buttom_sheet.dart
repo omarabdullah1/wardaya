@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 
 import '../../../../core/routing/routes.dart';
@@ -37,7 +38,7 @@ class _PasteLinkBottomSheetState extends State<PasteLinkBottomSheet> {
         appBar: AppBar(
           backgroundColor: ColorsManager.white,
           title: Text(
-            'Add a Video or Photo',
+            context.el.addMediaTitle,
             style: GoogleFonts.inter(
               color: ColorsManager.mainRose,
               fontSize: 18.sp,
@@ -84,7 +85,7 @@ class _PasteLinkBottomSheetState extends State<PasteLinkBottomSheet> {
               ),
               child: _selectedIndex == 1
                   ? Text(
-                      "Add to Message",
+                      context.el.addToMessageButton,
                       style: GoogleFonts.inter(
                         color: ColorsManager.white,
                         fontSize: 16.sp,
@@ -101,7 +102,7 @@ class _PasteLinkBottomSheetState extends State<PasteLinkBottomSheet> {
                         ),
                         SizedBox(width: 8.0.w),
                         Text(
-                          'Start Recording',
+                          context.el.startRecordingButton,
                           style: GoogleFonts.inter(
                             color: ColorsManager.white,
                             fontSize: 16.sp,
@@ -118,13 +119,12 @@ class _PasteLinkBottomSheetState extends State<PasteLinkBottomSheet> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Words are tough? Express yourself with a video or a photo.",
-                style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w500), //Customize Style
+              Text(
+                context.el.mediaIntroText,
+                style: const TextStyle(
+                    fontSize: 16.0, fontWeight: FontWeight.w500),
               ),
-              const SizedBox(height: 16.0),
+              SizedBox(height: 16.0.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 5.0.w),
                 child: PastRecordSelector(
@@ -137,27 +137,27 @@ class _PasteLinkBottomSheetState extends State<PasteLinkBottomSheet> {
                   initialTabIndex: _selectedIndex,
                 ),
               ),
-              const SizedBox(height: 16.0),
+              SizedBox(height: 16.0.h),
               Text(
-                "How it works?",
+                context.el.howItWorks,
                 style: GoogleFonts.inter(
-                  fontSize: 18.0,
+                  fontSize: 18.0.sp,
                   fontWeight: FontWeight.w500,
                   color: ColorsManager.darkGray,
                 ),
               ),
-              const SizedBox(height: 8.0),
+              SizedBox(height: 8.0.h),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Icon(Icons.star,
                       size: 14.0, color: ColorsManager.mainRose),
-                  const SizedBox(width: 8.0),
+                  SizedBox(width: 8.0.w),
                   Expanded(
                     child: Text(
                       _selectedIndex == 1
-                          ? "Paste a link of video or photo from the internet"
-                          : 'Record a 10-second video or take a picture',
+                          ? context.el.pasteLinkInstruction
+                          : context.el.recordVideoInstruction,
                       style: GoogleFonts.inter(
                         fontSize: 16.sp,
                         color: ColorsManager.black,
@@ -172,10 +172,10 @@ class _PasteLinkBottomSheetState extends State<PasteLinkBottomSheet> {
                   children: [
                     const Icon(Icons.star,
                         size: 14.0, color: ColorsManager.mainRose),
-                    const SizedBox(width: 8.0),
+                    SizedBox(width: 8.0.w),
                     Expanded(
                       child: Text(
-                        "Free",
+                        context.el.freeLabel,
                         style: GoogleFonts.inter(
                           fontSize: 16.sp,
                           color: ColorsManager.black,
@@ -190,10 +190,10 @@ class _PasteLinkBottomSheetState extends State<PasteLinkBottomSheet> {
                 children: [
                   const Icon(Icons.star,
                       size: 14.0, color: ColorsManager.mainRose),
-                  const SizedBox(width: 8.0),
+                  SizedBox(width: 8.0.w),
                   Expanded(
                     child: Text(
-                      "A QR code will be added to your card message",
+                      context.el.qrCodeLabel,
                       style: GoogleFonts.inter(
                         fontSize: 16.sp,
                         color: ColorsManager.black,
@@ -202,13 +202,13 @@ class _PasteLinkBottomSheetState extends State<PasteLinkBottomSheet> {
                   ),
                 ],
               ),
-              if (_selectedIndex == 1) const SizedBox(height: 16.0),
+              if (_selectedIndex == 1) SizedBox(height: 16.0.h),
               if (_selectedIndex == 1)
                 TextField(
                   controller:
                       widget.cartContext.read<CartCubit>().linkController,
                   decoration: InputDecoration(
-                    hintText: "Paste your link here",
+                    hintText: context.el.pasteLinkHint,
                     hintStyle: GoogleFonts.inter(
                       fontSize: 16.sp,
                       color: ColorsManager.lightGrey,

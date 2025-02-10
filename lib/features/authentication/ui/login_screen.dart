@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wardaya/core/blocs/general/cubit/general_cubit.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/routing/routes.dart';
+import 'package:localization/localization.dart';
 
 import '../../../core/theming/colors.dart';
 
@@ -20,8 +23,9 @@ class SignInScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
+              // App Title from localization
               Text(
-                'Sign In',
+                context.el.appTitle,
                 style: GoogleFonts.inter(
                   fontSize: 17.0.sp,
                   fontWeight: FontWeight.w700,
@@ -30,9 +34,10 @@ class SignInScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 18.h),
+              // Email TextField using localized label
               TextField(
                 decoration: InputDecoration(
-                  labelText: 'Email',
+                  labelText: context.el.emailLabel,
                   border: const OutlineInputBorder(
                     borderSide: BorderSide(
                       color: ColorsManager.grey,
@@ -53,9 +58,10 @@ class SignInScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 13.h),
+              // Password TextField using localized label
               TextField(
                 decoration: InputDecoration(
-                  labelText: 'Password',
+                  labelText: context.el.passwordLabel,
                   border: const OutlineInputBorder(
                     borderSide: BorderSide(
                       color: ColorsManager.grey,
@@ -77,6 +83,7 @@ class SignInScreen extends StatelessWidget {
                 obscureText: true, // Hide password
               ),
               SizedBox(height: 18.h),
+              // Sign In button using localized text
               ElevatedButton(
                 onPressed: () {
                   context.pushNamedAndRemoveUntil(
@@ -93,7 +100,7 @@ class SignInScreen extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Sign In',
+                  context.el.signInButton,
                   style: GoogleFonts.inter(
                     fontSize: 15.0.sp,
                     fontWeight: FontWeight.w400,
@@ -102,6 +109,7 @@ class SignInScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 13.h),
+              // Row for "Forget Password?" and "Create Account"
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -110,7 +118,7 @@ class SignInScreen extends StatelessWidget {
                       context.pushNamed(Routes.forgetPasswordScreen);
                     },
                     child: Text(
-                      'Forget Password?',
+                      context.el.forgetPassword,
                       style: GoogleFonts.inter(
                         fontSize: 13.0.sp,
                         fontWeight: FontWeight.w400,
@@ -123,7 +131,7 @@ class SignInScreen extends StatelessWidget {
                       context.pushNamed(Routes.createAccountScreen);
                     },
                     child: Text(
-                      'Create Account',
+                      context.el.createAccount,
                       style: GoogleFonts.inter(
                         fontSize: 13.0.sp,
                         fontWeight: FontWeight.w400,
@@ -134,19 +142,28 @@ class SignInScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 18.h),
-              const Row(
+              // Row for divider with localized "OR"
+              Row(
                 children: [
-                  Expanded(child: Divider()),
+                  const Expanded(child: Divider()),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Text("OR"),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      context.el.dividerText,
+                      style: GoogleFonts.inter(
+                        fontSize: 14.0.sp,
+                        fontWeight: FontWeight.w400,
+                        color: ColorsManager.black,
+                      ),
+                    ),
                   ),
-                  Expanded(child: Divider()),
+                  const Expanded(child: Divider()),
                 ],
               ),
               SizedBox(height: 8.h),
+              // "Sign in with" text from localization
               Text(
-                'Sign in with',
+                context.el.signInWith,
                 style: GoogleFonts.inter(
                   fontSize: 14.0.sp,
                   fontWeight: FontWeight.w400,
@@ -155,10 +172,10 @@ class SignInScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 18.h),
+              // Row with social sign-in icons
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Use InkWell or GestureDetector for tap events
                   InkWell(
                     onTap: () {
                       // Handle Apple sign in
@@ -171,11 +188,13 @@ class SignInScreen extends StatelessWidget {
                         'assets/svgs/apple.svg',
                         height: 40.0.h,
                       ),
-                    ), // Replace with your asset path
+                    ),
                   ),
                   SizedBox(width: 18.w),
                   InkWell(
                     onTap: () {
+                      GeneralCubit cubit = context.read<GeneralCubit>();
+                      cubit.changeLanguage(cubit.lang == 'en' ? 'ar' : 'en');
                       // Handle Google sign in
                     },
                     child: Material(
@@ -186,7 +205,7 @@ class SignInScreen extends StatelessWidget {
                         'assets/svgs/google.svg',
                         height: 40.0.h,
                       ),
-                    ), // Replace with your asset path
+                    ),
                   ),
                 ],
               ),

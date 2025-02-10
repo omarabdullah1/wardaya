@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
 import '../../../cart/logic/cubit/cart_state.dart';
@@ -31,10 +32,20 @@ class BottomNavBarWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildNavItem('assets/svgs/home.svg', 'HOME', 0, context,
-                    height: 14.0.h),
-                _buildNavItem('assets/svgs/explore.svg', 'EXPLORE', 1, context,
-                    height: 14.0.h),
+                _buildNavItem(
+                  'assets/svgs/home.svg',
+                  context.el.bottomNavHome,
+                  0,
+                  context,
+                  height: 14.0.h,
+                ),
+                _buildNavItem(
+                  'assets/svgs/explore.svg',
+                  context.el.bottomNavExplore,
+                  1,
+                  context,
+                  height: 14.0.h,
+                ),
                 BlocBuilder<CartCubit, CartState>(
                   builder: (context, state) {
                     return context.read<CartCubit>().cartItems > 0
@@ -43,17 +54,29 @@ class BottomNavBarWidget extends StatelessWidget {
                             backgroundColor: ColorsManager.mainRose,
                             offset: const Offset(10, -10.0),
                             child: _buildNavItem(
-                                'assets/svgs/cart.svg', 'CART', 2, context,
-                                height: 14.0.h),
+                              'assets/svgs/cart.svg',
+                              context.el.bottomNavCart,
+                              2,
+                              context,
+                              height: 14.0.h,
+                            ),
                           )
                         : _buildNavItem(
-                            'assets/svgs/cart.svg', 'CART', 2, context,
-                            height: 14.0.h);
+                            'assets/svgs/cart.svg',
+                            context.el.bottomNavCart,
+                            2,
+                            context,
+                            height: 14.0.h,
+                          );
                   },
                 ),
                 _buildNavItem(
-                    'assets/svgs/profile.svg', 'MY ACCOUNT', 3, context,
-                    height: 14.0.h),
+                  'assets/svgs/profile.svg',
+                  context.el.bottomNavMyAccount,
+                  3,
+                  context,
+                  height: 14.0.h,
+                ),
               ],
             ),
           ),

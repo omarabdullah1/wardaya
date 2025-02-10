@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/features/cart/ui/widgets/previewer.dart';
@@ -58,9 +59,9 @@ class _AddMessageTabState extends State<AddMessageTab> {
                     SizedBox(height: 5.h),
                     _buildTextFieldRow(
                       context,
-                      label: 'To:',
+                      label: context.el.toLabel,
                       controller: cartCubit.toController,
-                      hint: 'Optional',
+                      hint: context.el.optionalHint,
                       widthFactor: 0.60,
                     ),
                     SizedBox(height: 16.h),
@@ -68,7 +69,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                     SizedBox(height: 16.h),
                     Text.rich(
                       TextSpan(
-                        text: 'Not sure what to say? ',
+                        text: context.el.suggestedMessagesPromptPart1,
                         style: GoogleFonts.inter(
                           color: ColorsManager.lighterLightGrey,
                           fontSize: 12.sp,
@@ -76,7 +77,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                         ),
                         children: [
                           TextSpan(
-                            text: 'Try Suggested Messages',
+                            text: context.el.suggestedMessagesPromptPart2,
                             style: GoogleFonts.inter(
                               color: ColorsManager.mainRose,
                               fontSize: 12.sp,
@@ -109,7 +110,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'From:',
+                                context.el.fromLabel,
                                 style: GoogleFonts.inter(
                                   color: ColorsManager.lighterLightGrey,
                                   fontWeight: FontWeight.w500,
@@ -139,9 +140,9 @@ class _AddMessageTabState extends State<AddMessageTab> {
                     else
                       _buildTextFieldRow(
                         context,
-                        label: 'From:',
+                        label: context.el.fromLabel,
                         controller: cartCubit.fromController,
-                        hint: 'Optional',
+                        hint: context.el.optionalHint,
                         widthFactor: 0.40,
                         trailing: InkWell(
                           onTap: () => _showSignatureBottomSheet(context),
@@ -154,7 +155,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                                 ),
                                 SizedBox(width: 5.w),
                                 Text(
-                                  'Signature',
+                                  context.el.signatureButton,
                                   style: GoogleFonts.inter(
                                     color: ColorsManager.mainRose,
                                     fontSize: 12.sp,
@@ -193,12 +194,15 @@ class _AddMessageTabState extends State<AddMessageTab> {
                           FittedBox(
                             fit: BoxFit.scaleDown,
                             child: SizedBox(
-                              width: context.screenWidth*0.4.w,
+                              width: context.screenWidth * 0.4.w,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    context.read<CartCubit>().linkController.text,
+                                    context
+                                        .read<CartCubit>()
+                                        .linkController
+                                        .text,
                                     style: GoogleFonts.inter(
                                       color: ColorsManager.black,
                                       fontWeight: FontWeight.bold,
@@ -207,7 +211,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   Text(
-                                    'Added as a QR Code',
+                                    context.el.qrCodeLabel,
                                     style: GoogleFonts.inter(
                                       color: ColorsManager.lightGrey,
                                       fontWeight: FontWeight.w500,
@@ -267,7 +271,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                                 ),
                                 SizedBox(width: 10.w),
                                 Text(
-                                  'Record Video',
+                                  context.el.recordVideoButton,
                                   style: GoogleFonts.inter(
                                     color: ColorsManager.mainRose,
                                     fontSize: 13.sp,
@@ -279,7 +283,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                           ),
                           const Spacer(),
                           Text(
-                            'OR',
+                            context.el.orLabel,
                             style: GoogleFonts.inter(
                               color: ColorsManager.lighterLightGrey,
                               fontSize: 13.sp,
@@ -312,7 +316,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                                 ),
                                 SizedBox(width: 10.w),
                                 Text(
-                                  'Paste a Link',
+                                  context.el.pasteLinkButton,
                                   style: GoogleFonts.inter(
                                     color: ColorsManager.mainRose,
                                     fontSize: 13.sp,
@@ -338,7 +342,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
       required String hint,
       required double widthFactor,
       Widget? trailing}) {
-    List<String> styles = ['Handwritten', 'Typed'];
+    List<String> styles = [context.el.handwrittenStyle, context.el.typedStyle];
     return SizedBox(
       width: double.infinity,
       height: 40.h,
@@ -369,7 +373,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                     maxLength: 32,
                     decoration: InputDecoration(
                       hintText: hint,
-                      hintStyle: label == 'From:'
+                      hintStyle: label == context.el.fromLabel
                           ? GoogleFonts.corinthia(
                               color: ColorsManager.grey,
                               fontSize: 16.0.sp,
@@ -384,23 +388,23 @@ class _AddMessageTabState extends State<AddMessageTab> {
                     ),
                     onChanged: (value) {
                       context.read<CartCubit>().setMessageData(
-                            to: label == 'From:'
+                            to: label == context.el.fromLabel
                                 ? context.read<CartCubit>().toController.text
                                 : value,
                             message: context
                                 .read<CartCubit>()
                                 .messageController
                                 .text,
-                            from: label == 'From:'
+                            from: label == context.el.fromLabel
                                 ? value
                                 : context.read<CartCubit>().fromController.text,
                           );
                     },
-                    style: (label == 'From:' &&
+                    style: (label == context.el.fromLabel &&
                             styles[context
                                     .read<CartCubit>()
                                     .selectedTypingStyle] ==
-                                'Handwritten')
+                                context.el.handwrittenStyle)
                         ? GoogleFonts.corinthia(
                             color: ColorsManager.black,
                             fontSize: 16.0.sp,
@@ -441,7 +445,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
               maxLines: 4,
               maxLength: 192,
               decoration: InputDecoration(
-                hintText: 'Type your message and express your feelings',
+                hintText: context.el.messageHint,
                 hintStyle: GoogleFonts.inter(
                   color: ColorsManager.lighterLightGrey,
                   fontSize: 14.sp,
@@ -465,7 +469,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
               valueListenable: context.watch<CartCubit>().messageController,
               builder: (context, value, child) {
                 return Text(
-                  '${192 - value.text.length} Characters left',
+                  '${192 - value.text.length} ${context.el.charactersLeft}',
                   style: GoogleFonts.inter(
                     color: ColorsManager.lighterLightGrey,
                     fontSize: 12.sp,
@@ -503,12 +507,12 @@ class _AddMessageTabState extends State<AddMessageTab> {
         height: 450.h,
         child: SuggestedMessagesBottomSheet(
           onMessageSelected: (String message) {
-final cubit=context.read<CartCubit>();
-           cubit .setMessageData(
-            to: cubit.to,
-            message: message,
-            from: cubit.from,
-           );
+            final cubit = context.read<CartCubit>();
+            cubit.setMessageData(
+              to: cubit.to,
+              message: message,
+              from: cubit.from,
+            );
           },
         ),
       ),

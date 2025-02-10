@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
-
-import '../../../core/theming/colors.dart';
+import 'package:wardaya/core/theming/colors.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   const ForgetPasswordScreen({super.key});
@@ -31,8 +31,9 @@ class ForgetPasswordScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              // Localized title using context.el
               Text(
-                'Forget Password?',
+                context.el.forgetPasswordTitle,
                 style: GoogleFonts.inter(
                   fontSize: 27.0.sp,
                   fontWeight: FontWeight.w400,
@@ -40,8 +41,9 @@ class ForgetPasswordScreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
+              // Localized instruction text
               Text(
-                'Enter the email address associated with your account',
+                context.el.forgetPasswordInstruction,
                 style: GoogleFonts.inter(
                   fontSize: 16.0.sp,
                   fontWeight: FontWeight.w400,
@@ -50,9 +52,10 @@ class ForgetPasswordScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 18.h),
+              // Localized label for email TextField
               TextField(
                 decoration: InputDecoration(
-                  labelText: 'Email',
+                  labelText: context.el.emailLabel,
                   border: const OutlineInputBorder(
                     borderSide: BorderSide(
                       color: ColorsManager.grey,
@@ -73,9 +76,10 @@ class ForgetPasswordScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 18.h),
+              // Localized reset password button text
               ElevatedButton(
                 onPressed: () {
-                  // Handle sign in
+                  // Handle reset password action
                 },
                 style: ElevatedButton.styleFrom(
                   fixedSize: Size(context.screenWidth.w, 40.h),
@@ -87,7 +91,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Reset Password',
+                  context.el.resetPasswordButton,
                   style: GoogleFonts.inter(
                     fontSize: 15.0.sp,
                     fontWeight: FontWeight.w400,

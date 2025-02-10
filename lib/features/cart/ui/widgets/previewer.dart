@@ -1,9 +1,10 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
-import 'package:html/parser.dart' as htmlparser;
+// import 'package:html/parser.dart' as htmlparser;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -20,8 +21,8 @@ class LinkPreviewGenerator extends StatefulWidget {
 
 class _LinkPreviewGeneratorState extends State<LinkPreviewGenerator> {
   String? _imageUrl;
-  String? _title;
-  String? _description;
+  // String? _title;
+  // String? _description;
   bool _isLoading = true;
   bool _hasError = false;
 
@@ -36,8 +37,8 @@ class _LinkPreviewGeneratorState extends State<LinkPreviewGenerator> {
       _isLoading = true;
       _hasError = false;
       _imageUrl = null;
-      _title = null;
-      _description = null;
+      // _title = null;
+      // _description = null;
     });
 
     try {
@@ -62,7 +63,7 @@ class _LinkPreviewGeneratorState extends State<LinkPreviewGenerator> {
         await _scrapeWebpage(widget.url);
       }
     } catch (e) {
-      print("Error fetching preview data: $e");
+      log("Error fetching preview data: $e");
       setState(() {
         _hasError = true;
         _isLoading = false;
@@ -84,9 +85,9 @@ class _LinkPreviewGeneratorState extends State<LinkPreviewGenerator> {
     if (videoId != null) {
       setState(() {
         _imageUrl = "https://img.youtube.com/vi/$videoId/0.jpg";
-        _title =
-            "YouTube Video"; // You can fetch the title by scraping or using the YouTube API
-        _description = "YouTube Video Description"; // Fetch from API or scrape
+        // _title =
+        //     "YouTube Video"; // You can fetch the title by scraping or using the YouTube API
+        // _description = "YouTube Video Description"; // Fetch from API or scrape
         _isLoading = false;
       });
     } else {
@@ -107,8 +108,8 @@ class _LinkPreviewGeneratorState extends State<LinkPreviewGenerator> {
         final jsonResponse = json.decode(response.body);
         setState(() {
           _imageUrl = jsonResponse['thumbnail_url'];
-          _title = jsonResponse['title'];
-          _description = jsonResponse['description'];
+          // _title = jsonResponse['title'];
+          // _description = jsonResponse['description'];
           _isLoading = false;
         });
       } else {
@@ -129,25 +130,25 @@ class _LinkPreviewGeneratorState extends State<LinkPreviewGenerator> {
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
-        final document = htmlparser.parse(response.body);
+        // final document = htmlparser.parse(response.body);
 
         setState(() {
-          _title = document.head
-                  ?.querySelector('meta[property="og:title"]')
-                  ?.attributes['content'] ??
-              document.head?.querySelector('title')?.text ??
-              '';
-          _description = document.head
-                  ?.querySelector('meta[property="og:description"]')
-                  ?.attributes['content'] ??
-              document.head
-                  ?.querySelector('meta[name="description"]')
-                  ?.attributes['content'] ??
-              '';
-          _imageUrl = document.head
-                  ?.querySelector('meta[property="og:image"]')
-                  ?.attributes['content'] ??
-              '';
+          // _title = document.head
+          //         ?.querySelector('meta[property="og:title"]')
+          //         ?.attributes['content'] ??
+          //     document.head?.querySelector('title')?.text ??
+          //     '';
+          // _description = document.head
+          //         ?.querySelector('meta[property="og:description"]')
+          //         ?.attributes['content'] ??
+          //     document.head
+          //         ?.querySelector('meta[name="description"]')
+          //         ?.attributes['content'] ??
+          //     '';
+          // _imageUrl = document.head
+          //         ?.querySelector('meta[property="og:image"]')
+          //         ?.attributes['content'] ??
+          //     '';
 
           _isLoading = false;
         });
@@ -206,17 +207,17 @@ class _LinkPreviewGeneratorState extends State<LinkPreviewGenerator> {
                       height: 200, // Adjust as needed
                     )
                   : Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Center(
-                    child: SvgPicture.asset(
-                      'assets/svgs/small_logo.svg',
-                      colorFilter: const ColorFilter.mode(
-                        ColorsManager.lightGrey,
-                        BlendMode.srcIn,
+                      padding: const EdgeInsets.all(16.0),
+                      child: Center(
+                        child: SvgPicture.asset(
+                          'assets/svgs/small_logo.svg',
+                          colorFilter: const ColorFilter.mode(
+                            ColorsManager.lightGrey,
+                            BlendMode.srcIn,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
     );
   }
 }

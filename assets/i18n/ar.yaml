@@ -1,0 +1,203 @@
+# General App Texts
+app_title: "وردايا"
+
+# TransparentAppBar texts
+app_bar_title: "وردايا"
+delivery_to: "التوصيل إلى"
+location_city: "الرياض"
+
+# SignInScreen texts
+email_label: "البريد الإلكتروني"
+password_label: "كلمة المرور"
+sign_in_button: "تسجيل الدخول"
+forget_password: "نسيت كلمة المرور؟"
+create_account: "إنشاء حساب"
+divider_text: "أو"
+sign_in_with: "سجل دخول باستخدام"
+
+# ForgetPasswordScreen texts
+forget_password_title: "نسيت كلمة المرور؟"
+forget_password_instruction: "أدخل البريد الإلكتروني المرتبط بحسابك"
+reset_password_button: "إعادة تعيين كلمة المرور"
+
+# CreateAccountScreen texts
+create_account_title: "إنشاء حساب"
+name_label: "الاسم"
+phone_label: "الهاتف"
+select_country_label: "اختر الدولة"
+
+# HomeScreen texts
+home_gifts_for_every_moment: "هدايا لكل المناسبات"
+home_explore_unique_gift_ideas: "اكتشف أفكار هدايا فريدة"
+home_choose_gifts_now: "اختر الهدايا الآن"
+home_rounded_beauty_endless_charm: "جمال دائري وسحر لا ينتهي"
+home_start_the_year_with_tulips: "ابدأ العام مع التيوليب"
+home_woodnt_you_love_this: "ألا تحبين هذا الخشب؟"
+home_an_extra_luxurious_touch: "لمسة فاخرة إضافية"
+home_best_sellers: "الأكثر مبيعاً"
+home_captivation_aromas_of_mubkhar: "عطور المباخر الساحرة"
+home_gift_your_loved_ones: "اهدي أحبائك قبل نفاذ الكمية"
+home_natures_magic: "سحر الطبيعة"
+home_latest_and_loveliest: "الأحدث والأجمل"
+home_gifts_for_everyone: "هدايا للجميع"
+home_brands_youll_love: "علامات تجارية ستحبها"
+
+# BottomNavBar texts
+bottom_nav_home: "الرئيسية"
+bottom_nav_explore: "استكشف"
+bottom_nav_cart: "السلة"
+bottom_nav_my_account: "حسابي"
+
+# ExploreScreen texts
+explore_screen_title: "استكشف"
+explore_search_hint: "ابحث عن زهور، هدايا، والمزيد"
+explore_card_moments: "اللحظات"
+explore_card_recipients: "المستلمون"
+explore_category_flowers_plants: "زهور ونباتات"
+explore_category_flowers_gifts: "زهور وهدايا"
+explore_category_express_delivery: "توصيل سريع"
+explore_category_floral_subscription: "اشتراك زهري"
+explore_brands_youll_love: "علامات تجارية ستحبها"
+
+# DiscoverIdeasSection texts
+discover_new_ideas_title: "اكتشف أفكاراً جديدة"
+discover_card_express_delivery_title: "توصيل سريع"
+discover_card_express_delivery_button: "اهدِ الآن"
+discover_card_weekly_surprise_title: "مفاجأة أسبوعية"
+discover_card_weekly_surprise_button: "اشترك"
+
+# MomentsScreen texts
+moments_screen_title: "اللحظات"
+
+# RecipientsScreen texts
+recipients_screen_title: "المستلمون"
+
+# FlowersAndPlanetsScreen texts
+flowers_planets_screen_title: "الزهور والنباتات"
+
+# FlowersAndGiftsScreen texts
+flowers_gifts_screen_title: "الزهور والهدايا"
+
+# SearchScreen texts
+search_placeholder: "ابحث عن زهور، هدايا، والمزيد"
+search_button: "بحث"
+
+# CategoryScreen texts
+category_filter_title: "الفئة"
+occasion_filter_title: "المناسبة"
+recipient_filter_title: "المستلم"
+color_filter_title: "اللون"
+show_products_part1: "عرض "
+show_products_part2: " منتج"
+filters_title: "الفلاتر"
+
+# ProductDetailsScreen texts
+add_to_cart: "أضف إلى السلة"
+no_address_hassle: "لا مشكلة في العنوان"
+collect_address_text: "سنقوم بجمع العنوان نيابة عنك"
+description_header: "الوصف"
+see_more: "عرض المزيد"
+see_less: "عرض أقل"
+all_prices_include_tax: "جميع الأسعار تشمل الضريبة"
+pay_with: "الدفع باستخدام"
+product_details_title: "كعكة هيلين المرسومة لعيد الميلاد"
+wardaya_points: "نقاط وردايا"
+currency_sar: "ر.س. "
+split_payments_with_tamara: "قسط دفعاتك على 4 دفعات مع تمارا"
+earn: "اكسب "
+
+# Cart Screen texts
+cart_empty_title: "سلة التسوق فارغة!"
+cart_empty_subtitle: "يبدو أنك لم تضيف أي شيء إلى سلة التسوق بعد."
+start_shopping_button: "ابدأ التسوق"
+cart_title: "السلة "
+proceed_to_payment: "الدفع الآن"
+free_delivery_unlocked: "🎉 لقد حصلت على توصيل مجاني!"
+gift_card_message: "بطاقة هدية ورسالة"
+select_gift_card: "اختر بطاقة هدية"
+add_message: "أضف رسالة"
+customize_button: "تخصيص"
+make_it_perfect: "اجعله مثالياً"
+recommended_tab: "مُوصى به"
+flowers_add_on_tab: "إضافات زهور"
+stickers_tab: "ملصقات"
+product_price: "ر.س. "
+product_title: "لوحة أكريليك عيد ميلاد سعيد - ذهبي"
+
+# New entries from AddMessageTab
+to_label: "إلى:"
+from_label: "من:"
+optional_hint: "اختياري"
+suggested_messages_prompt_part1: "لا تعرف ماذا تكتب؟ "
+suggested_messages_prompt_part2: "جرب الرسائل المقترحة"
+signature_button: "توقيع"
+qr_code_label: "تمت إضافته كرمز QR"
+record_video_button: "تسجيل فيديو"
+or_label: "أو"
+paste_link_button: "لصق رابط"
+message_hint: "اكتب رسالتك عبر عن مشاعرك"
+characters_left: "أحرف متبقية"
+remove_tooltip: "إزالة"
+signature_remove: "إزالة التوقيع"
+link_remove: "إزالة الرابط"
+handwritten_style: "بخط اليد"
+typed_style: "مكتوب"
+characters_limit: "أحرف متبقية"
+
+# New entries for CustomTextFieldWithDropdown
+typing_style_label: "النمط:"  # Dropdown label
+handwriting_option: "خط اليد"  # Specific dropdown option
+typed_option: "مكتوب"  # Specific dropdown option
+
+# Paste Link Screen texts
+add_media_title: "إضافة فيديو أو صورة"
+media_intro_text: "الكلمات صعبة؟ عبر عن نفسك بفيديو أو صورة."
+how_it_works: "كيفية الاستخدام"
+paste_link_instruction: "الصق رابط فيديو أو صورة من الإنترنت"
+record_video_instruction: "سجل فيديو لمدة 10 ثوانٍ أو التقط صورة"
+qr_code_note: "سيتم إضافة رمز QR إلى رسالة البطاقة الخاصة بك"
+free_label: "مجاني"
+paste_link_hint: "الصق الرابط هنا"
+add_to_message_button: "إضافة إلى الرسالة"
+start_recording_button: "بدء التسجيل"
+record_video_tab: "تسجيل فيديو"
+paste_link_tab: "لصق رابط"
+
+# Preview Screen texts
+no_card_selected: "لم يتم اختيار بطاقة"
+front_side_label: "الوجه الأمامي (الرسالة)"
+back_side_label: "الوجه الخلفي (الغلاف)"
+qr_question: "هل استمتعت بهذه الهدية؟"
+qr_instruction: "امسح رمز QR لمشاركة رسالتك الصادقة مع المرسل"
+
+signature_title: "توقيعك"
+draw_instruction: "ارسم توقيعك داخل الإطار"
+clear_button: "مسح"
+save_button: "حفظ"
+customize_gift_card: "خصص بطاقة الهدية"
+select_card: "اختر البطاقة"
+preview: "معاينة"
+save_and_continue: "حفظ ومتابعة"
+
+# نصوص شاشة الملف الشخصي
+profile_screen_title: "الملف الشخصي"
+view_edit_profile: "عرض/تعديل الملف الشخصي"
+my_orders: "طلباتي"
+my_subscriptions: "اشتراكاتي"
+invoices: "الفواتير"
+saved_addresses: "العناوين المحفوظة"
+occasions: "المناسبات"
+favourite_gifts: "الهدايا المفضلة"
+wardaya_wallet: "محفظة وردايا"
+customer_care: "خدمة العملاء"
+language: "اللغة"
+faq: "الأسئلة الشائعة"
+terms_conditions: "الشروط والأحكام"
+delete_my_account: "حذف الحساب"
+customer_care_title: "يسعدنا مساعدتك!\nهل تحتاج مساعدة في شيء ما؟"
+phone_call: "مكالمة هاتفية"
+whatsapp: "واتساب"
+arabic: "العربية"
+english: "الإنجليزية"
+logout: "تسجيل خروج"
+delete_account: "تسجيل خروج من الحساب"
