@@ -193,8 +193,6 @@ class SignInScreen extends StatelessWidget {
                   SizedBox(width: 18.w),
                   InkWell(
                     onTap: () {
-                      GeneralCubit cubit = context.read<GeneralCubit>();
-                      cubit.changeLanguage(cubit.lang == 'en' ? 'ar' : 'en');
                       // Handle Google sign in
                     },
                     child: Material(
