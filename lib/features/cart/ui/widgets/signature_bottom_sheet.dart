@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_signature_pad/flutter_signature_pad.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
@@ -86,7 +87,7 @@ class _SignatureBottomSheetState extends State<SignatureBottomSheet> {
           appBar: AppBar(
             backgroundColor: ColorsManager.white,
             title: Text(
-              'Your Signature',
+              context.el.signatureTitle,
               style: GoogleFonts.inter(
                 color: ColorsManager.mainRose,
                 fontSize: 18.sp,
@@ -119,7 +120,7 @@ class _SignatureBottomSheetState extends State<SignatureBottomSheet> {
                     minimumSize: Size(150.w, 0.h),
                   ),
                   child: Text(
-                    "Clear",
+                    context.el.clearButton,
                     style: GoogleFonts.inter(
                       color: ColorsManager.white,
                       fontSize: 16.sp,
@@ -141,7 +142,7 @@ class _SignatureBottomSheetState extends State<SignatureBottomSheet> {
                     minimumSize: Size(150.w, 0.h),
                   ),
                   child: Text(
-                    "Save",
+                    context.el.saveButton,
                     style: GoogleFonts.inter(
                       color: ColorsManager.white,
                       fontSize: 16.sp,
@@ -177,7 +178,7 @@ class _SignatureBottomSheetState extends State<SignatureBottomSheet> {
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 8.0.h),
                             child: Text(
-                              'Draw Your Signature iside the frame',
+                              context.el.drawInstruction,
                               style: GoogleFonts.inter(
                                 fontSize: 12.0.sp,
                                 fontWeight: FontWeight.w300,
@@ -204,8 +205,11 @@ class _SignatureBottomSheetState extends State<SignatureBottomSheet> {
                         ],
                       )
                     : CustomTextFieldWithDropdown(
-                        labelText: 'From:',
-                        dropdownItems: const ['Handwriting', 'Text'],
+                        labelText: context.el.fromLabel,
+                        dropdownItems: [
+                          context.el.handwrittenStyle,
+                          context.el.typedStyle
+                        ],
                         cartContext: widget.cartContext,
                         textController: _textController,
                       ),

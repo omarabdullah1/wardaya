@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
@@ -12,6 +13,8 @@ import 'wardaya_app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+
   await setupGetIt();
   String token =
       await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
@@ -20,8 +23,12 @@ Future<void> main() async {
   await ScreenUtil.ensureScreenSize();
   log('message From Production');
   runApp(
-    WardayaApp(
-      appRouter: AppRouter(),
+    EasyLocalization(
+      path: 'assets/i18n',
+      supportedLocales: const [Locale('en'), Locale('ar')],
+      child: WardayaApp(
+        appRouter: AppRouter(),
+      ),
     ),
   );
 }

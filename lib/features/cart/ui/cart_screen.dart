@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
 import 'package:mobkit_dashed_border/mobkit_dashed_border.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/routing/routes.dart';
@@ -50,7 +51,7 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                     SizedBox(height: 25.h),
                     Text(
-                      "Your Cart is Empty!",
+                      context.el.cartEmptyTitle,
                       style: GoogleFonts.inter(
                         color: ColorsManager.black,
                         fontWeight: FontWeight.w700,
@@ -58,7 +59,7 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                     ),
                     Text(
-                      "Looks like you havn’t added anything to your cart yet.",
+                      context.el.cartEmptySubtitle,
                       style: GoogleFonts.inter(
                         color: ColorsManager.black,
                         fontWeight: FontWeight.w400,
@@ -82,7 +83,7 @@ class _CartScreenState extends State<CartScreen> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
                           child: Text(
-                            'Start Shopping',
+                            context.el.startShoppingButton,
                             style: GoogleFonts.inter(
                               fontWeight: FontWeight.w700,
                               fontSize: 15.0.sp,
@@ -103,7 +104,7 @@ class _CartScreenState extends State<CartScreen> {
             appBar: AppBar(
               backgroundColor: ColorsManager.offWhite,
               title: Text(
-                'Cart (${cartCubit.cartItems})',
+                "${context.el.cartTitle} (${cartCubit.cartItems})",
                 style: GoogleFonts.inter(
                   color: ColorsManager.mainRose,
                   fontSize: 18.0.sp,
@@ -135,7 +136,7 @@ class _CartScreenState extends State<CartScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Proceed To Payment',
+                          context.el.proceedToPayment,
                           style: GoogleFonts.inter(
                             fontWeight: FontWeight.w700,
                             fontSize: 15.0.sp,
@@ -145,7 +146,7 @@ class _CartScreenState extends State<CartScreen> {
                         Row(
                           children: [
                             Text(
-                              'SAR ${480 * cartCubit.cartItems}',
+                              "${context.el.currencySar}${480 * cartCubit.cartItems}",
                               style: GoogleFonts.inter(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 15.0.sp,
@@ -192,7 +193,7 @@ class _CartScreenState extends State<CartScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "🎉 You’ve unlocked free delivery!",
+                                context.el.freeDeliveryUnlocked,
                                 style: GoogleFonts.inter(
                                   color: ColorsManager.mainRose,
                                   fontWeight: FontWeight.w400,
@@ -222,7 +223,7 @@ class _CartScreenState extends State<CartScreen> {
                                     ),
                                     Text.rich(
                                       TextSpan(
-                                        text: 'SAR ',
+                                        text: '${context.el.currencySar} ',
                                         style: GoogleFonts.inter(
                                           color: ColorsManager.mainRose,
                                           fontWeight: FontWeight.w500,
@@ -350,7 +351,7 @@ class _CartScreenState extends State<CartScreen> {
                                       const Spacer(),
                                       Text.rich(
                                         TextSpan(
-                                          text: 'SAR ',
+                                          text: '${context.el.currencySar} ',
                                           style: GoogleFonts.inter(
                                             color: ColorsManager.mainRose,
                                             fontWeight: FontWeight.w700,
@@ -402,7 +403,7 @@ class _CartScreenState extends State<CartScreen> {
                                     ),
                                     SizedBox(width: 11.w),
                                     Text(
-                                      'Gift Card & Message',
+                                      context.el.giftCardMessage,
                                       style: GoogleFonts.inter(
                                         fontWeight: FontWeight.w700,
                                         fontSize: 15.0.sp,
@@ -469,7 +470,7 @@ class _CartScreenState extends State<CartScreen> {
                                         Padding(
                                           padding: const EdgeInsets.all(12.0),
                                           child: Text(
-                                            'Select Gift Card',
+                                            context.el.selectGiftCard,
                                             style: GoogleFonts.inter(
                                               color: ColorsManager.mainRose,
                                               fontWeight: FontWeight.w400,
@@ -602,7 +603,7 @@ class _CartScreenState extends State<CartScreen> {
                                         Padding(
                                           padding: const EdgeInsets.all(12.0),
                                           child: Text(
-                                            'Add a Message',
+                                            context.el.addMessage,
                                             style: GoogleFonts.inter(
                                               color: ColorsManager.mainRose,
                                               fontWeight: FontWeight.w400,
@@ -636,7 +637,7 @@ class _CartScreenState extends State<CartScreen> {
                                         );
                                       },
                                       child: Text(
-                                        'Customize',
+                                        context.el.customizeButton,
                                         style: GoogleFonts.inter(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 14.0.sp,
@@ -673,12 +674,11 @@ class MakeItPerfectSection extends StatefulWidget {
 class _MakeItPerfectSectionState extends State<MakeItPerfectSection> {
   @override
   Widget build(BuildContext context) {
-    double screenWidth =
-        MediaQuery.of(context).size.width; // For responsiveness
+    double screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
-      width: screenWidth * 0.9.w, // 90% of screen width
-      height: 500.h, // Or calculate height dynamically if needed
+      width: screenWidth * 0.9.w,
+      height: 500.h,
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -698,7 +698,7 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection> {
                 ),
                 SizedBox(width: 11.w),
                 Text(
-                  'Make it perfect',
+                  context.el.makeItPerfect,
                   style: GoogleFonts.inter(
                     fontWeight: FontWeight.w700,
                     fontSize: 15.0.sp,
@@ -720,19 +720,19 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection> {
                   fontSize: 14.0.sp,
                   color: ColorsManager.mainRose,
                 ),
-                tabs: const [
-                  Tab(text: 'Recommended'),
-                  Tab(text: 'Flowers Add On'),
-                  Tab(text: 'Stickers'),
+                tabs: [
+                  Tab(text: context.el.recommendedTab),
+                  Tab(text: context.el.flowersAddOnTab),
+                  Tab(text: context.el.stickersTab),
                 ],
               ),
             ),
             Expanded(
               child: TabBarView(
                 children: [
-                  _buildProductGrid(),
-                  _buildProductGrid(),
-                  _buildProductGrid(),
+                  _buildProductGrid(context),
+                  _buildProductGrid(context),
+                  _buildProductGrid(context),
                 ],
               ),
             ),
@@ -742,22 +742,22 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection> {
     );
   }
 
-  Widget _buildProductGrid() {
+  Widget _buildProductGrid(BuildContext context) {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 16.w,
         mainAxisSpacing: 16.w,
-        childAspectRatio: 0.7, // Adjust as needed
+        childAspectRatio: 0.7,
       ),
-      itemCount: 4, // Replace with your actual item count
+      itemCount: 4,
       itemBuilder: (context, index) {
-        return _buildProductItem();
+        return _buildProductItem(context);
       },
     );
   }
 
-  Widget _buildProductItem() {
+  Widget _buildProductItem(BuildContext context) {
     return Stack(
       children: [
         Column(
@@ -772,28 +772,21 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection> {
               child: Padding(
                 padding: const EdgeInsets.all(3.0),
                 child: Container(
-                  // width: context.screenWidth * 0.35.w,
                   height: 120.h,
                   decoration: BoxDecoration(
-                    color: ColorsManager.lightGrey, // Placeholder
+                    color: ColorsManager.lightGrey,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  // Replace with your Image widget:
-                  // child: Image.network('your_image_url', fit: BoxFit.cover),
-                  // or
-                  // child: Image.asset('your_asset_path', fit: BoxFit.cover),
                 ),
               ),
             ),
-            SizedBox(
-              height: 8.0.h,
-            ),
+            SizedBox(height: 8.0.h),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text.rich(
                   TextSpan(
-                    text: 'SAR ',
+                    text: '${context.el.currencySar} ',
                     style: GoogleFonts.inter(
                       color: ColorsManager.mainRose,
                       fontWeight: FontWeight.w400,
@@ -812,7 +805,7 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection> {
                   ),
                 ),
                 Text(
-                  'Happy Birthday Acrylic Topper - Gold',
+                  context.el.productTitle,
                   style: GoogleFonts.inter(
                     color: ColorsManager.mainRose,
                     fontWeight: FontWeight.w500,
@@ -827,18 +820,4 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection> {
       ],
     );
   }
-
-  // Dummy card data (Replace with your actual data)
-  final List<Map<String, dynamic>> cards = [
-    {
-      'image': 'assets/images/cards/card1.png',
-      'title': 'Floward Card',
-      'isFree': true,
-    },
-    {
-      'image': 'assets/images/cards/card2.png',
-      'title': 'Heart Card',
-      'isFree': false,
-    },
-  ];
 }

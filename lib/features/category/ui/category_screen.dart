@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
+import 'package:wardaya/core/blocs/general/cubit/general_cubit.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import '../../../core/helpers/dummy_vars.dart';
@@ -86,25 +89,45 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 const EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(
-                  'assets/svgs/filter.svg',
-                  colorFilter: const ColorFilter.mode(
-                    ColorsManager.white,
-                    BlendMode.srcIn,
-                  ),
-                  height: 16.0.h,
-                ),
-                const Spacer(),
-                Text(
-                  'Filters',
-                  style: GoogleFonts.inter(
-                    color: ColorsManager.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14.0.sp,
-                  ),
-                ),
-              ],
+              children: context.watch<GeneralCubit>().lang == 'ar'
+                  ? [
+                      Text(
+                        context.el.filtersTitle,
+                        style: GoogleFonts.inter(
+                          color: ColorsManager.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.0.sp,
+                        ),
+                      ),
+                      const Spacer(),
+                      SvgPicture.asset(
+                        'assets/svgs/filter.svg',
+                        colorFilter: const ColorFilter.mode(
+                          ColorsManager.white,
+                          BlendMode.srcIn,
+                        ),
+                        height: 16.0.h,
+                      ),
+                    ]
+                  : [
+                      SvgPicture.asset(
+                        'assets/svgs/filter.svg',
+                        colorFilter: const ColorFilter.mode(
+                          ColorsManager.white,
+                          BlendMode.srcIn,
+                        ),
+                        height: 16.0.h,
+                      ),
+                      const Spacer(),
+                      Text(
+                        context.el.filtersTitle,
+                        style: GoogleFonts.inter(
+                          color: ColorsManager.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.0.sp,
+                        ),
+                      ),
+                    ],
             ),
           ),
         ),
@@ -273,13 +296,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
   }
 
   Widget _buildProductCount() {
+    final String showProductsNumberText = context.el.showProductsPart1 +
+        products.length.toString() +
+        context.el.showProductsPart2;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "Showing ${products.length} Products",
+            showProductsNumberText,
             style: GoogleFonts.inter(
               fontSize: 14.0.sp,
               fontWeight: FontWeight.w700,
@@ -555,7 +581,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                               MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              'Filters',
+                                              context.el.filtersTitle,
                                               style: GoogleFonts.ebGaramond(
                                                 fontSize: 30.sp,
                                                 fontWeight: FontWeight.w400,
@@ -600,7 +626,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                   child: Column(
                                     children: <Widget>[
                                       _buildBottomSheetFilter(
-                                          "Category",
+                                          context.el.categoryFilterTitle,
                                           "category",
                                           [
                                             "All",
@@ -613,7 +639,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                           ],
                                           setState),
                                       _buildBottomSheetFilter(
-                                          "Occasion",
+                                          context.el.occasionFilterTitle,
                                           "occasion",
                                           [
                                             "All",
@@ -623,7 +649,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                           ],
                                           setState),
                                       _buildBottomSheetFilter(
-                                          "Recipient",
+                                          context.el.recipientFilterTitle,
                                           "recipient",
                                           [
                                             "All",
@@ -636,7 +662,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                           ],
                                           setState),
                                       _buildBottomSheetFilter(
-                                          "Color",
+                                          context.el.colorFilterTitle,
                                           "color",
                                           [
                                             "All",
@@ -675,6 +701,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   Widget _buildBottomSheetButton(StateSetter setModalState) {
     int filteredCount = _calculateFilteredCount();
+    final String showFilteredNumberText = context.el.showProductsPart1 +
+        filteredCount.toString() +
+        context.el.showProductsPart2;
     return ElevatedButton(
       onPressed: () {
         setState(() {
@@ -695,8 +724,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           fontWeight: FontWeight.w700,
         ),
       ),
-      child: Center(
-          child: Text('Show $filteredCount Products')), // Center the text
+      child: Center(child: Text(showFilteredNumberText)), // Center the text
     );
   }
 

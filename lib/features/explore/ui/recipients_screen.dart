@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 
 import '../../../core/helpers/dummy_vars.dart';
@@ -26,7 +27,7 @@ class RecipientsScreen extends StatelessWidget {
           },
         ),
         title: Text(
-          "Recipients",
+          context.el.recipientsScreenTitle,
           style: GoogleFonts.ebGaramond(
             color: ColorsManager.mainRose,
             fontWeight: FontWeight.w400,

@@ -4,6 +4,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 
 import '../../../core/routing/routes.dart';
@@ -19,6 +20,7 @@ class CreateAccountScreen extends StatefulWidget {
 class _CreateAccountScreenState extends State<CreateAccountScreen> {
   String? _countryCode;
   // Store selected country code
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +37,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
           },
         ),
         title: Text(
-          'Create Account',
+          // Using localized string for the app bar title
+          context.el.createAccountTitle,
           style: GoogleFonts.inter(
             fontSize: 17.0.sp,
             fontWeight: FontWeight.w700,
@@ -63,7 +66,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               ),
             ),
             child: Text(
-              'Sign In',
+              // Using localized text for the button
+              context.el.signInButton,
               style: GoogleFonts.inter(
                 fontSize: 15.0.sp,
                 fontWeight: FontWeight.w400,
@@ -78,9 +82,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            // Name TextField using localized label
             TextField(
               decoration: InputDecoration(
-                labelText: 'Name',
+                labelText: context.el.nameLabel,
                 border: const OutlineInputBorder(
                   borderSide: BorderSide(
                     color: ColorsManager.grey,
@@ -101,9 +106,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               ),
             ),
             SizedBox(height: 16.h),
+            // Email TextField using localized label
             TextField(
               decoration: InputDecoration(
-                labelText: 'Email',
+                labelText: context.el.emailLabel,
                 border: const OutlineInputBorder(
                   borderSide: BorderSide(
                     color: ColorsManager.grey,
@@ -124,9 +130,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               ),
             ),
             SizedBox(height: 16.h),
+            // Password TextField using localized label
             TextField(
               decoration: InputDecoration(
-                labelText: 'Password',
+                labelText: context.el.passwordLabel,
                 border: const OutlineInputBorder(
                   borderSide: BorderSide(
                     color: ColorsManager.grey,
@@ -145,7 +152,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   color: ColorsManager.grey,
                 ),
               ),
-              // obscureText: true, // Hide password
+              // Optionally set obscureText: true if needed.
             ),
             SizedBox(height: 16.h),
             Row(
@@ -153,7 +160,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 Padding(
                   padding: const EdgeInsetsDirectional.only(end: 16.0),
                   child: Container(
-                    // padding: const EdgeInsets.symmetric(horizontal: 8),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4.0),
                       border: Border.all(
@@ -163,18 +169,14 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     ),
                     child: CountryCodePicker(
                       onChanged: (CountryCode countryCode) {
-                        _countryCode = countryCode.dialCode; // Store the code
-                        // print("Selected Country Code: ${_countryCode}");
+                        _countryCode = countryCode.dialCode;
                       },
-                      initialSelection: 'EG', // Default selection (Egypt)
-                      favorite: const [
-                        'EG',
-                        'SA',
-                        'AE'
-                      ], // Show these as favorites
-                      showCountryOnly: false, // Show country name
-                      showOnlyCountryWhenClosed: false, // Show only country
-                      alignLeft: false, // Align the flag and code to the left
+                      headerText: context.el.selectCountryLabel,
+                      initialSelection: 'EG',
+                      favorite: const ['EG', 'SA', 'AE'],
+                      showCountryOnly: false,
+                      showOnlyCountryWhenClosed: false,
+                      alignLeft: false,
                       textStyle: GoogleFonts.inter(
                         fontSize: 15.0.sp,
                         fontWeight: FontWeight.w400,
@@ -193,9 +195,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   ),
                 ),
                 Expanded(
+                  // Phone TextField using localized label
                   child: TextField(
                     decoration: InputDecoration(
-                      labelText: 'Phone',
+                      labelText: context.el.phoneLabel,
                       border: const OutlineInputBorder(
                         borderSide: BorderSide(
                           color: ColorsManager.grey,
