@@ -1,0 +1,205 @@
+# General App Texts
+app_title: "Wardaya"
+
+# TransparentAppBar texts
+app_bar_title: "WARDAYA"
+delivery_to: "Delivery To"
+location_city: "Riyadh"
+
+# SignInScreen texts
+email_label: "Email"
+password_label: "Password"
+sign_in_button: "Sign In"
+forget_password: "Forget Password?"
+create_account: "Create Account"
+divider_text: "OR"
+sign_in_with: "Sign in with"
+
+# ForgetPasswordScreen texts
+forget_password_title: "Forget Password?"
+forget_password_instruction: "Enter the email address associated with your account"
+reset_password_button: "Reset Password"
+
+# CreateAccountScreen texts
+create_account_title: "Create Account"
+name_label: "Name"
+phone_label: "Phone"
+select_country_label: "Select Country"
+
+# HomeScreen texts
+home_gifts_for_every_moment: "Gifts For Every Moment"
+home_explore_unique_gift_ideas: "Explore Unique Gift Ideas"
+home_choose_gifts_now: "Choose Gifts Now"
+home_rounded_beauty_endless_charm: "Rounded Beauty, Endless Charm"
+home_start_the_year_with_tulips: "Start the Year with Tulips"
+home_woodnt_you_love_this: "Woodn’t You Love This?"
+home_an_extra_luxurious_touch: "An Extra Luxurious Touch"
+home_best_sellers: "Best Sellers"
+home_captivation_aromas_of_mubkhar: "Captivation Aromas of Mubkhar"
+home_gift_your_loved_ones: "Gift your loved ones while stocks last"
+home_natures_magic: "Nature’s Magic"
+home_latest_and_loveliest: "Latest & Loveliest"
+home_gifts_for_everyone: "Gifts for Everyone"
+home_brands_youll_love: "Brands You’ll Love"
+
+# BottomNavBar texts
+bottom_nav_home: "HOME"
+bottom_nav_explore: "EXPLORE"
+bottom_nav_cart: "CART"
+bottom_nav_my_account: "MY ACCOUNT"
+
+# ExploreScreen texts
+explore_screen_title: "Explore"
+explore_search_hint: "Search for flowers, gifts, and more"
+explore_card_moments: "Moments"
+explore_card_recipients: "Recipients"
+explore_category_flowers_plants: "Flowers & Plants"
+explore_category_flowers_gifts: "Flowers & Gifts"
+explore_category_express_delivery: "Express Delivery"
+explore_category_floral_subscription: "Floral Subscription"
+explore_brands_youll_love: "Brands You’ll Love"
+
+# DiscoverIdeasSection texts
+discover_new_ideas_title: "Discover New Ideas"
+discover_card_express_delivery_title: "Express Delivery"
+discover_card_express_delivery_button: "Gift Now"
+discover_card_weekly_surprise_title: "Weekly Surprise"
+discover_card_weekly_surprise_button: "Subscribe"
+
+# MomentsScreen texts
+moments_screen_title: "Moments"
+
+# RecipientsScreen texts
+recipients_screen_title: "Recipients"
+
+# FlowersAndPlanetsScreen texts
+flowers_planets_screen_title: "Flowers & Plants"
+
+# FlowersAndGiftsScreen texts
+flowers_gifts_screen_title: "Flowers & Gifts"
+
+# SearchScreen texts
+search_placeholder: "Search for flowers, gifts, and more"
+search_button: "Search"
+
+# CategoryScreen texts
+category_filter_title: "Category"
+occasion_filter_title: "Occasion"
+recipient_filter_title: "Recipient"
+color_filter_title: "Color"
+show_products_part1: "Show "
+show_products_part2: " Products"
+filters_title: "Filters"
+
+# ProductDetailsScreen texts
+add_to_cart: "Add To Cart"
+no_address_hassle: "No Address Hassle"
+collect_address_text: "We will collect the address for you"
+description_header: "Description"
+see_more: "See More"
+see_less: "See Less"
+all_prices_include_tax: "All prices include tax"
+pay_with: "Pay with"
+product_details_title: "Helen's Happy Birthday Drawing Cake"
+wardaya_points: "Wardaya Points"
+currency_sar: "SAR "
+split_payments_with_tamara: "Split in up to 4 payments with Tamara"
+earn: "Earn "
+
+# Cart Screen texts
+cart_empty_title: "Your Cart is Empty!"
+cart_empty_subtitle: "Looks like you havn’t added anything to your cart yet."
+start_shopping_button: "Start Shopping"
+cart_title: "Cart "
+proceed_to_payment: "Proceed To Payment"
+free_delivery_unlocked: "🎉 You’ve unlocked free delivery!"
+gift_card_message: "Gift Card & Message"
+select_gift_card: "Select Gift Card"
+add_message: "Add a Message"
+customize_button: "Customize"
+make_it_perfect: "Make it perfect"
+recommended_tab: "Recommended"
+flowers_add_on_tab: "Flowers Add On"
+stickers_tab: "Stickers"
+product_price: "SAR "
+product_title: "Happy Birthday Acrylic Topper - Gold"
+
+# New entries from AddMessageTab
+to_label: "To:"
+from_label: "From:"
+optional_hint: "Optional"
+suggested_messages_prompt_part1: "Not sure what to say? "
+suggested_messages_prompt_part2: "Try Suggested Messages"
+signature_button: "Signature"
+qr_code_label: "Added as a QR Code"
+record_video_button: "Record Video"
+or_label: "OR"
+paste_link_button: "Paste a Link"
+message_hint: "Type your message and express your feelings"
+characters_left: "Characters left"
+remove_tooltip: "Remove"
+signature_remove: "Remove Signature"
+link_remove: "Remove Link"
+handwritten_style: "Handwritten"
+typed_style: "Typed"
+characters_limit: "Characters left"
+
+# New entries for CustomTextFieldWithDropdown
+typing_style_label: "Style:" # For the dropdown label
+handwriting_option: "Handwriting" # Specific dropdown option
+typed_option: "Typed" # Specific dropdown option
+
+# Paste Link Screen texts
+add_media_title: "Add a Video or Photo"
+media_intro_text: "Words are tough? Express yourself with a video or a photo."
+how_it_works: "How it works?"
+paste_link_instruction: "Paste a link of video or photo from the internet"
+record_video_instruction: "Record a 10-second video or take a picture"
+qr_code_note: "A QR code will be added to your card message"
+free_label: "Free"
+paste_link_hint: "Paste your link here"
+add_to_message_button: "Add to Message"
+start_recording_button: "Start Recording"
+
+# New entries for PastRecordSelector
+record_video_tab: "Record Video"
+paste_link_tab: "Paste a Link" # Fixed typo from "Past" to "Paste"
+
+# Preview Screen texts
+no_card_selected: "No card selected"
+front_side_label: "Front Side (Message)"
+back_side_label: "Back Side (Cover)"
+qr_question: "Did you enjoy this gift?"
+qr_instruction: "Scan the QR code to share your heartfelt message with the sender."
+
+signature_title: "Your Signature"
+draw_instruction: "Draw your signature inside the frame"
+clear_button: "Clear"
+save_button: "Save"
+customize_gift_card: "Customize Gift Card"
+select_card: "Select Card"
+preview: "Preview"
+save_and_continue: "Save & Continue"
+
+# ProfileScreen texts
+profile_screen_title: "Profile"
+view_edit_profile: "View/Edit My Profile"
+my_orders: "My Orders"
+my_subscriptions: "My Subscriptions"
+invoices: "Invoices"
+saved_addresses: "Saved Addresses"
+occasions: "Occasions"
+favourite_gifts: "Favourite Gifts"
+wardaya_wallet: "Wardaya Wallet"
+customer_care: "Customer Care"
+language: "Language"
+faq: "FAQ"
+terms_conditions: "Terms & Conditions"
+delete_my_account: "Delete My Account"
+customer_care_title: "We are happy to help you!\nNeed help with something?"
+phone_call: "Phone Call"
+whatsapp: "WhatsApp"
+arabic: "Arabic"
+english: "English"
+logout: "Logout"
+delete_account: "Delete My Account"

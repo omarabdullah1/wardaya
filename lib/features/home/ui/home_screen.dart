@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/features/home/ui/widgets/transparent_app_bar.dart';
@@ -25,14 +26,14 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             const HomeCarouselSlider(),
-            // "Gifts For Every Moment" Section
+            // Gifts For Every Moment Section
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Text(
-                    'Gifts For Every Moment',
+                    context.el.homeGiftsForEveryMoment,
                     style: GoogleFonts.ebGaramond(
                       color: ColorsManager.mainRose,
                       fontSize: 32.sp,
@@ -47,16 +48,14 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: context.pOH(1.5).h,
-            ),
+            SizedBox(height: context.pOH(1.5).h),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Text(
-                    'Explore Unique Gift Ideas',
+                    context.el.homeExploreUniqueGiftIdeas,
                     style: GoogleFonts.ebGaramond(
                       color: ColorsManager.mainRose,
                       fontSize: 32.sp,
@@ -71,16 +70,14 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: context.pOH(1.5).h,
-            ),
+            SizedBox(height: context.pOH(1.5).h),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Rounded Beauty, Endless Charm',
+                    context.el.homeRoundedBeautyEndlessCharm,
                     style: GoogleFonts.ebGaramond(
                       color: ColorsManager.mainRose,
                       fontSize: 32.sp,
@@ -91,7 +88,7 @@ class HomeScreen extends StatelessWidget {
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
-                    buttonText: 'Choose Gifts Now',
+                    buttonText: context.el.homeChooseGiftsNow,
                     onButtonTap: () {
                       context.pushNamed(Routes.categoryScreen,
                           arguments: [names[0], context]);
@@ -100,16 +97,41 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              height: context.pOH(1.5).h,
+            SizedBox(height: context.pOH(1.5).h),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: Text(
+                    context.el.homeStartTheYearWithTulips,
+                    style: GoogleFonts.ebGaramond(
+                      color: ColorsManager.mainRose,
+                      fontSize: 32.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                GiftsCardBuilder(
+                  prices: prices,
+                  names: names,
+                  buttonText: context.el.homeChooseGiftsNow,
+                  onButtonTap: () {
+                    context.pushNamed(Routes.categoryScreen,
+                        arguments: [names[0], context]);
+                  },
+                ),
+              ],
             ),
+            SizedBox(height: context.pOH(1.5).h),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Start the Year with Tulips',
+                    context.el.homeWoodntYouLoveThis,
                     style: GoogleFonts.ebGaramond(
                       color: ColorsManager.mainRose,
                       fontSize: 32.sp,
@@ -120,7 +142,7 @@ class HomeScreen extends StatelessWidget {
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
-                    buttonText: 'Choose Gifts Now',
+                    buttonText: context.el.homeChooseGiftsNow,
                     onButtonTap: () {
                       context.pushNamed(Routes.categoryScreen,
                           arguments: [names[0], context]);
@@ -129,16 +151,14 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              height: context.pOH(1.5).h,
-            ),
+            SizedBox(height: context.pOH(1.5).h),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Woodn’t You Love This?',
+                    context.el.homeAnExtraLuxuriousTouch,
                     style: GoogleFonts.ebGaramond(
                       color: ColorsManager.mainRose,
                       fontSize: 32.sp,
@@ -149,7 +169,7 @@ class HomeScreen extends StatelessWidget {
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
-                    buttonText: 'Choose Gifts Now',
+                    buttonText: context.el.homeChooseGiftsNow,
                     onButtonTap: () {
                       context.pushNamed(Routes.categoryScreen,
                           arguments: [names[0], context]);
@@ -158,16 +178,14 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              height: context.pOH(1.5).h,
-            ),
+            SizedBox(height: context.pOH(1.5).h),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'An Extra Luxurious Touch',
+                    context.el.homeBestSellers,
                     style: GoogleFonts.ebGaramond(
                       color: ColorsManager.mainRose,
                       fontSize: 32.sp,
@@ -178,7 +196,7 @@ class HomeScreen extends StatelessWidget {
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
-                    buttonText: 'Choose Gifts Now',
+                    buttonText: context.el.homeChooseGiftsNow,
                     onButtonTap: () {
                       context.pushNamed(Routes.categoryScreen,
                           arguments: [names[0], context]);
@@ -187,38 +205,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              height: context.pOH(1.5).h,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Best Sellers',
-                    style: GoogleFonts.ebGaramond(
-                      color: ColorsManager.mainRose,
-                      fontSize: 32.sp,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  GiftsCardBuilder(
-                    prices: prices,
-                    names: names,
-                    buttonText: 'Choose Gifts Now',
-                    onButtonTap: () {
-                      context.pushNamed(Routes.categoryScreen,
-                          arguments: [names[0], context]);
-                    },
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: context.pOH(1.5).h,
-            ),
+            SizedBox(height: context.pOH(1.5).h),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 10.0),
               child: DiscoverIdeasSection(),
@@ -229,18 +216,18 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Captivation Aromas of Mubkhar',
+                    context.el.homeCaptivationAromasOfMubkhar,
                     style: GoogleFonts.ebGaramond(
+                      color: ColorsManager.mainRose,
                       fontSize: 32.sp,
                       fontWeight: FontWeight.w400,
-                      color: ColorsManager.mainRose,
                     ),
                   ),
                   const SizedBox(height: 20),
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
-                    buttonText: 'Choose Gifts Now',
+                    buttonText: context.el.homeChooseGiftsNow,
                     onButtonTap: () {
                       context.pushNamed(Routes.categoryScreen,
                           arguments: [names[0], context]);
@@ -249,16 +236,14 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              height: context.pOH(1.5).h,
-            ),
+            SizedBox(height: context.pOH(1.5).h),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Gift your loved ones while stocks last',
+                    context.el.homeGiftYourLovedOnes,
                     style: GoogleFonts.ebGaramond(
                       color: ColorsManager.mainRose,
                       fontSize: 32.sp,
@@ -269,7 +254,7 @@ class HomeScreen extends StatelessWidget {
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
-                    buttonText: 'Choose Gifts Now',
+                    buttonText: context.el.homeChooseGiftsNow,
                     onButtonTap: () {
                       context.pushNamed(Routes.categoryScreen,
                           arguments: [names[0], context]);
@@ -278,16 +263,14 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              height: context.pOH(1.5).h,
-            ),
+            SizedBox(height: context.pOH(1.5).h),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Nature’s Magic',
+                    context.el.homeNaturesMagic,
                     style: GoogleFonts.ebGaramond(
                       color: ColorsManager.mainRose,
                       fontSize: 32.sp,
@@ -298,7 +281,7 @@ class HomeScreen extends StatelessWidget {
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
-                    buttonText: 'Choose Gifts Now',
+                    buttonText: context.el.homeChooseGiftsNow,
                     onButtonTap: () {
                       context.pushNamed(Routes.categoryScreen,
                           arguments: [names[0], context]);
@@ -307,16 +290,14 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              height: context.pOH(1.5).h,
-            ),
+            SizedBox(height: context.pOH(1.5).h),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Latest & Loveliest',
+                    context.el.homeLatestAndLoveliest,
                     style: GoogleFonts.ebGaramond(
                       color: ColorsManager.mainRose,
                       fontSize: 32.sp,
@@ -327,7 +308,7 @@ class HomeScreen extends StatelessWidget {
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
-                    buttonText: 'Choose Gifts Now',
+                    buttonText: context.el.homeChooseGiftsNow,
                     onButtonTap: () {
                       context.pushNamed(Routes.categoryScreen,
                           arguments: [names[0], context]);
@@ -336,16 +317,14 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              height: context.pOH(1.5).h,
-            ),
+            SizedBox(height: context.pOH(1.5).h),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Text(
-                    'Gifts for Everyone',
+                    context.el.homeGiftsForEveryone,
                     style: GoogleFonts.ebGaramond(
                       color: ColorsManager.mainRose,
                       fontSize: 32.sp,
@@ -360,16 +339,14 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: context.pOH(1.5).h,
-            ),
+            SizedBox(height: context.pOH(1.5).h),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Text(
-                    'Brands You’ll Love',
+                    context.el.homeBrandsYoullLove,
                     style: GoogleFonts.ebGaramond(
                       color: ColorsManager.mainRose,
                       fontSize: 32.sp,
@@ -384,9 +361,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: context.pOH(1.5).h,
-            ),
+            SizedBox(height: context.pOH(1.5).h),
           ],
         ),
       ),

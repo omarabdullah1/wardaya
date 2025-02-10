@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
@@ -67,8 +68,8 @@ class _PreviewBottomSheetState extends State<PreviewBottomSheet> {
                   SizedBox(height: 16.h),
                   Text(
                     currentPage == 0
-                        ? 'Back Side (Cover)'
-                        : 'Front Side (Message)',
+                        ? context.el.backSideLabel
+                        : context.el.frontSideLabel,
                     style: GoogleFonts.inter(
                       color: ColorsManager.mainRose,
                       fontSize: 14.sp,
@@ -95,7 +96,9 @@ class _PreviewBottomSheetState extends State<PreviewBottomSheet> {
   Widget _buildFrontPreview(BuildContext context) {
     final cards = context.read<CartCubit>().cards;
     if (cards.isEmpty || widget.selectedCardIndex >= cards.length) {
-      return const Center(child: Text('No card selected'));
+      return Center(
+        child: Text(context.el.noCardSelected),
+      );
     }
     final card = cards[widget.selectedCardIndex];
     return Container(
@@ -211,7 +214,7 @@ class _PreviewBottomSheetState extends State<PreviewBottomSheet> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Did you enjoy this gift?',
+                          context.el.qrQuestion,
                           style: GoogleFonts.inter(
                             color: ColorsManager.mainRose,
                             fontWeight: FontWeight.w500,
@@ -219,7 +222,7 @@ class _PreviewBottomSheetState extends State<PreviewBottomSheet> {
                           ),
                         ),
                         Text(
-                          'Scan the QR code to share your heartfelt message with the sender.',
+                          context.el.qrInstruction,
                           style: GoogleFonts.inter(
                             color: ColorsManager.mainRose,
                             fontWeight: FontWeight.w500,

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +16,8 @@ import 'wardaya_app.dart';
 Future<void> main() async {
   Bloc.observer = AppBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+
   await setupGetIt();
   String token =
       await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
@@ -24,8 +27,12 @@ Future<void> main() async {
   Bloc.observer = AppBlocObserver(); // Initialize the observer here
   log('message From Development');
   runApp(
-    WardayaApp(
-      appRouter: AppRouter(),
+    EasyLocalization(
+      path: 'assets/i18n',
+      supportedLocales: const [Locale('en'), Locale('ar')],
+      child: WardayaApp(
+        appRouter: AppRouter(),
+      ),
     ),
   );
 }

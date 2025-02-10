@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
 
@@ -73,7 +74,7 @@ class _CustomTextFieldWithDropdownState
                       controller:
                           widget.textController, // Use the local controller
                       decoration: InputDecoration(
-                        hintText: 'Optional',
+                        hintText: context.el.optionalHint,
                         hintStyle: _selectedValue == widget.dropdownItems.first
                             ? GoogleFonts.corinthia(
                                 color: ColorsManager.lighterLightGrey,
@@ -128,7 +129,7 @@ class _CustomTextFieldWithDropdownState
                             value: item,
                             child: Text(
                               item,
-                              style: item == 'Handwriting'
+                              style: item == context.el.handwrittenStyle
                                   ? GoogleFonts.corinthia(fontSize: 12.sp)
                                   : GoogleFonts.inter(fontSize: 12.sp),
                             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart'; // Assuming you're using SVGs for the icons
+import 'package:localization/localization.dart';
 
 import 'package:wardaya/core/theming/colors.dart'; // Assuming you use the theme colors
 
@@ -26,10 +27,18 @@ class SignatureTextSelector extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _buildTabItem(context, 0, 'Handwritten',
-              'assets/svgs/signature.svg'), // Replace with your icon path
-          _buildTabItem(context, 1, 'Text',
-              'assets/svgs/text.svg'), // Replace with  your icon path
+          _buildTabItem(
+            context,
+            0,
+            context.el.handwrittenStyle,
+            'assets/svgs/signature.svg',
+          ), // Replace with your icon path
+          _buildTabItem(
+            context,
+            1,
+            context.el.typedStyle,
+            'assets/svgs/text.svg',
+          ), // Replace with  your icon path
         ],
       ),
     );

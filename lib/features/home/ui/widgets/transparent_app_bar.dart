@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/routing/routes.dart';
 
@@ -44,12 +45,12 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: FittedBox(
               fit: BoxFit.scaleDown,
               child: Text(
-                'WARDAYA',
+                context.el.appTitle,
                 style: TextStylesKammer.font35WhiteRegular,
               ),
             ),
           ),
-          _buildLocationButton(),
+          _buildLocationButton(context),
           const SizedBox(width: 10),
           _buildSearchButton(context),
         ],
@@ -57,7 +58,7 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  Widget _buildLocationButton() {
+  Widget _buildLocationButton(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
@@ -70,7 +71,7 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Delivery To',
+              context.el.deliveryTo,
               style: GoogleFonts.inter(
                 color: Colors.white,
                 fontSize: 12.sp,
@@ -80,7 +81,7 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
             Row(
               children: [
                 Text(
-                  'Riyadh',
+                  context.el.locationCity,
                   style: GoogleFonts.inter(
                     color: Colors.white,
                     fontSize: 14.sp,

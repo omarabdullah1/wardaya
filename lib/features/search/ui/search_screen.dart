@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
+import 'package:wardaya/core/blocs/general/cubit/general_cubit.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 
@@ -32,7 +35,7 @@ class SearchScreen extends StatelessWidget {
                   color: ColorsManager.mainRose,
                 ),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  context.pop();
                 },
               ),
               Expanded(
@@ -47,7 +50,7 @@ class SearchScreen extends StatelessWidget {
                     child: SizedBox(
                       height: 40.h,
                       child: CupertinoSearchTextField(
-                        placeholder: 'Search for flowers, gifts, and more',
+                        placeholder: context.el.searchPlaceholder,
                         style: GoogleFonts.inter(
                           color: ColorsManager.grey,
                           fontWeight: FontWeight.w400,
@@ -95,17 +98,28 @@ class SearchScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
               ),
-              child: const Center(
+              child: Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.search, color: Colors.white),
-                    SizedBox(width: 8.0),
-                    Text(
-                      'Search',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ],
+                  children: context.watch<GeneralCubit>().lang == 'ar'
+                      ? [
+                          Text(
+                            context.el.searchButton,
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 16),
+                          ),
+                          const SizedBox(width: 8.0),
+                          const Icon(Icons.search, color: Colors.white),
+                        ]
+                      : [
+                          const Icon(Icons.search, color: Colors.white),
+                          const SizedBox(width: 8.0),
+                          Text(
+                            context.el.searchButton,
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 16),
+                          ),
+                        ],
                 ),
               ),
             ),

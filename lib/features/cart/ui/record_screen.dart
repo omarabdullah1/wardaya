@@ -1,9 +1,9 @@
 import 'dart:developer';
-import 'dart:io';
+// import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as path;
+// import 'package:path_provider/path_provider.dart';
+// import 'package:path/path.dart' as path;
 import 'dart:async';
 
 class RecordScreen extends StatefulWidget {
@@ -90,10 +90,10 @@ class _RecordScreenState extends State<RecordScreen>
     }
 
     try {
-      final Directory appDocumentDir = await getApplicationDocumentsDirectory();
-      final String videoPath =
-          path.join(appDocumentDir.path, '${DateTime.now()}.mp4');
-      await _cameraController!.startVideoRecording();
+      // final Directory appDocumentDir = await getApplicationDocumentsDirectory();
+      // final String videoPath =
+      //     path.join(appDocumentDir.path, '${DateTime.now()}.mp4');
+      // await _cameraController!.startVideoRecording();
 
       setState(() {
         _isRecordingVideo = true;

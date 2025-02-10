@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/theming/colors.dart';
 
 class SuggestedMessagesBottomSheet extends StatefulWidget {
@@ -64,7 +65,7 @@ class _SuggestedMessagesBottomSheetState
         appBar: AppBar(
           backgroundColor: ColorsManager.white,
           title: Text(
-            'Customize Gift Card',
+            context.el.customizeGiftCard,
             style: GoogleFonts.inter(
               color: ColorsManager.mainRose,
               fontSize: 18.sp,
