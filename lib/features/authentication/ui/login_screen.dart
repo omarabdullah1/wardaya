@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/routing/routes.dart';
 import 'package:localization/localization.dart';
-
 import '../../../core/theming/colors.dart';
 
 class SignInScreen extends StatelessWidget {
