@@ -98,12 +98,12 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: context.pOH(1.5).h),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: Text(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
                     context.el.homeStartTheYearWithTulips,
                     style: GoogleFonts.ebGaramond(
                       color: ColorsManager.mainRose,
@@ -111,18 +111,18 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                ),
-                const SizedBox(height: 20),
-                GiftsCardBuilder(
-                  prices: prices,
-                  names: names,
-                  buttonText: context.el.homeChooseGiftsNow,
-                  onButtonTap: () {
-                    context.pushNamed(Routes.categoryScreen,
-                        arguments: [names[0], context]);
-                  },
-                ),
-              ],
+                  const SizedBox(height: 20),
+                  GiftsCardBuilder(
+                    prices: prices,
+                    names: names,
+                    buttonText: context.el.homeChooseGiftsNow,
+                    onButtonTap: () {
+                      context.pushNamed(Routes.categoryScreen,
+                          arguments: [names[0], context]);
+                    },
+                  ),
+                ],
+              ),
             ),
             SizedBox(height: context.pOH(1.5).h),
             Padding(
