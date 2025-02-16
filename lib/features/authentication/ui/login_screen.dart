@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/routing/routes.dart';
 import 'package:localization/localization.dart';
@@ -20,7 +21,7 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   bool _isSigningIn = false;
 
-  Future<void> _handleSignIn() async {
+  Future<void> _handleSignInWithGoogle() async {
     if (_isSigningIn) {
       return; // Prevent concurrent calls
     }
@@ -65,6 +66,36 @@ class _SignInScreenState extends State<SignInScreen> {
           backgroundColor: Colors.red,
         ),
       );
+    } finally {
+      setState(() {
+        _isSigningIn = false;
+      });
+    }
+  }
+
+  Future<void> _handleSignInWithApple() async {
+    if (_isSigningIn) {
+      return; // Prevent concurrent calls
+    }
+
+    setState(() {
+      _isSigningIn = true;
+    });
+
+    try {
+      final AuthorizationCredentialAppleID result =
+          await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+
+      log('Result: $result');
+      // Handle the sign-in result (e.g., send the `result.identityToken` to your backend)
+    } catch (e) {
+      log('Error signing in with Apple: $e');
+      // Handle errors
     } finally {
       setState(() {
         _isSigningIn = false;
@@ -236,9 +267,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InkWell(
-                    onTap: () {
-                      // Handle Apple sign in
-                    },
+                    onTap: _isSigningIn ? null : _handleSignInWithApple,
                     child: Material(
                       elevation: 2,
                       borderRadius: BorderRadius.circular(6),
@@ -251,7 +280,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   SizedBox(width: 18.w),
                   InkWell(
-                    onTap: _isSigningIn ? null : _handleSignIn,
+                    onTap: _isSigningIn ? null : _handleSignInWithGoogle,
                     child: Material(
                       elevation: 2,
                       borderRadius: BorderRadius.circular(6),
