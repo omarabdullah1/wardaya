@@ -61,7 +61,7 @@ class _SignInScreenState extends State<SignInScreen> {
       log('Error signing in: $error');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Error signing in: $error'),
+          content: Text('Error signing in : $error'),
           backgroundColor: Colors.red,
         ),
       );
