@@ -67,7 +67,8 @@ dependencies:
   toggle_switch: ^2.3.0
   typewritertext: ^3.0.9
   url_launcher: ^6.2.6
-
+  google_sign_in: ^6.2.2
+  
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
   flutter_lints: ^3.0.0

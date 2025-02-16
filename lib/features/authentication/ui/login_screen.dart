@@ -1,14 +1,76 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/routing/routes.dart';
 import 'package:localization/localization.dart';
 import '../../../core/theming/colors.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
+
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
+  bool _isSigningIn = false;
+
+  Future<void> _handleSignIn() async {
+    if (_isSigningIn) {
+      return; // Prevent concurrent calls
+    }
+
+    setState(() {
+      _isSigningIn = true;
+    });
+
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+
+      if (googleUser != null) {
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
+        final String? accessToken = googleAuth.accessToken;
+
+        log('User Name: ${googleUser.displayName}');
+        log('Access Token: $accessToken');
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Signed in as ${googleUser.displayName}'),
+            backgroundColor: Colors.green,
+          ),
+        );
+        // TODO: Send the access token to your backend server
+      } else {
+        log('Sign-in cancelled by user.');
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Sign-in cancelled by user.'),
+            backgroundColor: Colors.grey,
+          ),
+        );
+      }
+    } catch (error) {
+      log('Error signing in: $error');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error signing in: $error'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } finally {
+      setState(() {
+        _isSigningIn = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -189,9 +251,7 @@ class SignInScreen extends StatelessWidget {
                   ),
                   SizedBox(width: 18.w),
                   InkWell(
-                    onTap: () {
-                      // Handle Google sign in
-                    },
+                    onTap: _isSigningIn ? null : _handleSignIn,
                     child: Material(
                       elevation: 2,
                       borderRadius: BorderRadius.circular(6),
