@@ -10,6 +10,8 @@ import 'package:wardaya/core/blocs/general/cubit/general_cubit.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 
+import '../../../core/helpers/constants.dart';
+import '../../../core/helpers/shared_pref_helper.dart';
 import '../../../core/routing/routes.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -289,6 +291,14 @@ class ProfileScreen extends StatelessWidget {
                       context,
                       context.el.logout,
                       'assets/svgs/logout.svg',
+                      onTap: () {
+                        SharedPrefHelper.removeSecuredString(
+                            SharedPrefKeys.userToken);
+                        context.pushNamedAndRemoveUntil(
+                          Routes.loginScreen,
+                          predicate: (route) => false,
+                        );
+                      },
                     ),
                     const Divider(
                       color: ColorsManager.lightGrey,

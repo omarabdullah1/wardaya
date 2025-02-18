@@ -10,7 +10,7 @@ class Constants {
   static const String appName = 'Wardaya';
   static const String appVersion = '1.0.0';
   static const String appBuildNumber = '1';
-  static const String appPackage = 'com.wardaya.app';
+  static const String appPackage = 'com.wardaya.wardaya';
   static const String appStoreLink =
       'https://play.google.com/store/apps/details?id=$appPackage';
   static const String appStoreId = 'com.wardaya.app';

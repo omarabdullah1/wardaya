@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'api_error_model.dart';
+part of 'create_account_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ApiErrorModel _$ApiErrorModelFromJson(Map<String, dynamic> json) =>
-    ApiErrorModel(
+CreateAccountResponse _$CreateAccountResponseFromJson(
+        Map<String, dynamic> json) =>
+    CreateAccountResponse(
       message: json['message'] as String?,
-      error: json['error'] as String?,
     );
 
-Map<String, dynamic> _$ApiErrorModelToJson(ApiErrorModel instance) =>
+Map<String, dynamic> _$CreateAccountResponseToJson(
+        CreateAccountResponse instance) =>
     <String, dynamic>{
       'message': instance.message,
-      'error': instance.error,
     };
