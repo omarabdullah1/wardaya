@@ -10,6 +10,7 @@ import 'package:wardaya/core/blocs/general/cubit/general_cubit.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 
+import '../../../core/assets/assets.dart';
 import '../../../core/helpers/constants.dart';
 import '../../../core/helpers/shared_pref_helper.dart';
 import '../../../core/routing/routes.dart';
@@ -49,7 +50,8 @@ class ProfileScreen extends StatelessWidget {
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                     ),
-                    child: SvgPicture.asset('assets/svgs/profile_avatar.svg'),
+                    child: SvgPicture.asset(
+                        Assets.of(context).svgs.profile_avatar_svg),
                   ),
                   const SizedBox(width: 10),
                   Column(
@@ -68,7 +70,8 @@ class ProfileScreen extends StatelessWidget {
                         },
                         child: Row(
                           children: [
-                            SvgPicture.asset('assets/svgs/edit_pen.svg'),
+                            SvgPicture.asset(
+                                Assets.of(context).svgs.edit_pen_svg),
                             SizedBox(
                               width: 10.0.w,
                             ),
@@ -100,37 +103,37 @@ class ProfileScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     _buildOptionRow(context, context.el.myOrders,
-                        'assets/svgs/orders_truck.svg'),
+                        Assets.of(context).svgs.orders_truck_svg),
                     const Divider(
                       color: ColorsManager.lightGrey,
                       height: 0.0,
                     ),
                     _buildOptionRow(context, context.el.mySubscriptions,
-                        'assets/svgs/subscription.svg'),
+                        Assets.of(context).svgs.subscription_svg),
                     const Divider(
                       color: ColorsManager.lightGrey,
                       height: 0.0,
                     ),
                     _buildOptionRow(context, context.el.invoices,
-                        'assets/svgs/invoices.svg'),
+                        Assets.of(context).svgs.invoices_svg),
                     const Divider(
                       color: ColorsManager.lightGrey,
                       height: 0.0,
                     ),
                     _buildOptionRow(context, context.el.savedAddresses,
-                        'assets/svgs/addresses.svg'),
+                        Assets.of(context).svgs.addresses_svg),
                     const Divider(
                       color: ColorsManager.lightGrey,
                       height: 0.0,
                     ),
                     _buildOptionRow(context, context.el.occasions,
-                        'assets/svgs/occassions.svg'),
+                        Assets.of(context).svgs.occassions_svg),
                     const Divider(
                       color: ColorsManager.lightGrey,
                       height: 0.0,
                     ),
                     _buildOptionRow(context, context.el.favouriteGifts,
-                        'assets/svgs/fav_gifs.svg'),
+                        Assets.of(context).svgs.fav_gifs_svg),
                   ],
                 ),
               ),
@@ -148,7 +151,7 @@ class ProfileScreen extends StatelessWidget {
                     _buildOptionRow(
                       context,
                       context.el.wardayaPoints,
-                      'assets/svgs/points.svg',
+                      Assets.of(context).svgs.points_svg,
                       showArrow: false,
                       trailing: Container(
                         decoration: BoxDecoration(
@@ -178,7 +181,7 @@ class ProfileScreen extends StatelessWidget {
                     _buildOptionRow(
                       context,
                       context.el.wardayaWallet,
-                      'assets/svgs/wallet.svg',
+                      Assets.of(context).svgs.wallet_svg,
                       showArrow: false,
                       trailing: Container(
                         decoration: BoxDecoration(
@@ -216,7 +219,7 @@ class ProfileScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     _buildOptionRow(context, context.el.customerCare,
-                        'assets/svgs/customer_care.svg', onTap: () {
+                        Assets.of(context).svgs.customer_care_svg, onTap: () {
                       _showCustomerCareBottomSheet(context);
                     }),
                     const Divider(
@@ -224,7 +227,7 @@ class ProfileScreen extends StatelessWidget {
                       height: 0.0,
                     ),
                     _buildOptionRow(context, context.el.language,
-                        'assets/svgs/language.svg',
+                        Assets.of(context).svgs.language_svg,
                         showArrow: false,
                         trailing: Text(
                           context.read<GeneralCubit>().lang == 'ar'
@@ -256,7 +259,7 @@ class ProfileScreen extends StatelessWidget {
                     _buildOptionRow(
                       context,
                       context.el.faq,
-                      'assets/svgs/faq.svg',
+                      Assets.of(context).svgs.faq_svg,
                       onTap: () {
                         context.pushNamed(Routes.faqScreen);
                       },
@@ -268,7 +271,7 @@ class ProfileScreen extends StatelessWidget {
                     _buildOptionRow(
                       context,
                       context.el.termsConditions,
-                      'assets/svgs/tac.svg',
+                      Assets.of(context).svgs.tac_svg,
                       onTap: () {
                         context.pushNamed(Routes.tacScreen);
                       },
@@ -290,7 +293,7 @@ class ProfileScreen extends StatelessWidget {
                     _buildOptionRow(
                       context,
                       context.el.logout,
-                      'assets/svgs/logout.svg',
+                      Assets.of(context).svgs.logout_svg,
                       onTap: () {
                         SharedPrefHelper.removeSecuredString(
                             SharedPrefKeys.userToken);
@@ -307,7 +310,7 @@ class ProfileScreen extends StatelessWidget {
                     _buildOptionRow(
                       context,
                       context.el.deleteAccount,
-                      'assets/svgs/delete_account.svg',
+                      Assets.of(context).svgs.delete_account_svg,
                       color: ColorsManager.red,
                     ),
                   ],
@@ -401,12 +404,12 @@ class ProfileScreen extends StatelessWidget {
               _buildBottomSheetOptionRow(
                 context,
                 'Phone Call',
-                'assets/svgs/phone.svg',
+                Assets.of(context).svgs.phone_svg,
               ),
               _buildBottomSheetOptionRow(
                 context,
                 'WhatsApp',
-                'assets/svgs/whatsapp.svg',
+                Assets.of(context).svgs.whatsapp_svg,
               ),
             ],
           ),

@@ -50,7 +50,7 @@ class RecipientsScreen extends StatelessWidget {
           itemCount: recipients.length,
           itemBuilder: (context, index) {
             return _buildRecipientItem(
-                context, recipients[index], recipientsImages[index]);
+                context, recipients[index], recipientsImages(context)[index]);
           },
         ),
       ),

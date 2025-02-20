@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 CategoryProgressScroll(
-                  categoriesImages: categoriesImages,
+                  categoriesImages: categoriesImages(context),
                   titles: titles,
                 ),
               ],
@@ -65,7 +65,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 CategoryProgressScroll(
-                  categoriesImages: categoriesImages,
+                  categoriesImages: categoriesImages(context),
                   titles: titles,
                 ),
               ],
@@ -334,7 +334,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 CategoryProgressScroll(
-                  categoriesImages: giftsCategoriesImages,
+                  categoriesImages: giftsCategoriesImages(context),
                   titles: giftsTitles,
                 ),
               ],

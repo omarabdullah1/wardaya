@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wardaya/core/assets/assets.dart';
 
 import 'cart_state.dart';
 
@@ -21,20 +22,20 @@ class CartCubit extends Cubit<CartState> {
   Uint8List? signature; // Store signature image
 
   // Card Data
-  List<Map<String, dynamic>> cards = [
-    {
-      'image': 'assets/images/cards/card1.png',
-      'title': 'Floward Card',
-      'price': 'Free',
-      'currency': '',
-    },
-    {
-      'image': 'assets/images/cards/card2.png',
-      'title': 'You Complete Me',
-      'price': '99',
-      'currency': 'EGP',
-    },
-  ];
+  List<Map<String, dynamic>> cards(context) => [
+        {
+          'image': Assets.of(context).images.cards.card1_png,
+          'title': 'Floward Card',
+          'price': 'Free',
+          'currency': '',
+        },
+        {
+          'image': Assets.of(context).images.cards.card2_png,
+          'title': 'You Complete Me',
+          'price': '99',
+          'currency': 'EGP',
+        },
+      ];
 
   CartCubit() : super(const CartState.initial());
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/assets/assets.dart';
 import '../../../core/widgets/animated_splash_screen.dart' as animated_splash;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wardaya/core/theming/colors.dart';
@@ -22,7 +23,7 @@ class SplashScreen extends StatelessWidget {
       durationInSeconds: 4,
       backgroundColor: ColorsManager.mainRose,
       child: Image.asset(
-        'assets/images/logo/Wardaya_Application_splash.gif',
+        Assets.of(context).images.logo.Wardaya_Application_splash_gif,
       ),
     );
   }

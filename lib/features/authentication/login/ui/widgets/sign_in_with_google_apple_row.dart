@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wardaya/core/assets/assets.dart';
 
 import '../../../../../core/theming/colors.dart';
 
@@ -20,7 +21,7 @@ class SignInWithGoogleAppleRow extends StatelessWidget {
             borderRadius: BorderRadius.circular(6),
             color: ColorsManager.black,
             child: SvgPicture.asset(
-              'assets/svgs/apple.svg',
+              Assets.of(context).svgs.apple_svg,
               height: 40.0.h,
             ),
           ),
@@ -33,7 +34,7 @@ class SignInWithGoogleAppleRow extends StatelessWidget {
             borderRadius: BorderRadius.circular(6),
             color: ColorsManager.white,
             child: SvgPicture.asset(
-              'assets/svgs/google.svg',
+              Assets.of(context).svgs.google_svg,
               height: 40.0.h,
             ),
           ),

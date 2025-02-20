@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
 import 'package:mobkit_dashed_border/mobkit_dashed_border.dart';
+import 'package:wardaya/core/assets/assets.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/routing/routes.dart';
 import 'package:wardaya/core/theming/colors.dart';
@@ -30,10 +31,10 @@ class _CartScreenState extends State<CartScreen> {
         final selectedCard =
             context.read<CartCubit>().selectedCardIndex != -1 &&
                     context.read<CartCubit>().selectedCardIndex <
-                        context.read<CartCubit>().cards.length
+                        context.read<CartCubit>().cards(context).length
                 ? context
                     .read<CartCubit>()
-                    .cards[context.read<CartCubit>().selectedCardIndex]
+                    .cards(context)[context.read<CartCubit>().selectedCardIndex]
                 : null;
         final signatureImage = cartCubit.signature;
 
@@ -47,7 +48,7 @@ class _CartScreenState extends State<CartScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SvgPicture.asset(
-                      'assets/svgs/empty_cart.svg',
+                      Assets.of(context).svgs.empty_cart_svg,
                     ),
                     SizedBox(height: 25.h),
                     Text(
@@ -185,7 +186,7 @@ class _CartScreenState extends State<CartScreen> {
                       child: Row(
                         children: [
                           SvgPicture.asset(
-                            'assets/svgs/delivery.svg',
+                            Assets.of(context).svgs.delivery_svg,
                             height: 25.h,
                           ),
                           SizedBox(width: 8.w),
@@ -313,7 +314,9 @@ class _CartScreenState extends State<CartScreen> {
                                                   });
                                                 },
                                                 child: SvgPicture.asset(
-                                                  'assets/svgs/remove.svg',
+                                                  Assets.of(context)
+                                                      .svgs
+                                                      .remove_svg,
                                                 ),
                                               ),
                                               Padding(
@@ -398,7 +401,7 @@ class _CartScreenState extends State<CartScreen> {
                                 Row(
                                   children: [
                                     SvgPicture.asset(
-                                      'assets/svgs/gift_card.svg',
+                                      Assets.of(context).svgs.gift_card_svg,
                                       height: 30.h,
                                     ),
                                     SizedBox(width: 11.w),
@@ -456,9 +459,12 @@ class _CartScreenState extends State<CartScreen> {
                                                           ),
                                                           fit: BoxFit.cover,
                                                         )
-                                                      : const DecorationImage(
+                                                      : DecorationImage(
                                                           image: AssetImage(
-                                                            'assets/images/cards/empty_card.png',
+                                                            Assets.of(context)
+                                                                .images
+                                                                .cards
+                                                                .empty_card_png,
                                                           ),
                                                           fit: BoxFit.cover,
                                                         ),
@@ -521,7 +527,9 @@ class _CartScreenState extends State<CartScreen> {
                                                             .spaceBetween,
                                                     children: [
                                                       SvgPicture.asset(
-                                                        'assets/svgs/small_logo.svg',
+                                                        Assets.of(context)
+                                                            .svgs
+                                                            .small_logo_svg,
                                                         height: 15.0.h,
                                                       ),
                                                       SizedBox(height: 5.h),
@@ -693,7 +701,7 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection> {
             Row(
               children: [
                 SvgPicture.asset(
-                  'assets/svgs/ballons.svg',
+                  Assets.of(context).svgs.ballons_svg,
                   height: 30.h,
                 ),
                 SizedBox(width: 11.w),

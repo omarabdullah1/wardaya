@@ -18,6 +18,8 @@ class Constants {
   static const String appStoreDescription =
       'Wardaya is a mobile application that helps you to learn and improve your skills in different fields.';
 
+  static const String i18nPath = 'assets/i18n';
+
   static const String appStoreIcon = 'assets/images/app_icon.png';
   static const String appStoreBanner = 'assets/images/app_banner.png';
   static const String appStoreScreenshots = 'assets/images/app_screenshots.png';

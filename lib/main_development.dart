@@ -28,7 +28,7 @@ Future<void> main() async {
   log('message From Development');
   runApp(
     EasyLocalization(
-      path: 'assets/i18n',
+      path: Constants.i18nPath,
       supportedLocales: const [Locale('en'), Locale('ar')],
       child: WardayaApp(
         appRouter: AppRouter(),

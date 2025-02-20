@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/helpers/extensions.dart';
-import '../../../../../core/theming/colors.dart';
 import '../../../../../core/theming/styles.dart';
+import '../../../../../core/widgets/loading_widget.dart';
 import '../../logic/cubit/register_cubit.dart';
 import '../../logic/cubit/register_state.dart';
 
@@ -21,25 +20,8 @@ class RegisterBlocListener extends StatelessWidget {
           loading: () {
             showDialog(
               context: context,
-              barrierColor: ColorsManager
-                  .transparent, // Remove default barrier overlay color
-              builder: (context) => Dialog(
-                backgroundColor: ColorsManager
-                    .transparent, // Make dialog background transparent
-                insetPadding: EdgeInsets.zero, // Remove default dialog padding
-                child: Container(
-                  height: 80.0.h,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: Image.asset(
-                      'assets/images/logo/loading_gif.gif',
-                      fit: BoxFit.fitHeight,
-                    ),
-                  ),
-                ),
+              builder: (context) => const LoadingWidget(
+                loadingState: true,
               ),
             );
           },

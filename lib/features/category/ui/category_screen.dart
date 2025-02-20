@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
+import 'package:wardaya/core/assets/assets.dart';
 import 'package:wardaya/core/blocs/general/cubit/general_cubit.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
@@ -101,7 +102,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       ),
                       const Spacer(),
                       SvgPicture.asset(
-                        'assets/svgs/filter.svg',
+                        Assets.of(context).svgs.filter_svg,
                         colorFilter: const ColorFilter.mode(
                           ColorsManager.white,
                           BlendMode.srcIn,
@@ -111,7 +112,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     ]
                   : [
                       SvgPicture.asset(
-                        'assets/svgs/filter.svg',
+                        Assets.of(context).svgs.filter_svg,
                         colorFilter: const ColorFilter.mode(
                           ColorsManager.white,
                           BlendMode.srcIn,
@@ -173,7 +174,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 shape: BoxShape.circle,
                 // image: DecorationImage(
                 //   image: AssetImage(
-                //     'assets/images/cake.png',
+                //     Assets.of(context).images.cake,
                 //   ),
                 //  fit: BoxFit.cover,
                 // ),
@@ -225,7 +226,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 shape: BoxShape.circle,
                 // image: DecorationImage(
                 //   image: AssetImage(
-                //     'assets/images/cake.png',
+                //     Assets.of(context).images.cake,
                 //   ),
                 //  fit: BoxFit.cover,
                 // ),
@@ -341,7 +342,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                   horizontal: 12.0.w, vertical: 6.0.h),
                               child: Center(
                                 child: SvgPicture.asset(
-                                  'assets/svgs/grid.svg',
+                                  Assets.of(context).svgs.grid_svg,
                                   colorFilter: const ColorFilter.mode(
                                     ColorsManager.mainRose,
                                     BlendMode.srcIn,
@@ -352,7 +353,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             ),
                           )
                         : SvgPicture.asset(
-                            'assets/svgs/grid.svg',
+                            Assets.of(context).svgs.grid_svg,
                             colorFilter: const ColorFilter.mode(
                               ColorsManager.mainRose,
                               BlendMode.srcIn,
@@ -382,7 +383,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                   horizontal: 12.0.w, vertical: 6.0.h),
                               child: Center(
                                 child: SvgPicture.asset(
-                                  'assets/svgs/tile.svg',
+                                  Assets.of(context).svgs.tile_svg,
                                   colorFilter: const ColorFilter.mode(
                                     ColorsManager.mainRose,
                                     BlendMode.srcIn,
@@ -393,7 +394,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             ),
                           )
                         : SvgPicture.asset(
-                            'assets/svgs/tile.svg',
+                            Assets.of(context).svgs.tile_svg,
                             colorFilter: const ColorFilter.mode(
                               ColorsManager.mainRose,
                               BlendMode.srcIn,
