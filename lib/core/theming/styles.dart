@@ -53,6 +53,11 @@ class TextStylesInter {
     fontWeight: FontWeightHelper.regular,
     color: ColorsManager.black,
   );
+  static TextStyle font12BlackBold = GoogleFonts.inter(
+    fontWeight: FontWeightHelper.bold,
+    fontSize: 12.0.sp,
+    color: ColorsManager.black,
+  );
 }
 
 class TextStylesEBGaramond {

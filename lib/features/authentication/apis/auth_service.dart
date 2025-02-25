@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:wardaya/features/authentication/profile/data/models/profile_response.dart';
 
 import '../create_account/data/models/create_account_request_body.dart';
 import '../create_account/data/models/create_account_response.dart';
@@ -22,4 +23,6 @@ abstract class AuthenticationService {
   Future<CreateAccountResponse> createAccount(
     @Body() CreateAccountRequestBody createAccountRequestBody,
   );
+  @GET(AuthenticationApiConstants.myProfile)
+  Future<ProfileResponse> getProfile();
 }

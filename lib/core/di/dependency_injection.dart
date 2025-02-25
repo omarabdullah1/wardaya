@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:wardaya/features/authentication/profile/data/repos/profile_repo.dart';
+import 'package:wardaya/features/authentication/profile/logic/cubit/profile_cubit.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
 
 import '../../features/authentication/apis/auth_service.dart';
@@ -21,10 +23,12 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<LoginRepo>(() => LoginRepo(getIt()));
   getIt.registerLazySingleton<CreateAccountRepo>(
       () => CreateAccountRepo(getIt()));
+  getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepo(getIt()));
 
   getIt.registerFactory<GeneralCubit>(() => GeneralCubit());
   getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt()));
   getIt.registerFactory<RegisterCubit>(() => RegisterCubit(getIt()));
+  getIt.registerFactory<ProfileCubit>(() => ProfileCubit(getIt()));
 
   getIt.registerFactory<LayoutCubit>(() => LayoutCubit());
   getIt.registerFactory<CartCubit>(() => CartCubit());

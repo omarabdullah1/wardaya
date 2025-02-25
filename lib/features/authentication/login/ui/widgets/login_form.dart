@@ -18,8 +18,8 @@ class LoginForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<LoginCubit>();
 
-    return // Email TextField using localized label
-        Form(
+    // Email TextField using localized label
+    return Form(
       key: cubit.formKey,
       child: Column(
         children: [

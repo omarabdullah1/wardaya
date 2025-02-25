@@ -10,10 +10,11 @@ import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import '../../../core/helpers/dummy_vars.dart';
 import '../../../core/routing/routes.dart';
+import '../../cart/logic/cubit/cart_cubit.dart';
 
 class CategoryScreen extends StatefulWidget {
-  final List arguments;
-  const CategoryScreen({super.key, required this.arguments});
+  final String momentTitle;
+  const CategoryScreen({super.key, required this.momentTitle});
 
   @override
   State<CategoryScreen> createState() => _CategoryScreenState();
@@ -41,7 +42,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           },
         ),
         title: Text(
-          widget.arguments[0],
+          widget.momentTitle,
           style: GoogleFonts.ebGaramond(
             color: ColorsManager.mainRose,
             fontWeight: FontWeight.w400,
@@ -183,7 +184,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           ),
           showCheckmark: false,
           label: Text(
-            widget.arguments[0],
+            widget.momentTitle,
             style: GoogleFonts.inter(
               color: ColorsManager.mainRose,
               fontWeight: FontWeight.w400,
@@ -428,9 +429,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
         return GestureDetector(
           onTap: () {
             setState(() {});
-            (widget.arguments[1] as BuildContext).pushNamed(
-                Routes.productDetailsScreen,
-                arguments: widget.arguments[1]);
+            context.pushNamedWithCubit(
+              Routes.productDetailsScreen,
+              context.read<CartCubit>(),
+            );
           },
           child: _buildProductItem(products[index]),
         );
@@ -445,7 +447,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
           return GestureDetector(
             onTap: () {
               setState(() {});
-              context.pushNamed(Routes.productDetailsScreen);
+              context.pushNamed(
+                Routes.productDetailsScreen,
+              );
             },
             child: _buildProductItem(products[index]),
           );

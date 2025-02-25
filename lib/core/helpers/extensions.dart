@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 extension Navigation on BuildContext {
   /// Pushes a new screen on top of the current screen
@@ -17,6 +18,19 @@ extension Navigation on BuildContext {
       {Object? arguments, required RoutePredicate predicate}) {
     return Navigator.of(this)
         .pushNamedAndRemoveUntil(routeName, predicate, arguments: arguments);
+  }
+
+  /// Pushes a new screen on top of the current screen with BlocProvider
+  Future<dynamic> pushNamedWithCubit<T extends Cubit<Object>>(
+      String routeName, T cubit,
+      {Object? arguments}) {
+    return Navigator.of(this).pushNamed(
+      routeName,
+      arguments: {
+        'cubit': cubit,
+        'extraArgs': arguments,
+      },
+    );
   }
 
   /// Pops the current screen

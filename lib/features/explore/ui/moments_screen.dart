@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
@@ -6,10 +7,10 @@ import 'package:wardaya/core/helpers/extensions.dart';
 
 import '../../../core/routing/routes.dart';
 import '../../../core/theming/colors.dart';
+import '../../cart/logic/cubit/cart_cubit.dart';
 
 class MomentsScreen extends StatelessWidget {
-  final BuildContext cartContext;
-  const MomentsScreen({super.key, required this.cartContext});
+  const MomentsScreen({super.key});
   @override
   Widget build(BuildContext context) {
     // Sample data for moments (replace with your actual data)
@@ -70,8 +71,11 @@ class MomentsScreen extends StatelessWidget {
   Widget _buildMomentItem(BuildContext context, String moment) {
     return GestureDetector(
       onTap: () {
-        cartContext.pushReplacementNamed(Routes.categoryScreen,
-            arguments: [moment, cartContext]);
+        context.pushNamedWithCubit(
+          Routes.categoryScreen,
+          context.read<CartCubit>(),
+          arguments: moment,
+        );
       },
       child: Column(
         children: [

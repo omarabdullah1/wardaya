@@ -105,6 +105,7 @@ class CreateAccountForm extends StatelessWidget {
           ),
           verticalSpace(16),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsetsDirectional.only(end: 16.0),

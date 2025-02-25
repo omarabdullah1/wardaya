@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:wardaya/features/authentication/create_account/data/models/create_account_request_body.dart';
 import 'package:wardaya/features/authentication/create_account/data/repos/create_account_repo.dart';
 
@@ -14,7 +15,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
 
-  final formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormBuilderState>();
 
   String countryCode = '+966';
 

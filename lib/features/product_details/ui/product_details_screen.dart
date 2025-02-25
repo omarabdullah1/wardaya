@@ -14,8 +14,7 @@ import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
 import '../../../core/assets/assets.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  final BuildContext cartContext;
-  const ProductDetailsScreen({super.key, required this.cartContext});
+  const ProductDetailsScreen({super.key});
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
@@ -36,8 +35,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           child: ElevatedButton(
             onPressed: () {
               setState(() {
-                widget.cartContext.read<CartCubit>().changeLength(
-                    widget.cartContext.read<CartCubit>().cartItems + 1);
+                context
+                    .read<CartCubit>()
+                    .changeLength(context.read<CartCubit>().cartItems + 1);
               });
             }, // Centered text
             style: ElevatedButton.styleFrom(
