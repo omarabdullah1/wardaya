@@ -14,6 +14,7 @@ CreateAccountRequestBody _$CreateAccountRequestBodyFromJson(
       firstName: json['first_name'] as String,
       lastName: json['last_name'] as String,
       countryCode: json['country_code'] as String,
+      phoneNumber: json['phone_number'] as String,
       birthDate: json['birth_date'] as String,
       gender: json['gender'] as String,
     );
@@ -26,6 +27,7 @@ Map<String, dynamic> _$CreateAccountRequestBodyToJson(
       'first_name': instance.firstName,
       'last_name': instance.lastName,
       'country_code': instance.countryCode,
+      'phone_number': instance.phoneNumber,
       'birth_date': instance.birthDate,
       'gender': instance.gender,
     };

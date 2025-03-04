@@ -48,6 +48,11 @@ class TextStylesInter {
     fontWeight: FontWeightHelper.regular,
     color: ColorsManager.black,
   );
+  static TextStyle font13GreyRegular = GoogleFonts.inter(
+    fontSize: 13.0.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.grey,
+  );
   static TextStyle font13BlackRegular = GoogleFonts.inter(
     fontSize: 13.0.sp,
     fontWeight: FontWeightHelper.regular,
@@ -58,6 +63,21 @@ class TextStylesInter {
     fontSize: 12.0.sp,
     color: ColorsManager.black,
   );
+  static TextStyle font12WhiteBold = GoogleFonts.inter(
+    fontWeight: FontWeightHelper.bold,
+    fontSize: 12.0.sp,
+    color: ColorsManager.white,
+  );
+  static TextStyle font10WhiteBold = GoogleFonts.inter(
+    fontWeight: FontWeightHelper.bold,
+    fontSize: 10.0.sp,
+    color: ColorsManager.white,
+  );
+  static TextStyle font8WhiteBold = GoogleFonts.inter(
+    fontWeight: FontWeightHelper.bold,
+    fontSize: 8.0.sp,
+    color: ColorsManager.white,
+  );
 }
 
 class TextStylesEBGaramond {
@@ -65,5 +85,10 @@ class TextStylesEBGaramond {
     fontSize: 25.0.sp,
     fontWeight: FontWeightHelper.regular,
     color: ColorsManager.mainRose,
+  );
+  static TextStyle font32MainRoseRegular = GoogleFonts.ebGaramond(
+    color: ColorsManager.mainRose,
+    fontSize: 32.sp,
+    fontWeight: FontWeightHelper.regular,
   );
 }

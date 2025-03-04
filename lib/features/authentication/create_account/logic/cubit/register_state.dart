@@ -9,4 +9,7 @@ class RegisterState<T> with _$RegisterState {
   const factory RegisterState.error({required String error}) = Error;
 
   const factory RegisterState.setCountryCode(String countryCode) = CountryCode;
+  const factory RegisterState.setBirthDate(String birthdate) = BirthDate;
+  const factory RegisterState.togglePasswordVisibility(bool isPasswordVisable) =
+      TogglePasswordVisibility;
 }

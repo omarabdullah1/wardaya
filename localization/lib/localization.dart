@@ -190,6 +190,7 @@ class LocalizationMessages {
     required this.saveChangesButton,
     required this.firstNameLabel,
     required this.lastNameLabel,
+    required this.fullNameLabel,
     required this.phoneNumberLabel,
     required this.emailAddressLabel,
     required this.changePasswordButton,
@@ -362,6 +363,7 @@ class LocalizationMessages {
       saveChangesButton: (json['save_changes_button'] ?? '').toString(),
       firstNameLabel: (json['first_name_label'] ?? '').toString(),
       lastNameLabel: (json['last_name_label'] ?? '').toString(),
+      fullNameLabel: (json['full_name_label'] ?? '').toString(),
       phoneNumberLabel: (json['phone_number_label'] ?? '').toString(),
       emailAddressLabel: (json['email_address_label'] ?? '').toString(),
       changePasswordButton: (json['change_password_button'] ?? '').toString(),
@@ -533,6 +535,7 @@ class LocalizationMessages {
   final String saveChangesButton;
   final String firstNameLabel;
   final String lastNameLabel;
+  final String fullNameLabel;
   final String phoneNumberLabel;
   final String emailAddressLabel;
   final String changePasswordButton;
@@ -703,6 +706,7 @@ class LocalizationMessages {
         r'''save_changes_button''': saveChangesButton,
         r'''first_name_label''': firstNameLabel,
         r'''last_name_label''': lastNameLabel,
+        r'''full_name_label''': fullNameLabel,
         r'''phone_number_label''': phoneNumberLabel,
         r'''email_address_label''': emailAddressLabel,
         r'''change_password_button''': changePasswordButton,
@@ -903,6 +907,7 @@ Need help with something?''',
   saveChangesButton: 'Save',
   firstNameLabel: 'First Name',
   lastNameLabel: 'Last Name',
+  fullNameLabel: 'Full Name',
   phoneNumberLabel: 'Phone Number',
   emailAddressLabel: 'Email Address',
   changePasswordButton: 'Change',
@@ -1075,6 +1080,7 @@ final LocalizationMessages ar = LocalizationMessages(
   saveChangesButton: 'حفظ',
   firstNameLabel: 'الاسم الأول',
   lastNameLabel: 'اسم العائلة',
+  fullNameLabel: 'الاسم الكامل',
   phoneNumberLabel: 'رقم الهاتف',
   emailAddressLabel: 'البريد الإلكتروني',
   changePasswordButton: 'تغيير',
