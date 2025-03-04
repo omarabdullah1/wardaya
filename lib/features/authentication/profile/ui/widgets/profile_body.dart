@@ -214,7 +214,7 @@ class ProfileBody extends StatelessWidget {
                     Assets.of(context).svgs.language_svg,
                     showArrow: false,
                     trailing: Text(
-                      context.read<GeneralCubit>().lang == 'ar'
+                      context.read<GeneralCubit>().lang == Constants.arLang
                           ? context.el.arabic
                           : context.el.english,
                       style: GoogleFonts.lusitana(
@@ -224,7 +224,11 @@ class ProfileBody extends StatelessWidget {
                       ),
                     ), onTap: () {
                   var cubit = context.read<GeneralCubit>();
-                  cubit.changeLanguage(cubit.lang == 'ar' ? 'en' : 'ar');
+                  cubit.changeLanguage(
+                    cubit.lang == Constants.arLang
+                        ? Constants.enLang
+                        : Constants.arLang,
+                  );
                 }),
               ],
             ),
