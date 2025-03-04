@@ -8,6 +8,7 @@ import 'package:wardaya/core/assets/assets.dart';
 import 'package:wardaya/core/blocs/general/cubit/general_cubit.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
+import '../../../core/helpers/constants.dart';
 import '../../../core/helpers/dummy_vars.dart';
 import '../../../core/routing/routes.dart';
 import '../../cart/logic/cubit/cart_cubit.dart';
@@ -91,7 +92,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 const EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: context.watch<GeneralCubit>().lang == 'ar'
+              children: context.watch<GeneralCubit>().lang == Constants.arLang
                   ? [
                       Text(
                         context.el.filtersTitle,

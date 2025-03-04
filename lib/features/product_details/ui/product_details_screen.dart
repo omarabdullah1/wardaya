@@ -12,6 +12,7 @@ import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
 
 import '../../../core/assets/assets.dart';
+import '../../../core/helpers/constants.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({super.key});
@@ -89,7 +90,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               padding: EdgeInsets.symmetric(horizontal: 16.0.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: context.read<GeneralCubit>().lang == 'ar'
+                children: context.read<GeneralCubit>().lang == Constants.arLang
                     ? [
                         Text.rich(
                           TextSpan(

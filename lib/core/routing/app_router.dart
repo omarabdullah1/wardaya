@@ -1,30 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wardaya/core/di/dependency_injection.dart';
-import 'package:wardaya/features/authentication/create_account/logic/cubit/register_cubit.dart';
-import 'package:wardaya/features/authentication/create_account/ui/create_account.dart';
-import 'package:wardaya/features/authentication/profile/logic/cubit/profile_cubit.dart';
-import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
-import 'package:wardaya/features/cart/ui/customize_gift_card_screen.dart';
-import 'package:wardaya/features/category/ui/category_screen.dart';
-import 'package:wardaya/features/explore/ui/recipients_screen.dart';
-import 'package:wardaya/features/layout/logic/cubit/layout_cubit.dart';
-import 'package:wardaya/features/authentication/profile/ui/profile_screen.dart';
-import 'package:wardaya/features/splash/ui/splash_screen.dart';
-import '../../features/authentication/forget_password/ui/forget_password.dart';
-import '../../features/authentication/login/logic/cubit/login_cubit.dart';
-import '../../features/authentication/login/ui/login_screen.dart';
-import '../../features/authentication/profile/ui/edit_profile_screen.dart';
-import '../../features/cart/ui/record_screen.dart';
-import '../../features/explore/ui/flowers_gifts.dart';
-import '../../features/explore/ui/flowers_planets.dart';
-import '../../features/explore/ui/moments_screen.dart';
-import '../../features/layout/ui/home_layout.dart';
-import '../../features/product_details/ui/product_details_screen.dart';
-import '../../features/authentication/profile/ui/faq_screen.dart';
-import '../../features/authentication/profile/ui/tac_screen.dart';
-import '../../features/search/ui/search_screen.dart';
-import 'routes.dart';
+import 'package:wardaya/features/search/logic/cubit/search_cubit.dart';
+
+import '../routing/router_inports.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -58,17 +34,18 @@ class AppRouter {
         );
       case Routes.searchScreen:
         return _buildRoute(
-          screen: const SearchScreen(),
+          screen: BlocProvider(
+            create: (context) => getIt<SearchCubit>(),
+            child: const SearchScreen(),
+          ),
         );
       case Routes.momentsScreen:
-        // Ensure arguments is a Map before accessing its keys
         if (arguments is Map<String, dynamic>) {
           final cubit = arguments['cubit'] as CartCubit?;
 
           return _buildRoute(
             screen: BlocProvider.value(
-              value: cubit ??
-                  getIt<CartCubit>(), // Use existing Cubit or create a new one
+              value: cubit ?? getIt<CartCubit>(),
               child: const MomentsScreen(),
             ),
           );
@@ -95,17 +72,14 @@ class AppRouter {
         );
 
       case Routes.categoryScreen:
-        // Ensure arguments is a Map before accessing its keys
         if (arguments is Map<String, dynamic>) {
           final cubit = arguments['cubit'] as CartCubit?;
-          final extraArgs =
-              arguments['extraArgs'] as String?; // Ensure it's a String
+          final extraArgs = arguments['extraArgs'] as String?;
           return _buildRoute(
             screen: BlocProvider.value(
-              value: cubit ??
-                  getIt<CartCubit>(), // Use existing Cubit or create a new one
+              value: cubit ?? getIt<CartCubit>(),
               child: CategoryScreen(
-                momentTitle: extraArgs ?? "", // Handle null values safely
+                momentTitle: extraArgs ?? "",
               ),
             ),
           );
@@ -113,13 +87,11 @@ class AppRouter {
           throw ArgumentError("Invalid arguments for ${Routes.categoryScreen}");
         }
       case Routes.productDetailsScreen:
-        // Ensure arguments is a Map before accessing its keys
         if (arguments is Map<String, dynamic>) {
           final cubit = arguments['cubit'] as CartCubit?;
           return _buildRoute(
             screen: BlocProvider.value(
-              value: cubit ??
-                  getIt<CartCubit>(), // Use existing Cubit or create a new one
+              value: cubit ?? getIt<CartCubit>(),
               child: const ProductDetailsScreen(),
             ),
           );
@@ -181,7 +153,7 @@ class AppRouter {
             (arguments as Map<String, dynamic>?)?['cubit'] as ProfileCubit?;
         return _buildRoute(
           screen: BlocProvider<ProfileCubit>.value(
-            value: cubit!, // Use passed cubit or create a new one
+            value: cubit!,
             child: const EditProfileScreen(),
           ),
         );

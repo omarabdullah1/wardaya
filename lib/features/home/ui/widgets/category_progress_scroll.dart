@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
+import '../../../cart/logic/cubit/cart_cubit.dart';
 
 class CategoryProgressScroll extends StatefulWidget {
   final List<String> categoriesImages;
@@ -23,15 +25,15 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
   final ScrollController _scrollController = ScrollController();
 
   double _scrollProgress = 0.0;
-  double _itemWidth = 0.0; // Width of a single category item
-  int _visibleItemsCount = 0; // Number of fully visible items
-  final GlobalKey _itemKey = GlobalKey(); // Key to get item width
+  double _itemWidth = 0.0;
+  int _visibleItemsCount = 0;
+  final GlobalKey _itemKey = GlobalKey();
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_updateScrollProgress);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((context) {
       _calculateItemWidth();
       _calculateInitialProgress();
     });
@@ -151,8 +153,11 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
   }) {
     return InkWell(
       onTap: () {
-        context.pushNamed(Routes.categoryScreen,
-            arguments: [widget.titles[widget.titles.indexOf(title)], context]);
+        context.pushNamedWithCubit(
+          Routes.categoryScreen,
+          context.read<CartCubit>(),
+          arguments: widget.titles[widget.titles.indexOf(title)],
+        );
       },
       child: Container(
         key: key, // Assign the key to the first item

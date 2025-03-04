@@ -29,7 +29,10 @@ Future<void> main() async {
   runApp(
     EasyLocalization(
       path: Constants.i18nPath,
-      supportedLocales: const [Locale('en'), Locale('ar')],
+      supportedLocales: const [
+        Locale(Constants.enLang),
+        Locale(Constants.arLang)
+      ],
       child: WardayaApp(
         appRouter: AppRouter(),
       ),

@@ -5,8 +5,6 @@ class SharedPrefKeys {
   static const String userData = 'userData';
 }
 
-List<String> supportedLanguages = ['en', 'ar'];
-
 class Constants {
   static const String appName = 'Wardaya';
   static const String appVersion = '1.0.0';
@@ -45,4 +43,6 @@ class Constants {
   static const String appStoreContactEmail = ' [email protected]';
   static const String appStoreContactPhone = '+20123456789';
   static const String appStoreContactWebsite = 'https://wardaya.com';
+  static const String arLang = 'ar';
+  static const String enLang = 'en';
 }
