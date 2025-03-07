@@ -10,12 +10,15 @@ import 'package:wardaya/core/blocs/general/cubit/general_cubit.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
+import 'package:wardaya/features/search/data/apis/search_api_constants.dart';
+import 'package:wardaya/features/search/data/models/search_response.dart';
 
 import '../../../core/assets/assets.dart';
 import '../../../core/helpers/constants.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({super.key});
+  const ProductDetailsScreen({super.key, required this.product});
+  final Product product;
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
@@ -23,15 +26,17 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   bool _isExpanded = true;
+
   @override
   Widget build(BuildContext context) {
+    final product = widget.product;
+
     return Scaffold(
       extendBodyBehindAppBar: true, // Extend body behind AppBar
       appBar: const CustomAppBar(),
       bottomNavigationBar: Container(
         color: ColorsManager.white,
-        child: // Add to Cart Button
-            Padding(
+        child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: ElevatedButton(
             onPressed: () {
@@ -40,11 +45,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     .read<CartCubit>()
                     .changeLength(context.read<CartCubit>().cartItems + 1);
               });
-            }, // Centered text
+            },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 8),
-              minimumSize:
-                  const Size(double.infinity, 0), // Make button full width
+              minimumSize: const Size(double.infinity, 0),
               backgroundColor: ColorsManager.mainRose,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -74,7 +78,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        // For scrollable content
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -82,6 +85,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             Container(
               color: ColorsManager.lightGrey,
               height: context.pOH(30).h,
+              child: PageView.builder(
+                itemCount: product.images.length,
+                itemBuilder: (context, index) {
+                  return Image.network(
+                    SearchApiConstants.apiBaseUrlForImages +
+                        product.images[index],
+                    fit: BoxFit.cover,
+                  );
+                },
+              ),
             ),
             const SizedBox(height: 16),
 
@@ -94,7 +107,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ? [
                         Text.rich(
                           TextSpan(
-                              text: '200 ',
+                              text: '${product.price.total} ',
                               style: GoogleFonts.inter(
                                 fontSize: 27.0.sp,
                                 fontWeight: FontWeight.w700,
@@ -120,7 +133,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             SizedBox(width: 11.w),
                             Text.rich(
                               TextSpan(
-                                text: '${context.el.earn} 173 \n',
+                                text: '${context.el.earn} ${product.points} \n',
                                 style: GoogleFonts.inter(
                                   fontSize: 15.0.sp,
                                   fontWeight: FontWeight.w700,
@@ -150,7 +163,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               ),
                               children: [
                                 TextSpan(
-                                  text: ' 200',
+                                  text: ' ${product.price.total}',
                                   style: GoogleFonts.inter(
                                     fontSize: 27.0.sp,
                                     fontWeight: FontWeight.w700,
@@ -169,7 +182,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             SizedBox(width: 11.w),
                             Text.rich(
                               TextSpan(
-                                text: '${context.el.earn}173 \n',
+                                text: '${context.el.earn}${product.points} \n',
                                 style: GoogleFonts.inter(
                                   fontSize: 15.0.sp,
                                   fontWeight: FontWeight.w700,
@@ -210,7 +223,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0.w),
               child: Text(
-                context.el.homeCaptivationAromasOfMubkhar,
+                product.title,
                 style: GoogleFonts.inter(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.bold,
@@ -278,7 +291,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0.w),
               child: Text(
-                "Celebrate birthdays with a delightful twist with Helen's Happy Birthday Drawing Cake. This charming red velvet cake serves 8 people, making it perfect for small gatherings. Decorated with fun and whimsical birthday drawings, it's not just a treat but also a visual delight. The rich red velvet flavor, combined with creamy frosting, promises to satisfy your taste buds. Order now and make your loved one's birthday extra special.",
+                product.description,
                 maxLines: _isExpanded ? 5 : 20,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -301,7 +314,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         style: const TextStyle(color: ColorsManager.mainRose),
                       ),
                       Directionality(
-                        // for making the arrow direction in the right way for ar or en
                         textDirection: TextDirection.ltr,
                         child: !_isExpanded
                             ? Transform.rotate(

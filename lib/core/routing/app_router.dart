@@ -1,6 +1,7 @@
+import 'package:wardaya/features/search/data/models/search_response.dart';
 import 'package:wardaya/features/search/logic/cubit/search_cubit.dart';
 
-import '../routing/router_inports.dart';
+import 'router_imports.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -50,7 +51,7 @@ class AppRouter {
             ),
           );
         } else {
-          throw ArgumentError("Invalid arguments for ${Routes.categoryScreen}");
+          throw ArgumentError("Invalid arguments for ${Routes.momentsScreen}");
         }
       case Routes.recipientsScreen:
         return _buildRoute(
@@ -88,16 +89,17 @@ class AppRouter {
         }
       case Routes.productDetailsScreen:
         if (arguments is Map<String, dynamic>) {
-          final cubit = arguments['cubit'] as CartCubit?;
+          final extraArgs = arguments['extraArgs'] as Product;
           return _buildRoute(
-            screen: BlocProvider.value(
-              value: cubit ?? getIt<CartCubit>(),
-              child: const ProductDetailsScreen(),
+            screen: ProductDetailsScreen(
+              product: extraArgs,
             ),
           );
         } else {
-          throw ArgumentError("Invalid arguments for ${Routes.categoryScreen}");
+          throw ArgumentError(
+              "Invalid arguments for ${Routes.productDetailsScreen}");
         }
+
       case Routes.forgetPasswordScreen:
         return _buildRoute(screen: const ForgetPasswordScreen());
       case Routes.createAccountScreen:
