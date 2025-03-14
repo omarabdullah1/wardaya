@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:wardaya/features/search/data/models/filter_data_body.dart';
 import 'package:wardaya/features/search/data/models/search_request_body.dart';
 import 'package:wardaya/features/search/data/repos/search_repo.dart';
 
@@ -16,12 +19,26 @@ class SearchCubit extends Cubit<SearchState> {
   Map<String, String?> selectedFilters = {};
   Map<String, String?> tempFilters = {};
 
-  void emitSearchStates() async {
+  void emitSearchStates({
+    String? search,
+    String? filterCategory,
+    String? filterOccasion,
+    String? filterRecipients,
+    String? filterColor,
+    String? filterBundleTypes,
+    String? filterPriceRange,
+  }) async {
     emit(const SearchState.loading());
     final response = await _searchRepo.search(SearchRequestBody(
       limit: 10,
       page: 1,
-      search: searchController.text,
+      search: search ?? searchController.text,
+      category: filterCategory,
+      occasion: filterOccasion,
+      recipients: filterRecipients,
+      color: filterColor,
+      bundleTypes: filterBundleTypes,
+      priceRange: filterPriceRange,
     ));
     response.when(success: (data) {
       originalProducts = data.products;
@@ -38,36 +55,52 @@ class SearchCubit extends Cubit<SearchState> {
   }
 
   void applyFilters(Map<String, String?> filters) {
+    log(filters.toString());
     selectedFilters = filters;
 
     // If no filters are selected, show all products
     if (filters.values.every((value) => value == null)) {
       filteredProducts = originalProducts;
-      emit(SearchState.applyFilters(selectedFilters));
+      emitSearchStates(
+        filterCategory: filters["category"],
+        filterOccasion: filters["occasion"],
+        filterRecipients: filters["recipient"],
+        filterColor: filters["color"],
+        filterBundleTypes: filters["bundleTypes"],
+        filterPriceRange: filters["priceRange"],
+      );
       return;
     }
 
-    // Filter the products based on selected filters
-    filteredProducts = originalProducts.where((product) {
-      bool categoryMatch = filters["category"] == null ||
-          product.subCategories.any((cat) => cat.name == filters["category"]);
+    // // Filter the products based on selected filters
+    // filteredProducts = originalProducts.where((product) {
+    //   bool categoryMatch = filters["category"] == null ||
+    //       product.subCategories.any((cat) => cat.name == filters["category"]);
 
-      bool occasionMatch = filters["occasion"] == null ||
-          (product.occasions.isNotEmpty &&
-              product.occasions.any((occ) => occ.name == filters["occasion"]));
+    //   bool occasionMatch = filters["occasion"] == null ||
+    //       (product.occasions.isNotEmpty &&
+    //           product.occasions.any((occ) => occ.name == filters["occasion"]));
 
-      bool recipientMatch = filters["recipient"] == null ||
-          (product.recipients.isNotEmpty &&
-              product.recipients
-                  .any((rec) => rec.name == filters["recipient"]));
+    //   bool recipientMatch = filters["recipient"] == null ||
+    //       (product.recipients.isNotEmpty &&
+    //           product.recipients
+    //               .any((rec) => rec.name == filters["recipient"]));
 
-      bool colorMatch = filters["color"] == null ||
-          (product.colors.isNotEmpty &&
-              product.colors.any((col) => col.name == filters["color"]));
+    //   bool colorMatch = filters["color"] == null ||
+    //       (product.colors.isNotEmpty &&
+    //           product.colors.any((col) => col.name == filters["color"]));
 
-      return categoryMatch && occasionMatch && recipientMatch && colorMatch;
-    }).toList();
-    emit(SearchState.applyFilters(selectedFilters));
+    //   return categoryMatch && occasionMatch && recipientMatch && colorMatch;
+    // }).toList();
+    // emit(SearchState.applyFilters(selectedFilters));
+    emitSearchStates(
+      filterCategory: filters["category"],
+      filterOccasion: filters["occasion"],
+      filterRecipients: filters["recipient"],
+      filterColor: filters["color"],
+      filterBundleTypes: filters["bundleTypes"],
+      filterPriceRange: filters["priceRange"],
+    );
   }
 
   void setTempFilter(Map<String, String?> filters) {
@@ -85,5 +118,25 @@ class SearchCubit extends Cubit<SearchState> {
     }
     selectedFilters = tempFilters;
     emit(SearchState.setTempFiltersTypeValue(filterType, value));
+  }
+
+  void emitFilterDataStates({
+    String? filterCategory,
+    String? filterOccasion,
+    String? filterRecipients,
+    String? filterColor,
+  }) async {
+    emit(const SearchState.loadingFilterData());
+    final response = await _searchRepo.productFilterData(FilterDataBody(
+      category: filterCategory,
+      occasion: filterOccasion,
+      recipients: filterRecipients,
+      color: filterColor,
+    ));
+    response.when(success: (data) {
+      emit(SearchState.successFilterData(data));
+    }, failure: (error) {
+      emit(SearchState.errorFilterData(error.message ?? ''));
+    });
   }
 }

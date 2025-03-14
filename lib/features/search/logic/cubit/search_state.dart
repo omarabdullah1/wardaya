@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wardaya/features/search/data/models/filter_data_response.dart';
 import 'package:wardaya/features/search/data/models/search_response.dart';
 part 'search_state.freezed.dart';
 
@@ -15,4 +16,8 @@ class SearchState with _$SearchState {
       SetTempFilters;
   const factory SearchState.setTempFiltersTypeValue(
       String type, String? value) = SetTempFiltersTypeValue;
+  const factory SearchState.loadingFilterData() = LoadingFilterData;
+  const factory SearchState.successFilterData(FilterDataResponse response) =
+      SuccessFilterData;
+  const factory SearchState.errorFilterData(String message) = ErrorFilterData;
 }

@@ -27,6 +27,9 @@ mixin _$SearchState {
     required TResult Function(Map<String, String?> filters) setTempFilters,
     required TResult Function(String type, String? value)
         setTempFiltersTypeValue,
+    required TResult Function() loadingFilterData,
+    required TResult Function(FilterDataResponse response) successFilterData,
+    required TResult Function(String message) errorFilterData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,6 +42,9 @@ mixin _$SearchState {
     TResult? Function(Map<String, String?> filters)? applyFilters,
     TResult? Function(Map<String, String?> filters)? setTempFilters,
     TResult? Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult? Function()? loadingFilterData,
+    TResult? Function(FilterDataResponse response)? successFilterData,
+    TResult? Function(String message)? errorFilterData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,6 +57,9 @@ mixin _$SearchState {
     TResult Function(Map<String, String?> filters)? applyFilters,
     TResult Function(Map<String, String?> filters)? setTempFilters,
     TResult Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult Function()? loadingFilterData,
+    TResult Function(FilterDataResponse response)? successFilterData,
+    TResult Function(String message)? errorFilterData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -65,6 +74,9 @@ mixin _$SearchState {
     required TResult Function(SetTempFilters value) setTempFilters,
     required TResult Function(SetTempFiltersTypeValue value)
         setTempFiltersTypeValue,
+    required TResult Function(LoadingFilterData value) loadingFilterData,
+    required TResult Function(SuccessFilterData value) successFilterData,
+    required TResult Function(ErrorFilterData value) errorFilterData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -77,6 +89,9 @@ mixin _$SearchState {
     TResult? Function(ApplyFilters value)? applyFilters,
     TResult? Function(SetTempFilters value)? setTempFilters,
     TResult? Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult? Function(LoadingFilterData value)? loadingFilterData,
+    TResult? Function(SuccessFilterData value)? successFilterData,
+    TResult? Function(ErrorFilterData value)? errorFilterData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -89,6 +104,9 @@ mixin _$SearchState {
     TResult Function(ApplyFilters value)? applyFilters,
     TResult Function(SetTempFilters value)? setTempFilters,
     TResult Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult Function(LoadingFilterData value)? loadingFilterData,
+    TResult Function(SuccessFilterData value)? successFilterData,
+    TResult Function(ErrorFilterData value)? errorFilterData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -165,6 +183,9 @@ class _$InitialImpl implements Initial {
     required TResult Function(Map<String, String?> filters) setTempFilters,
     required TResult Function(String type, String? value)
         setTempFiltersTypeValue,
+    required TResult Function() loadingFilterData,
+    required TResult Function(FilterDataResponse response) successFilterData,
+    required TResult Function(String message) errorFilterData,
   }) {
     return initial();
   }
@@ -180,6 +201,9 @@ class _$InitialImpl implements Initial {
     TResult? Function(Map<String, String?> filters)? applyFilters,
     TResult? Function(Map<String, String?> filters)? setTempFilters,
     TResult? Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult? Function()? loadingFilterData,
+    TResult? Function(FilterDataResponse response)? successFilterData,
+    TResult? Function(String message)? errorFilterData,
   }) {
     return initial?.call();
   }
@@ -195,6 +219,9 @@ class _$InitialImpl implements Initial {
     TResult Function(Map<String, String?> filters)? applyFilters,
     TResult Function(Map<String, String?> filters)? setTempFilters,
     TResult Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult Function()? loadingFilterData,
+    TResult Function(FilterDataResponse response)? successFilterData,
+    TResult Function(String message)? errorFilterData,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -215,6 +242,9 @@ class _$InitialImpl implements Initial {
     required TResult Function(SetTempFilters value) setTempFilters,
     required TResult Function(SetTempFiltersTypeValue value)
         setTempFiltersTypeValue,
+    required TResult Function(LoadingFilterData value) loadingFilterData,
+    required TResult Function(SuccessFilterData value) successFilterData,
+    required TResult Function(ErrorFilterData value) errorFilterData,
   }) {
     return initial(this);
   }
@@ -230,6 +260,9 @@ class _$InitialImpl implements Initial {
     TResult? Function(ApplyFilters value)? applyFilters,
     TResult? Function(SetTempFilters value)? setTempFilters,
     TResult? Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult? Function(LoadingFilterData value)? loadingFilterData,
+    TResult? Function(SuccessFilterData value)? successFilterData,
+    TResult? Function(ErrorFilterData value)? errorFilterData,
   }) {
     return initial?.call(this);
   }
@@ -245,6 +278,9 @@ class _$InitialImpl implements Initial {
     TResult Function(ApplyFilters value)? applyFilters,
     TResult Function(SetTempFilters value)? setTempFilters,
     TResult Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult Function(LoadingFilterData value)? loadingFilterData,
+    TResult Function(SuccessFilterData value)? successFilterData,
+    TResult Function(ErrorFilterData value)? errorFilterData,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -308,6 +344,9 @@ class _$LoadingImpl implements Loading {
     required TResult Function(Map<String, String?> filters) setTempFilters,
     required TResult Function(String type, String? value)
         setTempFiltersTypeValue,
+    required TResult Function() loadingFilterData,
+    required TResult Function(FilterDataResponse response) successFilterData,
+    required TResult Function(String message) errorFilterData,
   }) {
     return loading();
   }
@@ -323,6 +362,9 @@ class _$LoadingImpl implements Loading {
     TResult? Function(Map<String, String?> filters)? applyFilters,
     TResult? Function(Map<String, String?> filters)? setTempFilters,
     TResult? Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult? Function()? loadingFilterData,
+    TResult? Function(FilterDataResponse response)? successFilterData,
+    TResult? Function(String message)? errorFilterData,
   }) {
     return loading?.call();
   }
@@ -338,6 +380,9 @@ class _$LoadingImpl implements Loading {
     TResult Function(Map<String, String?> filters)? applyFilters,
     TResult Function(Map<String, String?> filters)? setTempFilters,
     TResult Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult Function()? loadingFilterData,
+    TResult Function(FilterDataResponse response)? successFilterData,
+    TResult Function(String message)? errorFilterData,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -358,6 +403,9 @@ class _$LoadingImpl implements Loading {
     required TResult Function(SetTempFilters value) setTempFilters,
     required TResult Function(SetTempFiltersTypeValue value)
         setTempFiltersTypeValue,
+    required TResult Function(LoadingFilterData value) loadingFilterData,
+    required TResult Function(SuccessFilterData value) successFilterData,
+    required TResult Function(ErrorFilterData value) errorFilterData,
   }) {
     return loading(this);
   }
@@ -373,6 +421,9 @@ class _$LoadingImpl implements Loading {
     TResult? Function(ApplyFilters value)? applyFilters,
     TResult? Function(SetTempFilters value)? setTempFilters,
     TResult? Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult? Function(LoadingFilterData value)? loadingFilterData,
+    TResult? Function(SuccessFilterData value)? successFilterData,
+    TResult? Function(ErrorFilterData value)? errorFilterData,
   }) {
     return loading?.call(this);
   }
@@ -388,6 +439,9 @@ class _$LoadingImpl implements Loading {
     TResult Function(ApplyFilters value)? applyFilters,
     TResult Function(SetTempFilters value)? setTempFilters,
     TResult Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult Function(LoadingFilterData value)? loadingFilterData,
+    TResult Function(SuccessFilterData value)? successFilterData,
+    TResult Function(ErrorFilterData value)? errorFilterData,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -479,6 +533,9 @@ class _$SuccessImpl implements Success {
     required TResult Function(Map<String, String?> filters) setTempFilters,
     required TResult Function(String type, String? value)
         setTempFiltersTypeValue,
+    required TResult Function() loadingFilterData,
+    required TResult Function(FilterDataResponse response) successFilterData,
+    required TResult Function(String message) errorFilterData,
   }) {
     return success(response);
   }
@@ -494,6 +551,9 @@ class _$SuccessImpl implements Success {
     TResult? Function(Map<String, String?> filters)? applyFilters,
     TResult? Function(Map<String, String?> filters)? setTempFilters,
     TResult? Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult? Function()? loadingFilterData,
+    TResult? Function(FilterDataResponse response)? successFilterData,
+    TResult? Function(String message)? errorFilterData,
   }) {
     return success?.call(response);
   }
@@ -509,6 +569,9 @@ class _$SuccessImpl implements Success {
     TResult Function(Map<String, String?> filters)? applyFilters,
     TResult Function(Map<String, String?> filters)? setTempFilters,
     TResult Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult Function()? loadingFilterData,
+    TResult Function(FilterDataResponse response)? successFilterData,
+    TResult Function(String message)? errorFilterData,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -529,6 +592,9 @@ class _$SuccessImpl implements Success {
     required TResult Function(SetTempFilters value) setTempFilters,
     required TResult Function(SetTempFiltersTypeValue value)
         setTempFiltersTypeValue,
+    required TResult Function(LoadingFilterData value) loadingFilterData,
+    required TResult Function(SuccessFilterData value) successFilterData,
+    required TResult Function(ErrorFilterData value) errorFilterData,
   }) {
     return success(this);
   }
@@ -544,6 +610,9 @@ class _$SuccessImpl implements Success {
     TResult? Function(ApplyFilters value)? applyFilters,
     TResult? Function(SetTempFilters value)? setTempFilters,
     TResult? Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult? Function(LoadingFilterData value)? loadingFilterData,
+    TResult? Function(SuccessFilterData value)? successFilterData,
+    TResult? Function(ErrorFilterData value)? errorFilterData,
   }) {
     return success?.call(this);
   }
@@ -559,6 +628,9 @@ class _$SuccessImpl implements Success {
     TResult Function(ApplyFilters value)? applyFilters,
     TResult Function(SetTempFilters value)? setTempFilters,
     TResult Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult Function(LoadingFilterData value)? loadingFilterData,
+    TResult Function(SuccessFilterData value)? successFilterData,
+    TResult Function(ErrorFilterData value)? errorFilterData,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -657,6 +729,9 @@ class _$ErrorImpl implements Error {
     required TResult Function(Map<String, String?> filters) setTempFilters,
     required TResult Function(String type, String? value)
         setTempFiltersTypeValue,
+    required TResult Function() loadingFilterData,
+    required TResult Function(FilterDataResponse response) successFilterData,
+    required TResult Function(String message) errorFilterData,
   }) {
     return error(message);
   }
@@ -672,6 +747,9 @@ class _$ErrorImpl implements Error {
     TResult? Function(Map<String, String?> filters)? applyFilters,
     TResult? Function(Map<String, String?> filters)? setTempFilters,
     TResult? Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult? Function()? loadingFilterData,
+    TResult? Function(FilterDataResponse response)? successFilterData,
+    TResult? Function(String message)? errorFilterData,
   }) {
     return error?.call(message);
   }
@@ -687,6 +765,9 @@ class _$ErrorImpl implements Error {
     TResult Function(Map<String, String?> filters)? applyFilters,
     TResult Function(Map<String, String?> filters)? setTempFilters,
     TResult Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult Function()? loadingFilterData,
+    TResult Function(FilterDataResponse response)? successFilterData,
+    TResult Function(String message)? errorFilterData,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -707,6 +788,9 @@ class _$ErrorImpl implements Error {
     required TResult Function(SetTempFilters value) setTempFilters,
     required TResult Function(SetTempFiltersTypeValue value)
         setTempFiltersTypeValue,
+    required TResult Function(LoadingFilterData value) loadingFilterData,
+    required TResult Function(SuccessFilterData value) successFilterData,
+    required TResult Function(ErrorFilterData value) errorFilterData,
   }) {
     return error(this);
   }
@@ -722,6 +806,9 @@ class _$ErrorImpl implements Error {
     TResult? Function(ApplyFilters value)? applyFilters,
     TResult? Function(SetTempFilters value)? setTempFilters,
     TResult? Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult? Function(LoadingFilterData value)? loadingFilterData,
+    TResult? Function(SuccessFilterData value)? successFilterData,
+    TResult? Function(ErrorFilterData value)? errorFilterData,
   }) {
     return error?.call(this);
   }
@@ -737,6 +824,9 @@ class _$ErrorImpl implements Error {
     TResult Function(ApplyFilters value)? applyFilters,
     TResult Function(SetTempFilters value)? setTempFilters,
     TResult Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult Function(LoadingFilterData value)? loadingFilterData,
+    TResult Function(SuccessFilterData value)? successFilterData,
+    TResult Function(ErrorFilterData value)? errorFilterData,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -835,6 +925,9 @@ class _$SetIsGridViewImpl implements SetIsGridView {
     required TResult Function(Map<String, String?> filters) setTempFilters,
     required TResult Function(String type, String? value)
         setTempFiltersTypeValue,
+    required TResult Function() loadingFilterData,
+    required TResult Function(FilterDataResponse response) successFilterData,
+    required TResult Function(String message) errorFilterData,
   }) {
     return setIsGridView(isGrid);
   }
@@ -850,6 +943,9 @@ class _$SetIsGridViewImpl implements SetIsGridView {
     TResult? Function(Map<String, String?> filters)? applyFilters,
     TResult? Function(Map<String, String?> filters)? setTempFilters,
     TResult? Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult? Function()? loadingFilterData,
+    TResult? Function(FilterDataResponse response)? successFilterData,
+    TResult? Function(String message)? errorFilterData,
   }) {
     return setIsGridView?.call(isGrid);
   }
@@ -865,6 +961,9 @@ class _$SetIsGridViewImpl implements SetIsGridView {
     TResult Function(Map<String, String?> filters)? applyFilters,
     TResult Function(Map<String, String?> filters)? setTempFilters,
     TResult Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult Function()? loadingFilterData,
+    TResult Function(FilterDataResponse response)? successFilterData,
+    TResult Function(String message)? errorFilterData,
     required TResult orElse(),
   }) {
     if (setIsGridView != null) {
@@ -885,6 +984,9 @@ class _$SetIsGridViewImpl implements SetIsGridView {
     required TResult Function(SetTempFilters value) setTempFilters,
     required TResult Function(SetTempFiltersTypeValue value)
         setTempFiltersTypeValue,
+    required TResult Function(LoadingFilterData value) loadingFilterData,
+    required TResult Function(SuccessFilterData value) successFilterData,
+    required TResult Function(ErrorFilterData value) errorFilterData,
   }) {
     return setIsGridView(this);
   }
@@ -900,6 +1002,9 @@ class _$SetIsGridViewImpl implements SetIsGridView {
     TResult? Function(ApplyFilters value)? applyFilters,
     TResult? Function(SetTempFilters value)? setTempFilters,
     TResult? Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult? Function(LoadingFilterData value)? loadingFilterData,
+    TResult? Function(SuccessFilterData value)? successFilterData,
+    TResult? Function(ErrorFilterData value)? errorFilterData,
   }) {
     return setIsGridView?.call(this);
   }
@@ -915,6 +1020,9 @@ class _$SetIsGridViewImpl implements SetIsGridView {
     TResult Function(ApplyFilters value)? applyFilters,
     TResult Function(SetTempFilters value)? setTempFilters,
     TResult Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult Function(LoadingFilterData value)? loadingFilterData,
+    TResult Function(SuccessFilterData value)? successFilterData,
+    TResult Function(ErrorFilterData value)? errorFilterData,
     required TResult orElse(),
   }) {
     if (setIsGridView != null) {
@@ -1020,6 +1128,9 @@ class _$ApplyFiltersImpl implements ApplyFilters {
     required TResult Function(Map<String, String?> filters) setTempFilters,
     required TResult Function(String type, String? value)
         setTempFiltersTypeValue,
+    required TResult Function() loadingFilterData,
+    required TResult Function(FilterDataResponse response) successFilterData,
+    required TResult Function(String message) errorFilterData,
   }) {
     return applyFilters(filters);
   }
@@ -1035,6 +1146,9 @@ class _$ApplyFiltersImpl implements ApplyFilters {
     TResult? Function(Map<String, String?> filters)? applyFilters,
     TResult? Function(Map<String, String?> filters)? setTempFilters,
     TResult? Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult? Function()? loadingFilterData,
+    TResult? Function(FilterDataResponse response)? successFilterData,
+    TResult? Function(String message)? errorFilterData,
   }) {
     return applyFilters?.call(filters);
   }
@@ -1050,6 +1164,9 @@ class _$ApplyFiltersImpl implements ApplyFilters {
     TResult Function(Map<String, String?> filters)? applyFilters,
     TResult Function(Map<String, String?> filters)? setTempFilters,
     TResult Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult Function()? loadingFilterData,
+    TResult Function(FilterDataResponse response)? successFilterData,
+    TResult Function(String message)? errorFilterData,
     required TResult orElse(),
   }) {
     if (applyFilters != null) {
@@ -1070,6 +1187,9 @@ class _$ApplyFiltersImpl implements ApplyFilters {
     required TResult Function(SetTempFilters value) setTempFilters,
     required TResult Function(SetTempFiltersTypeValue value)
         setTempFiltersTypeValue,
+    required TResult Function(LoadingFilterData value) loadingFilterData,
+    required TResult Function(SuccessFilterData value) successFilterData,
+    required TResult Function(ErrorFilterData value) errorFilterData,
   }) {
     return applyFilters(this);
   }
@@ -1085,6 +1205,9 @@ class _$ApplyFiltersImpl implements ApplyFilters {
     TResult? Function(ApplyFilters value)? applyFilters,
     TResult? Function(SetTempFilters value)? setTempFilters,
     TResult? Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult? Function(LoadingFilterData value)? loadingFilterData,
+    TResult? Function(SuccessFilterData value)? successFilterData,
+    TResult? Function(ErrorFilterData value)? errorFilterData,
   }) {
     return applyFilters?.call(this);
   }
@@ -1100,6 +1223,9 @@ class _$ApplyFiltersImpl implements ApplyFilters {
     TResult Function(ApplyFilters value)? applyFilters,
     TResult Function(SetTempFilters value)? setTempFilters,
     TResult Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult Function(LoadingFilterData value)? loadingFilterData,
+    TResult Function(SuccessFilterData value)? successFilterData,
+    TResult Function(ErrorFilterData value)? errorFilterData,
     required TResult orElse(),
   }) {
     if (applyFilters != null) {
@@ -1207,6 +1333,9 @@ class _$SetTempFiltersImpl implements SetTempFilters {
     required TResult Function(Map<String, String?> filters) setTempFilters,
     required TResult Function(String type, String? value)
         setTempFiltersTypeValue,
+    required TResult Function() loadingFilterData,
+    required TResult Function(FilterDataResponse response) successFilterData,
+    required TResult Function(String message) errorFilterData,
   }) {
     return setTempFilters(filters);
   }
@@ -1222,6 +1351,9 @@ class _$SetTempFiltersImpl implements SetTempFilters {
     TResult? Function(Map<String, String?> filters)? applyFilters,
     TResult? Function(Map<String, String?> filters)? setTempFilters,
     TResult? Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult? Function()? loadingFilterData,
+    TResult? Function(FilterDataResponse response)? successFilterData,
+    TResult? Function(String message)? errorFilterData,
   }) {
     return setTempFilters?.call(filters);
   }
@@ -1237,6 +1369,9 @@ class _$SetTempFiltersImpl implements SetTempFilters {
     TResult Function(Map<String, String?> filters)? applyFilters,
     TResult Function(Map<String, String?> filters)? setTempFilters,
     TResult Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult Function()? loadingFilterData,
+    TResult Function(FilterDataResponse response)? successFilterData,
+    TResult Function(String message)? errorFilterData,
     required TResult orElse(),
   }) {
     if (setTempFilters != null) {
@@ -1257,6 +1392,9 @@ class _$SetTempFiltersImpl implements SetTempFilters {
     required TResult Function(SetTempFilters value) setTempFilters,
     required TResult Function(SetTempFiltersTypeValue value)
         setTempFiltersTypeValue,
+    required TResult Function(LoadingFilterData value) loadingFilterData,
+    required TResult Function(SuccessFilterData value) successFilterData,
+    required TResult Function(ErrorFilterData value) errorFilterData,
   }) {
     return setTempFilters(this);
   }
@@ -1272,6 +1410,9 @@ class _$SetTempFiltersImpl implements SetTempFilters {
     TResult? Function(ApplyFilters value)? applyFilters,
     TResult? Function(SetTempFilters value)? setTempFilters,
     TResult? Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult? Function(LoadingFilterData value)? loadingFilterData,
+    TResult? Function(SuccessFilterData value)? successFilterData,
+    TResult? Function(ErrorFilterData value)? errorFilterData,
   }) {
     return setTempFilters?.call(this);
   }
@@ -1287,6 +1428,9 @@ class _$SetTempFiltersImpl implements SetTempFilters {
     TResult Function(ApplyFilters value)? applyFilters,
     TResult Function(SetTempFilters value)? setTempFilters,
     TResult Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult Function(LoadingFilterData value)? loadingFilterData,
+    TResult Function(SuccessFilterData value)? successFilterData,
+    TResult Function(ErrorFilterData value)? errorFilterData,
     required TResult orElse(),
   }) {
     if (setTempFilters != null) {
@@ -1397,6 +1541,9 @@ class _$SetTempFiltersTypeValueImpl implements SetTempFiltersTypeValue {
     required TResult Function(Map<String, String?> filters) setTempFilters,
     required TResult Function(String type, String? value)
         setTempFiltersTypeValue,
+    required TResult Function() loadingFilterData,
+    required TResult Function(FilterDataResponse response) successFilterData,
+    required TResult Function(String message) errorFilterData,
   }) {
     return setTempFiltersTypeValue(type, value);
   }
@@ -1412,6 +1559,9 @@ class _$SetTempFiltersTypeValueImpl implements SetTempFiltersTypeValue {
     TResult? Function(Map<String, String?> filters)? applyFilters,
     TResult? Function(Map<String, String?> filters)? setTempFilters,
     TResult? Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult? Function()? loadingFilterData,
+    TResult? Function(FilterDataResponse response)? successFilterData,
+    TResult? Function(String message)? errorFilterData,
   }) {
     return setTempFiltersTypeValue?.call(type, value);
   }
@@ -1427,6 +1577,9 @@ class _$SetTempFiltersTypeValueImpl implements SetTempFiltersTypeValue {
     TResult Function(Map<String, String?> filters)? applyFilters,
     TResult Function(Map<String, String?> filters)? setTempFilters,
     TResult Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult Function()? loadingFilterData,
+    TResult Function(FilterDataResponse response)? successFilterData,
+    TResult Function(String message)? errorFilterData,
     required TResult orElse(),
   }) {
     if (setTempFiltersTypeValue != null) {
@@ -1447,6 +1600,9 @@ class _$SetTempFiltersTypeValueImpl implements SetTempFiltersTypeValue {
     required TResult Function(SetTempFilters value) setTempFilters,
     required TResult Function(SetTempFiltersTypeValue value)
         setTempFiltersTypeValue,
+    required TResult Function(LoadingFilterData value) loadingFilterData,
+    required TResult Function(SuccessFilterData value) successFilterData,
+    required TResult Function(ErrorFilterData value) errorFilterData,
   }) {
     return setTempFiltersTypeValue(this);
   }
@@ -1462,6 +1618,9 @@ class _$SetTempFiltersTypeValueImpl implements SetTempFiltersTypeValue {
     TResult? Function(ApplyFilters value)? applyFilters,
     TResult? Function(SetTempFilters value)? setTempFilters,
     TResult? Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult? Function(LoadingFilterData value)? loadingFilterData,
+    TResult? Function(SuccessFilterData value)? successFilterData,
+    TResult? Function(ErrorFilterData value)? errorFilterData,
   }) {
     return setTempFiltersTypeValue?.call(this);
   }
@@ -1477,6 +1636,9 @@ class _$SetTempFiltersTypeValueImpl implements SetTempFiltersTypeValue {
     TResult Function(ApplyFilters value)? applyFilters,
     TResult Function(SetTempFilters value)? setTempFilters,
     TResult Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult Function(LoadingFilterData value)? loadingFilterData,
+    TResult Function(SuccessFilterData value)? successFilterData,
+    TResult Function(ErrorFilterData value)? errorFilterData,
     required TResult orElse(),
   }) {
     if (setTempFiltersTypeValue != null) {
@@ -1498,4 +1660,561 @@ abstract class SetTempFiltersTypeValue implements SearchState {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SetTempFiltersTypeValueImplCopyWith<_$SetTempFiltersTypeValueImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadingFilterDataImplCopyWith<$Res> {
+  factory _$$LoadingFilterDataImplCopyWith(_$LoadingFilterDataImpl value,
+          $Res Function(_$LoadingFilterDataImpl) then) =
+      __$$LoadingFilterDataImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadingFilterDataImplCopyWithImpl<$Res>
+    extends _$SearchStateCopyWithImpl<$Res, _$LoadingFilterDataImpl>
+    implements _$$LoadingFilterDataImplCopyWith<$Res> {
+  __$$LoadingFilterDataImplCopyWithImpl(_$LoadingFilterDataImpl _value,
+      $Res Function(_$LoadingFilterDataImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SearchState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$LoadingFilterDataImpl implements LoadingFilterData {
+  const _$LoadingFilterDataImpl();
+
+  @override
+  String toString() {
+    return 'SearchState.loadingFilterData()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadingFilterDataImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(SearchResponse response) success,
+    required TResult Function(String message) error,
+    required TResult Function(bool isGrid) setIsGridView,
+    required TResult Function(Map<String, String?> filters) applyFilters,
+    required TResult Function(Map<String, String?> filters) setTempFilters,
+    required TResult Function(String type, String? value)
+        setTempFiltersTypeValue,
+    required TResult Function() loadingFilterData,
+    required TResult Function(FilterDataResponse response) successFilterData,
+    required TResult Function(String message) errorFilterData,
+  }) {
+    return loadingFilterData();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(SearchResponse response)? success,
+    TResult? Function(String message)? error,
+    TResult? Function(bool isGrid)? setIsGridView,
+    TResult? Function(Map<String, String?> filters)? applyFilters,
+    TResult? Function(Map<String, String?> filters)? setTempFilters,
+    TResult? Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult? Function()? loadingFilterData,
+    TResult? Function(FilterDataResponse response)? successFilterData,
+    TResult? Function(String message)? errorFilterData,
+  }) {
+    return loadingFilterData?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(SearchResponse response)? success,
+    TResult Function(String message)? error,
+    TResult Function(bool isGrid)? setIsGridView,
+    TResult Function(Map<String, String?> filters)? applyFilters,
+    TResult Function(Map<String, String?> filters)? setTempFilters,
+    TResult Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult Function()? loadingFilterData,
+    TResult Function(FilterDataResponse response)? successFilterData,
+    TResult Function(String message)? errorFilterData,
+    required TResult orElse(),
+  }) {
+    if (loadingFilterData != null) {
+      return loadingFilterData();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) error,
+    required TResult Function(SetIsGridView value) setIsGridView,
+    required TResult Function(ApplyFilters value) applyFilters,
+    required TResult Function(SetTempFilters value) setTempFilters,
+    required TResult Function(SetTempFiltersTypeValue value)
+        setTempFiltersTypeValue,
+    required TResult Function(LoadingFilterData value) loadingFilterData,
+    required TResult Function(SuccessFilterData value) successFilterData,
+    required TResult Function(ErrorFilterData value) errorFilterData,
+  }) {
+    return loadingFilterData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? error,
+    TResult? Function(SetIsGridView value)? setIsGridView,
+    TResult? Function(ApplyFilters value)? applyFilters,
+    TResult? Function(SetTempFilters value)? setTempFilters,
+    TResult? Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult? Function(LoadingFilterData value)? loadingFilterData,
+    TResult? Function(SuccessFilterData value)? successFilterData,
+    TResult? Function(ErrorFilterData value)? errorFilterData,
+  }) {
+    return loadingFilterData?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? error,
+    TResult Function(SetIsGridView value)? setIsGridView,
+    TResult Function(ApplyFilters value)? applyFilters,
+    TResult Function(SetTempFilters value)? setTempFilters,
+    TResult Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult Function(LoadingFilterData value)? loadingFilterData,
+    TResult Function(SuccessFilterData value)? successFilterData,
+    TResult Function(ErrorFilterData value)? errorFilterData,
+    required TResult orElse(),
+  }) {
+    if (loadingFilterData != null) {
+      return loadingFilterData(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadingFilterData implements SearchState {
+  const factory LoadingFilterData() = _$LoadingFilterDataImpl;
+}
+
+/// @nodoc
+abstract class _$$SuccessFilterDataImplCopyWith<$Res> {
+  factory _$$SuccessFilterDataImplCopyWith(_$SuccessFilterDataImpl value,
+          $Res Function(_$SuccessFilterDataImpl) then) =
+      __$$SuccessFilterDataImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({FilterDataResponse response});
+}
+
+/// @nodoc
+class __$$SuccessFilterDataImplCopyWithImpl<$Res>
+    extends _$SearchStateCopyWithImpl<$Res, _$SuccessFilterDataImpl>
+    implements _$$SuccessFilterDataImplCopyWith<$Res> {
+  __$$SuccessFilterDataImplCopyWithImpl(_$SuccessFilterDataImpl _value,
+      $Res Function(_$SuccessFilterDataImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SearchState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? response = null,
+  }) {
+    return _then(_$SuccessFilterDataImpl(
+      null == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as FilterDataResponse,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SuccessFilterDataImpl implements SuccessFilterData {
+  const _$SuccessFilterDataImpl(this.response);
+
+  @override
+  final FilterDataResponse response;
+
+  @override
+  String toString() {
+    return 'SearchState.successFilterData(response: $response)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessFilterDataImpl &&
+            (identical(other.response, response) ||
+                other.response == response));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, response);
+
+  /// Create a copy of SearchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessFilterDataImplCopyWith<_$SuccessFilterDataImpl> get copyWith =>
+      __$$SuccessFilterDataImplCopyWithImpl<_$SuccessFilterDataImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(SearchResponse response) success,
+    required TResult Function(String message) error,
+    required TResult Function(bool isGrid) setIsGridView,
+    required TResult Function(Map<String, String?> filters) applyFilters,
+    required TResult Function(Map<String, String?> filters) setTempFilters,
+    required TResult Function(String type, String? value)
+        setTempFiltersTypeValue,
+    required TResult Function() loadingFilterData,
+    required TResult Function(FilterDataResponse response) successFilterData,
+    required TResult Function(String message) errorFilterData,
+  }) {
+    return successFilterData(response);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(SearchResponse response)? success,
+    TResult? Function(String message)? error,
+    TResult? Function(bool isGrid)? setIsGridView,
+    TResult? Function(Map<String, String?> filters)? applyFilters,
+    TResult? Function(Map<String, String?> filters)? setTempFilters,
+    TResult? Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult? Function()? loadingFilterData,
+    TResult? Function(FilterDataResponse response)? successFilterData,
+    TResult? Function(String message)? errorFilterData,
+  }) {
+    return successFilterData?.call(response);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(SearchResponse response)? success,
+    TResult Function(String message)? error,
+    TResult Function(bool isGrid)? setIsGridView,
+    TResult Function(Map<String, String?> filters)? applyFilters,
+    TResult Function(Map<String, String?> filters)? setTempFilters,
+    TResult Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult Function()? loadingFilterData,
+    TResult Function(FilterDataResponse response)? successFilterData,
+    TResult Function(String message)? errorFilterData,
+    required TResult orElse(),
+  }) {
+    if (successFilterData != null) {
+      return successFilterData(response);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) error,
+    required TResult Function(SetIsGridView value) setIsGridView,
+    required TResult Function(ApplyFilters value) applyFilters,
+    required TResult Function(SetTempFilters value) setTempFilters,
+    required TResult Function(SetTempFiltersTypeValue value)
+        setTempFiltersTypeValue,
+    required TResult Function(LoadingFilterData value) loadingFilterData,
+    required TResult Function(SuccessFilterData value) successFilterData,
+    required TResult Function(ErrorFilterData value) errorFilterData,
+  }) {
+    return successFilterData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? error,
+    TResult? Function(SetIsGridView value)? setIsGridView,
+    TResult? Function(ApplyFilters value)? applyFilters,
+    TResult? Function(SetTempFilters value)? setTempFilters,
+    TResult? Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult? Function(LoadingFilterData value)? loadingFilterData,
+    TResult? Function(SuccessFilterData value)? successFilterData,
+    TResult? Function(ErrorFilterData value)? errorFilterData,
+  }) {
+    return successFilterData?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? error,
+    TResult Function(SetIsGridView value)? setIsGridView,
+    TResult Function(ApplyFilters value)? applyFilters,
+    TResult Function(SetTempFilters value)? setTempFilters,
+    TResult Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult Function(LoadingFilterData value)? loadingFilterData,
+    TResult Function(SuccessFilterData value)? successFilterData,
+    TResult Function(ErrorFilterData value)? errorFilterData,
+    required TResult orElse(),
+  }) {
+    if (successFilterData != null) {
+      return successFilterData(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SuccessFilterData implements SearchState {
+  const factory SuccessFilterData(final FilterDataResponse response) =
+      _$SuccessFilterDataImpl;
+
+  FilterDataResponse get response;
+
+  /// Create a copy of SearchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SuccessFilterDataImplCopyWith<_$SuccessFilterDataImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ErrorFilterDataImplCopyWith<$Res> {
+  factory _$$ErrorFilterDataImplCopyWith(_$ErrorFilterDataImpl value,
+          $Res Function(_$ErrorFilterDataImpl) then) =
+      __$$ErrorFilterDataImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$ErrorFilterDataImplCopyWithImpl<$Res>
+    extends _$SearchStateCopyWithImpl<$Res, _$ErrorFilterDataImpl>
+    implements _$$ErrorFilterDataImplCopyWith<$Res> {
+  __$$ErrorFilterDataImplCopyWithImpl(
+      _$ErrorFilterDataImpl _value, $Res Function(_$ErrorFilterDataImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SearchState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$ErrorFilterDataImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ErrorFilterDataImpl implements ErrorFilterData {
+  const _$ErrorFilterDataImpl(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'SearchState.errorFilterData(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ErrorFilterDataImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of SearchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ErrorFilterDataImplCopyWith<_$ErrorFilterDataImpl> get copyWith =>
+      __$$ErrorFilterDataImplCopyWithImpl<_$ErrorFilterDataImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(SearchResponse response) success,
+    required TResult Function(String message) error,
+    required TResult Function(bool isGrid) setIsGridView,
+    required TResult Function(Map<String, String?> filters) applyFilters,
+    required TResult Function(Map<String, String?> filters) setTempFilters,
+    required TResult Function(String type, String? value)
+        setTempFiltersTypeValue,
+    required TResult Function() loadingFilterData,
+    required TResult Function(FilterDataResponse response) successFilterData,
+    required TResult Function(String message) errorFilterData,
+  }) {
+    return errorFilterData(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(SearchResponse response)? success,
+    TResult? Function(String message)? error,
+    TResult? Function(bool isGrid)? setIsGridView,
+    TResult? Function(Map<String, String?> filters)? applyFilters,
+    TResult? Function(Map<String, String?> filters)? setTempFilters,
+    TResult? Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult? Function()? loadingFilterData,
+    TResult? Function(FilterDataResponse response)? successFilterData,
+    TResult? Function(String message)? errorFilterData,
+  }) {
+    return errorFilterData?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(SearchResponse response)? success,
+    TResult Function(String message)? error,
+    TResult Function(bool isGrid)? setIsGridView,
+    TResult Function(Map<String, String?> filters)? applyFilters,
+    TResult Function(Map<String, String?> filters)? setTempFilters,
+    TResult Function(String type, String? value)? setTempFiltersTypeValue,
+    TResult Function()? loadingFilterData,
+    TResult Function(FilterDataResponse response)? successFilterData,
+    TResult Function(String message)? errorFilterData,
+    required TResult orElse(),
+  }) {
+    if (errorFilterData != null) {
+      return errorFilterData(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) error,
+    required TResult Function(SetIsGridView value) setIsGridView,
+    required TResult Function(ApplyFilters value) applyFilters,
+    required TResult Function(SetTempFilters value) setTempFilters,
+    required TResult Function(SetTempFiltersTypeValue value)
+        setTempFiltersTypeValue,
+    required TResult Function(LoadingFilterData value) loadingFilterData,
+    required TResult Function(SuccessFilterData value) successFilterData,
+    required TResult Function(ErrorFilterData value) errorFilterData,
+  }) {
+    return errorFilterData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? error,
+    TResult? Function(SetIsGridView value)? setIsGridView,
+    TResult? Function(ApplyFilters value)? applyFilters,
+    TResult? Function(SetTempFilters value)? setTempFilters,
+    TResult? Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult? Function(LoadingFilterData value)? loadingFilterData,
+    TResult? Function(SuccessFilterData value)? successFilterData,
+    TResult? Function(ErrorFilterData value)? errorFilterData,
+  }) {
+    return errorFilterData?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? error,
+    TResult Function(SetIsGridView value)? setIsGridView,
+    TResult Function(ApplyFilters value)? applyFilters,
+    TResult Function(SetTempFilters value)? setTempFilters,
+    TResult Function(SetTempFiltersTypeValue value)? setTempFiltersTypeValue,
+    TResult Function(LoadingFilterData value)? loadingFilterData,
+    TResult Function(SuccessFilterData value)? successFilterData,
+    TResult Function(ErrorFilterData value)? errorFilterData,
+    required TResult orElse(),
+  }) {
+    if (errorFilterData != null) {
+      return errorFilterData(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ErrorFilterData implements SearchState {
+  const factory ErrorFilterData(final String message) = _$ErrorFilterDataImpl;
+
+  String get message;
+
+  /// Create a copy of SearchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ErrorFilterDataImplCopyWith<_$ErrorFilterDataImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

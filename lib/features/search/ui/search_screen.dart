@@ -5,18 +5,12 @@ import '../logic/cubit/search_cubit.dart';
 import '../logic/cubit/search_state.dart';
 import 'widgets/filter_fab.dart';
 import 'widgets/search_app_bar.dart';
-import 'widgets/filter_bottom_sheet.dart';
 import 'widgets/search_bloc_listener.dart';
 import 'widgets/search_body.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
 
-  @override
-  State<SearchScreen> createState() => _SearchScreenState();
-}
-
-class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SearchCubit, SearchState>(
@@ -26,7 +20,7 @@ class _SearchScreenState extends State<SearchScreen> {
           backgroundColor: ColorsManager.offWhite,
           floatingActionButton: (state is! Initial && state is! Loading)
               ? FilterFAB(
-                  onPressed: _showFilterBottomSheet,
+                  onPressed: () => _showFilterBottomSheet(context),
                 )
               : null,
           floatingActionButtonLocation:
@@ -43,16 +37,8 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  void _showFilterBottomSheet() {
-    // final cubit = context.read<SearchCubit>();
-
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (_) => BlocProvider.value(
-        value: context.read<SearchCubit>(),
-        child: const FilterBottomSheet(),
-      ),
-    );
+  void _showFilterBottomSheet(BuildContext context) {
+    final cubit = context.read<SearchCubit>();
+    cubit.emitFilterDataStates();
   }
 }

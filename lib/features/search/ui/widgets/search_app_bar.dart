@@ -61,9 +61,9 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
                             color: ColorsManager.mainRose,
                           ),
                           itemSize: 24,
-                          itemColor: Colors.black,
+                          itemColor: ColorsManager.black,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: ColorsManager.white,
                             borderRadius: BorderRadius.circular(30.0),
                           ),
                           onSubmitted: (value) {

@@ -40,55 +40,21 @@ class ProductCountAndView extends StatelessWidget {
                 ),
                 child: Padding(
                   padding:
-                      EdgeInsets.symmetric(horizontal: 14.0.w, vertical: 6.0.h),
+                      EdgeInsets.symmetric(horizontal: 10.0.w, vertical: 4.0.h),
                   child: Row(
                     children: [
-                      InkWell(
+                      _buildViewModeSelector(
+                        context: context,
+                        svgPath: Assets.of(context).svgs.grid_svg,
                         onTap: () => cubit.setIsGridView(true),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: cubit.isGridView
-                                ? ColorsManager.white
-                                : Colors.transparent,
-                            borderRadius: BorderRadius.circular(16.0),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 12.0.w, vertical: 6.0.h),
-                          child: SvgPicture.asset(
-                            Assets.of(context).svgs.grid_svg,
-                            colorFilter: ColorFilter.mode(
-                              cubit.isGridView
-                                  ? ColorsManager.mainRose
-                                  : ColorsManager.mainRose.withAlpha(128),
-                              BlendMode.srcIn,
-                            ),
-                            height: 14.0.h,
-                          ),
-                        ),
+                        isGridView: cubit.isGridView,
                       ),
                       SizedBox(width: 15.0.w),
-                      InkWell(
+                      _buildViewModeSelector(
+                        context: context,
+                        svgPath: Assets.of(context).svgs.tile_svg,
                         onTap: () => cubit.setIsGridView(false),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: !cubit.isGridView
-                                ? ColorsManager.white
-                                : Colors.transparent,
-                            borderRadius: BorderRadius.circular(16.0),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 12.0.w, vertical: 6.0.h),
-                          child: SvgPicture.asset(
-                            Assets.of(context).svgs.tile_svg,
-                            colorFilter: ColorFilter.mode(
-                              !cubit.isGridView
-                                  ? ColorsManager.mainRose
-                                  : ColorsManager.mainRose.withAlpha(128),
-                              BlendMode.srcIn,
-                            ),
-                            height: 14.0.h,
-                          ),
-                        ),
+                        isGridView: !cubit.isGridView,
                       ),
                     ],
                   ),
@@ -98,6 +64,34 @@ class ProductCountAndView extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildViewModeSelector({
+    required BuildContext context,
+    required String svgPath,
+    required Function onTap,
+    required bool isGridView,
+  }) {
+    return InkWell(
+      onTap: () => onTap(),
+      child: Container(
+        decoration: BoxDecoration(
+          color: isGridView ? ColorsManager.white : ColorsManager.transparent,
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 10.0.w, vertical: 3.0.h),
+        child: SvgPicture.asset(
+          svgPath,
+          colorFilter: ColorFilter.mode(
+            isGridView
+                ? ColorsManager.mainRose
+                : ColorsManager.mainRose.withAlpha(128),
+            BlendMode.srcIn,
+          ),
+          height: 14.0.h,
+        ),
+      ),
     );
   }
 }

@@ -3,4 +3,5 @@ class SearchApiConstants {
   static const String apiBaseUrlForImages = "https://wardaya-tan.vercel.app";
 
   static const String search = "api/products";
+  static const String productsFilterData = "api/product-filter-data";
 }

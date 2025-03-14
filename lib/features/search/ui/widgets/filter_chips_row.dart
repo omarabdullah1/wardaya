@@ -1,6 +1,11 @@
+import 'dart:developer';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wardaya/core/helpers/extensions.dart';
+import 'package:wardaya/features/search/data/apis/search_api_constants.dart';
 import '../../../../core/routing/router_imports.dart';
 import '../../../../core/theming/colors.dart';
 import '../../logic/cubit/search_cubit.dart';
@@ -16,18 +21,61 @@ class FilterChipsRow extends StatelessWidget {
     return BlocBuilder<SearchCubit, SearchState>(
       builder: (context, state) {
         final cubit = context.read<SearchCubit>();
-        final categories = cubit.originalProducts
+        final categoriesNames = cubit.originalProducts
             .expand((product) => product.subCategories)
             .map((cat) => cat.name)
             .toSet()
             .toList();
 
-        final occasions = cubit.originalProducts
+        final occasionsNames = cubit.originalProducts
             .expand((product) => product.occasions)
             .map((occ) => occ.name)
             .toSet()
             .toList();
+        // i want a list of occasions and categories images of the names in the lists above
+        final categoriesImages = categoriesNames.map((name) {
+          return cubit.originalProducts
+              .expand((product) => product.subCategories)
+              .firstWhere((cat) => cat.name == name)
+              .imageUrl;
+        }).toList();
 
+        final occasionsImages = occasionsNames.map((name) {
+          return cubit.originalProducts
+              .expand((product) => product.occasions)
+              .firstWhere((occ) => occ.name == name)
+              .imageUrl;
+        }).toList();
+        final categoryPairs = List<MapEntry<String, String>>.from(
+          categoriesNames.asMap().entries.map(
+                (entry) => MapEntry(entry.value, categoriesImages[entry.key]),
+              ),
+        );
+
+        final occasionPairs = List<MapEntry<String, String>>.from(
+          occasionsNames.asMap().entries.map(
+                (entry) => MapEntry(entry.value, occasionsImages[entry.key]),
+              ),
+        );
+        log('cat: $categoryPairs');
+        log('occ: $occasionPairs');
+        log('categoriesNames: $categoriesNames');
+        final allPairs = [
+          ...categoryPairs.map((pair) => _buildFilterChip(
+                pair.key,
+                "category",
+                pair.value,
+                context: context,
+              )),
+          ...occasionPairs.map((pair) => _buildFilterChip(
+                pair.key,
+                "occasion",
+                pair.value,
+                context: context,
+              )),
+        ];
+        // log(categoriesImages.toString());
+        // log(occasionsImages.toString());
         return SizedBox(
           height: 50.h,
           child: ListView(
@@ -36,18 +84,10 @@ class FilterChipsRow extends StatelessWidget {
               _buildFilterChip(
                 "All",
                 "All",
+                '',
                 context: context,
               ),
-              ...categories.map((category) => _buildFilterChip(
-                    category,
-                    "category",
-                    context: context,
-                  )),
-              ...occasions.map((occasion) => _buildFilterChip(
-                    occasion,
-                    "occasion",
-                    context: context,
-                  )),
+              ...allPairs
             ],
           ),
         );
@@ -55,12 +95,11 @@ class FilterChipsRow extends StatelessWidget {
     );
   }
 
-  Widget _buildFilterChip(String label, String filterType,
+  Widget _buildFilterChip(String label, String filterType, String image,
       {required BuildContext context}) {
-    final cubit = context.read<SearchCubit>();
-
     return BlocBuilder<SearchCubit, SearchState>(
       builder: (context, state) {
+        final cubit = context.read<SearchCubit>();
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0.w),
           child: ChoiceChip(
@@ -74,9 +113,18 @@ class FilterChipsRow extends StatelessWidget {
               padding: EdgeInsetsDirectional.only(end: 1.0.w),
               child: Container(
                 height: 35.0.h,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: ColorsManager.grey,
                   shape: BoxShape.circle,
+                  image: image.isNullOrEmpty()
+                      ? DecorationImage(
+                          image: CachedNetworkImageProvider(
+                            SearchApiConstants.apiBaseUrlForImages + image,
+                          ),
+                          onError: (exception, stackTrace) =>
+                              log(exception.toString()),
+                        )
+                      : null,
                 ),
               ),
             ),
@@ -109,8 +157,42 @@ class FilterChipsRow extends StatelessWidget {
                     Map<String, String?>.from(cubit.selectedFilters);
 
                 if (selected) {
+                  List catList = cubit.originalProducts
+                      .expand((product) => product.subCategories)
+                      .map((cat) => cat.name)
+                      .toSet()
+                      .toList();
+
+                  List occList = cubit.originalProducts
+                      .expand((product) => product.occasions)
+                      .map((occ) => occ.name)
+                      .toSet()
+                      .toList();
                   // When selecting a filter, clear "All" and apply the new filter
-                  updatedFilters[filterType] = label;
+                  final categoryIds = cubit.originalProducts
+                      .expand((product) => product.categories)
+                      .map((cat) => cat.id)
+                      .toSet()
+                      .toList();
+                  final occasionIds = cubit.originalProducts
+                      .expand((product) => product.occasions)
+                      .map((occ) => occ.id)
+                      .toSet()
+                      .toList();
+                  // log(label);
+                  // log(catList.toString());
+                  // log(catList.indexOf(label).toString());
+                  // log(occList.indexOf(label).toString());
+                  switch (filterType) {
+                    case "category":
+                      updatedFilters["category"] =
+                          categoryIds[catList.indexOf(label)];
+                      break;
+                    case "occasion":
+                      updatedFilters["occasion"] =
+                          occasionIds[occList.indexOf(label)];
+                      break;
+                  }
                 } else {
                   // When deselecting a filter, remove it
                   updatedFilters.remove(filterType);

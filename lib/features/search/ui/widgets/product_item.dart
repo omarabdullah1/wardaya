@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -34,9 +35,9 @@ class ProductItem extends StatelessWidget {
                   color: ColorsManager.lightGrey,
                   borderRadius: BorderRadius.circular(8.0),
                   image: DecorationImage(
-                    image: NetworkImage(
+                    image: CachedNetworkImageProvider(
                       SearchApiConstants.apiBaseUrlForImages +
-                          product.images[0],
+                          product.images.first,
                     ),
                     fit: BoxFit.cover,
                   ),
