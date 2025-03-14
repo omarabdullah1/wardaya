@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
+import '../../../../core/assets/assets.dart';
 import '../../../cart/logic/cubit/cart_state.dart';
 import '../../logic/cubit/layout_cubit.dart';
 import '../../logic/cubit/layout_state.dart';
@@ -33,14 +34,14 @@ class BottomNavBarWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _buildNavItem(
-                  'assets/svgs/home.svg',
+                  Assets.of(context).svgs.home_svg,
                   context.el.bottomNavHome,
                   0,
                   context,
                   height: 14.0.h,
                 ),
                 _buildNavItem(
-                  'assets/svgs/explore.svg',
+                  Assets.of(context).svgs.explore_svg,
                   context.el.bottomNavExplore,
                   1,
                   context,
@@ -54,7 +55,7 @@ class BottomNavBarWidget extends StatelessWidget {
                             backgroundColor: ColorsManager.mainRose,
                             offset: const Offset(10, -10.0),
                             child: _buildNavItem(
-                              'assets/svgs/cart.svg',
+                              Assets.of(context).svgs.cart_svg,
                               context.el.bottomNavCart,
                               2,
                               context,
@@ -62,7 +63,7 @@ class BottomNavBarWidget extends StatelessWidget {
                             ),
                           )
                         : _buildNavItem(
-                            'assets/svgs/cart.svg',
+                            Assets.of(context).svgs.cart_svg,
                             context.el.bottomNavCart,
                             2,
                             context,
@@ -71,7 +72,7 @@ class BottomNavBarWidget extends StatelessWidget {
                   },
                 ),
                 _buildNavItem(
-                  'assets/svgs/profile.svg',
+                  Assets.of(context).svgs.profile_svg,
                   context.el.bottomNavMyAccount,
                   3,
                   context,

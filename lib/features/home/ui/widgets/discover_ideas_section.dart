@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
 import 'package:wardaya/core/theming/colors.dart';
 
+import '../../../../core/assets/assets.dart';
+
 class DiscoverIdeasSection extends StatelessWidget {
   const DiscoverIdeasSection({super.key});
 
@@ -33,13 +35,13 @@ class DiscoverIdeasSection extends StatelessWidget {
               child: Row(
                 children: [
                   CardItem(
-                    imageUrl: 'assets/images/delivery.png',
+                    imageUrl: Assets.of(context).images.delivery_png,
                     title: context.el.discoverCardExpressDeliveryTitle,
                     buttonText: context.el.discoverCardExpressDeliveryButton,
                   ),
                   const SizedBox(width: 10),
                   CardItem(
-                    imageUrl: 'assets/images/subscription.png',
+                    imageUrl: Assets.of(context).images.subscription_png,
                     title: context.el.discoverCardWeeklySurpriseTitle,
                     buttonText: context.el.discoverCardWeeklySurpriseButton,
                   ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wardaya/core/di/dependency_injection.dart';
-import 'package:wardaya/features/authentication/ui/create_account.dart';
+import 'package:wardaya/features/authentication/create_account/logic/cubit/register_cubit.dart';
+import 'package:wardaya/features/authentication/create_account/ui/create_account.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
 import 'package:wardaya/features/cart/ui/customize_gift_card_screen.dart';
 import 'package:wardaya/features/category/ui/category_screen.dart';
@@ -9,9 +10,9 @@ import 'package:wardaya/features/explore/ui/recipients_screen.dart';
 import 'package:wardaya/features/layout/logic/cubit/layout_cubit.dart';
 import 'package:wardaya/features/profile/ui/profile_screen.dart';
 import 'package:wardaya/features/splash/ui/splash_screen.dart';
-import '../../features/authentication/logic/cubit/login_cubit.dart';
-import '../../features/authentication/ui/forget_password.dart';
-import '../../features/authentication/ui/login_screen.dart';
+import '../../features/authentication/forget_password/ui/forget_password.dart';
+import '../../features/authentication/login/logic/cubit/login_cubit.dart';
+import '../../features/authentication/login/ui/login_screen.dart';
 import '../../features/cart/ui/record_screen.dart';
 import '../../features/explore/ui/flowers_gifts.dart';
 import '../../features/explore/ui/flowers_planets.dart';
@@ -104,7 +105,10 @@ class AppRouter {
         );
       case Routes.createAccountScreen:
         return MaterialPageRoute(
-          builder: (_) => const CreateAccountScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<RegisterCubit>(),
+            child: const CreateAccountScreen(),
+          ),
         );
       case Routes.profileScreen:
         return MaterialPageRoute(

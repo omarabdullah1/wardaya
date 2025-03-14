@@ -11,6 +11,8 @@ import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
 
+import '../../../core/assets/assets.dart';
+
 class ProductDetailsScreen extends StatefulWidget {
   final BuildContext cartContext;
   const ProductDetailsScreen({super.key, required this.cartContext});
@@ -51,7 +53,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SvgPicture.asset(
-                  'assets/svgs/add_cart.svg',
+                  Assets.of(context).svgs.add_cart_svg,
                   colorFilter:
                       const ColorFilter.mode(Colors.white, BlendMode.srcIn),
                   height: 24.h,
@@ -109,7 +111,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         Row(
                           children: [
                             SvgPicture.asset(
-                              'assets/svgs/wardaya_points_icon.svg',
+                              Assets.of(context).svgs.wardaya_points_icon_svg,
                               colorFilter: const ColorFilter.mode(
                                   ColorsManager.mainRose, BlendMode.srcIn),
                               height: 24.h,
@@ -158,7 +160,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         Row(
                           children: [
                             SvgPicture.asset(
-                              'assets/svgs/wardaya_points_icon.svg',
+                              Assets.of(context).svgs.wardaya_points_icon_svg,
                               colorFilter: const ColorFilter.mode(
                                   ColorsManager.mainRose, BlendMode.srcIn),
                               height: 24.h,
@@ -224,7 +226,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 child: Row(
                   children: [
                     SvgPicture.asset(
-                      'assets/svgs/location_icon.svg',
+                      Assets.of(context).svgs.location_icon_svg,
                       colorFilter: const ColorFilter.mode(
                           ColorsManager.mainRose, BlendMode.srcIn),
                       height: 24.h,
@@ -350,27 +352,27 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           Row(
                             children: [
                               Image.asset(
-                                'assets/pay_cards/mada.png',
+                                Assets.of(context).pay_cards.mada_png,
                                 height: 24.h,
                               ),
                               SizedBox(width: 4.w),
                               Image.asset(
-                                'assets/pay_cards/paypal.png',
+                                Assets.of(context).pay_cards.paypal_png,
                                 height: 24.h,
                               ),
                               SizedBox(width: 4.w),
                               Image.asset(
-                                'assets/pay_cards/visa.png',
+                                Assets.of(context).pay_cards.visa_png,
                                 height: 24.h,
                               ),
                               SizedBox(width: 4.w),
                               Image.asset(
-                                'assets/pay_cards/gpay.png',
+                                Assets.of(context).pay_cards.gpay_png,
                                 height: 24.h,
                               ),
                               SizedBox(width: 4.w),
                               Image.asset(
-                                'assets/pay_cards/master_card.png',
+                                Assets.of(context).pay_cards.master_card_png,
                                 height: 24.h,
                               ),
                             ],
@@ -391,7 +393,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             ),
                           ),
                           Image.asset(
-                            'assets/pay_cards/tamara.png',
+                            Assets.of(context).pay_cards.tamara_png,
                             height: 12.h,
                           ),
                         ],
@@ -428,7 +430,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               _buildIconButton(
                 svgIcon: SvgPicture.asset(
-                  'assets/svgs/favs.svg',
+                  Assets.of(context).svgs.favs_svg,
                   colorFilter: const ColorFilter.mode(
                       ColorsManager.black, BlendMode.srcIn),
                   height: 12.h,
@@ -440,7 +442,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               _buildIconButton(
                 svgIcon: SvgPicture.asset(
-                  'assets/svgs/share.svg',
+                  Assets.of(context).svgs.share_svg,
                   colorFilter: const ColorFilter.mode(
                       ColorsManager.black, BlendMode.srcIn),
                   height: 12.h,

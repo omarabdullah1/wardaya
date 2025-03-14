@@ -20,9 +20,9 @@ class SelectCardTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final cards = context.read<CartCubit>().cards;
     return ListView.builder(
-      itemCount: cards.length,
+      itemCount: cards(context).length,
       itemBuilder: (_, index) {
-        final card = cards[index];
+        final card = cards(context)[index];
         return Padding(
           padding: EdgeInsets.symmetric(vertical: 8.h),
           child: Container(

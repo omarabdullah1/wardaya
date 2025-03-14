@@ -22,9 +22,11 @@ Future<void> main() async {
   // To fix texts being hidden bug in flutter_screenutil in release mode.
   await ScreenUtil.ensureScreenSize();
   log('message From Production');
+  log(token);
+  log(isLoggedInUser.toString());
   runApp(
     EasyLocalization(
-      path: 'assets/i18n',
+      path: Constants.i18nPath,
       supportedLocales: const [Locale('en'), Locale('ar')],
       child: WardayaApp(
         appRouter: AppRouter(),

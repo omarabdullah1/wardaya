@@ -1,18 +1,16 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:wardaya/core/helpers/extensions.dart';
 
 part 'api_error_model.g.dart';
 
 @JsonSerializable()
 class ApiErrorModel {
   final String? message;
-  final int? code;
-  @JsonKey(name: 'data')
-  final dynamic errors;
+  final String? error;
 
   ApiErrorModel({
     this.message,
-    this.code,
-    this.errors,
+    this.error,
   });
 
   factory ApiErrorModel.fromJson(Map<String, dynamic> json) =>
@@ -22,20 +20,16 @@ class ApiErrorModel {
 
   /// Returns a String containing all the error messages
   String getAllErrorMessages() {
-    if (errors == null || errors is List && (errors as List).isEmpty) {
+    if (error.isNullOrEmpty()) {
       return message ?? "Unknown Error occurred";
     }
 
-    if (errors is Map<String, dynamic>) {
-      final errorMessage =
-          (errors as Map<String, dynamic>).entries.map((entry) {
-        final value = entry.value;
-        return "${value.join(',')}";
-      }).join('\n');
+    if (!error.isNullOrEmpty()) {
+      final errorMessage = error;
 
-      return errorMessage;
-    } else if (errors is List) {
-      return (errors as List).join('\n');
+      return errorMessage ?? "Unknown Error occurred";
+    } else if (error.isNullOrEmpty() && message.isNullOrEmpty()) {
+      return error ?? "Unknown Error occurred";
     }
 
     return message ?? "Unknown Error occurred";

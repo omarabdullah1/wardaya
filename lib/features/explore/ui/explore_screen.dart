@@ -8,6 +8,7 @@ import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/routing/routes.dart';
 import 'package:wardaya/core/theming/colors.dart';
 
+import '../../../core/assets/assets.dart';
 import '../../../core/helpers/dummy_vars.dart';
 import '../../home/ui/widgets/category_progress_scroll.dart';
 import 'widgets/explore_card_item.dart';
@@ -73,7 +74,7 @@ class ExploreScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 _buildCategoryButton(
                   text: context.el.exploreCategoryFlowersPlants,
-                  imagePath: 'assets/images/flowersAndPlants.png',
+                  imagePath: Assets.of(context).images.flowersAndPlants_png,
                   onTap: () {
                     context.pushNamed(
                       Routes.flowersPlantsScreen,
@@ -84,7 +85,7 @@ class ExploreScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 _buildCategoryButton(
                   text: context.el.exploreCategoryFlowersGifts,
-                  imagePath: 'assets/images/flowersAndGifts.png',
+                  imagePath: Assets.of(context).images.flowersAndGifts_png,
                   onTap: () {
                     context.pushNamed(
                       Routes.flowersGiftsScreen,
