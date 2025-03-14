@@ -35,9 +35,10 @@ class Product {
   final List<String> images;
   final Price price;
   final List<dynamic> bundleItems;
-  final List<Category> subCategories;
+  final List<ParentCategory> categories; // Updated to ParentCategory
+  final List<SubCategory> subCategories; // Renamed from Category to SubCategory
   final List<Occasion> occasions;
-  final Brand brand;
+  final Brand? brand; // Made nullable
   final bool expressDelivery;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -56,6 +57,7 @@ class Product {
     required this.images,
     required this.price,
     required this.bundleItems,
+    required this.categories,
     required this.subCategories,
     required this.occasions,
     required this.brand,
@@ -87,26 +89,56 @@ class Price {
   Map<String, dynamic> toJson() => _$PriceToJson(this);
 }
 
+// Renamed from Category to SubCategory
 @JsonSerializable()
-class Category {
+class SubCategory {
   @JsonKey(name: '_id')
   final String id;
   final String name;
   @JsonKey(name: 'image_url')
   final String imageUrl;
   final String category;
+  @JsonKey(name: '__v')
+  final int v;
 
-  Category({
+  SubCategory({
     required this.id,
     required this.name,
     required this.imageUrl,
     required this.category,
+    required this.v,
   });
 
-  factory Category.fromJson(Map<String, dynamic> json) =>
-      _$CategoryFromJson(json);
+  factory SubCategory.fromJson(Map<String, dynamic> json) =>
+      _$SubCategoryFromJson(json);
 
-  Map<String, dynamic> toJson() => _$CategoryToJson(this);
+  Map<String, dynamic> toJson() => _$SubCategoryToJson(this);
+}
+
+// New model for parent categories
+@JsonSerializable()
+class ParentCategory {
+  @JsonKey(name: '_id')
+  final String id;
+  final String name;
+  @JsonKey(name: 'image_url')
+  final String imageUrl;
+  final List<String> subCategories;
+  @JsonKey(name: '__v')
+  final int v;
+
+  ParentCategory({
+    required this.id,
+    required this.name,
+    required this.imageUrl,
+    required this.subCategories,
+    required this.v,
+  });
+
+  factory ParentCategory.fromJson(Map<String, dynamic> json) =>
+      _$ParentCategoryFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ParentCategoryToJson(this);
 }
 
 @JsonSerializable()
@@ -116,6 +148,7 @@ class Occasion {
   final String name;
   @JsonKey(name: 'image_url')
   final String imageUrl;
+
   Occasion({
     required this.id,
     required this.name,

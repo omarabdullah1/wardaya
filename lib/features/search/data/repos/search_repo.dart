@@ -1,3 +1,6 @@
+import 'package:wardaya/features/search/data/models/filter_data_body.dart';
+import 'package:wardaya/features/search/data/models/filter_data_response.dart';
+
 import '../../../../../core/networking/api_error_handler.dart';
 import '../../../../../core/networking/api_result.dart';
 import '../apis/search_service.dart';
@@ -24,6 +27,25 @@ class SearchRepo {
         searchRequestBody.recipients,
         searchRequestBody.bundleTypes,
         searchRequestBody.priceRange,
+      );
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ApiErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<FilterDataResponse>> productFilterData(
+      FilterDataBody filterDataBody) async {
+    try {
+      final response = await _apiService.productsFilterData(
+        filterDataBody.category,
+        filterDataBody.subCategory,
+        filterDataBody.brand,
+        filterDataBody.occasion,
+        filterDataBody.color,
+        filterDataBody.recipients,
+        filterDataBody.bundleTypes,
+        filterDataBody.priceRange,
       );
       return ApiResult.success(response);
     } catch (error) {

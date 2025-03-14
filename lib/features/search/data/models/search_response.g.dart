@@ -36,13 +36,18 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           (json['images'] as List<dynamic>).map((e) => e as String).toList(),
       price: Price.fromJson(json['price'] as Map<String, dynamic>),
       bundleItems: json['bundleItems'] as List<dynamic>,
+      categories: (json['categories'] as List<dynamic>)
+          .map((e) => ParentCategory.fromJson(e as Map<String, dynamic>))
+          .toList(),
       subCategories: (json['subCategories'] as List<dynamic>)
-          .map((e) => Category.fromJson(e as Map<String, dynamic>))
+          .map((e) => SubCategory.fromJson(e as Map<String, dynamic>))
           .toList(),
       occasions: (json['occasions'] as List<dynamic>)
           .map((e) => Occasion.fromJson(e as Map<String, dynamic>))
           .toList(),
-      brand: Brand.fromJson(json['brand'] as Map<String, dynamic>),
+      brand: json['brand'] == null
+          ? null
+          : Brand.fromJson(json['brand'] as Map<String, dynamic>),
       expressDelivery: json['expressDelivery'] as bool,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
@@ -68,6 +73,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'images': instance.images,
       'price': instance.price,
       'bundleItems': instance.bundleItems,
+      'categories': instance.categories,
       'subCategories': instance.subCategories,
       'occasions': instance.occasions,
       'brand': instance.brand,
@@ -91,18 +97,41 @@ Map<String, dynamic> _$PriceToJson(Price instance) => <String, dynamic>{
       'currency': instance.currency,
     };
 
-Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
+SubCategory _$SubCategoryFromJson(Map<String, dynamic> json) => SubCategory(
       id: json['_id'] as String,
       name: json['name'] as String,
       imageUrl: json['image_url'] as String,
       category: json['category'] as String,
+      v: (json['__v'] as num).toInt(),
     );
 
-Map<String, dynamic> _$CategoryToJson(Category instance) => <String, dynamic>{
+Map<String, dynamic> _$SubCategoryToJson(SubCategory instance) =>
+    <String, dynamic>{
       '_id': instance.id,
       'name': instance.name,
       'image_url': instance.imageUrl,
       'category': instance.category,
+      '__v': instance.v,
+    };
+
+ParentCategory _$ParentCategoryFromJson(Map<String, dynamic> json) =>
+    ParentCategory(
+      id: json['_id'] as String,
+      name: json['name'] as String,
+      imageUrl: json['image_url'] as String,
+      subCategories: (json['subCategories'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      v: (json['__v'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$ParentCategoryToJson(ParentCategory instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'name': instance.name,
+      'image_url': instance.imageUrl,
+      'subCategories': instance.subCategories,
+      '__v': instance.v,
     };
 
 Occasion _$OccasionFromJson(Map<String, dynamic> json) => Occasion(

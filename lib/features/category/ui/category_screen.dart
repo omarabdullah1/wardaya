@@ -32,51 +32,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
     return Scaffold(
       backgroundColor: ColorsManager.offWhite,
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: ColorsManager.mainRose,
-          ), // Back button
-          onPressed: () {
-            context.pop();
-          },
-        ),
-        title: Text(
-          widget.momentTitle,
-          style: GoogleFonts.ebGaramond(
-            color: ColorsManager.mainRose,
-            fontWeight: FontWeight.w400,
-            fontSize: 30.0.sp,
-          ),
-        ),
-        backgroundColor: ColorsManager.offWhite, // Make the AppBar transparent
-        elevation: 0, // Remove AppBar shadow
-      ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: _buildFilterChips(),
-            ),
-            const Divider(
-              color: ColorsManager.lightGrey,
-              thickness: 1.0,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: _buildProductCount(),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: _buildProductView(),
-              ),
-            ),
-          ],
-        ),
-      ),
       floatingActionButton: InkWell(
         onTap: () {
           _showFilterBottomSheet();
@@ -136,6 +91,51 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: ColorsManager.mainRose,
+          ), // Back button
+          onPressed: () {
+            context.pop();
+          },
+        ),
+        title: Text(
+          widget.momentTitle,
+          style: GoogleFonts.ebGaramond(
+            color: ColorsManager.mainRose,
+            fontWeight: FontWeight.w400,
+            fontSize: 30.0.sp,
+          ),
+        ),
+        backgroundColor: ColorsManager.offWhite, // Make the AppBar transparent
+        elevation: 0, // Remove AppBar shadow
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: _buildFilterChips(),
+            ),
+            const Divider(
+              color: ColorsManager.lightGrey,
+              thickness: 1.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: _buildProductCount(),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: _buildProductView(),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
