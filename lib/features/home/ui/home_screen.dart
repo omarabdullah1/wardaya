@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
+import 'package:wardaya/core/theming/styles.dart';
 import 'package:wardaya/features/home/ui/widgets/transparent_app_bar.dart';
 
 import '../../../core/helpers/dummy_vars.dart';
@@ -34,11 +35,7 @@ class HomeScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Text(
                     context.el.homeGiftsForEveryMoment,
-                    style: GoogleFonts.ebGaramond(
-                      color: ColorsManager.mainRose,
-                      fontSize: 32.sp,
-                      fontWeight: FontWeight.w400,
-                    ),
+                    style: TextStylesEBGaramond.font32MainRoseRegular,
                   ),
                 ),
                 const SizedBox(height: 20),

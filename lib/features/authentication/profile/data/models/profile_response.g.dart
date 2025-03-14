@@ -108,7 +108,7 @@ ProfileResponse _$ProfileResponseFromJson(Map<String, dynamic> json) =>
       isBlocked: json['is_blocked'] as bool?,
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
-      v: (json['v'] as num?)?.toInt(),
+      v: (json['__v'] as num?)?.toInt(),
       phoneNumber: json['phone_number'] as String?,
       favorites: (json['favorites'] as List<dynamic>?)
           ?.map((e) => Favorite.fromJson(e as Map<String, dynamic>))
@@ -135,7 +135,7 @@ Map<String, dynamic> _$ProfileResponseToJson(ProfileResponse instance) =>
       'is_blocked': instance.isBlocked,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
-      'v': instance.v,
+      '__v': instance.v,
       'phone_number': instance.phoneNumber,
       'favorites': instance.favorites,
       'role': instance.role,

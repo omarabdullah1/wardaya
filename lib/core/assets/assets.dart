@@ -4,7 +4,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-
+        
 class Assets extends StatelessWidget {
   final AssetsData assets;
   final Widget child;
@@ -16,8 +16,7 @@ class Assets extends StatelessWidget {
   });
 
   static AssetsData of(BuildContext context) {
-    final widget =
-        context.dependOnInheritedWidgetOfExactType<_InheritedAssets>();
+    final widget = context.dependOnInheritedWidgetOfExactType<_InheritedAssets>();
     return widget?.assets ?? AssetsData.light();
   }
 
@@ -39,20 +38,16 @@ class _InheritedAssets extends InheritedWidget {
   });
 
   @override
-  bool updateShouldNotify(covariant _InheritedAssets oldWidget) =>
-      assets != oldWidget.assets;
+  bool updateShouldNotify(covariant _InheritedAssets oldWidget) => assets != oldWidget.assets;
 }
 
 class AssetsData {
   static AssetsData? _light;
   static AssetsData? _dark;
 
-  factory AssetsData.light() =>
-      _light ??= AssetsData._(brightness: Brightness.light);
-  factory AssetsData.dark() =>
-      _dark ??= AssetsData._(brightness: Brightness.dark);
-  factory AssetsData.brightness(Brightness brightness) =>
-      brightness == Brightness.light ? AssetsData.light() : AssetsData.dark();
+  factory AssetsData.light() => _light ??= AssetsData._(brightness: Brightness.light);
+  factory AssetsData.dark() => _dark ??= AssetsData._(brightness: Brightness.dark);
+  factory AssetsData.brightness(Brightness brightness) => brightness == Brightness.light ? AssetsData.light() : AssetsData.dark();
 
   final Brightness _brightness;
 
@@ -79,7 +74,7 @@ class _assets_fonts_dart {
 
   _assets_fonts_dart._({
     required Brightness brightness,
-  }) : _brightness = brightness;
+  })  : _brightness = brightness;
 
   final Kammerlander_Bold_ttf = 'assets/fonts/Kammerlander-Bold.ttf';
   final Kammerlander_Regular_ttf = 'assets/fonts/Kammerlander-Regular.ttf';
@@ -91,7 +86,7 @@ class _assets_i18n_dart {
 
   _assets_i18n_dart._({
     required Brightness brightness,
-  }) : _brightness = brightness;
+  })  : _brightness = brightness;
 
   final ar_yaml = 'assets/i18n/ar.yaml';
   final en_yaml = 'assets/i18n/en.yaml';
@@ -128,7 +123,7 @@ class _assets_images_cards_dart {
 
   _assets_images_cards_dart._({
     required Brightness brightness,
-  }) : _brightness = brightness;
+  })  : _brightness = brightness;
 
   final card1_png = 'assets/images/cards/card1.png';
   final card2_png = 'assets/images/cards/card2.png';
@@ -140,7 +135,7 @@ class _assets_images_categories_dart {
 
   _assets_images_categories_dart._({
     required Brightness brightness,
-  }) : _brightness = brightness;
+  })  : _brightness = brightness;
 
   final aunt_png = 'assets/images/categories/aunt.png';
   final children_png = 'assets/images/categories/children.png';
@@ -160,16 +155,13 @@ class _assets_images_logo_dart {
 
   _assets_images_logo_dart._({
     required Brightness brightness,
-  }) : _brightness = brightness;
+  })  : _brightness = brightness;
 
-  final Wardaya_Application_splash_gif =
-      'assets/images/logo/Wardaya_Application_splash.gif';
+  final Wardaya_Application_splash_gif = 'assets/images/logo/Wardaya_Application_splash.gif';
   final loading_gif_gif = 'assets/images/logo/loading_gif.gif';
   final splash_png = 'assets/images/logo/splash.png';
-  final splash_android12_logo_png =
-      'assets/images/logo/splash_android12_logo.png';
-  final splash_android12_logo_empty_png =
-      'assets/images/logo/splash_android12_logo_empty.png';
+  final splash_android12_logo_png = 'assets/images/logo/splash_android12_logo.png';
+  final splash_android12_logo_empty_png = 'assets/images/logo/splash_android12_logo_empty.png';
 }
 
 class _assets_lottie_dart {
@@ -177,7 +169,7 @@ class _assets_lottie_dart {
 
   _assets_lottie_dart._({
     required Brightness brightness,
-  }) : _brightness = brightness;
+  })  : _brightness = brightness;
 
   final loading_animation_json = 'assets/lottie/loading_animation.json';
 }
@@ -187,7 +179,7 @@ class _assets_pay_cards_dart {
 
   _assets_pay_cards_dart._({
     required Brightness brightness,
-  }) : _brightness = brightness;
+  })  : _brightness = brightness;
 
   final gpay_png = 'assets/pay_cards/gpay.png';
   final mada_png = 'assets/pay_cards/mada.png';
@@ -202,7 +194,7 @@ class _assets_svgs_dart {
 
   _assets_svgs_dart._({
     required Brightness brightness,
-  }) : _brightness = brightness;
+  })  : _brightness = brightness;
 
   final add_cart_svg = 'assets/svgs/add_cart.svg';
   final addresses_svg = 'assets/svgs/addresses.svg';
@@ -242,6 +234,7 @@ class _assets_svgs_dart {
   final tac_svg = 'assets/svgs/tac.svg';
   final text_svg = 'assets/svgs/text.svg';
   final tile_svg = 'assets/svgs/tile.svg';
+  final user_svg = 'assets/svgs/user.svg';
   final video_svg = 'assets/svgs/video.svg';
   final wallet_svg = 'assets/svgs/wallet.svg';
   final wardaya_points_icon_svg = 'assets/svgs/wardaya_points_icon.svg';

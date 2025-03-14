@@ -113,6 +113,7 @@ class ProfileResponse {
   bool? isBlocked;
   String? createdAt;
   String? updatedAt;
+  @JsonKey(name: "__v")
   int? v;
   @JsonKey(name: "phone_number")
   String? phoneNumber;
