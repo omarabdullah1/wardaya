@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wardaya/features/authentication/profile/logic/cubit/profile_cubit.dart';
+import 'package:wardaya/features/profile/logic/cubit/profile_cubit.dart';
 import 'package:wardaya/features/explore/ui/explore_screen.dart';
 import 'package:wardaya/features/home/ui/home_screen.dart';
 
@@ -8,7 +8,7 @@ import '../../../core/di/dependency_injection.dart';
 import '../../../core/theming/colors.dart';
 
 import '../../cart/ui/cart_screen.dart';
-import '../../authentication/profile/ui/profile_screen.dart';
+import '../../profile/ui/profile_screen.dart';
 import '../logic/cubit/layout_cubit.dart';
 import '../logic/cubit/layout_state.dart';
 import 'widgets/bottom_nav_bar_widget.dart';

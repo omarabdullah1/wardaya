@@ -56,7 +56,7 @@ class SignatureTextSelector extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
           decoration: BoxDecoration(
-            color: isSelected ? Colors.white : Colors.transparent,
+            color: isSelected ? ColorsManager.white : ColorsManager.transparent,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Row(

@@ -32,7 +32,7 @@ class SelectCardTab extends StatelessWidget {
               border: Border.all(
                 color: selectedCardIndex == index
                     ? ColorsManager.mainRose
-                    : Colors.transparent,
+                    : ColorsManager.transparent,
                 width: 2,
               ),
             ),
@@ -102,13 +102,13 @@ class SelectCardTab extends StatelessWidget {
                           color: selectedCardIndex == index
                               ? ColorsManager.mainRose
                               : ColorsManager.white,
-                          border: Border.all(color: Colors.grey),
+                          border: Border.all(color: ColorsManager.grey),
                         ),
                         child: Icon(
                           Icons.check,
                           color: selectedCardIndex == index
-                              ? Colors.white
-                              : Colors.transparent,
+                              ? ColorsManager.white
+                              : ColorsManager.transparent,
                           size: 20,
                         ),
                       ),

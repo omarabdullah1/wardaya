@@ -106,7 +106,7 @@ class _PreviewBottomSheetState extends State<PreviewBottomSheet> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: Colors.white,
+        color: ColorsManager.white,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(15),

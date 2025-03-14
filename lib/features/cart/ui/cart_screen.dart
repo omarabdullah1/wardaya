@@ -689,9 +689,9 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection> {
       height: 500.h,
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorsManager.white,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey[300]!),
+        border: Border.all(color: ColorsManager.lightGrey),
       ),
       child: DefaultTabController(
         length: 3,

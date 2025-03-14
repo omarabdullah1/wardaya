@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 
+import '../theming/colors.dart';
 import '../theming/styles.dart';
 
 class StyledToastWidget extends StatelessWidget {
@@ -38,7 +39,7 @@ class StyledToastWidget extends StatelessWidget {
               ),
               Icon(
                 icon,
-                color: Colors.white,
+                color: ColorsManager.white,
                 size: 18,
               ),
             ],

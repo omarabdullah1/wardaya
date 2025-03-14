@@ -58,7 +58,7 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
                   dotWidth: 24.0,
                   dotHeight: 4.0,
                   paintStyle: PaintingStyle.fill,
-                  dotColor: Colors.grey,
+                  dotColor: ColorsManager.grey,
                   activeDotColor: ColorsManager.mainRose,
                 ),
               ),

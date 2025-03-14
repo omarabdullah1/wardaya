@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/helpers/extensions.dart';
 import '../../../../../core/routing/routes.dart';
+import '../../../../../core/theming/colors.dart';
 import '../../../../../core/theming/styles.dart';
 import '../../../../../core/widgets/loading_widget.dart';
 import '../../logic/cubit/login_cubit.dart';
@@ -49,7 +50,7 @@ class LoginBlocListener extends StatelessWidget {
       builder: (context) => AlertDialog(
         icon: const Icon(
           Icons.error,
-          color: Colors.red,
+          color: ColorsManager.red,
           size: 32,
         ),
         content: Text(

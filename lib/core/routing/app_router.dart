@@ -1,6 +1,9 @@
 import 'package:wardaya/features/search/data/models/search_response.dart';
 import 'package:wardaya/features/search/logic/cubit/search_cubit.dart';
+import 'package:wardaya/features/subscriptions/logic/cubit/subscription_cubit.dart';
 
+import '../../features/subscriptions/ui/subscription_duration_screen.dart';
+import '../../features/subscriptions/ui/susbcriptions_screen.dart';
 import 'router_imports.dart';
 
 class AppRouter {
@@ -74,11 +77,10 @@ class AppRouter {
 
       case Routes.categoryScreen:
         if (arguments is Map<String, dynamic>) {
-          final cubit = arguments['cubit'] as CartCubit?;
           final extraArgs = arguments['extraArgs'] as String?;
           return _buildRoute(
-            screen: BlocProvider.value(
-              value: cubit ?? getIt<CartCubit>(),
+            screen: BlocProvider(
+              create: (context) => getIt<SearchCubit>(),
               child: CategoryScreen(
                 momentTitle: extraArgs ?? "",
               ),
@@ -158,6 +160,18 @@ class AppRouter {
             value: cubit!,
             child: const EditProfileScreen(),
           ),
+        );
+      case Routes.susbcriptionsScreen:
+        return _buildRoute(
+          screen: BlocProvider(
+            create: (context) =>
+                getIt<SubscriptionCubit>()..emitGetSubscription(),
+            child: const SusbcriptionsScreen(),
+          ),
+        );
+      case Routes.susbcriptionsDurationScreen:
+        return _buildRoute(
+          screen: const SubscriptionDurationScreen(),
         );
       default:
         return null;

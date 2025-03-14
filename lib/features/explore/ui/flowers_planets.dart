@@ -45,7 +45,8 @@ class FlowersPlantsScreen extends StatelessWidget {
           ),
         ),
 
-        backgroundColor: Colors.transparent, // Make the AppBar transparent
+        backgroundColor:
+            ColorsManager.transparent, // Make the AppBar transparent
         elevation: 0,
       ),
       body: Padding(

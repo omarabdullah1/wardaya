@@ -33,7 +33,8 @@ class ExploreScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.transparent, // Make the AppBar transparent
+        backgroundColor:
+            ColorsManager.transparent, // Make the AppBar transparent
         elevation: 0, // Remove AppBar shadow
       ),
       body: SafeArea(
@@ -131,6 +132,7 @@ class ExploreScreen extends StatelessWidget {
                     CategoryProgressScroll(
                       categoriesImages: brandsCategoriesImages,
                       titles: brandsTitles,
+                      isBackgroundColor: false,
                     ),
                   ],
                 ),
@@ -230,7 +232,7 @@ class ExploreScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           child: CachedNetworkImage(
             colorBlendMode: BlendMode.srcATop,
-            color: Colors.black12,
+            color: ColorsManager.black87.withAlpha((0.3 * 255).toInt()),
             imageUrl: imageUrl,
             fit: BoxFit.cover,
             width: 165.w,
@@ -258,7 +260,7 @@ class ExploreScreen extends StatelessWidget {
         return const LinearGradient(
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
-          colors: [Colors.black, Colors.black],
+          colors: [ColorsManager.black, ColorsManager.black],
           stops: [0.0, 1.0],
         ).createShader(bounds);
       },
@@ -267,7 +269,7 @@ class ExploreScreen extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.grey.withAlpha(51),
+          color: ColorsManager.grey.withAlpha(51),
         ),
       ),
     );

@@ -106,15 +106,23 @@ class _assets_images_dart {
   final _assets_images_categories_dart categories;
   final _assets_images_logo_dart logo;
 
+  final anniversary_png = 'assets/images/anniversary.png';
   final ballones_png = 'assets/images/ballones.png';
   final cake_png = 'assets/images/cake.png';
+  final chocolate_png = 'assets/images/chocolate.png';
   final delivery_png = 'assets/images/delivery.png';
   final flower_gift_png = 'assets/images/flower_gift.png';
   final flowers_png = 'assets/images/flowers.png';
   final flowersAndGifts_png = 'assets/images/flowersAndGifts.png';
   final flowersAndPlants_png = 'assets/images/flowersAndPlants.png';
+  final flowers_gifts_png = 'assets/images/flowers_gifts.png';
+  final jewlary_png = 'assets/images/jewlary.png';
   final ring_png = 'assets/images/ring.png';
+  final sub1_png = 'assets/images/sub1.png';
+  final sub2_png = 'assets/images/sub2.png';
+  final sub3_png = 'assets/images/sub3.png';
   final subscription_png = 'assets/images/subscription.png';
+  final subscriptions_banner_png = 'assets/images/subscriptions_banner.png';
   final teddy_png = 'assets/images/teddy.png';
 }
 
@@ -202,10 +210,12 @@ class _assets_svgs_dart {
   final ballons_svg = 'assets/svgs/ballons.svg';
   final cart_svg = 'assets/svgs/cart.svg';
   final customer_care_svg = 'assets/svgs/customer_care.svg';
+  final customize_delivery_svg = 'assets/svgs/customize_delivery.svg';
   final delete_account_svg = 'assets/svgs/delete_account.svg';
   final delivery_svg = 'assets/svgs/delivery.svg';
   final edit_pen_svg = 'assets/svgs/edit_pen.svg';
   final empty_cart_svg = 'assets/svgs/empty_cart.svg';
+  final enjoy_fresh_flowers_svg = 'assets/svgs/enjoy_fresh_flowers.svg';
   final explore_svg = 'assets/svgs/explore.svg';
   final faq_svg = 'assets/svgs/faq.svg';
   final fav_gifs_svg = 'assets/svgs/fav_gifs.svg';
@@ -227,6 +237,7 @@ class _assets_svgs_dart {
   final profile_svg = 'assets/svgs/profile.svg';
   final profile_avatar_svg = 'assets/svgs/profile_avatar.svg';
   final remove_svg = 'assets/svgs/remove.svg';
+  final select_plan_svg = 'assets/svgs/select_plan.svg';
   final share_svg = 'assets/svgs/share.svg';
   final signature_svg = 'assets/svgs/signature.svg';
   final small_logo_svg = 'assets/svgs/small_logo.svg';
@@ -234,7 +245,6 @@ class _assets_svgs_dart {
   final tac_svg = 'assets/svgs/tac.svg';
   final text_svg = 'assets/svgs/text.svg';
   final tile_svg = 'assets/svgs/tile.svg';
-  final user_svg = 'assets/svgs/user.svg';
   final video_svg = 'assets/svgs/video.svg';
   final wallet_svg = 'assets/svgs/wallet.svg';
   final wardaya_points_icon_svg = 'assets/svgs/wardaya_points_icon.svg';

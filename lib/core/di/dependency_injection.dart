@@ -1,11 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:wardaya/features/authentication/profile/data/repos/profile_repo.dart';
-import 'package:wardaya/features/authentication/profile/logic/cubit/profile_cubit.dart';
+import 'package:wardaya/features/profile/data/repos/profile_repo.dart';
+import 'package:wardaya/features/profile/logic/cubit/profile_cubit.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
 import 'package:wardaya/features/search/data/apis/search_service.dart';
 import 'package:wardaya/features/search/data/repos/search_repo.dart';
 import 'package:wardaya/features/search/logic/cubit/search_cubit.dart';
+import 'package:wardaya/features/subscriptions/data/apis/subscription_service.dart';
+import 'package:wardaya/features/subscriptions/data/repos/subscription_repo.dart';
+import 'package:wardaya/features/subscriptions/logic/cubit/subscription_cubit.dart';
 
 import '../../features/authentication/apis/auth_service.dart';
 import '../../features/authentication/create_account/data/repos/create_account_repo.dart';
@@ -28,6 +31,8 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<AuthenticationService>(
       () => AuthenticationService(dio));
   getIt.registerLazySingleton<SearchService>(() => SearchService(dio));
+  getIt.registerLazySingleton<SubscriptionService>(
+      () => SubscriptionService(dio));
 
   /************************* */
   /* ******** REPOS *********
@@ -39,6 +44,8 @@ Future<void> setupGetIt() async {
       () => CreateAccountRepo(getIt()));
   getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepo(getIt()));
   getIt.registerLazySingleton<SearchRepo>(() => SearchRepo(getIt()));
+  getIt
+      .registerLazySingleton<SubscriptionRepo>(() => SubscriptionRepo(getIt()));
 
   /************************* */
   /* ******** CUBIT *********
@@ -50,6 +57,7 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<RegisterCubit>(() => RegisterCubit(getIt()));
   getIt.registerFactory<ProfileCubit>(() => ProfileCubit(getIt()));
   getIt.registerFactory<SearchCubit>(() => SearchCubit(getIt()));
+  getIt.registerFactory<SubscriptionCubit>(() => SubscriptionCubit(getIt()));
 
   getIt.registerFactory<LayoutCubit>(() => LayoutCubit());
   getIt.registerFactory<CartCubit>(() => CartCubit());

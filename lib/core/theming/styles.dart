@@ -15,7 +15,7 @@ class TextStyles {
 
 class TextStylesKammer {
   static TextStyle font35WhiteRegular = TextStyle(
-    color: Colors.white,
+    color: ColorsManager.white,
     fontSize: 35.sp,
     fontWeight: FontWeightHelper.regular,
     fontFamily: 'Kammerlander',
@@ -81,14 +81,44 @@ class TextStylesInter {
 }
 
 class TextStylesEBGaramond {
+  static TextStyle font31MainRoseRegular = GoogleFonts.ebGaramond(
+    fontSize: 31.0.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.mainRose,
+  );
+  static TextStyle font12MainRoseBold = GoogleFonts.ebGaramond(
+    fontSize: 12.0.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: ColorsManager.mainRose,
+  );
+  static TextStyle font23WhiteRegular = GoogleFonts.ebGaramond(
+    fontSize: 23.0.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.white,
+  );
   static TextStyle font25MainRoseRegular = GoogleFonts.ebGaramond(
     fontSize: 25.0.sp,
     fontWeight: FontWeightHelper.regular,
     color: ColorsManager.mainRose,
   );
+  static TextStyle font26WhiteRegular = GoogleFonts.ebGaramond(
+    fontSize: 26.0.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.white,
+  );
+  static TextStyle font30WhiteRegular = GoogleFonts.ebGaramond(
+    fontSize: 30.0.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.white,
+  );
   static TextStyle font32MainRoseRegular = GoogleFonts.ebGaramond(
     color: ColorsManager.mainRose,
     fontSize: 32.sp,
+    fontWeight: FontWeightHelper.regular,
+  );
+  static TextStyle font50WhiteRegular = GoogleFonts.ebGaramond(
+    color: ColorsManager.white,
+    fontSize: 50.sp,
     fontWeight: FontWeightHelper.regular,
   );
 }

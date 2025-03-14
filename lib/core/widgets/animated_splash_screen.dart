@@ -5,6 +5,8 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 
+import '../theming/colors.dart';
+
 enum Transition {
   fade,
   rightToLeft,
@@ -37,7 +39,7 @@ class AnimatedSplash extends StatefulWidget {
     this.animation,
     required this.navigator,
     this.durationInSeconds,
-    this.backgroundColor = Colors.white,
+    this.backgroundColor = ColorsManager.white,
   });
 
   @override
