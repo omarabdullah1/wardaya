@@ -189,7 +189,7 @@ class _SignatureBottomSheetState extends State<SignatureBottomSheet> {
                           Container(
                             height: 200.0.h,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: ColorsManager.white,
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
                                 color: ColorsManager.grey,
@@ -197,7 +197,7 @@ class _SignatureBottomSheetState extends State<SignatureBottomSheet> {
                             ),
                             child: Signature(
                               key: _signatureKey,
-                              color: Colors.black,
+                              color: ColorsManager.black,
                               strokeWidth: 3.0,
                               backgroundPainter: null,
                             ),

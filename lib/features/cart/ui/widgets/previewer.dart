@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+import '../../../../core/assets/assets.dart';
 import '../../../../core/theming/colors.dart';
 
 class LinkPreviewGenerator extends StatefulWidget {
@@ -187,7 +188,7 @@ class _LinkPreviewGeneratorState extends State<LinkPreviewGenerator> {
                   padding: const EdgeInsets.all(16.0),
                   child: Center(
                     child: SvgPicture.asset(
-                      'assets/svgs/small_logo.svg',
+                      Assets.of(context).svgs.small_logo_svg,
                       colorFilter: const ColorFilter.mode(
                         ColorsManager.lightGrey,
                         BlendMode.srcIn,
@@ -210,7 +211,7 @@ class _LinkPreviewGeneratorState extends State<LinkPreviewGenerator> {
                       padding: const EdgeInsets.all(16.0),
                       child: Center(
                         child: SvgPicture.asset(
-                          'assets/svgs/small_logo.svg',
+                          Assets.of(context).svgs.small_logo_svg,
                           colorFilter: const ColorFilter.mode(
                             ColorsManager.lightGrey,
                             BlendMode.srcIn,

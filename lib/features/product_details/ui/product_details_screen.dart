@@ -10,10 +10,15 @@ import 'package:wardaya/core/blocs/general/cubit/general_cubit.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
+import 'package:wardaya/features/search/data/apis/search_api_constants.dart';
+import 'package:wardaya/features/search/data/models/search_response.dart';
+
+import '../../../core/assets/assets.dart';
+import '../../../core/helpers/constants.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  final BuildContext cartContext;
-  const ProductDetailsScreen({super.key, required this.cartContext});
+  const ProductDetailsScreen({super.key, required this.product});
+  final Product product;
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
@@ -21,27 +26,29 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   bool _isExpanded = true;
+
   @override
   Widget build(BuildContext context) {
+    final product = widget.product;
+
     return Scaffold(
       extendBodyBehindAppBar: true, // Extend body behind AppBar
       appBar: const CustomAppBar(),
       bottomNavigationBar: Container(
         color: ColorsManager.white,
-        child: // Add to Cart Button
-            Padding(
+        child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: ElevatedButton(
             onPressed: () {
               setState(() {
-                widget.cartContext.read<CartCubit>().changeLength(
-                    widget.cartContext.read<CartCubit>().cartItems + 1);
+                context
+                    .read<CartCubit>()
+                    .changeLength(context.read<CartCubit>().cartItems + 1);
               });
-            }, // Centered text
+            },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 8),
-              minimumSize:
-                  const Size(double.infinity, 0), // Make button full width
+              minimumSize: const Size(double.infinity, 0),
               backgroundColor: ColorsManager.mainRose,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -51,9 +58,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SvgPicture.asset(
-                  'assets/svgs/add_cart.svg',
-                  colorFilter:
-                      const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                  Assets.of(context).svgs.add_cart_svg,
+                  colorFilter: const ColorFilter.mode(
+                      ColorsManager.white, BlendMode.srcIn),
                   height: 24.h,
                 ),
                 SizedBox(width: 15.w),
@@ -62,7 +69,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   style: GoogleFonts.inter(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: ColorsManager.white,
                   ),
                 ),
               ],
@@ -71,7 +78,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        // For scrollable content
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -79,6 +85,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             Container(
               color: ColorsManager.lightGrey,
               height: context.pOH(30).h,
+              child: PageView.builder(
+                itemCount: product.images.length,
+                itemBuilder: (context, index) {
+                  return Image.network(
+                    SearchApiConstants.apiBaseUrlForImages +
+                        product.images[index],
+                    fit: BoxFit.cover,
+                  );
+                },
+              ),
             ),
             const SizedBox(height: 16),
 
@@ -87,11 +103,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               padding: EdgeInsets.symmetric(horizontal: 16.0.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: context.read<GeneralCubit>().lang == 'ar'
+                children: context.read<GeneralCubit>().lang == Constants.arLang
                     ? [
                         Text.rich(
                           TextSpan(
-                              text: '200 ',
+                              text: '${product.price.total} ',
                               style: GoogleFonts.inter(
                                 fontSize: 27.0.sp,
                                 fontWeight: FontWeight.w700,
@@ -109,7 +125,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         Row(
                           children: [
                             SvgPicture.asset(
-                              'assets/svgs/wardaya_points_icon.svg',
+                              Assets.of(context).svgs.wardaya_points_icon_svg,
                               colorFilter: const ColorFilter.mode(
                                   ColorsManager.mainRose, BlendMode.srcIn),
                               height: 24.h,
@@ -117,7 +133,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             SizedBox(width: 11.w),
                             Text.rich(
                               TextSpan(
-                                text: '${context.el.earn} 173 \n',
+                                text: '${context.el.earn} ${product.points} \n',
                                 style: GoogleFonts.inter(
                                   fontSize: 15.0.sp,
                                   fontWeight: FontWeight.w700,
@@ -147,7 +163,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               ),
                               children: [
                                 TextSpan(
-                                  text: ' 200',
+                                  text: ' ${product.price.total}',
                                   style: GoogleFonts.inter(
                                     fontSize: 27.0.sp,
                                     fontWeight: FontWeight.w700,
@@ -158,7 +174,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         Row(
                           children: [
                             SvgPicture.asset(
-                              'assets/svgs/wardaya_points_icon.svg',
+                              Assets.of(context).svgs.wardaya_points_icon_svg,
                               colorFilter: const ColorFilter.mode(
                                   ColorsManager.mainRose, BlendMode.srcIn),
                               height: 24.h,
@@ -166,7 +182,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             SizedBox(width: 11.w),
                             Text.rich(
                               TextSpan(
-                                text: '${context.el.earn}173 \n',
+                                text: '${context.el.earn}${product.points} \n',
                                 style: GoogleFonts.inter(
                                   fontSize: 15.0.sp,
                                   fontWeight: FontWeight.w700,
@@ -207,7 +223,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0.w),
               child: Text(
-                context.el.homeCaptivationAromasOfMubkhar,
+                product.title,
                 style: GoogleFonts.inter(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.bold,
@@ -224,7 +240,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 child: Row(
                   children: [
                     SvgPicture.asset(
-                      'assets/svgs/location_icon.svg',
+                      Assets.of(context).svgs.location_icon_svg,
                       colorFilter: const ColorFilter.mode(
                           ColorsManager.mainRose, BlendMode.srcIn),
                       height: 24.h,
@@ -275,7 +291,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0.w),
               child: Text(
-                "Celebrate birthdays with a delightful twist with Helen's Happy Birthday Drawing Cake. This charming red velvet cake serves 8 people, making it perfect for small gatherings. Decorated with fun and whimsical birthday drawings, it's not just a treat but also a visual delight. The rich red velvet flavor, combined with creamy frosting, promises to satisfy your taste buds. Order now and make your loved one's birthday extra special.",
+                product.description,
                 maxLines: _isExpanded ? 5 : 20,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -298,7 +314,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         style: const TextStyle(color: ColorsManager.mainRose),
                       ),
                       Directionality(
-                        // for making the arrow direction in the right way for ar or en
                         textDirection: TextDirection.ltr,
                         child: !_isExpanded
                             ? Transform.rotate(
@@ -330,7 +345,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.grey.shade300),
+                  border: Border.all(color: ColorsManager.lightGrey),
                 ),
                 child: Padding(
                   padding: EdgeInsets.all(16.0.w),
@@ -350,27 +365,27 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           Row(
                             children: [
                               Image.asset(
-                                'assets/pay_cards/mada.png',
+                                Assets.of(context).pay_cards.mada_png,
                                 height: 24.h,
                               ),
                               SizedBox(width: 4.w),
                               Image.asset(
-                                'assets/pay_cards/paypal.png',
+                                Assets.of(context).pay_cards.paypal_png,
                                 height: 24.h,
                               ),
                               SizedBox(width: 4.w),
                               Image.asset(
-                                'assets/pay_cards/visa.png',
+                                Assets.of(context).pay_cards.visa_png,
                                 height: 24.h,
                               ),
                               SizedBox(width: 4.w),
                               Image.asset(
-                                'assets/pay_cards/gpay.png',
+                                Assets.of(context).pay_cards.gpay_png,
                                 height: 24.h,
                               ),
                               SizedBox(width: 4.w),
                               Image.asset(
-                                'assets/pay_cards/master_card.png',
+                                Assets.of(context).pay_cards.master_card_png,
                                 height: 24.h,
                               ),
                             ],
@@ -391,7 +406,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             ),
                           ),
                           Image.asset(
-                            'assets/pay_cards/tamara.png',
+                            Assets.of(context).pay_cards.tamara_png,
                             height: 12.h,
                           ),
                         ],
@@ -415,7 +430,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: ColorsManager.transparent,
       elevation: 0,
       leadingWidth: 45.w, // Set the leadingWidth
       leading: _buildIconButton(icon: Icons.arrow_back_ios_new, () {
@@ -428,7 +443,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               _buildIconButton(
                 svgIcon: SvgPicture.asset(
-                  'assets/svgs/favs.svg',
+                  Assets.of(context).svgs.favs_svg,
                   colorFilter: const ColorFilter.mode(
                       ColorsManager.black, BlendMode.srcIn),
                   height: 12.h,
@@ -440,7 +455,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               _buildIconButton(
                 svgIcon: SvgPicture.asset(
-                  'assets/svgs/share.svg',
+                  Assets.of(context).svgs.share_svg,
                   colorFilter: const ColorFilter.mode(
                       ColorsManager.black, BlendMode.srcIn),
                   height: 12.h,
@@ -482,7 +497,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   : Icon(
                       icon,
                       size: 20,
-                      color: Colors.black,
+                      color: ColorsManager.black,
                     ),
             ),
           ),

@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:wardaya/core/assets/assets.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -95,16 +96,17 @@ class _PreviewBottomSheetState extends State<PreviewBottomSheet> {
 
   Widget _buildFrontPreview(BuildContext context) {
     final cards = context.read<CartCubit>().cards;
-    if (cards.isEmpty || widget.selectedCardIndex >= cards.length) {
+    if (cards(context).isEmpty ||
+        widget.selectedCardIndex >= cards(context).length) {
       return Center(
         child: Text(context.el.noCardSelected),
       );
     }
-    final card = cards[widget.selectedCardIndex];
+    final card = cards(context)[widget.selectedCardIndex];
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: Colors.white,
+        color: ColorsManager.white,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(15),
@@ -131,7 +133,7 @@ class _PreviewBottomSheetState extends State<PreviewBottomSheet> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SvgPicture.asset(
-            'assets/svgs/small_logo.svg',
+            Assets.of(context).svgs.small_logo_svg,
             height: 35.h,
           ),
           SizedBox(height: 15.h),

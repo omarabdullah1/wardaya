@@ -35,7 +35,8 @@ class RecipientsScreen extends StatelessWidget {
           ),
         ),
 
-        backgroundColor: Colors.transparent, // Make the AppBar transparent
+        backgroundColor:
+            ColorsManager.transparent, // Make the AppBar transparent
         elevation: 0,
       ),
       body: Padding(
@@ -50,7 +51,7 @@ class RecipientsScreen extends StatelessWidget {
           itemCount: recipients.length,
           itemBuilder: (context, index) {
             return _buildRecipientItem(
-                context, recipients[index], recipientsImages[index]);
+                context, recipients[index], recipientsImages(context)[index]);
           },
         ),
       ),

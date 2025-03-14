@@ -22,6 +22,7 @@ reset_password_button: "إعادة تعيين كلمة المرور"
 
 # CreateAccountScreen texts
 create_account_title: "إنشاء حساب"
+create_account_button: "إنشاء حساب"
 name_label: "الاسم"
 phone_label: "الهاتف"
 select_country_label: "اختر الدولة"
@@ -145,9 +146,9 @@ typed_style: "مكتوب"
 characters_limit: "أحرف متبقية"
 
 # New entries for CustomTextFieldWithDropdown
-typing_style_label: "النمط:"  # Dropdown label
-handwriting_option: "خط اليد"  # Specific dropdown option
-typed_option: "مكتوب"  # Specific dropdown option
+typing_style_label: "النمط:" # Dropdown label
+handwriting_option: "خط اليد" # Specific dropdown option
+typed_option: "مكتوب" # Specific dropdown option
 
 # Paste Link Screen texts
 add_media_title: "إضافة فيديو أو صورة"
@@ -201,3 +202,34 @@ arabic: "العربية"
 english: "الإنجليزية"
 logout: "تسجيل خروج"
 delete_account: "تسجيل خروج من الحساب"
+
+# Edit Profile texts
+edit_profile_title: "تعديل الملف الشخصي"
+save_changes_button: "حفظ"
+first_name_label: "الاسم الأول"
+last_name_label: "اسم العائلة"
+full_name_label: "الاسم الكامل"
+phone_number_label: "رقم الهاتف"
+email_address_label: "البريد الإلكتروني"
+change_password_button: "تغيير"
+change_password_title: "كلمة المرور"
+birthday_label: "تاريخ الميلاد"
+
+# My Subscriptions texts
+my_subscriptions_title: "اشتراكاتي"
+wardaya_subscriptions: "وردايا\nاشتراكات"
+subscription_description: "\nاستمتع بسحر توصيل الزهور الطازجة المنتظمة التي تعمل على تحويل مساحتك، ورفع روحك، ونشر الفرح طوال الوقت"
+subscription_how_it_works: "كيف يعمل؟"
+subscription_select_your_plan: "حدد خطتك:"
+subscription_choose_what_fits_your_needs: "اختر ما يناسب احتياجاتك."
+subscription_customize_delivery: "تخصيص التسليم:"
+subscription_set_delivery_frequency_and_payment: "تعيين تردد التسليم والدفع."
+subscription_enjoy_fresh_flowers: "استمتع بالزهور النضرة:"
+subscription_receive_fresh_flowers_every_time: "احصل على زهور نضرة في كل مرة."
+subscription_plans: "خطط الاشتراك"
+subscription_starting_from: "بدءا من"
+subscription_button: "اشترك الآن"
+more: "المزيد"
+less: "أقل"
+starting_from: "بدءا من"
+per_delivery: "لكل تسليم"

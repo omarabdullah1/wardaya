@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
+import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:wardaya/core/theming/colors.dart';
+import 'package:wardaya/core/theming/styles.dart';
 import 'package:wardaya/features/home/ui/widgets/transparent_app_bar.dart';
 
 import '../../../core/helpers/dummy_vars.dart';
@@ -34,21 +36,18 @@ class HomeScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Text(
                     context.el.homeGiftsForEveryMoment,
-                    style: GoogleFonts.ebGaramond(
-                      color: ColorsManager.mainRose,
-                      fontSize: 32.sp,
-                      fontWeight: FontWeight.w400,
-                    ),
+                    style: TextStylesEBGaramond.font32MainRoseRegular,
                   ),
                 ),
-                const SizedBox(height: 20),
+                verticalSpace(20),
                 CategoryProgressScroll(
-                  categoriesImages: categoriesImages,
+                  categoriesImages: categoriesImages(context),
                   titles: titles,
+                  isBackgroundColor: true,
                 ),
               ],
             ),
-            SizedBox(height: context.pOH(1.5).h),
+            verticalSpace(20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -63,14 +62,15 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                verticalSpace(20),
                 CategoryProgressScroll(
-                  categoriesImages: categoriesImages,
+                  categoriesImages: categoriesImages(context),
                   titles: titles,
+                  isBackgroundColor: true,
                 ),
               ],
             ),
-            SizedBox(height: context.pOH(1.5).h),
+            verticalSpace(20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -97,7 +97,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: context.pOH(1.5).h),
+            verticalSpace(20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -111,7 +111,7 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  verticalSpace(20),
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
@@ -124,7 +124,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: context.pOH(1.5).h),
+            verticalSpace(20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -138,7 +138,7 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  verticalSpace(20),
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
@@ -151,7 +151,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: context.pOH(1.5).h),
+            verticalSpace(20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -165,7 +165,7 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  verticalSpace(20),
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
@@ -178,7 +178,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: context.pOH(1.5).h),
+            verticalSpace(20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -192,7 +192,7 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  verticalSpace(20),
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
@@ -205,7 +205,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: context.pOH(1.5).h),
+            verticalSpace(20),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 10.0),
               child: DiscoverIdeasSection(),
@@ -223,7 +223,7 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  verticalSpace(20),
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
@@ -236,7 +236,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: context.pOH(1.5).h),
+            verticalSpace(20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -250,7 +250,7 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  verticalSpace(20),
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
@@ -263,7 +263,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: context.pOH(1.5).h),
+            verticalSpace(20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -277,7 +277,7 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  verticalSpace(20),
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
@@ -290,7 +290,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: context.pOH(1.5).h),
+            verticalSpace(20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -304,7 +304,7 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  verticalSpace(20),
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
@@ -317,7 +317,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: context.pOH(1.5).h),
+            verticalSpace(20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -332,10 +332,11 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                verticalSpace(20),
                 CategoryProgressScroll(
-                  categoriesImages: giftsCategoriesImages,
+                  categoriesImages: giftsCategoriesImages(context),
                   titles: giftsTitles,
+                  isBackgroundColor: false,
                 ),
               ],
             ),
@@ -354,14 +355,15 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                verticalSpace(20),
                 CategoryProgressScroll(
                   categoriesImages: brandsCategoriesImages,
                   titles: brandsTitles,
+                  isBackgroundColor: false,
                 ),
               ],
             ),
-            SizedBox(height: context.pOH(1.5).h),
+            verticalSpace(20),
           ],
         ),
       ),

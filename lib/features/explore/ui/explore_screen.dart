@@ -1,13 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/routing/routes.dart';
 import 'package:wardaya/core/theming/colors.dart';
+import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
 
+import '../../../core/assets/assets.dart';
 import '../../../core/helpers/dummy_vars.dart';
 import '../../home/ui/widgets/category_progress_scroll.dart';
 import 'widgets/explore_card_item.dart';
@@ -30,7 +33,8 @@ class ExploreScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.transparent, // Make the AppBar transparent
+        backgroundColor:
+            ColorsManager.transparent, // Make the AppBar transparent
         elevation: 0, // Remove AppBar shadow
       ),
       body: SafeArea(
@@ -50,9 +54,9 @@ class ExploreScreen extends StatelessWidget {
                           'https://s3-alpha-sig.figma.com/img/8e3e/9429/5f9afb33f407be39848aa2053e8f09bc?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=X5~lhyoouM3Jy0awOt~p0N2sY2agbolhlbp1Mux25iZgVjcF0kYkpKS5rMfmLve2khXMiIhiSG9tXqvSFlzc55wk6-VymbYXh3PmDSW-rB0tS7Uzg6349logsqj57~lNmGuOeCKF9Hz2IrxHN2zX0U~-50pe9nolHyeGd1S-n5OhbCYc~SIvZSDgLSPSdygF2ENrIgJj-ydNkWvl2bTuREtTLkJ631e86OyJFaA6bBgWK1wSpMDGko5vMZQXYKeLtTcvHs0BJy6uKcYPjXONYM3ZCoSGbm7EE2AchwPkgfv87AYL57NGNG~Dw6L~gx6kDIwwsJi~r5L8rs~Vtao6Qw__',
                       lable: context.el.exploreCardMoments,
                       onTap: () {
-                        context.pushNamed(
+                        context.pushNamedWithCubit(
                           Routes.momentsScreen,
-                          arguments: context,
+                          context.read<CartCubit>(),
                         );
                       },
                     ),
@@ -73,7 +77,7 @@ class ExploreScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 _buildCategoryButton(
                   text: context.el.exploreCategoryFlowersPlants,
-                  imagePath: 'assets/images/flowersAndPlants.png',
+                  imagePath: Assets.of(context).images.flowersAndPlants_png,
                   onTap: () {
                     context.pushNamed(
                       Routes.flowersPlantsScreen,
@@ -84,7 +88,7 @@ class ExploreScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 _buildCategoryButton(
                   text: context.el.exploreCategoryFlowersGifts,
-                  imagePath: 'assets/images/flowersAndGifts.png',
+                  imagePath: Assets.of(context).images.flowersAndGifts_png,
                   onTap: () {
                     context.pushNamed(
                       Routes.flowersGiftsScreen,
@@ -128,6 +132,7 @@ class ExploreScreen extends StatelessWidget {
                     CategoryProgressScroll(
                       categoriesImages: brandsCategoriesImages,
                       titles: brandsTitles,
+                      isBackgroundColor: false,
                     ),
                   ],
                 ),
@@ -227,7 +232,7 @@ class ExploreScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           child: CachedNetworkImage(
             colorBlendMode: BlendMode.srcATop,
-            color: Colors.black12,
+            color: ColorsManager.black87.withAlpha((0.3 * 255).toInt()),
             imageUrl: imageUrl,
             fit: BoxFit.cover,
             width: 165.w,
@@ -255,7 +260,7 @@ class ExploreScreen extends StatelessWidget {
         return const LinearGradient(
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
-          colors: [Colors.black, Colors.black],
+          colors: [ColorsManager.black, ColorsManager.black],
           stops: [0.0, 1.0],
         ).createShader(bounds);
       },
@@ -264,7 +269,7 @@ class ExploreScreen extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.grey.withAlpha(51),
+          color: ColorsManager.grey.withAlpha(51),
         ),
       ),
     );

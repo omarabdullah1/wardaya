@@ -34,9 +34,15 @@ class ApiErrorHandler {
 }
 
 ApiErrorModel _handleError(dynamic data) {
+  if (data == null) return ApiErrorModel(message: "Unknown error occurred");
+
+  // Check if data is already a Map, if not try to decode it
+  final Map<String, dynamic> errorData = data is Map
+      ? data as Map<String, dynamic>
+      : {'message': 'Unknown error occurred'};
+
   return ApiErrorModel(
-    message: data['message'] ?? "Unknown error occurred",
-    code: data['code'],
-    errors: data['data'],
+    message: errorData['message'],
+    error: errorData['error'],
   );
 }

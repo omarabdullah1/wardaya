@@ -31,7 +31,8 @@ class TACScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.transparent, // Make the AppBar transparent
+        backgroundColor:
+            ColorsManager.transparent, // Make the AppBar transparent
         elevation: 0, // Remove AppBar shadow
       ),
       body: SafeArea(

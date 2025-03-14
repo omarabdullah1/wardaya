@@ -2,21 +2,22 @@ bool isLoggedInUser = false;
 
 class SharedPrefKeys {
   static const String userToken = 'userToken';
+  static const String userData = 'userData';
 }
-
-List<String> supportedLanguages = ['en', 'ar'];
 
 class Constants {
   static const String appName = 'Wardaya';
   static const String appVersion = '1.0.0';
   static const String appBuildNumber = '1';
-  static const String appPackage = 'com.wardaya.app';
+  static const String appPackage = 'com.wardaya.wardaya';
   static const String appStoreLink =
       'https://play.google.com/store/apps/details?id=$appPackage';
   static const String appStoreId = 'com.wardaya.app';
   static const String appStoreName = 'Wardaya';
   static const String appStoreDescription =
       'Wardaya is a mobile application that helps you to learn and improve your skills in different fields.';
+
+  static const String i18nPath = 'assets/i18n';
 
   static const String appStoreIcon = 'assets/images/app_icon.png';
   static const String appStoreBanner = 'assets/images/app_banner.png';
@@ -42,4 +43,6 @@ class Constants {
   static const String appStoreContactEmail = ' [email protected]';
   static const String appStoreContactPhone = '+20123456789';
   static const String appStoreContactWebsite = 'https://wardaya.com';
+  static const String arLang = 'ar';
+  static const String enLang = 'en';
 }

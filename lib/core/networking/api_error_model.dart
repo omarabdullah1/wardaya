@@ -5,14 +5,11 @@ part 'api_error_model.g.dart';
 @JsonSerializable()
 class ApiErrorModel {
   final String? message;
-  final int? code;
-  @JsonKey(name: 'data')
-  final dynamic errors;
+  final String? error;
 
   ApiErrorModel({
     this.message,
-    this.code,
-    this.errors,
+    this.error,
   });
 
   factory ApiErrorModel.fromJson(Map<String, dynamic> json) =>
@@ -20,24 +17,14 @@ class ApiErrorModel {
 
   Map<String, dynamic> toJson() => _$ApiErrorModelToJson(this);
 
-  /// Returns a String containing all the error messages
+  /// Returns a String containing all error messages
   String getAllErrorMessages() {
-    if (errors == null || errors is List && (errors as List).isEmpty) {
-      return message ?? "Unknown Error occurred";
+    if (error != null && error!.isNotEmpty) {
+      return error!; // This will return "Password must contain at least one uppercase letter"
     }
-
-    if (errors is Map<String, dynamic>) {
-      final errorMessage =
-          (errors as Map<String, dynamic>).entries.map((entry) {
-        final value = entry.value;
-        return "${value.join(',')}";
-      }).join('\n');
-
-      return errorMessage;
-    } else if (errors is List) {
-      return (errors as List).join('\n');
+    if (message != null && message!.isNotEmpty) {
+      return message!;
     }
-
-    return message ?? "Unknown Error occurred";
+    return "Unknown error occurred";
   }
 }

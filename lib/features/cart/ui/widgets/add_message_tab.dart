@@ -11,6 +11,7 @@ import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/features/cart/ui/widgets/previewer.dart';
 
+import '../../../../core/assets/assets.dart';
 import '../../logic/cubit/cart_cubit.dart';
 import 'past_link_buttom_sheet.dart';
 import 'signature_bottom_sheet.dart';
@@ -53,7 +54,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                 child: Column(
                   children: [
                     SvgPicture.asset(
-                      'assets/svgs/small_logo.svg',
+                      Assets.of(context).svgs.small_logo_svg,
                       height: 35.h,
                     ),
                     SizedBox(height: 5.h),
@@ -125,7 +126,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                                       .setSignature(signature: null);
                                 },
                                 child: SvgPicture.asset(
-                                  'assets/svgs/remove.svg',
+                                  Assets.of(context).svgs.remove_svg,
                                   colorFilter: const ColorFilter.mode(
                                     ColorsManager.lightGrey,
                                     BlendMode.srcIn,
@@ -150,7 +151,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                             child: Row(
                               children: [
                                 SvgPicture.asset(
-                                  'assets/svgs/signature.svg',
+                                  Assets.of(context).svgs.signature_svg,
                                   height: 15.h,
                                 ),
                                 SizedBox(width: 5.w),
@@ -230,7 +231,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                                 context.read<CartCubit>().setLink(link: '');
                               },
                               child: SvgPicture.asset(
-                                'assets/svgs/remove.svg',
+                                Assets.of(context).svgs.remove_svg,
                                 colorFilter: const ColorFilter.mode(
                                   ColorsManager.lightGrey,
                                   BlendMode.srcIn,
@@ -266,7 +267,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                             child: Row(
                               children: [
                                 SvgPicture.asset(
-                                  'assets/svgs/video.svg',
+                                  Assets.of(context).svgs.video_svg,
                                   height: 15.h,
                                 ),
                                 SizedBox(width: 10.w),
@@ -311,7 +312,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                             child: Row(
                               children: [
                                 SvgPicture.asset(
-                                  'assets/svgs/link.svg',
+                                  Assets.of(context).svgs.link_svg,
                                   height: 15.h,
                                 ),
                                 SizedBox(width: 10.w),

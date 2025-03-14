@@ -1,28 +1,31 @@
-final List<String> categoriesImages = [
-  'assets/images/ballones.png',
-  'assets/images/cake.png',
-  'assets/images/flower_gift.png',
-  'assets/images/ring.png',
-  'assets/images/teddy.png',
-  'assets/images/ballones.png',
-  'assets/images/cake.png',
-  'assets/images/flower_gift.png',
-  'assets/images/ring.png',
-  'assets/images/teddy.png',
-  'assets/images/teddy.png',
-  'assets/images/flower_gift.png',
-  'assets/images/flower_gift.png',
-  'assets/images/ballones.png',
-  'assets/images/cake.png',
-  'assets/images/flower_gift.png',
-  'assets/images/ring.png',
-  'assets/images/teddy.png',
-  'assets/images/ballones.png',
-  'assets/images/cake.png',
-  'assets/images/flower_gift.png',
-  'assets/images/ring.png',
-  'assets/images/teddy.png',
-];
+import 'package:flutter/material.dart';
+import 'package:wardaya/core/assets/assets.dart';
+
+List<String> categoriesImages(BuildContext context) => [
+      Assets.of(context).images.ballones_png,
+      Assets.of(context).images.cake_png,
+      Assets.of(context).images.flower_gift_png,
+      Assets.of(context).images.ring_png,
+      Assets.of(context).images.teddy_png,
+      Assets.of(context).images.ballones_png,
+      Assets.of(context).images.cake_png,
+      Assets.of(context).images.flower_gift_png,
+      Assets.of(context).images.ring_png,
+      Assets.of(context).images.teddy_png,
+      Assets.of(context).images.teddy_png,
+      Assets.of(context).images.flower_gift_png,
+      Assets.of(context).images.flower_gift_png,
+      Assets.of(context).images.ballones_png,
+      Assets.of(context).images.cake_png,
+      Assets.of(context).images.flower_gift_png,
+      Assets.of(context).images.ring_png,
+      Assets.of(context).images.teddy_png,
+      Assets.of(context).images.ballones_png,
+      Assets.of(context).images.cake_png,
+      Assets.of(context).images.flower_gift_png,
+      Assets.of(context).images.ring_png,
+      Assets.of(context).images.teddy_png,
+    ];
 final List<String> titles = [
   'ballones',
   'cake',
@@ -48,20 +51,20 @@ final List<String> titles = [
   'ring',
   'teddy',
 ];
-final List<String> giftsCategoriesImages = [
-  'assets/images/categories/friends.png',
-  'assets/images/categories/colleague.png',
-  'assets/images/categories/mother.png',
-  'assets/images/categories/friends.png',
-  'assets/images/categories/colleague.png',
-  'assets/images/categories/mother.png',
-  'assets/images/categories/wife.png',
-  'assets/images/categories/husband.png',
-  'assets/images/categories/father.png',
-  'assets/images/categories/wife.png',
-  'assets/images/categories/husband.png',
-  'assets/images/categories/father.png',
-];
+List<String> giftsCategoriesImages(BuildContext context) => [
+      Assets.of(context).images.categories.friends_png,
+      Assets.of(context).images.categories.colleague_png,
+      Assets.of(context).images.categories.mother_png,
+      Assets.of(context).images.categories.friends_png,
+      Assets.of(context).images.categories.colleague_png,
+      Assets.of(context).images.categories.mother_png,
+      Assets.of(context).images.categories.wife_png,
+      Assets.of(context).images.categories.husband_png,
+      Assets.of(context).images.categories.father_png,
+      Assets.of(context).images.categories.wife_png,
+      Assets.of(context).images.categories.husband_png,
+      Assets.of(context).images.categories.father_png,
+    ];
 final List<String> giftsTitles = [
   'friends',
   'colleague',
@@ -130,19 +133,19 @@ final List<String> recipients = [
   "Friends",
   "Colleagues",
 ];
-final List<String> recipientsImages = [
-  'assets/images/categories/mother.png',
-  'assets/images/categories/father.png',
-  'assets/images/categories/children.png',
-  'assets/images/categories/husband.png',
-  'assets/images/categories/wife.png',
-  'assets/images/categories/grandmother.png',
-  'assets/images/categories/grandfather.png',
-  'assets/images/categories/friends.png',
-  'assets/images/categories/aunt.png',
-  'assets/images/categories/uncle.png',
-  'assets/images/categories/colleague.png',
-];
+List<String> recipientsImages(BuildContext context) => [
+      Assets.of(context).images.categories.mother_png,
+      Assets.of(context).images.categories.father_png,
+      Assets.of(context).images.categories.children_png,
+      Assets.of(context).images.categories.husband_png,
+      Assets.of(context).images.categories.wife_png,
+      Assets.of(context).images.categories.grandmother_png,
+      Assets.of(context).images.categories.grandfather_png,
+      Assets.of(context).images.categories.friends_png,
+      Assets.of(context).images.categories.aunt_png,
+      Assets.of(context).images.categories.uncle_png,
+      Assets.of(context).images.categories.colleague_png,
+    ];
 
 class Product {
   final String name;

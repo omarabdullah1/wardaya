@@ -4,6 +4,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 
+import '../../../../core/assets/assets.dart';
+
 class HomeCarouselSlider extends StatefulWidget {
   const HomeCarouselSlider({super.key});
 
@@ -14,12 +16,12 @@ class HomeCarouselSlider extends StatefulWidget {
 class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
   final PageController _controller = PageController();
 
-  final List<String> _images = [
-    'assets/images/flowers.png',
-    'assets/images/flowers.png',
-    'assets/images/flowers.png',
-    'assets/images/flowers.png',
-  ];
+  List<String> _images(context) => [
+        Assets.of(context).images.flowers_png,
+        Assets.of(context).images.flowers_png,
+        Assets.of(context).images.flowers_png,
+        Assets.of(context).images.flowers_png,
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +32,11 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
           // Page View for Images
           PageView.builder(
             controller: _controller,
-            itemCount: _images.length,
+            itemCount: _images(context).length,
             onPageChanged: (index) {},
             itemBuilder: (context, index) {
               return Image.asset(
-                'assets/images/flowers.png',
+                Assets.of(context).images.flowers_png,
                 fit: BoxFit.cover,
               );
             },
@@ -48,7 +50,7 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
             child: Center(
               child: SmoothPageIndicator(
                 controller: _controller,
-                count: _images.length,
+                count: _images(context).length,
                 axisDirection: Axis.horizontal,
                 effect: const SlideEffect(
                   spacing: 8.0,
@@ -56,7 +58,7 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
                   dotWidth: 24.0,
                   dotHeight: 4.0,
                   paintStyle: PaintingStyle.fill,
-                  dotColor: Colors.grey,
+                  dotColor: ColorsManager.grey,
                   activeDotColor: ColorsManager.mainRose,
                 ),
               ),

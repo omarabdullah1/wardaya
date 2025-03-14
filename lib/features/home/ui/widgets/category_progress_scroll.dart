@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
+import '../../../cart/logic/cubit/cart_cubit.dart';
 
 class CategoryProgressScroll extends StatefulWidget {
   final List<String> categoriesImages;
   final List<String> titles;
+  final bool isBackgroundColor;
   const CategoryProgressScroll({
     super.key,
     required this.categoriesImages,
     required this.titles,
+    required this.isBackgroundColor,
   });
 
   @override
@@ -23,15 +27,15 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
   final ScrollController _scrollController = ScrollController();
 
   double _scrollProgress = 0.0;
-  double _itemWidth = 0.0; // Width of a single category item
-  int _visibleItemsCount = 0; // Number of fully visible items
-  final GlobalKey _itemKey = GlobalKey(); // Key to get item width
+  double _itemWidth = 0.0;
+  int _visibleItemsCount = 0;
+  final GlobalKey _itemKey = GlobalKey();
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_updateScrollProgress);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((context) {
       _calculateItemWidth();
       _calculateInitialProgress();
     });
@@ -103,6 +107,7 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
                         title: widget.titles[index],
                         imagePath: widget.categoriesImages[index],
                         context: context,
+                        isBackgroundColor: widget.isBackgroundColor,
                       ),
                     ),
                   ),
@@ -119,6 +124,7 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
                         title: widget.titles[index + halfLength],
                         imagePath: widget.categoriesImages[index + halfLength],
                         context: context,
+                        isBackgroundColor: widget.isBackgroundColor,
                       ),
                     ),
                   ),
@@ -132,7 +138,7 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
           padding: EdgeInsets.symmetric(horizontal: context.pOW(5).w),
           child: LinearProgressIndicator(
             value: _scrollProgress,
-            backgroundColor: Colors.grey[200],
+            backgroundColor: ColorsManager.lightGrey,
             valueColor:
                 const AlwaysStoppedAnimation<Color>(ColorsManager.mainRose),
             minHeight: 1.5,
@@ -142,17 +148,20 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
     );
   }
 
-  Widget _buildCategoryItem({
-    Key? key,
-    required int index,
-    required String title,
-    required String imagePath,
-    required BuildContext context,
-  }) {
+  Widget _buildCategoryItem(
+      {Key? key,
+      required int index,
+      required String title,
+      required String imagePath,
+      required BuildContext context,
+      required bool isBackgroundColor}) {
     return InkWell(
       onTap: () {
-        context.pushNamed(Routes.categoryScreen,
-            arguments: [widget.titles[widget.titles.indexOf(title)], context]);
+        context.pushNamedWithCubit(
+          Routes.categoryScreen,
+          context.read<CartCubit>(),
+          arguments: widget.titles[widget.titles.indexOf(title)],
+        );
       },
       child: Container(
         key: key, // Assign the key to the first item
@@ -170,6 +179,12 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
                           const BorderRadius.all(Radius.circular(12.5)),
                     )
                   : BoxDecoration(
+                      color: isBackgroundColor
+                          ? ColorsManager.mainRose.withAlpha(30)
+                          : null,
+                      shape: isBackgroundColor
+                          ? BoxShape.circle
+                          : BoxShape.rectangle,
                       image: DecorationImage(
                         image: AssetImage(imagePath),
                         fit: BoxFit.cover,

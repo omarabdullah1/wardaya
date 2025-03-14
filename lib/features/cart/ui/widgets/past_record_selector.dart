@@ -4,7 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart'; // Assuming you're using SVGs for the icons
 import 'package:localization/localization.dart';
 
-import 'package:wardaya/core/theming/colors.dart'; // Assuming you use the theme colors
+import 'package:wardaya/core/theming/colors.dart';
+
+import '../../../../core/assets/assets.dart'; // Assuming you use the theme colors
 
 class PastRecordSelector extends StatelessWidget {
   final int selectedIndex;
@@ -32,13 +34,13 @@ class PastRecordSelector extends StatelessWidget {
             context,
             0,
             context.el.recordVideoTab,
-            'assets/svgs/video.svg',
+            Assets.of(context).svgs.video_svg,
           ),
           _buildTabItem(
             context,
             1,
             context.el.pasteLinkTab,
-            'assets/svgs/link.svg',
+            Assets.of(context).svgs.link_svg,
           ),
         ],
       ),
@@ -55,7 +57,7 @@ class PastRecordSelector extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
           decoration: BoxDecoration(
-            color: isSelected ? Colors.white : Colors.transparent,
+            color: isSelected ? ColorsManager.white : ColorsManager.transparent,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Row(
