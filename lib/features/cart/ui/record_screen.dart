@@ -6,6 +6,8 @@ import 'package:camera/camera.dart';
 // import 'package:path/path.dart' as path;
 import 'dart:async';
 
+import '../../../core/theming/colors.dart';
+
 class RecordScreen extends StatefulWidget {
   const RecordScreen({super.key});
 
@@ -182,7 +184,7 @@ class _RecordScreenState extends State<RecordScreen>
                           children: [
                             IconButton(
                               icon: const Icon(Icons.flash_on,
-                                  color: Colors.white),
+                                  color: ColorsManager.white),
                               onPressed: () {
                                 //TODO: Add logic for flash control
                               },
@@ -207,10 +209,12 @@ class _RecordScreenState extends State<RecordScreen>
                                       child: CircularProgressIndicator(
                                         value: _progressValue,
                                         strokeWidth: 4.0,
-                                        backgroundColor: Colors.white,
+                                        backgroundColor: ColorsManager.white,
                                         valueColor:
-                                            const AlwaysStoppedAnimation<Color>(
-                                                Colors.pinkAccent),
+                                            AlwaysStoppedAnimation<Color>(
+                                          ColorsManager.red
+                                              .withAlpha((0.8 * 255).toInt()),
+                                        ),
                                       ),
                                     ),
                                     Container(
@@ -218,7 +222,7 @@ class _RecordScreenState extends State<RecordScreen>
                                       height: 70.0,
                                       decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: Colors.white,
+                                        color: ColorsManager.white,
                                       ),
                                     ),
                                   ],
@@ -226,7 +230,8 @@ class _RecordScreenState extends State<RecordScreen>
                               ),
                             ),
                             IconButton(
-                              icon: const Icon(Icons.sync, color: Colors.white),
+                              icon: const Icon(Icons.sync,
+                                  color: ColorsManager.white),
                               onPressed: () {
                                 //TODO: Add logic to switch camera
                               },
@@ -237,7 +242,8 @@ class _RecordScreenState extends State<RecordScreen>
                         Align(
                           alignment: Alignment.centerRight,
                           child: IconButton(
-                            icon: const Icon(Icons.send, color: Colors.white),
+                            icon: const Icon(Icons.send,
+                                color: ColorsManager.white),
                             onPressed: () {
                               Navigator.pop(context);
                             },
@@ -253,7 +259,7 @@ class _RecordScreenState extends State<RecordScreen>
                   top: 16.0,
                   left: 16.0,
                   child: IconButton(
-                    icon: const Icon(Icons.close, color: Colors.white),
+                    icon: const Icon(Icons.close, color: ColorsManager.white),
                     onPressed: () {
                       Navigator.pop(context);
                     },

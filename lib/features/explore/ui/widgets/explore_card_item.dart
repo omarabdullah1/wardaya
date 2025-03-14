@@ -30,7 +30,7 @@ class ExploreCardItem extends StatelessWidget {
             children: [
               CachedNetworkImage(
                 colorBlendMode: BlendMode.srcATop,
-                color: Colors.black26,
+                color: ColorsManager.black.withAlpha((0.26 * 255).toInt()),
                 imageUrl: imageUrl,
                 fit: BoxFit.cover,
                 width: 165.w,
@@ -62,7 +62,7 @@ class ExploreCardItem extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: ColorsManager.white,
                         ),
                       ),
                     ),
@@ -83,8 +83,8 @@ class ExploreCardItem extends StatelessWidget {
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
           colors: [
-            Colors.black,
-            Colors.black,
+            ColorsManager.black,
+            ColorsManager.black,
           ],
           stops: [0.0, 1.0],
         ).createShader(bounds);
@@ -94,7 +94,7 @@ class ExploreCardItem extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.grey.withAlpha(51),
+          color: ColorsManager.grey.withAlpha(51),
         ),
       ),
     );

@@ -261,7 +261,7 @@ class RegisterForm extends StatelessWidget {
         onTap: () {
           tooltipKey.currentState?.ensureTooltipVisible();
         },
-        child: const Icon(Icons.error, color: Colors.red),
+        child: const Icon(Icons.error, color: ColorsManager.red),
       ),
     );
   }

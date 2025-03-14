@@ -16,15 +16,12 @@ class DiscoverIdeasSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0.w),
-            child: Text(
-              context.el.discoverNewIdeasTitle,
-              style: GoogleFonts.ebGaramond(
-                fontSize: 32.sp,
-                fontWeight: FontWeight.w400,
-                color: ColorsManager.mainRose,
-              ),
+          Text(
+            context.el.discoverNewIdeasTitle,
+            style: GoogleFonts.ebGaramond(
+              fontSize: 32.sp,
+              fontWeight: FontWeight.w400,
+              color: ColorsManager.mainRose,
             ),
           ),
           const SizedBox(height: 20),
@@ -78,7 +75,7 @@ class CardItem extends StatelessWidget {
             Image.asset(
               imageUrl,
               colorBlendMode: BlendMode.srcATop,
-              color: Colors.black26,
+              color: ColorsManager.black.withAlpha((0.26 * 255).toInt()),
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
@@ -93,8 +90,8 @@ class CardItem extends StatelessWidget {
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
                       colors: [
-                        Colors.black,
-                        Colors.transparent,
+                        ColorsManager.black,
+                        ColorsManager.transparent,
                       ],
                       stops: [0.0, 1.0],
                     ),
@@ -109,7 +106,7 @@ class CardItem extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: ColorsManager.white,
                           ),
                         ),
                         const SizedBox(
@@ -118,12 +115,12 @@ class CardItem extends StatelessWidget {
                         ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.transparent,
+                                backgroundColor: ColorsManager.transparent,
                                 side: const BorderSide(color: Colors.white)),
                             child: Text(
                               buttonText,
                               style: const TextStyle(
-                                color: Colors.white,
+                                color: ColorsManager.white,
                               ),
                             )),
                       ],

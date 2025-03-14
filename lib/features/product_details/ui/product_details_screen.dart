@@ -59,8 +59,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               children: [
                 SvgPicture.asset(
                   Assets.of(context).svgs.add_cart_svg,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                  colorFilter: const ColorFilter.mode(
+                      ColorsManager.white, BlendMode.srcIn),
                   height: 24.h,
                 ),
                 SizedBox(width: 15.w),
@@ -69,7 +69,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   style: GoogleFonts.inter(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: ColorsManager.white,
                   ),
                 ),
               ],
@@ -345,7 +345,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.grey.shade300),
+                  border: Border.all(color: ColorsManager.lightGrey),
                 ),
                 child: Padding(
                   padding: EdgeInsets.all(16.0.w),
@@ -430,7 +430,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: ColorsManager.transparent,
       elevation: 0,
       leadingWidth: 45.w, // Set the leadingWidth
       leading: _buildIconButton(icon: Icons.arrow_back_ios_new, () {
@@ -497,7 +497,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   : Icon(
                       icon,
                       size: 20,
-                      color: Colors.black,
+                      color: ColorsManager.black,
                     ),
             ),
           ),

@@ -21,4 +21,7 @@ class Routes {
   static const String addMessageScreen = '/addMessageScreen';
   static const String recordScreen = '/recordScreen';
   static const String editProfileScreen = '/editProfileScreen';
+  static const String susbcriptionsScreen = '/susbcriptionsScreen';
+  static const String susbcriptionsDurationScreen =
+      '/susbcriptionsDurationScreen';
 }

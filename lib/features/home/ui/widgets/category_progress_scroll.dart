@@ -11,10 +11,12 @@ import '../../../cart/logic/cubit/cart_cubit.dart';
 class CategoryProgressScroll extends StatefulWidget {
   final List<String> categoriesImages;
   final List<String> titles;
+  final bool isBackgroundColor;
   const CategoryProgressScroll({
     super.key,
     required this.categoriesImages,
     required this.titles,
+    required this.isBackgroundColor,
   });
 
   @override
@@ -105,6 +107,7 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
                         title: widget.titles[index],
                         imagePath: widget.categoriesImages[index],
                         context: context,
+                        isBackgroundColor: widget.isBackgroundColor,
                       ),
                     ),
                   ),
@@ -121,6 +124,7 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
                         title: widget.titles[index + halfLength],
                         imagePath: widget.categoriesImages[index + halfLength],
                         context: context,
+                        isBackgroundColor: widget.isBackgroundColor,
                       ),
                     ),
                   ),
@@ -134,7 +138,7 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
           padding: EdgeInsets.symmetric(horizontal: context.pOW(5).w),
           child: LinearProgressIndicator(
             value: _scrollProgress,
-            backgroundColor: Colors.grey[200],
+            backgroundColor: ColorsManager.lightGrey,
             valueColor:
                 const AlwaysStoppedAnimation<Color>(ColorsManager.mainRose),
             minHeight: 1.5,
@@ -144,13 +148,13 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
     );
   }
 
-  Widget _buildCategoryItem({
-    Key? key,
-    required int index,
-    required String title,
-    required String imagePath,
-    required BuildContext context,
-  }) {
+  Widget _buildCategoryItem(
+      {Key? key,
+      required int index,
+      required String title,
+      required String imagePath,
+      required BuildContext context,
+      required bool isBackgroundColor}) {
     return InkWell(
       onTap: () {
         context.pushNamedWithCubit(
@@ -175,6 +179,12 @@ class _CategoryProgressScrollState extends State<CategoryProgressScroll> {
                           const BorderRadius.all(Radius.circular(12.5)),
                     )
                   : BoxDecoration(
+                      color: isBackgroundColor
+                          ? ColorsManager.mainRose.withAlpha(30)
+                          : null,
+                      shape: isBackgroundColor
+                          ? BoxShape.circle
+                          : BoxShape.rectangle,
                       image: DecorationImage(
                         image: AssetImage(imagePath),
                         fit: BoxFit.cover,
