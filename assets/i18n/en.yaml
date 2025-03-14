@@ -22,6 +22,7 @@ reset_password_button: "Reset Password"
 
 # CreateAccountScreen texts
 create_account_title: "Create Account"
+create_account_button: "Create Account"
 name_label: "Name"
 phone_label: "Phone"
 select_country_label: "Select Country"
@@ -203,3 +204,15 @@ arabic: "Arabic"
 english: "English"
 logout: "Logout"
 delete_account: "Delete My Account"
+
+# Edit Profile texts
+edit_profile_title: "Edit Profile"
+save_changes_button: "Save"
+first_name_label: "First Name"
+last_name_label: "Last Name"
+full_name_label: "Full Name"
+phone_number_label: "Phone Number"
+email_address_label: "Email Address"
+change_password_button: "Change"
+change_password_title: "Password"
+birthday_label: "Birthday"

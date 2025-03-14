@@ -53,6 +53,8 @@ class BottomNavBarWidget extends StatelessWidget {
                         ? Badge.count(
                             count: context.read<CartCubit>().cartItems,
                             backgroundColor: ColorsManager.mainRose,
+
+                            ///TODO: Fix the offset with localization in arabic
                             offset: const Offset(10, -10.0),
                             child: _buildNavItem(
                               Assets.of(context).svgs.cart_svg,

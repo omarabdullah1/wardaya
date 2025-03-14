@@ -23,6 +23,8 @@ mixin _$RegisterState<T> {
     required TResult Function(T data) success,
     required TResult Function(String error) error,
     required TResult Function(String countryCode) setCountryCode,
+    required TResult Function(String birthdate) setBirthDate,
+    required TResult Function(bool isPasswordVisable) togglePasswordVisibility,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +34,8 @@ mixin _$RegisterState<T> {
     TResult? Function(T data)? success,
     TResult? Function(String error)? error,
     TResult? Function(String countryCode)? setCountryCode,
+    TResult? Function(String birthdate)? setBirthDate,
+    TResult? Function(bool isPasswordVisable)? togglePasswordVisibility,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +45,8 @@ mixin _$RegisterState<T> {
     TResult Function(T data)? success,
     TResult Function(String error)? error,
     TResult Function(String countryCode)? setCountryCode,
+    TResult Function(String birthdate)? setBirthDate,
+    TResult Function(bool isPasswordVisable)? togglePasswordVisibility,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +57,9 @@ mixin _$RegisterState<T> {
     required TResult Function(RegisterSuccess<T> value) success,
     required TResult Function(Error<T> value) error,
     required TResult Function(CountryCode<T> value) setCountryCode,
+    required TResult Function(BirthDate<T> value) setBirthDate,
+    required TResult Function(TogglePasswordVisibility<T> value)
+        togglePasswordVisibility,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +69,9 @@ mixin _$RegisterState<T> {
     TResult? Function(RegisterSuccess<T> value)? success,
     TResult? Function(Error<T> value)? error,
     TResult? Function(CountryCode<T> value)? setCountryCode,
+    TResult? Function(BirthDate<T> value)? setBirthDate,
+    TResult? Function(TogglePasswordVisibility<T> value)?
+        togglePasswordVisibility,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +81,9 @@ mixin _$RegisterState<T> {
     TResult Function(RegisterSuccess<T> value)? success,
     TResult Function(Error<T> value)? error,
     TResult Function(CountryCode<T> value)? setCountryCode,
+    TResult Function(BirthDate<T> value)? setBirthDate,
+    TResult Function(TogglePasswordVisibility<T> value)?
+        togglePasswordVisibility,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -141,6 +156,8 @@ class _$InitialImpl<T> implements _Initial<T> {
     required TResult Function(T data) success,
     required TResult Function(String error) error,
     required TResult Function(String countryCode) setCountryCode,
+    required TResult Function(String birthdate) setBirthDate,
+    required TResult Function(bool isPasswordVisable) togglePasswordVisibility,
   }) {
     return initial();
   }
@@ -153,6 +170,8 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult? Function(T data)? success,
     TResult? Function(String error)? error,
     TResult? Function(String countryCode)? setCountryCode,
+    TResult? Function(String birthdate)? setBirthDate,
+    TResult? Function(bool isPasswordVisable)? togglePasswordVisibility,
   }) {
     return initial?.call();
   }
@@ -165,6 +184,8 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult Function(T data)? success,
     TResult Function(String error)? error,
     TResult Function(String countryCode)? setCountryCode,
+    TResult Function(String birthdate)? setBirthDate,
+    TResult Function(bool isPasswordVisable)? togglePasswordVisibility,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -181,6 +202,9 @@ class _$InitialImpl<T> implements _Initial<T> {
     required TResult Function(RegisterSuccess<T> value) success,
     required TResult Function(Error<T> value) error,
     required TResult Function(CountryCode<T> value) setCountryCode,
+    required TResult Function(BirthDate<T> value) setBirthDate,
+    required TResult Function(TogglePasswordVisibility<T> value)
+        togglePasswordVisibility,
   }) {
     return initial(this);
   }
@@ -193,6 +217,9 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult? Function(RegisterSuccess<T> value)? success,
     TResult? Function(Error<T> value)? error,
     TResult? Function(CountryCode<T> value)? setCountryCode,
+    TResult? Function(BirthDate<T> value)? setBirthDate,
+    TResult? Function(TogglePasswordVisibility<T> value)?
+        togglePasswordVisibility,
   }) {
     return initial?.call(this);
   }
@@ -205,6 +232,9 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult Function(RegisterSuccess<T> value)? success,
     TResult Function(Error<T> value)? error,
     TResult Function(CountryCode<T> value)? setCountryCode,
+    TResult Function(BirthDate<T> value)? setBirthDate,
+    TResult Function(TogglePasswordVisibility<T> value)?
+        togglePasswordVisibility,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -264,6 +294,8 @@ class _$LoadingImpl<T> implements Loading<T> {
     required TResult Function(T data) success,
     required TResult Function(String error) error,
     required TResult Function(String countryCode) setCountryCode,
+    required TResult Function(String birthdate) setBirthDate,
+    required TResult Function(bool isPasswordVisable) togglePasswordVisibility,
   }) {
     return loading();
   }
@@ -276,6 +308,8 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult? Function(T data)? success,
     TResult? Function(String error)? error,
     TResult? Function(String countryCode)? setCountryCode,
+    TResult? Function(String birthdate)? setBirthDate,
+    TResult? Function(bool isPasswordVisable)? togglePasswordVisibility,
   }) {
     return loading?.call();
   }
@@ -288,6 +322,8 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult Function(T data)? success,
     TResult Function(String error)? error,
     TResult Function(String countryCode)? setCountryCode,
+    TResult Function(String birthdate)? setBirthDate,
+    TResult Function(bool isPasswordVisable)? togglePasswordVisibility,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -304,6 +340,9 @@ class _$LoadingImpl<T> implements Loading<T> {
     required TResult Function(RegisterSuccess<T> value) success,
     required TResult Function(Error<T> value) error,
     required TResult Function(CountryCode<T> value) setCountryCode,
+    required TResult Function(BirthDate<T> value) setBirthDate,
+    required TResult Function(TogglePasswordVisibility<T> value)
+        togglePasswordVisibility,
   }) {
     return loading(this);
   }
@@ -316,6 +355,9 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult? Function(RegisterSuccess<T> value)? success,
     TResult? Function(Error<T> value)? error,
     TResult? Function(CountryCode<T> value)? setCountryCode,
+    TResult? Function(BirthDate<T> value)? setBirthDate,
+    TResult? Function(TogglePasswordVisibility<T> value)?
+        togglePasswordVisibility,
   }) {
     return loading?.call(this);
   }
@@ -328,6 +370,9 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult Function(RegisterSuccess<T> value)? success,
     TResult Function(Error<T> value)? error,
     TResult Function(CountryCode<T> value)? setCountryCode,
+    TResult Function(BirthDate<T> value)? setBirthDate,
+    TResult Function(TogglePasswordVisibility<T> value)?
+        togglePasswordVisibility,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -416,6 +461,8 @@ class _$RegisterSuccessImpl<T> implements RegisterSuccess<T> {
     required TResult Function(T data) success,
     required TResult Function(String error) error,
     required TResult Function(String countryCode) setCountryCode,
+    required TResult Function(String birthdate) setBirthDate,
+    required TResult Function(bool isPasswordVisable) togglePasswordVisibility,
   }) {
     return success(data);
   }
@@ -428,6 +475,8 @@ class _$RegisterSuccessImpl<T> implements RegisterSuccess<T> {
     TResult? Function(T data)? success,
     TResult? Function(String error)? error,
     TResult? Function(String countryCode)? setCountryCode,
+    TResult? Function(String birthdate)? setBirthDate,
+    TResult? Function(bool isPasswordVisable)? togglePasswordVisibility,
   }) {
     return success?.call(data);
   }
@@ -440,6 +489,8 @@ class _$RegisterSuccessImpl<T> implements RegisterSuccess<T> {
     TResult Function(T data)? success,
     TResult Function(String error)? error,
     TResult Function(String countryCode)? setCountryCode,
+    TResult Function(String birthdate)? setBirthDate,
+    TResult Function(bool isPasswordVisable)? togglePasswordVisibility,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -456,6 +507,9 @@ class _$RegisterSuccessImpl<T> implements RegisterSuccess<T> {
     required TResult Function(RegisterSuccess<T> value) success,
     required TResult Function(Error<T> value) error,
     required TResult Function(CountryCode<T> value) setCountryCode,
+    required TResult Function(BirthDate<T> value) setBirthDate,
+    required TResult Function(TogglePasswordVisibility<T> value)
+        togglePasswordVisibility,
   }) {
     return success(this);
   }
@@ -468,6 +522,9 @@ class _$RegisterSuccessImpl<T> implements RegisterSuccess<T> {
     TResult? Function(RegisterSuccess<T> value)? success,
     TResult? Function(Error<T> value)? error,
     TResult? Function(CountryCode<T> value)? setCountryCode,
+    TResult? Function(BirthDate<T> value)? setBirthDate,
+    TResult? Function(TogglePasswordVisibility<T> value)?
+        togglePasswordVisibility,
   }) {
     return success?.call(this);
   }
@@ -480,6 +537,9 @@ class _$RegisterSuccessImpl<T> implements RegisterSuccess<T> {
     TResult Function(RegisterSuccess<T> value)? success,
     TResult Function(Error<T> value)? error,
     TResult Function(CountryCode<T> value)? setCountryCode,
+    TResult Function(BirthDate<T> value)? setBirthDate,
+    TResult Function(TogglePasswordVisibility<T> value)?
+        togglePasswordVisibility,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -574,6 +634,8 @@ class _$ErrorImpl<T> implements Error<T> {
     required TResult Function(T data) success,
     required TResult Function(String error) error,
     required TResult Function(String countryCode) setCountryCode,
+    required TResult Function(String birthdate) setBirthDate,
+    required TResult Function(bool isPasswordVisable) togglePasswordVisibility,
   }) {
     return error(this.error);
   }
@@ -586,6 +648,8 @@ class _$ErrorImpl<T> implements Error<T> {
     TResult? Function(T data)? success,
     TResult? Function(String error)? error,
     TResult? Function(String countryCode)? setCountryCode,
+    TResult? Function(String birthdate)? setBirthDate,
+    TResult? Function(bool isPasswordVisable)? togglePasswordVisibility,
   }) {
     return error?.call(this.error);
   }
@@ -598,6 +662,8 @@ class _$ErrorImpl<T> implements Error<T> {
     TResult Function(T data)? success,
     TResult Function(String error)? error,
     TResult Function(String countryCode)? setCountryCode,
+    TResult Function(String birthdate)? setBirthDate,
+    TResult Function(bool isPasswordVisable)? togglePasswordVisibility,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -614,6 +680,9 @@ class _$ErrorImpl<T> implements Error<T> {
     required TResult Function(RegisterSuccess<T> value) success,
     required TResult Function(Error<T> value) error,
     required TResult Function(CountryCode<T> value) setCountryCode,
+    required TResult Function(BirthDate<T> value) setBirthDate,
+    required TResult Function(TogglePasswordVisibility<T> value)
+        togglePasswordVisibility,
   }) {
     return error(this);
   }
@@ -626,6 +695,9 @@ class _$ErrorImpl<T> implements Error<T> {
     TResult? Function(RegisterSuccess<T> value)? success,
     TResult? Function(Error<T> value)? error,
     TResult? Function(CountryCode<T> value)? setCountryCode,
+    TResult? Function(BirthDate<T> value)? setBirthDate,
+    TResult? Function(TogglePasswordVisibility<T> value)?
+        togglePasswordVisibility,
   }) {
     return error?.call(this);
   }
@@ -638,6 +710,9 @@ class _$ErrorImpl<T> implements Error<T> {
     TResult Function(RegisterSuccess<T> value)? success,
     TResult Function(Error<T> value)? error,
     TResult Function(CountryCode<T> value)? setCountryCode,
+    TResult Function(BirthDate<T> value)? setBirthDate,
+    TResult Function(TogglePasswordVisibility<T> value)?
+        togglePasswordVisibility,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -734,6 +809,8 @@ class _$CountryCodeImpl<T> implements CountryCode<T> {
     required TResult Function(T data) success,
     required TResult Function(String error) error,
     required TResult Function(String countryCode) setCountryCode,
+    required TResult Function(String birthdate) setBirthDate,
+    required TResult Function(bool isPasswordVisable) togglePasswordVisibility,
   }) {
     return setCountryCode(countryCode);
   }
@@ -746,6 +823,8 @@ class _$CountryCodeImpl<T> implements CountryCode<T> {
     TResult? Function(T data)? success,
     TResult? Function(String error)? error,
     TResult? Function(String countryCode)? setCountryCode,
+    TResult? Function(String birthdate)? setBirthDate,
+    TResult? Function(bool isPasswordVisable)? togglePasswordVisibility,
   }) {
     return setCountryCode?.call(countryCode);
   }
@@ -758,6 +837,8 @@ class _$CountryCodeImpl<T> implements CountryCode<T> {
     TResult Function(T data)? success,
     TResult Function(String error)? error,
     TResult Function(String countryCode)? setCountryCode,
+    TResult Function(String birthdate)? setBirthDate,
+    TResult Function(bool isPasswordVisable)? togglePasswordVisibility,
     required TResult orElse(),
   }) {
     if (setCountryCode != null) {
@@ -774,6 +855,9 @@ class _$CountryCodeImpl<T> implements CountryCode<T> {
     required TResult Function(RegisterSuccess<T> value) success,
     required TResult Function(Error<T> value) error,
     required TResult Function(CountryCode<T> value) setCountryCode,
+    required TResult Function(BirthDate<T> value) setBirthDate,
+    required TResult Function(TogglePasswordVisibility<T> value)
+        togglePasswordVisibility,
   }) {
     return setCountryCode(this);
   }
@@ -786,6 +870,9 @@ class _$CountryCodeImpl<T> implements CountryCode<T> {
     TResult? Function(RegisterSuccess<T> value)? success,
     TResult? Function(Error<T> value)? error,
     TResult? Function(CountryCode<T> value)? setCountryCode,
+    TResult? Function(BirthDate<T> value)? setBirthDate,
+    TResult? Function(TogglePasswordVisibility<T> value)?
+        togglePasswordVisibility,
   }) {
     return setCountryCode?.call(this);
   }
@@ -798,6 +885,9 @@ class _$CountryCodeImpl<T> implements CountryCode<T> {
     TResult Function(RegisterSuccess<T> value)? success,
     TResult Function(Error<T> value)? error,
     TResult Function(CountryCode<T> value)? setCountryCode,
+    TResult Function(BirthDate<T> value)? setBirthDate,
+    TResult Function(TogglePasswordVisibility<T> value)?
+        togglePasswordVisibility,
     required TResult orElse(),
   }) {
     if (setCountryCode != null) {
@@ -817,4 +907,357 @@ abstract class CountryCode<T> implements RegisterState<T> {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CountryCodeImplCopyWith<T, _$CountryCodeImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$BirthDateImplCopyWith<T, $Res> {
+  factory _$$BirthDateImplCopyWith(
+          _$BirthDateImpl<T> value, $Res Function(_$BirthDateImpl<T>) then) =
+      __$$BirthDateImplCopyWithImpl<T, $Res>;
+  @useResult
+  $Res call({String birthdate});
+}
+
+/// @nodoc
+class __$$BirthDateImplCopyWithImpl<T, $Res>
+    extends _$RegisterStateCopyWithImpl<T, $Res, _$BirthDateImpl<T>>
+    implements _$$BirthDateImplCopyWith<T, $Res> {
+  __$$BirthDateImplCopyWithImpl(
+      _$BirthDateImpl<T> _value, $Res Function(_$BirthDateImpl<T>) _then)
+      : super(_value, _then);
+
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? birthdate = null,
+  }) {
+    return _then(_$BirthDateImpl<T>(
+      null == birthdate
+          ? _value.birthdate
+          : birthdate // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$BirthDateImpl<T> implements BirthDate<T> {
+  const _$BirthDateImpl(this.birthdate);
+
+  @override
+  final String birthdate;
+
+  @override
+  String toString() {
+    return 'RegisterState<$T>.setBirthDate(birthdate: $birthdate)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BirthDateImpl<T> &&
+            (identical(other.birthdate, birthdate) ||
+                other.birthdate == birthdate));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, birthdate);
+
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BirthDateImplCopyWith<T, _$BirthDateImpl<T>> get copyWith =>
+      __$$BirthDateImplCopyWithImpl<T, _$BirthDateImpl<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(T data) success,
+    required TResult Function(String error) error,
+    required TResult Function(String countryCode) setCountryCode,
+    required TResult Function(String birthdate) setBirthDate,
+    required TResult Function(bool isPasswordVisable) togglePasswordVisibility,
+  }) {
+    return setBirthDate(birthdate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(T data)? success,
+    TResult? Function(String error)? error,
+    TResult? Function(String countryCode)? setCountryCode,
+    TResult? Function(String birthdate)? setBirthDate,
+    TResult? Function(bool isPasswordVisable)? togglePasswordVisibility,
+  }) {
+    return setBirthDate?.call(birthdate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(T data)? success,
+    TResult Function(String error)? error,
+    TResult Function(String countryCode)? setCountryCode,
+    TResult Function(String birthdate)? setBirthDate,
+    TResult Function(bool isPasswordVisable)? togglePasswordVisibility,
+    required TResult orElse(),
+  }) {
+    if (setBirthDate != null) {
+      return setBirthDate(birthdate);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial<T> value) initial,
+    required TResult Function(Loading<T> value) loading,
+    required TResult Function(RegisterSuccess<T> value) success,
+    required TResult Function(Error<T> value) error,
+    required TResult Function(CountryCode<T> value) setCountryCode,
+    required TResult Function(BirthDate<T> value) setBirthDate,
+    required TResult Function(TogglePasswordVisibility<T> value)
+        togglePasswordVisibility,
+  }) {
+    return setBirthDate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial<T> value)? initial,
+    TResult? Function(Loading<T> value)? loading,
+    TResult? Function(RegisterSuccess<T> value)? success,
+    TResult? Function(Error<T> value)? error,
+    TResult? Function(CountryCode<T> value)? setCountryCode,
+    TResult? Function(BirthDate<T> value)? setBirthDate,
+    TResult? Function(TogglePasswordVisibility<T> value)?
+        togglePasswordVisibility,
+  }) {
+    return setBirthDate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial<T> value)? initial,
+    TResult Function(Loading<T> value)? loading,
+    TResult Function(RegisterSuccess<T> value)? success,
+    TResult Function(Error<T> value)? error,
+    TResult Function(CountryCode<T> value)? setCountryCode,
+    TResult Function(BirthDate<T> value)? setBirthDate,
+    TResult Function(TogglePasswordVisibility<T> value)?
+        togglePasswordVisibility,
+    required TResult orElse(),
+  }) {
+    if (setBirthDate != null) {
+      return setBirthDate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class BirthDate<T> implements RegisterState<T> {
+  const factory BirthDate(final String birthdate) = _$BirthDateImpl<T>;
+
+  String get birthdate;
+
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BirthDateImplCopyWith<T, _$BirthDateImpl<T>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TogglePasswordVisibilityImplCopyWith<T, $Res> {
+  factory _$$TogglePasswordVisibilityImplCopyWith(
+          _$TogglePasswordVisibilityImpl<T> value,
+          $Res Function(_$TogglePasswordVisibilityImpl<T>) then) =
+      __$$TogglePasswordVisibilityImplCopyWithImpl<T, $Res>;
+  @useResult
+  $Res call({bool isPasswordVisable});
+}
+
+/// @nodoc
+class __$$TogglePasswordVisibilityImplCopyWithImpl<T, $Res>
+    extends _$RegisterStateCopyWithImpl<T, $Res,
+        _$TogglePasswordVisibilityImpl<T>>
+    implements _$$TogglePasswordVisibilityImplCopyWith<T, $Res> {
+  __$$TogglePasswordVisibilityImplCopyWithImpl(
+      _$TogglePasswordVisibilityImpl<T> _value,
+      $Res Function(_$TogglePasswordVisibilityImpl<T>) _then)
+      : super(_value, _then);
+
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isPasswordVisable = null,
+  }) {
+    return _then(_$TogglePasswordVisibilityImpl<T>(
+      null == isPasswordVisable
+          ? _value.isPasswordVisable
+          : isPasswordVisable // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TogglePasswordVisibilityImpl<T> implements TogglePasswordVisibility<T> {
+  const _$TogglePasswordVisibilityImpl(this.isPasswordVisable);
+
+  @override
+  final bool isPasswordVisable;
+
+  @override
+  String toString() {
+    return 'RegisterState<$T>.togglePasswordVisibility(isPasswordVisable: $isPasswordVisable)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TogglePasswordVisibilityImpl<T> &&
+            (identical(other.isPasswordVisable, isPasswordVisable) ||
+                other.isPasswordVisable == isPasswordVisable));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isPasswordVisable);
+
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TogglePasswordVisibilityImplCopyWith<T, _$TogglePasswordVisibilityImpl<T>>
+      get copyWith => __$$TogglePasswordVisibilityImplCopyWithImpl<T,
+          _$TogglePasswordVisibilityImpl<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(T data) success,
+    required TResult Function(String error) error,
+    required TResult Function(String countryCode) setCountryCode,
+    required TResult Function(String birthdate) setBirthDate,
+    required TResult Function(bool isPasswordVisable) togglePasswordVisibility,
+  }) {
+    return togglePasswordVisibility(isPasswordVisable);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(T data)? success,
+    TResult? Function(String error)? error,
+    TResult? Function(String countryCode)? setCountryCode,
+    TResult? Function(String birthdate)? setBirthDate,
+    TResult? Function(bool isPasswordVisable)? togglePasswordVisibility,
+  }) {
+    return togglePasswordVisibility?.call(isPasswordVisable);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(T data)? success,
+    TResult Function(String error)? error,
+    TResult Function(String countryCode)? setCountryCode,
+    TResult Function(String birthdate)? setBirthDate,
+    TResult Function(bool isPasswordVisable)? togglePasswordVisibility,
+    required TResult orElse(),
+  }) {
+    if (togglePasswordVisibility != null) {
+      return togglePasswordVisibility(isPasswordVisable);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial<T> value) initial,
+    required TResult Function(Loading<T> value) loading,
+    required TResult Function(RegisterSuccess<T> value) success,
+    required TResult Function(Error<T> value) error,
+    required TResult Function(CountryCode<T> value) setCountryCode,
+    required TResult Function(BirthDate<T> value) setBirthDate,
+    required TResult Function(TogglePasswordVisibility<T> value)
+        togglePasswordVisibility,
+  }) {
+    return togglePasswordVisibility(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial<T> value)? initial,
+    TResult? Function(Loading<T> value)? loading,
+    TResult? Function(RegisterSuccess<T> value)? success,
+    TResult? Function(Error<T> value)? error,
+    TResult? Function(CountryCode<T> value)? setCountryCode,
+    TResult? Function(BirthDate<T> value)? setBirthDate,
+    TResult? Function(TogglePasswordVisibility<T> value)?
+        togglePasswordVisibility,
+  }) {
+    return togglePasswordVisibility?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial<T> value)? initial,
+    TResult Function(Loading<T> value)? loading,
+    TResult Function(RegisterSuccess<T> value)? success,
+    TResult Function(Error<T> value)? error,
+    TResult Function(CountryCode<T> value)? setCountryCode,
+    TResult Function(BirthDate<T> value)? setBirthDate,
+    TResult Function(TogglePasswordVisibility<T> value)?
+        togglePasswordVisibility,
+    required TResult orElse(),
+  }) {
+    if (togglePasswordVisibility != null) {
+      return togglePasswordVisibility(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TogglePasswordVisibility<T> implements RegisterState<T> {
+  const factory TogglePasswordVisibility(final bool isPasswordVisable) =
+      _$TogglePasswordVisibilityImpl<T>;
+
+  bool get isPasswordVisable;
+
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TogglePasswordVisibilityImplCopyWith<T, _$TogglePasswordVisibilityImpl<T>>
+      get copyWith => throw _privateConstructorUsedError;
 }

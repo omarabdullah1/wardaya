@@ -20,4 +20,5 @@ class Routes {
   static const String customizeGiftCardScreen = '/customizeGiftCardScreen';
   static const String addMessageScreen = '/addMessageScreen';
   static const String recordScreen = '/recordScreen';
+  static const String editProfileScreen = '/editProfileScreen';
 }

@@ -22,6 +22,7 @@ reset_password_button: "إعادة تعيين كلمة المرور"
 
 # CreateAccountScreen texts
 create_account_title: "إنشاء حساب"
+create_account_button: "إنشاء حساب"
 name_label: "الاسم"
 phone_label: "الهاتف"
 select_country_label: "اختر الدولة"
@@ -145,9 +146,9 @@ typed_style: "مكتوب"
 characters_limit: "أحرف متبقية"
 
 # New entries for CustomTextFieldWithDropdown
-typing_style_label: "النمط:"  # Dropdown label
-handwriting_option: "خط اليد"  # Specific dropdown option
-typed_option: "مكتوب"  # Specific dropdown option
+typing_style_label: "النمط:" # Dropdown label
+handwriting_option: "خط اليد" # Specific dropdown option
+typed_option: "مكتوب" # Specific dropdown option
 
 # Paste Link Screen texts
 add_media_title: "إضافة فيديو أو صورة"
@@ -201,3 +202,15 @@ arabic: "العربية"
 english: "الإنجليزية"
 logout: "تسجيل خروج"
 delete_account: "تسجيل خروج من الحساب"
+
+# Edit Profile texts
+edit_profile_title: "تعديل الملف الشخصي"
+save_changes_button: "حفظ"
+first_name_label: "الاسم الأول"
+last_name_label: "اسم العائلة"
+full_name_label: "الاسم الكامل"
+phone_number_label: "رقم الهاتف"
+email_address_label: "البريد الإلكتروني"
+change_password_button: "تغيير"
+change_password_title: "كلمة المرور"
+birthday_label: "تاريخ الميلاد"

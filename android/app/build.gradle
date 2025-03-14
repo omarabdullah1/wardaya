@@ -44,7 +44,7 @@ android {
     create("Development") {
         dimension = "default"
         resValue("string", "app_name", "Waradaya Dev")
-        // applicationIdSuffix = ".dev"
+        applicationIdSuffix = ".dev"
     }
     }
   signingConfigs {

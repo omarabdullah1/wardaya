@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
+import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:wardaya/core/theming/colors.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
@@ -51,7 +52,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 18.h),
+              verticalSpace(18),
               // Localized label for email TextField
               TextField(
                 decoration: InputDecoration(
@@ -75,7 +76,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 18.h),
+              verticalSpace(18),
               // Localized reset password button text
               ElevatedButton(
                 onPressed: () {

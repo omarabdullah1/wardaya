@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wardaya/core/helpers/extensions.dart';
 
 part 'api_error_model.g.dart';
 
@@ -18,20 +17,14 @@ class ApiErrorModel {
 
   Map<String, dynamic> toJson() => _$ApiErrorModelToJson(this);
 
-  /// Returns a String containing all the error messages
+  /// Returns a String containing all error messages
   String getAllErrorMessages() {
-    if (error.isNullOrEmpty()) {
-      return message ?? "Unknown Error occurred";
+    if (error != null && error!.isNotEmpty) {
+      return error!; // This will return "Password must contain at least one uppercase letter"
     }
-
-    if (!error.isNullOrEmpty()) {
-      final errorMessage = error;
-
-      return errorMessage ?? "Unknown Error occurred";
-    } else if (error.isNullOrEmpty() && message.isNullOrEmpty()) {
-      return error ?? "Unknown Error occurred";
+    if (message != null && message!.isNotEmpty) {
+      return message!;
     }
-
-    return message ?? "Unknown Error occurred";
+    return "Unknown error occurred";
   }
 }

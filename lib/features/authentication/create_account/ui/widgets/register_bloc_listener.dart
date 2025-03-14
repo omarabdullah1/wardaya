@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 import '../../../../../core/helpers/extensions.dart';
-import '../../../../../core/theming/styles.dart';
+import '../../../../../core/theming/colors.dart';
 import '../../../../../core/widgets/loading_widget.dart';
+import '../../../../../core/widgets/styled_toast.dart';
 import '../../logic/cubit/register_cubit.dart';
 import '../../logic/cubit/register_state.dart';
 
@@ -40,30 +42,19 @@ class RegisterBlocListener extends StatelessWidget {
 
   void setupErrorState(BuildContext context, String error) {
     context.pop();
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        icon: const Icon(
-          Icons.error,
-          color: Colors.red,
-          size: 32,
-        ),
-        content: Text(
-          error,
-          style: TextStyles.font22MainRoseSemiBold,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              context.pop();
-            },
-            child: Text(
-              'Got it',
-              style: TextStyles.font22MainRoseSemiBold,
-            ),
-          ),
-        ],
+    showToastWidget(
+      StyledToastWidget(
+        message: error,
+        icon: Icons.error_outline,
+        color: ColorsManager.red.withGreen(20).withBlue(20).withRed(230),
       ),
+      context: context,
+      axis: Axis.horizontal,
+      alignment: Alignment.center,
+      position: StyledToastPosition.top,
+      reverseAnimation: StyledToastAnimation.slideFromTopFade,
+      animation: StyledToastAnimation.slideFromTopFade,
+      duration: const Duration(milliseconds: 2500),
     );
   }
 }
