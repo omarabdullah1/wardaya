@@ -1,31 +1,64 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:localization/localization.dart';
+import 'package:wardaya/core/helpers/extensions.dart';
+import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:wardaya/core/theming/styles.dart';
 
+import '../../../core/assets/assets.dart';
+import '../../../core/routing/routes.dart';
 import '../../../core/theming/colors.dart';
+import '../logic/cubit/subscription_cubit.dart';
+import 'widgets/build_radio_list.dart';
 
-class SubscriptionDurationScreen extends StatefulWidget {
+class SubscriptionDurationScreen extends StatelessWidget {
   const SubscriptionDurationScreen({super.key});
 
   @override
-  State<SubscriptionDurationScreen> createState() =>
-      _SubscriptionDurationScreenState();
-}
-
-class _SubscriptionDurationScreenState
-    extends State<SubscriptionDurationScreen> {
-  String? deliveryFrequency = "Once a week";
-  String? subscriptionDuration = "12 Months";
-  String? startDate = "Sat, 01/2/25";
-
-  @override
   Widget build(BuildContext context) {
+    String today = DateFormat('EEE, d/M/yyyy').format(DateTime.now());
+    String tommorow = DateFormat('EEE, d/M/yyyy')
+        .format(DateTime.now().add(const Duration(days: 1)));
+    final cubit = context.watch<SubscriptionCubit>();
     return Scaffold(
       backgroundColor: ColorsManager.offWhite,
+      bottomNavigationBar: Material(
+        elevation: 25,
+        child: Container(
+          color: ColorsManager.white,
+          height: 75.h,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ElevatedButton(
+              onPressed: () {
+                log(cubit.deliveryFrequency.toString());
+                log(cubit.subscriptionDuration.toString());
+                log(cubit.selectedDate.toString());
+
+                context.pushNamed(Routes.subscripionCheckout);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: ColorsManager.mainRose,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(28.sp),
+                ),
+                padding: const EdgeInsets.all(16),
+              ),
+              child: Text(context.el.proceedToPayment,
+                  style: const TextStyle(color: Colors.white)),
+            ),
+          ),
+        ),
+      ),
       appBar: AppBar(
         title: Text(
-          "Classic Flowers Subscription",
+          context.el.subscriptionDurationTitle,
           style: GoogleFonts.ebGaramond(
             color: ColorsManager.mainRose,
             fontWeight: FontWeight.w400,
@@ -49,44 +82,52 @@ class _SubscriptionDurationScreenState
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            buildSectionTitle("Delivery Frequency"),
-            buildRadioList(
-              ["Once a week", "Every two weeks", "Once a month"],
-              deliveryFrequency,
-              (value) => setState(() => deliveryFrequency = value),
+            buildSectionTitle(context.el.deliveryFrequency),
+            BuildDeliveryRadioList(
+              options: [
+                context.el.onceAWeek,
+                context.el.everyTwoWeeks,
+                context.el.onceAMonth
+              ],
             ),
-            buildSectionTitle("Subscription Duration"),
-            buildRadioList(
-              ["1 Month", "3 Months", "6 Months", "12 Months"],
-              subscriptionDuration,
-              (value) => setState(() => subscriptionDuration = value),
+            buildSectionTitle(context.el.subscriptionDuration),
+            BuildSubscriptionRadioList(
+              options: const ["1 Month", "3 Months", "6 Months", "12 Months"],
+              optionsOffValue: const ["", "10", "35", "15"],
+              prices: const ["SAR 159", "SAR 145", "SAR 137", "SAR 129"],
+              deliveries: [
+                "",
+                "12 ${context.el.deliveries} - ${context.el.total} SAR 1,548",
+                "24 ${context.el.deliveries} - ${context.el.total} SAR 3,069",
+                "48 ${context.el.deliveries} - ${context.el.total} SAR 6,192"
+              ],
             ),
-            buildSectionTitle("Starting Date"),
-            buildRadioList(
-              ["Sat, 01/2/25", "Sun, 02/2/25", "Select Other Date"],
-              startDate,
-              (value) => setState(() => startDate = value),
+            buildSectionTitle(context.el.startingDate),
+            BuildStartingDateRadioList(
+              options: [today, tommorow, context.el.selectOtherDate],
+              selectedDate: context.el.selectOtherDate,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                "We’ll select the best delivery time based on your area and delivery date",
-                style: TextStyle(color: Colors.grey),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.brown,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: SizedBox(
+                width: double.infinity,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      Assets.of(context).svgs.info_svg,
+                    ),
+                    const HorizontalSpace(width: 10),
+                    Expanded(
+                      child: Text(
+                        context.el.weSelectDeleveryBasedArea,
+                        style: TextStylesInter.font12BlackBold,
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                  ],
                 ),
-                padding: const EdgeInsets.all(16),
               ),
-              child: const Text("Proceed To Payment",
-                  style: TextStyle(color: Colors.white)),
             ),
           ],
         ),
@@ -101,42 +142,6 @@ class _SubscriptionDurationScreenState
         title,
         style: TextStylesEBGaramond.font25MainRoseRegular,
       ),
-    );
-  }
-
-  Widget buildRadioList(List<String> options, String? selectedValue,
-      Function(String?) onChanged) {
-    return Column(
-      children: options.map((option) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: ColorsManager.white,
-              border: Border.all(
-                  color: option == selectedValue
-                      ? ColorsManager.mainRose
-                      : Colors.transparent),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: RadioListTile<String>(
-              title: Text(option,
-                  style: GoogleFonts.inter(
-                    color: ColorsManager.mainRose,
-                    fontSize: 16.0.sp,
-                    fontWeight: option == selectedValue
-                        ? FontWeight.bold
-                        : FontWeight.normal,
-                  )),
-              value: option,
-              groupValue: selectedValue,
-              onChanged: onChanged,
-              activeColor: ColorsManager.mainRose,
-              overlayColor: WidgetStateProperty.all(ColorsManager.mainRose),
-            ),
-          ),
-        );
-      }).toList(),
     );
   }
 }

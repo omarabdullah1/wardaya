@@ -28,10 +28,26 @@ class TextStylesInter {
     fontWeight: FontWeightHelper.bold,
     color: ColorsManager.mainRose,
   );
+  static TextStyle font16MainRoseNormal = GoogleFonts.inter(
+    color: ColorsManager.mainRose,
+    fontSize: 16.0.sp,
+    fontWeight: FontWeight.normal,
+  );
+  static TextStyle font16MainRoseBold = GoogleFonts.inter(
+    color: ColorsManager.mainRose,
+    fontSize: 16.0.sp,
+    fontWeight: FontWeight.bold,
+  );
   static TextStyle font15WhiteRegular = GoogleFonts.inter(
     fontSize: 15.0.sp,
     fontWeight: FontWeightHelper.regular,
     color: ColorsManager.white,
+  );
+  static TextStyle font10GreyRegularLineThrough = GoogleFonts.inter(
+    fontSize: 10.0.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: ColorsManager.grey,
+    decoration: TextDecoration.lineThrough,
   );
   static TextStyle font15GreyRegular = GoogleFonts.inter(
     fontSize: 15.0.sp,
@@ -67,6 +83,11 @@ class TextStylesInter {
     fontWeight: FontWeightHelper.bold,
     fontSize: 12.0.sp,
     color: ColorsManager.white,
+  );
+  static TextStyle font11MainRoseRegular = GoogleFonts.inter(
+    fontWeight: FontWeightHelper.regular,
+    fontSize: 11.0.sp,
+    color: ColorsManager.mainRose,
   );
   static TextStyle font10WhiteBold = GoogleFonts.inter(
     fontWeight: FontWeightHelper.bold,

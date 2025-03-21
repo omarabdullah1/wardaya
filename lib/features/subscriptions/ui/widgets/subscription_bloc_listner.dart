@@ -12,7 +12,7 @@ class SubscriptionBlocListner extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SubscriptionCubit, SubscriptionState>(
       builder: (context, state) {
-        return state.when(
+        final widget = state.whenOrNull(
           initial: () => const SizedBox.shrink(),
           loading: () => const Center(child: CircularProgressIndicator()),
           success: (data) {
@@ -37,6 +37,7 @@ class SubscriptionBlocListner extends StatelessWidget {
             );
           },
         );
+        return widget ?? const SizedBox.shrink();
       },
     );
   }

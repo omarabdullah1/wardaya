@@ -52,7 +52,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              verticalSpace(18),
+              const VerticalSpace(height: 18),
               // Localized label for email TextField
               TextField(
                 decoration: InputDecoration(
@@ -76,7 +76,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              verticalSpace(18),
+              const VerticalSpace(height: 18),
               // Localized reset password button text
               ElevatedButton(
                 onPressed: () {
