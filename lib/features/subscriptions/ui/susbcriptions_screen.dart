@@ -39,9 +39,9 @@ class SusbcriptionsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SubscriptionBanner(),
-            verticalSpace(20),
+            const VerticalSpace(height: 20),
             const SubscriptionHowItWorksSection(),
-            verticalSpace(20),
+            const VerticalSpace(height: 20),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.w),
               child: Text(
@@ -49,7 +49,7 @@ class SusbcriptionsScreen extends StatelessWidget {
                 style: TextStylesEBGaramond.font32MainRoseRegular,
               ),
             ),
-            verticalSpace(20),
+            const VerticalSpace(height: 20),
             SubscriptionPlanCard(
               title: context.el.addMediaTitle,
               description: context.el.subscriptionDescription,
@@ -61,7 +61,7 @@ class SusbcriptionsScreen extends StatelessWidget {
                 'assets/images/sub3.png',
               ],
             ),
-            verticalSpace(20),
+            const VerticalSpace(height: 20),
             SubscriptionPlanCard(
               title: context.el.addMediaTitle,
               description: context.el.subscriptionDescription,
@@ -73,7 +73,7 @@ class SusbcriptionsScreen extends StatelessWidget {
                 'assets/images/sub3.png',
               ],
             ),
-            verticalSpace(20),
+            const VerticalSpace(height: 20),
             SubscriptionPlanCard(
               title: context.el.addMediaTitle,
               description: context.el.subscriptionDescription,
@@ -85,7 +85,7 @@ class SusbcriptionsScreen extends StatelessWidget {
                 'assets/images/sub1.png',
               ],
             ),
-            verticalSpace(20),
+            const VerticalSpace(height: 20),
           ],
         ),
       ),

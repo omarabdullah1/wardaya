@@ -42,7 +42,7 @@ class LoginForm extends StatelessWidget {
               labelStyle: TextStylesInter.font15GreyRegular,
             ),
           ),
-          verticalSpace(13),
+          const VerticalSpace(height: 13),
           // Password TextField using localized label
           TextField(
             controller: cubit.passwordController,
@@ -65,7 +65,7 @@ class LoginForm extends StatelessWidget {
             ),
             obscureText: true, // Hide password
           ),
-          verticalSpace(18),
+          const VerticalSpace(height: 18),
           // "Sign in with" text from localization
           AppTextButton(
             buttonText: context.el.signInButton,
@@ -74,7 +74,7 @@ class LoginForm extends StatelessWidget {
             buttonHeight: 45.h,
             onPressed: () => validateThenDoLogin(context),
           ),
-          verticalSpace(13),
+          const VerticalSpace(height: 13),
           // Row for "Forget Password?" and "Create Account"
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -99,7 +99,7 @@ class LoginForm extends StatelessWidget {
               ),
             ],
           ),
-          verticalSpace(18),
+          const VerticalSpace(height: 18),
           // Row for divider with localized "OR"
           Row(
             children: [
@@ -114,7 +114,7 @@ class LoginForm extends StatelessWidget {
               const Expanded(child: Divider()),
             ],
           ),
-          verticalSpace(8),
+          const VerticalSpace(height: 8),
         ],
       ),
     );

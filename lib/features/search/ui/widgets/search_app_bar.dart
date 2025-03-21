@@ -74,7 +74,7 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ),
                 ),
-                horizontalSpace(16),
+                const HorizontalSpace(width: 16),
               ],
             ),
           ),

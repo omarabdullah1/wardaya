@@ -26,7 +26,7 @@ class SignInScreen extends StatelessWidget {
                 style: TextStylesInter.font17MainRoseBold,
                 textAlign: TextAlign.center,
               ),
-              verticalSpace(18),
+              const VerticalSpace(height: 18),
               const LoginForm(),
               const LoginBlocListener(),
               Text(
@@ -34,7 +34,7 @@ class SignInScreen extends StatelessWidget {
                 style: TextStylesInter.font14BlackRegular,
                 textAlign: TextAlign.center,
               ),
-              verticalSpace(18),
+              const VerticalSpace(height: 18),
               const SignInWithGoogleAppleRow(),
             ],
           ),

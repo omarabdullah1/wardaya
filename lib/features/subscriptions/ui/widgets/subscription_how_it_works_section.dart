@@ -23,7 +23,7 @@ class SubscriptionHowItWorksSection extends StatelessWidget {
             style: TextStylesEBGaramond.font32MainRoseRegular,
           ),
         ),
-        verticalSpace(20),
+        const VerticalSpace(height: 20),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           child: Container(
@@ -100,7 +100,7 @@ class SubscriptionHowItWorksSection extends StatelessWidget {
               ),
             ),
           ),
-          horizontalSpace(10),
+          const HorizontalSpace(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -108,7 +108,7 @@ class SubscriptionHowItWorksSection extends StatelessWidget {
                 title,
                 style: TextStylesInter.font17MainRoseBold,
               ),
-              verticalSpace(10),
+              const VerticalSpace(height: 10),
               Text(
                 description,
                 style: TextStylesInter.font13BlackRegular,
