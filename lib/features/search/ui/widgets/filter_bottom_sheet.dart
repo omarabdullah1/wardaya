@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -216,7 +214,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                         if (value == "All") {
                           cubit.setTempFilterTypeValue(filterType, null);
                         } else {
-                          log(cubit.tempFilters.toString());
+                          // log(cubit.tempFilters.toString());
                           cubit.setTempFilterTypeValue(
                               filterType, getValue(value!, filterType));
                         }
@@ -329,8 +327,8 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
   }
 
   getOption(String value, String filterType) {
-    log(value);
-    log(filterType.toString());
+    // log(value);
+    // log(filterType.toString());
     switch (filterType) {
       case 'occasion':
         return widget
