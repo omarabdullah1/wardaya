@@ -34,19 +34,40 @@ class Product {
   final String productType;
   final List<String> images;
   final Price price;
-  final List<dynamic> bundleItems;
-  final List<ParentCategory> categories; // Updated to ParentCategory
-  final List<SubCategory> subCategories; // Renamed from Category to SubCategory
+  final Dimensions? dimensions;
+  @JsonKey(defaultValue: [])
+  final List<String> menuItems; // Changed from List<dynamic> to List<String>
+  @JsonKey(defaultValue: [])
+  final List<String> subMenuItems; // Changed from List<dynamic> to List<String>
+  @JsonKey(defaultValue: [])
+  final List<String> bundleItems; // Changed from List<dynamic> to List<String>
+  @JsonKey(defaultValue: [])
+  final List<ParentCategory> categories;
+  @JsonKey(defaultValue: [])
+  final List<SubCategory> subCategories;
+  @JsonKey(defaultValue: [])
   final List<Occasion> occasions;
-  final Brand? brand; // Made nullable
+  @JsonKey(defaultValue: [])
+  final List<BundleType> bundleTypes;
+  @JsonKey(defaultValue: [])
+  final List<ColorOption> colors;
+  @JsonKey(defaultValue: [])
+  final List<Recipient> recipients;
+  @JsonKey(defaultValue: [])
+  final List<Component> components;
+
+  // Define missing fields
+  final Brand? brand;
   final bool expressDelivery;
   final DateTime createdAt;
   final DateTime updatedAt;
   final int points;
-  final List<BundleType> bundleTypes;
-  final List<ColorOption> colors;
-  final List<Recipient> recipients;
-  final List<dynamic> components;
+  final String? careTips;
+  final bool? freeDelivery;
+  final bool? premiumFlowers;
+  final bool? isBundle;
+  @JsonKey(name: 'productTypes', defaultValue: [])
+  final List<String> productTypeIds;
 
   Product({
     required this.id,
@@ -56,25 +77,81 @@ class Product {
     required this.productType,
     required this.images,
     required this.price,
+    this.dimensions,
+    required this.menuItems,
+    required this.subMenuItems,
     required this.bundleItems,
     required this.categories,
     required this.subCategories,
     required this.occasions,
-    required this.brand,
-    required this.expressDelivery,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.points,
     required this.bundleTypes,
     required this.colors,
     required this.recipients,
     required this.components,
+    required this.productTypeIds,
+    this.brand,
+    required this.expressDelivery,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.points,
+    this.careTips,
+    this.freeDelivery,
+    this.premiumFlowers,
+    this.isBundle,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);
-
   Map<String, dynamic> toJson() => _$ProductToJson(this);
+}
+
+@JsonSerializable()
+class Dimensions {
+  final double? width;
+  final double? height;
+
+  Dimensions({this.width, this.height});
+
+  factory Dimensions.fromJson(Map<String, dynamic> json) =>
+      _$DimensionsFromJson(json);
+  Map<String, dynamic> toJson() => _$DimensionsToJson(this);
+}
+
+@JsonSerializable()
+class Component {
+  final String item;
+  final int quantity;
+  @JsonKey(name: '_id')
+  final String id;
+
+  Component({
+    required this.item,
+    required this.quantity,
+    required this.id,
+  });
+
+  factory Component.fromJson(Map<String, dynamic> json) =>
+      _$ComponentFromJson(json);
+  Map<String, dynamic> toJson() => _$ComponentToJson(this);
+}
+
+@JsonSerializable()
+class ProductType {
+  @JsonKey(name: '_id')
+  final String id;
+  final String name;
+  @JsonKey(name: 'image_url')
+  final String imageUrl;
+
+  ProductType({
+    required this.id,
+    required this.name,
+    required this.imageUrl,
+  });
+
+  factory ProductType.fromJson(Map<String, dynamic> json) =>
+      _$ProductTypeFromJson(json);
+  Map<String, dynamic> toJson() => _$ProductTypeToJson(this);
 }
 
 @JsonSerializable()
@@ -115,24 +192,26 @@ class SubCategory {
   Map<String, dynamic> toJson() => _$SubCategoryToJson(this);
 }
 
-// New model for parent categories
 @JsonSerializable()
 class ParentCategory {
   @JsonKey(name: '_id')
   final String id;
   final String name;
   @JsonKey(name: 'image_url')
-  final String imageUrl;
-  final List<String> subCategories;
+  final String? imageUrl; // Make nullable
+  @JsonKey(name: 'subCategories', defaultValue: [])
+  final List<String> subCategories; // Provide default value
   @JsonKey(name: '__v')
   final int v;
+  final int? categoryOrder;
 
   ParentCategory({
     required this.id,
     required this.name,
-    required this.imageUrl,
+    this.imageUrl, // Make nullable
     required this.subCategories,
     required this.v,
+    this.categoryOrder,
   });
 
   factory ParentCategory.fromJson(Map<String, dynamic> json) =>
@@ -148,11 +227,14 @@ class Occasion {
   final String name;
   @JsonKey(name: 'image_url')
   final String imageUrl;
+  @JsonKey(name: '__v')
+  final int? v;
 
   Occasion({
     required this.id,
     required this.name,
     required this.imageUrl,
+    this.v,
   });
 
   factory Occasion.fromJson(Map<String, dynamic> json) =>
@@ -168,11 +250,17 @@ class Brand {
   final String name;
   @JsonKey(name: 'image_url')
   final String imageUrl;
+  @JsonKey(name: 'cover_image_url')
+  final String? coverImageUrl;
+  @JsonKey(name: '__v')
+  final int? v;
 
   Brand({
     required this.id,
     required this.name,
     required this.imageUrl,
+    this.coverImageUrl,
+    this.v,
   });
 
   factory Brand.fromJson(Map<String, dynamic> json) => _$BrandFromJson(json);
@@ -185,8 +273,14 @@ class BundleType {
   @JsonKey(name: '_id')
   final String id;
   final String name;
+  @JsonKey(name: '__v')
+  final int? v;
 
-  BundleType({required this.id, required this.name});
+  BundleType({
+    required this.id,
+    required this.name,
+    this.v,
+  });
 
   factory BundleType.fromJson(Map<String, dynamic> json) =>
       _$BundleTypeFromJson(json);
@@ -199,8 +293,14 @@ class ColorOption {
   @JsonKey(name: '_id')
   final String id;
   final String name;
+  @JsonKey(name: '__v')
+  final int? v;
 
-  ColorOption({required this.id, required this.name});
+  ColorOption({
+    required this.id,
+    required this.name,
+    this.v,
+  });
 
   factory ColorOption.fromJson(Map<String, dynamic> json) =>
       _$ColorOptionFromJson(json);
@@ -213,8 +313,11 @@ class Recipient {
   @JsonKey(name: '_id')
   final String id;
   final String name;
+  final List<String>? images;
+  @JsonKey(name: '__v')
+  final int? v;
 
-  Recipient({required this.id, required this.name});
+  Recipient({required this.id, required this.name, this.images, this.v});
 
   factory Recipient.fromJson(Map<String, dynamic> json) =>
       _$RecipientFromJson(json);

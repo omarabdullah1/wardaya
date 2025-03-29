@@ -10,6 +10,7 @@ class DioFactory {
   DioFactory._();
 
   static Dio? dio;
+  static String? _currentLanguage;
 
   static Dio getDio() {
     Duration timeOut = const Duration(seconds: 30);
@@ -21,6 +22,10 @@ class DioFactory {
         ..options.receiveTimeout = timeOut;
       addDioHeaders();
       addDioInterceptor();
+      // Apply language if it was set before dio initialization
+      if (_currentLanguage != null) {
+        setLanguageParameter(_currentLanguage!);
+      }
       return dio!;
     } else {
       return dio!;
@@ -39,6 +44,27 @@ class DioFactory {
     dio?.options.headers = {
       'Authorization': 'Bearer $token',
     };
+  }
+
+  static void setLanguageParameter(String language) {
+    _currentLanguage = language;
+
+    // If dio isn't initialized yet, we'll apply this when it is
+    if (dio == null) return;
+
+    // Remove any existing language interceptor
+    dio?.interceptors
+        .removeWhere((interceptor) => interceptor is LanguageInterceptor);
+
+    // Add the interceptor at the beginning of the interceptors list for highest priority
+    dio?.interceptors.insert(0, LanguageInterceptor(language));
+  }
+
+  // Function to set language from context
+  static void setLanguageFromContext(dynamic context) {
+    if (context != null && context.el != null && context.el.language != null) {
+      setLanguageParameter(context.el.language);
+    }
   }
 
   static void addDioInterceptor() {
@@ -62,5 +88,21 @@ class DioFactory {
         ),
       ],
     );
+  }
+}
+
+class LanguageInterceptor extends Interceptor {
+  final String language;
+
+  LanguageInterceptor(this.language);
+
+  @override
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    // Force add language parameter to ensure it's in the request
+    final queryParams = Map<String, dynamic>.from(options.queryParameters);
+    queryParams['lang'] = language;
+    options.queryParameters = queryParams;
+
+    handler.next(options);
   }
 }
