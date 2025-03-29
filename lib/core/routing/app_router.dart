@@ -1,7 +1,9 @@
+import 'package:localization/localization.dart';
 import 'package:wardaya/features/search/data/models/search_response.dart';
 import 'package:wardaya/features/search/logic/cubit/search_cubit.dart';
 import 'package:wardaya/features/subscriptions/logic/cubit/subscription_cubit.dart';
 
+import '../../features/subscriptions/ui/subscripion_checkout.dart';
 import '../../features/subscriptions/ui/subscription_duration_screen.dart';
 import '../../features/subscriptions/ui/susbcriptions_screen.dart';
 import 'router_imports.dart';
@@ -114,7 +116,7 @@ class AppRouter {
       case Routes.profileScreen:
         return _buildRoute(
           screen: BlocProvider(
-            create: (context) => getIt<ProfileCubit>()..getProfile(),
+            create: (context) => getIt<ProfileCubit>()..getProfile(context),
             child: const ProfileScreen(),
           ),
         );
@@ -164,14 +166,22 @@ class AppRouter {
       case Routes.susbcriptionsScreen:
         return _buildRoute(
           screen: BlocProvider(
-            create: (context) =>
-                getIt<SubscriptionCubit>()..emitGetSubscription(),
+            create: (context) => getIt<SubscriptionCubit>()
+              ..emitGetSubscription()
+              ..setSelectedDate(context.el.selectOtherDate),
             child: const SusbcriptionsScreen(),
           ),
         );
       case Routes.susbcriptionsDurationScreen:
         return _buildRoute(
-          screen: const SubscriptionDurationScreen(),
+          screen: BlocProvider(
+            create: (context) => getIt<SubscriptionCubit>(),
+            child: const SubscriptionDurationScreen(),
+          ),
+        );
+      case Routes.subscripionCheckout:
+        return _buildRoute(
+          screen: const SubscripionCheckout(),
         );
       default:
         return null;

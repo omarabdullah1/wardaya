@@ -22,7 +22,7 @@ class ProfileScreen extends StatelessWidget {
           body: SafeArea(
             child: RefreshIndicator(
                 onRefresh: () async {
-                  context.read<ProfileCubit>().getProfile();
+                  context.read<ProfileCubit>().getProfile(context);
                 },
                 child: const ProfileBuilder()),
           ),

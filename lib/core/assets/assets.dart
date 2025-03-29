@@ -225,6 +225,7 @@ class _assets_svgs_dart {
   final google_svg = 'assets/svgs/google.svg';
   final grid_svg = 'assets/svgs/grid.svg';
   final home_svg = 'assets/svgs/home.svg';
+  final info_svg = 'assets/svgs/info.svg';
   final invoices_svg = 'assets/svgs/invoices.svg';
   final language_svg = 'assets/svgs/language.svg';
   final link_svg = 'assets/svgs/link.svg';
@@ -245,6 +246,7 @@ class _assets_svgs_dart {
   final tac_svg = 'assets/svgs/tac.svg';
   final text_svg = 'assets/svgs/text.svg';
   final tile_svg = 'assets/svgs/tile.svg';
+  final user_svg = 'assets/svgs/user.svg';
   final video_svg = 'assets/svgs/video.svg';
   final wallet_svg = 'assets/svgs/wallet.svg';
   final wardaya_points_icon_svg = 'assets/svgs/wardaya_points_icon.svg';

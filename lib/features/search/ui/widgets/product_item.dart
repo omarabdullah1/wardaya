@@ -2,10 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/features/search/data/models/search_response.dart';
 
-import '../../data/apis/search_api_constants.dart';
+import '../../../../core/assets/assets.dart';
 
 class ProductItem extends StatelessWidget {
   final Product product;
@@ -29,26 +30,42 @@ class ProductItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (product.images.isNotEmpty)
-              Container(
-                height: isGrid ? 120.h : 200.h,
-                decoration: BoxDecoration(
-                  color: ColorsManager.lightGrey,
-                  borderRadius: BorderRadius.circular(8.0),
-                  image: DecorationImage(
-                    image: CachedNetworkImageProvider(
-                      SearchApiConstants.apiBaseUrlForImages +
-                          product.images.first,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: CachedNetworkImage(
+                  imageUrl: product.images.first,
+                  height: isGrid ? 110.h : 200.h,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => Container(
+                    color: ColorsManager.lightGrey,
+                  ),
+                  errorWidget: (context, url, error) => Container(
+                    height: isGrid ? 180.h : 200.h,
+                    color: ColorsManager.transparent,
+                    child: Center(
+                      child: SvgPicture.asset(
+                        Assets.of(context).svgs.small_logo_svg,
+                        height: isGrid ? 120.h : 150.h,
+                        width: isGrid ? 120.w : 150.w,
+                      ),
                     ),
-                    fit: BoxFit.cover,
                   ),
                 ),
               )
             else
               Container(
-                height: isGrid ? 120.h : 200.h,
+                height: isGrid ? 110.h : 200.h,
                 decoration: BoxDecoration(
                   color: ColorsManager.lightGrey,
                   borderRadius: BorderRadius.circular(8.0),
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    Assets.of(context).svgs.small_logo_svg,
+                    height: isGrid ? 120.h : 150.h,
+                    width: isGrid ? 120.w : 150.w,
+                  ),
                 ),
               ),
             Padding(

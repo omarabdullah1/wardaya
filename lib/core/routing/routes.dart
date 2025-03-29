@@ -24,4 +24,5 @@ class Routes {
   static const String susbcriptionsScreen = '/susbcriptionsScreen';
   static const String susbcriptionsDurationScreen =
       '/susbcriptionsDurationScreen';
+  static const String subscripionCheckout = '/subscripionCheckout';
 }

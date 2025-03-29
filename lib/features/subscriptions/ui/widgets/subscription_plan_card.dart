@@ -48,7 +48,7 @@ class _SubscriptionPlanCardState extends State<SubscriptionPlanCard> {
                   title: widget.title,
                   images: widget.images,
                 ),
-                verticalSpace(18),
+                const VerticalSpace(height: 18),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Align(
@@ -84,7 +84,7 @@ class _SubscriptionPlanCardState extends State<SubscriptionPlanCard> {
                     ),
                   ),
                 ),
-                verticalSpace(18),
+                const VerticalSpace(height: 18),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                   child: Row(
@@ -137,7 +137,7 @@ class _SubscriptionPlanCardState extends State<SubscriptionPlanCard> {
                     ],
                   ),
                 ),
-                verticalSpace(10),
+                const VerticalSpace(height: 10),
               ],
             ),
           ),

@@ -22,6 +22,10 @@ mixin _$SubscriptionState {
     required TResult Function() loading,
     required TResult Function(SubscriptionResponse data) success,
     required TResult Function(String message) error,
+    required TResult Function(String delevery) setDeliveryFrequency,
+    required TResult Function(String duration) setSubscriptionDuration,
+    required TResult Function(String date) setStartDate,
+    required TResult Function(String date) setSelectedDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +34,10 @@ mixin _$SubscriptionState {
     TResult? Function()? loading,
     TResult? Function(SubscriptionResponse data)? success,
     TResult? Function(String message)? error,
+    TResult? Function(String delevery)? setDeliveryFrequency,
+    TResult? Function(String duration)? setSubscriptionDuration,
+    TResult? Function(String date)? setStartDate,
+    TResult? Function(String date)? setSelectedDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,31 +46,48 @@ mixin _$SubscriptionState {
     TResult Function()? loading,
     TResult Function(SubscriptionResponse data)? success,
     TResult Function(String message)? error,
+    TResult Function(String delevery)? setDeliveryFrequency,
+    TResult Function(String duration)? setSubscriptionDuration,
+    TResult Function(String date)? setStartDate,
+    TResult Function(String date)? setSelectedDate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) error,
+    required TResult Function(SetDeliveryFrequency value) setDeliveryFrequency,
+    required TResult Function(SetSubscriptionDuration value)
+        setSubscriptionDuration,
+    required TResult Function(SetStartDate value) setStartDate,
+    required TResult Function(SetSelectedDate value) setSelectedDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Error value)? error,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? error,
+    TResult? Function(SetDeliveryFrequency value)? setDeliveryFrequency,
+    TResult? Function(SetSubscriptionDuration value)? setSubscriptionDuration,
+    TResult? Function(SetStartDate value)? setStartDate,
+    TResult? Function(SetSelectedDate value)? setSelectedDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? error,
+    TResult Function(SetDeliveryFrequency value)? setDeliveryFrequency,
+    TResult Function(SetSubscriptionDuration value)? setSubscriptionDuration,
+    TResult Function(SetStartDate value)? setStartDate,
+    TResult Function(SetSelectedDate value)? setSelectedDate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,6 +159,10 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loading,
     required TResult Function(SubscriptionResponse data) success,
     required TResult Function(String message) error,
+    required TResult Function(String delevery) setDeliveryFrequency,
+    required TResult Function(String duration) setSubscriptionDuration,
+    required TResult Function(String date) setStartDate,
+    required TResult Function(String date) setSelectedDate,
   }) {
     return initial();
   }
@@ -145,6 +174,10 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? loading,
     TResult? Function(SubscriptionResponse data)? success,
     TResult? Function(String message)? error,
+    TResult? Function(String delevery)? setDeliveryFrequency,
+    TResult? Function(String duration)? setSubscriptionDuration,
+    TResult? Function(String date)? setStartDate,
+    TResult? Function(String date)? setSelectedDate,
   }) {
     return initial?.call();
   }
@@ -156,6 +189,10 @@ class _$InitialImpl implements _Initial {
     TResult Function()? loading,
     TResult Function(SubscriptionResponse data)? success,
     TResult Function(String message)? error,
+    TResult Function(String delevery)? setDeliveryFrequency,
+    TResult Function(String duration)? setSubscriptionDuration,
+    TResult Function(String date)? setStartDate,
+    TResult Function(String date)? setSelectedDate,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -168,9 +205,14 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) error,
+    required TResult Function(SetDeliveryFrequency value) setDeliveryFrequency,
+    required TResult Function(SetSubscriptionDuration value)
+        setSubscriptionDuration,
+    required TResult Function(SetStartDate value) setStartDate,
+    required TResult Function(SetSelectedDate value) setSelectedDate,
   }) {
     return initial(this);
   }
@@ -179,9 +221,13 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Error value)? error,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? error,
+    TResult? Function(SetDeliveryFrequency value)? setDeliveryFrequency,
+    TResult? Function(SetSubscriptionDuration value)? setSubscriptionDuration,
+    TResult? Function(SetStartDate value)? setStartDate,
+    TResult? Function(SetSelectedDate value)? setSelectedDate,
   }) {
     return initial?.call(this);
   }
@@ -190,9 +236,13 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? error,
+    TResult Function(SetDeliveryFrequency value)? setDeliveryFrequency,
+    TResult Function(SetSubscriptionDuration value)? setSubscriptionDuration,
+    TResult Function(SetStartDate value)? setStartDate,
+    TResult Function(SetSelectedDate value)? setSelectedDate,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -227,7 +277,7 @@ class __$$LoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadingImpl implements _Loading {
+class _$LoadingImpl implements Loading {
   const _$LoadingImpl();
 
   @override
@@ -251,6 +301,10 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() loading,
     required TResult Function(SubscriptionResponse data) success,
     required TResult Function(String message) error,
+    required TResult Function(String delevery) setDeliveryFrequency,
+    required TResult Function(String duration) setSubscriptionDuration,
+    required TResult Function(String date) setStartDate,
+    required TResult Function(String date) setSelectedDate,
   }) {
     return loading();
   }
@@ -262,6 +316,10 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? loading,
     TResult? Function(SubscriptionResponse data)? success,
     TResult? Function(String message)? error,
+    TResult? Function(String delevery)? setDeliveryFrequency,
+    TResult? Function(String duration)? setSubscriptionDuration,
+    TResult? Function(String date)? setStartDate,
+    TResult? Function(String date)? setSelectedDate,
   }) {
     return loading?.call();
   }
@@ -273,6 +331,10 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? loading,
     TResult Function(SubscriptionResponse data)? success,
     TResult Function(String message)? error,
+    TResult Function(String delevery)? setDeliveryFrequency,
+    TResult Function(String duration)? setSubscriptionDuration,
+    TResult Function(String date)? setStartDate,
+    TResult Function(String date)? setSelectedDate,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -285,9 +347,14 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) error,
+    required TResult Function(SetDeliveryFrequency value) setDeliveryFrequency,
+    required TResult Function(SetSubscriptionDuration value)
+        setSubscriptionDuration,
+    required TResult Function(SetStartDate value) setStartDate,
+    required TResult Function(SetSelectedDate value) setSelectedDate,
   }) {
     return loading(this);
   }
@@ -296,9 +363,13 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Error value)? error,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? error,
+    TResult? Function(SetDeliveryFrequency value)? setDeliveryFrequency,
+    TResult? Function(SetSubscriptionDuration value)? setSubscriptionDuration,
+    TResult? Function(SetStartDate value)? setStartDate,
+    TResult? Function(SetSelectedDate value)? setSelectedDate,
   }) {
     return loading?.call(this);
   }
@@ -307,9 +378,13 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? error,
+    TResult Function(SetDeliveryFrequency value)? setDeliveryFrequency,
+    TResult Function(SetSubscriptionDuration value)? setSubscriptionDuration,
+    TResult Function(SetStartDate value)? setStartDate,
+    TResult Function(SetSelectedDate value)? setSelectedDate,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -319,8 +394,8 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements SubscriptionState {
-  const factory _Loading() = _$LoadingImpl;
+abstract class Loading implements SubscriptionState {
+  const factory Loading() = _$LoadingImpl;
 }
 
 /// @nodoc
@@ -358,7 +433,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SuccessImpl implements _Success {
+class _$SuccessImpl implements Success {
   const _$SuccessImpl(this.data);
 
   @override
@@ -395,6 +470,10 @@ class _$SuccessImpl implements _Success {
     required TResult Function() loading,
     required TResult Function(SubscriptionResponse data) success,
     required TResult Function(String message) error,
+    required TResult Function(String delevery) setDeliveryFrequency,
+    required TResult Function(String duration) setSubscriptionDuration,
+    required TResult Function(String date) setStartDate,
+    required TResult Function(String date) setSelectedDate,
   }) {
     return success(data);
   }
@@ -406,6 +485,10 @@ class _$SuccessImpl implements _Success {
     TResult? Function()? loading,
     TResult? Function(SubscriptionResponse data)? success,
     TResult? Function(String message)? error,
+    TResult? Function(String delevery)? setDeliveryFrequency,
+    TResult? Function(String duration)? setSubscriptionDuration,
+    TResult? Function(String date)? setStartDate,
+    TResult? Function(String date)? setSelectedDate,
   }) {
     return success?.call(data);
   }
@@ -417,6 +500,10 @@ class _$SuccessImpl implements _Success {
     TResult Function()? loading,
     TResult Function(SubscriptionResponse data)? success,
     TResult Function(String message)? error,
+    TResult Function(String delevery)? setDeliveryFrequency,
+    TResult Function(String duration)? setSubscriptionDuration,
+    TResult Function(String date)? setStartDate,
+    TResult Function(String date)? setSelectedDate,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -429,9 +516,14 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) error,
+    required TResult Function(SetDeliveryFrequency value) setDeliveryFrequency,
+    required TResult Function(SetSubscriptionDuration value)
+        setSubscriptionDuration,
+    required TResult Function(SetStartDate value) setStartDate,
+    required TResult Function(SetSelectedDate value) setSelectedDate,
   }) {
     return success(this);
   }
@@ -440,9 +532,13 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Error value)? error,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? error,
+    TResult? Function(SetDeliveryFrequency value)? setDeliveryFrequency,
+    TResult? Function(SetSubscriptionDuration value)? setSubscriptionDuration,
+    TResult? Function(SetStartDate value)? setStartDate,
+    TResult? Function(SetSelectedDate value)? setSelectedDate,
   }) {
     return success?.call(this);
   }
@@ -451,9 +547,13 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? error,
+    TResult Function(SetDeliveryFrequency value)? setDeliveryFrequency,
+    TResult Function(SetSubscriptionDuration value)? setSubscriptionDuration,
+    TResult Function(SetStartDate value)? setStartDate,
+    TResult Function(SetSelectedDate value)? setSelectedDate,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -463,8 +563,8 @@ class _$SuccessImpl implements _Success {
   }
 }
 
-abstract class _Success implements SubscriptionState {
-  const factory _Success(final SubscriptionResponse data) = _$SuccessImpl;
+abstract class Success implements SubscriptionState {
+  const factory Success(final SubscriptionResponse data) = _$SuccessImpl;
 
   SubscriptionResponse get data;
 
@@ -510,7 +610,7 @@ class __$$ErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ErrorImpl implements _Error {
+class _$ErrorImpl implements Error {
   const _$ErrorImpl(this.message);
 
   @override
@@ -547,6 +647,10 @@ class _$ErrorImpl implements _Error {
     required TResult Function() loading,
     required TResult Function(SubscriptionResponse data) success,
     required TResult Function(String message) error,
+    required TResult Function(String delevery) setDeliveryFrequency,
+    required TResult Function(String duration) setSubscriptionDuration,
+    required TResult Function(String date) setStartDate,
+    required TResult Function(String date) setSelectedDate,
   }) {
     return error(message);
   }
@@ -558,6 +662,10 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? loading,
     TResult? Function(SubscriptionResponse data)? success,
     TResult? Function(String message)? error,
+    TResult? Function(String delevery)? setDeliveryFrequency,
+    TResult? Function(String duration)? setSubscriptionDuration,
+    TResult? Function(String date)? setStartDate,
+    TResult? Function(String date)? setSelectedDate,
   }) {
     return error?.call(message);
   }
@@ -569,6 +677,10 @@ class _$ErrorImpl implements _Error {
     TResult Function()? loading,
     TResult Function(SubscriptionResponse data)? success,
     TResult Function(String message)? error,
+    TResult Function(String delevery)? setDeliveryFrequency,
+    TResult Function(String duration)? setSubscriptionDuration,
+    TResult Function(String date)? setStartDate,
+    TResult Function(String date)? setSelectedDate,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -581,9 +693,14 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) error,
+    required TResult Function(SetDeliveryFrequency value) setDeliveryFrequency,
+    required TResult Function(SetSubscriptionDuration value)
+        setSubscriptionDuration,
+    required TResult Function(SetStartDate value) setStartDate,
+    required TResult Function(SetSelectedDate value) setSelectedDate,
   }) {
     return error(this);
   }
@@ -592,9 +709,13 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Error value)? error,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? error,
+    TResult? Function(SetDeliveryFrequency value)? setDeliveryFrequency,
+    TResult? Function(SetSubscriptionDuration value)? setSubscriptionDuration,
+    TResult? Function(SetStartDate value)? setStartDate,
+    TResult? Function(SetSelectedDate value)? setSelectedDate,
   }) {
     return error?.call(this);
   }
@@ -603,9 +724,13 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? error,
+    TResult Function(SetDeliveryFrequency value)? setDeliveryFrequency,
+    TResult Function(SetSubscriptionDuration value)? setSubscriptionDuration,
+    TResult Function(SetStartDate value)? setStartDate,
+    TResult Function(SetSelectedDate value)? setSelectedDate,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -615,8 +740,8 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements SubscriptionState {
-  const factory _Error(final String message) = _$ErrorImpl;
+abstract class Error implements SubscriptionState {
+  const factory Error(final String message) = _$ErrorImpl;
 
   String get message;
 
@@ -624,5 +749,723 @@ abstract class _Error implements SubscriptionState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SetDeliveryFrequencyImplCopyWith<$Res> {
+  factory _$$SetDeliveryFrequencyImplCopyWith(_$SetDeliveryFrequencyImpl value,
+          $Res Function(_$SetDeliveryFrequencyImpl) then) =
+      __$$SetDeliveryFrequencyImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String delevery});
+}
+
+/// @nodoc
+class __$$SetDeliveryFrequencyImplCopyWithImpl<$Res>
+    extends _$SubscriptionStateCopyWithImpl<$Res, _$SetDeliveryFrequencyImpl>
+    implements _$$SetDeliveryFrequencyImplCopyWith<$Res> {
+  __$$SetDeliveryFrequencyImplCopyWithImpl(_$SetDeliveryFrequencyImpl _value,
+      $Res Function(_$SetDeliveryFrequencyImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SubscriptionState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? delevery = null,
+  }) {
+    return _then(_$SetDeliveryFrequencyImpl(
+      null == delevery
+          ? _value.delevery
+          : delevery // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetDeliveryFrequencyImpl implements SetDeliveryFrequency {
+  const _$SetDeliveryFrequencyImpl(this.delevery);
+
+  @override
+  final String delevery;
+
+  @override
+  String toString() {
+    return 'SubscriptionState.setDeliveryFrequency(delevery: $delevery)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetDeliveryFrequencyImpl &&
+            (identical(other.delevery, delevery) ||
+                other.delevery == delevery));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, delevery);
+
+  /// Create a copy of SubscriptionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetDeliveryFrequencyImplCopyWith<_$SetDeliveryFrequencyImpl>
+      get copyWith =>
+          __$$SetDeliveryFrequencyImplCopyWithImpl<_$SetDeliveryFrequencyImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(SubscriptionResponse data) success,
+    required TResult Function(String message) error,
+    required TResult Function(String delevery) setDeliveryFrequency,
+    required TResult Function(String duration) setSubscriptionDuration,
+    required TResult Function(String date) setStartDate,
+    required TResult Function(String date) setSelectedDate,
+  }) {
+    return setDeliveryFrequency(delevery);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(SubscriptionResponse data)? success,
+    TResult? Function(String message)? error,
+    TResult? Function(String delevery)? setDeliveryFrequency,
+    TResult? Function(String duration)? setSubscriptionDuration,
+    TResult? Function(String date)? setStartDate,
+    TResult? Function(String date)? setSelectedDate,
+  }) {
+    return setDeliveryFrequency?.call(delevery);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(SubscriptionResponse data)? success,
+    TResult Function(String message)? error,
+    TResult Function(String delevery)? setDeliveryFrequency,
+    TResult Function(String duration)? setSubscriptionDuration,
+    TResult Function(String date)? setStartDate,
+    TResult Function(String date)? setSelectedDate,
+    required TResult orElse(),
+  }) {
+    if (setDeliveryFrequency != null) {
+      return setDeliveryFrequency(delevery);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) error,
+    required TResult Function(SetDeliveryFrequency value) setDeliveryFrequency,
+    required TResult Function(SetSubscriptionDuration value)
+        setSubscriptionDuration,
+    required TResult Function(SetStartDate value) setStartDate,
+    required TResult Function(SetSelectedDate value) setSelectedDate,
+  }) {
+    return setDeliveryFrequency(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? error,
+    TResult? Function(SetDeliveryFrequency value)? setDeliveryFrequency,
+    TResult? Function(SetSubscriptionDuration value)? setSubscriptionDuration,
+    TResult? Function(SetStartDate value)? setStartDate,
+    TResult? Function(SetSelectedDate value)? setSelectedDate,
+  }) {
+    return setDeliveryFrequency?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? error,
+    TResult Function(SetDeliveryFrequency value)? setDeliveryFrequency,
+    TResult Function(SetSubscriptionDuration value)? setSubscriptionDuration,
+    TResult Function(SetStartDate value)? setStartDate,
+    TResult Function(SetSelectedDate value)? setSelectedDate,
+    required TResult orElse(),
+  }) {
+    if (setDeliveryFrequency != null) {
+      return setDeliveryFrequency(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SetDeliveryFrequency implements SubscriptionState {
+  const factory SetDeliveryFrequency(final String delevery) =
+      _$SetDeliveryFrequencyImpl;
+
+  String get delevery;
+
+  /// Create a copy of SubscriptionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SetDeliveryFrequencyImplCopyWith<_$SetDeliveryFrequencyImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SetSubscriptionDurationImplCopyWith<$Res> {
+  factory _$$SetSubscriptionDurationImplCopyWith(
+          _$SetSubscriptionDurationImpl value,
+          $Res Function(_$SetSubscriptionDurationImpl) then) =
+      __$$SetSubscriptionDurationImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String duration});
+}
+
+/// @nodoc
+class __$$SetSubscriptionDurationImplCopyWithImpl<$Res>
+    extends _$SubscriptionStateCopyWithImpl<$Res, _$SetSubscriptionDurationImpl>
+    implements _$$SetSubscriptionDurationImplCopyWith<$Res> {
+  __$$SetSubscriptionDurationImplCopyWithImpl(
+      _$SetSubscriptionDurationImpl _value,
+      $Res Function(_$SetSubscriptionDurationImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SubscriptionState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? duration = null,
+  }) {
+    return _then(_$SetSubscriptionDurationImpl(
+      null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetSubscriptionDurationImpl implements SetSubscriptionDuration {
+  const _$SetSubscriptionDurationImpl(this.duration);
+
+  @override
+  final String duration;
+
+  @override
+  String toString() {
+    return 'SubscriptionState.setSubscriptionDuration(duration: $duration)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetSubscriptionDurationImpl &&
+            (identical(other.duration, duration) ||
+                other.duration == duration));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, duration);
+
+  /// Create a copy of SubscriptionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetSubscriptionDurationImplCopyWith<_$SetSubscriptionDurationImpl>
+      get copyWith => __$$SetSubscriptionDurationImplCopyWithImpl<
+          _$SetSubscriptionDurationImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(SubscriptionResponse data) success,
+    required TResult Function(String message) error,
+    required TResult Function(String delevery) setDeliveryFrequency,
+    required TResult Function(String duration) setSubscriptionDuration,
+    required TResult Function(String date) setStartDate,
+    required TResult Function(String date) setSelectedDate,
+  }) {
+    return setSubscriptionDuration(duration);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(SubscriptionResponse data)? success,
+    TResult? Function(String message)? error,
+    TResult? Function(String delevery)? setDeliveryFrequency,
+    TResult? Function(String duration)? setSubscriptionDuration,
+    TResult? Function(String date)? setStartDate,
+    TResult? Function(String date)? setSelectedDate,
+  }) {
+    return setSubscriptionDuration?.call(duration);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(SubscriptionResponse data)? success,
+    TResult Function(String message)? error,
+    TResult Function(String delevery)? setDeliveryFrequency,
+    TResult Function(String duration)? setSubscriptionDuration,
+    TResult Function(String date)? setStartDate,
+    TResult Function(String date)? setSelectedDate,
+    required TResult orElse(),
+  }) {
+    if (setSubscriptionDuration != null) {
+      return setSubscriptionDuration(duration);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) error,
+    required TResult Function(SetDeliveryFrequency value) setDeliveryFrequency,
+    required TResult Function(SetSubscriptionDuration value)
+        setSubscriptionDuration,
+    required TResult Function(SetStartDate value) setStartDate,
+    required TResult Function(SetSelectedDate value) setSelectedDate,
+  }) {
+    return setSubscriptionDuration(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? error,
+    TResult? Function(SetDeliveryFrequency value)? setDeliveryFrequency,
+    TResult? Function(SetSubscriptionDuration value)? setSubscriptionDuration,
+    TResult? Function(SetStartDate value)? setStartDate,
+    TResult? Function(SetSelectedDate value)? setSelectedDate,
+  }) {
+    return setSubscriptionDuration?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? error,
+    TResult Function(SetDeliveryFrequency value)? setDeliveryFrequency,
+    TResult Function(SetSubscriptionDuration value)? setSubscriptionDuration,
+    TResult Function(SetStartDate value)? setStartDate,
+    TResult Function(SetSelectedDate value)? setSelectedDate,
+    required TResult orElse(),
+  }) {
+    if (setSubscriptionDuration != null) {
+      return setSubscriptionDuration(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SetSubscriptionDuration implements SubscriptionState {
+  const factory SetSubscriptionDuration(final String duration) =
+      _$SetSubscriptionDurationImpl;
+
+  String get duration;
+
+  /// Create a copy of SubscriptionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SetSubscriptionDurationImplCopyWith<_$SetSubscriptionDurationImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SetStartDateImplCopyWith<$Res> {
+  factory _$$SetStartDateImplCopyWith(
+          _$SetStartDateImpl value, $Res Function(_$SetStartDateImpl) then) =
+      __$$SetStartDateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String date});
+}
+
+/// @nodoc
+class __$$SetStartDateImplCopyWithImpl<$Res>
+    extends _$SubscriptionStateCopyWithImpl<$Res, _$SetStartDateImpl>
+    implements _$$SetStartDateImplCopyWith<$Res> {
+  __$$SetStartDateImplCopyWithImpl(
+      _$SetStartDateImpl _value, $Res Function(_$SetStartDateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SubscriptionState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? date = null,
+  }) {
+    return _then(_$SetStartDateImpl(
+      null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetStartDateImpl implements SetStartDate {
+  const _$SetStartDateImpl(this.date);
+
+  @override
+  final String date;
+
+  @override
+  String toString() {
+    return 'SubscriptionState.setStartDate(date: $date)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetStartDateImpl &&
+            (identical(other.date, date) || other.date == date));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, date);
+
+  /// Create a copy of SubscriptionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetStartDateImplCopyWith<_$SetStartDateImpl> get copyWith =>
+      __$$SetStartDateImplCopyWithImpl<_$SetStartDateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(SubscriptionResponse data) success,
+    required TResult Function(String message) error,
+    required TResult Function(String delevery) setDeliveryFrequency,
+    required TResult Function(String duration) setSubscriptionDuration,
+    required TResult Function(String date) setStartDate,
+    required TResult Function(String date) setSelectedDate,
+  }) {
+    return setStartDate(date);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(SubscriptionResponse data)? success,
+    TResult? Function(String message)? error,
+    TResult? Function(String delevery)? setDeliveryFrequency,
+    TResult? Function(String duration)? setSubscriptionDuration,
+    TResult? Function(String date)? setStartDate,
+    TResult? Function(String date)? setSelectedDate,
+  }) {
+    return setStartDate?.call(date);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(SubscriptionResponse data)? success,
+    TResult Function(String message)? error,
+    TResult Function(String delevery)? setDeliveryFrequency,
+    TResult Function(String duration)? setSubscriptionDuration,
+    TResult Function(String date)? setStartDate,
+    TResult Function(String date)? setSelectedDate,
+    required TResult orElse(),
+  }) {
+    if (setStartDate != null) {
+      return setStartDate(date);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) error,
+    required TResult Function(SetDeliveryFrequency value) setDeliveryFrequency,
+    required TResult Function(SetSubscriptionDuration value)
+        setSubscriptionDuration,
+    required TResult Function(SetStartDate value) setStartDate,
+    required TResult Function(SetSelectedDate value) setSelectedDate,
+  }) {
+    return setStartDate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? error,
+    TResult? Function(SetDeliveryFrequency value)? setDeliveryFrequency,
+    TResult? Function(SetSubscriptionDuration value)? setSubscriptionDuration,
+    TResult? Function(SetStartDate value)? setStartDate,
+    TResult? Function(SetSelectedDate value)? setSelectedDate,
+  }) {
+    return setStartDate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? error,
+    TResult Function(SetDeliveryFrequency value)? setDeliveryFrequency,
+    TResult Function(SetSubscriptionDuration value)? setSubscriptionDuration,
+    TResult Function(SetStartDate value)? setStartDate,
+    TResult Function(SetSelectedDate value)? setSelectedDate,
+    required TResult orElse(),
+  }) {
+    if (setStartDate != null) {
+      return setStartDate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SetStartDate implements SubscriptionState {
+  const factory SetStartDate(final String date) = _$SetStartDateImpl;
+
+  String get date;
+
+  /// Create a copy of SubscriptionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SetStartDateImplCopyWith<_$SetStartDateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SetSelectedDateImplCopyWith<$Res> {
+  factory _$$SetSelectedDateImplCopyWith(_$SetSelectedDateImpl value,
+          $Res Function(_$SetSelectedDateImpl) then) =
+      __$$SetSelectedDateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String date});
+}
+
+/// @nodoc
+class __$$SetSelectedDateImplCopyWithImpl<$Res>
+    extends _$SubscriptionStateCopyWithImpl<$Res, _$SetSelectedDateImpl>
+    implements _$$SetSelectedDateImplCopyWith<$Res> {
+  __$$SetSelectedDateImplCopyWithImpl(
+      _$SetSelectedDateImpl _value, $Res Function(_$SetSelectedDateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SubscriptionState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? date = null,
+  }) {
+    return _then(_$SetSelectedDateImpl(
+      null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetSelectedDateImpl implements SetSelectedDate {
+  const _$SetSelectedDateImpl(this.date);
+
+  @override
+  final String date;
+
+  @override
+  String toString() {
+    return 'SubscriptionState.setSelectedDate(date: $date)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetSelectedDateImpl &&
+            (identical(other.date, date) || other.date == date));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, date);
+
+  /// Create a copy of SubscriptionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetSelectedDateImplCopyWith<_$SetSelectedDateImpl> get copyWith =>
+      __$$SetSelectedDateImplCopyWithImpl<_$SetSelectedDateImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(SubscriptionResponse data) success,
+    required TResult Function(String message) error,
+    required TResult Function(String delevery) setDeliveryFrequency,
+    required TResult Function(String duration) setSubscriptionDuration,
+    required TResult Function(String date) setStartDate,
+    required TResult Function(String date) setSelectedDate,
+  }) {
+    return setSelectedDate(date);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(SubscriptionResponse data)? success,
+    TResult? Function(String message)? error,
+    TResult? Function(String delevery)? setDeliveryFrequency,
+    TResult? Function(String duration)? setSubscriptionDuration,
+    TResult? Function(String date)? setStartDate,
+    TResult? Function(String date)? setSelectedDate,
+  }) {
+    return setSelectedDate?.call(date);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(SubscriptionResponse data)? success,
+    TResult Function(String message)? error,
+    TResult Function(String delevery)? setDeliveryFrequency,
+    TResult Function(String duration)? setSubscriptionDuration,
+    TResult Function(String date)? setStartDate,
+    TResult Function(String date)? setSelectedDate,
+    required TResult orElse(),
+  }) {
+    if (setSelectedDate != null) {
+      return setSelectedDate(date);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) error,
+    required TResult Function(SetDeliveryFrequency value) setDeliveryFrequency,
+    required TResult Function(SetSubscriptionDuration value)
+        setSubscriptionDuration,
+    required TResult Function(SetStartDate value) setStartDate,
+    required TResult Function(SetSelectedDate value) setSelectedDate,
+  }) {
+    return setSelectedDate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? error,
+    TResult? Function(SetDeliveryFrequency value)? setDeliveryFrequency,
+    TResult? Function(SetSubscriptionDuration value)? setSubscriptionDuration,
+    TResult? Function(SetStartDate value)? setStartDate,
+    TResult? Function(SetSelectedDate value)? setSelectedDate,
+  }) {
+    return setSelectedDate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? error,
+    TResult Function(SetDeliveryFrequency value)? setDeliveryFrequency,
+    TResult Function(SetSubscriptionDuration value)? setSubscriptionDuration,
+    TResult Function(SetStartDate value)? setStartDate,
+    TResult Function(SetSelectedDate value)? setSelectedDate,
+    required TResult orElse(),
+  }) {
+    if (setSelectedDate != null) {
+      return setSelectedDate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SetSelectedDate implements SubscriptionState {
+  const factory SetSelectedDate(final String date) = _$SetSelectedDateImpl;
+
+  String get date;
+
+  /// Create a copy of SubscriptionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SetSelectedDateImplCopyWith<_$SetSelectedDateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

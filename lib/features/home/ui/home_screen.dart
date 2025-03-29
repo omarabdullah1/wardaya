@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                     style: TextStylesEBGaramond.font32MainRoseRegular,
                   ),
                 ),
-                verticalSpace(20),
+                const VerticalSpace(height: 20),
                 CategoryProgressScroll(
                   categoriesImages: categoriesImages(context),
                   titles: titles,
@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            verticalSpace(20),
+            const VerticalSpace(height: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -62,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                verticalSpace(20),
+                const VerticalSpace(height: 20),
                 CategoryProgressScroll(
                   categoriesImages: categoriesImages(context),
                   titles: titles,
@@ -70,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            verticalSpace(20),
+            const VerticalSpace(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -97,7 +97,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            verticalSpace(20),
+            const VerticalSpace(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -111,7 +111,7 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  verticalSpace(20),
+                  const VerticalSpace(height: 20),
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
@@ -124,7 +124,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            verticalSpace(20),
+            const VerticalSpace(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -138,7 +138,7 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  verticalSpace(20),
+                  const VerticalSpace(height: 20),
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
@@ -151,7 +151,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            verticalSpace(20),
+            const VerticalSpace(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -165,7 +165,7 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  verticalSpace(20),
+                  const VerticalSpace(height: 20),
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
@@ -178,7 +178,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            verticalSpace(20),
+            const VerticalSpace(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -192,7 +192,7 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  verticalSpace(20),
+                  const VerticalSpace(height: 20),
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
@@ -205,7 +205,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            verticalSpace(20),
+            const VerticalSpace(height: 20),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 10.0),
               child: DiscoverIdeasSection(),
@@ -223,7 +223,7 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  verticalSpace(20),
+                  const VerticalSpace(height: 20),
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
@@ -236,7 +236,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            verticalSpace(20),
+            const VerticalSpace(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -250,7 +250,7 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  verticalSpace(20),
+                  const VerticalSpace(height: 20),
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
@@ -263,7 +263,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            verticalSpace(20),
+            const VerticalSpace(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -277,7 +277,7 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  verticalSpace(20),
+                  const VerticalSpace(height: 20),
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
@@ -290,7 +290,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            verticalSpace(20),
+            const VerticalSpace(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -304,7 +304,7 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  verticalSpace(20),
+                  const VerticalSpace(height: 20),
                   GiftsCardBuilder(
                     prices: prices,
                     names: names,
@@ -317,7 +317,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            verticalSpace(20),
+            const VerticalSpace(height: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -332,7 +332,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                verticalSpace(20),
+                const VerticalSpace(height: 20),
                 CategoryProgressScroll(
                   categoriesImages: giftsCategoriesImages(context),
                   titles: giftsTitles,
@@ -355,7 +355,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                verticalSpace(20),
+                const VerticalSpace(height: 20),
                 CategoryProgressScroll(
                   categoriesImages: brandsCategoriesImages,
                   titles: brandsTitles,
@@ -363,7 +363,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            verticalSpace(20),
+            const VerticalSpace(height: 20),
           ],
         ),
       ),

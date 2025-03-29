@@ -67,14 +67,26 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
                             borderRadius: BorderRadius.circular(30.0),
                           ),
                           onSubmitted: (value) {
-                            cubit.emitSearchStates();
+                            if (value.isNotEmpty) {
+                              cubit.emitSearchStates(search: value);
+                            }
+                          },
+                          onChanged: (value) {
+                            // Trigger search on each change if needed
+                            // Uncommenting this would create a live search experience
+                            // if (value.isNotEmpty) {
+                            //   cubit.emitSearchStates(search: value);
+                            // }
+                          },
+                          onSuffixTap: () {
+                            cubit.searchController.clear();
                           },
                         ),
                       ),
                     ),
                   ),
                 ),
-                horizontalSpace(16),
+                const HorizontalSpace(width: 16),
               ],
             ),
           ),

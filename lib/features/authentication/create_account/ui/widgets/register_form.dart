@@ -67,7 +67,7 @@ class RegisterForm extends StatelessWidget {
               FormBuilderValidators.required(errorText: ''),
             ]),
           ),
-          verticalSpace(10.0),
+          const VerticalSpace(height: 10.0),
           FormBuilderTextField(
             key: cubit.emailFieldKey,
             name: FormFieldsKeys.email,
@@ -93,7 +93,7 @@ class RegisterForm extends StatelessWidget {
               FormBuilderValidators.email(errorText: ''),
             ]),
           ),
-          verticalSpace(10.0),
+          const VerticalSpace(height: 10.0),
           BlocBuilder<RegisterCubit, RegisterState>(
             builder: (context, state) {
               return FormBuilderTextField(
@@ -143,7 +143,7 @@ class RegisterForm extends StatelessWidget {
               );
             },
           ),
-          verticalSpace(10.0),
+          const VerticalSpace(height: 10.0),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -220,9 +220,9 @@ class RegisterForm extends StatelessWidget {
               ),
             ],
           ),
-          verticalSpace(10.0),
+          const VerticalSpace(height: 10.0),
           const CreateAccountBirthdayPicker(),
-          verticalSpace(30.0),
+          const VerticalSpace(height: 30.0),
           bottomCreateAccount(
             context: context,
             onPressed: () {

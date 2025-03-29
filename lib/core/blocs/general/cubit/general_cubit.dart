@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wardaya/core/blocs/general/cubit/general_state.dart';
 import 'package:wardaya/core/helpers/shared_pref_helper.dart';
 
+import '../../../networking/dio_factory.dart';
+
 class GeneralCubit extends Cubit<GeneralState> {
   GeneralCubit() : super(const GeneralState.initial());
   String lang = 'en';
@@ -17,7 +19,7 @@ class GeneralCubit extends Cubit<GeneralState> {
     }
     this.lang = lang;
     local = Locale(lang);
-
+    DioFactory.setLanguageParameter(lang);
     emit(GeneralState.changeLanguage(lang));
   }
 
@@ -28,6 +30,7 @@ class GeneralCubit extends Cubit<GeneralState> {
     lang = languageCode;
     local = Locale(lang);
 
+    DioFactory.setLanguageParameter(lang);
     // Emit the new state so the UI can rebuild with the new locale.
     emit(GeneralState.changeLanguage(languageCode));
   }

@@ -58,7 +58,7 @@
 //                       size: iconSize ?? 20.0,
 //                       color: iconColor??ColorsManager.mainBlue,
 //                     ),
-//                     horizontalSpace(5.0),
+//                     HorizontalSpace(5.0),
 //                     Text(
 //                       text,
 //                       style: textStyle ?? TextStyles.font12MainBlueBold,
