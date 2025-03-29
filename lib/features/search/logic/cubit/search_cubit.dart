@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:wardaya/features/search/data/apis/search_api_constants.dart';
 import 'package:wardaya/features/search/data/models/filter_data_body.dart';
 import 'package:wardaya/features/search/data/models/search_request_body.dart';
 import 'package:wardaya/features/search/data/repos/search_repo.dart';
@@ -19,6 +20,22 @@ class SearchCubit extends Cubit<SearchState> {
   Map<String, String?> selectedFilters = {};
   Map<String, String?> tempFilters = {};
 
+  // Helper method to process image URLs
+  String getCompleteImageUrl(String relativePath) {
+    if (relativePath.startsWith('http')) {
+      return relativePath;
+    }
+
+    const baseUrl = SearchApiConstants.apiBaseUrlForImages;
+
+    // Handle path with or without leading slash
+    if (relativePath.startsWith('/')) {
+      return '$baseUrl$relativePath';
+    } else {
+      return '$baseUrl/$relativePath';
+    }
+  }
+
   void emitSearchStates({
     String? search,
     String? filterCategory,
@@ -29,24 +46,36 @@ class SearchCubit extends Cubit<SearchState> {
     String? filterPriceRange,
   }) async {
     emit(const SearchState.loading());
-    final response = await _searchRepo.search(SearchRequestBody(
-      limit: 10,
-      page: 1,
-      search: search ?? searchController.text,
-      category: filterCategory,
-      occasion: filterOccasion,
-      recipients: filterRecipients,
-      color: filterColor,
-      bundleTypes: filterBundleTypes,
-      priceRange: filterPriceRange,
-    ));
-    response.when(success: (data) {
-      originalProducts = data.products;
-      filteredProducts = data.products;
-      emit(SearchState.success(data));
-    }, failure: (error) {
-      emit(SearchState.error(error.message ?? ''));
-    });
+    try {
+      final response = await _searchRepo.search(SearchRequestBody(
+        limit: 10,
+        page: 1,
+        search: search ?? searchController.text,
+        category: filterCategory,
+        occasion: filterOccasion,
+        recipients: filterRecipients,
+        color: filterColor,
+        bundleTypes: filterBundleTypes,
+        priceRange: filterPriceRange,
+      ));
+
+      response.when(success: (SearchResponse data) {
+        // Process images for all products
+        for (var product in data.products) {
+          for (int i = 0; i < product.images.length; i++) {
+            product.images[i] = getCompleteImageUrl(product.images[i]);
+          }
+        }
+        originalProducts = data.products;
+        filteredProducts = data.products;
+        emit(SearchState.success(data));
+      }, failure: (error) {
+        emit(SearchState.error(error.message ?? 'Unknown error occurred'));
+      });
+    } catch (e, stackTrace) {
+      log('Search error: $e', stackTrace: stackTrace);
+      emit(SearchState.error('An unexpected error occurred: ${e.toString()}'));
+    }
   }
 
   void setIsGridView(bool isGrid) {

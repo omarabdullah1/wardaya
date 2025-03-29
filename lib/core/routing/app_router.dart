@@ -116,7 +116,7 @@ class AppRouter {
       case Routes.profileScreen:
         return _buildRoute(
           screen: BlocProvider(
-            create: (context) => getIt<ProfileCubit>()..getProfile(),
+            create: (context) => getIt<ProfileCubit>()..getProfile(context),
             child: const ProfileScreen(),
           ),
         );

@@ -42,7 +42,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                     case 3:
                       return BlocProvider(
                         create: (context) =>
-                            getIt<ProfileCubit>()..getProfile(),
+                            getIt<ProfileCubit>()..getProfile(context),
                         child: const ProfileScreen(),
                       );
                     default:

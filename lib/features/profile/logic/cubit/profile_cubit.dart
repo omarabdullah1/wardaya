@@ -1,7 +1,11 @@
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:wardaya/core/helpers/constants.dart';
+import 'package:wardaya/core/helpers/extensions.dart';
+import 'package:wardaya/core/theming/styles.dart';
 import 'package:wardaya/features/profile/data/repos/profile_repo.dart';
 import 'package:wardaya/features/profile/logic/cubit/profile_state.dart';
 
+import '../../../../core/helpers/shared_pref_helper.dart';
 import '../../../../core/routing/router_imports.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
@@ -26,7 +30,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   final TextEditingController dateOfBirthController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  void getProfile() async {
+  void getProfile(BuildContext context) async {
     emit(const ProfileState.loading());
     final response = await _profileRepo.getProfile();
     response.when(success: (profileResponse) async {
@@ -37,7 +41,27 @@ class ProfileCubit extends Cubit<ProfileState> {
       passwordController.text = profileResponse.password!;
       phoneController.text = profileResponse.phoneNumber.toString();
       dateOfBirthController.text = profileResponse.birthDate.toString();
-    }, failure: (error) {
+    }, failure: (error) async {
+      if (error.message == 'Unauthorized') {
+        await Future.delayed(const Duration(seconds: 1));
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Session has been expired',
+                style: TextStylesInter.font12WhiteBold,
+              ),
+              backgroundColor: Colors.red,
+            ),
+          );
+          SharedPrefHelper.removeSecuredString(SharedPrefKeys.userToken);
+          SharedPrefHelper.removeSecuredString(SharedPrefKeys.userData);
+          context.pushNamedAndRemoveUntil(
+            Routes.loginScreen,
+            predicate: (route) => false,
+          );
+        }
+      }
       emit(ProfileState.error(error: error.message ?? ''));
     });
   }
