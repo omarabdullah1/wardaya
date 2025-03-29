@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wardaya/features/home/logic/cubit/home_cubit.dart';
 import 'package:wardaya/features/profile/logic/cubit/profile_cubit.dart';
 import 'package:wardaya/features/explore/ui/explore_screen.dart';
 import 'package:wardaya/features/home/ui/home_screen.dart';
@@ -34,7 +35,11 @@ class _HomeLayoutState extends State<HomeLayout> {
                 builder: (context) {
                   switch (index) {
                     case 0:
-                      return const HomeScreen();
+                      return BlocProvider(
+                        create: (context) =>
+                            getIt<HomeCubit>()..getHomeGallery(),
+                        child: const HomeScreen(),
+                      );
                     case 1:
                       return const ExploreScreen();
                     case 2:
@@ -46,7 +51,11 @@ class _HomeLayoutState extends State<HomeLayout> {
                         child: const ProfileScreen(),
                       );
                     default:
-                      return const HomeScreen();
+                      return BlocProvider(
+                        create: (context) =>
+                            getIt<HomeCubit>()..getHomeGallery(),
+                        child: const HomeScreen(),
+                      );
                   }
                 },
               ),

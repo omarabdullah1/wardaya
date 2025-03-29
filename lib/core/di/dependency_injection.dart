@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:wardaya/features/home/data/apis/home_service.dart';
+import 'package:wardaya/features/home/data/repos/home_repo.dart';
+import 'package:wardaya/features/home/logic/cubit/home_cubit.dart';
 import 'package:wardaya/features/profile/data/repos/profile_repo.dart';
 import 'package:wardaya/features/profile/logic/cubit/profile_cubit.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
@@ -33,6 +36,7 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<SearchService>(() => SearchService(dio));
   getIt.registerLazySingleton<SubscriptionService>(
       () => SubscriptionService(dio));
+  getIt.registerLazySingleton<HomeService>(() => HomeService(dio));
 
   /************************* */
   /* ******** REPOS *********
@@ -46,6 +50,7 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<SearchRepo>(() => SearchRepo(getIt()));
   getIt
       .registerLazySingleton<SubscriptionRepo>(() => SubscriptionRepo(getIt()));
+  getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
 
   /************************* */
   /* ******** CUBIT *********
@@ -53,19 +58,14 @@ Future<void> setupGetIt() async {
   */
 
   getIt.registerFactory<GeneralCubit>(() => GeneralCubit());
+
   getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt()));
   getIt.registerFactory<RegisterCubit>(() => RegisterCubit(getIt()));
   getIt.registerFactory<ProfileCubit>(() => ProfileCubit(getIt()));
   getIt.registerFactory<SearchCubit>(() => SearchCubit(getIt()));
   getIt.registerFactory<SubscriptionCubit>(() => SubscriptionCubit(getIt()));
+  getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt()));
 
   getIt.registerFactory<LayoutCubit>(() => LayoutCubit());
   getIt.registerFactory<CartCubit>(() => CartCubit());
-
-  // getIt.registerFactory<NetZeroCubit>(() => NetZeroCubit());
-  // getIt.registerFactory<PaginationCubit>(() => PaginationCubit());
-
-  // home
-  // getIt.registerLazySingleton<HomeApiService>(() => HomeApiService(dio));
-  // getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
 }
