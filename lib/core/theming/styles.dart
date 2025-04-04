@@ -112,6 +112,11 @@ class TextStylesEBGaramond {
     fontWeight: FontWeightHelper.bold,
     color: ColorsManager.mainRose,
   );
+  static TextStyle font18MainRoseBold = GoogleFonts.ebGaramond(
+    fontSize: 18.0.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: ColorsManager.mainRose,
+  );
   static TextStyle font23WhiteRegular = GoogleFonts.ebGaramond(
     fontSize: 23.0.sp,
     fontWeight: FontWeightHelper.regular,
@@ -130,6 +135,16 @@ class TextStylesEBGaramond {
   static TextStyle font30WhiteRegular = GoogleFonts.ebGaramond(
     fontSize: 30.0.sp,
     fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.white,
+  );
+  static TextStyle font30WhiteBold = GoogleFonts.ebGaramond(
+    fontSize: 30.0.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: ColorsManager.white,
+  );
+  static TextStyle font38WhiteBold = GoogleFonts.ebGaramond(
+    fontSize: 38.0.sp,
+    fontWeight: FontWeightHelper.bold,
     color: ColorsManager.white,
   );
   static TextStyle font32MainRoseRegular = GoogleFonts.ebGaramond(

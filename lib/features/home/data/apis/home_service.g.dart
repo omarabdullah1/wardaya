@@ -14,7 +14,7 @@ class _HomeService implements HomeService {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'https://wardaya-tan.vercel.app/';
+    baseUrl ??= 'https://wecareroot.ddns.net:5100/';
   }
 
   final Dio _dio;
@@ -45,7 +45,7 @@ class _HomeService implements HomeService {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    final _result = await _dio.fetch(_options);
     late GalleryResponse _value;
     try {
       _value = GalleryResponse.fromJson(_result.data!);

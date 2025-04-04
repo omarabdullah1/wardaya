@@ -6,12 +6,13 @@ part 'home_gallery_response.g.dart';
 class GalleryItem {
   @JsonKey(name: "_id")
   final String id;
-  final String? brand;
-  final String? occasion;
-  final String? recipient;
-  final String? subCategory;
+  final String? brand; // Nullable
+  final String? occasion; // Nullable
+  final String? recipient; // Nullable
+  final String? subCategory; // Nullable
   final String textOnImage;
   final String textOnButton;
+  @JsonKey(name: "image_url")
   final String imageUrl;
 
   GalleryItem({
@@ -37,8 +38,26 @@ class GalleryResponse {
 
   GalleryResponse({required this.items});
 
-  factory GalleryResponse.fromJson(Map<String, dynamic> json) =>
-      _$GalleryResponseFromJson(json);
+  // Custom fromJson that handles both List and Map responses
+  factory GalleryResponse.fromJson(dynamic json) {
+    if (json is List) {
+      // If the API returns a list directly
+      return GalleryResponse(
+        items: json.map((item) => GalleryItem.fromJson(item)).toList(),
+      );
+    } else if (json is Map<String, dynamic>) {
+      // If the API returns an object with an 'items' field
+      return _$GalleryResponseFromJson(json);
+    } else {
+      // Handle unexpected format
+      throw FormatException('Unexpected JSON format: $json');
+    }
+  }
+
+  // Make this method static
+  static GalleryResponse convert(dynamic value) {
+    return GalleryResponse.fromJson(value);
+  }
 
   Map<String, dynamic> toJson() => _$GalleryResponseToJson(this);
 }

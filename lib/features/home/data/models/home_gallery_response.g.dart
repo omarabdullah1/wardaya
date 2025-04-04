@@ -14,7 +14,7 @@ GalleryItem _$GalleryItemFromJson(Map<String, dynamic> json) => GalleryItem(
       subCategory: json['subCategory'] as String?,
       textOnImage: json['textOnImage'] as String,
       textOnButton: json['textOnButton'] as String,
-      imageUrl: json['imageUrl'] as String,
+      imageUrl: json['image_url'] as String,
     );
 
 Map<String, dynamic> _$GalleryItemToJson(GalleryItem instance) =>
@@ -26,7 +26,7 @@ Map<String, dynamic> _$GalleryItemToJson(GalleryItem instance) =>
       'subCategory': instance.subCategory,
       'textOnImage': instance.textOnImage,
       'textOnButton': instance.textOnButton,
-      'imageUrl': instance.imageUrl,
+      'image_url': instance.imageUrl,
     };
 
 GalleryResponse _$GalleryResponseFromJson(Map<String, dynamic> json) =>

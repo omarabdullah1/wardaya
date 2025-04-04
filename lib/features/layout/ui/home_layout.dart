@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wardaya/features/home/logic/cubit/home_cubit.dart';
 import 'package:wardaya/features/profile/logic/cubit/profile_cubit.dart';
 import 'package:wardaya/features/explore/ui/explore_screen.dart';
 import 'package:wardaya/features/home/ui/home_screen.dart';
@@ -9,19 +8,15 @@ import '../../../core/di/dependency_injection.dart';
 import '../../../core/theming/colors.dart';
 
 import '../../cart/ui/cart_screen.dart';
+import '../../home/logic/gallery/gallery_cubit.dart';
 import '../../profile/ui/profile_screen.dart';
 import '../logic/cubit/layout_cubit.dart';
 import '../logic/cubit/layout_state.dart';
 import 'widgets/bottom_nav_bar_widget.dart';
 
-class HomeLayout extends StatefulWidget {
+class HomeLayout extends StatelessWidget {
   const HomeLayout({super.key});
 
-  @override
-  State<HomeLayout> createState() => _HomeLayoutState();
-}
-
-class _HomeLayoutState extends State<HomeLayout> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LayoutCubit, LayoutState>(
@@ -37,7 +32,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                     case 0:
                       return BlocProvider(
                         create: (context) =>
-                            getIt<HomeCubit>()..getHomeGallery(),
+                            getIt<GalleryCubit>()..getHomeGallery(),
                         child: const HomeScreen(),
                       );
                     case 1:
@@ -53,7 +48,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                     default:
                       return BlocProvider(
                         create: (context) =>
-                            getIt<HomeCubit>()..getHomeGallery(),
+                            getIt<GalleryCubit>()..getHomeGallery(),
                         child: const HomeScreen(),
                       );
                   }
