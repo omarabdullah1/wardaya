@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,6 +27,7 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   bool _isExpanded = true;
+  int _currentImageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -82,19 +84,64 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Image Carousel
-            Container(
-              color: ColorsManager.lightGrey,
-              height: context.pOH(30).h,
-              child: PageView.builder(
-                itemCount: product.images.length,
-                itemBuilder: (context, index) {
-                  return Image.network(
-                    SearchApiConstants.apiBaseUrlForImages +
-                        product.images[index],
-                    fit: BoxFit.cover,
-                  );
-                },
-              ),
+            Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                Container(
+                  color: ColorsManager.lightGrey,
+                  height: context.pOH(30).h,
+                  child: PageView.builder(
+                    itemCount: product.images.length,
+                    onPageChanged: (index) {
+                      setState(() {
+                        _currentImageIndex = index;
+                      });
+                    },
+                    itemBuilder: (context, index) {
+                      return CachedNetworkImage(
+                        imageUrl: SearchApiConstants.apiBaseUrlForImages +
+                            product.images[index],
+                        fit: BoxFit.contain,
+                        placeholder: (context, url) => Center(
+                          child: SvgPicture.asset(
+                            Assets.of(context).svgs.small_logo_svg,
+                            height: 120.h,
+                            width: 120.w,
+                          ),
+                        ),
+                        errorWidget: (context, url, error) => Center(
+                          child: SvgPicture.asset(
+                            Assets.of(context).svgs.small_logo_svg,
+                            height: 120.h,
+                            width: 120.w,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 16.h),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      product.images.length,
+                      (index) => AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        margin: EdgeInsets.symmetric(horizontal: 2.w),
+                        height: 7.h,
+                        width: 7.w,
+                        decoration: BoxDecoration(
+                          color: _currentImageIndex == index
+                              ? ColorsManager.mainRose
+                              : ColorsManager.grey.withAlpha(128),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 16),
 
