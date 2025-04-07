@@ -133,6 +133,9 @@ class ExploreScreen extends StatelessWidget {
                       categoriesImages: brandsCategoriesImages,
                       titles: brandsTitles,
                       isBackgroundColor: false,
+                      // Note: If brands data comes from API, you'll need to pass IDs and sourceType
+                      // ids: brandsIds,
+                      // sourceType: 'brand',
                     ),
                   ],
                 ),

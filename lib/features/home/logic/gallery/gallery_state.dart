@@ -7,6 +7,6 @@ part 'gallery_state.freezed.dart';
 class GalleryState with _$GalleryState {
   const factory GalleryState.initial() = _Initial;
   const factory GalleryState.loading() = Loading;
-  const factory GalleryState.success(GalleryResponse response) = Success;
+  const factory GalleryState.success(List<GalleryItem> response) = Success;
   const factory GalleryState.error(String message) = Error;
 }

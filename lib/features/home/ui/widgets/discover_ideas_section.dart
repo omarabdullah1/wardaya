@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
+import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
+import 'package:wardaya/core/routing/routes.dart';
 
 import '../../../../core/assets/assets.dart';
 
@@ -35,6 +37,16 @@ class DiscoverIdeasSection extends StatelessWidget {
                     imageUrl: Assets.of(context).images.delivery_png,
                     title: context.el.discoverCardExpressDeliveryTitle,
                     buttonText: context.el.discoverCardExpressDeliveryButton,
+                    onPressed: () {
+                      // Navigate to category screen with express delivery parameter
+                      context.pushNamed(
+                        Routes.categoryScreen,
+                        arguments: {
+                          'extraArgs': 'Express Delivery',
+                          'expressDelivery': true,
+                        },
+                      );
+                    },
                   ),
                   const SizedBox(width: 10),
                   CardItem(
@@ -57,12 +69,14 @@ class CardItem extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String buttonText;
+  final VoidCallback? onPressed;
 
   const CardItem(
       {super.key,
       required this.imageUrl,
       required this.title,
-      required this.buttonText});
+      required this.buttonText,
+      this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +127,7 @@ class CardItem extends StatelessWidget {
                           height: 10,
                         ),
                         ElevatedButton(
-                            onPressed: () {},
+                            onPressed: onPressed,
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: ColorsManager.transparent,
                                 side: const BorderSide(color: Colors.white)),

@@ -64,6 +64,21 @@ class TextStylesInter {
     fontWeight: FontWeightHelper.regular,
     color: ColorsManager.black,
   );
+  static TextStyle font14DarkGrayBold = GoogleFonts.inter(
+    fontSize: 14.0.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: ColorsManager.darkGray,
+  );
+  static TextStyle font13MainRoseBold = GoogleFonts.inter(
+    fontSize: 13.0.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: ColorsManager.mainRose,
+  );
+  static TextStyle font13MainRoseRegular = GoogleFonts.inter(
+    fontSize: 13.0.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.mainRose,
+  );
   static TextStyle font13GreyRegular = GoogleFonts.inter(
     fontSize: 13.0.sp,
     fontWeight: FontWeightHelper.regular,

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'home_gallery_response.g.dart';
@@ -38,19 +40,21 @@ class GalleryResponse {
 
   GalleryResponse({required this.items});
 
-  // Custom fromJson that handles both List and Map responses
   factory GalleryResponse.fromJson(dynamic json) {
+    log("Parsing JSON: $json"); // Debugging line
     if (json is List) {
-      // If the API returns a list directly
-      return GalleryResponse(
-        items: json.map((item) => GalleryItem.fromJson(item)).toList(),
-      );
-    } else if (json is Map<String, dynamic>) {
-      // If the API returns an object with an 'items' field
-      return _$GalleryResponseFromJson(json);
+      try {
+        return GalleryResponse(
+          items: json
+              .map((item) => GalleryItem.fromJson(item as Map<String, dynamic>))
+              .toList(),
+        );
+      } catch (e) {
+        log("Error parsing gallery items: $e, JSON: $json");
+        rethrow;
+      }
     } else {
-      // Handle unexpected format
-      throw FormatException('Unexpected JSON format: $json');
+      throw FormatException('Expected a list but got: $json');
     }
   }
 

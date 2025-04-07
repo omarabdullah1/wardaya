@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
+import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:wardaya/core/routing/routes.dart';
 
 import '../../../../core/theming/colors.dart';
@@ -14,8 +15,7 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
   const TransparentAppBar({super.key});
 
   @override
-  Size get preferredSize =>
-      const Size.fromHeight(80); // Adjust height as needed
+  Size get preferredSize => Size.fromHeight(40.h); // Adjust height as needed
 
   @override
   Widget build(BuildContext context) {
@@ -37,25 +37,22 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   Widget _buildAppBarContent(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Text(
-                context.el.appTitle,
-                style: TextStylesKammer.font35WhiteRegular,
-              ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              context.el.appTitle,
+              style: TextStylesKammer.font35WhiteRegular,
             ),
           ),
-          _buildLocationButton(context),
-          const SizedBox(width: 10),
-          _buildSearchButton(context),
-        ],
-      ),
+        ),
+        _buildLocationButton(context),
+        HorizontalSpace(width: 10.w),
+        _buildSearchButton(context),
+      ],
     );
   }
 

@@ -1,0 +1,187 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'home_category_response.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+HomeCategoryResponse _$HomeCategoryResponseFromJson(
+        Map<String, dynamic> json) =>
+    HomeCategoryResponse(
+      categories: (json['categories'] as List<dynamic>)
+          .map((e) => Category.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$HomeCategoryResponseToJson(
+        HomeCategoryResponse instance) =>
+    <String, dynamic>{
+      'categories': instance.categories,
+    };
+
+Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
+      id: json['_id'] as String,
+      name: json['name'] as String,
+      imageUrl: json['image_url'] as String?,
+      subCategories: (json['subCategories'] as List<dynamic>)
+          .map((e) => SubCategory.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      version: (json['__v'] as num?)?.toInt() ?? 0,
+      categoryOrder: (json['categoryOrder'] as num?)?.toInt(),
+      products: (json['products'] as List<dynamic>)
+          .map((e) => Product.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      nameAr: json['name-ar'] as String?,
+    );
+
+Map<String, dynamic> _$CategoryToJson(Category instance) => <String, dynamic>{
+      '_id': instance.id,
+      'name': instance.name,
+      'image_url': instance.imageUrl,
+      'subCategories': instance.subCategories,
+      '__v': instance.version,
+      'categoryOrder': instance.categoryOrder,
+      'products': instance.products,
+      'name-ar': instance.nameAr,
+    };
+
+SubCategory _$SubCategoryFromJson(Map<String, dynamic> json) => SubCategory(
+      id: json['_id'] as String,
+      name: json['name'] as String,
+      imageUrl: json['image_url'] as String,
+      category: json['category'] as String,
+      version: (json['__v'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$SubCategoryToJson(SubCategory instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'name': instance.name,
+      'image_url': instance.imageUrl,
+      'category': instance.category,
+      '__v': instance.version,
+    };
+
+Product _$ProductFromJson(Map<String, dynamic> json) => Product(
+      id: json['_id'] as String,
+      sku: json['sku'] as String,
+      title: json['title'] as String,
+      description: json['description'] as String,
+      productType: json['productType'] as String?,
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      categories: (json['categories'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      subCategories: (json['subCategories'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      expressDelivery: json['expressDelivery'] as bool,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
+      version: (json['__v'] as num).toInt(),
+      brand: json['brand'] as String?,
+      bundleTypes: (json['bundleTypes'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      careTips: json['careTips'] as String?,
+      colors: (json['colors'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      freeDelivery: json['freeDelivery'] as bool?,
+      occasions: (json['occasions'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      points: (json['points'] as num?)?.toInt(),
+      premiumFlowers: json['premiumFlowers'] as bool?,
+      productTypes: (json['productTypes'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      recipients: (json['recipients'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      isBundle: json['isBundle'] as bool?,
+      components: (json['components'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      price: Price.fromJson(json['price'] as Map<String, dynamic>),
+      dimensions: json['dimensions'] == null
+          ? null
+          : Dimensions.fromJson(json['dimensions'] as Map<String, dynamic>),
+      menuItems: (json['menuItems'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      subMenuItems: (json['subMenuItems'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      bundleItems: (json['bundleItems'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
+      '_id': instance.id,
+      'sku': instance.sku,
+      'title': instance.title,
+      'description': instance.description,
+      'productType': instance.productType,
+      'images': instance.images,
+      'categories': instance.categories,
+      'subCategories': instance.subCategories,
+      'expressDelivery': instance.expressDelivery,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt.toIso8601String(),
+      '__v': instance.version,
+      'brand': instance.brand,
+      'bundleTypes': instance.bundleTypes,
+      'careTips': instance.careTips,
+      'colors': instance.colors,
+      'freeDelivery': instance.freeDelivery,
+      'occasions': instance.occasions,
+      'points': instance.points,
+      'premiumFlowers': instance.premiumFlowers,
+      'productTypes': instance.productTypes,
+      'recipients': instance.recipients,
+      'isBundle': instance.isBundle,
+      'components': instance.components,
+      'price': instance.price,
+      'dimensions': instance.dimensions,
+      'menuItems': instance.menuItems,
+      'subMenuItems': instance.subMenuItems,
+      'bundleItems': instance.bundleItems,
+    };
+
+Price _$PriceFromJson(Map<String, dynamic> json) => Price(
+      total: (json['total'] as num).toInt(),
+      currency: json['currency'] as String,
+    );
+
+Map<String, dynamic> _$PriceToJson(Price instance) => <String, dynamic>{
+      'total': instance.total,
+      'currency': instance.currency,
+    };
+
+Dimensions _$DimensionsFromJson(Map<String, dynamic> json) => Dimensions(
+      width: (json['width'] as num?)?.toInt(),
+      height: (json['height'] as num?)?.toInt(),
+    );
+
+Map<String, dynamic> _$DimensionsToJson(Dimensions instance) =>
+    <String, dynamic>{
+      'width': instance.width,
+      'height': instance.height,
+    };

@@ -14,10 +14,12 @@ class GalleryCubit extends Cubit<GalleryState> {
     try {
       final response = await _homeRepo.getHomeGallery();
       response.when(
-        success: (GalleryResponse data) {
+        success: (List<GalleryItem> data) {
+          log('Successfully received gallery data with ${data.length} items');
           emit(GalleryState.success(data));
         },
         failure: (error) {
+          log('Error fetching gallery data: ${error.message}, Details: ${error.message} - and error ${error.error}');
           emit(GalleryState.error(
               error.message ?? 'Failed to fetch gallery data'));
         },

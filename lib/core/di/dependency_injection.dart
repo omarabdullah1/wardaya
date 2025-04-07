@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:wardaya/features/home/data/apis/home_service.dart';
 import 'package:wardaya/features/home/data/repos/home_repo.dart';
+import 'package:wardaya/features/home/logic/brands/brands_cubit.dart';
+import 'package:wardaya/features/home/logic/categories/categories_cubit.dart';
 import 'package:wardaya/features/profile/data/repos/profile_repo.dart';
 import 'package:wardaya/features/profile/logic/cubit/profile_cubit.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
@@ -17,7 +19,10 @@ import '../../features/authentication/create_account/data/repos/create_account_r
 import '../../features/authentication/create_account/logic/cubit/register_cubit.dart';
 import '../../features/authentication/login/data/repos/login_repo.dart';
 import '../../features/authentication/login/logic/cubit/login_cubit.dart';
+import '../../features/home/logic/delivery_areas/delivery_areas_cubit.dart';
 import '../../features/home/logic/gallery/gallery_cubit.dart';
+import '../../features/home/logic/occassions/occassions_cubit.dart';
+import '../../features/home/logic/recipients/recipients_cubit.dart';
 import '../../features/layout/logic/cubit/layout_cubit.dart';
 import '../blocs/general/cubit/general_cubit.dart';
 import '../networking/dio_factory.dart';
@@ -65,6 +70,11 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<SearchCubit>(() => SearchCubit(getIt()));
   getIt.registerFactory<SubscriptionCubit>(() => SubscriptionCubit(getIt()));
   getIt.registerFactory<GalleryCubit>(() => GalleryCubit(getIt()));
+  getIt.registerFactory<OccassionsCubit>(() => OccassionsCubit(getIt()));
+  getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt()));
+  getIt.registerFactory<BrandsCubit>(() => BrandsCubit(getIt()));
+  getIt.registerFactory<RecipientsCubit>(() => RecipientsCubit(getIt()));
+  getIt.registerFactory<DeliveryAreasCubit>(() => DeliveryAreasCubit(getIt()));
 
   getIt.registerFactory<LayoutCubit>(() => LayoutCubit());
   getIt.registerFactory<CartCubit>(() => CartCubit());

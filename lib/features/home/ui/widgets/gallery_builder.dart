@@ -17,8 +17,8 @@ import '../../../../core/theming/colors.dart';
 import '../../../../core/assets/assets.dart';
 import '../../../../core/widgets/loading_widget.dart';
 
-class GalleryBlocListener extends StatelessWidget {
-  const GalleryBlocListener({super.key});
+class GalleryBuilder extends StatelessWidget {
+  const GalleryBuilder({super.key});
 
   void setupErrorState(BuildContext context, String error) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -132,27 +132,27 @@ class GalleryBlocListener extends StatelessWidget {
   }
 
   Widget _setupSuccess(
-      BuildContext context, PageController controller, GalleryResponse data) {
+      BuildContext context, PageController controller, List<GalleryItem> data) {
     return SizedBox(
       height: context.pOH(60).h,
       child: Stack(
         children: [
           PageView.builder(
             controller: controller,
-            itemCount: data.items.length,
+            itemCount: data.length,
             itemBuilder: (context, index) {
               return Stack(
                 fit: StackFit.expand,
                 children: [
                   CachedNetworkImage(
                     imageUrl: HomeApiConstants.apiBaseUrlForImages +
-                        data.items[index].imageUrl,
+                        data[index].imageUrl,
                     fit: BoxFit.cover,
-                    placeholder: (context, url) => const Center(
+                    placeholder: (context, url) => Center(
                       child: LoadingWidget(
                         loadingState: true,
-                        height: 60,
-                        width: 60,
+                        height: 60.h,
+                        width: 60.w,
                       ),
                     ),
                     errorWidget: (context, url, error) => Center(
@@ -175,7 +175,7 @@ class GalleryBlocListener extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            data.items[index].textOnImage,
+                            data[index].textOnImage,
                             style: TextStylesEBGaramond.font38WhiteBold,
                             softWrap: true,
                           ),
@@ -189,7 +189,7 @@ class GalleryBlocListener extends StatelessWidget {
                             child: TextButton(
                               onPressed: () {},
                               child: Text(
-                                data.items[index].textOnButton,
+                                data[index].textOnButton,
                                 style: TextStylesEBGaramond.font18MainRoseBold,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -210,7 +210,7 @@ class GalleryBlocListener extends StatelessWidget {
             child: Center(
               child: SmoothPageIndicator(
                 controller: controller,
-                count: data.items.length,
+                count: data.length,
                 effect: const SlideEffect(
                   spacing: 8.0,
                   radius: 4.0,

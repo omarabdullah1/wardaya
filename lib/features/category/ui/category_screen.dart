@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +14,23 @@ import '../../search/ui/widgets/search_body.dart';
 
 class CategoryScreen extends StatefulWidget {
   final String momentTitle;
-  const CategoryScreen({super.key, required this.momentTitle});
+  final String? occasionId;
+  final String? categoryId;
+  final String? subCategoryId;
+  final String? recipientId;
+  final String? brandId;
+  final bool? expressDelivery;
+
+  const CategoryScreen({
+    super.key,
+    required this.momentTitle,
+    this.occasionId,
+    this.categoryId,
+    this.subCategoryId,
+    this.recipientId,
+    this.brandId,
+    this.expressDelivery,
+  });
 
   @override
   State<CategoryScreen> createState() => _CategoryScreenState();
@@ -22,11 +40,52 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   void initState() {
     super.initState();
-    // Initialize search with moment title as category
+    // Initialize search based on available parameters
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<SearchCubit>().emitSearchStates(
-            search: widget.momentTitle,
-          );
+      // Get navigation state
+
+      // Use navigation state values if available, otherwise fall back to widget parameters
+      final String? occasionId = widget.occasionId;
+      final String? categoryId = widget.categoryId;
+      final String? subCategoryId = widget.subCategoryId;
+      final String? recipientId = widget.recipientId;
+      final String? brandId = widget.brandId;
+      final bool? expressDelivery = widget.expressDelivery;
+      log('expressDelivery: $expressDelivery');
+      // Set express delivery if needed
+      if (expressDelivery != null && expressDelivery) {
+        context.read<SearchCubit>().emitSearchStates(expressDelivery: true);
+      } else if (brandId != null) {
+        // For brands, use only the brandId
+        context.read<SearchCubit>().emitSearchStates(
+              filterBrand: brandId,
+            );
+      } else if (recipientId != null) {
+        // For recipients, use only the recipientId
+        context.read<SearchCubit>().emitSearchStates(
+              filterRecipients: recipientId,
+            );
+      } else if (occasionId != null) {
+        // For occasions, use only the occasionId
+        context.read<SearchCubit>().emitSearchStates(
+              filterOccasion: occasionId,
+            );
+      } else if (categoryId != null) {
+        // For categories, use only the categoryId
+        context.read<SearchCubit>().emitSearchStates(
+              filterCategory: categoryId,
+            );
+      } else if (subCategoryId != null) {
+        // For subcategories, use only the subCategoryId
+        context.read<SearchCubit>().emitSearchStates(
+              filterSubCategory: subCategoryId,
+            );
+      } else {
+        // Fallback to title search for backward compatibility
+        context.read<SearchCubit>().emitSearchStates(
+              search: widget.momentTitle,
+            );
+      }
     });
   }
 

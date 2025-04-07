@@ -19,6 +19,8 @@ class SearchCubit extends Cubit<SearchState> {
   bool isGridView = true;
   Map<String, String?> selectedFilters = {};
   Map<String, String?> tempFilters = {};
+  Map<String, String?> initialFilter = {};
+  Map<String, List<String>> filterLists = {};
 
   // Helper method to process image URLs
   String getCompleteImageUrl(String relativePath) {
@@ -39,24 +41,79 @@ class SearchCubit extends Cubit<SearchState> {
   void emitSearchStates({
     String? search,
     String? filterCategory,
+    String? filterSubCategory,
     String? filterOccasion,
     String? filterRecipients,
     String? filterColor,
     String? filterBundleTypes,
     String? filterPriceRange,
+    String? filterBrand,
+    bool? expressDelivery,
   }) async {
     emit(const SearchState.loading());
     try {
+      // Only use search parameter if it's not empty or null
+      String? searchText;
+      if (search?.isNotEmpty ?? false) {
+        searchText = search;
+      } else if (searchController.text.isNotEmpty) {
+        searchText = searchController.text;
+      }
+
+      // Store the initial filter if this is the first search
+      if (initialFilter.isEmpty) {
+        if (filterCategory != null) {
+          initialFilter['category'] = filterCategory;
+          // Initialize the filter list with the initial category
+          filterLists['category'] = [filterCategory];
+        }
+        if (filterSubCategory != null) {
+          initialFilter['subCategory'] = filterSubCategory;
+          filterLists['subCategory'] = [filterSubCategory];
+        }
+        if (filterOccasion != null) {
+          initialFilter['occasion'] = filterOccasion;
+          filterLists['occasion'] = [filterOccasion];
+        }
+        if (filterRecipients != null) {
+          initialFilter['recipient'] = filterRecipients;
+          filterLists['recipient'] = [filterRecipients];
+        }
+        if (filterColor != null) {
+          initialFilter['color'] = filterColor;
+        }
+        if (filterBundleTypes != null) {
+          initialFilter['bundleTypes'] = filterBundleTypes;
+          filterLists['bundleTypes'] = [filterBundleTypes];
+        }
+        if (filterPriceRange != null) {
+          initialFilter['priceRange'] = filterPriceRange;
+          filterLists['priceRange'] = [filterPriceRange];
+        }
+        if (filterBrand != null) {
+          initialFilter['brand'] = filterBrand;
+          filterLists['brand'] = [filterBrand];
+        }
+        if (expressDelivery != null) {
+          initialFilter['expressDelivery'] = expressDelivery.toString();
+        }
+      }
+
+      // Add a timeout for the entire operation
       final response = await _searchRepo.search(SearchRequestBody(
         limit: 10,
         page: 1,
-        search: search ?? searchController.text,
-        category: filterCategory,
-        occasion: filterOccasion,
-        recipients: filterRecipients,
-        color: filterColor,
-        bundleTypes: filterBundleTypes,
-        priceRange: filterPriceRange,
+        search: searchText,
+        category:
+            filterLists['category']?.join(','), // Join category list values
+        subCategory: filterLists['subCategory']?.join(','),
+        occasion: filterLists['occasion']?.join(','),
+        recipients: filterLists['recipient']?.join(','),
+        color: filterLists['color']?.join(','),
+        bundleTypes: filterLists['bundleTypes']?.join(','),
+        priceRange: filterLists['priceRange']?.join(','),
+        brand: filterLists['brand']?.join(','),
+        expressDelivery: expressDelivery,
       ));
 
       response.when(success: (SearchResponse data) {
@@ -70,11 +127,25 @@ class SearchCubit extends Cubit<SearchState> {
         filteredProducts = data.products;
         emit(SearchState.success(data));
       }, failure: (error) {
-        emit(SearchState.error(error.message ?? 'Unknown error occurred'));
+        // Check if this is a 504 error and provide a more specific message
+        if (error.message?.contains('504') == true) {
+          emit(const SearchState.error(
+              'Server is taking too long to respond. Please try again in a moment.'));
+        } else {
+          emit(SearchState.error(error.message ?? 'Unknown error occurred'));
+        }
       });
     } catch (e, stackTrace) {
       log('Search error: $e', stackTrace: stackTrace);
-      emit(SearchState.error('An unexpected error occurred: ${e.toString()}'));
+
+      // Check if this is a 504 error and provide a more specific message
+      if (e.toString().contains('504')) {
+        emit(const SearchState.error(
+            'Server is taking too long to respond. Please try again in a moment.'));
+      } else {
+        emit(
+            SearchState.error('An unexpected error occurred: ${e.toString()}'));
+      }
     }
   }
 
@@ -90,45 +161,39 @@ class SearchCubit extends Cubit<SearchState> {
     // If no filters are selected, show all products
     if (filters.values.every((value) => value == null)) {
       filteredProducts = originalProducts;
+      // Reset filter lists when clearing filters
+      filterLists.clear();
+      // Restore initial category if it exists
+      if (initialFilter['category'] != null) {
+        filterLists['category'] = [initialFilter['category']!];
+      }
       emitSearchStates(
         filterCategory: filters["category"],
+        filterSubCategory: filters["subCategory"],
         filterOccasion: filters["occasion"],
         filterRecipients: filters["recipient"],
         filterColor: filters["color"],
         filterBundleTypes: filters["bundleTypes"],
         filterPriceRange: filters["priceRange"],
+        expressDelivery: filters["expressDelivery"] == "true",
       );
       return;
     }
 
-    // // Filter the products based on selected filters
-    // filteredProducts = originalProducts.where((product) {
-    //   bool categoryMatch = filters["category"] == null ||
-    //       product.subCategories.any((cat) => cat.name == filters["category"]);
+    // Get current search text if present
+    String? searchText =
+        searchController.text.isNotEmpty ? searchController.text : null;
 
-    //   bool occasionMatch = filters["occasion"] == null ||
-    //       (product.occasions.isNotEmpty &&
-    //           product.occasions.any((occ) => occ.name == filters["occasion"]));
-
-    //   bool recipientMatch = filters["recipient"] == null ||
-    //       (product.recipients.isNotEmpty &&
-    //           product.recipients
-    //               .any((rec) => rec.name == filters["recipient"]));
-
-    //   bool colorMatch = filters["color"] == null ||
-    //       (product.colors.isNotEmpty &&
-    //           product.colors.any((col) => col.name == filters["color"]));
-
-    //   return categoryMatch && occasionMatch && recipientMatch && colorMatch;
-    // }).toList();
-    // emit(SearchState.applyFilters(selectedFilters));
     emitSearchStates(
+      search: searchText,
       filterCategory: filters["category"],
+      filterSubCategory: filters["subCategory"],
       filterOccasion: filters["occasion"],
       filterRecipients: filters["recipient"],
       filterColor: filters["color"],
       filterBundleTypes: filters["bundleTypes"],
       filterPriceRange: filters["priceRange"],
+      expressDelivery: filters["expressDelivery"] == "true",
     );
   }
 
@@ -142,8 +207,20 @@ class SearchCubit extends Cubit<SearchState> {
 
     if (value == null) {
       tempFilters.remove(filterType);
+      filterLists[filterType]?.remove(value);
+      if (filterLists[filterType]?.isEmpty == true) {
+        filterLists.remove(filterType);
+      }
     } else {
       tempFilters[filterType] = value;
+      if (filterType == 'category') {
+        if (!filterLists.containsKey(filterType)) {
+          filterLists[filterType] = [];
+        }
+        if (!filterLists[filterType]!.contains(value)) {
+          filterLists[filterType]!.add(value);
+        }
+      }
     }
     selectedFilters = tempFilters;
     emit(SearchState.setTempFiltersTypeValue(filterType, value));
@@ -151,16 +228,28 @@ class SearchCubit extends Cubit<SearchState> {
 
   void emitFilterDataStates({
     String? filterCategory,
+    String? filterSubCategory,
     String? filterOccasion,
     String? filterRecipients,
     String? filterColor,
   }) async {
     emit(const SearchState.loadingFilterData());
+
+    // Only pass non-empty parameters
+    final category = filterCategory?.isNotEmpty == true ? filterCategory : null;
+    final subCategory =
+        filterSubCategory?.isNotEmpty == true ? filterSubCategory : null;
+    final occasion = filterOccasion?.isNotEmpty == true ? filterOccasion : null;
+    final recipients =
+        filterRecipients?.isNotEmpty == true ? filterRecipients : null;
+    final color = filterColor?.isNotEmpty == true ? filterColor : null;
+
     final response = await _searchRepo.productFilterData(FilterDataBody(
-      category: filterCategory,
-      occasion: filterOccasion,
-      recipients: filterRecipients,
-      color: filterColor,
+      category: category,
+      subCategory: subCategory,
+      occasion: occasion,
+      recipients: recipients,
+      color: color,
     ));
     response.when(success: (data) {
       emit(SearchState.successFilterData(data));

@@ -20,7 +20,7 @@ mixin _$GalleryState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(GalleryResponse response) success,
+    required TResult Function(List<GalleryItem> response) success,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$GalleryState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(GalleryResponse response)? success,
+    TResult? Function(List<GalleryItem> response)? success,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$GalleryState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(GalleryResponse response)? success,
+    TResult Function(List<GalleryItem> response)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -132,7 +132,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(GalleryResponse response) success,
+    required TResult Function(List<GalleryItem> response) success,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -143,7 +143,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(GalleryResponse response)? success,
+    TResult? Function(List<GalleryItem> response)? success,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -154,7 +154,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(GalleryResponse response)? success,
+    TResult Function(List<GalleryItem> response)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -249,7 +249,7 @@ class _$LoadingImpl implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(GalleryResponse response) success,
+    required TResult Function(List<GalleryItem> response) success,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -260,7 +260,7 @@ class _$LoadingImpl implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(GalleryResponse response)? success,
+    TResult? Function(List<GalleryItem> response)? success,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -271,7 +271,7 @@ class _$LoadingImpl implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(GalleryResponse response)? success,
+    TResult Function(List<GalleryItem> response)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -329,7 +329,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({GalleryResponse response});
+  $Res call({List<GalleryItem> response});
 }
 
 /// @nodoc
@@ -349,9 +349,9 @@ class __$$SuccessImplCopyWithImpl<$Res>
   }) {
     return _then(_$SuccessImpl(
       null == response
-          ? _value.response
+          ? _value._response
           : response // ignore: cast_nullable_to_non_nullable
-              as GalleryResponse,
+              as List<GalleryItem>,
     ));
   }
 }
@@ -359,10 +359,15 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements Success {
-  const _$SuccessImpl(this.response);
+  const _$SuccessImpl(final List<GalleryItem> response) : _response = response;
 
+  final List<GalleryItem> _response;
   @override
-  final GalleryResponse response;
+  List<GalleryItem> get response {
+    if (_response is EqualUnmodifiableListView) return _response;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_response);
+  }
 
   @override
   String toString() {
@@ -374,12 +379,12 @@ class _$SuccessImpl implements Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.response, response) ||
-                other.response == response));
+            const DeepCollectionEquality().equals(other._response, _response));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, response);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_response));
 
   /// Create a copy of GalleryState
   /// with the given fields replaced by the non-null parameter values.
@@ -394,7 +399,7 @@ class _$SuccessImpl implements Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(GalleryResponse response) success,
+    required TResult Function(List<GalleryItem> response) success,
     required TResult Function(String message) error,
   }) {
     return success(response);
@@ -405,7 +410,7 @@ class _$SuccessImpl implements Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(GalleryResponse response)? success,
+    TResult? Function(List<GalleryItem> response)? success,
     TResult? Function(String message)? error,
   }) {
     return success?.call(response);
@@ -416,7 +421,7 @@ class _$SuccessImpl implements Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(GalleryResponse response)? success,
+    TResult Function(List<GalleryItem> response)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -465,9 +470,9 @@ class _$SuccessImpl implements Success {
 }
 
 abstract class Success implements GalleryState {
-  const factory Success(final GalleryResponse response) = _$SuccessImpl;
+  const factory Success(final List<GalleryItem> response) = _$SuccessImpl;
 
-  GalleryResponse get response;
+  List<GalleryItem> get response;
 
   /// Create a copy of GalleryState
   /// with the given fields replaced by the non-null parameter values.
@@ -546,7 +551,7 @@ class _$ErrorImpl implements Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(GalleryResponse response) success,
+    required TResult Function(List<GalleryItem> response) success,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -557,7 +562,7 @@ class _$ErrorImpl implements Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(GalleryResponse response)? success,
+    TResult? Function(List<GalleryItem> response)? success,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -568,7 +573,7 @@ class _$ErrorImpl implements Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(GalleryResponse response)? success,
+    TResult Function(List<GalleryItem> response)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {

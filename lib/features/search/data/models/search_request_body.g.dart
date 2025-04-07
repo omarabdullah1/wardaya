@@ -19,6 +19,7 @@ SearchRequestBody _$SearchRequestBodyFromJson(Map<String, dynamic> json) =>
       recipients: json['recipients'] as String?,
       bundleTypes: json['bundleTypes'] as String?,
       priceRange: json['priceRange'] as String?,
+      expressDelivery: json['expressDelivery'] as bool?,
     );
 
 Map<String, dynamic> _$SearchRequestBodyToJson(SearchRequestBody instance) =>
@@ -34,4 +35,5 @@ Map<String, dynamic> _$SearchRequestBodyToJson(SearchRequestBody instance) =>
       'recipients': instance.recipients,
       'bundleTypes': instance.bundleTypes,
       'priceRange': instance.priceRange,
+      'expressDelivery': instance.expressDelivery,
     };
