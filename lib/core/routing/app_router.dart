@@ -80,11 +80,28 @@ class AppRouter {
       case Routes.categoryScreen:
         if (arguments is Map<String, dynamic>) {
           final extraArgs = arguments['extraArgs'] as String?;
+          final String? occasionId = arguments['occasionId'] as String?;
+          final String? categoryId = arguments['categoryId'] as String?;
+          final String? subCategoryId = arguments['subCategoryId'] as String?;
+          final String? recipientId = arguments['recipientId'] as String?;
+          final String? brandId = arguments['brandId'] as String?;
+          final bool expressDelivery =
+              arguments['expressDelivery'] as bool? ?? false;
+
+          // Create a new SearchCubit instance
+          final searchCubit = getIt<SearchCubit>();
+
           return _buildRoute(
-            screen: BlocProvider(
-              create: (context) => getIt<SearchCubit>(),
+            screen: BlocProvider.value(
+              value: searchCubit,
               child: CategoryScreen(
                 momentTitle: extraArgs ?? "",
+                occasionId: occasionId,
+                categoryId: categoryId,
+                subCategoryId: subCategoryId,
+                recipientId: recipientId,
+                brandId: brandId,
+                expressDelivery: expressDelivery,
               ),
             ),
           );

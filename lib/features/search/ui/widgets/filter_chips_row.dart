@@ -35,16 +35,18 @@ class FilterChipsRow extends StatelessWidget {
         // i want a list of occasions and categories images of the names in the lists above
         final categoriesImages = categoriesNames.map((name) {
           return cubit.originalProducts
-              .expand((product) => product.subCategories)
-              .firstWhere((cat) => cat.name == name)
-              .imageUrl;
+                  .expand((product) => product.subCategories)
+                  .firstWhere((cat) => cat.name == name)
+                  .imageUrl ??
+              '';
         }).toList();
 
         final occasionsImages = occasionsNames.map((name) {
           return cubit.originalProducts
-              .expand((product) => product.occasions)
-              .firstWhere((occ) => occ.name == name)
-              .imageUrl;
+                  .expand((product) => product.occasions)
+                  .firstWhere((occ) => occ.name == name)
+                  .imageUrl ??
+              '';
         }).toList();
         final categoryPairs = List<MapEntry<String, String>>.from(
           categoriesNames.asMap().entries.map(
@@ -100,6 +102,9 @@ class FilterChipsRow extends StatelessWidget {
     return BlocBuilder<SearchCubit, SearchState>(
       builder: (context, state) {
         final cubit = context.read<SearchCubit>();
+        // Get the initial filter that was set when entering the category screen
+        final initialFilter = cubit.initialFilter;
+
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0.w),
           child: ChoiceChip(
@@ -116,7 +121,7 @@ class FilterChipsRow extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: ColorsManager.grey,
                   shape: BoxShape.circle,
-                  image: image.isNullOrEmpty()
+                  image: !image.isNullOrEmpty()
                       ? DecorationImage(
                           image: CachedNetworkImageProvider(
                             SearchApiConstants.apiBaseUrlForImages + image,
@@ -143,18 +148,26 @@ class FilterChipsRow extends StatelessWidget {
             ),
             labelPadding: EdgeInsetsDirectional.only(start: 12.0.w),
             selected: filterType == "All"
-                ? cubit.selectedFilters
-                    .isEmpty // "All" is selected when no filters are active
-                : cubit.selectedFilters[filterType] ==
-                    label, // Other filters are selected when they match
+                ? cubit.selectedFilters.length == 1 &&
+                    cubit.selectedFilters.containsKey(initialFilter.keys.first)
+                : cubit.selectedFilters[filterType] == label,
             onSelected: (selected) {
               if (filterType == "All") {
-                // When "All" is selected, clear all filters
-                cubit.applyFilters({});
+                // When "All" is selected, keep only the initial filter
+                if (initialFilter.isNotEmpty) {
+                  cubit.applyFilters(initialFilter);
+                } else {
+                  cubit.applyFilters({});
+                }
               } else {
                 // For other filters
                 final updatedFilters =
                     Map<String, String?>.from(cubit.selectedFilters);
+
+                // If this is the first filter being added, make sure to keep the initial filter
+                if (updatedFilters.isEmpty && initialFilter.isNotEmpty) {
+                  updatedFilters.addAll(initialFilter);
+                }
 
                 if (selected) {
                   List catList = cubit.originalProducts
@@ -168,7 +181,7 @@ class FilterChipsRow extends StatelessWidget {
                       .map((occ) => occ.name)
                       .toSet()
                       .toList();
-                  // When selecting a filter, clear "All" and apply the new filter
+
                   final categoryIds = cubit.originalProducts
                       .expand((product) => product.categories)
                       .map((cat) => cat.id)
@@ -179,10 +192,7 @@ class FilterChipsRow extends StatelessWidget {
                       .map((occ) => occ.id)
                       .toSet()
                       .toList();
-                  // log(label);
-                  // log(catList.toString());
-                  // log(catList.indexOf(label).toString());
-                  // log(occList.indexOf(label).toString());
+
                   switch (filterType) {
                     case "category":
                       updatedFilters["category"] =
@@ -194,16 +204,14 @@ class FilterChipsRow extends StatelessWidget {
                       break;
                   }
                 } else {
-                  // When deselecting a filter, remove it
+                  // When deselecting a filter, remove it but keep the initial filter
                   updatedFilters.remove(filterType);
+                  if (updatedFilters.isEmpty && initialFilter.isNotEmpty) {
+                    updatedFilters.addAll(initialFilter);
+                  }
                 }
 
-                // If no filters are selected after update, automatically select "All"
-                if (updatedFilters.isEmpty) {
-                  cubit.applyFilters({});
-                } else {
-                  cubit.applyFilters(updatedFilters);
-                }
+                cubit.applyFilters(updatedFilters);
               }
             },
           ),

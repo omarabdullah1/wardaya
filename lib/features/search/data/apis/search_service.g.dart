@@ -36,6 +36,7 @@ class _SearchService implements SearchService {
     String? recipients,
     String? bundleTypes,
     String? priceRange,
+    bool? expressDelivery,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -50,6 +51,7 @@ class _SearchService implements SearchService {
       r'recipients': recipients,
       r'bundleTypes': bundleTypes,
       r'priceRange': priceRange,
+      r'expressDelivery': expressDelivery,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};

@@ -238,6 +238,7 @@ class _assets_svgs_dart {
   final profile_svg = 'assets/svgs/profile.svg';
   final profile_avatar_svg = 'assets/svgs/profile_avatar.svg';
   final remove_svg = 'assets/svgs/remove.svg';
+  final riyal_symbol_svg = 'assets/svgs/riyal_symbol.svg';
   final select_plan_svg = 'assets/svgs/select_plan.svg';
   final share_svg = 'assets/svgs/share.svg';
   final signature_svg = 'assets/svgs/signature.svg';

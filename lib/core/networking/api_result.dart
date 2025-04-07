@@ -1,6 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:dio/dio.dart';
 
 import 'api_error_model.dart';
+import 'dio_factory.dart';
 
 part 'api_result.freezed.dart';
 
@@ -8,4 +10,26 @@ part 'api_result.freezed.dart';
 abstract class ApiResult<T> with _$ApiResult<T> {
   const factory ApiResult.success(T data) = Success<T>;
   const factory ApiResult.failure(ApiErrorModel apiErrorModel) = Failure<T>;
+}
+
+/// Extension methods for ApiResult
+extension ApiResultExtensions<T> on ApiResult<T> {
+  /// Check if this result represents a response that came from cache during a network error
+  bool get isFromCache {
+    if (this is Success<T>) {
+      final successData = (this as Success<T>).data;
+      if (successData is Response) {
+        return CacheUtils.isResponseFromCache(successData);
+      }
+    }
+    return false;
+  }
+
+  /// Get the data safely from the ApiResult
+  T? get dataOrNull {
+    return when(
+      success: (data) => data,
+      failure: (_) => null,
+    );
+  }
 }

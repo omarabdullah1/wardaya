@@ -4,13 +4,14 @@
 
 import 'dart:developer' show log;
 
-import 'package:easiest_localization/easiest_localization.dart' show LocalizationProvider;
+import 'package:easiest_localization/easiest_localization.dart'
+    show LocalizationProvider;
 import 'package:flutter/foundation.dart' show kDebugMode;
-import 'package:flutter/widgets.dart' show BuildContext, Locale, Localizations, LocalizationsDelegate;
-import 'package:flutter_localizations/flutter_localizations.dart' show GlobalMaterialLocalizations;
+import 'package:flutter/widgets.dart'
+    show BuildContext, Locale, Localizations, LocalizationsDelegate;
+import 'package:flutter_localizations/flutter_localizations.dart'
+    show GlobalMaterialLocalizations;
 import 'package:intl/intl.dart' show Intl;
-
-final RegExp _variableRegExp = RegExp(r'\$\{[^}]+\} ?');
 
 typedef Checker<T> = bool Function(T value);
 
@@ -243,25 +244,35 @@ class LocalizationMessages {
       dividerText: (json['divider_text'] ?? '').toString(),
       signInWith: (json['sign_in_with'] ?? '').toString(),
       forgetPasswordTitle: (json['forget_password_title'] ?? '').toString(),
-      forgetPasswordInstruction: (json['forget_password_instruction'] ?? '').toString(),
+      forgetPasswordInstruction:
+          (json['forget_password_instruction'] ?? '').toString(),
       resetPasswordButton: (json['reset_password_button'] ?? '').toString(),
       createAccountTitle: (json['create_account_title'] ?? '').toString(),
       createAccountButton: (json['create_account_button'] ?? '').toString(),
       nameLabel: (json['name_label'] ?? '').toString(),
       phoneLabel: (json['phone_label'] ?? '').toString(),
       selectCountryLabel: (json['select_country_label'] ?? '').toString(),
-      homeGiftsForEveryMoment: (json['home_gifts_for_every_moment'] ?? '').toString(),
-      homeExploreUniqueGiftIdeas: (json['home_explore_unique_gift_ideas'] ?? '').toString(),
+      homeGiftsForEveryMoment:
+          (json['home_gifts_for_every_moment'] ?? '').toString(),
+      homeExploreUniqueGiftIdeas:
+          (json['home_explore_unique_gift_ideas'] ?? '').toString(),
       homeChooseGiftsNow: (json['home_choose_gifts_now'] ?? '').toString(),
-      homeRoundedBeautyEndlessCharm: (json['home_rounded_beauty_endless_charm'] ?? '').toString(),
-      homeStartTheYearWithTulips: (json['home_start_the_year_with_tulips'] ?? '').toString(),
-      homeWoodntYouLoveThis: (json['home_woodnt_you_love_this'] ?? '').toString(),
-      homeAnExtraLuxuriousTouch: (json['home_an_extra_luxurious_touch'] ?? '').toString(),
+      homeRoundedBeautyEndlessCharm:
+          (json['home_rounded_beauty_endless_charm'] ?? '').toString(),
+      homeStartTheYearWithTulips:
+          (json['home_start_the_year_with_tulips'] ?? '').toString(),
+      homeWoodntYouLoveThis:
+          (json['home_woodnt_you_love_this'] ?? '').toString(),
+      homeAnExtraLuxuriousTouch:
+          (json['home_an_extra_luxurious_touch'] ?? '').toString(),
       homeBestSellers: (json['home_best_sellers'] ?? '').toString(),
-      homeCaptivationAromasOfMubkhar: (json['home_captivation_aromas_of_mubkhar'] ?? '').toString(),
-      homeGiftYourLovedOnes: (json['home_gift_your_loved_ones'] ?? '').toString(),
+      homeCaptivationAromasOfMubkhar:
+          (json['home_captivation_aromas_of_mubkhar'] ?? '').toString(),
+      homeGiftYourLovedOnes:
+          (json['home_gift_your_loved_ones'] ?? '').toString(),
       homeNaturesMagic: (json['home_natures_magic'] ?? '').toString(),
-      homeLatestAndLoveliest: (json['home_latest_and_loveliest'] ?? '').toString(),
+      homeLatestAndLoveliest:
+          (json['home_latest_and_loveliest'] ?? '').toString(),
       homeGiftsForEveryone: (json['home_gifts_for_everyone'] ?? '').toString(),
       homeBrandsYoullLove: (json['home_brands_youll_love'] ?? '').toString(),
       bottomNavHome: (json['bottom_nav_home'] ?? '').toString(),
@@ -272,20 +283,32 @@ class LocalizationMessages {
       exploreSearchHint: (json['explore_search_hint'] ?? '').toString(),
       exploreCardMoments: (json['explore_card_moments'] ?? '').toString(),
       exploreCardRecipients: (json['explore_card_recipients'] ?? '').toString(),
-      exploreCategoryFlowersPlants: (json['explore_category_flowers_plants'] ?? '').toString(),
-      exploreCategoryFlowersGifts: (json['explore_category_flowers_gifts'] ?? '').toString(),
-      exploreCategoryExpressDelivery: (json['explore_category_express_delivery'] ?? '').toString(),
-      exploreCategoryFloralSubscription: (json['explore_category_floral_subscription'] ?? '').toString(),
-      exploreBrandsYoullLove: (json['explore_brands_youll_love'] ?? '').toString(),
-      discoverNewIdeasTitle: (json['discover_new_ideas_title'] ?? '').toString(),
-      discoverCardExpressDeliveryTitle: (json['discover_card_express_delivery_title'] ?? '').toString(),
-      discoverCardExpressDeliveryButton: (json['discover_card_express_delivery_button'] ?? '').toString(),
-      discoverCardWeeklySurpriseTitle: (json['discover_card_weekly_surprise_title'] ?? '').toString(),
-      discoverCardWeeklySurpriseButton: (json['discover_card_weekly_surprise_button'] ?? '').toString(),
+      exploreCategoryFlowersPlants:
+          (json['explore_category_flowers_plants'] ?? '').toString(),
+      exploreCategoryFlowersGifts:
+          (json['explore_category_flowers_gifts'] ?? '').toString(),
+      exploreCategoryExpressDelivery:
+          (json['explore_category_express_delivery'] ?? '').toString(),
+      exploreCategoryFloralSubscription:
+          (json['explore_category_floral_subscription'] ?? '').toString(),
+      exploreBrandsYoullLove:
+          (json['explore_brands_youll_love'] ?? '').toString(),
+      discoverNewIdeasTitle:
+          (json['discover_new_ideas_title'] ?? '').toString(),
+      discoverCardExpressDeliveryTitle:
+          (json['discover_card_express_delivery_title'] ?? '').toString(),
+      discoverCardExpressDeliveryButton:
+          (json['discover_card_express_delivery_button'] ?? '').toString(),
+      discoverCardWeeklySurpriseTitle:
+          (json['discover_card_weekly_surprise_title'] ?? '').toString(),
+      discoverCardWeeklySurpriseButton:
+          (json['discover_card_weekly_surprise_button'] ?? '').toString(),
       momentsScreenTitle: (json['moments_screen_title'] ?? '').toString(),
       recipientsScreenTitle: (json['recipients_screen_title'] ?? '').toString(),
-      flowersPlanetsScreenTitle: (json['flowers_planets_screen_title'] ?? '').toString(),
-      flowersGiftsScreenTitle: (json['flowers_gifts_screen_title'] ?? '').toString(),
+      flowersPlanetsScreenTitle:
+          (json['flowers_planets_screen_title'] ?? '').toString(),
+      flowersGiftsScreenTitle:
+          (json['flowers_gifts_screen_title'] ?? '').toString(),
       searchPlaceholder: (json['search_placeholder'] ?? '').toString(),
       searchButton: (json['search_button'] ?? '').toString(),
       categoryFilterTitle: (json['category_filter_title'] ?? '').toString(),
@@ -306,7 +329,8 @@ class LocalizationMessages {
       productDetailsTitle: (json['product_details_title'] ?? '').toString(),
       wardayaPoints: (json['wardaya_points'] ?? '').toString(),
       currencySar: (json['currency_sar'] ?? '').toString(),
-      splitPaymentsWithTamara: (json['split_payments_with_tamara'] ?? '').toString(),
+      splitPaymentsWithTamara:
+          (json['split_payments_with_tamara'] ?? '').toString(),
       earn: (json['earn'] ?? '').toString(),
       cartEmptyTitle: (json['cart_empty_title'] ?? '').toString(),
       cartEmptySubtitle: (json['cart_empty_subtitle'] ?? '').toString(),
@@ -327,8 +351,10 @@ class LocalizationMessages {
       toLabel: (json['to_label'] ?? '').toString(),
       fromLabel: (json['from_label'] ?? '').toString(),
       optionalHint: (json['optional_hint'] ?? '').toString(),
-      suggestedMessagesPromptPart1: (json['suggested_messages_prompt_part1'] ?? '').toString(),
-      suggestedMessagesPromptPart2: (json['suggested_messages_prompt_part2'] ?? '').toString(),
+      suggestedMessagesPromptPart1:
+          (json['suggested_messages_prompt_part1'] ?? '').toString(),
+      suggestedMessagesPromptPart2:
+          (json['suggested_messages_prompt_part2'] ?? '').toString(),
       signatureButton: (json['signature_button'] ?? '').toString(),
       qrCodeLabel: (json['qr_code_label'] ?? '').toString(),
       recordVideoButton: (json['record_video_button'] ?? '').toString(),
@@ -349,7 +375,8 @@ class LocalizationMessages {
       mediaIntroText: (json['media_intro_text'] ?? '').toString(),
       howItWorks: (json['how_it_works'] ?? '').toString(),
       pasteLinkInstruction: (json['paste_link_instruction'] ?? '').toString(),
-      recordVideoInstruction: (json['record_video_instruction'] ?? '').toString(),
+      recordVideoInstruction:
+          (json['record_video_instruction'] ?? '').toString(),
       qrCodeNote: (json['qr_code_note'] ?? '').toString(),
       freeLabel: (json['free_label'] ?? '').toString(),
       pasteLinkHint: (json['paste_link_hint'] ?? '').toString(),
@@ -403,24 +430,34 @@ class LocalizationMessages {
       birthdayLabel: (json['birthday_label'] ?? '').toString(),
       mySubscriptionsTitle: (json['my_subscriptions_title'] ?? '').toString(),
       wardayaSubscriptions: (json['wardaya_subscriptions'] ?? '').toString(),
-      subscriptionDescription: (json['subscription_description'] ?? '').toString(),
-      subscriptionHowItWorks: (json['subscription_how_it_works'] ?? '').toString(),
-      subscriptionSelectYourPlan: (json['subscription_select_your_plan'] ?? '').toString(),
-      subscriptionChooseWhatFitsYourNeeds: (json['subscription_choose_what_fits_your_needs'] ?? '').toString(),
-      subscriptionCustomizeDelivery: (json['subscription_customize_delivery'] ?? '').toString(),
+      subscriptionDescription:
+          (json['subscription_description'] ?? '').toString(),
+      subscriptionHowItWorks:
+          (json['subscription_how_it_works'] ?? '').toString(),
+      subscriptionSelectYourPlan:
+          (json['subscription_select_your_plan'] ?? '').toString(),
+      subscriptionChooseWhatFitsYourNeeds:
+          (json['subscription_choose_what_fits_your_needs'] ?? '').toString(),
+      subscriptionCustomizeDelivery:
+          (json['subscription_customize_delivery'] ?? '').toString(),
       subscriptionSetDeliveryFrequencyAndPayment:
-          (json['subscription_set_delivery_frequency_and_payment'] ?? '').toString(),
-      subscriptionEnjoyFreshFlowers: (json['subscription_enjoy_fresh_flowers'] ?? '').toString(),
+          (json['subscription_set_delivery_frequency_and_payment'] ?? '')
+              .toString(),
+      subscriptionEnjoyFreshFlowers:
+          (json['subscription_enjoy_fresh_flowers'] ?? '').toString(),
       subscriptionReceiveFreshFlowersEveryTime:
-          (json['subscription_receive_fresh_flowers_every_time'] ?? '').toString(),
+          (json['subscription_receive_fresh_flowers_every_time'] ?? '')
+              .toString(),
       subscriptionPlans: (json['subscription_plans'] ?? '').toString(),
-      subscriptionStartingFrom: (json['subscription_starting_from'] ?? '').toString(),
+      subscriptionStartingFrom:
+          (json['subscription_starting_from'] ?? '').toString(),
       subscriptionButton: (json['subscription_button'] ?? '').toString(),
       more: (json['more'] ?? '').toString(),
       less: (json['less'] ?? '').toString(),
       startingFrom: (json['starting_from'] ?? '').toString(),
       perDelivery: (json['per_delivery'] ?? '').toString(),
-      subscriptionDurationTitle: (json['subscription_duration_title'] ?? '').toString(),
+      subscriptionDurationTitle:
+          (json['subscription_duration_title'] ?? '').toString(),
       deliveryFrequency: (json['deliveryـfrequency'] ?? '').toString(),
       onceAWeek: (json['once_a_week'] ?? '').toString(),
       everyTwoWeeks: (json['every_two_weeks'] ?? '').toString(),
@@ -430,7 +467,8 @@ class LocalizationMessages {
       total: (json['total'] ?? '').toString(),
       startingDate: (json['starting_date'] ?? '').toString(),
       selectOtherDate: (json['select_other_date'] ?? '').toString(),
-      weSelectDeleveryBasedArea: (json['we_select_delevery_based_area'] ?? '').toString(),
+      weSelectDeleveryBasedArea:
+          (json['we_select_delevery_based_area'] ?? '').toString(),
       off: (json['off'] ?? '').toString(),
       perDelivery1: (json['perـdelivery'] ?? '').toString(),
       deliveryFrequency1: (json['delivery_frequency'] ?? '').toString(),
@@ -667,7 +705,8 @@ class LocalizationMessages {
         r'''home_woodnt_you_love_this''': homeWoodntYouLoveThis,
         r'''home_an_extra_luxurious_touch''': homeAnExtraLuxuriousTouch,
         r'''home_best_sellers''': homeBestSellers,
-        r'''home_captivation_aromas_of_mubkhar''': homeCaptivationAromasOfMubkhar,
+        r'''home_captivation_aromas_of_mubkhar''':
+            homeCaptivationAromasOfMubkhar,
         r'''home_gift_your_loved_ones''': homeGiftYourLovedOnes,
         r'''home_natures_magic''': homeNaturesMagic,
         r'''home_latest_and_loveliest''': homeLatestAndLoveliest,
@@ -683,14 +722,20 @@ class LocalizationMessages {
         r'''explore_card_recipients''': exploreCardRecipients,
         r'''explore_category_flowers_plants''': exploreCategoryFlowersPlants,
         r'''explore_category_flowers_gifts''': exploreCategoryFlowersGifts,
-        r'''explore_category_express_delivery''': exploreCategoryExpressDelivery,
-        r'''explore_category_floral_subscription''': exploreCategoryFloralSubscription,
+        r'''explore_category_express_delivery''':
+            exploreCategoryExpressDelivery,
+        r'''explore_category_floral_subscription''':
+            exploreCategoryFloralSubscription,
         r'''explore_brands_youll_love''': exploreBrandsYoullLove,
         r'''discover_new_ideas_title''': discoverNewIdeasTitle,
-        r'''discover_card_express_delivery_title''': discoverCardExpressDeliveryTitle,
-        r'''discover_card_express_delivery_button''': discoverCardExpressDeliveryButton,
-        r'''discover_card_weekly_surprise_title''': discoverCardWeeklySurpriseTitle,
-        r'''discover_card_weekly_surprise_button''': discoverCardWeeklySurpriseButton,
+        r'''discover_card_express_delivery_title''':
+            discoverCardExpressDeliveryTitle,
+        r'''discover_card_express_delivery_button''':
+            discoverCardExpressDeliveryButton,
+        r'''discover_card_weekly_surprise_title''':
+            discoverCardWeeklySurpriseTitle,
+        r'''discover_card_weekly_surprise_button''':
+            discoverCardWeeklySurpriseButton,
         r'''moments_screen_title''': momentsScreenTitle,
         r'''recipients_screen_title''': recipientsScreenTitle,
         r'''flowers_planets_screen_title''': flowersPlanetsScreenTitle,
@@ -815,11 +860,14 @@ class LocalizationMessages {
         r'''subscription_description''': subscriptionDescription,
         r'''subscription_how_it_works''': subscriptionHowItWorks,
         r'''subscription_select_your_plan''': subscriptionSelectYourPlan,
-        r'''subscription_choose_what_fits_your_needs''': subscriptionChooseWhatFitsYourNeeds,
+        r'''subscription_choose_what_fits_your_needs''':
+            subscriptionChooseWhatFitsYourNeeds,
         r'''subscription_customize_delivery''': subscriptionCustomizeDelivery,
-        r'''subscription_set_delivery_frequency_and_payment''': subscriptionSetDeliveryFrequencyAndPayment,
+        r'''subscription_set_delivery_frequency_and_payment''':
+            subscriptionSetDeliveryFrequencyAndPayment,
         r'''subscription_enjoy_fresh_flowers''': subscriptionEnjoyFreshFlowers,
-        r'''subscription_receive_fresh_flowers_every_time''': subscriptionReceiveFreshFlowersEveryTime,
+        r'''subscription_receive_fresh_flowers_every_time''':
+            subscriptionReceiveFreshFlowersEveryTime,
         r'''subscription_plans''': subscriptionPlans,
         r'''subscription_starting_from''': subscriptionStartingFrom,
         r'''subscription_button''': subscriptionButton,
@@ -884,7 +932,8 @@ final LocalizationMessages en = LocalizationMessages(
   dividerText: 'OR',
   signInWith: 'Sign in with',
   forgetPasswordTitle: 'Forget Password?',
-  forgetPasswordInstruction: 'Enter the email address associated with your account',
+  forgetPasswordInstruction:
+      'Enter the email address associated with your account',
   resetPasswordButton: 'Reset Password',
   createAccountTitle: 'Create Account',
   createAccountButton: 'Create Account',
@@ -1002,7 +1051,8 @@ final LocalizationMessages en = LocalizationMessages(
   frontSideLabel: 'Front Side (Message)',
   backSideLabel: 'Back Side (Cover)',
   qrQuestion: 'Did you enjoy this gift?',
-  qrInstruction: 'Scan the QR code to share your heartfelt message with the sender.',
+  qrInstruction:
+      'Scan the QR code to share your heartfelt message with the sender.',
   signatureTitle: 'Your Signature',
   drawInstruction: 'Draw your signature inside the frame',
   clearButton: 'Clear',
@@ -1052,7 +1102,8 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   subscriptionSelectYourPlan: 'Select Your Plan:',
   subscriptionChooseWhatFitsYourNeeds: 'Choose what fits your needs.',
   subscriptionCustomizeDelivery: 'Customize Delivery:',
-  subscriptionSetDeliveryFrequencyAndPayment: 'Set delivery frequency and payment.',
+  subscriptionSetDeliveryFrequencyAndPayment:
+      'Set delivery frequency and payment.',
   subscriptionEnjoyFreshFlowers: 'Enjoy Fresh Flowers:',
   subscriptionReceiveFreshFlowersEveryTime: 'Receive fresh flowers every time.',
   subscriptionPlans: 'Subscription Plans',
@@ -1072,7 +1123,8 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   total: 'Total',
   startingDate: 'Starting Date',
   selectOtherDate: 'Select Other Date',
-  weSelectDeleveryBasedArea: 'We’ll select the best delivery time based on your area and delivery date',
+  weSelectDeleveryBasedArea:
+      'We’ll select the best delivery time based on your area and delivery date',
   off: 'OFF',
   perDelivery1: 'Per delivery',
   deliveryFrequency1: '',
@@ -1279,7 +1331,8 @@ final LocalizationMessages ar = LocalizationMessages(
   total: 'الإجمالي',
   startingDate: 'تاريخ البدء',
   selectOtherDate: 'اختر تاريخًا آخر',
-  weSelectDeleveryBasedArea: 'سنختار أفضل وقت توصيل بناءً على منطقتك وتاريخ التوصيل',
+  weSelectDeleveryBasedArea:
+      'سنختار أفضل وقت توصيل بناءً على منطقتك وتاريخ التوصيل',
   off: 'خصم',
   perDelivery1: '',
   deliveryFrequency1: 'تكرار التوصيل',
@@ -1292,7 +1345,8 @@ final Map<Locale, LocalizationMessages> _languageMap = {
 
 final Map<Locale, LocalizationMessages> _providersLanguagesMap = {};
 
-class EasiestLocalizationDelegate extends LocalizationsDelegate<LocalizationMessages> {
+class EasiestLocalizationDelegate
+    extends LocalizationsDelegate<LocalizationMessages> {
   EasiestLocalizationDelegate({
     List<LocalizationProvider<LocalizationMessages>> providers = const [],
   }) {
@@ -1307,7 +1361,8 @@ class EasiestLocalizationDelegate extends LocalizationsDelegate<LocalizationMess
 
   @override
   bool isSupported(Locale locale) {
-    final bool supportedByProviders = _providers.any((LocalizationProvider value) => value.canLoad(locale));
+    final bool supportedByProviders =
+        _providers.any((LocalizationProvider value) => value.canLoad(locale));
     if (supportedByProviders) {
       return true;
     }
@@ -1328,7 +1383,8 @@ class EasiestLocalizationDelegate extends LocalizationsDelegate<LocalizationMess
 
     LocalizationProvider<LocalizationMessages>? localizationProvider;
 
-    for (final LocalizationProvider<LocalizationMessages> provider in _providers) {
+    for (final LocalizationProvider<LocalizationMessages> provider
+        in _providers) {
       if (provider.canLoad(locale)) {
         localizationProvider = provider;
         break;
@@ -1352,20 +1408,26 @@ class EasiestLocalizationDelegate extends LocalizationsDelegate<LocalizationMess
   }
 
   @override
-  bool shouldReload(LocalizationsDelegate<LocalizationMessages> old) => old != this;
+  bool shouldReload(LocalizationsDelegate<LocalizationMessages> old) =>
+      old != this;
 }
 
 class Messages {
-  static LocalizationMessages of(BuildContext context) => Localizations.of(context, LocalizationMessages)!;
+  static LocalizationMessages of(BuildContext context) =>
+      Localizations.of(context, LocalizationMessages)!;
 
-  static LocalizationMessages? getContent(Locale locale) => _loadLocalLocale(locale);
+  static LocalizationMessages? getContent(Locale locale) =>
+      _loadLocalLocale(locale);
 
   static LocalizationMessages get el {
     final String? defaultLocaleString = Intl.defaultLocale;
-    final List<String> localeParticles = defaultLocaleString == null ? [] : defaultLocaleString.split(RegExp(r'[_-]'));
+    final List<String> localeParticles = defaultLocaleString == null
+        ? []
+        : defaultLocaleString.split(RegExp(r'[_-]'));
     final Locale? defaultLocale = localeParticles.isEmpty
         ? null
-        : Locale(localeParticles.first, localeParticles.length > 1 ? localeParticles[1] : null);
+        : Locale(localeParticles.first,
+            localeParticles.length > 1 ? localeParticles[1] : null);
     LocalizationMessages? localeContent = _providersLanguagesMap[defaultLocale];
     localeContent ??= _languageMap[defaultLocale] ?? _languageMap.values.first;
     return localeContent;
@@ -1406,8 +1468,11 @@ const List<Locale> supportedLocales = [
   Locale('ar'),
 ];
 
-List<Locale> supportedLocalesWithProviders(List<LocalizationProvider<LocalizationMessages>> providers) => [
-      for (final LocalizationProvider provider in providers) ...provider.supportedLocales,
+List<Locale> supportedLocalesWithProviders(
+        List<LocalizationProvider<LocalizationMessages>> providers) =>
+    [
+      for (final LocalizationProvider provider in providers)
+        ...provider.supportedLocales,
       ...supportedLocales,
     ];
 
