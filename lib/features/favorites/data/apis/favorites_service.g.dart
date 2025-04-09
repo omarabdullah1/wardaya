@@ -105,7 +105,7 @@ class _FavoritesService implements FavoritesService {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'productId': productId};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<DeleteFavoritesResponse>(Options(
       method: 'DELETE',
       headers: _headers,

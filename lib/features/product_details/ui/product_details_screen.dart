@@ -607,18 +607,6 @@ class ProductDetailsAppBar extends StatelessWidget
                             color: ColorsManager.black,
                           ),
                     () {
-                      // Create product map for favorites
-                      final Map<String, dynamic> productMap = {
-                        'id': product.id,
-                        'name': product.title,
-                        'price': product.price.total,
-                        'imageUrl': product.images.isNotEmpty
-                            ? SearchApiConstants.apiBaseUrlForImages +
-                                product.images[0]
-                            : '',
-                        'description': product.description,
-                      };
-
                       // Check if the product is already in favorites
                       if (isFavorite) {
                         // If it's already a favorite, remove it
