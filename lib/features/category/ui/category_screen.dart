@@ -19,6 +19,7 @@ class CategoryScreen extends StatefulWidget {
   final String? subCategoryId;
   final String? recipientId;
   final String? brandId;
+  final String? subMenuItemsId;
   final bool? expressDelivery;
 
   const CategoryScreen({
@@ -29,6 +30,7 @@ class CategoryScreen extends StatefulWidget {
     this.subCategoryId,
     this.recipientId,
     this.brandId,
+    this.subMenuItemsId,
     this.expressDelivery,
   });
 
@@ -50,6 +52,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       final String? subCategoryId = widget.subCategoryId;
       final String? recipientId = widget.recipientId;
       final String? brandId = widget.brandId;
+      final String? subMenuItemsId = widget.subMenuItemsId;
       final bool? expressDelivery = widget.expressDelivery;
       log('expressDelivery: $expressDelivery');
       // Set express delivery if needed
@@ -79,6 +82,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
         // For subcategories, use only the subCategoryId
         context.read<SearchCubit>().emitSearchStates(
               filterSubCategory: subCategoryId,
+            );
+      } else if (subMenuItemsId != null) {
+        // For submenu items, use only the subMenuItemsId
+        context.read<SearchCubit>().emitSearchStates(
+              filterSubMenuItems: subMenuItemsId,
             );
       } else {
         // Fallback to title search for backward compatibility

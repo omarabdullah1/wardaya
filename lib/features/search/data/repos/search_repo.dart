@@ -29,6 +29,7 @@ class SearchRepo {
         searchRequestBody.recipients,
         searchRequestBody.bundleTypes,
         searchRequestBody.priceRange,
+        searchRequestBody.subMenuItems,
         searchRequestBody.expressDelivery,
       );
       return ApiResult.success(response);

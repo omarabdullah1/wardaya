@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:wardaya/features/explore/data/apis/explore_service.dart';
+import 'package:wardaya/features/explore/data/repos/explore_repo.dart';
+import 'package:wardaya/features/explore/logic/cubit/explore_cubit.dart';
 import 'package:wardaya/features/favorites/data/apis/favorites_service.dart';
 import 'package:wardaya/features/favorites/logic/cubit/favorites_cubit.dart';
 import 'package:wardaya/features/home/data/apis/home_service.dart';
@@ -46,6 +49,7 @@ Future<void> setupGetIt() async {
       () => SubscriptionService(dio));
   getIt.registerLazySingleton<HomeService>(() => HomeService(dio));
   getIt.registerLazySingleton<FavoritesService>(() => FavoritesService(dio));
+  getIt.registerLazySingleton<ExploreService>(() => ExploreService(dio));
 
   /************************* */
   /* ******** REPOS *********
@@ -61,6 +65,7 @@ Future<void> setupGetIt() async {
       .registerLazySingleton<SubscriptionRepo>(() => SubscriptionRepo(getIt()));
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
   getIt.registerLazySingleton<FavoritesRepo>(() => FavoritesRepo(getIt()));
+  getIt.registerLazySingleton<ExploreRepo>(() => ExploreRepo(getIt()));
 
   /************************* */
   /* ******** CUBIT *********
@@ -81,6 +86,7 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<RecipientsCubit>(() => RecipientsCubit(getIt()));
   getIt.registerFactory<DeliveryAreasCubit>(() => DeliveryAreasCubit(getIt()));
   getIt.registerFactory<FavoritesCubit>(() => FavoritesCubit(getIt()));
+  getIt.registerFactory<ExploreCubit>(() => ExploreCubit(getIt()));
 
   getIt.registerFactory<LayoutCubit>(() => LayoutCubit());
   getIt.registerFactory<CartCubit>(() => CartCubit());

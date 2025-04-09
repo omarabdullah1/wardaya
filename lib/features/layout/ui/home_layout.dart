@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wardaya/features/explore/logic/cubit/explore_cubit.dart';
 import 'package:wardaya/features/home/logic/brands/brands_cubit.dart';
 import 'package:wardaya/features/profile/logic/cubit/profile_cubit.dart';
 import 'package:wardaya/features/explore/ui/explore_screen.dart';
@@ -65,7 +66,19 @@ class HomeLayout extends StatelessWidget {
                         child: const HomeScreen(),
                       );
                     case 1:
-                      return const ExploreScreen();
+                      return MultiBlocProvider(
+                        providers: [
+                          BlocProvider(
+                            create: (context) =>
+                                getIt<BrandsCubit>()..getBrands(),
+                          ),
+                          BlocProvider(
+                            create: (context) =>
+                                getIt<ExploreCubit>()..getMenuItems(),
+                          ),
+                        ],
+                        child: const ExploreScreen(),
+                      );
                     case 2:
                       return const CartScreen();
                     case 3:

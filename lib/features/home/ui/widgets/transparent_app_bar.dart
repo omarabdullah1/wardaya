@@ -14,6 +14,7 @@ import 'package:wardaya/features/home/logic/delivery_areas/delivery_areas_cubit.
 import 'package:wardaya/features/home/logic/delivery_areas/delivery_areas_state.dart';
 import 'package:wardaya/features/home/ui/widgets/city_selection_bottom_sheet.dart';
 
+import '../../../../core/di/dependency_injection.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
 
@@ -30,15 +31,28 @@ class TransparentAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _TransparentAppBarState extends State<TransparentAppBar> {
   String? _selectedCityId;
   String _cityName = '';
+  bool _isLoading = false;
+
+  late DeliveryAreasCubit _deliveryAreasCubit;
 
   @override
   void initState() {
     super.initState();
+    // Get the DeliveryAreasCubit from dependency injection
+    _deliveryAreasCubit = getIt<DeliveryAreasCubit>();
+
     // Fetch delivery areas when widget initializes
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final deliveryAreasCubit = context.read<DeliveryAreasCubit>();
-      deliveryAreasCubit.getDeliveryAreas();
+      _fetchDeliveryAreas();
     });
+  }
+
+  void _fetchDeliveryAreas() {
+    log('Manually triggering delivery areas API call...');
+    setState(() {
+      _isLoading = true;
+    });
+    _deliveryAreasCubit.getDeliveryAreas();
   }
 
   @override
@@ -73,7 +87,10 @@ class _TransparentAppBarState extends State<TransparentAppBar> {
             ),
           ),
         ),
-        _buildLocationButton(context),
+        BlocProvider.value(
+          value: _deliveryAreasCubit,
+          child: _buildLocationButton(context),
+        ),
         HorizontalSpace(width: 10.w),
         _buildSearchButton(context),
       ],
@@ -84,15 +101,26 @@ class _TransparentAppBarState extends State<TransparentAppBar> {
     return BlocConsumer<DeliveryAreasCubit, DeliveryAreasState>(
       listener: (context, state) {
         log("DeliveryAreasState changed: ${state.runtimeType}");
+
         state.when(
           initial: () {
             log("DeliveryAreas: Initial state");
+            setState(() {
+              _isLoading = false;
+            });
           },
           loading: () {
             log("DeliveryAreas: Loading...");
+            setState(() {
+              _isLoading = true;
+            });
           },
           success: (areas) {
             log("DeliveryAreas: Loaded ${areas.length} areas");
+            setState(() {
+              _isLoading = false;
+            });
+
             // Display details of each area
             for (var area in areas) {
               log("Area: ${area.country} (${area.cities.length} cities)");
@@ -106,10 +134,10 @@ class _TransparentAppBarState extends State<TransparentAppBar> {
                 areas.first.cities.isNotEmpty &&
                 _selectedCityId == null) {
               // Try to find Saudi Arabia first
-              final saudiArabia = areas
-                  .where((area) => area.country == "Saudi Arabia")
+              final area = areas
+                  .where((area) => area.country == areas.first.country)
                   .firstOrNull;
-              final cities = saudiArabia?.cities ?? areas.first.cities;
+              final cities = area?.cities ?? areas.first.cities;
 
               if (cities.isNotEmpty) {
                 setState(() {
@@ -122,6 +150,24 @@ class _TransparentAppBarState extends State<TransparentAppBar> {
           },
           error: (errorMsg) {
             log("DeliveryAreas: Error - $errorMsg");
+            setState(() {
+              _isLoading = false;
+            });
+
+            // Show error message to user
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("Error loading delivery areas: $errorMsg"),
+                backgroundColor: Colors.red,
+                action: SnackBarAction(
+                  label: 'Retry',
+                  textColor: Colors.white,
+                  onPressed: () {
+                    _fetchDeliveryAreas();
+                  },
+                ),
+              ),
+            );
           },
         );
       },
@@ -156,7 +202,30 @@ class _TransparentAppBarState extends State<TransparentAppBar> {
 
         return GestureDetector(
           onTap: () {
-            if (deliveryAreas.isEmpty) return; // Don't show if no data
+            log("Location button tapped - state: ${state.runtimeType}, isLoading: $_isLoading, areas: ${deliveryAreas.length}");
+
+            if (_isLoading) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Loading delivery areas, please wait..."),
+                  duration: Duration(seconds: 2),
+                ),
+              );
+              return;
+            }
+
+            if (deliveryAreas.isEmpty) {
+              log("No delivery areas available, retrying API call...");
+              _fetchDeliveryAreas();
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text(
+                      "Loading delivery areas, please try again in a moment"),
+                  duration: Duration(seconds: 2),
+                ),
+              );
+              return;
+            }
 
             CitySelectionBottomSheet.show(
               context,

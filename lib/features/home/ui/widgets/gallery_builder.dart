@@ -236,8 +236,27 @@ class GalleryBuilder extends StatelessWidget {
           current is Loading || current is Success || current is Error,
       listener: (context, state) {
         state.whenOrNull(
+          loading: () {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => const LoadingWidget(
+                  loadingState: true,
+                ),
+              );
+            });
+          },
+          success: (_) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.of(context).popUntil((route) => route.isFirst);
+            });
+          },
           error: (error) {
-            setupErrorState(context, error);
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.of(context).popUntil((route) => route.isFirst);
+              setupErrorState(context, error);
+            });
           },
         );
       },

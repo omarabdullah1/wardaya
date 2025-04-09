@@ -254,4 +254,7 @@ perـdelivery: "Per delivery"
 favorites_screen_title: "Favorites"
 favorites_empty_title: "No Favorite products found!"
 favorites_empty_button: "Start Shopping"
- 
+
+# SubMenuItemsScreen texts
+sub_menu_items_screen_title: "Sub Menu Items"
+sub_menu_items_empty_title: "No sub-menu items available"

@@ -11,6 +11,7 @@ import '../../../../../core/helpers/extensions.dart';
 import '../../../../../core/theming/styles.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
+import '../../../../core/widgets/loading_widget.dart';
 import 'category_progress_scroll.dart';
 import 'grid_product_card.dart';
 
@@ -30,6 +31,15 @@ class CategoriesBuilder extends StatelessWidget {
   }
 
   Widget _setupLoading(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const LoadingWidget(
+          loadingState: true,
+        ),
+      );
+    });
     return Skeletonizer(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -53,6 +63,9 @@ class CategoriesBuilder extends StatelessWidget {
   }
 
   Widget _setupSuccess(BuildContext context, HomeCategoryResponse data) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    });
     final validCategories = data.categories
         .where((category) => !(category.products.isNullOrEmpty() &&
             category.subCategories.isNullOrEmpty()))
@@ -105,21 +118,17 @@ class CategoriesBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CategoriesCubit, CategoriesState>(
-      listenWhen: (previous, current) =>
-          current is Loading || current is Success || current is Error,
-      listener: (context, state) {
-        state.whenOrNull(
-          error: (error) {
-            setupErrorState(context, error);
-          },
-        );
-      },
+    return BlocBuilder<CategoriesCubit, CategoriesState>(
       builder: (context, state) {
         return state.when(
           loading: () => _setupLoading(context),
           success: (HomeCategoryResponse data) => _setupSuccess(context, data),
-          error: (_) => const SizedBox.shrink(),
+          error: (_) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.of(context).popUntil((route) => route.isFirst);
+            });
+            return const SizedBox.shrink();
+          },
           initial: () {
             return const SizedBox.shrink();
           },

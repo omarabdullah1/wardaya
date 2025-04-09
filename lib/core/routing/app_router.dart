@@ -1,8 +1,11 @@
 import 'package:localization/localization.dart';
 import 'package:wardaya/features/favorites/logic/cubit/favorites_cubit.dart';
+import 'package:wardaya/features/home/logic/occassions/occassions_cubit.dart';
+import 'package:wardaya/features/home/logic/recipients/recipients_cubit.dart';
 import 'package:wardaya/features/search/data/models/search_response.dart';
 import 'package:wardaya/features/search/logic/cubit/search_cubit.dart';
 import 'package:wardaya/features/subscriptions/logic/cubit/subscription_cubit.dart';
+import 'package:wardaya/features/explore/data/models/menu_items_response.dart';
 
 import '../../features/favorites/ui/favorites_screen.dart';
 import '../../features/subscriptions/ui/subscripion_checkout.dart';
@@ -48,36 +51,44 @@ class AppRouter {
           ),
         );
       case Routes.momentsScreen:
+        return _buildRoute(
+          screen: BlocProvider(
+            create: (context) => getIt<OccassionsCubit>()..getHomeOccassions(),
+            child: const MomentsScreen(),
+          ),
+        );
+      case Routes.recipientsScreen:
+        return _buildRoute(
+          screen: BlocProvider(
+            create: (context) => getIt<RecipientsCubit>()..getRecipients(),
+            child: const RecipientsScreen(),
+          ),
+        );
+      case Routes.subMenuItemsScreen:
         if (arguments is Map<String, dynamic>) {
-          final cubit = arguments['cubit'] as CartCubit?;
+          final BuildContext cartContext = arguments['context'] as BuildContext;
+          final MenuItem menuItem = arguments['menuItem'] as MenuItem;
 
           return _buildRoute(
-            screen: BlocProvider.value(
-              value: cubit ?? getIt<CartCubit>(),
-              child: const MomentsScreen(),
+            screen: SubMenuItemsScreen(
+              cartContext: cartContext,
+              menuItem: menuItem,
             ),
           );
         } else {
-          throw ArgumentError("Invalid arguments for ${Routes.momentsScreen}");
+          // Fallback for backward compatibility
+          return _buildRoute(
+            screen: SubMenuItemsScreen(
+              cartContext: (arguments as BuildContext),
+              menuItem: MenuItem(
+                id: "",
+                imageUrl: "",
+                name: "Menu Items",
+                subMenuItems: [],
+              ),
+            ),
+          );
         }
-      case Routes.recipientsScreen:
-        return _buildRoute(
-          screen: RecipientsScreen(
-            cartContext: (arguments as BuildContext),
-          ),
-        );
-      case Routes.flowersPlantsScreen:
-        return _buildRoute(
-          screen: FlowersPlantsScreen(
-            cartContext: (arguments as BuildContext),
-          ),
-        );
-      case Routes.flowersGiftsScreen:
-        return _buildRoute(
-          screen: FlowersGiftsScreen(
-            cartContext: (arguments as BuildContext),
-          ),
-        );
 
       case Routes.categoryScreen:
         if (arguments is Map<String, dynamic>) {
@@ -87,6 +98,7 @@ class AppRouter {
           final String? subCategoryId = arguments['subCategoryId'] as String?;
           final String? recipientId = arguments['recipientId'] as String?;
           final String? brandId = arguments['brandId'] as String?;
+          final String? subMenuItemsId = arguments['subMenuItemsId'] as String?;
           final bool expressDelivery =
               arguments['expressDelivery'] as bool? ?? false;
 
@@ -103,6 +115,7 @@ class AppRouter {
                 subCategoryId: subCategoryId,
                 recipientId: recipientId,
                 brandId: brandId,
+                subMenuItemsId: subMenuItemsId,
                 expressDelivery: expressDelivery,
               ),
             ),

@@ -2,7 +2,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:dio/dio.dart';
 
 import 'api_error_model.dart';
-import 'dio_factory.dart';
 
 part 'api_result.freezed.dart';
 
@@ -19,7 +18,7 @@ extension ApiResultExtensions<T> on ApiResult<T> {
     if (this is Success<T>) {
       final successData = (this as Success<T>).data;
       if (successData is Response) {
-        return CacheUtils.isResponseFromCache(successData);
+        return successData.extra['fromCache'] == true;
       }
     }
     return false;

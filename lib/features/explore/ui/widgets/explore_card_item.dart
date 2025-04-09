@@ -1,16 +1,15 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wardaya/core/theming/colors.dart';
 
 class ExploreCardItem extends StatelessWidget {
-  final String imageUrl;
+  final String imagePath;
   final String lable;
-  final Function onTap;
+  final VoidCallback onTap;
 
   const ExploreCardItem({
     super.key,
-    required this.imageUrl,
+    required this.imagePath,
     required this.lable,
     required this.onTap,
   });
@@ -18,9 +17,7 @@ class ExploreCardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        onTap();
-      },
+      onTap: onTap,
       child: SizedBox(
         width: 165.w,
         height: 180.h,
@@ -28,15 +25,16 @@ class ExploreCardItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           child: Stack(
             children: [
-              CachedNetworkImage(
-                colorBlendMode: BlendMode.srcATop,
-                color: ColorsManager.black.withAlpha((0.26 * 255).toInt()),
-                imageUrl: imageUrl,
+              Image.asset(
+                imagePath,
                 fit: BoxFit.cover,
                 width: 165.w,
                 height: 180.h,
-                placeholder: (context, url) => _buildShadedPlaceholder(context),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+              ),
+              Positioned.fill(
+                child: Container(
+                  color: ColorsManager.black.withAlpha((0.26 * 255).toInt()),
+                ),
               ),
               Positioned(
                 left: 0,
@@ -71,30 +69,6 @@ class ExploreCardItem extends StatelessWidget {
               )
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildShadedPlaceholder(BuildContext context) {
-    return ShaderMask(
-      shaderCallback: (Rect bounds) {
-        return const LinearGradient(
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-          colors: [
-            ColorsManager.black,
-            ColorsManager.black,
-          ],
-          stops: [0.0, 1.0],
-        ).createShader(bounds);
-      },
-      blendMode: BlendMode.darken,
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          color: ColorsManager.grey.withAlpha(51),
         ),
       ),
     );

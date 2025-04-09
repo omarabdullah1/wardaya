@@ -1,7 +1,10 @@
 import 'package:localization/localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wardaya/features/subscriptions/logic/cubit/subscription_cubit.dart';
 
 import '../../../../core/routing/router_imports.dart';
+import '../../../../core/widgets/loading_widget.dart';
 import '../../logic/cubit/subscription_state.dart';
 import 'subscription_plan_card.dart';
 
@@ -12,10 +15,12 @@ class SubscriptionBlocListner extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SubscriptionCubit, SubscriptionState>(
       builder: (context, state) {
-        final widget = state.whenOrNull(
+        return state.maybeWhen(
           initial: () => const SizedBox.shrink(),
-          loading: () => const Center(child: CircularProgressIndicator()),
           success: (data) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.of(context).popUntil((route) => route.isFirst);
+            });
             return SubscriptionPlanCard(
               title: context.el.addMediaTitle,
               description: context.el.addToMessageButton,
@@ -28,16 +33,26 @@ class SubscriptionBlocListner extends StatelessWidget {
               ],
             );
           },
-          error: (message) {
-            return Center(
-              child: Text(
-                message,
-                style: const TextStyle(color: Colors.red),
-              ),
-            );
+          loading: () {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => const LoadingWidget(
+                  loadingState: true,
+                ),
+              );
+            });
+            return const SizedBox.shrink();
           },
+          error: (_) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.of(context).popUntil((route) => route.isFirst);
+            });
+            return const SizedBox.shrink();
+          }, // Error already handled in listener
+          orElse: () => const SizedBox.shrink(),
         );
-        return widget ?? const SizedBox.shrink();
       },
     );
   }
