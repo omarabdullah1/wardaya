@@ -1,28 +1,52 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:wardaya/core/routing/routes.dart';
+import 'package:wardaya/features/home/data/models/home_delivery_areas_response.dart';
+import 'package:wardaya/features/home/logic/delivery_areas/delivery_areas_cubit.dart';
+import 'package:wardaya/features/home/logic/delivery_areas/delivery_areas_state.dart';
+import 'package:wardaya/features/home/ui/widgets/city_selection_bottom_sheet.dart';
 
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
 
-class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
+class TransparentAppBar extends StatefulWidget implements PreferredSizeWidget {
   const TransparentAppBar({super.key});
 
   @override
   Size get preferredSize => Size.fromHeight(40.h); // Adjust height as needed
 
   @override
+  State<TransparentAppBar> createState() => _TransparentAppBarState();
+}
+
+class _TransparentAppBarState extends State<TransparentAppBar> {
+  String? _selectedCityId;
+  String _cityName = '';
+
+  @override
+  void initState() {
+    super.initState();
+    // Fetch delivery areas when widget initializes
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final deliveryAreasCubit = context.read<DeliveryAreasCubit>();
+      deliveryAreasCubit.getDeliveryAreas();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: ColorsManager.transparent,
       elevation: 0,
-      toolbarHeight: preferredSize.height,
+      toolbarHeight: widget.preferredSize.height,
       titleSpacing: 20,
       flexibleSpace: ClipRect(
         child: BackdropFilter(
@@ -57,46 +81,149 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   Widget _buildLocationButton(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: ColorsManager.black.withAlpha(45),
-        borderRadius: BorderRadius.circular(40),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              context.el.deliveryTo,
-              style: GoogleFonts.inter(
-                color: ColorsManager.white,
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w200,
+    return BlocConsumer<DeliveryAreasCubit, DeliveryAreasState>(
+      listener: (context, state) {
+        log("DeliveryAreasState changed: ${state.runtimeType}");
+        state.when(
+          initial: () {
+            log("DeliveryAreas: Initial state");
+          },
+          loading: () {
+            log("DeliveryAreas: Loading...");
+          },
+          success: (areas) {
+            log("DeliveryAreas: Loaded ${areas.length} areas");
+            // Display details of each area
+            for (var area in areas) {
+              log("Area: ${area.country} (${area.cities.length} cities)");
+              for (var city in area.cities) {
+                log("  - ${city.name} (${city.id})");
+              }
+            }
+
+            // If we have areas and no selected city yet, select the first city by default
+            if (areas.isNotEmpty &&
+                areas.first.cities.isNotEmpty &&
+                _selectedCityId == null) {
+              // Try to find Saudi Arabia first
+              final saudiArabia = areas
+                  .where((area) => area.country == "Saudi Arabia")
+                  .firstOrNull;
+              final cities = saudiArabia?.cities ?? areas.first.cities;
+
+              if (cities.isNotEmpty) {
+                setState(() {
+                  _selectedCityId = cities.first.id;
+                  _cityName = cities.first.name;
+                  log("Selected city: $_cityName (${cities.first.id})");
+                });
+              }
+            }
+          },
+          error: (errorMsg) {
+            log("DeliveryAreas: Error - $errorMsg");
+          },
+        );
+      },
+      builder: (context, state) {
+        List<DeliveryArea> deliveryAreas = [];
+
+        // Initialize city name with local context if not yet set
+        if (_cityName.isEmpty) {
+          _cityName = context.el.locationCity;
+        }
+
+        state.when(
+          initial: () {},
+          loading: () {},
+          success: (areas) {
+            deliveryAreas = areas;
+
+            // If we have a selected city ID, make sure the city name is correct
+            if (_selectedCityId != null) {
+              for (var area in areas) {
+                for (var city in area.cities) {
+                  if (city.id == _selectedCityId) {
+                    _cityName = city.name;
+                    break;
+                  }
+                }
+              }
+            }
+          },
+          error: (_) {},
+        );
+
+        return GestureDetector(
+          onTap: () {
+            if (deliveryAreas.isEmpty) return; // Don't show if no data
+
+            CitySelectionBottomSheet.show(
+              context,
+              deliveryAreas: deliveryAreas,
+              currentCityId: _selectedCityId,
+              onCitySelected: (city) {
+                setState(() {
+                  _selectedCityId = city.id;
+                  _cityName = city.name;
+                });
+
+                // Here you could also save the selected city ID to SharedPreferences
+                // for persistence between app sessions
+                log('Selected city: ${city.name} (${city.id})');
+              },
+            );
+          },
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            decoration: BoxDecoration(
+              color: ColorsManager.black.withAlpha(45),
+              borderRadius: BorderRadius.circular(40),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    context.el.deliveryTo,
+                    style: GoogleFonts.inter(
+                      color: ColorsManager.white,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w200,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        constraints: BoxConstraints(
+                          maxWidth: 85.w,
+                        ),
+                        child: Text(
+                          _cityName,
+                          style: GoogleFonts.inter(
+                            color: ColorsManager.white,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      const Icon(
+                        Icons.keyboard_arrow_down,
+                        color: ColorsManager.white,
+                        size: 18,
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-            Row(
-              children: [
-                Text(
-                  context.el.locationCity,
-                  style: GoogleFonts.inter(
-                    color: ColorsManager.white,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(width: 4),
-                const Icon(
-                  Icons.keyboard_arrow_down,
-                  color: ColorsManager.white,
-                  size: 18,
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
