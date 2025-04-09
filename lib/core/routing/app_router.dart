@@ -1,8 +1,10 @@
 import 'package:localization/localization.dart';
+import 'package:wardaya/features/favorites/logic/cubit/favorites_cubit.dart';
 import 'package:wardaya/features/search/data/models/search_response.dart';
 import 'package:wardaya/features/search/logic/cubit/search_cubit.dart';
 import 'package:wardaya/features/subscriptions/logic/cubit/subscription_cubit.dart';
 
+import '../../features/favorites/ui/favorites_screen.dart';
 import '../../features/subscriptions/ui/subscripion_checkout.dart';
 import '../../features/subscriptions/ui/subscription_duration_screen.dart';
 import '../../features/subscriptions/ui/susbcriptions_screen.dart';
@@ -199,6 +201,13 @@ class AppRouter {
       case Routes.subscripionCheckout:
         return _buildRoute(
           screen: const SubscripionCheckout(),
+        );
+      case Routes.favoritesScreen:
+        return _buildRoute(
+          screen: BlocProvider(
+            create: (context) => getIt<FavoritesCubit>()..getFavorites(),
+            child: const FavoritesScreen(),
+          ),
         );
       default:
         return null;

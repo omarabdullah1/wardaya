@@ -1,0 +1,115 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+import 'package:wardaya/features/favorites/logic/cubit/favorites_cubit.dart';
+import 'package:wardaya/features/favorites/logic/cubit/favorites_state.dart';
+import 'package:wardaya/features/favorites/ui/widgets/favorite_item_tile.dart';
+import 'package:wardaya/features/favorites/ui/widgets/favorites_empty_view.dart';
+
+import '../../data/models/get_favorites_response.dart';
+
+class FavoritesBuilder extends StatelessWidget {
+  const FavoritesBuilder({super.key});
+
+  Widget _buildLoadingState() {
+    return Skeletonizer(
+      child: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: 4,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: FavoriteItemTile(
+              item: GetFavoriteProduct(
+                id: '1',
+                title: 'Loading Item',
+                price: Price(
+                  total: 100,
+                  currency: 'EGP',
+                ),
+                images: [],
+                description: 'This is a loading placeholder',
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildLoadedState(GetFavoritesResponse favorites) {
+    if (favorites.favorites.isEmpty) {
+      return const FavoritesEmptyView();
+    }
+
+    return ListView.builder(
+      padding: const EdgeInsets.all(16),
+      itemCount: favorites.favorites.length,
+      itemBuilder: (context, index) {
+        final GetFavoriteProduct item = favorites.favorites[index];
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 16),
+          child: FavoriteItemTile(
+            item: item,
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<FavoritesCubit, FavoritesState>(
+      buildWhen: (previous, current) =>
+          current is AddFavoriteSuccess ||
+          current is DeleteFavoriteSuccess ||
+          current is GetFavoritesSuccess ||
+          current is Error ||
+          current is Loading,
+      builder: (context, state) {
+        return state.maybeWhen(
+          initial: () => _buildLoadingState(),
+          loading: () => _buildLoadingState(),
+          getFavoritesSuccess: (GetFavoritesResponse favorites) =>
+              _buildLoadedState(favorites),
+          deleteFavoriteSuccess: (response) {
+            // Show a snackbar if the product was not found in favorites
+            if (response.message
+                    ?.toLowerCase()
+                    .contains('not found in favorites') ??
+                false) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                        response.message ?? 'Product not found in favorites'),
+                    backgroundColor: Colors.orange,
+                    duration: const Duration(seconds: 2),
+                  ),
+                );
+              });
+            }
+            // Refresh the favorites list to get the updated state
+            context.read<FavoritesCubit>().getFavorites();
+            // Return loading state while refreshing
+            return _buildLoadingState();
+          },
+          error: (message) {
+            // Show error message in a snackbar
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(message),
+                  backgroundColor: Colors.red,
+                  duration: const Duration(seconds: 3),
+                ),
+              );
+            });
+            return const SizedBox.shrink();
+          },
+          orElse: () => const SizedBox.shrink(),
+        );
+      },
+    );
+  }
+}

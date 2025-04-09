@@ -23,6 +23,42 @@ class TextStylesKammer {
 }
 
 class TextStylesInter {
+  static TextStyle font14WhiteSemiBold = TextStyle(
+    fontSize: 14.0.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    color: ColorsManager.white,
+  );
+  static TextStyle font14BlackSemiBold = TextStyle(
+    fontSize: 14.0.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    color: ColorsManager.black,
+  );
+  static TextStyle font14MainRoseSemiBold = TextStyle(
+    fontSize: 14.0.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    color: ColorsManager.mainRose,
+  );
+  static TextStyle font14MainRoseRegular = TextStyle(
+    fontSize: 14.0.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.mainRose,
+  );
+  static TextStyle font14GreyRegular = TextStyle(
+    fontSize: 14.0.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.grey,
+  );
+  static TextStyle font14DarkGrayRegular = TextStyle(
+    fontSize: 14.0.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.darkGray,
+  );
+  static TextStyle font14DarkGrayBold = TextStyle(
+    fontSize: 14.0.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: ColorsManager.darkGray,
+  );
+
   static TextStyle font17MainRoseBold = GoogleFonts.inter(
     fontSize: 17.0.sp,
     fontWeight: FontWeightHelper.bold,
@@ -64,11 +100,17 @@ class TextStylesInter {
     fontWeight: FontWeightHelper.regular,
     color: ColorsManager.black,
   );
-  static TextStyle font14DarkGrayBold = GoogleFonts.inter(
-    fontSize: 14.0.sp,
-    fontWeight: FontWeightHelper.bold,
-    color: ColorsManager.darkGray,
+  static TextStyle font18BlackSemiBold = GoogleFonts.inter(
+    fontSize: 18.0.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    color: ColorsManager.black,
   );
+  static TextStyle font16BlackSemiBold = GoogleFonts.inter(
+    fontSize: 16.0.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    color: ColorsManager.black,
+  );
+
   static TextStyle font13MainRoseBold = GoogleFonts.inter(
     fontSize: 13.0.sp,
     fontWeight: FontWeightHelper.bold,
