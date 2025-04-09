@@ -229,6 +229,8 @@ class LocalizationMessages {
     required this.favoritesScreenTitle,
     required this.favoritesEmptyTitle,
     required this.favoritesEmptyButton,
+    required this.subMenuItemsScreenTitle,
+    required this.subMenuItemsEmptyTitle,
     required this.deliveryFrequency1,
     required this.subscriptionDuration1,
   });
@@ -439,6 +441,8 @@ class LocalizationMessages {
       favoritesScreenTitle: (json['favorites_screen_title'] ?? '').toString(),
       favoritesEmptyTitle: (json['favorites_empty_title'] ?? '').toString(),
       favoritesEmptyButton: (json['favorites_empty_button'] ?? '').toString(),
+      subMenuItemsScreenTitle: (json['sub_menu_items_screen_title'] ?? '').toString(),
+      subMenuItemsEmptyTitle: (json['sub_menu_items_empty_title'] ?? '').toString(),
       deliveryFrequency1: (json['delivery_frequency'] ?? '').toString(),
       subscriptionDuration1: (json['subscription_duration'] ?? '').toString(),
     );
@@ -646,6 +650,8 @@ class LocalizationMessages {
   final String favoritesScreenTitle;
   final String favoritesEmptyTitle;
   final String favoritesEmptyButton;
+  final String subMenuItemsScreenTitle;
+  final String subMenuItemsEmptyTitle;
   final String deliveryFrequency1;
   final String subscriptionDuration1;
   Map<String, Object> get _content => {
@@ -852,6 +858,8 @@ class LocalizationMessages {
         r'''favorites_screen_title''': favoritesScreenTitle,
         r'''favorites_empty_title''': favoritesEmptyTitle,
         r'''favorites_empty_button''': favoritesEmptyButton,
+        r'''sub_menu_items_screen_title''': subMenuItemsScreenTitle,
+        r'''sub_menu_items_empty_title''': subMenuItemsEmptyTitle,
         r'''delivery_frequency''': deliveryFrequency1,
         r'''subscription_duration''': subscriptionDuration1,
       };
@@ -1090,6 +1098,8 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   favoritesScreenTitle: 'Favorites',
   favoritesEmptyTitle: 'No Favorite products found!',
   favoritesEmptyButton: 'Start Shopping',
+  subMenuItemsScreenTitle: 'Sub Menu Items',
+  subMenuItemsEmptyTitle: 'No sub-menu items available',
   deliveryFrequency1: '',
   subscriptionDuration1: '',
 );
@@ -1300,6 +1310,8 @@ final LocalizationMessages ar = LocalizationMessages(
   favoritesScreenTitle: 'المفضلة',
   favoritesEmptyTitle: 'لا يوجد منتجات مفضلة بعد',
   favoritesEmptyButton: 'ابدأ التسوق',
+  subMenuItemsScreenTitle: 'المنتجات',
+  subMenuItemsEmptyTitle: 'لا يوجد منتجات بعد',
   deliveryFrequency1: 'تكرار التوصيل',
   subscriptionDuration1: 'مدة الاشتراك',
 );

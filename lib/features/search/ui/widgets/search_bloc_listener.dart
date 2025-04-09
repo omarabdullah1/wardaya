@@ -14,46 +14,50 @@ class SearchBlocListener extends StatelessWidget {
   const SearchBlocListener({super.key});
 
   void setupErrorState(BuildContext context, String error) {
-    context.pop();
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        icon: const Icon(
-          Icons.error,
-          color: ColorsManager.red,
-          size: 32,
-        ),
-        content: Text(
-          error,
-          style: TextStyles.font22MainRoseSemiBold,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              context.pop();
-            },
-            child: Text(
-              'Got it',
-              style: TextStyles.font22MainRoseSemiBold,
-            ),
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.of(context).popUntil((route) => route.isFirst);
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          icon: const Icon(
+            Icons.error,
+            color: ColorsManager.red,
+            size: 32,
           ),
-        ],
-      ),
-    );
+          content: Text(
+            error,
+            style: TextStyles.font22MainRoseSemiBold,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                context.pop();
+              },
+              child: Text(
+                'Got it',
+                style: TextStyles.font22MainRoseSemiBold,
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 
   void _setupShowFilterBottomSheet(
       BuildContext context, FilterDataResponse response) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (_) => BlocProvider.value(
-        value: context.read<SearchCubit>(),
-        child: FilterBottomSheet(
-          filterDataResponse: response,
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (_) => BlocProvider.value(
+          value: context.read<SearchCubit>(),
+          child: FilterBottomSheet(
+            filterDataResponse: response,
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   @override
@@ -69,35 +73,43 @@ class SearchBlocListener extends StatelessWidget {
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
-            showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (context) => const LoadingWidget(
-                loadingState: true,
-              ),
-            );
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => const LoadingWidget(
+                  loadingState: true,
+                ),
+              );
+            });
           },
           success: (_) {
-            context.pop();
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.of(context).pop();
+            });
           },
           error: (error) {
             setupErrorState(context, error);
           },
           loadingFilterData: () {
-            showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (context) => const LoadingWidget(
-                loadingState: true,
-              ),
-            );
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => const LoadingWidget(
+                  loadingState: true,
+                ),
+              );
+            });
           },
           errorFilterData: (error) {
             setupErrorState(context, error);
           },
-          successFilterData: (_) {
-            context.pop();
-            _setupShowFilterBottomSheet(context, _);
+          successFilterData: (response) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.of(context).pop();
+              _setupShowFilterBottomSheet(context, response);
+            });
           },
         );
       },

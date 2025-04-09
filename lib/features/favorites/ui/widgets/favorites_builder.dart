@@ -6,12 +6,22 @@ import 'package:wardaya/features/favorites/logic/cubit/favorites_state.dart';
 import 'package:wardaya/features/favorites/ui/widgets/favorite_item_tile.dart';
 import 'package:wardaya/features/favorites/ui/widgets/favorites_empty_view.dart';
 
+import '../../../../core/widgets/loading_widget.dart';
 import '../../data/models/get_favorites_response.dart';
 
 class FavoritesBuilder extends StatelessWidget {
   const FavoritesBuilder({super.key});
 
-  Widget _buildLoadingState() {
+  Widget _buildLoadingState(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const LoadingWidget(
+          loadingState: true,
+        ),
+      );
+    });
     return Skeletonizer(
       child: ListView.builder(
         padding: const EdgeInsets.all(16),
@@ -37,11 +47,15 @@ class FavoritesBuilder extends StatelessWidget {
     );
   }
 
-  Widget _buildLoadedState(GetFavoritesResponse favorites) {
+  Widget _buildLoadedState(
+      BuildContext context, GetFavoritesResponse favorites) {
     if (favorites.favorites.isEmpty) {
       return const FavoritesEmptyView();
     }
 
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    });
     return ListView.builder(
       padding: const EdgeInsets.all(16),
       itemCount: favorites.favorites.length,
@@ -68,10 +82,10 @@ class FavoritesBuilder extends StatelessWidget {
           current is Loading,
       builder: (context, state) {
         return state.maybeWhen(
-          initial: () => _buildLoadingState(),
-          loading: () => _buildLoadingState(),
+          initial: () => _buildLoadingState(context),
+          loading: () => _buildLoadingState(context),
           getFavoritesSuccess: (GetFavoritesResponse favorites) =>
-              _buildLoadedState(favorites),
+              _buildLoadedState(context, favorites),
           deleteFavoriteSuccess: (response) {
             // Show a snackbar if the product was not found in favorites
             if (response.message
@@ -92,11 +106,12 @@ class FavoritesBuilder extends StatelessWidget {
             // Refresh the favorites list to get the updated state
             context.read<FavoritesCubit>().getFavorites();
             // Return loading state while refreshing
-            return _buildLoadingState();
+            return _buildLoadingState(context);
           },
           error: (message) {
             // Show error message in a snackbar
             WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.of(context).popUntil((route) => route.isFirst);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(message),

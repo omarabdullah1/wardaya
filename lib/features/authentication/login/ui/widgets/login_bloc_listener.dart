@@ -20,19 +20,23 @@ class LoginBlocListener extends StatelessWidget {
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
-            showDialog(
-              context: context,
-              builder: (context) => const LoadingWidget(
-                loadingState: true,
-              ),
-            );
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              showDialog(
+                context: context,
+                builder: (context) => const LoadingWidget(
+                  loadingState: true,
+                ),
+              );
+            });
           },
           success: (loginResponse) {
-            context.pop();
-            context.pushNamedAndRemoveUntil(
-              Routes.homeLayout,
-              predicate: (route) => false,
-            );
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.of(context).popUntil((route) => route.isFirst);
+              context.pushNamedAndRemoveUntil(
+                Routes.homeLayout,
+                predicate: (route) => false,
+              );
+            });
           },
           error: (error) {
             setupErrorState(context, error);
@@ -44,31 +48,33 @@ class LoginBlocListener extends StatelessWidget {
   }
 
   void setupErrorState(BuildContext context, String error) {
-    context.pop();
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        icon: const Icon(
-          Icons.error,
-          color: ColorsManager.red,
-          size: 32,
-        ),
-        content: Text(
-          error,
-          style: TextStyles.font22MainRoseSemiBold,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              context.pop();
-            },
-            child: Text(
-              'Got it',
-              style: TextStyles.font22MainRoseSemiBold,
-            ),
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.of(context).popUntil((route) => route.isFirst);
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          icon: const Icon(
+            Icons.error,
+            color: ColorsManager.red,
+            size: 32,
           ),
-        ],
-      ),
-    );
+          content: Text(
+            error,
+            style: TextStyles.font22MainRoseSemiBold,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                context.pop();
+              },
+              child: Text(
+                'Got it',
+                style: TextStyles.font22MainRoseSemiBold,
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }

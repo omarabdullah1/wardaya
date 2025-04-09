@@ -118,6 +118,8 @@ class _assets_images_dart {
   final flowersAndPlants_png = 'assets/images/flowersAndPlants.png';
   final flowers_gifts_png = 'assets/images/flowers_gifts.png';
   final jewlary_png = 'assets/images/jewlary.png';
+  final moments_png = 'assets/images/moments.png';
+  final recipients_png = 'assets/images/recipients.png';
   final ring_png = 'assets/images/ring.png';
   final sub1_png = 'assets/images/sub1.png';
   final sub2_png = 'assets/images/sub2.png';

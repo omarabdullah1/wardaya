@@ -251,3 +251,7 @@ off: "خصم"
 favorites_screen_title: "المفضلة"
 favorites_empty_title: "لا يوجد منتجات مفضلة بعد"
 favorites_empty_button: "ابدأ التسوق"
+
+# SubMenuItemsScreen texts
+sub_menu_items_screen_title: "المنتجات"
+sub_menu_items_empty_title: "لا يوجد منتجات بعد"

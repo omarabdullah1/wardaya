@@ -20,11 +20,11 @@ class OccassionsCubit extends Cubit<OccassionsState> {
         },
         failure: (error) {
           emit(OccassionsState.error(
-              error.message ?? 'Failed to fetch gallery data'));
+              error.message ?? 'Failed to fetch Occassions data'));
         },
       );
     } catch (e, stackTrace) {
-      log('Gallery unexpected error: $e', stackTrace: stackTrace);
+      log('Occassions unexpected error: $e', stackTrace: stackTrace);
       emit(OccassionsState.error(
           'An unexpected error occurred: ${e.toString()}'));
     }

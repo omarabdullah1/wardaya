@@ -15,6 +15,7 @@ class SearchRequestBody {
   final String? recipients;
   final String? bundleTypes;
   final String? priceRange;
+  final String? subMenuItems;
   final bool? expressDelivery;
 
   SearchRequestBody({
@@ -29,6 +30,7 @@ class SearchRequestBody {
     this.recipients,
     this.bundleTypes,
     this.priceRange,
+    this.subMenuItems,
     this.expressDelivery,
   });
 

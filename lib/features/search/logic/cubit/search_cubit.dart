@@ -48,6 +48,7 @@ class SearchCubit extends Cubit<SearchState> {
     String? filterBundleTypes,
     String? filterPriceRange,
     String? filterBrand,
+    String? filterSubMenuItems,
     bool? expressDelivery,
   }) async {
     emit(const SearchState.loading());
@@ -97,6 +98,10 @@ class SearchCubit extends Cubit<SearchState> {
         if (expressDelivery != null) {
           initialFilter['expressDelivery'] = expressDelivery.toString();
         }
+        if (filterSubMenuItems != null) {
+          initialFilter['subMenuItems'] = filterSubMenuItems;
+          filterLists['subMenuItems'] = [filterSubMenuItems];
+        }
       }
 
       // Add a timeout for the entire operation
@@ -113,6 +118,7 @@ class SearchCubit extends Cubit<SearchState> {
         bundleTypes: filterLists['bundleTypes']?.join(','),
         priceRange: filterLists['priceRange']?.join(','),
         brand: filterLists['brand']?.join(','),
+        subMenuItems: filterLists['subMenuItems']?.join(','),
         expressDelivery: expressDelivery,
       ));
 
@@ -175,6 +181,7 @@ class SearchCubit extends Cubit<SearchState> {
         filterColor: filters["color"],
         filterBundleTypes: filters["bundleTypes"],
         filterPriceRange: filters["priceRange"],
+        filterSubMenuItems: filters["subMenuItems"],
         expressDelivery: filters["expressDelivery"] == "true",
       );
       return;

@@ -14,6 +14,7 @@ import 'package:wardaya/features/home/logic/categories/categories_state.dart';
 import '../../../../../core/theming/styles.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
+import '../../../../core/widgets/loading_widget.dart';
 import '../../logic/brands/brands_state.dart';
 
 class BrandsYoullLoveBuilder extends StatelessWidget {
@@ -32,6 +33,15 @@ class BrandsYoullLoveBuilder extends StatelessWidget {
   }
 
   Widget _setupLoading(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const LoadingWidget(
+          loadingState: true,
+        ),
+      );
+    });
     return const Skeletonizer(
       child: BrandsGrid(
         brandImages: ['', '', '', '', '', ''],
@@ -47,6 +57,9 @@ class BrandsYoullLoveBuilder extends StatelessWidget {
       List<String> brandsCategoriesImages,
       List<String> brandsTitles,
       List<String> brandIds) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    });
     return BrandsGrid(
       brandImages: brandsCategoriesImages,
       brandNames: brandsTitles,
@@ -58,16 +71,7 @@ class BrandsYoullLoveBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     final PageController pageController = PageController();
 
-    return BlocConsumer<BrandsCubit, BrandsState>(
-      listenWhen: (previous, current) =>
-          current is Loading || current is Success || current is Error,
-      listener: (context, state) {
-        state.whenOrNull(
-          error: (error) {
-            setupErrorState(context, error);
-          },
-        );
-      },
+    return BlocBuilder<BrandsCubit, BrandsState>(
       builder: (context, state) {
         return state.when(
           loading: () => _setupLoading(context),
@@ -81,7 +85,12 @@ class BrandsYoullLoveBuilder extends StatelessWidget {
             data.brands.map((e) => e.name).whereType<String>().toList(),
             data.brands.map((e) => e.id).whereType<String>().toList(),
           ),
-          error: (_) => const SizedBox.shrink(),
+          error: (_) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.of(context).popUntil((route) => route.isFirst);
+            });
+            return const SizedBox.shrink();
+          },
           initial: () => const SizedBox.shrink(),
         );
       },

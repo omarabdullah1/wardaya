@@ -5,6 +5,7 @@ import 'package:wardaya/features/home/logic/occassions/occassions_cubit.dart';
 
 import '../../../../../core/theming/styles.dart';
 import '../../../../core/theming/colors.dart';
+import '../../../../core/widgets/loading_widget.dart';
 import '../../data/models/home_occassions_response.dart';
 import '../../logic/occassions/occassions_state.dart';
 import 'category_progress_scroll.dart';
@@ -25,6 +26,15 @@ class GiftsForEveryMomentBuilder extends StatelessWidget {
   }
 
   Widget _setupLoading(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const LoadingWidget(
+          loadingState: true,
+        ),
+      );
+    });
     return const Skeletonizer(
       child: CategoryProgressScroll(
         categoriesImages: ['', '', '', '', '', '', '', '', '', ''],
@@ -40,6 +50,9 @@ class GiftsForEveryMomentBuilder extends StatelessWidget {
     List<String?> images = data.map((item) => item.imageUrl).toList();
     List<String> ids = data.map((item) => item.id).toList();
 
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    });
     return CategoryProgressScroll(
       categoriesImages: images.whereType<String>().toList(),
       titles: titles.whereType<String>().toList(),
@@ -53,16 +66,7 @@ class GiftsForEveryMomentBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     final PageController pageController = PageController();
 
-    return BlocConsumer<OccassionsCubit, OccassionsState>(
-      listenWhen: (previous, current) =>
-          current is Loading || current is Success || current is Error,
-      listener: (context, state) {
-        state.whenOrNull(
-          error: (error) {
-            setupErrorState(context, error);
-          },
-        );
-      },
+    return BlocBuilder<OccassionsCubit, OccassionsState>(
       builder: (context, state) {
         return state.when(
           initial: () => const SizedBox.shrink(),

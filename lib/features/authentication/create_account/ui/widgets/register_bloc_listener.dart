@@ -20,16 +20,20 @@ class RegisterBlocListener extends StatelessWidget {
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
-            showDialog(
-              context: context,
-              builder: (context) => const LoadingWidget(
-                loadingState: true,
-              ),
-            );
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              showDialog(
+                context: context,
+                builder: (context) => const LoadingWidget(
+                  loadingState: true,
+                ),
+              );
+            });
           },
           success: (registerResponse) {
-            context.pop();
-            context.pop();
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.of(context).popUntil((route) => route.isFirst);
+              context.pop();
+            });
           },
           error: (error) {
             setupErrorState(context, error);
@@ -41,20 +45,22 @@ class RegisterBlocListener extends StatelessWidget {
   }
 
   void setupErrorState(BuildContext context, String error) {
-    context.pop();
-    showToastWidget(
-      StyledToastWidget(
-        message: error,
-        icon: Icons.error_outline,
-        color: ColorsManager.red.withGreen(20).withBlue(20).withRed(230),
-      ),
-      context: context,
-      axis: Axis.horizontal,
-      alignment: Alignment.center,
-      position: StyledToastPosition.top,
-      reverseAnimation: StyledToastAnimation.slideFromTopFade,
-      animation: StyledToastAnimation.slideFromTopFade,
-      duration: const Duration(milliseconds: 2500),
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.of(context).popUntil((route) => route.isFirst);
+      showToastWidget(
+        StyledToastWidget(
+          message: error,
+          icon: Icons.error_outline,
+          color: ColorsManager.red.withGreen(20).withBlue(20).withRed(230),
+        ),
+        context: context,
+        axis: Axis.horizontal,
+        alignment: Alignment.center,
+        position: StyledToastPosition.top,
+        reverseAnimation: StyledToastAnimation.slideFromTopFade,
+        animation: StyledToastAnimation.slideFromTopFade,
+        duration: const Duration(milliseconds: 2500),
+      );
+    });
   }
 }
