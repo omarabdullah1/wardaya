@@ -111,6 +111,7 @@ class _assets_images_dart {
   final cake_png = 'assets/images/cake.png';
   final chocolate_png = 'assets/images/chocolate.png';
   final delivery_png = 'assets/images/delivery.png';
+  final empty_favs_png = 'assets/images/empty_favs.png';
   final flower_gift_png = 'assets/images/flower_gift.png';
   final flowers_png = 'assets/images/flowers.png';
   final flowersAndGifts_png = 'assets/images/flowersAndGifts.png';
@@ -215,6 +216,7 @@ class _assets_svgs_dart {
   final delivery_svg = 'assets/svgs/delivery.svg';
   final edit_pen_svg = 'assets/svgs/edit_pen.svg';
   final empty_cart_svg = 'assets/svgs/empty_cart.svg';
+  final empty_favs_svg = 'assets/svgs/empty_favs.svg';
   final enjoy_fresh_flowers_svg = 'assets/svgs/enjoy_fresh_flowers.svg';
   final explore_svg = 'assets/svgs/explore.svg';
   final faq_svg = 'assets/svgs/faq.svg';

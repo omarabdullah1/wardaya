@@ -132,8 +132,14 @@ class ProfileBody extends StatelessWidget {
                   color: ColorsManager.lightGrey,
                   height: 0.0,
                 ),
-                _buildOptionRow(context, context.el.favouriteGifts,
-                    Assets.of(context).svgs.fav_gifs_svg),
+                _buildOptionRow(
+                  context,
+                  context.el.favouriteGifts,
+                  Assets.of(context).svgs.fav_gifs_svg,
+                  onTap: () {
+                    context.pushNamed(Routes.favoritesScreen);
+                  },
+                ),
               ],
             ),
           ),

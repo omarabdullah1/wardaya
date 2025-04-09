@@ -248,3 +248,10 @@ select_other_date: "Select Other Date"
 we_select_delevery_based_area: "We’ll select the best delivery time based on your area and delivery date"
 off: "OFF"
 perـdelivery: "Per delivery"
+
+
+# FavoritesScreen texts
+favorites_screen_title: "Favorites"
+favorites_empty_title: "No Favorite products found!"
+favorites_empty_button: "Start Shopping"
+ 

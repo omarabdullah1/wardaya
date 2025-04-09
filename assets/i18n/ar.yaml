@@ -245,3 +245,9 @@ starting_date: "تاريخ البدء"
 select_other_date: "اختر تاريخًا آخر"
 we_select_delevery_based_area: "سنختار أفضل وقت توصيل بناءً على منطقتك وتاريخ التوصيل"
 off: "خصم"
+
+
+# FavoritesScreen texts
+favorites_screen_title: "المفضلة"
+favorites_empty_title: "لا يوجد منتجات مفضلة بعد"
+favorites_empty_button: "ابدأ التسوق"
