@@ -21,10 +21,11 @@ class ProfileScreen extends StatelessWidget {
           appBar: AppAppBar(title: context.el.profileScreenTitle),
           body: SafeArea(
             child: RefreshIndicator(
-                onRefresh: () async {
-                  context.read<ProfileCubit>().getProfile(context);
-                },
-                child: const ProfileBuilder()),
+              onRefresh: () async {
+                context.read<ProfileCubit>().getProfile(context);
+              },
+              child: const ProfileBuilder(),
+            ),
           ),
         );
       },

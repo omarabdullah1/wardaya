@@ -17,14 +17,32 @@ class FavoritesResponseHelper {
     }
     // If response is a direct list of favorites
     else if (response is List) {
-      return GetFavoritesResponse.fromJsonList(response);
+      // Convert the list to GetFavoriteProduct objects
+      final favoritesList = response
+          .map((item) => item is Map<String, dynamic> 
+              ? GetFavoriteProduct.fromJson(item)
+              : null)
+          .where((item) => item != null)
+          .cast<GetFavoriteProduct>()
+          .toList();
+      
+      return GetFavoritesResponse(favorites: favoritesList);
     }
-    // If response is a JSON string
+    // If response is a JSON string 
     else if (response is String) {
       try {
         final decoded = json.decode(response);
         if (decoded is List) {
-          return GetFavoritesResponse.fromJsonList(decoded);
+          // Convert the decoded list to GetFavoriteProduct objects
+          final favoritesList = decoded
+              .map((item) => item is Map<String, dynamic> 
+                  ? GetFavoriteProduct.fromJson(item)
+                  : null)
+              .where((item) => item != null)
+              .cast<GetFavoriteProduct>()
+              .toList();
+          
+          return GetFavoritesResponse(favorites: favoritesList);
         } else if (decoded is Map<String, dynamic>) {
           if (decoded.containsKey('favorites') &&
               decoded['favorites'] is List) {

@@ -1,110 +1,129 @@
 name: wardaya
-description: "A new Flutter project."
+description: "A Wardaya e-commerce application."
+publish_to: 'none'
 
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.6.1
+  sdk: '>=3.6.0 <4.0.0'
 
 dependencies:
-  auto_size_text: ^3.0.0
-  build_runner: ^2.4.7
-  cached_network_image: ^3.3.1
-  camera: ^0.10.5+8
-  cool_dropdown: ^2.1.0
-  country_code_picker: ^3.2.0
-  cupertino_icons: ^1.0.6
-  dio: ^5.3.3
-  dio_smart_retry: ^6.0.0
-  dropdown_button2: ^2.3.9
-  dropdown_search: ^5.0.6
-  easiest_localization: ^2.0.1
-  easy_localization: ^3.0.3
   flutter:
     sdk: flutter
-
-  # *** Automatically added by easiest_localization ***
-  # If you find it useful, please consider giving a ⭐ on GitHub: https://github.com/alphamikle/el
-  # And leaving a 👍 on pub.dev: https://pub.dev/packages/easiest_localization
-  # Your support is very important!
-  localization:
-    path: ./localization
-
-  flutter_bloc: ^9.1.0
-  flutter_flavor: ^3.1.3
   flutter_localizations:
     sdk: flutter
-  flutter_native_splash: ^2.4.1
-  flutter_screenutil: ^5.9.0
-  flutter_secure_storage: ^9.2.2
-  flutter_signature_pad: ^3.0.1
-  flutter_svg: ^2.0.9
-  flutter_translate: ^4.0.4
-  font_awesome_flutter: ^10.8.0
-  freezed: ^2.4.5
-  freezed_annotation: ^2.4.1
-  get_it: ^7.6.4
-  google_fonts: ^6.1.0
-  http: ^1.3.0
-  intl: ^0.19.0
-  json_annotation: ^4.8.1
-  json_serializable: ^6.7.1
-  logger: ^2.4.0
-  lottie: ^3.1.2
-  mobkit_dashed_border: ^0.0.7
-  path: ^1.8.3
-  path_provider: ^2.1.1
-  pretty_dio_logger: ^1.3.1
-  qr_flutter: ^4.1.0
-  retrofit: ^4.0.3
-  retrofit_generator: ^8.0.4
-  shared_preferences: ^2.2.3
+
+  # UI packages
+  cupertino_icons: ^1.0.8
+  flutter_svg: ^2.0.17
+  google_fonts: ^6.2.1
+  flutter_screenutil: ^5.9.3
+  skeletonizer: ^1.4.3
   shimmer: ^3.0.0
-  signature: ^5.0.0
-  smooth_page_indicator: ^1.2.0+3
-  toggle_switch: ^2.3.0
-  typewritertext: ^3.0.9 
-  url_launcher: ^6.2.6
-  google_sign_in: ^6.2.2
-  sign_in_with_apple: ^5.0.0
-  custom_loading: ^1.0.3
-  flutter_form_builder: ^9.7.0
-  form_builder_validators: ^10.0.1
-  clipboard: ^0.1.3
+  smooth_page_indicator: ^1.2.1
+  lottie: ^3.3.1
   flutter_styled_toast: ^2.2.1
-  skeletonizer: ^1.4.3 
- 
-flutter-assets:
-  auto-generate: false
-  assets-path: assets
-  output-path: lib/core/assets
-  ignore-ext: false
+  cached_network_image: ^3.3.0
+  
+  # State management
+  flutter_bloc: ^9.1.0
+  bloc: ^9.0.0
+  provider: ^6.1.4
+  
+  # Network & API
+  dio: ^5.8.0+1
+  dio_smart_retry: ^6.0.0
+  dio_web_adapter: ^2.1.1
+  pretty_dio_logger: ^1.4.0
+  retrofit: ^4.4.2
+  http: ^1.1.0
+  webview_flutter: 4.2.2
+  webview_flutter_android: 3.9.3
+  webview_flutter_wkwebview: 3.7.3
+  
+  # Local storage
+  shared_preferences: ^2.5.3
+  flutter_secure_storage: ^9.2.4
+  
+  # DI
+  get_it: ^7.7.0
+  
+  # Localization
+  easy_localization: ^3.0.7+1
+  localization:
+    path: ./localization
+    
+  # Maps & Location
+  google_maps_flutter: ^2.6.0
+  geolocator: ^11.0.0
+  country_picker: ^2.0.25
+  flutter_contacts: ^1.1.7+1
+  
+  # Environment config
+  flutter_dotenv: ^5.1.0
+  
+  # Utility packages
+  uuid: ^4.5.1
+  url_launcher: ^6.3.1
+  intl: ^0.19.0
+  logger: ^2.5.0
+
+  # Other functionality
+  benefit_pay_flutter: ^1.0.1
+  crypto: ^3.0.3
+  camera: ^0.10.6
+  signature: ^5.5.0
+  flutter_signature_pad: ^3.0.1
+  qr_flutter: ^4.1.0
+  mobkit_dashed_border: ^0.0.5
+  custom_loading: ^0.0.1
+  
+  # Forms and input
+  flutter_form_builder: ^9.1.1
+  form_builder_validators: ^10.0.1
+  country_code_picker: ^3.0.0
+  
+  # Authentication
+  google_sign_in: ^6.1.5
+  sign_in_with_apple: ^5.0.0
+  
+  # Code generation
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.1
 
 dev_dependencies:
-  flutter_launcher_icons: ^0.13.1
-  flutter_lints: ^3.0.0
   flutter_test:
     sdk: flutter
+  flutter_lints: ^3.0.2
+  build_runner: ^2.4.15
+  retrofit_generator: ^8.2.1
+  json_serializable: ^6.9.0
+  freezed: ^2.5.7
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.4
+  flutter_flavor: ^3.1.4
 
 flutter:
   uses-material-design: true
+  
   assets:
     - assets/images/
     - assets/images/logo/
     - assets/images/cards/
     - assets/images/categories/
-    - assets/pay_cards/
     - assets/lottie/
     - assets/svgs/
+    - assets/pay_cards/
     - assets/i18n/
-    - assets/fonts/
+    - .env
     
   fonts:
     - family: Kammerlander
       fonts:
-        - asset: assets/fonts/Kammerlander-Bold.ttf
         - asset: assets/fonts/Kammerlander-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Kammerlander-Bold.ttf
+          weight: 700
     - family: WardayaIcons
       fonts:
         - asset: assets/fonts/WardayaIcons.ttf

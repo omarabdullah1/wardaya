@@ -32,6 +32,10 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+flutter_*.png
+linked_*.ds
+unlinked.ds
+unlinked_spec.ds
 
 # Symbolication related
 app.*.symbols
@@ -43,3 +47,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Environment files with sensitive data
+.env
+env.g.dart

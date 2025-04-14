@@ -14,7 +14,7 @@ class _SubscriptionService implements SubscriptionService {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'https://wardaya-tan.vercel.app/';
+    baseUrl ??= 'https://wecareroot.ddns.net:5100/';
   }
 
   final Dio _dio;
@@ -24,19 +24,19 @@ class _SubscriptionService implements SubscriptionService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<SubscriptionResponse> getSubcriptionPlan() async {
+  Future<SubscriptionPlansResponse> getSubcriptionPlan() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<SubscriptionResponse>(Options(
+    final _options = _setStreamType<SubscriptionPlansResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          'api/subscriptions',
+          'api/subscriptionPlans',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -46,9 +46,9 @@ class _SubscriptionService implements SubscriptionService {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late SubscriptionResponse _value;
+    late SubscriptionPlansResponse _value;
     try {
-      _value = SubscriptionResponse.fromJson(_result.data!);
+      _value = SubscriptionPlansResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

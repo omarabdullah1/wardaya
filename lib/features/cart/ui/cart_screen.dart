@@ -11,6 +11,7 @@ import 'package:wardaya/core/routing/routes.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/features/layout/logic/cubit/layout_cubit.dart';
 
+import '../../payment/ui/benefit_pay_screen.dart';
 import '../logic/cubit/cart_cubit.dart';
 import '../logic/cubit/cart_state.dart';
 
@@ -129,7 +130,34 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ),
                   onPressed: () {
-                    // Handle checkout logic
+                    // Navigate to payment method selection screen
+                    Navigator.pushNamed(
+                      context,
+                      Routes.paymentMethodScreen,
+                      arguments: {
+                        'amount': 480 * cartCubit.cartItems.toDouble(),
+                        'orderId': 'ORD-${DateTime.now().millisecondsSinceEpoch}',
+                      },
+                    ).then((value) {
+                      // Handle payment result
+                      if (value == true) {
+                        // Payment was successful
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'context.el.paymentSuccessMessage' ??
+                                  'Payment was successful!',
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
+
+                        // Reset cart or navigate to confirmation
+                        cartCubit.changeLength(0);
+                        context.read<LayoutCubit>().changeIndex(0);
+                      }
+                    });
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),

@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:wardaya/features/address/data/api/address_service.dart';
+import 'package:wardaya/features/address/data/repos/address_repo.dart';
 import 'package:wardaya/features/explore/data/apis/explore_service.dart';
 import 'package:wardaya/features/explore/data/repos/explore_repo.dart';
 import 'package:wardaya/features/explore/logic/cubit/explore_cubit.dart';
@@ -9,6 +11,11 @@ import 'package:wardaya/features/home/data/apis/home_service.dart';
 import 'package:wardaya/features/home/data/repos/home_repo.dart';
 import 'package:wardaya/features/home/logic/brands/brands_cubit.dart';
 import 'package:wardaya/features/home/logic/categories/categories_cubit.dart';
+import 'package:wardaya/features/invoices/data/apis/invoices_service.dart';
+import 'package:wardaya/features/invoices/logic/cubit/invoices_cubit.dart';
+import 'package:wardaya/features/my_occasions/data/apis/my_occassions_service.dart';
+import 'package:wardaya/features/my_occasions/data/repos/my_occasions_repo.dart';
+import 'package:wardaya/features/my_occasions/logic/cubit/my_occasions_cubit.dart';
 import 'package:wardaya/features/profile/data/repos/profile_repo.dart';
 import 'package:wardaya/features/profile/logic/cubit/profile_cubit.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
@@ -19,6 +26,8 @@ import 'package:wardaya/features/subscriptions/data/apis/subscription_service.da
 import 'package:wardaya/features/subscriptions/data/repos/subscription_repo.dart';
 import 'package:wardaya/features/subscriptions/logic/cubit/subscription_cubit.dart';
 
+import '../../features/address/logic/address_cubit/address_cubit.dart';
+import '../../features/address/logic/recipient_details_cubit/recipient_details_cubit.dart';
 import '../../features/authentication/apis/auth_service.dart';
 import '../../features/authentication/create_account/data/repos/create_account_repo.dart';
 import '../../features/authentication/create_account/logic/cubit/register_cubit.dart';
@@ -29,6 +38,7 @@ import '../../features/home/logic/delivery_areas/delivery_areas_cubit.dart';
 import '../../features/home/logic/gallery/gallery_cubit.dart';
 import '../../features/home/logic/occassions/occassions_cubit.dart';
 import '../../features/home/logic/recipients/recipients_cubit.dart';
+import '../../features/invoices/data/repos/invoices_repo.dart';
 import '../../features/layout/logic/cubit/layout_cubit.dart';
 import '../blocs/general/cubit/general_cubit.dart';
 import '../networking/dio_factory.dart';
@@ -50,6 +60,9 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<HomeService>(() => HomeService(dio));
   getIt.registerLazySingleton<FavoritesService>(() => FavoritesService(dio));
   getIt.registerLazySingleton<ExploreService>(() => ExploreService(dio));
+  getIt.registerLazySingleton<AddressService>(() => AddressService(dio));
+  getIt.registerLazySingleton<MyOccassionsService>(() => MyOccassionsService(dio));
+  getIt.registerLazySingleton<InvoicesService>(() => InvoicesService(dio));
 
   /************************* */
   /* ******** REPOS *********
@@ -66,6 +79,10 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
   getIt.registerLazySingleton<FavoritesRepo>(() => FavoritesRepo(getIt()));
   getIt.registerLazySingleton<ExploreRepo>(() => ExploreRepo(getIt()));
+
+  getIt.registerLazySingleton<AddressRepo>(() => AddressRepo(getIt()));
+  getIt.registerLazySingleton<MyOccasionsRepo>(() => MyOccasionsRepo(getIt()));
+  getIt.registerLazySingleton<InvoicesRepo>(() => InvoicesRepo(getIt()));
 
   /************************* */
   /* ******** CUBIT *********
@@ -87,6 +104,12 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<DeliveryAreasCubit>(() => DeliveryAreasCubit(getIt()));
   getIt.registerFactory<FavoritesCubit>(() => FavoritesCubit(getIt()));
   getIt.registerFactory<ExploreCubit>(() => ExploreCubit(getIt()));
+
+  getIt.registerFactory<AddressCubit>(() => AddressCubit(getIt()));
+
+  getIt.registerFactory<RecipientDetailsCubit>(() => RecipientDetailsCubit());
+  getIt.registerFactory<MyOccasionsCubit>(() => MyOccasionsCubit(getIt()));
+  getIt.registerFactory<InvoicesCubit>(() => InvoicesCubit(getIt()));
 
   getIt.registerFactory<LayoutCubit>(() => LayoutCubit());
   getIt.registerFactory<CartCubit>(() => CartCubit());
