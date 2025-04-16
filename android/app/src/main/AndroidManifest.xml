@@ -35,6 +35,40 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            
+            <!-- Deep linking for product sharing - with autoVerify -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "https://www.wardaya.net/products/product/" -->
+                <data android:scheme="https" 
+                      android:host="www.wardaya.net" 
+                      android:pathPrefix="/products/product/" />
+                <!-- Also handle non-www version -->
+                <data android:scheme="https" 
+                      android:host="wardaya.net" 
+                      android:pathPrefix="/products/product/" />
+            </intent-filter>
+            <!-- For handling app links directly -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "wardaya://products/product/" -->
+                <data android:scheme="wardaya" 
+                      android:host="products" 
+                      android:pathPattern="/product/.*" />
+            </intent-filter>
+            <!-- Deep linking with custom URL scheme - simpler implementation -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Simple custom URL scheme: wardaya://product/123456 -->
+                <data android:scheme="wardaya" 
+                      android:host="product" />
+            </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

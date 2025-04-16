@@ -67,6 +67,50 @@
             <key>CFBundleURLName</key>
             <string>com.wardaya.wardaya</string>
         </dict>
+        <!-- Add URL scheme for deep linking -->
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLName</key>
+            <string>com.wardaya.app.product</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>wardaya</string>
+            </array>
+        </dict>
+        <!-- Add URL scheme for deep linking -->
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLName</key>
+            <string>com.wardaya.app.products</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>wardaya</string>
+            </array>
+            <key>CFBundleURLPathPattern</key>
+            <string>/products/product/*</string>
+        </dict>
+        <!-- Add URL scheme for deep linking -->
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLName</key>
+            <string>com.wardaya.app.product</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>wardaya</string>
+            </array>
+            <key>CFBundleURLPathPattern</key>
+            <string>/product/*</string>
+        </dict>
+    </array>
+
+    <!-- Update associated domains for universal links -->
+    <key>com.apple.developer.associated-domains</key>
+    <array>
+        <string>applinks:www.wardaya.net</string>
+        <string>applinks:wardaya.net</string>
     </array>
 
     <key>NSLocationWhenInUseUsageDescription</key>
