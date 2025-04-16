@@ -9,7 +9,6 @@ import 'package:wardaya/core/assets/assets.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/features/home/data/apis/home_api_constants.dart';
 import 'package:wardaya/features/home/logic/brands/brands_cubit.dart';
-import 'package:wardaya/features/home/logic/categories/categories_state.dart';
 
 import '../../../../../core/theming/styles.dart';
 import '../../../../core/routing/routes.dart';

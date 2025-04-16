@@ -15,26 +15,31 @@ class FavoritesCubit extends Cubit<FavoritesState> {
 
   // Get all favorites from server
   Future<void> getFavorites() async {
+    // Check if the cubit is closed before emitting any state
+    if (isClosed) return; 
+    
     emit(const FavoritesState.loading());
     try {
       final response = await _favoritesRepo.getFavorites();
+      
+      // Check again if the cubit is closed before emitting another state
+      if (isClosed) return;
+      
       response.when(
-        success: (GetFavoritesResponse data) {
-          log('data: $data');
-          log('Successfully received favorites data with ${data.favorites.length} items');
+        success: (data) {
           _favorites = data.favorites;
           emit(FavoritesState.getFavoritesSuccess(data));
         },
         failure: (error) {
-          log('Error fetching favorites data: ${error.message}, Details: ${error.message} - and error ${error.error}');
           emit(FavoritesState.error(
               error.message ?? 'Failed to fetch favorites data'));
         },
       );
-    } catch (e, stackTrace) {
-      log('favorites unexpected error: $e', stackTrace: stackTrace);
-      emit(FavoritesState.error(
-          'An unexpected error occurred: ${e.toString()}'));
+    } catch (e) {
+      // Check again if the cubit is closed before emitting another state
+      if (isClosed) return;
+      
+      emit(FavoritesState.error(e.toString()));
     }
   }
 

@@ -32,11 +32,19 @@ class LoginCubit extends Cubit<LoginState> {
       ),
     );
     response.when(success: (loginResponse) async {
+      // Check if the response contains a valid token
+      if (loginResponse.token == null || loginResponse.token!.isEmpty) {
+        // If no token, treat as an error even if API returned 200
+        emit(LoginState.error(error: loginResponse.message ?? 'Login failed'));
+        return;
+      }
+
       await saveUserToken(loginResponse.token ?? '');
       await userDataToString(loginResponse);
       emit(LoginState.success(loginResponse));
     }, failure: (error) {
-      emit(LoginState.error(error: error.message ?? ''));
+      log('Login error: ${error.message}');
+      emit(LoginState.error(error: error.message ?? 'Login failed'));
     });
   }
 
@@ -95,6 +103,7 @@ class LoginCubit extends Cubit<LoginState> {
       snackbarShow(
         context.mounted ? context : context,
         'Error signing in: $error',
+        color: ColorsManager.red,
       );
     } finally {
       isSigningIn = false;
@@ -127,10 +136,10 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  dynamic snackbarShow(BuildContext context, String message) {
+  dynamic snackbarShow(BuildContext context, String message, {Color? color}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: ColorsManager.grey,
+        backgroundColor: color ?? ColorsManager.grey,
         duration: const Duration(seconds: 5),
         content: Text(
           message,

@@ -231,6 +231,16 @@ class LocalizationMessages {
     required this.favoritesEmptyButton,
     required this.subMenuItemsScreenTitle,
     required this.subMenuItemsEmptyTitle,
+    required this.addressesScreenTitle,
+    required this.addressesScreenAddNewAddressButton,
+    required this.addressesScreenNoAddressesFound,
+    required this.recipientDetailsScreenTitle,
+    required this.recipientDetailsScreenContinueButton,
+    required this.recipientDetailsScreenRecipientNameLabel,
+    required this.recipientDetailsScreenRecipientPhoneLabel,
+    required this.recipientDetailsScreenRecipientAreaLabel,
+    required this.recipientDetailsScreenRecipientAddressLabel,
+    required this.recipientDetailsScreenRecipientExtraAddressLabel,
     required this.deliveryFrequency1,
     required this.subscriptionDuration1,
   });
@@ -443,6 +453,21 @@ class LocalizationMessages {
       favoritesEmptyButton: (json['favorites_empty_button'] ?? '').toString(),
       subMenuItemsScreenTitle: (json['sub_menu_items_screen_title'] ?? '').toString(),
       subMenuItemsEmptyTitle: (json['sub_menu_items_empty_title'] ?? '').toString(),
+      addressesScreenTitle: (json['addresses_screen_title'] ?? '').toString(),
+      addressesScreenAddNewAddressButton: (json['addresses_screen_add_new_address_button'] ?? '').toString(),
+      addressesScreenNoAddressesFound: (json['addresses_screen_no_addresses_found'] ?? '').toString(),
+      recipientDetailsScreenTitle: (json['recipient_details_screen_title'] ?? '').toString(),
+      recipientDetailsScreenContinueButton: (json['recipient_details_screen_continue_button'] ?? '').toString(),
+      recipientDetailsScreenRecipientNameLabel:
+          (json['recipient_details_screen_recipient_name_label'] ?? '').toString(),
+      recipientDetailsScreenRecipientPhoneLabel:
+          (json['recipient_details_screen_recipient_phone_label'] ?? '').toString(),
+      recipientDetailsScreenRecipientAreaLabel:
+          (json['recipient_details_screen_recipient_area_label'] ?? '').toString(),
+      recipientDetailsScreenRecipientAddressLabel:
+          (json['recipient_details_screen_recipient_address_label'] ?? '').toString(),
+      recipientDetailsScreenRecipientExtraAddressLabel:
+          (json['recipient_details_screen_recipient_extra_address_label'] ?? '').toString(),
       deliveryFrequency1: (json['delivery_frequency'] ?? '').toString(),
       subscriptionDuration1: (json['subscription_duration'] ?? '').toString(),
     );
@@ -652,6 +677,16 @@ class LocalizationMessages {
   final String favoritesEmptyButton;
   final String subMenuItemsScreenTitle;
   final String subMenuItemsEmptyTitle;
+  final String addressesScreenTitle;
+  final String addressesScreenAddNewAddressButton;
+  final String addressesScreenNoAddressesFound;
+  final String recipientDetailsScreenTitle;
+  final String recipientDetailsScreenContinueButton;
+  final String recipientDetailsScreenRecipientNameLabel;
+  final String recipientDetailsScreenRecipientPhoneLabel;
+  final String recipientDetailsScreenRecipientAreaLabel;
+  final String recipientDetailsScreenRecipientAddressLabel;
+  final String recipientDetailsScreenRecipientExtraAddressLabel;
   final String deliveryFrequency1;
   final String subscriptionDuration1;
   Map<String, Object> get _content => {
@@ -860,6 +895,16 @@ class LocalizationMessages {
         r'''favorites_empty_button''': favoritesEmptyButton,
         r'''sub_menu_items_screen_title''': subMenuItemsScreenTitle,
         r'''sub_menu_items_empty_title''': subMenuItemsEmptyTitle,
+        r'''addresses_screen_title''': addressesScreenTitle,
+        r'''addresses_screen_add_new_address_button''': addressesScreenAddNewAddressButton,
+        r'''addresses_screen_no_addresses_found''': addressesScreenNoAddressesFound,
+        r'''recipient_details_screen_title''': recipientDetailsScreenTitle,
+        r'''recipient_details_screen_continue_button''': recipientDetailsScreenContinueButton,
+        r'''recipient_details_screen_recipient_name_label''': recipientDetailsScreenRecipientNameLabel,
+        r'''recipient_details_screen_recipient_phone_label''': recipientDetailsScreenRecipientPhoneLabel,
+        r'''recipient_details_screen_recipient_area_label''': recipientDetailsScreenRecipientAreaLabel,
+        r'''recipient_details_screen_recipient_address_label''': recipientDetailsScreenRecipientAddressLabel,
+        r'''recipient_details_screen_recipient_extra_address_label''': recipientDetailsScreenRecipientExtraAddressLabel,
         r'''delivery_frequency''': deliveryFrequency1,
         r'''subscription_duration''': subscriptionDuration1,
       };
@@ -1100,6 +1145,16 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   favoritesEmptyButton: 'Start Shopping',
   subMenuItemsScreenTitle: 'Sub Menu Items',
   subMenuItemsEmptyTitle: 'No sub-menu items available',
+  addressesScreenTitle: 'Saved Addresses',
+  addressesScreenAddNewAddressButton: 'Add a new Address',
+  addressesScreenNoAddressesFound: 'No addresses found',
+  recipientDetailsScreenTitle: 'Recipient Details',
+  recipientDetailsScreenContinueButton: 'Continue',
+  recipientDetailsScreenRecipientNameLabel: 'Recipient Name',
+  recipientDetailsScreenRecipientPhoneLabel: 'Phone Number',
+  recipientDetailsScreenRecipientAreaLabel: 'Area',
+  recipientDetailsScreenRecipientAddressLabel: 'Address',
+  recipientDetailsScreenRecipientExtraAddressLabel: 'Extra address details(optional)',
   deliveryFrequency1: '',
   subscriptionDuration1: '',
 );
@@ -1312,6 +1367,16 @@ final LocalizationMessages ar = LocalizationMessages(
   favoritesEmptyButton: 'ابدأ التسوق',
   subMenuItemsScreenTitle: 'المنتجات',
   subMenuItemsEmptyTitle: 'لا يوجد منتجات بعد',
+  addressesScreenTitle: 'العنوان المحفوظ',
+  addressesScreenAddNewAddressButton: 'إضافة عنوان جديد',
+  addressesScreenNoAddressesFound: 'لا يوجد عنوان محفوظ',
+  recipientDetailsScreenTitle: 'تفاصيل المستلم',
+  recipientDetailsScreenContinueButton: 'متابعة',
+  recipientDetailsScreenRecipientNameLabel: 'الاسم',
+  recipientDetailsScreenRecipientPhoneLabel: 'رقم الهاتف',
+  recipientDetailsScreenRecipientAreaLabel: 'المنطقة',
+  recipientDetailsScreenRecipientAddressLabel: 'العنوان',
+  recipientDetailsScreenRecipientExtraAddressLabel: 'العنوان الإضافي (اختياري)',
   deliveryFrequency1: 'تكرار التوصيل',
   subscriptionDuration1: 'مدة الاشتراك',
 );

@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/helpers/extensions.dart';
 import '../../../../../core/routing/routes.dart';
 import '../../../../../core/theming/colors.dart';
-import '../../../../../core/theming/styles.dart';
 import '../../../../../core/widgets/loading_widget.dart';
 import '../../logic/cubit/login_cubit.dart';
 import '../../logic/cubit/login_state.dart';
@@ -48,32 +47,13 @@ class LoginBlocListener extends StatelessWidget {
   }
 
   void setupErrorState(BuildContext context, String error) {
+    final cubit = context.read<LoginCubit>();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Navigator.of(context).popUntil((route) => route.isFirst);
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          icon: const Icon(
-            Icons.error,
-            color: ColorsManager.red,
-            size: 32,
-          ),
-          content: Text(
-            error,
-            style: TextStyles.font22MainRoseSemiBold,
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                context.pop();
-              },
-              child: Text(
-                'Got it',
-                style: TextStyles.font22MainRoseSemiBold,
-              ),
-            ),
-          ],
-        ),
+      cubit.snackbarShow(
+        context,
+        error,
+        color: ColorsManager.red,
       );
     });
   }

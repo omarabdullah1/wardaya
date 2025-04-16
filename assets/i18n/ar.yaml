@@ -255,3 +255,18 @@ favorites_empty_button: "ابدأ التسوق"
 # SubMenuItemsScreen texts
 sub_menu_items_screen_title: "المنتجات"
 sub_menu_items_empty_title: "لا يوجد منتجات بعد"
+
+# AddressesScreen texts
+addresses_screen_title: "العنوان المحفوظ"
+addresses_screen_add_new_address_button: "إضافة عنوان جديد"
+addresses_screen_no_addresses_found: "لا يوجد عنوان محفوظ"
+
+# RecipientDetails texts
+recipient_details_screen_title: "تفاصيل المستلم"
+recipient_details_screen_continue_button: "متابعة"
+recipient_details_screen_recipient_name_label: "الاسم"
+recipient_details_screen_recipient_phone_label: "رقم الهاتف"
+recipient_details_screen_recipient_area_label: "المنطقة"
+recipient_details_screen_recipient_address_label: "العنوان"
+recipient_details_screen_recipient_extra_address_label: "العنوان الإضافي (اختياري)"
+

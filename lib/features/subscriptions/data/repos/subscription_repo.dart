@@ -1,14 +1,14 @@
 import '../../../../../core/networking/api_error_handler.dart';
 import '../../../../../core/networking/api_result.dart';
 import '../apis/subscription_service.dart';
-import '../models/subscription_response.dart';
+import '../models/subscription_home_response.dart';
 
 class SubscriptionRepo {
   final SubscriptionService _apiService;
 
   SubscriptionRepo(this._apiService);
 
-  Future<ApiResult<SubscriptionResponse>> getSubscriptionPlans() async {
+  Future<ApiResult<SubscriptionPlansResponse>> getSubscriptionPlans() async {
     try {
       final response = await _apiService.getSubcriptionPlan();
       return ApiResult.success(response);

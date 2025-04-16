@@ -103,8 +103,8 @@ class SearchBody extends StatelessWidget {
                           const SizedBox(width: 8.0),
                           Text(
                             context.el.searchButton,
-                            style: const TextStyle(
-                                color: ColorsManager.white, fontSize: 16),
+                            style: TextStyle(
+                                color: ColorsManager.white, fontSize: 16.sp),
                           ),
                         ],
                 ),

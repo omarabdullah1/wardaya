@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wardaya/features/subscriptions/data/models/subscription_response.dart';
+
+import '../../data/models/subscription_home_response.dart';
 
 part 'subscription_state.freezed.dart';
 
@@ -7,7 +8,7 @@ part 'subscription_state.freezed.dart';
 class SubscriptionState with _$SubscriptionState {
   const factory SubscriptionState.initial() = _Initial;
   const factory SubscriptionState.loading() = Loading;
-  const factory SubscriptionState.success(SubscriptionResponse data) = Success;
+  const factory SubscriptionState.success(SubscriptionPlansResponse data) = Success;
   const factory SubscriptionState.error(String message) = Error;
   const factory SubscriptionState.setDeliveryFrequency(String delevery) =
       SetDeliveryFrequency;

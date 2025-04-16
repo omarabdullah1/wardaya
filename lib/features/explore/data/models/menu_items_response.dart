@@ -9,9 +9,12 @@ class MenuItemsResponse {
     required this.menuItems,
   });
 
-  factory MenuItemsResponse.fromJson(List<dynamic> json) {
+  factory MenuItemsResponse.fromJson(Map<String, dynamic> json) {
+    final items = json['data'] as List<dynamic>? ?? [];
     return MenuItemsResponse(
-      menuItems: json.map((item) => MenuItem.fromJson(item)).toList(),
+      menuItems: items
+          .map((item) => MenuItem.fromJson(item as Map<String, dynamic>))
+          .toList(),
     );
   }
 

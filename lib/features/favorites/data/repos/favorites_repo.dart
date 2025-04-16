@@ -15,34 +15,27 @@ class FavoritesRepo {
 
   FavoritesRepo(this._apiService);
 
+  // Update the getFavorites method in your repository
   Future<ApiResult<GetFavoritesResponse>> getFavorites() async {
     try {
       final response = await _apiService.getFavorites();
-      return ApiResult.success(response);
-    } catch (error, stackTrace) {
-      // Check if the error is a DioException with response data that's a list
-      if (error is DioException && error.response?.data != null) {
-        try {
-          if (error.response!.data is List) {
-            final parsedResponse =
-                GetFavoritesResponse.fromJsonList(error.response!.data);
-            if (parsedResponse.favorites.isNotEmpty) {
-              return ApiResult.success(parsedResponse);
-            }
-          } else if (error.response!.data is Map<String, dynamic>) {
-            final parsedResponse =
-                FavoritesResponseHelper.parseGetFavoritesResponse(
-                    error.response!.data);
-            if (parsedResponse.favorites.isNotEmpty) {
-              return ApiResult.success(parsedResponse);
-            }
-          }
-        } catch (parseError) {
-          log('Error parsing favorites response: $parseError');
-        }
-      }
-      log('Error in getFavorites: $error', stackTrace: stackTrace);
-      return ApiResult.failure(ApiErrorHandler.handle(error));
+      // If the service is now returning a List<GetFavoriteProduct>
+      return ApiResult.success(
+        GetFavoritesResponse(favorites: response),
+      );
+    } catch (e) {
+      // // If the service is still returning dynamic or the original response format
+      // try {
+      //   // Try to parse the response using the helper
+      //   final parsedResponse =
+      //       FavoritesResponseHelper.parseGetFavoritesResponse((e as DioException).response?.data);
+      //   return ApiResult.success(parsedResponse);
+      // } catch (error) {
+        // If parsing fails, return a failure
+        return ApiResult.failure(
+          ApiErrorHandler.handle(e),
+        );
+      // }
     }
   }
 
