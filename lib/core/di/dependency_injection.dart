@@ -17,7 +17,8 @@ import 'package:wardaya/features/my_occasions/data/apis/my_occassions_service.da
 import 'package:wardaya/features/my_occasions/data/repos/my_occasions_repo.dart';
 import 'package:wardaya/features/my_occasions/logic/cubit/my_occasions_cubit.dart';
 import 'package:wardaya/features/profile/data/repos/profile_repo.dart';
-import 'package:wardaya/features/profile/logic/cubit/profile_cubit.dart';
+import 'package:wardaya/features/product_details/data/repos/product_details_repo.dart';
+import 'package:wardaya/features/product_details/logic/product_details/product_details_cubit.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
 import 'package:wardaya/features/search/data/apis/search_service.dart';
 import 'package:wardaya/features/search/data/repos/search_repo.dart';
@@ -40,6 +41,8 @@ import '../../features/home/logic/occassions/occassions_cubit.dart';
 import '../../features/home/logic/recipients/recipients_cubit.dart';
 import '../../features/invoices/data/repos/invoices_repo.dart';
 import '../../features/layout/logic/cubit/layout_cubit.dart';
+import '../../features/product_details/data/apis/product_details_service.dart';
+import '../../features/profile/logic/cubit/profile_cubit.dart';
 import '../blocs/general/cubit/general_cubit.dart';
 import '../networking/dio_factory.dart';
 
@@ -61,8 +64,11 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<FavoritesService>(() => FavoritesService(dio));
   getIt.registerLazySingleton<ExploreService>(() => ExploreService(dio));
   getIt.registerLazySingleton<AddressService>(() => AddressService(dio));
-  getIt.registerLazySingleton<MyOccassionsService>(() => MyOccassionsService(dio));
+  getIt.registerLazySingleton<MyOccassionsService>(
+      () => MyOccassionsService(dio));
   getIt.registerLazySingleton<InvoicesService>(() => InvoicesService(dio));
+  getIt.registerLazySingleton<ProductDetailsService>(
+      () => ProductDetailsService(dio));
 
   /************************* */
   /* ******** REPOS *********
@@ -79,6 +85,8 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
   getIt.registerLazySingleton<FavoritesRepo>(() => FavoritesRepo(getIt()));
   getIt.registerLazySingleton<ExploreRepo>(() => ExploreRepo(getIt()));
+  getIt.registerLazySingleton<ProductDetailsRepo>(
+      () => ProductDetailsRepo(productDetailsService: getIt()));
 
   getIt.registerLazySingleton<AddressRepo>(() => AddressRepo(getIt()));
   getIt.registerLazySingleton<MyOccasionsRepo>(() => MyOccasionsRepo(getIt()));
@@ -110,6 +118,8 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<RecipientDetailsCubit>(() => RecipientDetailsCubit());
   getIt.registerFactory<MyOccasionsCubit>(() => MyOccasionsCubit(getIt()));
   getIt.registerFactory<InvoicesCubit>(() => InvoicesCubit(getIt()));
+  getIt
+      .registerFactory<ProductDetailsCubit>(() => ProductDetailsCubit(getIt()));
 
   getIt.registerFactory<LayoutCubit>(() => LayoutCubit());
   getIt.registerFactory<CartCubit>(() => CartCubit());

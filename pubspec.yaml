@@ -90,6 +90,7 @@ dependencies:
   # Code generation
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
+  infinite_scroll_pagination: ^5.0.0
 
 dev_dependencies:
   flutter_test:

@@ -18,7 +18,10 @@ class ProfileScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: ColorsManager.offWhite,
           extendBodyBehindAppBar: true,
-          appBar: AppAppBar(title: context.el.profileScreenTitle),
+          appBar: AppAppBar(
+            title: context.el.profileScreenTitle,
+            showBackButton: false,
+          ),
           body: SafeArea(
             child: RefreshIndicator(
               onRefresh: () async {
