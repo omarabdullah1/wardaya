@@ -58,12 +58,12 @@ class _FavoritesService implements FavoritesService {
   }
 
   @override
-  Future<GetFavoritesResponse> getFavorites() async {
+  Future<List<GetFavoriteProduct>> getFavorites() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<GetFavoritesResponse>(Options(
+    final _options = _setStreamType<List<GetFavoriteProduct>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -79,10 +79,13 @@ class _FavoritesService implements FavoritesService {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late GetFavoritesResponse _value;
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<GetFavoriteProduct> _value;
     try {
-      _value = GetFavoritesResponse.fromJson(_result.data!);
+      _value = _result.data!
+          .map((dynamic i) =>
+              GetFavoriteProduct.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

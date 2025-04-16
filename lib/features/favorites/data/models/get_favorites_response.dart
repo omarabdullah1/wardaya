@@ -10,30 +10,30 @@ class GetFavoritesResponse {
     required this.favorites,
   });
 
-  factory GetFavoritesResponse.fromJson(Map<String, dynamic> json) {
+  factory GetFavoritesResponse.fromJson(dynamic json) {
+    // Handle the case where the API returns a list directly
+    if (json is List) {
+      return GetFavoritesResponse(
+        favorites: json
+            .map((item) => GetFavoriteProduct.fromJson(item))
+            .toList(),
+      );
+    } 
     // Handle the case where the API returns an object with a 'favorites' field
-    if (json.containsKey('favorites')) {
+    else if (json is Map<String, dynamic> && json.containsKey('favorites')) {
       return _$GetFavoritesResponseFromJson(json);
-    } else {
-      // If we got a direct list (which happens sometimes), create a response with that list
-      return GetFavoritesResponse(favorites: []);
+    } 
+    // Fallback for empty or unexpected response
+    else {
+      return GetFavoritesResponse(
+        favorites: [],
+      );
     }
-  }
-
-  // Special handling for direct list response
-  static GetFavoritesResponse fromJsonList(List<dynamic> jsonList) {
-    return GetFavoritesResponse(
-      favorites: jsonList
-          .map((item) =>
-              GetFavoriteProduct.fromJson(item as Map<String, dynamic>))
-          .toList(),
-    );
   }
 
   Map<String, dynamic> toJson() => _$GetFavoritesResponseToJson(this);
 }
 
-// Use the same structure but with a different name
 @JsonSerializable()
 class GetFavoriteProduct {
   final Price? price;

@@ -29,8 +29,24 @@ class SubscriptionPlanCard extends StatefulWidget {
 
 class _SubscriptionPlanCardState extends State<SubscriptionPlanCard> {
   bool _isExpanded = false;
+  
+  // Store localized strings that need to be accessed in initState
+  late String moreText;
+  late String lessText;
+  late String subscriptionButtonText;
+  
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Access localization in didChangeDependencies which is called when dependencies change
+    moreText = context.el.more;
+    lessText = context.el.less;
+    subscriptionButtonText = context.el.subscriptionButton;
+  }
+  
   @override
   Widget build(BuildContext context) {
+    // Now use the stored strings instead of directly accessing context.el
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -75,9 +91,8 @@ class _SubscriptionPlanCardState extends State<SubscriptionPlanCard> {
                       child: Row(
                         children: [
                           Text(
-                            !_isExpanded ? context.el.more : context.el.less,
-                            style:
-                                const TextStyle(color: ColorsManager.mainRose),
+                            !_isExpanded ? moreText : lessText,
+                            style: const TextStyle(color: ColorsManager.mainRose),
                           ),
                         ],
                       ),
@@ -129,7 +144,7 @@ class _SubscriptionPlanCardState extends State<SubscriptionPlanCard> {
                             vertical: 8.0.h,
                           ),
                           child: Text(
-                            context.el.subscriptionButton,
+                            subscriptionButtonText,
                             style: TextStylesInter.font12WhiteBold,
                           ),
                         ),

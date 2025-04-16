@@ -25,4 +25,11 @@ class Routes {
       '/susbcriptionsDurationScreen';
   static const String subscripionCheckout = '/subscripionCheckout';
   static const String favoritesScreen = '/favoritesScreen';
+  static const String addressesScreen = '/addressesScreen';
+  static const String recipientDetailsScreen = '/recipientDetailsScreen';
+  static const String occasionsScreen = '/occasionsScreen';
+  static const String invoicesScreen = '/invoicesScreen';
+  static const String benefitPayScreen = '/benefit-pay';
+  static const String paymentMethodScreen = '/payment-method';
+  static const String tapPaymentScreen = '/tap-payment';
 }

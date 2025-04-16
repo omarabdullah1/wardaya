@@ -16,7 +16,7 @@ abstract class FavoritesService {
   Future<AddFavoritesResponse> addToFavorites(@Body() Map<String, String> body);
 
   @GET(FavoritesApiConstants.favorites)
-  Future<GetFavoritesResponse> getFavorites();
+  Future<List<GetFavoriteProduct>> getFavorites();
 
   @DELETE(FavoritesApiConstants.favorites)
   Future<DeleteFavoritesResponse> deleteFromFavorites(

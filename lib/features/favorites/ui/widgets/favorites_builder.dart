@@ -12,16 +12,21 @@ import '../../data/models/get_favorites_response.dart';
 class FavoritesBuilder extends StatelessWidget {
   const FavoritesBuilder({super.key});
 
-  Widget _buildLoadingState(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) => const LoadingWidget(
-          loadingState: true,
-        ),
-      );
+  Widget _buildLoadingState(BuildContext context,bool isDialog) {
+    if(isDialog) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Check if the context is still mounted before showing dialog
+      if (context.mounted) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => const LoadingWidget(
+            loadingState: true,
+          ),
+        );
+      }
     });
+    }
     return Skeletonizer(
       child: ListView.builder(
         padding: const EdgeInsets.all(16),
@@ -54,7 +59,10 @@ class FavoritesBuilder extends StatelessWidget {
     }
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Navigator.of(context).popUntil((route) => route.isFirst);
+      // Check if the context is still mounted before popping
+      if (context.mounted && Navigator.of(context).canPop()) {
+        Navigator.of(context).pop();
+      }
     });
     return ListView.builder(
       padding: const EdgeInsets.all(16),
@@ -82,43 +90,63 @@ class FavoritesBuilder extends StatelessWidget {
           current is Loading,
       builder: (context, state) {
         return state.maybeWhen(
-          initial: () => _buildLoadingState(context),
-          loading: () => _buildLoadingState(context),
+          // initial: () => _buildLoadingState(context),
+          loading: () => _buildLoadingState(context,true),
           getFavoritesSuccess: (GetFavoritesResponse favorites) =>
               _buildLoadedState(context, favorites),
           deleteFavoriteSuccess: (response) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              // Check if the context is still mounted before popping
+              if (context.mounted) {
+                Navigator.of(context).pop();
+              }
+            });
             // Show a snackbar if the product was not found in favorites
             if (response.message
                     ?.toLowerCase()
                     .contains('not found in favorites') ??
                 false) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                        response.message ?? 'Product not found in favorites'),
-                    backgroundColor: Colors.orange,
-                    duration: const Duration(seconds: 2),
-                  ),
-                );
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                          response.message ?? 'Product not found in favorites'),
+                      backgroundColor: Colors.orange,
+                      duration: const Duration(seconds: 2),
+                    ),
+                  );
+                }
               });
             }
             // Refresh the favorites list to get the updated state
-            context.read<FavoritesCubit>().getFavorites();
+            // Check if the cubit is still active before calling getFavorites
+            if (context.mounted) {
+              final cubit = context.read<FavoritesCubit>();
+              // Only call getFavorites if the cubit is not closed
+              if (!cubit.isClosed) {
+                cubit.getFavorites();
+              }
+            }
             // Return loading state while refreshing
-            return _buildLoadingState(context);
+            return _buildLoadingState(context,false);
           },
           error: (message) {
             // Show error message in a snackbar
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              Navigator.of(context).popUntil((route) => route.isFirst);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(message),
-                  backgroundColor: Colors.red,
-                  duration: const Duration(seconds: 3),
-                ),
-              );
+              if (context.mounted) {
+                // Check if we can pop before trying to pop to first route
+                if (Navigator.of(context).canPop()) {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                }
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(message),
+                    backgroundColor: Colors.red,
+                    duration: const Duration(seconds: 3),
+                  ),
+                );
+              }
             });
             return const SizedBox.shrink();
           },

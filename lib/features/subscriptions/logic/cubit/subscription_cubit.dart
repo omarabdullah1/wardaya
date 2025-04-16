@@ -14,9 +14,9 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
   String? selectedDate;
 
   Future<void> emitGetSubscription() async {
+      emit(const SubscriptionState.loading());
     try {
       log('Fetching subscription plans');
-      emit(const SubscriptionState.loading());
 
       final response = await _subscriptionRepo.getSubscriptionPlans();
 

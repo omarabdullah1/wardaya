@@ -258,3 +258,18 @@ favorites_empty_button: "Start Shopping"
 # SubMenuItemsScreen texts
 sub_menu_items_screen_title: "Sub Menu Items"
 sub_menu_items_empty_title: "No sub-menu items available"
+
+# AddressesScreen texts
+addresses_screen_title: "Saved Addresses"
+addresses_screen_add_new_address_button: "Add a new Address"
+addresses_screen_no_addresses_found: "No addresses found"
+
+# RecipientDetails texts
+recipient_details_screen_title: "Recipient Details"
+recipient_details_screen_continue_button: "Continue"
+recipient_details_screen_recipient_name_label: "Recipient Name"
+recipient_details_screen_recipient_phone_label: "Phone Number"
+recipient_details_screen_recipient_area_label: "Area"
+recipient_details_screen_recipient_address_label: "Address"
+recipient_details_screen_recipient_extra_address_label: "Extra address details(optional)"
+

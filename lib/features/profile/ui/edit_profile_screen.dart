@@ -59,7 +59,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 // _emailFieldKey.currentState?.invalidate('Email already taken.');
               }
             }
-            debugPrint(formKey.currentState?.value.toString());
+            log(formKey.currentState!.value.toString());
           });
         },
       ),
