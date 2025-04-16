@@ -1,4 +1,6 @@
 PODS:
+  - app_links (0.0.1):
+    - Flutter
   - AppAuth (1.7.6):
     - AppAuth/Core (= 1.7.6)
     - AppAuth/ExternalUserAgent (= 1.7.6)
@@ -87,6 +89,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - app_links (from `.symlinks/plugins/app_links/ios`)
   - benefit_pay_flutter (from `.symlinks/plugins/benefit_pay_flutter/ios`)
   - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
   - Flutter (from `Flutter`)
@@ -120,6 +123,8 @@ SPEC REPOS:
     - TapSwiftFixesV2
 
 EXTERNAL SOURCES:
+  app_links:
+    :path: ".symlinks/plugins/app_links/ios"
   benefit_pay_flutter:
     :path: ".symlinks/plugins/benefit_pay_flutter/ios"
   camera_avfoundation:
@@ -154,6 +159,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
+  app_links: c5161ac5ab5383ad046884568b4b91cb52df5d91
   AppAuth: d4f13a8fe0baf391b2108511793e4b479691fb73
   benefit_pay_flutter: 8fa02f52653dd04e5c9cc10a91bf84a492f74f08
   BenefitPay-iOS: bdb615e8c127e5545bcddacf79f7b26ecc5f55ca

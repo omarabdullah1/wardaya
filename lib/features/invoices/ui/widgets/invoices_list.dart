@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:localization/localization.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/styles.dart';
 import 'package:wardaya/features/invoices/data/models/invoice_response.dart';
 import 'package:wardaya/features/invoices/logic/cubit/invoices_cubit.dart';
 import 'package:wardaya/features/invoices/logic/cubit/invoices_state.dart';
+import 'package:wardaya/features/invoices/ui/invoice_details_screen.dart';
 
 import '../../../../core/widgets/loading_widget.dart';
 
@@ -77,13 +79,15 @@ class InvoicesList extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'You have no invoices from Wardaya.',
+                        'context.el.noInvoicesTitle' ??
+                            'You have no invoices from Wardaya.',
                         style: TextStylesInter.font16BlackSemiBold,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
-                        'Order’s invoices wil appear here',
+                        'context.el.noInvoicesSubtitle' ??
+                            'Order\'s invoices will appear here',
                         style: TextStylesInter.font15GreyRegular,
                       ),
                     ],
@@ -140,59 +144,69 @@ class InvoiceCard extends StatelessWidget {
         ? invoice.id.substring(invoice.id.length - 8)
         : invoice.id;
 
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 8.0.h),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 4,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(16.0.w),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // Left side - Invoice ID and Customer Name
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => InvoiceDetailsScreen(invoice: invoice),
+          ),
+        );
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 8.0.h),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 4,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(16.0.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Left side - Invoice ID and Customer Name
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '#$idSuffix',
+                        style: TextStylesInter.font14BlackSemiBold,
+                      ),
+                      SizedBox(height: 4.h),
+                      Text(
+                        invoice.name,
+                        style: TextStylesInter.font14GreyRegular,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                ),
+                // Right side - Date and Price
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      '#$idSuffix',
-                      style: TextStylesInter.font14BlackSemiBold,
+                      formattedDate,
+                      style: TextStylesInter.font14GreyRegular,
                     ),
                     SizedBox(height: 4.h),
                     Text(
-                      invoice.name,
-                      style: TextStylesInter.font14GreyRegular,
-                      overflow: TextOverflow.ellipsis,
+                      '${invoice.currency} ${invoice.totalPrice.toStringAsFixed(0)}',
+                      style: TextStylesInter.font16BlackSemiBold,
                     ),
                   ],
                 ),
-              ),
-              // Right side - Date and Price
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    formattedDate,
-                    style: TextStylesInter.font14GreyRegular,
-                  ),
-                  SizedBox(height: 4.h),
-                  Text(
-                    '${invoice.currency} ${invoice.totalPrice.toStringAsFixed(0)}',
-                    style: TextStylesInter.font16BlackSemiBold,
-                  ),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
