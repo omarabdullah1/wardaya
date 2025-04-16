@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:wardaya/features/favorites/data/apis/favorites_service.dart';
 import 'package:wardaya/features/favorites/data/models/get_favorites_response.dart';
-import 'package:wardaya/features/favorites/data/models/favorites_response_helper.dart';
 
 import '../../../../core/networking/api_error_handler.dart';
 import '../../../../core/networking/api_result.dart';
@@ -31,10 +30,10 @@ class FavoritesRepo {
       //       FavoritesResponseHelper.parseGetFavoritesResponse((e as DioException).response?.data);
       //   return ApiResult.success(parsedResponse);
       // } catch (error) {
-        // If parsing fails, return a failure
-        return ApiResult.failure(
-          ApiErrorHandler.handle(e),
-        );
+      // If parsing fails, return a failure
+      return ApiResult.failure(
+        ApiErrorHandler.handle(e),
+      );
       // }
     }
   }
@@ -69,7 +68,9 @@ class FavoritesRepo {
   Future<ApiResult<DeleteFavoritesResponse>> deleteFromFavorites(
       String productId) async {
     try {
-      final response = await _apiService.deleteFromFavorites(productId);
+      final response = await _apiService.deleteFromFavorites({
+        'productId': productId,
+      });
       return ApiResult.success(response);
     } catch (error, stackTrace) {
       log('Error in deleteFromFavorites: $error', stackTrace: stackTrace);

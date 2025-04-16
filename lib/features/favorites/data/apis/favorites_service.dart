@@ -20,5 +20,5 @@ abstract class FavoritesService {
 
   @DELETE(FavoritesApiConstants.favorites)
   Future<DeleteFavoritesResponse> deleteFromFavorites(
-      @Query("productId") String productId);
+      @Body() Map<String, String> body);
 }

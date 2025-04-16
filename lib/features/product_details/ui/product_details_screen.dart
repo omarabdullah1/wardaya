@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wardaya/core/di/dependency_injection.dart';
@@ -14,6 +16,7 @@ class ProductDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log(product.id.toString());
     return MultiBlocProvider(
       providers: [
         BlocProvider(

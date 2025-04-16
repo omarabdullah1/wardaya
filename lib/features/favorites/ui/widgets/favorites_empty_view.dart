@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/spacing.dart';
-import 'package:wardaya/core/routing/routes.dart';
-import 'package:wardaya/core/theming/colors.dart';
 
 import '../../../../core/assets/assets.dart';
 import '../../../../core/theming/styles.dart';
@@ -26,25 +24,26 @@ class FavoritesEmptyView extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const VerticalSpace(height: 24),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(Routes.homeLayout);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: ColorsManager.mainRose,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 12,
-                ),
-              ),
-              child: Text(
-                context.el.favoritesEmptyButton,
-                style: TextStylesInter.font14WhiteSemiBold,
-              ),
-            ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     context.read<LayoutCubit>().changeIndex(0);
+            //     Navigator.of(context).pushNamed(Routes.homeLayout);
+            //   },
+            //   style: ElevatedButton.styleFrom(
+            //     backgroundColor: ColorsManager.mainRose,
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(8),
+            //     ),
+            //     padding: const EdgeInsets.symmetric(
+            //       horizontal: 24,
+            //       vertical: 12,
+            //     ),
+            //   ),
+            //   child: Text(
+            //     context.el.favoritesEmptyButton,
+            //     style: TextStylesInter.font14WhiteSemiBold,
+            //   ),
+            // ),
           ],
         ),
       ),

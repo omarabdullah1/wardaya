@@ -12,20 +12,20 @@ import '../../data/models/get_favorites_response.dart';
 class FavoritesBuilder extends StatelessWidget {
   const FavoritesBuilder({super.key});
 
-  Widget _buildLoadingState(BuildContext context,bool isDialog) {
-    if(isDialog) {
+  Widget _buildLoadingState(BuildContext context, bool isDialog) {
+    if (isDialog) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Check if the context is still mounted before showing dialog
-      if (context.mounted) {
-        showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (context) => const LoadingWidget(
-            loadingState: true,
-          ),
-        );
-      }
-    });
+        // Check if the context is still mounted before showing dialog
+        if (context.mounted) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => const LoadingWidget(
+              loadingState: true,
+            ),
+          );
+        }
+      });
     }
     return Skeletonizer(
       child: ListView.builder(
@@ -55,6 +55,12 @@ class FavoritesBuilder extends StatelessWidget {
   Widget _buildLoadedState(
       BuildContext context, GetFavoritesResponse favorites) {
     if (favorites.favorites.isEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        // Check if the context is still mounted before popping
+        if (context.mounted && Navigator.of(context).canPop()) {
+          Navigator.of(context).pop();
+        }
+      });
       return const FavoritesEmptyView();
     }
 
@@ -91,7 +97,7 @@ class FavoritesBuilder extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
           // initial: () => _buildLoadingState(context),
-          loading: () => _buildLoadingState(context,true),
+          loading: () => _buildLoadingState(context, true),
           getFavoritesSuccess: (GetFavoritesResponse favorites) =>
               _buildLoadedState(context, favorites),
           deleteFavoriteSuccess: (response) {
@@ -129,7 +135,7 @@ class FavoritesBuilder extends StatelessWidget {
               }
             }
             // Return loading state while refreshing
-            return _buildLoadingState(context,false);
+            return _buildLoadingState(context, false);
           },
           error: (message) {
             // Show error message in a snackbar

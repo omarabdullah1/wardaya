@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wardaya/core/helpers/constants.dart';
+import 'package:wardaya/core/helpers/shared_pref_helper.dart';
 import 'package:wardaya/features/favorites/data/models/get_favorites_response.dart';
 import 'package:wardaya/features/favorites/data/repos/favorites_repo.dart';
 import 'package:wardaya/features/favorites/data/models/add_favorites_response.dart';
@@ -16,15 +18,15 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   // Get all favorites from server
   Future<void> getFavorites() async {
     // Check if the cubit is closed before emitting any state
-    if (isClosed) return; 
-    
+    if (isClosed) return;
+
     emit(const FavoritesState.loading());
     try {
       final response = await _favoritesRepo.getFavorites();
-      
+
       // Check again if the cubit is closed before emitting another state
       if (isClosed) return;
-      
+
       response.when(
         success: (data) {
           _favorites = data.favorites;
@@ -38,7 +40,7 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     } catch (e) {
       // Check again if the cubit is closed before emitting another state
       if (isClosed) return;
-      
+
       emit(FavoritesState.error(e.toString()));
     }
   }
@@ -81,6 +83,8 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   // Remove item from favorites using API
   Future<void> removeFromFavorites(String productId) async {
     emit(const FavoritesState.loading());
+    log('Removing product with ID: $productId from favorites');
+    log(await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken));
     final result = await _favoritesRepo.deleteFromFavorites(productId);
     result.when(
       success: (response) {
