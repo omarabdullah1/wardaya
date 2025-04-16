@@ -45,7 +45,7 @@ class _ExploreService implements ExploreService {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<List<dynamic>>(_options);
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late MenuItemsResponse _value;
     try {
       _value = MenuItemsResponse.fromJson(_result.data!);

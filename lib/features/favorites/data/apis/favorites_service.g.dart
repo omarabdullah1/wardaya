@@ -62,7 +62,7 @@ class _FavoritesService implements FavoritesService {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<GetFavoritesResponse>(Options(
       method: 'GET',
       headers: _headers,
@@ -79,20 +79,10 @@ class _FavoritesService implements FavoritesService {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch(_options);
-
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late GetFavoritesResponse _value;
     try {
-      if (_result.data is List) {
-        // Handle list response
-        _value = GetFavoritesResponse.fromJsonList(_result.data);
-      } else if (_result.data is Map<String, dynamic>) {
-        // Handle object response
-        _value = GetFavoritesResponse.fromJson(_result.data!);
-      } else {
-        // Default to empty response
-        _value = GetFavoritesResponse(favorites: []);
-      }
+      _value = GetFavoritesResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
