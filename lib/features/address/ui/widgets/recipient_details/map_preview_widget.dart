@@ -57,7 +57,8 @@ class _MapPreviewWidgetState extends State<MapPreviewWidget> {
                 children: [
                   GoogleMap(
                     initialCameraPosition: CameraPosition(
-                      target: widget.initialLocation ?? const LatLng(30.0444, 31.2357), // Default to Cairo
+                      target: widget.initialLocation ??
+                          const LatLng(30.0444, 31.2357), // Default to Cairo
                       zoom: 14.0,
                     ),
                     myLocationEnabled: true,
@@ -133,8 +134,7 @@ class _MapPreviewWidgetState extends State<MapPreviewWidget> {
                   borderRadius: BorderRadius.circular(8.r),
                   boxShadow: [
                     BoxShadow(
-                      color: ColorsManager.black
-                          .withAlpha((0.1 * 255).toInt()),
+                      color: ColorsManager.black.withAlpha((0.1 * 255).toInt()),
                       blurRadius: 4.r,
                       offset: const Offset(0, 2),
                     ),
@@ -162,7 +162,8 @@ class _MapPreviewWidgetState extends State<MapPreviewWidget> {
       // Check location services and permissions
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
-        widget.showMessage('Location services are disabled. Please enable them in settings.');
+        widget.showMessage(
+            'Location services are disabled. Please enable them in settings.');
         setState(() {
           _isLoading = false;
         });
@@ -173,7 +174,8 @@ class _MapPreviewWidgetState extends State<MapPreviewWidget> {
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
         if (permission == LocationPermission.denied) {
-          widget.showMessage('Location permission denied. Please grant permission to use this feature.');
+          widget.showMessage(
+              'Location permission denied. Please grant permission to use this feature.');
           setState(() {
             _isLoading = false;
           });
@@ -182,6 +184,7 @@ class _MapPreviewWidgetState extends State<MapPreviewWidget> {
       }
 
       if (permission == LocationPermission.deniedForever) {
+        if (!mounted) return;
         showDialog(
           context: context,
           builder: (context) => AlertDialog(

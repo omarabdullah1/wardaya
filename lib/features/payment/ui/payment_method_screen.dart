@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:localization/localization.dart';
-import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/widgets/app_app_bar.dart';
 
@@ -13,7 +11,7 @@ import 'tap_payment_screen.dart';
 class PaymentMethodScreen extends StatefulWidget {
   final double amount;
   final String orderId;
-  
+
   const PaymentMethodScreen({
     super.key,
     required this.amount,
@@ -42,7 +40,8 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
       id: 'apple_pay',
       title: 'Apple Pay',
       description: 'Quick and secure payment with Apple Pay',
-      icon: 'assets/svgs/apple.svg', // Using existing SVG instead of missing PNG
+      icon:
+          'assets/svgs/apple.svg', // Using existing SVG instead of missing PNG
       isSvg: true,
       isApplePay: true,
     ),
@@ -56,7 +55,8 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
       id: 'benefitpay',
       title: 'Benefit Pay',
       description: 'Pay using Benefit Pay service',
-      icon: 'assets/pay_cards/master_card.png', // Fallback to a generic payment icon
+      icon:
+          'assets/pay_cards/master_card.png', // Fallback to a generic payment icon
     ),
   ];
 
@@ -67,7 +67,8 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsManager.white,
-      appBar: AppAppBar(title: 'context.el.paymentMethodsTitle' ?? 'Payment Methods'),
+      appBar: const AppAppBar(
+          title: 'context.el.paymentMethodsTitle' ?? 'Payment Methods'),
       body: Column(
         children: [
           // Payment amount header
@@ -104,7 +105,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               ),
             ),
           ),
-          
+
           // Payment methods list
           Expanded(
             child: ListView.builder(
@@ -113,17 +114,19 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               itemBuilder: (context, index) {
                 final method = _paymentMethods[index];
                 final isSelected = method.id == _selectedPaymentMethodId;
-                
+
                 // Check if we should show Apple Pay (only on iOS)
-                if (method.isApplePay && Theme.of(context).platform != TargetPlatform.iOS) {
+                if (method.isApplePay &&
+                    Theme.of(context).platform != TargetPlatform.iOS) {
                   return const SizedBox.shrink();
                 }
-                
+
                 // Check if we should show Google Pay (only on Android)
-                if (method.id == 'google_pay' && Theme.of(context).platform != TargetPlatform.android) {
+                if (method.id == 'google_pay' &&
+                    Theme.of(context).platform != TargetPlatform.android) {
                   return const SizedBox.shrink();
                 }
-                
+
                 return GestureDetector(
                   onTap: () {
                     setState(() {
@@ -134,10 +137,15 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                     margin: EdgeInsets.only(bottom: 12.h),
                     padding: EdgeInsets.all(16.r),
                     decoration: BoxDecoration(
-                      color: isSelected ? ColorsManager.mainRose.withOpacity(0.1) : Colors.white,
+                      color: isSelected
+                          ? ColorsManager.mainRose
+                              .withAlpha((0.1 * 255).toInt())
+                          : Colors.white,
                       borderRadius: BorderRadius.circular(12.r),
                       border: Border.all(
-                        color: isSelected ? ColorsManager.mainRose : ColorsManager.lightGrey,
+                        color: isSelected
+                            ? ColorsManager.mainRose
+                            : ColorsManager.lightGrey,
                         width: isSelected ? 2 : 1,
                       ),
                     ),
@@ -149,20 +157,20 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                           child: SizedBox(
                             width: 48.w,
                             height: 48.w,
-                            child: method.isSvg 
-                              ? SvgPicture.asset(
-                                  method.icon,
-                                  fit: BoxFit.contain,
-                                )
-                              : Image.asset(
-                                  method.icon,
-                                  fit: BoxFit.contain,
-                                ),
+                            child: method.isSvg
+                                ? SvgPicture.asset(
+                                    method.icon,
+                                    fit: BoxFit.contain,
+                                  )
+                                : Image.asset(
+                                    method.icon,
+                                    fit: BoxFit.contain,
+                                  ),
                           ),
                         ),
-                        
+
                         SizedBox(width: 16.w),
-                        
+
                         // Payment method details
                         Expanded(
                           child: Column(
@@ -186,7 +194,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                             ],
                           ),
                         ),
-                        
+
                         // Selection indicator
                         Container(
                           width: 24.w,
@@ -194,7 +202,9 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color: isSelected ? ColorsManager.mainRose : ColorsManager.lightGrey,
+                              color: isSelected
+                                  ? ColorsManager.mainRose
+                                  : ColorsManager.lightGrey,
                               width: 2,
                             ),
                             color: Colors.white,
@@ -219,7 +229,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               },
             ),
           ),
-          
+
           // Proceed to payment button
           Padding(
             padding: EdgeInsets.all(16.r),
@@ -246,7 +256,8 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                       ),
                     )
                   : Text(
-                      'context.el.proceedToPaymentButton' ?? 'Proceed to Payment',
+                      'context.el.proceedToPaymentButton' ??
+                          'Proceed to Payment',
                       style: GoogleFonts.inter(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w600,
@@ -261,56 +272,60 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
 
   Future<void> _proceedToPayment(BuildContext context) async {
     if (_selectedPaymentMethodId == null) return;
-    
+
     setState(() {
       _isProcessing = true;
     });
-    
+
     try {
       bool paymentSuccess = false;
-      
+
       // Handle different payment methods
       if (_selectedPaymentMethodId == 'benefitpay') {
         // Use BenefitPay specific screen
         paymentSuccess = await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => BenefitPayScreen(
-              amount: widget.amount,
-              orderId: widget.orderId,
-            ),
-          ),
-        ) ?? false;
+              context,
+              MaterialPageRoute(
+                builder: (context) => BenefitPayScreen(
+                  amount: widget.amount,
+                  orderId: widget.orderId,
+                ),
+              ),
+            ) ??
+            false;
       } else {
         // For all other payment methods, use the new Tap Payment screen
         paymentSuccess = await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => TapPaymentScreen(
-              amount: widget.amount,
-              orderId: widget.orderId,
-              firstName: "John", // Replace with actual user data
-              lastName: "Smith", // Replace with actual user data
-              email: "customer@example.com", // Replace with actual user data
-              phoneNumber: "566123456", // Replace with actual user data
-              countryCode: "+966", // Replace with actual user data
-              paymentMethod: _selectedPaymentMethodId,
-            ),
-          ),
-        ) ?? false;
+              context,
+              MaterialPageRoute(
+                builder: (context) => TapPaymentScreen(
+                  amount: widget.amount,
+                  orderId: widget.orderId,
+                  firstName: "John", // Replace with actual user data
+                  lastName: "Smith", // Replace with actual user data
+                  email:
+                      "customer@example.com", // Replace with actual user data
+                  phoneNumber: "566123456", // Replace with actual user data
+                  countryCode: "+966", // Replace with actual user data
+                  paymentMethod: _selectedPaymentMethodId,
+                ),
+              ),
+            ) ??
+            false;
       }
-      
+
       // Handle payment result
       if (paymentSuccess) {
         // Show success message and navigate back
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content: Text('Payment successful!'),
               backgroundColor: Colors.green,
             ),
           );
-          Navigator.pop(context, true); // Return to previous screen with success result
+          Navigator.pop(
+              context, true); // Return to previous screen with success result
         }
       }
     } catch (e) {

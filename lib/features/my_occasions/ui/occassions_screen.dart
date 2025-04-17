@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/widgets/app_app_bar.dart';
@@ -14,7 +13,8 @@ import 'widgets/reminder_bottom_sheet.dart';
 class OccasionsScreen extends StatelessWidget {
   const OccasionsScreen({super.key});
 
-  void _showReminderBottomSheet(BuildContext context, {MyOccasionItem? occasion}) {
+  void _showReminderBottomSheet(BuildContext context,
+      {MyOccasionItem? occasion}) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -27,7 +27,7 @@ class OccasionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsManager.offWhite,
-      appBar: AppAppBar(title: 'context.el.myOccasions'),
+      appBar: const AppAppBar(title: 'context.el.myOccasions'),
       body: SafeArea(
         child: RefreshIndicator(
           color: ColorsManager.mainRose,
@@ -59,7 +59,9 @@ class OccasionsScreen extends StatelessWidget {
                   ),
                 ),
                 VerticalSpace(height: 16.h),
-                OccasionsBuilder(onOccasionTap: (occasion) => _showReminderBottomSheet(context, occasion: occasion)),
+                OccasionsBuilder(
+                    onOccasionTap: (occasion) =>
+                        _showReminderBottomSheet(context, occasion: occasion)),
                 VerticalSpace(height: 24.h),
                 Padding(
                   padding: EdgeInsets.all(16.0.w),
@@ -71,7 +73,9 @@ class OccasionsScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                UpcomingOccasionsList(onOccasionTap: (occasion) => _showReminderBottomSheet(context, occasion: occasion)),
+                UpcomingOccasionsList(
+                    onOccasionTap: (occasion) =>
+                        _showReminderBottomSheet(context, occasion: occasion)),
               ],
             ),
           ),

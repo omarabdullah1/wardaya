@@ -16,10 +16,12 @@ import 'package:wardaya/features/invoices/logic/cubit/invoices_cubit.dart';
 import 'package:wardaya/features/my_occasions/data/apis/my_occassions_service.dart';
 import 'package:wardaya/features/my_occasions/data/repos/my_occasions_repo.dart';
 import 'package:wardaya/features/my_occasions/logic/cubit/my_occasions_cubit.dart';
-import 'package:wardaya/features/profile/data/repos/profile_repo.dart';
+import 'package:wardaya/features/my_orders/data/apis/my_orders_service.dart';
+import 'package:wardaya/features/my_orders/logic/cubit/my_orders_cubit.dart';
 import 'package:wardaya/features/product_details/data/repos/product_details_repo.dart';
 import 'package:wardaya/features/product_details/logic/product_details/product_details_cubit.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
+import 'package:wardaya/features/profile/data/repos/profile_repo.dart';
 import 'package:wardaya/features/search/data/apis/search_service.dart';
 import 'package:wardaya/features/search/data/repos/search_repo.dart';
 import 'package:wardaya/features/search/logic/cubit/search_cubit.dart';
@@ -42,6 +44,7 @@ import '../../features/home/logic/occassions/occassions_cubit.dart';
 import '../../features/home/logic/recipients/recipients_cubit.dart';
 import '../../features/invoices/data/repos/invoices_repo.dart';
 import '../../features/layout/logic/cubit/layout_cubit.dart';
+import '../../features/my_orders/data/repos/my_orders_repo.dart';
 import '../../features/product_details/data/apis/product_details_service.dart';
 import '../../features/profile/logic/cubit/profile_cubit.dart';
 import '../../features/subscriptions/logic/subscription_checkout_cubit/subscription_checkout_cubit.dart';
@@ -71,6 +74,7 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<InvoicesService>(() => InvoicesService(dio));
   getIt.registerLazySingleton<ProductDetailsService>(
       () => ProductDetailsService(dio));
+  getIt.registerLazySingleton<MyOrdersService>(() => MyOrdersService(dio));
 
   /************************* */
   /* ******** REPOS *********
@@ -93,6 +97,7 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<AddressRepo>(() => AddressRepo(getIt()));
   getIt.registerLazySingleton<MyOccasionsRepo>(() => MyOccasionsRepo(getIt()));
   getIt.registerLazySingleton<InvoicesRepo>(() => InvoicesRepo(getIt()));
+  getIt.registerLazySingleton<MyOrdersRepo>(() => MyOrdersRepo(getIt()));
 
   /************************* */
   /* ******** CUBIT *********
@@ -126,6 +131,7 @@ Future<void> setupGetIt() async {
       .registerFactory<ProductDetailsCubit>(() => ProductDetailsCubit(getIt()));
   getIt.registerFactory<SubscriptionCheckoutCubit>(
       () => SubscriptionCheckoutCubit());
+  getIt.registerFactory<MyOrdersCubit>(() => MyOrdersCubit(getIt()));
 
   getIt.registerFactory<LayoutCubit>(() => LayoutCubit());
   getIt.registerFactory<CartCubit>(() => CartCubit());

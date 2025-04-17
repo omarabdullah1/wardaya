@@ -90,12 +90,7 @@ class ProfileBody extends StatelessWidget {
                   context.el.myOrders,
                   Assets.of(context).svgs.orders_truck_svg,
                   onTap: () async {
-                    // String token = await SharedPrefHelper.getSecuredString(
-                    //     SharedPrefKeys.userToken);
-                    // log('Saved Token: $token');
-                    // String userData = await SharedPrefHelper.getSecuredString(
-                    //     SharedPrefKeys.userData);
-                    // log('Saved User Data: $userData');
+                    context.pushNamed(Routes.myOrdersScreen);
                   },
                 ),
                 const Divider(

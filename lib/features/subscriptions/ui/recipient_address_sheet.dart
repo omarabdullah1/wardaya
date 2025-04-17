@@ -15,11 +15,11 @@ class RecipientAddressSheet extends StatefulWidget {
   final String initialArea;
 
   const RecipientAddressSheet({
-    Key? key,
+    super.key,
     this.initialLocation,
     this.initialAddress = '',
     this.initialArea = '',
-  }) : super(key: key);
+  });
 
   @override
   State<RecipientAddressSheet> createState() => _RecipientAddressSheetState();
@@ -28,14 +28,16 @@ class RecipientAddressSheet extends StatefulWidget {
 class _RecipientAddressSheetState extends State<RecipientAddressSheet> {
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _areaController = TextEditingController();
-  final TextEditingController _additionalInfoController = TextEditingController();
+  final TextEditingController _additionalInfoController =
+      TextEditingController();
   LatLng? _selectedLocation;
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    _selectedLocation = widget.initialLocation ?? const LatLng(30.0444, 31.2357);
+    _selectedLocation =
+        widget.initialLocation ?? const LatLng(30.0444, 31.2357);
     _addressController.text = widget.initialAddress;
     _areaController.text = widget.initialArea;
   }
@@ -48,7 +50,9 @@ class _RecipientAddressSheetState extends State<RecipientAddressSheet> {
     super.dispose();
   }
 
-  Widget _buildTextField(String label, String hint, TextEditingController controller, {bool isRequired = true}) {
+  Widget _buildTextField(
+      String label, String hint, TextEditingController controller,
+      {bool isRequired = true}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -84,12 +88,14 @@ class _RecipientAddressSheetState extends State<RecipientAddressSheet> {
               borderSide: const BorderSide(color: ColorsManager.mainRose),
             ),
           ),
-          validator: isRequired ? (value) {
-            if (value == null || value.isEmpty) {
-              return 'This field is required';
-            }
-            return null;
-          } : null,
+          validator: isRequired
+              ? (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'This field is required';
+                  }
+                  return null;
+                }
+              : null,
         ),
       ],
     );
@@ -153,12 +159,16 @@ class _RecipientAddressSheetState extends State<RecipientAddressSheet> {
 
                           if (response.statusCode == 200) {
                             final data = json.decode(response.body);
-                            if (data['results'] != null && data['results'].isNotEmpty) {
-                              final address = data['results'][0]['formatted_address'] as String;
+                            if (data['results'] != null &&
+                                data['results'].isNotEmpty) {
+                              final address = data['results'][0]
+                                  ['formatted_address'] as String;
                               String area = '';
 
-                              if (data['results'][0]['address_components'] != null) {
-                                final components = data['results'][0]['address_components'] as List;
+                              if (data['results'][0]['address_components'] !=
+                                  null) {
+                                final components = data['results'][0]
+                                    ['address_components'] as List;
                                 for (final component in components) {
                                   final types = component['types'] as List;
                                   if (types.contains('neighborhood') ||

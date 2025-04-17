@@ -16,5 +16,6 @@ class ColorsManager {
   static const Color offWhite = Color(0xFFF7F6F2);
   static const Color transparent = Color(0x00000000);
   static const Color mintGreen = Color(0xFFA3C362);
+  static const Color orange = Color(0xFFFF9800);
   static const Color white86 = Color(0xFFEBEBEB);
 }

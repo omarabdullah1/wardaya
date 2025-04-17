@@ -246,7 +246,6 @@ select_other_date: "اختر تاريخًا آخر"
 we_select_delevery_based_area: "سنختار أفضل وقت توصيل بناءً على منطقتك وتاريخ التوصيل"
 off: "خصم"
 
-
 # FavoritesScreen texts
 favorites_screen_title: "المفضلة"
 favorites_empty_title: "لا يوجد منتجات مفضلة بعد"
@@ -270,3 +269,32 @@ recipient_details_screen_recipient_area_label: "المنطقة"
 recipient_details_screen_recipient_address_label: "العنوان"
 recipient_details_screen_recipient_extra_address_label: "العنوان الإضافي (اختياري)"
 
+# Order Card texts
+orderNumber: "رقم الطلب"
+date: "التاريخ"
+orderId: "رقم الطلب"
+orderStatus: "الحالة"
+deliveryInfo: "معلومات التوصيل"
+recipientName: "الاسم"
+phoneNumber: "رقم الهاتف"
+address: "العنوان"
+estimatedDeliveryTime: "وقت التوصيل المتوقع"
+myIdentity: "هويتي"
+expressDelivery: "توصيل سريع"
+hidden: "مخفي"
+visible: "ظاهر"
+yes: "نعم"
+no: "لا"
+quantity: "×"
+noOrders: "لا توجد طلبات"
+recipient: "المستلم"
+deliveryDate: "تاريخ التوصيل"
+
+# Order Details Screen
+paymentDetails: "تفاصيل الدفع"
+subtotal: "المجموع الفرعي"
+deliveryCharges: "رسوم التوصيل"
+vatLabel: "ضريبة القيمة المضافة"
+paymentMethod: "طريقة الدفع"
+
+search_order_placeholder: "ابحث عن رقم الطلب أو اسم المستلم" 

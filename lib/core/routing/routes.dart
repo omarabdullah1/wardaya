@@ -32,4 +32,6 @@ class Routes {
   static const String benefitPayScreen = '/benefit-pay';
   static const String paymentMethodScreen = '/payment-method';
   static const String tapPaymentScreen = '/tap-payment';
+  static const String myOrdersScreen = '/myOrdersScreen';
+  static const String orderDetailsScreen = '/orderDetailsScreen';
 }

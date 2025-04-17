@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:localization/localization.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/styles.dart';
@@ -161,7 +160,7 @@ class InvoiceCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.0),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: Colors.black.withAlpha((0.05 * 255).toInt()),
                 blurRadius: 4,
                 offset: const Offset(0, 2),
               ),

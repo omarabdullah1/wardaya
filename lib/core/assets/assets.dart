@@ -227,6 +227,7 @@ class _assets_svgs_dart {
   final delivery_svg = 'assets/svgs/delivery.svg';
   final edit_pen_svg = 'assets/svgs/edit_pen.svg';
   final empty_cart_svg = 'assets/svgs/empty_cart.svg';
+  final empty_orders_svg = 'assets/svgs/orders_empty.svg';
   final empty_favs_svg = 'assets/svgs/empty_favs.svg';
   final enjoy_fresh_flowers_svg = 'assets/svgs/enjoy_fresh_flowers.svg';
   final explore_svg = 'assets/svgs/explore.svg';

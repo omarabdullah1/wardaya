@@ -26,8 +26,8 @@ class TapHashGenerator {
     var formattedAmount = amount.toStringAsFixed(3);
 
     // Format the string that we will hash
-    String toBeHashed = "x_publickey$publicKey" +
-        "x_amount$formattedAmount" +
+    String toBeHashed = "x_publickey$publicKey"
+        "x_amount$formattedAmount"
         "x_currency$currency";
 
     // Add optional parameters if they're provided

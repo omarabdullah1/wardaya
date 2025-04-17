@@ -237,6 +237,7 @@ class _assets_svgs_dart {
   final location_icon_svg = 'assets/svgs/location_icon.svg';
   final logout_svg = 'assets/svgs/logout.svg';
   final occassions_svg = 'assets/svgs/occassions.svg';
+  final orders_empty_svg = 'assets/svgs/orders_empty.svg';
   final orders_truck_svg = 'assets/svgs/orders_truck.svg';
   final phone_svg = 'assets/svgs/phone.svg';
   final points_svg = 'assets/svgs/points.svg';

@@ -12,7 +12,7 @@ import 'occasion_card.dart';
 
 class OccasionsBuilder extends StatelessWidget {
   final Function(MyOccasionItem)? onOccasionTap;
-  
+
   const OccasionsBuilder({super.key, this.onOccasionTap});
 
   @override
@@ -40,7 +40,7 @@ class OccasionsBuilder extends StatelessWidget {
         ),
       );
     });
-    
+
     // Return a skeleton loading UI
     return Skeletonizer(
       enabled: true,
@@ -50,7 +50,7 @@ class OccasionsBuilder extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           itemCount: 4,
-          itemBuilder: (context, index) => OccasionCard(
+          itemBuilder: (context, index) => const OccasionCard(
             occasion: null,
             isLoading: true,
             // Remove the onTap parameter to match the success state
@@ -67,7 +67,7 @@ class OccasionsBuilder extends StatelessWidget {
         Navigator.of(context).pop();
       }
     });
-    
+
     if (occasions.isEmpty) {
       return Center(
         child: Padding(
@@ -76,7 +76,7 @@ class OccasionsBuilder extends StatelessWidget {
         ),
       );
     }
-    
+
     return SizedBox(
       height: 120.h,
       child: ListView.builder(
@@ -118,7 +118,7 @@ class OccasionsBuilder extends StatelessWidget {
         ),
       );
     });
-    
+
     return Center(
       child: Padding(
         padding: EdgeInsets.all(16.w),

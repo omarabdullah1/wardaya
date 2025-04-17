@@ -4,8 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../theming/colors.dart';
 
-typedef ItemBuilder<T> = Widget Function(BuildContext context, T item, int index);
-typedef FetchMoreItemsCallback<T> = Future<List<T>> Function(int page, int pageSize);
+typedef ItemBuilder<T> = Widget Function(
+    BuildContext context, T item, int index);
+typedef FetchMoreItemsCallback<T> = Future<List<T>> Function(
+    int page, int pageSize);
 
 class PaginatedListView<T> extends StatefulWidget {
   final List<T> items;
@@ -26,7 +28,7 @@ class PaginatedListView<T> extends StatefulWidget {
   final Widget? errorWidget;
 
   const PaginatedListView({
-    Key? key,
+    super.key,
     required this.items,
     required this.itemBuilder,
     required this.onFetchMoreItems,
@@ -43,7 +45,7 @@ class PaginatedListView<T> extends StatefulWidget {
     this.emptyWidget,
     this.loadingWidget,
     this.errorWidget,
-  }) : super(key: key);
+  });
 
   @override
   State<PaginatedListView<T>> createState() => _PaginatedListViewState<T>();
@@ -71,9 +73,10 @@ class _PaginatedListViewState<T> extends State<PaginatedListView<T>> {
   @override
   void didUpdateWidget(PaginatedListView<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    
+
     // Reset pagination when items list is reset (like after applying filters)
-    if (oldWidget.items.length > 0 && widget.items.length > 0 && 
+    if (oldWidget.items.isNotEmpty &&
+        widget.items.isNotEmpty &&
         widget.items.length <= widget.pageSize &&
         oldWidget.items != widget.items) {
       log('Items list was reset, resetting pagination');
@@ -108,7 +111,7 @@ class _PaginatedListViewState<T> extends State<PaginatedListView<T>> {
 
     try {
       log('Fetching page ${_currentPage + 1}');
-      
+
       final newItems = await widget.onFetchMoreItems(
         _currentPage + 1,
         widget.pageSize,
@@ -117,7 +120,7 @@ class _PaginatedListViewState<T> extends State<PaginatedListView<T>> {
       // Calculate total pages
       final totalPages = (widget.totalItemsCount / widget.pageSize).ceil();
       log('Total pages: $totalPages, Current page: ${_currentPage + 1}, Items count: ${newItems.length}');
-      
+
       if (newItems.isEmpty || _currentPage + 1 >= totalPages) {
         setState(() {
           _hasReachedMax = true;
@@ -129,7 +132,6 @@ class _PaginatedListViewState<T> extends State<PaginatedListView<T>> {
         });
         log('Advanced to page $_currentPage');
       }
-
     } catch (error) {
       log('Error fetching more items: $error');
       setState(() {
@@ -156,9 +158,10 @@ class _PaginatedListViewState<T> extends State<PaginatedListView<T>> {
   @override
   Widget build(BuildContext context) {
     if (widget.items.isEmpty) {
-      return widget.emptyWidget ?? const Center(
-        child: Text('No items found'),
-      );
+      return widget.emptyWidget ??
+          const Center(
+            child: Text('No items found'),
+          );
     }
 
     return Stack(
@@ -169,28 +172,30 @@ class _PaginatedListViewState<T> extends State<PaginatedListView<T>> {
             bottom: 0,
             left: 0,
             right: 0,
-            child: widget.loadingWidget ?? Container(
-              padding: EdgeInsets.all(10.r),
-              alignment: Alignment.center,
-              child: const CircularProgressIndicator(
-                color: ColorsManager.mainRose,
-              ),
-            ),
+            child: widget.loadingWidget ??
+                Container(
+                  padding: EdgeInsets.all(10.r),
+                  alignment: Alignment.center,
+                  child: const CircularProgressIndicator(
+                    color: ColorsManager.mainRose,
+                  ),
+                ),
           ),
         if (_hasError)
           Positioned(
             bottom: 0,
             left: 0,
             right: 0,
-            child: widget.errorWidget ?? Container(
-              padding: EdgeInsets.all(10.r),
-              color: Colors.red.withOpacity(0.8),
-              child: Text(
-                'Error loading more items. Tap to retry.',
-                style: TextStyle(color: Colors.white, fontSize: 14.sp),
-                textAlign: TextAlign.center,
-              ),
-            ),
+            child: widget.errorWidget ??
+                Container(
+                  padding: EdgeInsets.all(10.r),
+                  color: Colors.red.withAlpha((0.8 * 255).toInt()),
+                  child: Text(
+                    'Error loading more items. Tap to retry.',
+                    style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
           ),
       ],
     );
@@ -207,7 +212,8 @@ class _PaginatedListViewState<T> extends State<PaginatedListView<T>> {
         crossAxisSpacing: widget.gridCrossAxisSpacing,
       ),
       itemCount: widget.items.length,
-      itemBuilder: (context, index) => widget.itemBuilder(context, widget.items[index], index),
+      itemBuilder: (context, index) =>
+          widget.itemBuilder(context, widget.items[index], index),
     );
   }
 
@@ -217,8 +223,10 @@ class _PaginatedListViewState<T> extends State<PaginatedListView<T>> {
       padding: widget.padding,
       physics: widget.physics,
       itemCount: widget.items.length,
-      separatorBuilder: (context, index) => widget.separatorBuilder ?? SizedBox(height: 10.h),
-      itemBuilder: (context, index) => widget.itemBuilder(context, widget.items[index], index),
+      separatorBuilder: (context, index) =>
+          widget.separatorBuilder ?? SizedBox(height: 10.h),
+      itemBuilder: (context, index) =>
+          widget.itemBuilder(context, widget.items[index], index),
     );
   }
 }

@@ -1,12 +1,9 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:localization/localization.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
-import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/widgets/app_app_bar.dart';
 
@@ -58,10 +55,7 @@ class _TapPaymentScreenState extends State<TapPaymentScreen> {
       // Initialize the controller based on platform
       late final PlatformWebViewControllerCreationParams params;
 
-      if (WebViewPlatform.instance == null) {
-        // Initialize the platform
-        WebViewPlatform.instance = AndroidWebViewPlatform();
-      }
+      WebViewPlatform.instance ??= AndroidWebViewPlatform();
 
       params = const PlatformWebViewControllerCreationParams();
 
@@ -254,14 +248,14 @@ class _TapPaymentScreenState extends State<TapPaymentScreen> {
               child: Container(
                 padding: EdgeInsets.all(16.r),
                 decoration: BoxDecoration(
-                  color: Colors.red.withOpacity(0.1),
+                  color: ColorsManager.red.withAlpha((0.1 * 255).toInt()),
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Column(
                   children: [
                     const Icon(
                       Icons.error_outline,
-                      color: Colors.red,
+                      color: ColorsManager.red,
                       size: 32,
                     ),
                     SizedBox(height: 12.h),
@@ -269,7 +263,7 @@ class _TapPaymentScreenState extends State<TapPaymentScreen> {
                       _errorMessage,
                       style: GoogleFonts.inter(
                         fontSize: 14.sp,
-                        color: Colors.red,
+                        color: ColorsManager.red,
                       ),
                       textAlign: TextAlign.center,
                     ),

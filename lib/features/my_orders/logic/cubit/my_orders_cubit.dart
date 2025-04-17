@@ -1,68 +1,90 @@
-import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:wardaya/core/helpers/constants.dart';
-import 'package:wardaya/core/helpers/extensions.dart';
-import 'package:wardaya/core/theming/styles.dart';
-import 'package:wardaya/features/profile/data/repos/profile_repo.dart';
-import 'package:wardaya/features/profile/logic/cubit/profile_state.dart';
+import 'dart:developer';
 
-import '../../../../core/helpers/shared_pref_helper.dart';
-import '../../../../core/routing/router_imports.dart';
+import 'package:wardaya/features/my_orders/data/models/my_orders_response.dart';
+import 'package:wardaya/features/my_orders/data/repos/my_orders_repo.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'my_orders_state.dart';
 
-class ProfileCubit extends Cubit<ProfileState> {
-  final ProfileRepo _profileRepo;
+class MyOrdersCubit extends Cubit<MyOrdersState> {
+  final MyOrdersRepo _repository;
+  bool isLoadingMore = false;
+  bool hasMorePages = true;
+  int currentPage = 1;
+  String? currentSearch;
+  List<Order> allOrders = [];
 
-  ProfileCubit(this._profileRepo) : super(const ProfileState.initial());
+  MyOrdersCubit(this._repository) : super(const MyOrdersState.initial());
 
-  final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
-  final GlobalKey<FormBuilderFieldState> emailFieldKey =
-      GlobalKey<FormBuilderFieldState>();
-  final GlobalKey<TooltipState> firstNameTooltipKey = GlobalKey<TooltipState>();
-  final GlobalKey<TooltipState> lastNameTooltipKey = GlobalKey<TooltipState>();
-  final GlobalKey<TooltipState> emailTooltipKey = GlobalKey<TooltipState>();
-  final GlobalKey<TooltipState> passwordTooltipKey = GlobalKey<TooltipState>();
-  final GlobalKey<TooltipState> phoneTooltipKey = GlobalKey<TooltipState>();
-  final GlobalKey<TooltipState> dateOfBirthTooltipKey =
-      GlobalKey<TooltipState>();
-  final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController dateOfBirthController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  Future<void> getOrders({String? search}) async {
+    currentSearch = search;
+    currentPage = 1;
+    allOrders = [];
+    hasMorePages = true;
 
-  void getProfile(BuildContext context) async {
-    emit(const ProfileState.loading());
-    final response = await _profileRepo.getProfile();
-    response.when(success: (profileResponse) async {
-      emit(ProfileState.success(profileResponse));
-      firstNameController.text = profileResponse.firstName!;
-      lastNameController.text = profileResponse.lastName!;
-      emailController.text = profileResponse.email!;
-      passwordController.text = profileResponse.password!;
-      phoneController.text = profileResponse.phoneNumber.toString();
-      dateOfBirthController.text = profileResponse.birthDate.toString();
-    }, failure: (error) async {
-      if (error.message == 'Unauthorized') {
-        await Future.delayed(const Duration(seconds: 1));
-        if (context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                'Session has been expired',
-                style: TextStylesInter.font12WhiteBold,
-              ),
-              backgroundColor: Colors.red,
-            ),
-          );
-          SharedPrefHelper.removeSecuredString(SharedPrefKeys.userToken);
-          SharedPrefHelper.removeSecuredString(SharedPrefKeys.userData);
-          context.pushNamedAndRemoveUntil(
-            Routes.loginScreen,
-            predicate: (route) => false,
-          );
-        }
-      }
-      emit(ProfileState.error(error: error.message ?? ''));
-    });
+    emit(const MyOrdersState.loading());
+    try {
+      final response = await _repository.getMyOrders(
+        limit: 10,
+        page: currentPage,
+        search: search,
+      );
+
+      response.when(
+        success: (MyOrdersResponse data) {
+          allOrders = data.orders;
+          hasMorePages = currentPage < data.totalPages;
+          log('Successfully received orders data with ${data.totalOrders} items');
+          emit(MyOrdersState.success(data));
+        },
+        failure: (error) {
+          log('Error fetching orders data: ${error.message}');
+          emit(MyOrdersState.error(
+              error.message ?? 'Failed to fetch orders data'));
+        },
+      );
+    } catch (e, stackTrace) {
+      log('orders unexpected error: $e', stackTrace: stackTrace);
+      emit(
+          MyOrdersState.error('An unexpected error occurred: ${e.toString()}'));
+    }
+  }
+
+  Future<void> loadMoreOrders() async {
+    if (!hasMorePages || isLoadingMore) return;
+
+    isLoadingMore = true;
+    currentPage++;
+
+    try {
+      final response = await _repository.getMyOrders(
+        limit: 10,
+        page: currentPage,
+        search: currentSearch,
+      );
+
+      response.when(
+        success: (MyOrdersResponse data) {
+          allOrders.addAll(data.orders);
+          hasMorePages = currentPage < data.totalPages;
+          emit(MyOrdersState.success(MyOrdersResponse(
+            orders: allOrders,
+            page: data.page,
+            limit: data.limit,
+            totalOrders: data.totalOrders,
+            totalPages: data.totalPages,
+          )));
+        },
+        failure: (error) {
+          currentPage--;
+          emit(MyOrdersState.error(
+              error.message ?? 'Failed to load more orders'));
+        },
+      );
+    } catch (e) {
+      currentPage--;
+      emit(MyOrdersState.error('Failed to load more orders'));
+    } finally {
+      isLoadingMore = false;
+    }
   }
 }

@@ -241,6 +241,31 @@ class LocalizationMessages {
     required this.recipientDetailsScreenRecipientAreaLabel,
     required this.recipientDetailsScreenRecipientAddressLabel,
     required this.recipientDetailsScreenRecipientExtraAddressLabel,
+    required this.orderNumber,
+    required this.date,
+    required this.orderId,
+    required this.orderStatus,
+    required this.deliveryInfo,
+    required this.recipientName,
+    required this.phoneNumber,
+    required this.address,
+    required this.estimatedDeliveryTime,
+    required this.myIdentity,
+    required this.expressDelivery,
+    required this.hidden,
+    required this.visible,
+    required this.yes,
+    required this.no,
+    required this.quantity,
+    required this.noOrders,
+    required this.recipient,
+    required this.deliveryDate,
+    required this.paymentDetails,
+    required this.subtotal,
+    required this.deliveryCharges,
+    required this.vatLabel,
+    required this.paymentMethod,
+    required this.searchOrderPlaceholder,
     required this.deliveryFrequency1,
     required this.subscriptionDuration1,
   });
@@ -468,6 +493,31 @@ class LocalizationMessages {
           (json['recipient_details_screen_recipient_address_label'] ?? '').toString(),
       recipientDetailsScreenRecipientExtraAddressLabel:
           (json['recipient_details_screen_recipient_extra_address_label'] ?? '').toString(),
+      orderNumber: (json['orderNumber'] ?? '').toString(),
+      date: (json['date'] ?? '').toString(),
+      orderId: (json['orderId'] ?? '').toString(),
+      orderStatus: (json['orderStatus'] ?? '').toString(),
+      deliveryInfo: (json['deliveryInfo'] ?? '').toString(),
+      recipientName: (json['recipientName'] ?? '').toString(),
+      phoneNumber: (json['phoneNumber'] ?? '').toString(),
+      address: (json['address'] ?? '').toString(),
+      estimatedDeliveryTime: (json['estimatedDeliveryTime'] ?? '').toString(),
+      myIdentity: (json['myIdentity'] ?? '').toString(),
+      expressDelivery: (json['expressDelivery'] ?? '').toString(),
+      hidden: (json['hidden'] ?? '').toString(),
+      visible: (json['visible'] ?? '').toString(),
+      yes: (json['yes'] ?? '').toString(),
+      no: (json['no'] ?? '').toString(),
+      quantity: (json['quantity'] ?? '').toString(),
+      noOrders: (json['noOrders'] ?? '').toString(),
+      recipient: (json['recipient'] ?? '').toString(),
+      deliveryDate: (json['deliveryDate'] ?? '').toString(),
+      paymentDetails: (json['paymentDetails'] ?? '').toString(),
+      subtotal: (json['subtotal'] ?? '').toString(),
+      deliveryCharges: (json['deliveryCharges'] ?? '').toString(),
+      vatLabel: (json['vatLabel'] ?? '').toString(),
+      paymentMethod: (json['paymentMethod'] ?? '').toString(),
+      searchOrderPlaceholder: (json['search_order_placeholder'] ?? '').toString(),
       deliveryFrequency1: (json['delivery_frequency'] ?? '').toString(),
       subscriptionDuration1: (json['subscription_duration'] ?? '').toString(),
     );
@@ -687,6 +737,31 @@ class LocalizationMessages {
   final String recipientDetailsScreenRecipientAreaLabel;
   final String recipientDetailsScreenRecipientAddressLabel;
   final String recipientDetailsScreenRecipientExtraAddressLabel;
+  final String orderNumber;
+  final String date;
+  final String orderId;
+  final String orderStatus;
+  final String deliveryInfo;
+  final String recipientName;
+  final String phoneNumber;
+  final String address;
+  final String estimatedDeliveryTime;
+  final String myIdentity;
+  final String expressDelivery;
+  final String hidden;
+  final String visible;
+  final String yes;
+  final String no;
+  final String quantity;
+  final String noOrders;
+  final String recipient;
+  final String deliveryDate;
+  final String paymentDetails;
+  final String subtotal;
+  final String deliveryCharges;
+  final String vatLabel;
+  final String paymentMethod;
+  final String searchOrderPlaceholder;
   final String deliveryFrequency1;
   final String subscriptionDuration1;
   Map<String, Object> get _content => {
@@ -905,6 +980,31 @@ class LocalizationMessages {
         r'''recipient_details_screen_recipient_area_label''': recipientDetailsScreenRecipientAreaLabel,
         r'''recipient_details_screen_recipient_address_label''': recipientDetailsScreenRecipientAddressLabel,
         r'''recipient_details_screen_recipient_extra_address_label''': recipientDetailsScreenRecipientExtraAddressLabel,
+        r'''orderNumber''': orderNumber,
+        r'''date''': date,
+        r'''orderId''': orderId,
+        r'''orderStatus''': orderStatus,
+        r'''deliveryInfo''': deliveryInfo,
+        r'''recipientName''': recipientName,
+        r'''phoneNumber''': phoneNumber,
+        r'''address''': address,
+        r'''estimatedDeliveryTime''': estimatedDeliveryTime,
+        r'''myIdentity''': myIdentity,
+        r'''expressDelivery''': expressDelivery,
+        r'''hidden''': hidden,
+        r'''visible''': visible,
+        r'''yes''': yes,
+        r'''no''': no,
+        r'''quantity''': quantity,
+        r'''noOrders''': noOrders,
+        r'''recipient''': recipient,
+        r'''deliveryDate''': deliveryDate,
+        r'''paymentDetails''': paymentDetails,
+        r'''subtotal''': subtotal,
+        r'''deliveryCharges''': deliveryCharges,
+        r'''vatLabel''': vatLabel,
+        r'''paymentMethod''': paymentMethod,
+        r'''search_order_placeholder''': searchOrderPlaceholder,
         r'''delivery_frequency''': deliveryFrequency1,
         r'''subscription_duration''': subscriptionDuration1,
       };
@@ -1155,6 +1255,31 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   recipientDetailsScreenRecipientAreaLabel: 'Area',
   recipientDetailsScreenRecipientAddressLabel: 'Address',
   recipientDetailsScreenRecipientExtraAddressLabel: 'Extra address details(optional)',
+  orderNumber: 'Order Number',
+  date: 'Date',
+  orderId: 'Order ID',
+  orderStatus: 'Status',
+  deliveryInfo: 'Delivery Info',
+  recipientName: 'Name',
+  phoneNumber: 'Phone Number',
+  address: 'Address',
+  estimatedDeliveryTime: 'Estimated Delivery Time',
+  myIdentity: 'My Identity',
+  expressDelivery: 'Express Delivery',
+  hidden: 'Hidden',
+  visible: 'Visible',
+  yes: 'Yes',
+  no: 'No',
+  quantity: 'x',
+  noOrders: 'No orders found',
+  recipient: 'Recipient',
+  deliveryDate: 'Delivery Date',
+  paymentDetails: 'Payment Details',
+  subtotal: 'Subtotal',
+  deliveryCharges: 'Delivery charges',
+  vatLabel: 'VAT',
+  paymentMethod: 'Payment Method',
+  searchOrderPlaceholder: 'Search for orders by order number or recipient name',
   deliveryFrequency1: '',
   subscriptionDuration1: '',
 );
@@ -1377,6 +1502,31 @@ final LocalizationMessages ar = LocalizationMessages(
   recipientDetailsScreenRecipientAreaLabel: 'المنطقة',
   recipientDetailsScreenRecipientAddressLabel: 'العنوان',
   recipientDetailsScreenRecipientExtraAddressLabel: 'العنوان الإضافي (اختياري)',
+  orderNumber: 'رقم الطلب',
+  date: 'التاريخ',
+  orderId: 'رقم الطلب',
+  orderStatus: 'الحالة',
+  deliveryInfo: 'معلومات التوصيل',
+  recipientName: 'الاسم',
+  phoneNumber: 'رقم الهاتف',
+  address: 'العنوان',
+  estimatedDeliveryTime: 'وقت التوصيل المتوقع',
+  myIdentity: 'هويتي',
+  expressDelivery: 'توصيل سريع',
+  hidden: 'مخفي',
+  visible: 'ظاهر',
+  yes: 'نعم',
+  no: 'لا',
+  quantity: '×',
+  noOrders: 'لا توجد طلبات',
+  recipient: 'المستلم',
+  deliveryDate: 'تاريخ التوصيل',
+  paymentDetails: 'تفاصيل الدفع',
+  subtotal: 'المجموع الفرعي',
+  deliveryCharges: 'رسوم التوصيل',
+  vatLabel: 'ضريبة القيمة المضافة',
+  paymentMethod: 'طريقة الدفع',
+  searchOrderPlaceholder: 'ابحث عن رقم الطلب أو اسم المستلم',
   deliveryFrequency1: 'تكرار التوصيل',
   subscriptionDuration1: 'مدة الاشتراك',
 );

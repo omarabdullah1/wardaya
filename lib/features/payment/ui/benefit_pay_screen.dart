@@ -4,7 +4,6 @@ import 'package:benefit_pay_flutter/benefit_pay_flutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
-import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/widgets/app_app_bar.dart';
 import '../service/payment_service.dart';
@@ -74,7 +73,7 @@ class _BenefitPayScreenState extends State<BenefitPayScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsManager.white,
-      appBar: AppAppBar(title: 'context.el.paymentTitle' ?? 'Payment'),
+      appBar: const AppAppBar(title: 'context.el.paymentTitle' ?? 'Payment'),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -131,8 +130,8 @@ class _BenefitPayScreenState extends State<BenefitPayScreen> {
                   padding: EdgeInsets.all(12.r),
                   decoration: BoxDecoration(
                     color: sdkResponse.contains('success')
-                        ? Colors.green.withOpacity(0.1)
-                        : Colors.red.withOpacity(0.1),
+                        ? Colors.green.withAlpha((0.1 * 255).toInt())
+                        : Colors.red.withAlpha((0.1 * 255).toInt()),
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Text(
@@ -206,9 +205,11 @@ class _BenefitPayScreenState extends State<BenefitPayScreen> {
                             // Here you would typically handle successful payment
                             // For example, navigate back to confirmation page
                             Future.delayed(const Duration(seconds: 2), () {
-                              if (mounted) {
-                                Navigator.pop(context,
-                                    true); // Return true to indicate success
+                              if (context.mounted) {
+                                if (Navigator.canPop(context)) {
+                                  Navigator.pop(context,
+                                      true); // Return true to indicate success
+                                }
                               }
                             });
                           }

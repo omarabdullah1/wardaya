@@ -26,7 +26,7 @@ class RecipientMapWidget extends StatefulWidget {
 
 class _RecipientMapWidgetState extends State<RecipientMapWidget> {
   // Initialize with a default value instead of using late
-   final LatLng _defaultLocation = const LatLng(0.0, 0.0); // Cairo coordinates
+  final LatLng _defaultLocation = const LatLng(0.0, 0.0); // Cairo coordinates
   LatLng? _selectedLocation;
   GoogleMapController? _mapController;
   Set<Marker> _markers = {};
@@ -40,15 +40,15 @@ class _RecipientMapWidgetState extends State<RecipientMapWidget> {
   void initState() {
     super.initState();
 
-log('area: ${widget.address?.recipientAddress}');
-log('lat: ${widget.address?.latitude}');
-log('long: ${widget.address?.longitude}');
+    log('area: ${widget.address?.recipientAddress}');
+    log('lat: ${widget.address?.latitude}');
+    log('long: ${widget.address?.longitude}');
     // Initialize with address data if available
     if (widget.address != null) {
       // Ensure we're not using 0,0 coordinates if they're in the address
       // Ensure we're not using 0,0 coordinates if they're in the address
       if (widget.address!.latitude != 0 || widget.address!.longitude != 0) {
-         _selectedLocation = LatLng(
+        _selectedLocation = LatLng(
           widget.address!.latitude,
           widget.address!.longitude,
         );
@@ -71,8 +71,13 @@ log('long: ${widget.address?.longitude}');
       // Try to get location from RecipientDetailsCubit after the first frame
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!_isMounted) return;
-        
-        final recipientCubit = context.read<RecipientDetailsCubit>();
+
+        final recipientCubit =
+            context.mounted ? context.read<RecipientDetailsCubit>() : null;
+        if (recipientCubit == null) {
+          return;
+        }
+        if (!_isMounted) return; // Ensure widget is still mounted
         if (recipientCubit.selectedLocation != null) {
           setState(() {
             _selectedLocation = recipientCubit.selectedLocation;
@@ -158,7 +163,7 @@ log('long: ${widget.address?.longitude}');
 
   void updateLocation(LatLng location, {bool updateAddress = true}) async {
     if (!_isMounted) return;
-    
+
     setState(() {
       _selectedLocation = location;
       _updateMarkers();
@@ -172,7 +177,7 @@ log('long: ${widget.address?.longitude}');
       try {
         final addressData = await getAddressFromCoordinates(location);
         if (!_isMounted) return;
-        
+
         setState(() {
           _currentAddress = addressData.address;
           _currentArea = addressData.area;
@@ -237,7 +242,9 @@ log('long: ${widget.address?.longitude}');
 
   @override
   Widget build(BuildContext context) {
-    final recipientCubit = context.read<RecipientDetailsCubit>();
+    final recipientCubit =
+        mounted ? context.read<RecipientDetailsCubit>() : null;
+    if (recipientCubit == null) return const SizedBox.shrink();
 
     return BlocListener<RecipientDetailsCubit, RecipientDetailsState>(
       listener: (context, state) {
@@ -292,7 +299,7 @@ log('long: ${widget.address?.longitude}');
       // Get address details from coordinates
       final addressData = await getAddressFromCoordinates(currentLocation);
       if (!_isMounted) return;
-      
+
       setState(() {
         _currentAddress = addressData.address;
         _currentArea = addressData.area;
@@ -304,6 +311,7 @@ log('long: ${widget.address?.longitude}');
 
       // Update recipient cubit if needed
       if (_isMounted) {
+        if (!mounted) return;
         final recipientCubit = context.read<RecipientDetailsCubit>();
         recipientCubit.updateLocationData(
             currentLocation, _currentAddress, _currentArea);
@@ -317,7 +325,7 @@ log('long: ${widget.address?.longitude}');
 
   Future<void> _openFullScreenMap(BuildContext context) async {
     if (!_isMounted) return;
-    
+
     final recipientCubit = context.read<RecipientDetailsCubit>();
 
     final Map<String, dynamic>? result = await Navigator.push(
@@ -370,11 +378,11 @@ log('long: ${widget.address?.longitude}');
       _mapController!.dispose();
       _mapController = null;
     }
-    
+
     // Cancel any pending futures or timers
     // This helps prevent setState calls after dispose
     _isUpdatingFromMapPicker = false;
-    
+
     super.dispose();
   }
 }

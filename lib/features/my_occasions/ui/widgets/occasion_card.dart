@@ -25,7 +25,7 @@ class OccasionCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.withAlpha((0.2 * 255).toInt()),
               spreadRadius: 1,
               blurRadius: 3,
               offset: const Offset(0, 2),

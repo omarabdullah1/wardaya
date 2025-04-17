@@ -19,6 +19,11 @@ import '../../features/address/ui/recipient_details_screen.dart';
 import '../../features/invoices/ui/invoices_screen.dart';
 import '../../features/my_occasions/logic/cubit/my_occasions_cubit.dart';
 import '../../features/my_occasions/ui/occassions_screen.dart';
+import '../../features/my_orders/data/models/my_orders_response.dart'
+    as my_order_response;
+import '../../features/my_orders/logic/cubit/my_orders_cubit.dart';
+import '../../features/my_orders/ui/my_orders_screen.dart';
+import '../../features/my_orders/ui/order_details_screen.dart';
 import '../../features/subscriptions/ui/subscripion_checkout.dart';
 import '../../features/subscriptions/ui/subscription_duration_screen.dart';
 import '../../features/subscriptions/ui/susbcriptions_screen.dart';
@@ -360,6 +365,23 @@ class AppRouter {
             paymentMethod: args['paymentMethod'] as String?,
           ),
         );
+      case Routes.myOrdersScreen:
+        return _buildRoute(
+          screen: BlocProvider(
+            create: (_) => getIt<MyOrdersCubit>()..getOrders(),
+            child: const MyOrdersScreen(),
+          ),
+        );
+      case Routes.orderDetailsScreen:
+        if (arguments is my_order_response.Order) {
+          return _buildRoute(
+            screen: OrderDetailsScreen(
+              order: arguments,
+            ),
+          );
+        }
+        throw ArgumentError(
+            "Invalid arguments for ${Routes.orderDetailsScreen}");
       default:
         return null;
     }
