@@ -14,11 +14,15 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
   String? selectedDate;
 
   Future<void> emitGetSubscription() async {
-      emit(const SubscriptionState.loading());
+    if (isClosed) return; // Prevent operations on closed cubit
+
+    emit(const SubscriptionState.loading());
     try {
       log('Fetching subscription plans');
 
       final response = await _subscriptionRepo.getSubscriptionPlans();
+
+      if (isClosed) return; // Check again after async operation
 
       response.when(success: (data) {
         log('Subscription plans fetched successfully');
@@ -29,6 +33,8 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
             SubscriptionState.error(error.message ?? 'Unknown error occurred'));
       });
     } catch (e) {
+      if (isClosed) return; // Check again after exception
+
       log('Exception in emitGetSubscription: $e');
       emit(const SubscriptionState.error('An unexpected error occurred'));
     }

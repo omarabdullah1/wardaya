@@ -24,12 +24,12 @@ class _SubscriptionService implements SubscriptionService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<SubscriptionPlansResponse> getSubcriptionPlan() async {
+  Future<List<SubscriptionPlan>> getSubcriptionPlans() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<SubscriptionPlansResponse>(Options(
+    final _options = _setStreamType<List<SubscriptionPlan>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -45,10 +45,49 @@ class _SubscriptionService implements SubscriptionService {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late SubscriptionPlansResponse _value;
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<SubscriptionPlan> _value;
     try {
-      _value = SubscriptionPlansResponse.fromJson(_result.data!);
+      _value = _result.data!
+          .map((dynamic i) =>
+              SubscriptionPlan.fromJson(i as Map<String, dynamic>))
+          .toList();
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<List<SubscriptionDuration>> getSubcriptionDurations() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<List<SubscriptionDuration>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'api/durations',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<SubscriptionDuration> _value;
+    try {
+      _value = _result.data!
+          .map((dynamic i) =>
+              SubscriptionDuration.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

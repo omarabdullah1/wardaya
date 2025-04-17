@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:localization/localization.dart';
+
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:wardaya/core/theming/styles.dart';
@@ -14,11 +16,20 @@ import 'package:wardaya/core/theming/styles.dart';
 import '../../../core/assets/assets.dart';
 import '../../../core/routing/routes.dart';
 import '../../../core/theming/colors.dart';
-import '../logic/cubit/subscription_cubit.dart';
+import '../logic/plans/subscription_cubit.dart';
 import 'widgets/build_radio_list.dart';
+import 'widgets/subscription_duration_bloc_listener.dart';
 
 class SubscriptionDurationScreen extends StatelessWidget {
-  const SubscriptionDurationScreen({super.key});
+  final String title;
+  final String price;
+  final String currency;
+  const SubscriptionDurationScreen({
+    super.key,
+    required this.title,
+    required this.price,
+    required this.currency,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +52,33 @@ class SubscriptionDurationScreen extends StatelessWidget {
                 log(cubit.subscriptionDuration.toString());
                 log(cubit.selectedDate.toString());
 
-                context.pushNamed(Routes.subscripionCheckout);
+                if (cubit.deliveryFrequency == null ||
+                    cubit.subscriptionDuration == null ||
+                    cubit.selectedDate == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Please select all required options'),
+                      backgroundColor: ColorsManager.mainRose,
+                    ),
+                  );
+                  return;
+                }
+                log('message');
+                log(cubit.deliveryFrequency.toString());
+                log(cubit.subscriptionDuration.toString());
+                log(cubit.selectedDate.toString());
+                log(price.toString());
+                log(currency.toString());
+                context.pushNamed(
+                  Routes.subscripionCheckout,
+                  arguments: {
+                    'deliveryFrequency': cubit.deliveryFrequency,
+                    'subscriptionDuration': cubit.subscriptionDuration,
+                    'selectedDate': cubit.selectedDate,
+                    'price': price,
+                    'currency': currency,
+                  },
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: ColorsManager.mainRose,
@@ -91,17 +128,7 @@ class SubscriptionDurationScreen extends StatelessWidget {
               ],
             ),
             buildSectionTitle(context.el.subscriptionDuration),
-            BuildSubscriptionRadioList(
-              options: const ["1 Month", "3 Months", "6 Months", "12 Months"],
-              optionsOffValue: const ["", "10", "35", "15"],
-              prices: const ["SAR 159", "SAR 145", "SAR 137", "SAR 129"],
-              deliveries: [
-                "",
-                "12 ${context.el.deliveries} - ${context.el.total} SAR 1,548",
-                "24 ${context.el.deliveries} - ${context.el.total} SAR 3,069",
-                "48 ${context.el.deliveries} - ${context.el.total} SAR 6,192"
-              ],
-            ),
+            const SubscriptionDurationBlocListener(),
             buildSectionTitle(context.el.startingDate),
             BuildStartingDateRadioList(
               options: [today, tommorow, context.el.selectOtherDate],

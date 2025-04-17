@@ -1,4 +1,3 @@
-import 'package:localization/localization.dart';
 import 'package:wardaya/features/address/logic/address_cubit/address_cubit.dart';
 import 'package:wardaya/features/favorites/logic/cubit/favorites_cubit.dart';
 import 'package:wardaya/features/home/logic/occassions/occassions_cubit.dart';
@@ -7,8 +6,10 @@ import 'package:wardaya/features/invoices/logic/cubit/invoices_cubit.dart';
 import 'package:wardaya/features/product_details/logic/product_details/product_details_cubit.dart';
 import 'package:wardaya/features/search/data/models/search_response.dart';
 import 'package:wardaya/features/search/logic/cubit/search_cubit.dart';
-import 'package:wardaya/features/subscriptions/logic/cubit/subscription_cubit.dart';
+import 'package:wardaya/features/subscriptions/logic/durations/subscription_duration_cubit.dart';
+import 'package:wardaya/features/subscriptions/logic/plans/subscription_cubit.dart';
 import 'package:wardaya/features/explore/data/models/menu_items_response.dart';
+import 'package:wardaya/features/subscriptions/logic/subscription_checkout_cubit/subscription_checkout_cubit.dart';
 
 import '../../features/address/data/models/address_response.dart';
 import '../../features/address/logic/recipient_details_cubit/recipient_details_cubit.dart';
@@ -253,22 +254,45 @@ class AppRouter {
       case Routes.susbcriptionsScreen:
         return _buildRoute(
           screen: BlocProvider(
-            create: (context) => getIt<SubscriptionCubit>()
-              ..emitGetSubscription()
-              ..setSelectedDate(context.el.selectOtherDate),
+            create: (context) =>
+                getIt<SubscriptionCubit>()..emitGetSubscription(),
             child: const SusbcriptionsScreen(),
           ),
         );
       case Routes.susbcriptionsDurationScreen:
+        final Map<String, dynamic> args = arguments as Map<String, dynamic>;
+
         return _buildRoute(
-          screen: BlocProvider(
-            create: (context) => getIt<SubscriptionCubit>(),
-            child: const SubscriptionDurationScreen(),
+          screen: MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => getIt<SubscriptionCubit>(),
+              ),
+              BlocProvider(
+                create: (context) => getIt<SubscriptionDurationCubit>()
+                  ..emitGetSubscriptionDurations(),
+              ),
+            ],
+            child: SubscriptionDurationScreen(
+              title: args['title'],
+              price: args['price'],
+              currency: args['currency'],
+            ),
           ),
         );
       case Routes.subscripionCheckout:
+        final Map<String, dynamic> args = arguments as Map<String, dynamic>;
         return _buildRoute(
-          screen: const SubscripionCheckout(),
+          screen: BlocProvider(
+            create: (context) => getIt<SubscriptionCheckoutCubit>(),
+            child: SubscripionCheckout(
+              deliveryFrequency: args['deliveryFrequency'] as String,
+              subscriptionDuration: args['subscriptionDuration'] as String,
+              startDate: args['selectedDate'],
+              price: args['price'],
+              currency: args['currency'],
+            ),
+          ),
         );
       case Routes.favoritesScreen:
         return _buildRoute(

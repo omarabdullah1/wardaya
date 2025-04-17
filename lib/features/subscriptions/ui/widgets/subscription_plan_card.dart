@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:localization/localization.dart';
@@ -29,12 +31,12 @@ class SubscriptionPlanCard extends StatefulWidget {
 
 class _SubscriptionPlanCardState extends State<SubscriptionPlanCard> {
   bool _isExpanded = false;
-  
+
   // Store localized strings that need to be accessed in initState
   late String moreText;
   late String lessText;
   late String subscriptionButtonText;
-  
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -43,7 +45,7 @@ class _SubscriptionPlanCardState extends State<SubscriptionPlanCard> {
     lessText = context.el.less;
     subscriptionButtonText = context.el.subscriptionButton;
   }
-  
+
   @override
   Widget build(BuildContext context) {
     // Now use the stored strings instead of directly accessing context.el
@@ -92,7 +94,8 @@ class _SubscriptionPlanCardState extends State<SubscriptionPlanCard> {
                         children: [
                           Text(
                             !_isExpanded ? moreText : lessText,
-                            style: const TextStyle(color: ColorsManager.mainRose),
+                            style:
+                                const TextStyle(color: ColorsManager.mainRose),
                           ),
                         ],
                       ),
@@ -130,7 +133,14 @@ class _SubscriptionPlanCardState extends State<SubscriptionPlanCard> {
                       const Spacer(),
                       ElevatedButton(
                         onPressed: () {
-                          context.pushNamed(Routes.susbcriptionsDurationScreen);
+                          context.pushNamed(
+                            Routes.susbcriptionsDurationScreen,
+                            arguments: {
+                              'title': widget.title,
+                              'price': widget.price,
+                              'currency': widget.currency,
+                            },
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: ColorsManager.mainRose,

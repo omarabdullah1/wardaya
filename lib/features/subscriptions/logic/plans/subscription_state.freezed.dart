@@ -20,7 +20,7 @@ mixin _$SubscriptionState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(SubscriptionPlansResponse data) success,
+    required TResult Function(List<SubscriptionPlan> data) success,
     required TResult Function(String message) error,
     required TResult Function(String delevery) setDeliveryFrequency,
     required TResult Function(String duration) setSubscriptionDuration,
@@ -32,7 +32,7 @@ mixin _$SubscriptionState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(SubscriptionPlansResponse data)? success,
+    TResult? Function(List<SubscriptionPlan> data)? success,
     TResult? Function(String message)? error,
     TResult? Function(String delevery)? setDeliveryFrequency,
     TResult? Function(String duration)? setSubscriptionDuration,
@@ -44,7 +44,7 @@ mixin _$SubscriptionState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(SubscriptionPlansResponse data)? success,
+    TResult Function(List<SubscriptionPlan> data)? success,
     TResult Function(String message)? error,
     TResult Function(String delevery)? setDeliveryFrequency,
     TResult Function(String duration)? setSubscriptionDuration,
@@ -157,7 +157,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(SubscriptionPlansResponse data) success,
+    required TResult Function(List<SubscriptionPlan> data) success,
     required TResult Function(String message) error,
     required TResult Function(String delevery) setDeliveryFrequency,
     required TResult Function(String duration) setSubscriptionDuration,
@@ -172,7 +172,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(SubscriptionPlansResponse data)? success,
+    TResult? Function(List<SubscriptionPlan> data)? success,
     TResult? Function(String message)? error,
     TResult? Function(String delevery)? setDeliveryFrequency,
     TResult? Function(String duration)? setSubscriptionDuration,
@@ -187,7 +187,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(SubscriptionPlansResponse data)? success,
+    TResult Function(List<SubscriptionPlan> data)? success,
     TResult Function(String message)? error,
     TResult Function(String delevery)? setDeliveryFrequency,
     TResult Function(String duration)? setSubscriptionDuration,
@@ -299,7 +299,7 @@ class _$LoadingImpl implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(SubscriptionPlansResponse data) success,
+    required TResult Function(List<SubscriptionPlan> data) success,
     required TResult Function(String message) error,
     required TResult Function(String delevery) setDeliveryFrequency,
     required TResult Function(String duration) setSubscriptionDuration,
@@ -314,7 +314,7 @@ class _$LoadingImpl implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(SubscriptionPlansResponse data)? success,
+    TResult? Function(List<SubscriptionPlan> data)? success,
     TResult? Function(String message)? error,
     TResult? Function(String delevery)? setDeliveryFrequency,
     TResult? Function(String duration)? setSubscriptionDuration,
@@ -329,7 +329,7 @@ class _$LoadingImpl implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(SubscriptionPlansResponse data)? success,
+    TResult Function(List<SubscriptionPlan> data)? success,
     TResult Function(String message)? error,
     TResult Function(String delevery)? setDeliveryFrequency,
     TResult Function(String duration)? setSubscriptionDuration,
@@ -404,7 +404,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({SubscriptionPlansResponse data});
+  $Res call({List<SubscriptionPlan> data});
 }
 
 /// @nodoc
@@ -424,9 +424,9 @@ class __$$SuccessImplCopyWithImpl<$Res>
   }) {
     return _then(_$SuccessImpl(
       null == data
-          ? _value.data
+          ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as SubscriptionPlansResponse,
+              as List<SubscriptionPlan>,
     ));
   }
 }
@@ -434,10 +434,15 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements Success {
-  const _$SuccessImpl(this.data);
+  const _$SuccessImpl(final List<SubscriptionPlan> data) : _data = data;
 
+  final List<SubscriptionPlan> _data;
   @override
-  final SubscriptionPlansResponse data;
+  List<SubscriptionPlan> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
 
   @override
   String toString() {
@@ -449,11 +454,12 @@ class _$SuccessImpl implements Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.data, data) || other.data == data));
+            const DeepCollectionEquality().equals(other._data, _data));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, data);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
   /// Create a copy of SubscriptionState
   /// with the given fields replaced by the non-null parameter values.
@@ -468,7 +474,7 @@ class _$SuccessImpl implements Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(SubscriptionPlansResponse data) success,
+    required TResult Function(List<SubscriptionPlan> data) success,
     required TResult Function(String message) error,
     required TResult Function(String delevery) setDeliveryFrequency,
     required TResult Function(String duration) setSubscriptionDuration,
@@ -483,7 +489,7 @@ class _$SuccessImpl implements Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(SubscriptionPlansResponse data)? success,
+    TResult? Function(List<SubscriptionPlan> data)? success,
     TResult? Function(String message)? error,
     TResult? Function(String delevery)? setDeliveryFrequency,
     TResult? Function(String duration)? setSubscriptionDuration,
@@ -498,7 +504,7 @@ class _$SuccessImpl implements Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(SubscriptionPlansResponse data)? success,
+    TResult Function(List<SubscriptionPlan> data)? success,
     TResult Function(String message)? error,
     TResult Function(String delevery)? setDeliveryFrequency,
     TResult Function(String duration)? setSubscriptionDuration,
@@ -564,9 +570,9 @@ class _$SuccessImpl implements Success {
 }
 
 abstract class Success implements SubscriptionState {
-  const factory Success(final SubscriptionPlansResponse data) = _$SuccessImpl;
+  const factory Success(final List<SubscriptionPlan> data) = _$SuccessImpl;
 
-  SubscriptionPlansResponse get data;
+  List<SubscriptionPlan> get data;
 
   /// Create a copy of SubscriptionState
   /// with the given fields replaced by the non-null parameter values.
@@ -645,7 +651,7 @@ class _$ErrorImpl implements Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(SubscriptionPlansResponse data) success,
+    required TResult Function(List<SubscriptionPlan> data) success,
     required TResult Function(String message) error,
     required TResult Function(String delevery) setDeliveryFrequency,
     required TResult Function(String duration) setSubscriptionDuration,
@@ -660,7 +666,7 @@ class _$ErrorImpl implements Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(SubscriptionPlansResponse data)? success,
+    TResult? Function(List<SubscriptionPlan> data)? success,
     TResult? Function(String message)? error,
     TResult? Function(String delevery)? setDeliveryFrequency,
     TResult? Function(String duration)? setSubscriptionDuration,
@@ -675,7 +681,7 @@ class _$ErrorImpl implements Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(SubscriptionPlansResponse data)? success,
+    TResult Function(List<SubscriptionPlan> data)? success,
     TResult Function(String message)? error,
     TResult Function(String delevery)? setDeliveryFrequency,
     TResult Function(String duration)? setSubscriptionDuration,
@@ -825,7 +831,7 @@ class _$SetDeliveryFrequencyImpl implements SetDeliveryFrequency {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(SubscriptionPlansResponse data) success,
+    required TResult Function(List<SubscriptionPlan> data) success,
     required TResult Function(String message) error,
     required TResult Function(String delevery) setDeliveryFrequency,
     required TResult Function(String duration) setSubscriptionDuration,
@@ -840,7 +846,7 @@ class _$SetDeliveryFrequencyImpl implements SetDeliveryFrequency {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(SubscriptionPlansResponse data)? success,
+    TResult? Function(List<SubscriptionPlan> data)? success,
     TResult? Function(String message)? error,
     TResult? Function(String delevery)? setDeliveryFrequency,
     TResult? Function(String duration)? setSubscriptionDuration,
@@ -855,7 +861,7 @@ class _$SetDeliveryFrequencyImpl implements SetDeliveryFrequency {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(SubscriptionPlansResponse data)? success,
+    TResult Function(List<SubscriptionPlan> data)? success,
     TResult Function(String message)? error,
     TResult Function(String delevery)? setDeliveryFrequency,
     TResult Function(String duration)? setSubscriptionDuration,
@@ -1007,7 +1013,7 @@ class _$SetSubscriptionDurationImpl implements SetSubscriptionDuration {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(SubscriptionPlansResponse data) success,
+    required TResult Function(List<SubscriptionPlan> data) success,
     required TResult Function(String message) error,
     required TResult Function(String delevery) setDeliveryFrequency,
     required TResult Function(String duration) setSubscriptionDuration,
@@ -1022,7 +1028,7 @@ class _$SetSubscriptionDurationImpl implements SetSubscriptionDuration {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(SubscriptionPlansResponse data)? success,
+    TResult? Function(List<SubscriptionPlan> data)? success,
     TResult? Function(String message)? error,
     TResult? Function(String delevery)? setDeliveryFrequency,
     TResult? Function(String duration)? setSubscriptionDuration,
@@ -1037,7 +1043,7 @@ class _$SetSubscriptionDurationImpl implements SetSubscriptionDuration {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(SubscriptionPlansResponse data)? success,
+    TResult Function(List<SubscriptionPlan> data)? success,
     TResult Function(String message)? error,
     TResult Function(String delevery)? setDeliveryFrequency,
     TResult Function(String duration)? setSubscriptionDuration,
@@ -1185,7 +1191,7 @@ class _$SetStartDateImpl implements SetStartDate {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(SubscriptionPlansResponse data) success,
+    required TResult Function(List<SubscriptionPlan> data) success,
     required TResult Function(String message) error,
     required TResult Function(String delevery) setDeliveryFrequency,
     required TResult Function(String duration) setSubscriptionDuration,
@@ -1200,7 +1206,7 @@ class _$SetStartDateImpl implements SetStartDate {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(SubscriptionPlansResponse data)? success,
+    TResult? Function(List<SubscriptionPlan> data)? success,
     TResult? Function(String message)? error,
     TResult? Function(String delevery)? setDeliveryFrequency,
     TResult? Function(String duration)? setSubscriptionDuration,
@@ -1215,7 +1221,7 @@ class _$SetStartDateImpl implements SetStartDate {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(SubscriptionPlansResponse data)? success,
+    TResult Function(List<SubscriptionPlan> data)? success,
     TResult Function(String message)? error,
     TResult Function(String delevery)? setDeliveryFrequency,
     TResult Function(String duration)? setSubscriptionDuration,
@@ -1363,7 +1369,7 @@ class _$SetSelectedDateImpl implements SetSelectedDate {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(SubscriptionPlansResponse data) success,
+    required TResult Function(List<SubscriptionPlan> data) success,
     required TResult Function(String message) error,
     required TResult Function(String delevery) setDeliveryFrequency,
     required TResult Function(String duration) setSubscriptionDuration,
@@ -1378,7 +1384,7 @@ class _$SetSelectedDateImpl implements SetSelectedDate {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(SubscriptionPlansResponse data)? success,
+    TResult? Function(List<SubscriptionPlan> data)? success,
     TResult? Function(String message)? error,
     TResult? Function(String delevery)? setDeliveryFrequency,
     TResult? Function(String duration)? setSubscriptionDuration,
@@ -1393,7 +1399,7 @@ class _$SetSelectedDateImpl implements SetSelectedDate {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(SubscriptionPlansResponse data)? success,
+    TResult Function(List<SubscriptionPlan> data)? success,
     TResult Function(String message)? error,
     TResult Function(String delevery)? setDeliveryFrequency,
     TResult Function(String duration)? setSubscriptionDuration,

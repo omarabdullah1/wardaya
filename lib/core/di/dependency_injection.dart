@@ -25,7 +25,8 @@ import 'package:wardaya/features/search/data/repos/search_repo.dart';
 import 'package:wardaya/features/search/logic/cubit/search_cubit.dart';
 import 'package:wardaya/features/subscriptions/data/apis/subscription_service.dart';
 import 'package:wardaya/features/subscriptions/data/repos/subscription_repo.dart';
-import 'package:wardaya/features/subscriptions/logic/cubit/subscription_cubit.dart';
+import 'package:wardaya/features/subscriptions/logic/durations/subscription_duration_cubit.dart';
+import 'package:wardaya/features/subscriptions/logic/plans/subscription_cubit.dart';
 
 import '../../features/address/logic/address_cubit/address_cubit.dart';
 import '../../features/address/logic/recipient_details_cubit/recipient_details_cubit.dart';
@@ -43,6 +44,7 @@ import '../../features/invoices/data/repos/invoices_repo.dart';
 import '../../features/layout/logic/cubit/layout_cubit.dart';
 import '../../features/product_details/data/apis/product_details_service.dart';
 import '../../features/profile/logic/cubit/profile_cubit.dart';
+import '../../features/subscriptions/logic/subscription_checkout_cubit/subscription_checkout_cubit.dart';
 import '../blocs/general/cubit/general_cubit.dart';
 import '../networking/dio_factory.dart';
 
@@ -104,6 +106,8 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<ProfileCubit>(() => ProfileCubit(getIt()));
   getIt.registerFactory<SearchCubit>(() => SearchCubit(getIt()));
   getIt.registerFactory<SubscriptionCubit>(() => SubscriptionCubit(getIt()));
+  getIt.registerFactory<SubscriptionDurationCubit>(
+      () => SubscriptionDurationCubit(getIt()));
   getIt.registerFactory<GalleryCubit>(() => GalleryCubit(getIt()));
   getIt.registerFactory<OccassionsCubit>(() => OccassionsCubit(getIt()));
   getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt()));
@@ -120,6 +124,8 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<InvoicesCubit>(() => InvoicesCubit(getIt()));
   getIt
       .registerFactory<ProductDetailsCubit>(() => ProductDetailsCubit(getIt()));
+  getIt.registerFactory<SubscriptionCheckoutCubit>(
+      () => SubscriptionCheckoutCubit());
 
   getIt.registerFactory<LayoutCubit>(() => LayoutCubit());
   getIt.registerFactory<CartCubit>(() => CartCubit());

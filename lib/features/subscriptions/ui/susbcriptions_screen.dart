@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
@@ -9,13 +8,16 @@ import 'package:wardaya/features/subscriptions/ui/widgets/subscription_how_it_wo
 import '../../../core/helpers/spacing.dart';
 import '../../../core/routing/router_imports.dart';
 import '../../../core/theming/styles.dart';
-import 'widgets/subscription_plan_card.dart';
+import '../logic/plans/subscription_cubit.dart';
+import 'widgets/plans_builder.dart';
 
 class SusbcriptionsScreen extends StatelessWidget {
   const SusbcriptionsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizedPlans = context.el.subscriptionPlans;
+
     return Scaffold(
       backgroundColor: ColorsManager.offWhite,
       extendBodyBehindAppBar: true,
@@ -34,59 +36,30 @@ class SusbcriptionsScreen extends StatelessWidget {
           },
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SubscriptionBanner(),
-            const VerticalSpace(height: 20),
-            const SubscriptionHowItWorksSection(),
-            const VerticalSpace(height: 20),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.w),
-              child: Text(
-                context.el.subscriptionPlans,
-                style: TextStylesEBGaramond.font32MainRoseRegular,
+      body: RefreshIndicator(
+        onRefresh: () async {
+          // Add your refresh logic here
+          context.read<SubscriptionCubit>().emitGetSubscription();
+        },
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SubscriptionBanner(),
+              const VerticalSpace(height: 20),
+              const SubscriptionHowItWorksSection(),
+              const VerticalSpace(height: 20),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                child: Text(
+                  localizedPlans,
+                  style: TextStylesEBGaramond.font32MainRoseRegular,
+                ),
               ),
-            ),
-            const VerticalSpace(height: 20),
-            SubscriptionPlanCard(
-              title: context.el.addMediaTitle,
-              description: context.el.subscriptionDescription,
-              price: '173',
-              currency: 'SAR',
-              images: const [
-                'assets/images/sub1.png',
-                'assets/images/sub2.png',
-                'assets/images/sub3.png',
-              ],
-            ),
-            const VerticalSpace(height: 20),
-            SubscriptionPlanCard(
-              title: context.el.addMediaTitle,
-              description: context.el.subscriptionDescription,
-              price: '173',
-              currency: 'SAR',
-              images: const [
-                'assets/images/sub2.png',
-                'assets/images/sub1.png',
-                'assets/images/sub3.png',
-              ],
-            ),
-            const VerticalSpace(height: 20),
-            SubscriptionPlanCard(
-              title: context.el.addMediaTitle,
-              description: context.el.subscriptionDescription,
-              price: '173',
-              currency: 'SAR',
-              images: const [
-                'assets/images/sub3.png',
-                'assets/images/sub2.png',
-                'assets/images/sub1.png',
-              ],
-            ),
-            const VerticalSpace(height: 20),
-          ],
+              const PlansBuilder(),
+            ],
+          ),
         ),
       ),
     );

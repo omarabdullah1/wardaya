@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:wardaya/core/assets/assets.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/theming/styles.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:wardaya/features/subscriptions/data/apis/subscription_api_constants.dart';
 
 class SubscriptionSlider extends StatefulWidget {
   const SubscriptionSlider(
@@ -41,14 +45,40 @@ class _SubscriptionSliderState extends State<SubscriptionSlider> {
               itemCount: widget.images.length,
               onPageChanged: (index) {},
               itemBuilder: (context, index) {
+                final imageUrl = SubscriptionApiConstants.apiBaseUrlForImages +
+                    widget.images[index];
                 return Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Image.asset(
-                    widget.images[index],
-                    fit: BoxFit.cover,
-                  ),
+                  child: imageUrl.startsWith('http') ||
+                          imageUrl.startsWith('https')
+                      ? CachedNetworkImage(
+                          imageUrl: imageUrl,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => const Center(
+                            child: CircularProgressIndicator(
+                              color: ColorsManager.mainRose,
+                            ),
+                          ),
+                          errorWidget: (context, url, error) =>
+                              SvgPicture.asset(
+                            Assets.of(context).svgs.small_logo_svg,
+                            fit: BoxFit.contain,
+                            colorFilter: const ColorFilter.mode(
+                              ColorsManager.lightGrey,
+                              BlendMode.srcIn,
+                            ),
+                          ),
+                        )
+                      : SvgPicture.asset(
+                          Assets.of(context).svgs.small_logo_svg,
+                          fit: BoxFit.contain,
+                          colorFilter: const ColorFilter.mode(
+                            ColorsManager.lightGrey,
+                            BlendMode.srcIn,
+                          ),
+                        ),
                 );
               },
             ),

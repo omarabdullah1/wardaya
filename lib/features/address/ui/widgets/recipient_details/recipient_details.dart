@@ -51,7 +51,9 @@ class RecipientDetails extends StatelessWidget {
           ),
         ),
         VerticalSpace(height: 8.h),
-        RecipientMapWidget(address: address,), // Using the correctly named widget
+        RecipientMapWidget(
+          address: address,
+        ), // Using the correctly named widget
         VerticalSpace(height: 16.h),
         AreaField(
           areaController: cubit.areaController,

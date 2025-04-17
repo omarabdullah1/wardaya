@@ -3,4 +3,6 @@ class SubscriptionApiConstants {
   static const String apiBaseUrlForImages = "https://wecareroot.ddns.net:5100";
 
   static const String subscriptionPlan = "api/subscriptionPlans";
+  static const String durations = "api/durations";
+  static const String checkout = "api/cart/subscription_checkout";
 }

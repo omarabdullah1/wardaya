@@ -1,9 +1,9 @@
 import 'package:localization/localization.dart';
-import 'package:wardaya/features/subscriptions/logic/cubit/subscription_cubit.dart';
+import 'package:wardaya/features/subscriptions/logic/plans/subscription_cubit.dart';
 
 import '../../../../core/routing/router_imports.dart';
 import '../../../../core/widgets/loading_widget.dart';
-import '../../logic/cubit/subscription_state.dart';
+import '../../logic/plans/subscription_state.dart';
 import 'subscription_plan_card.dart';
 
 class SubscriptionBlocListner extends StatelessWidget {
