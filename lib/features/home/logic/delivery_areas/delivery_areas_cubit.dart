@@ -22,39 +22,25 @@ class DeliveryAreasCubit extends Cubit<DeliveryAreasState> {
       final response = await _homeRepo.getHomeDeliveryAreas();
       response.when(
         success: (List<DeliveryArea> data) async {
-          // Filter cities - only keep cities for Saudi Arabia
-          final filteredData = data.map((area) {
-            if (area.country != 'Saudi Arabia') {
-              return DeliveryArea(
-                id: area.id,
-                country: area.country,
-                currency: area.currency,
-                language: area.language,
-                cities: [], // Empty cities list for non-Saudi areas
-              );
-            }
-            return area; // Keep Saudi Arabia data as is
-          }).toList();
-
-          _cachedDeliveryAreas = _sortDeliveryAreas(filteredData);
+          _cachedDeliveryAreas = _sortDeliveryAreas(data);
           log('Successfully received Delivery Areas data with ${data.length} items');
 
-          // Load saved city ID and ensure it exists in the new data
+          // Load saved city ID
           final savedCityId = await SharedPrefHelper.getSecuredString(
               SharedPrefKeys.userAreaId);
+          log('Retrieved saved city ID: $savedCityId');
+
           if (savedCityId != null && savedCityId.isNotEmpty) {
             final city = getCityById(savedCityId);
-            if (city == null) {
-              // If saved city no longer exists, clear it from preferences
-              await SharedPrefHelper.setSecuredString(
-                  SharedPrefKeys.userAreaId, '');
+            if (city != null) {
+              log('Successfully restored saved city: ${city.name}');
             }
           }
 
           emit(DeliveryAreasState.success(_cachedDeliveryAreas));
         },
         failure: (error) {
-          log('Error fetching Delivery Areas data: ${error.message}, Details: ${error.message} - and error ${error.error}');
+          log('Error fetching Delivery Areas data: ${error.message}');
           emit(DeliveryAreasState.error(
               error.message ?? 'Failed to fetch Delivery Areas data'));
         },
@@ -68,7 +54,6 @@ class DeliveryAreasCubit extends Cubit<DeliveryAreasState> {
 
   List<DeliveryArea> _sortDeliveryAreas(List<DeliveryArea> areas) {
     final sorted = List<DeliveryArea>.from(areas);
-    // Move Saudi Arabia to the front
     sorted.sort((a, b) {
       if (a.country == 'Saudi Arabia') return -1;
       if (b.country == 'Saudi Arabia') return 1;
@@ -77,7 +62,6 @@ class DeliveryAreasCubit extends Cubit<DeliveryAreasState> {
     return sorted;
   }
 
-  // Get a specific city by ID
   City? getCityById(String cityId) {
     for (var area in _cachedDeliveryAreas) {
       for (var city in area.cities) {
@@ -91,8 +75,7 @@ class DeliveryAreasCubit extends Cubit<DeliveryAreasState> {
 
   Future<void> updateSelectedCity(String cityId) async {
     try {
-      emit(const DeliveryAreasState.loading());
-      log('Updating user selected city: $cityId');
+      log('DeliveryAreas: City updated to: $cityId');
       final city = getCityById(cityId);
       if (city == null) {
         emit(const DeliveryAreasState.error('City not found'));
@@ -101,9 +84,15 @@ class DeliveryAreasCubit extends Cubit<DeliveryAreasState> {
 
       final response = await _homeRepo.updateUserCity(cityId);
       response.when(
-        success: (data) {
+        success: (data) async {
           log('Successfully updated user city: ${data.message}');
+          // Save the selected city ID to local storage
+          await SharedPrefHelper.setSecuredString(
+              SharedPrefKeys.userAreaId, cityId);
           emit(DeliveryAreasState.updateCity(data));
+
+          // Refresh delivery areas to ensure we have the latest data
+          await getDeliveryAreas();
         },
         failure: (error) {
           log('Error updating user city: ${error.message}');

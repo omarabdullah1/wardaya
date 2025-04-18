@@ -328,3 +328,8 @@ googlePayTitle: "Google Pay"
 googlePayDescription: "دفع سريع وآمن باستخدام Google Pay"
 benefitPayTitle: "بنفت باي"
 benefitPayDescription: "ادفع باستخدام خدمة بنفت باي"
+
+# Select City
+selectCityTitle: "اختر المدينة"
+sAFilter: "المملكة العربية السعودية"
+SendYourGiftTo: "أرسل هديتك إلى..."

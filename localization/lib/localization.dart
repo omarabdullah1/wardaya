@@ -292,6 +292,9 @@ class LocalizationMessages {
     required this.googlePayDescription,
     required this.benefitPayTitle,
     required this.benefitPayDescription,
+    required this.selectCityTitle,
+    required this.sAfilter,
+    required this.sendYourGiftTo,
     required this.deliveryFrequency1,
     required this.subscriptionDuration1,
   });
@@ -570,6 +573,9 @@ class LocalizationMessages {
       googlePayDescription: (json['googlePayDescription'] ?? '').toString(),
       benefitPayTitle: (json['benefitPayTitle'] ?? '').toString(),
       benefitPayDescription: (json['benefitPayDescription'] ?? '').toString(),
+      selectCityTitle: (json['selectCityTitle'] ?? '').toString(),
+      sAfilter: (json['sAFilter'] ?? '').toString(),
+      sendYourGiftTo: (json['SendYourGiftTo'] ?? '').toString(),
       deliveryFrequency1: (json['delivery_frequency'] ?? '').toString(),
       subscriptionDuration1: (json['subscription_duration'] ?? '').toString(),
     );
@@ -840,6 +846,9 @@ class LocalizationMessages {
   final String googlePayDescription;
   final String benefitPayTitle;
   final String benefitPayDescription;
+  final String selectCityTitle;
+  final String sAfilter;
+  final String sendYourGiftTo;
   final String deliveryFrequency1;
   final String subscriptionDuration1;
   Map<String, Object> get _content => {
@@ -1109,6 +1118,9 @@ class LocalizationMessages {
         r'''googlePayDescription''': googlePayDescription,
         r'''benefitPayTitle''': benefitPayTitle,
         r'''benefitPayDescription''': benefitPayDescription,
+        r'''selectCityTitle''': selectCityTitle,
+        r'''sAFilter''': sAfilter,
+        r'''SendYourGiftTo''': sendYourGiftTo,
         r'''delivery_frequency''': deliveryFrequency1,
         r'''subscription_duration''': subscriptionDuration1,
       };
@@ -1410,6 +1422,9 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   googlePayDescription: 'Quick and secure payment with Google Pay',
   benefitPayTitle: 'Benefit Pay',
   benefitPayDescription: 'Pay using Benefit Pay service',
+  selectCityTitle: 'Select City',
+  sAfilter: 'Saudi Arabia',
+  sendYourGiftTo: 'Send your gift to...',
   deliveryFrequency1: '',
   subscriptionDuration1: '',
 );
@@ -1683,6 +1698,9 @@ final LocalizationMessages ar = LocalizationMessages(
   googlePayDescription: 'دفع سريع وآمن باستخدام Google Pay',
   benefitPayTitle: 'بنفت باي',
   benefitPayDescription: 'ادفع باستخدام خدمة بنفت باي',
+  selectCityTitle: 'اختر المدينة',
+  sAfilter: 'المملكة العربية السعودية',
+  sendYourGiftTo: 'أرسل هديتك إلى...',
   deliveryFrequency1: 'تكرار التوصيل',
   subscriptionDuration1: 'مدة الاشتراك',
 );

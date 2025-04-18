@@ -18,17 +18,16 @@ Future<void> main() async {
   await EasyLocalization.ensureInitialized();
 
   await setupGetIt();
-  String token =
+  String? token =
       await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
   isLoggedInUser = token.isNullOrEmpty() ? false : true;
   // Initialize environment variables for secure API key access
   await EnvConfig.init();
 
-
   // To fix texts being hidden bug in flutter_screenutil in release mode.
   await ScreenUtil.ensureScreenSize();
   log('message From Production');
-  log(token);
+  log(token!);
   log(isLoggedInUser.toString());
   runApp(
     EasyLocalization(

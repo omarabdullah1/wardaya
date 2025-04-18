@@ -112,9 +112,9 @@ class SubscriptionCheckoutCubit extends Cubit<SubscriptionCheckoutState> {
     required bool keepIdentitySecret,
     required String additionalInfo,
   }) async {
-    final String cityId =
+    final String? cityId =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userAreaId);
-    log(cityId);
+    log(cityId!);
     emit(const SubscriptionCheckoutState.loading());
     try {
       final formattedStartDate = _formatDateForApi(startDate);

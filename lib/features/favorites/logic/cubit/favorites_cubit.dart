@@ -84,7 +84,8 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   Future<void> removeFromFavorites(String productId) async {
     emit(const FavoritesState.loading());
     log('Removing product with ID: $productId from favorites');
-    log(await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken));
+    log(await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken) ??
+        'No user token found');
     final result = await _favoritesRepo.deleteFromFavorites(productId);
     result.when(
       success: (response) {

@@ -331,3 +331,8 @@ googlePayTitle: "Google Pay"
 googlePayDescription: "Quick and secure payment with Google Pay"
 benefitPayTitle: "Benefit Pay"
 benefitPayDescription: "Pay using Benefit Pay service"
+
+# Select City
+selectCityTitle: "Select City"
+sAFilter: "Saudi Arabia"
+SendYourGiftTo: "Send your gift to..."
