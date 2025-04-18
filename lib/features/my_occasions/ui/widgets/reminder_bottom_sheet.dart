@@ -3,7 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:wardaya/core/theming/colors.dart';
+import 'package:wardaya/features/home/logic/recipients/recipients_cubit.dart';
 import 'package:wardaya/features/my_occasions/data/models/my_occasions_response.dart';
+
+import '../../../../core/routing/router_imports.dart';
+import '../../../home/logic/recipients/recipients_state.dart';
 
 class ReminderBottomSheet extends StatefulWidget {
   final MyOccasionItem? occasion;
@@ -29,6 +33,8 @@ class _ReminderBottomSheetState extends State<ReminderBottomSheet> {
       _nameController.text = widget.occasion!.name;
       _selectedDate = widget.occasion!.date;
     }
+    // Fetch recipients data when sheet opens
+    context.read<RecipientsCubit>().getRecipients();
   }
 
   @override
@@ -128,38 +134,50 @@ class _ReminderBottomSheetState extends State<ReminderBottomSheet> {
                 ),
               ),
               VerticalSpace(height: 8.h),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[300]!),
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    value: _selectedRelationship,
-                    hint: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      child: Text('Select',
-                          style: TextStyle(color: Colors.grey[600])),
-                    ),
-                    isExpanded: true,
-                    icon: Icon(Icons.keyboard_arrow_down,
-                        color: Colors.grey[600]),
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    borderRadius: BorderRadius.circular(8.r),
-                    items: ['Family', 'Friend', 'Colleague', 'Other']
-                        .map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
+              BlocBuilder<RecipientsCubit, RecipientsState>(
+                builder: (context, state) {
+                  return state.maybeWhen(
+                    success: (recipients) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: ColorsManager.grey.withAlpha(
+                              (0.3 * 255).toInt(),
+                            ),
+                          ),
+                          borderRadius: BorderRadius.circular(8.r),
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            value: _selectedRelationship,
+                            hint: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 16.w),
+                              child: Text('Select relationship',
+                                  style: TextStyle(color: Colors.grey[600])),
+                            ),
+                            isExpanded: true,
+                            icon: Icon(Icons.keyboard_arrow_down,
+                                color: Colors.grey[600]),
+                            padding: EdgeInsets.symmetric(horizontal: 16.w),
+                            borderRadius: BorderRadius.circular(8.r),
+                            items: recipients.map((recipient) {
+                              return DropdownMenuItem<String>(
+                                value: recipient.name,
+                                child: Text(recipient.name),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                _selectedRelationship = newValue;
+                              });
+                            },
+                          ),
+                        ),
                       );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedRelationship = newValue;
-                      });
                     },
-                  ),
-                ),
+                    orElse: () => const SizedBox.shrink(),
+                  );
+                },
               ),
               VerticalSpace(height: 16.h),
 

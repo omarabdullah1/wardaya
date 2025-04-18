@@ -295,6 +295,10 @@ class LocalizationMessages {
     required this.selectCityTitle,
     required this.sAfilter,
     required this.sendYourGiftTo,
+    required this.myOccasions,
+    required this.quickAdd,
+    required this.selectAnOccasionToCreateAreminder,
+    required this.yourUpcomingOccasion,
     required this.deliveryFrequency1,
     required this.subscriptionDuration1,
   });
@@ -576,6 +580,10 @@ class LocalizationMessages {
       selectCityTitle: (json['selectCityTitle'] ?? '').toString(),
       sAfilter: (json['sAFilter'] ?? '').toString(),
       sendYourGiftTo: (json['SendYourGiftTo'] ?? '').toString(),
+      myOccasions: (json['myOccasions'] ?? '').toString(),
+      quickAdd: (json['quickAdd'] ?? '').toString(),
+      selectAnOccasionToCreateAreminder: (json['selectAnOccasionToCreateAReminder'] ?? '').toString(),
+      yourUpcomingOccasion: (json['yourUpcomingOccasion'] ?? '').toString(),
       deliveryFrequency1: (json['delivery_frequency'] ?? '').toString(),
       subscriptionDuration1: (json['subscription_duration'] ?? '').toString(),
     );
@@ -849,6 +857,10 @@ class LocalizationMessages {
   final String selectCityTitle;
   final String sAfilter;
   final String sendYourGiftTo;
+  final String myOccasions;
+  final String quickAdd;
+  final String selectAnOccasionToCreateAreminder;
+  final String yourUpcomingOccasion;
   final String deliveryFrequency1;
   final String subscriptionDuration1;
   Map<String, Object> get _content => {
@@ -1121,6 +1133,10 @@ class LocalizationMessages {
         r'''selectCityTitle''': selectCityTitle,
         r'''sAFilter''': sAfilter,
         r'''SendYourGiftTo''': sendYourGiftTo,
+        r'''myOccasions''': myOccasions,
+        r'''quickAdd''': quickAdd,
+        r'''selectAnOccasionToCreateAReminder''': selectAnOccasionToCreateAreminder,
+        r'''yourUpcomingOccasion''': yourUpcomingOccasion,
         r'''delivery_frequency''': deliveryFrequency1,
         r'''subscription_duration''': subscriptionDuration1,
       };
@@ -1425,6 +1441,10 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   selectCityTitle: 'Select City',
   sAfilter: 'Saudi Arabia',
   sendYourGiftTo: 'Send your gift to...',
+  myOccasions: 'My Occasions',
+  quickAdd: 'Quick Add',
+  selectAnOccasionToCreateAreminder: 'Select an occasion to create a reminder',
+  yourUpcomingOccasion: 'Your Upcoming Occasion',
   deliveryFrequency1: '',
   subscriptionDuration1: '',
 );
@@ -1701,6 +1721,10 @@ final LocalizationMessages ar = LocalizationMessages(
   selectCityTitle: 'اختر المدينة',
   sAfilter: 'المملكة العربية السعودية',
   sendYourGiftTo: 'أرسل هديتك إلى...',
+  myOccasions: 'مناسباتي',
+  quickAdd: 'إضافة سريعة',
+  selectAnOccasionToCreateAreminder: 'اختر مناسبة لإنشاء تذكير',
+  yourUpcomingOccasion: 'مناسباتك القادمة',
   deliveryFrequency1: 'تكرار التوصيل',
   subscriptionDuration1: 'مدة الاشتراك',
 );

@@ -9,7 +9,8 @@ import 'my_occasions_state.dart';
 class MyOccasionsCubit extends Cubit<MyOccasionsState> {
   final MyOccasionsRepo _myOccasionsRepo;
 
-  MyOccasionsCubit(this._myOccasionsRepo) : super(const MyOccasionsState.initial());
+  MyOccasionsCubit(this._myOccasionsRepo)
+      : super(const MyOccasionsState.initial());
 
   Future<void> getMyOccasions() async {
     emit(const MyOccasionsState.loading());

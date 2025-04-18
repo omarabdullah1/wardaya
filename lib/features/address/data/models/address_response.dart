@@ -25,11 +25,21 @@ class Address {
   final String id;
   final String userId;
   final String title;
+  @JsonKey(defaultValue: '')
   final String recipientArea;
+  @JsonKey(defaultValue: '')
   final String recipientAddress;
+  @JsonKey(defaultValue: '')
   final String extraAddressDetails;
+  final String? recipientPhoneNumber;
+  final String? recipientName;
+  final String? recipientCountryCode;
+  @JsonKey(defaultValue: 0.0)
   final double latitude;
+  @JsonKey(defaultValue: 0.0)
   final double longitude;
+  @JsonKey(name: '__v', defaultValue: 0)
+  final int version;
 
   Address({
     required this.id,
@@ -38,8 +48,12 @@ class Address {
     required this.recipientArea,
     required this.recipientAddress,
     required this.extraAddressDetails,
+    this.recipientPhoneNumber,
+    this.recipientName,
+    this.recipientCountryCode,
     required this.latitude,
     required this.longitude,
+    required this.version,
   });
 
   factory Address.fromJson(Map<String, dynamic> json) =>

@@ -41,7 +41,8 @@ class ProductResponse {
   @JsonKey(fromJson: _dimensionsFromJson)
   final Dimensions? dimensions;
 
-  final List<dynamic> bundleItems;
+  @JsonKey(defaultValue: [])
+  final List<BundleItemResponse> bundleItems;
 
   @JsonKey(fromJson: _colorsFromJson)
   final List<dynamic> colors;
@@ -361,4 +362,72 @@ class Recipient {
   factory Recipient.fromJson(Map<String, dynamic> json) =>
       _$RecipientFromJson(json);
   Map<String, dynamic> toJson() => _$RecipientToJson(this);
+}
+
+@JsonSerializable()
+class BundleCategoryItem {
+  @JsonKey(name: 'category_title')
+  final String categoryTitle;
+
+  @JsonKey(name: 'category_title_ar')
+  final String? categoryTitleAr;
+
+  @JsonKey(defaultValue: [])
+  final List<String> items;
+
+  @JsonKey(defaultValue: false)
+  final bool isRequired;
+
+  @JsonKey(name: '_id')
+  final String id;
+
+  BundleCategoryItem({
+    required this.categoryTitle,
+    this.categoryTitleAr,
+    required this.items,
+    required this.isRequired,
+    required this.id,
+  });
+
+  factory BundleCategoryItem.fromJson(Map<String, dynamic> json) =>
+      _$BundleCategoryItemFromJson(json);
+  Map<String, dynamic> toJson() => _$BundleCategoryItemToJson(this);
+}
+
+@JsonSerializable()
+class BundleItemResponse {
+  @JsonKey(defaultValue: [])
+  final List<BundleCategoryItem> categories;
+
+  @JsonKey(name: '_id', defaultValue: '')
+  final String id;
+
+  BundleItemResponse({
+    required this.categories,
+    required this.id,
+  });
+
+  factory BundleItemResponse.fromJson(Map<String, dynamic> json) {
+    // Handle the case where categories is a direct list
+    if (json['categories'] is List) {
+      final categoriesList = (json['categories'] as List)
+          .map((category) {
+            if (category is Map<String, dynamic>) {
+              return BundleCategoryItem.fromJson(category);
+            }
+            return null;
+          })
+          .whereType<BundleCategoryItem>()
+          .toList();
+
+      return BundleItemResponse(
+        categories: categoriesList,
+        id: json['_id'] as String? ?? '',
+      );
+    }
+
+    return _$BundleItemResponseFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() => _$BundleItemResponseToJson(this);
 }

@@ -30,7 +30,11 @@ ProductResponse _$ProductResponseFromJson(Map<String, dynamic> json) =>
       points: (json['points'] as num?)?.toInt() ?? 0,
       components: json['components'] as List<dynamic>,
       dimensions: ProductResponse._dimensionsFromJson(json['dimensions']),
-      bundleItems: json['bundleItems'] as List<dynamic>,
+      bundleItems: (json['bundleItems'] as List<dynamic>?)
+              ?.map(
+                  (e) => BundleItemResponse.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
       colors: ProductResponse._colorsFromJson(json['colors'] as List),
       recipients:
           ProductResponse._recipientsFromJson(json['recipients'] as List),
@@ -230,4 +234,40 @@ Map<String, dynamic> _$RecipientToJson(Recipient instance) => <String, dynamic>{
       'name': instance.name,
       '__v': instance.version,
       'images': instance.images,
+    };
+
+BundleCategoryItem _$BundleCategoryItemFromJson(Map<String, dynamic> json) =>
+    BundleCategoryItem(
+      categoryTitle: json['category_title'] as String,
+      categoryTitleAr: json['category_title_ar'] as String?,
+      items:
+          (json['items'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      isRequired: json['isRequired'] as bool? ?? false,
+      id: json['_id'] as String,
+    );
+
+Map<String, dynamic> _$BundleCategoryItemToJson(BundleCategoryItem instance) =>
+    <String, dynamic>{
+      'category_title': instance.categoryTitle,
+      'category_title_ar': instance.categoryTitleAr,
+      'items': instance.items,
+      'isRequired': instance.isRequired,
+      '_id': instance.id,
+    };
+
+BundleItemResponse _$BundleItemResponseFromJson(Map<String, dynamic> json) =>
+    BundleItemResponse(
+      categories: (json['categories'] as List<dynamic>?)
+              ?.map(
+                  (e) => BundleCategoryItem.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      id: json['_id'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$BundleItemResponseToJson(BundleItemResponse instance) =>
+    <String, dynamic>{
+      'categories': instance.categories,
+      '_id': instance.id,
     };

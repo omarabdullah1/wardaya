@@ -211,6 +211,7 @@ class _assets_svgs_dart {
   final add_cart_svg = 'assets/svgs/add_cart.svg';
   final addresses_svg = 'assets/svgs/addresses.svg';
   final apple_svg = 'assets/svgs/apple.svg';
+  final apple_pay_svg = 'assets/svgs/apple_pay.svg';
   final ballons_svg = 'assets/svgs/ballons.svg';
   final cart_svg = 'assets/svgs/cart.svg';
   final customer_care_svg = 'assets/svgs/customer_care.svg';

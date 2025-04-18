@@ -12,7 +12,7 @@ import 'package:wardaya/features/my_occasions/logic/cubit/my_occasions_state.dar
 // Update the class definition to accept onOccasionTap callback
 class UpcomingOccasionsList extends StatelessWidget {
   final Function(MyOccasionItem)? onOccasionTap;
-  
+
   const UpcomingOccasionsList({super.key, this.onOccasionTap});
 
   @override
@@ -98,8 +98,8 @@ class OccasionCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.0),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withAlpha((0.05*255).toInt()),
-              blurRadius: 4,
+              color: Colors.black.withAlpha((0.05 * 255).toInt()),
+              blurRadius: 4.r,
               offset: const Offset(0, 2),
             ),
           ],

@@ -12,4 +12,7 @@ abstract class AddressService {
 
   @GET(AddressApiConstants.address)
   Future<List<Address>> getAddresses();
+
+  // @GET(AddressApiConstants.address)
+  // Future<List<Address>> createAddresses();
 }

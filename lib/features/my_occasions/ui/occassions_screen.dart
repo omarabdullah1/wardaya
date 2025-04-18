@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/widgets/app_app_bar.dart';
+import 'package:wardaya/features/home/logic/recipients/recipients_cubit.dart';
 import 'package:wardaya/features/my_occasions/data/models/my_occasions_response.dart';
 import 'package:wardaya/features/my_occasions/logic/cubit/my_occasions_cubit.dart';
 import 'widgets/occasions_builder.dart';
 import 'widgets/upcoming_occasions_list.dart';
 import 'widgets/reminder_bottom_sheet.dart';
+import '../../../core/di/dependency_injection.dart';
 
 class OccasionsScreen extends StatelessWidget {
   const OccasionsScreen({super.key});
@@ -18,8 +21,11 @@ class OccasionsScreen extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) => ReminderBottomSheet(occasion: occasion),
+      backgroundColor: ColorsManager.transparent,
+      builder: (bottomSheetContext) => BlocProvider(
+        create: (context) => getIt<RecipientsCubit>()..getRecipients(),
+        child: ReminderBottomSheet(occasion: occasion),
+      ),
     );
   }
 
@@ -27,7 +33,7 @@ class OccasionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsManager.offWhite,
-      appBar: const AppAppBar(title: 'context.el.myOccasions'),
+      appBar: AppAppBar(title: context.el.myOccasions),
       body: SafeArea(
         child: RefreshIndicator(
           color: ColorsManager.mainRose,
@@ -41,7 +47,7 @@ class OccasionsScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(16.0.w),
                   child: Text(
-                    'context.el.quickAdd',
+                    context.el.quickAdd,
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
@@ -51,7 +57,7 @@ class OccasionsScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                   child: Text(
-                    'context.el.selectAnOccasionToCreateAReminder',
+                    context.el.selectAnOccasionToCreateAreminder,
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: Colors.grey,
@@ -66,7 +72,7 @@ class OccasionsScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(16.0.w),
                   child: Text(
-                    'context.el.yourUpcomingOccasion',
+                    context.el.yourUpcomingOccasion,
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.bold,

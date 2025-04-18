@@ -22,11 +22,10 @@ class AddressCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-         Map<String, dynamic> arguments = {
-                              'expressDelivery': true,
-                              'extraArgs':
-                                  address,
-                            };
+        Map<String, dynamic> arguments = {
+          'expressDelivery': true,
+          'extraArgs': address,
+        };
         final result = await context.pushNamed(
           Routes.recipientDetailsScreen,
           arguments: arguments,
@@ -98,7 +97,7 @@ class AddressCard extends StatelessWidget {
                   ),
                   SizedBox(height: 12.h),
                   Text(
-                    'Name: ${address?.title ?? ''}',
+                    'Name: ${address?.recipientName ?? ''}',
                     style: TextStyle(
                       fontSize: 13.sp,
                       color: ColorsManager.darkGray,
@@ -106,7 +105,7 @@ class AddressCard extends StatelessWidget {
                   ),
                   SizedBox(height: 4.h),
                   Text(
-                    'Phone number: ${address?.userId ?? ''}',
+                    'Phone number: ${address?.recipientPhoneNumber ?? ''}',
                     style: TextStyle(
                       fontSize: 13.sp,
                       color: ColorsManager.darkGray,

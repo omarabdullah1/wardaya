@@ -333,3 +333,9 @@ benefitPayDescription: "ادفع باستخدام خدمة بنفت باي"
 selectCityTitle: "اختر المدينة"
 sAFilter: "المملكة العربية السعودية"
 SendYourGiftTo: "أرسل هديتك إلى..."
+
+# OccasionsScreen texts
+myOccasions: "مناسباتي"
+quickAdd: "إضافة سريعة"
+selectAnOccasionToCreateAReminder: "اختر مناسبة لإنشاء تذكير"
+yourUpcomingOccasion: "مناسباتك القادمة"

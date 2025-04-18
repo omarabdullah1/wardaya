@@ -67,6 +67,11 @@ class NewIdeasBuilder extends StatelessWidget {
                 title: context.el.discoverCardWeeklySurpriseTitle,
                 buttonText: context.el.discoverCardWeeklySurpriseButton,
                 isAsset: true,
+                onPressed: () {
+                  context.pushNamed(
+                    Routes.susbcriptionsScreen,
+                  );
+                },
               ),
               const SizedBox(width: 10),
             ],
@@ -119,6 +124,11 @@ class NewIdeasBuilder extends StatelessWidget {
                     title: context.el.discoverCardWeeklySurpriseTitle,
                     buttonText: context.el.discoverCardWeeklySurpriseButton,
                     isAsset: true,
+                    onPressed: () {
+                      context.pushNamed(
+                        Routes.susbcriptionsScreen,
+                      );
+                    },
                   ),
                   const SizedBox(width: 10),
                   // Dynamic new ideas cards

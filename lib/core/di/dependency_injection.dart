@@ -15,6 +15,7 @@ import 'package:wardaya/features/invoices/data/apis/invoices_service.dart';
 import 'package:wardaya/features/invoices/logic/cubit/invoices_cubit.dart';
 import 'package:wardaya/features/my_occasions/data/apis/my_occassions_service.dart';
 import 'package:wardaya/features/my_occasions/data/repos/my_occasions_repo.dart';
+import 'package:wardaya/features/my_occasions/logic/create_occassion/cubit/create_occasion_cubit.dart';
 import 'package:wardaya/features/my_occasions/logic/cubit/my_occasions_cubit.dart';
 import 'package:wardaya/features/my_orders/data/apis/my_orders_service.dart';
 import 'package:wardaya/features/my_orders/logic/cubit/my_orders_cubit.dart';
@@ -136,4 +137,6 @@ Future<void> setupGetIt() async {
 
   getIt.registerFactory<LayoutCubit>(() => LayoutCubit());
   getIt.registerFactory<CartCubit>(() => CartCubit());
+  getIt
+      .registerFactory<CreateOccasionCubit>(() => CreateOccasionCubit(getIt()));
 }

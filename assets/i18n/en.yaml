@@ -336,3 +336,9 @@ benefitPayDescription: "Pay using Benefit Pay service"
 selectCityTitle: "Select City"
 sAFilter: "Saudi Arabia"
 SendYourGiftTo: "Send your gift to..."
+
+# OccasionsScreen texts
+myOccasions: "My Occasions"
+quickAdd: "Quick Add"
+selectAnOccasionToCreateAReminder: "Select an occasion to create a reminder"
+yourUpcomingOccasion: "Your Upcoming Occasion"

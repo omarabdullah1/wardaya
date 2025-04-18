@@ -199,12 +199,24 @@ class _ProductDetailsBuilderState extends State<ProductDetailsBuilder> {
           components: widget.product.components,
           dimensions: widget.product.dimensions != null
               ? product_data_model.Dimensions(
-                  // Map the fields from search_response.Dimensions to product_response.Dimensions
                   width: widget.product.dimensions!.width?.toInt(),
                   height: widget.product.dimensions!.height?.toInt(),
                 )
               : null,
-          bundleItems: widget.product.bundleItems,
+          bundleItems: widget.product.bundleItems
+              .map((item) => product_data_model.BundleItemResponse(
+                    id: item.id,
+                    categories: [
+                      product_data_model.BundleCategoryItem(
+                        id: '0',
+                        categoryTitle: 'Bundle Item',
+                        categoryTitleAr: null,
+                        items: [],
+                        isRequired: false,
+                      )
+                    ],
+                  ))
+              .toList(),
           colors: widget.product.colors,
           recipients: widget.product.recipients,
           bundleTypes: widget.product.bundleTypes,
