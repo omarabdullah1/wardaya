@@ -10,7 +10,7 @@ class ExploreRepo {
 
   ExploreRepo(this._apiService);
 
-  Future<ApiResult<MenuItemsResponse>> getMenuItems() async {
+  Future<ApiResult<List<MenuItem>>> getMenuItems() async {
     try {
       final response = await _apiService.getMenuItems();
       return ApiResult.success(response);

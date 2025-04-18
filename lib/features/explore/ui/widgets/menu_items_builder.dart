@@ -62,9 +62,8 @@ class MenuItemsBuilder extends StatelessWidget {
     );
   }
 
-  Widget _buildSuccess(
-      BuildContext context, MenuItemsResponse menuItemsResponse) {
-    if (menuItemsResponse.menuItems.isEmpty) {
+  Widget _buildSuccess(BuildContext context, List<MenuItem> menuItemsResponse) {
+    if (menuItemsResponse.isEmpty) {
       return const SizedBox.shrink();
     }
     // Schedule pop to happen after the build phase
@@ -72,7 +71,7 @@ class MenuItemsBuilder extends StatelessWidget {
       Navigator.of(context).popUntil((route) => route.isFirst);
     });
     return Column(
-      children: menuItemsResponse.menuItems.map((menuItem) {
+      children: menuItemsResponse.map((menuItem) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 10.0),
           child: CategoryButton(

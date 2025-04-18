@@ -20,7 +20,7 @@ mixin _$ExploreState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(MenuItemsResponse menuItemsResponse) success,
+    required TResult Function(List<MenuItem> menuItemsResponse) success,
     required TResult Function(String message) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$ExploreState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(MenuItemsResponse menuItemsResponse)? success,
+    TResult? Function(List<MenuItem> menuItemsResponse)? success,
     TResult? Function(String message)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$ExploreState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(MenuItemsResponse menuItemsResponse)? success,
+    TResult Function(List<MenuItem> menuItemsResponse)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) =>
@@ -132,7 +132,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(MenuItemsResponse menuItemsResponse) success,
+    required TResult Function(List<MenuItem> menuItemsResponse) success,
     required TResult Function(String message) failure,
   }) {
     return initial();
@@ -143,7 +143,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(MenuItemsResponse menuItemsResponse)? success,
+    TResult? Function(List<MenuItem> menuItemsResponse)? success,
     TResult? Function(String message)? failure,
   }) {
     return initial?.call();
@@ -154,7 +154,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(MenuItemsResponse menuItemsResponse)? success,
+    TResult Function(List<MenuItem> menuItemsResponse)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -249,7 +249,7 @@ class _$LoadingImpl implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(MenuItemsResponse menuItemsResponse) success,
+    required TResult Function(List<MenuItem> menuItemsResponse) success,
     required TResult Function(String message) failure,
   }) {
     return loading();
@@ -260,7 +260,7 @@ class _$LoadingImpl implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(MenuItemsResponse menuItemsResponse)? success,
+    TResult? Function(List<MenuItem> menuItemsResponse)? success,
     TResult? Function(String message)? failure,
   }) {
     return loading?.call();
@@ -271,7 +271,7 @@ class _$LoadingImpl implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(MenuItemsResponse menuItemsResponse)? success,
+    TResult Function(List<MenuItem> menuItemsResponse)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -329,7 +329,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({MenuItemsResponse menuItemsResponse});
+  $Res call({List<MenuItem> menuItemsResponse});
 }
 
 /// @nodoc
@@ -349,9 +349,9 @@ class __$$SuccessImplCopyWithImpl<$Res>
   }) {
     return _then(_$SuccessImpl(
       null == menuItemsResponse
-          ? _value.menuItemsResponse
+          ? _value._menuItemsResponse
           : menuItemsResponse // ignore: cast_nullable_to_non_nullable
-              as MenuItemsResponse,
+              as List<MenuItem>,
     ));
   }
 }
@@ -359,10 +359,17 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements Success {
-  const _$SuccessImpl(this.menuItemsResponse);
+  const _$SuccessImpl(final List<MenuItem> menuItemsResponse)
+      : _menuItemsResponse = menuItemsResponse;
 
+  final List<MenuItem> _menuItemsResponse;
   @override
-  final MenuItemsResponse menuItemsResponse;
+  List<MenuItem> get menuItemsResponse {
+    if (_menuItemsResponse is EqualUnmodifiableListView)
+      return _menuItemsResponse;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_menuItemsResponse);
+  }
 
   @override
   String toString() {
@@ -374,12 +381,13 @@ class _$SuccessImpl implements Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.menuItemsResponse, menuItemsResponse) ||
-                other.menuItemsResponse == menuItemsResponse));
+            const DeepCollectionEquality()
+                .equals(other._menuItemsResponse, _menuItemsResponse));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, menuItemsResponse);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_menuItemsResponse));
 
   /// Create a copy of ExploreState
   /// with the given fields replaced by the non-null parameter values.
@@ -394,7 +402,7 @@ class _$SuccessImpl implements Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(MenuItemsResponse menuItemsResponse) success,
+    required TResult Function(List<MenuItem> menuItemsResponse) success,
     required TResult Function(String message) failure,
   }) {
     return success(menuItemsResponse);
@@ -405,7 +413,7 @@ class _$SuccessImpl implements Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(MenuItemsResponse menuItemsResponse)? success,
+    TResult? Function(List<MenuItem> menuItemsResponse)? success,
     TResult? Function(String message)? failure,
   }) {
     return success?.call(menuItemsResponse);
@@ -416,7 +424,7 @@ class _$SuccessImpl implements Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(MenuItemsResponse menuItemsResponse)? success,
+    TResult Function(List<MenuItem> menuItemsResponse)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -465,10 +473,9 @@ class _$SuccessImpl implements Success {
 }
 
 abstract class Success implements ExploreState {
-  const factory Success(final MenuItemsResponse menuItemsResponse) =
-      _$SuccessImpl;
+  const factory Success(final List<MenuItem> menuItemsResponse) = _$SuccessImpl;
 
-  MenuItemsResponse get menuItemsResponse;
+  List<MenuItem> get menuItemsResponse;
 
   /// Create a copy of ExploreState
   /// with the given fields replaced by the non-null parameter values.
@@ -547,7 +554,7 @@ class _$FailureImpl implements Failure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(MenuItemsResponse menuItemsResponse) success,
+    required TResult Function(List<MenuItem> menuItemsResponse) success,
     required TResult Function(String message) failure,
   }) {
     return failure(message);
@@ -558,7 +565,7 @@ class _$FailureImpl implements Failure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(MenuItemsResponse menuItemsResponse)? success,
+    TResult? Function(List<MenuItem> menuItemsResponse)? success,
     TResult? Function(String message)? failure,
   }) {
     return failure?.call(message);
@@ -569,7 +576,7 @@ class _$FailureImpl implements Failure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(MenuItemsResponse menuItemsResponse)? success,
+    TResult Function(List<MenuItem> menuItemsResponse)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {

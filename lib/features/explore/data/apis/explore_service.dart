@@ -10,5 +10,5 @@ abstract class ExploreService {
   factory ExploreService(Dio dio) = _ExploreService;
 
   @GET(ExploreApiConstants.menuitems)
-  Future<MenuItemsResponse> getMenuItems();
+  Future<List<MenuItem>> getMenuItems();
 }
