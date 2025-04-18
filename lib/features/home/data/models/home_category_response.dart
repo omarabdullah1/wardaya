@@ -29,7 +29,7 @@ class Category {
   @JsonKey(name: 'image_url')
   final String? imageUrl;
   final List<SubCategory> subCategories;
-  @JsonKey(name: '__v')
+  @JsonKey(name: '__v', defaultValue: 0)
   final int version;
   final int? categoryOrder;
   final List<Product> products;
@@ -60,7 +60,7 @@ class SubCategory {
   @JsonKey(name: 'image_url')
   final String? imageUrl;
   final String category;
-  @JsonKey(name: '__v')
+  @JsonKey(name: '__v', defaultValue: 0)
   final int version;
 
   SubCategory({
@@ -93,7 +93,7 @@ class Product {
   final bool expressDelivery;
   final DateTime createdAt;
   final DateTime updatedAt;
-  @JsonKey(name: '__v')
+  @JsonKey(name: '__v', defaultValue: 0)
   final int version;
   final String? brand;
   @JsonKey(defaultValue: [], fromJson: _parseIdList)
@@ -169,7 +169,7 @@ class Product {
     json['updatedAt'] ??= DateTime.now().toIso8601String();
     json['isBundle'] ??= false;
     json['expressDelivery'] ??= false;
-    json['version'] ??= 0;
+    json['__v'] ??= 0;
     json['price'] ??= {'total': 0, 'currency': 'SAR'};
 
     // Handle bundleItems parsing

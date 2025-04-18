@@ -27,7 +27,7 @@ Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
       subCategories: (json['subCategories'] as List<dynamic>)
           .map((e) => SubCategory.fromJson(e as Map<String, dynamic>))
           .toList(),
-      version: (json['__v'] as num).toInt(),
+      version: (json['__v'] as num?)?.toInt() ?? 0,
       categoryOrder: (json['categoryOrder'] as num?)?.toInt(),
       products: (json['products'] as List<dynamic>)
           .map((e) => Product.fromJson(e as Map<String, dynamic>))
@@ -51,7 +51,7 @@ SubCategory _$SubCategoryFromJson(Map<String, dynamic> json) => SubCategory(
       name: json['name'] as String,
       imageUrl: json['image_url'] as String?,
       category: json['category'] as String,
-      version: (json['__v'] as num).toInt(),
+      version: (json['__v'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$SubCategoryToJson(SubCategory instance) =>
@@ -82,7 +82,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       expressDelivery: json['expressDelivery'] as bool,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
-      version: (json['__v'] as num).toInt(),
+      version: (json['__v'] as num?)?.toInt() ?? 0,
       brand: json['brand'] as String?,
       bundleTypes: json['bundleTypes'] == null
           ? []
