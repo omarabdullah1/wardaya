@@ -29,7 +29,6 @@ import 'package:wardaya/features/subscriptions/data/apis/subscription_service.da
 import 'package:wardaya/features/subscriptions/data/repos/subscription_repo.dart';
 import 'package:wardaya/features/subscriptions/logic/durations/subscription_duration_cubit.dart';
 import 'package:wardaya/features/subscriptions/logic/plans/subscription_cubit.dart';
-
 import '../../features/address/logic/address_cubit/address_cubit.dart';
 import '../../features/address/logic/recipient_details_cubit/recipient_details_cubit.dart';
 import '../../features/authentication/apis/auth_service.dart';
@@ -50,6 +49,7 @@ import '../../features/profile/logic/cubit/profile_cubit.dart';
 import '../../features/subscriptions/logic/subscription_checkout_cubit/subscription_checkout_cubit.dart';
 import '../blocs/general/cubit/general_cubit.dart';
 import '../networking/dio_factory.dart';
+import '../../features/home/logic/new_ideas/new_ideas_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -119,6 +119,7 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<BrandsCubit>(() => BrandsCubit(getIt()));
   getIt.registerFactory<RecipientsCubit>(() => RecipientsCubit(getIt()));
   getIt.registerFactory<DeliveryAreasCubit>(() => DeliveryAreasCubit(getIt()));
+  getIt.registerFactory<NewIdeasCubit>(() => NewIdeasCubit(getIt()));
   getIt.registerFactory<FavoritesCubit>(() => FavoritesCubit(getIt()));
   getIt.registerFactory<ExploreCubit>(() => ExploreCubit(getIt()));
 

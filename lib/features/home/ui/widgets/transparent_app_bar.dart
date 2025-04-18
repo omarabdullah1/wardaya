@@ -9,8 +9,7 @@ import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:wardaya/core/routing/routes.dart';
-import 'package:wardaya/core/widgets/loading_widget.dart'; // Added this import
-import 'package:wardaya/features/home/data/models/home_delivery_areas_response.dart';
+import 'package:wardaya/core/widgets/loading_widget.dart';
 import 'package:wardaya/features/home/logic/delivery_areas/delivery_areas_cubit.dart';
 import 'package:wardaya/features/home/logic/delivery_areas/delivery_areas_state.dart';
 import 'package:wardaya/features/home/ui/widgets/city_selection_bottom_sheet.dart';
@@ -227,11 +226,11 @@ class _TransparentAppBarState extends State<TransparentAppBar> {
                 deliveryAreas: state.deliveryAreas,
                 currentCityId: _selectedCityId,
                 onCitySelected: (city) async {
+                  await _deliveryAreasCubit.updateSelectedCity(city.id);
                   setState(() {
                     _selectedCityId = city.id;
                     _cityName = city.name;
                   });
-                  await _deliveryAreasCubit.updateSelectedCity(city.id);
                 },
               );
             } else {

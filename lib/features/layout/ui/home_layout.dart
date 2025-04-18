@@ -5,6 +5,7 @@ import 'package:wardaya/features/home/logic/brands/brands_cubit.dart';
 import 'package:wardaya/features/profile/logic/cubit/profile_cubit.dart';
 import 'package:wardaya/features/explore/ui/explore_screen.dart';
 import 'package:wardaya/features/home/ui/home_screen.dart';
+import 'package:wardaya/features/home/logic/new_ideas/new_ideas_cubit.dart';
 
 import '../../../core/di/dependency_injection.dart';
 import '../../../core/theming/colors.dart';
@@ -62,6 +63,10 @@ class HomeLayout extends StatelessWidget {
                             create: (context) =>
                                 getIt<DeliveryAreasCubit>()..getDeliveryAreas(),
                           ),
+                          BlocProvider(
+                            create: (context) =>
+                                getIt<NewIdeasCubit>()..getHomeNewIdeas(),
+                          ),
                         ],
                         child: const HomeScreen(),
                       );
@@ -113,6 +118,10 @@ class HomeLayout extends StatelessWidget {
                           BlocProvider(
                             create: (context) =>
                                 getIt<DeliveryAreasCubit>()..getDeliveryAreas(),
+                          ),
+                          BlocProvider(
+                            create: (context) =>
+                                getIt<NewIdeasCubit>()..getHomeNewIdeas(),
                           ),
                         ],
                         child: const HomeScreen(),

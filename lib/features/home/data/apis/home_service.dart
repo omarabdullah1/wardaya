@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:wardaya/features/home/data/models/home_gallery_response.dart';
+import 'package:wardaya/features/home/data/models/home_new_ideas_response.dart';
 import '../models/home_brands_response.dart';
 import '../models/home_category_response.dart';
 import '../models/home_delivery_areas_response.dart';
@@ -37,4 +38,7 @@ abstract class HomeService {
   Future<HomeUpdateCityResponse> updateUserCity(
     @Body() Map<String, dynamic> body,
   );
+
+  @GET(HomeApiConstants.newIdeas)
+  Future<List<HomeNewIdeasItem>> getHomeNewIdeas();
 }

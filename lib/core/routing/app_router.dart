@@ -358,21 +358,21 @@ class AppRouter {
             orderId: args['orderId'] as String,
           ),
         );
-      case Routes.tapPaymentScreen:
-        final Map<String, dynamic> args =
-            settings.arguments as Map<String, dynamic>;
-        return _buildRoute(
-          screen: TapPaymentScreen(
-            amount: args['amount'] as double,
-            orderId: args['orderId'] as String,
-            firstName: args['firstName'] as String? ?? "John",
-            lastName: args['lastName'] as String? ?? "Smith",
-            email: args['email'] as String? ?? "customer@example.com",
-            phoneNumber: args['phoneNumber'] as String? ?? "566123456",
-            countryCode: args['countryCode'] as String? ?? "+966",
-            paymentMethod: args['paymentMethod'] as String?,
-          ),
-        );
+      // case Routes.tapPaymentScreen:
+      //   final Map<String, dynamic> args =
+      //       settings.arguments as Map<String, dynamic>;
+      //   return _buildRoute(
+      //     screen: TapPaymentScreen(
+      //       amount: args['amount'] as double,
+      //       orderId: args['orderId'] as String,
+      //       firstName: args['firstName'] as String? ?? "John",
+      //       lastName: args['lastName'] as String? ?? "Smith",
+      //       email: args['email'] as String? ?? "customer@example.com",
+      //       phoneNumber: args['phoneNumber'] as String? ?? "566123456",
+      //       countryCode: args['countryCode'] as String? ?? "+966",
+      //       paymentMethod: args['paymentMethod'] as String?,
+      //     ),
+      //   );
       case Routes.myOrdersScreen:
         return _buildRoute(
           screen: BlocProvider(

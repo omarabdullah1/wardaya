@@ -281,7 +281,7 @@ class GalleryBuilder extends StatelessWidget {
                                           ColorsManager.grey,
                                     ),
                                     child: Text(
-                                      data[index].textOnButton ?? '',
+                                      data[index].textOnButton,
                                       style: TextStylesEBGaramond
                                           .font18MainRoseBold,
                                       overflow: TextOverflow.ellipsis,

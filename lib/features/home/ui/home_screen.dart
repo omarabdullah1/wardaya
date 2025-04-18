@@ -6,7 +6,9 @@ import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/theming/styles.dart';
 import 'package:wardaya/features/home/logic/gallery/gallery_cubit.dart';
+import 'package:wardaya/features/home/logic/new_ideas/new_ideas_cubit.dart';
 import 'package:wardaya/features/home/ui/widgets/gallery_builder.dart';
+import 'package:wardaya/features/home/ui/widgets/new_ideas_builder.dart';
 import 'package:wardaya/features/home/ui/widgets/transparent_app_bar.dart';
 
 import '../logic/brands/brands_cubit.dart';
@@ -16,7 +18,6 @@ import '../logic/occassions/occassions_cubit.dart';
 import '../logic/recipients/recipients_cubit.dart';
 import 'widgets/brands_youll_love_builder.dart';
 import 'widgets/categories_builder.dart';
-import 'widgets/discover_ideas_section.dart';
 import 'widgets/gifts_for_every_moment_builder.dart';
 import 'widgets/gifts_for_everyone_builder.dart';
 
@@ -38,6 +39,7 @@ class HomeScreen extends StatelessWidget {
           context.read<BrandsCubit>().getBrands();
           context.read<RecipientsCubit>().getRecipients();
           context.read<DeliveryAreasCubit>().getDeliveryAreas();
+          context.read<NewIdeasCubit>().getHomeNewIdeas();
         },
         child: SingleChildScrollView(
           child: Column(
@@ -60,10 +62,7 @@ class HomeScreen extends StatelessWidget {
               const VerticalSpace(height: 20),
               const CategoriesBuilder(),
               const VerticalSpace(height: 20),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10.0),
-                child: DiscoverIdeasSection(),
-              ),
+              const NewIdeasBuilder(),
               const VerticalSpace(height: 20),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),

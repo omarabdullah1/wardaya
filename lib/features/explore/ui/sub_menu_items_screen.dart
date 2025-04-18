@@ -85,7 +85,7 @@ class SubMenuItemsScreen extends StatelessWidget {
         Navigator.of(context).pushNamed(
           Routes.categoryScreen,
           arguments: {
-            'subMenuItems': subMenuItem.id,
+            'subMenuItemsId': subMenuItem.id,
             'extraArgs': subMenuItem.name,
           },
         );

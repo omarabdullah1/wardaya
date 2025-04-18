@@ -45,55 +45,26 @@ class _CategoryScreenState extends State<CategoryScreen> {
     // Initialize search based on available parameters
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // Get navigation state
+      log('CategoryScreen initState');
+      log(widget.momentTitle);
+      log(widget.occasionId.toString());
+      log(widget.categoryId.toString());
+      log(widget.subCategoryId.toString());
+      log(widget.recipientId.toString());
+      log(widget.brandId.toString());
+      log(widget.subMenuItemsId.toString());
+      log(widget.expressDelivery.toString());
 
-      // Use navigation state values if available, otherwise fall back to widget parameters
-      final String? occasionId = widget.occasionId;
-      final String? categoryId = widget.categoryId;
-      final String? subCategoryId = widget.subCategoryId;
-      final String? recipientId = widget.recipientId;
-      final String? brandId = widget.brandId;
-      final String? subMenuItemsId = widget.subMenuItemsId;
-      final bool? expressDelivery = widget.expressDelivery;
-      log('expressDelivery: $expressDelivery');
-      // Set express delivery if needed
-      if (expressDelivery != null && expressDelivery) {
-        context.read<SearchCubit>().emitSearchStates(expressDelivery: true);
-      } else if (brandId != null) {
-        // For brands, use only the brandId
-        context.read<SearchCubit>().emitSearchStates(
-              filterBrand: brandId,
-            );
-      } else if (recipientId != null) {
-        // For recipients, use only the recipientId
-        context.read<SearchCubit>().emitSearchStates(
-              filterRecipients: recipientId,
-            );
-      } else if (occasionId != null) {
-        // For occasions, use only the occasionId
-        context.read<SearchCubit>().emitSearchStates(
-              filterOccasion: occasionId,
-            );
-      } else if (categoryId != null) {
-        // For categories, use only the categoryId
-        context.read<SearchCubit>().emitSearchStates(
-              filterCategory: categoryId,
-            );
-      } else if (subCategoryId != null) {
-        // For subcategories, use only the subCategoryId
-        context.read<SearchCubit>().emitSearchStates(
-              filterSubCategory: subCategoryId,
-            );
-      } else if (subMenuItemsId != null) {
-        // For submenu items, use only the subMenuItemsId
-        context.read<SearchCubit>().emitSearchStates(
-              filterSubMenuItems: subMenuItemsId,
-            );
-      } else {
-        // Fallback to title search for backward compatibility
-        context.read<SearchCubit>().emitSearchStates(
-              search: widget.momentTitle,
-            );
-      }
+      // Use all available filters simultaneously
+      context.read<SearchCubit>().emitSearchStates(
+            expressDelivery: widget.expressDelivery,
+            filterBrand: widget.brandId,
+            filterRecipients: widget.recipientId,
+            filterOccasion: widget.occasionId,
+            filterCategory: widget.categoryId,
+            filterSubCategory: widget.subCategoryId,
+            filterSubMenuItems: widget.subMenuItemsId,
+          );
     });
   }
 
