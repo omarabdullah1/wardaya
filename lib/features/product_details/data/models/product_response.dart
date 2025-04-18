@@ -9,50 +9,56 @@ class ProductResponse {
   final String sku;
   final String title;
   final String description;
+  @JsonKey(defaultValue: false)
   final bool isBundle;
   final Price price;
   final List<String> images;
-  
+
   @JsonKey(fromJson: _categoriesFromJson)
   final List<dynamic> categories;
-  
+
   @JsonKey(fromJson: _subCategoriesFromJson)
   final List<dynamic> subCategories;
-  
+
   final List<dynamic> menuItems;
   final List<dynamic> subMenuItems;
-  
+
   @JsonKey(fromJson: _productTypesFromJson)
   final List<dynamic> productTypes;
-  
+
   @JsonKey(fromJson: _occasionsFromJson)
   final List<dynamic> occasions;
-  
+
   @JsonKey(fromJson: _brandFromJson)
   final dynamic brand;
-  
+
+  @JsonKey(defaultValue: false)
   final bool expressDelivery;
+  @JsonKey(defaultValue: 0)
   final int points;
   final List<dynamic> components;
-  
+
   @JsonKey(fromJson: _dimensionsFromJson)
   final Dimensions? dimensions;
-  
+
   final List<dynamic> bundleItems;
-  
+
   @JsonKey(fromJson: _colorsFromJson)
   final List<dynamic> colors;
-  
+
   @JsonKey(fromJson: _recipientsFromJson)
   final List<dynamic> recipients;
-  
+
   final List<dynamic> bundleTypes;
+  @JsonKey(defaultValue: '')
   final String careTips;
+  @JsonKey(defaultValue: false)
   final bool freeDelivery;
+  @JsonKey(defaultValue: false)
   final bool premiumFlowers;
   final String createdAt;
   final String updatedAt;
-  
+
   @JsonKey(name: '__v')
   final int version;
 
@@ -119,7 +125,7 @@ class ProductResponse {
 
   static Dimensions? _dimensionsFromJson(dynamic dimensions) {
     if (dimensions == null) return null;
-    
+
     try {
       return Dimensions.fromJson(dimensions as Map<String, dynamic>);
     } catch (e) {

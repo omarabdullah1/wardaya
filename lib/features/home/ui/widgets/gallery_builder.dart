@@ -6,6 +6,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wardaya/core/helpers/spacing.dart';
+import 'package:wardaya/core/routing/routes.dart';
 import 'package:wardaya/features/home/data/apis/home_api_constants.dart';
 import 'package:wardaya/features/home/data/models/home_gallery_response.dart';
 import 'package:wardaya/features/home/logic/gallery/gallery_cubit.dart';
@@ -179,22 +180,116 @@ class GalleryBuilder extends StatelessWidget {
                             style: TextStylesEBGaramond.font38WhiteBold,
                             softWrap: true,
                           ),
-                          const VerticalSpace(height: 15),
-                          Container(
-                            width: 120.w,
-                            decoration: BoxDecoration(
-                              color: ColorsManager.white,
-                              borderRadius: BorderRadius.circular(25.r),
-                            ),
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                data[index].textOnButton,
-                                style: TextStylesEBGaramond.font18MainRoseBold,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          )
+                          if ((data[index].recipient?.isNotEmpty ?? false) ||
+                              (data[index].subCategory?.isNotEmpty ?? false) ||
+                              (data[index].occasion?.isNotEmpty ?? false) ||
+                              (data[index].brand?.isNotEmpty ?? false))
+                            Column(
+                              children: [
+                                const VerticalSpace(height: 15),
+                                Container(
+                                  width: 120.w,
+                                  decoration: BoxDecoration(
+                                    color: ColorsManager.white,
+                                    borderRadius: BorderRadius.circular(25.r),
+                                  ),
+                                  child: TextButton(
+                                    onPressed: (data[index]
+                                                    .recipient
+                                                    ?.isNotEmpty ??
+                                                false) ||
+                                            (data[index]
+                                                    .subCategory
+                                                    ?.isNotEmpty ??
+                                                false) ||
+                                            (data[index].occasion?.isNotEmpty ??
+                                                false) ||
+                                            (data[index].brand?.isNotEmpty ??
+                                                false)
+                                        ? () {
+                                            // Safe null checks with null-aware operators
+                                            bool hasAnyValue = (data[index]
+                                                        .recipient
+                                                        ?.isNotEmpty ??
+                                                    false) ||
+                                                (data[index]
+                                                        .subCategory
+                                                        ?.isNotEmpty ??
+                                                    false) ||
+                                                (data[index]
+                                                        .occasion
+                                                        ?.isNotEmpty ??
+                                                    false) ||
+                                                (data[index]
+                                                        .brand
+                                                        ?.isNotEmpty ??
+                                                    false);
+
+                                            if (!hasAnyValue) {
+                                              return; // Disable button if no values or all null
+                                            }
+
+                                            Map<String, dynamic> arguments = {};
+
+                                            // Only add non-null and non-empty values
+                                            if (data[index]
+                                                    .recipient
+                                                    ?.isNotEmpty ??
+                                                false) {
+                                              arguments['recipientId'] =
+                                                  data[index].recipient;
+                                            }
+                                            if (data[index]
+                                                    .subCategory
+                                                    ?.isNotEmpty ??
+                                                false) {
+                                              arguments['subCategoryId'] =
+                                                  data[index].subCategory;
+                                            }
+                                            if (data[index]
+                                                    .occasion
+                                                    ?.isNotEmpty ??
+                                                false) {
+                                              arguments['occasionId'] =
+                                                  data[index].occasion;
+                                            }
+                                            if (data[index].brand?.isNotEmpty ??
+                                                false) {
+                                              arguments['brandId'] =
+                                                  data[index].brand;
+                                            }
+
+                                            // Only add extraArgs if we have valid data
+                                            if ((data[index]
+                                                    .textOnImage
+                                                    .isNotEmpty) &&
+                                                hasAnyValue) {
+                                              arguments['extraArgs'] =
+                                                  data[index].textOnImage;
+                                            }
+
+                                            if (arguments.isNotEmpty) {
+                                              context.pushNamed(
+                                                Routes.categoryScreen,
+                                                arguments: arguments,
+                                              );
+                                            }
+                                          }
+                                        : null,
+                                    style: TextButton.styleFrom(
+                                      disabledForegroundColor:
+                                          ColorsManager.grey,
+                                    ),
+                                    child: Text(
+                                      data[index].textOnButton ?? '',
+                                      style: TextStylesEBGaramond
+                                          .font18MainRoseBold,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
                         ],
                       ),
                     ),

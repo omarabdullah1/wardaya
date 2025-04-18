@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +9,7 @@ import 'package:wardaya/core/assets/assets.dart';
 import 'package:wardaya/core/blocs/general/cubit/general_cubit.dart';
 import 'package:wardaya/core/helpers/constants.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
+import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/features/product_details/data/apis/product_details_api_constants.dart';
 import 'package:wardaya/features/product_details/data/models/product_response.dart';
@@ -32,12 +31,15 @@ class ProductDetailsBody extends StatefulWidget {
 }
 
 class _ProductDetailsBodyState extends State<ProductDetailsBody> {
-  // UI state variables managed directly in the widget
-  bool _isExpanded = true;
   int _currentImageIndex = 0;
+  bool _isDescriptionTab = true; // Controls which tab is selected
+  bool _isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
+    final bool showTabs =
+        widget.product.careTips.isNotEmpty && !widget.product.isBundle;
+
     return Column(
       children: [
         Expanded(
@@ -288,77 +290,183 @@ class _ProductDetailsBodyState extends State<ProductDetailsBody> {
                 ),
                 SizedBox(height: 16.h),
 
-                // Description
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0.w),
-                  child: Text(context.el.descriptionHeader,
-                      style: GoogleFonts.inter(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14.0.sp,
-                      )),
-                ),
-                SizedBox(height: 16.h),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Divider(
-                    color: ColorsManager.black,
-                    thickness: 1,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0.w),
-                  child: Text(
-                    widget.product.description,
-                    maxLines: _isExpanded ? 5 : 20,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0.w),
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _isExpanded = !_isExpanded;
-                      });
-                    },
-                    child: AnimatedContainer(
-                      curve: Curves.easeInOut,
-                      duration: const Duration(milliseconds: 200),
-                      child: Row(
-                        children: [
-                          Text(
-                            _isExpanded
-                                ? context.el.seeMore
-                                : context.el.seeLess,
-                            style:
-                                const TextStyle(color: ColorsManager.mainRose),
-                          ),
-                          Directionality(
-                            textDirection: TextDirection.ltr,
-                            child: !_isExpanded
-                                ? Transform.rotate(
-                                    angle: 270 * -pi / 180,
-                                    child: Icon(
-                                      Icons.arrow_back_ios_rounded,
-                                      color: ColorsManager.mainRose,
-                                      size: 16.sp,
-                                    ),
-                                  )
-                                : Transform(
-                                    transform: Matrix4.rotationZ(pi / 2)
-                                      ..scale(-1.0),
-                                    alignment: Alignment.center,
-                                    child: Icon(Icons.arrow_back_ios_rounded,
-                                        color: ColorsManager.mainRose,
-                                        size: 16.sp),
+                // Only show tabs and content if there are care tips and not a bundle
+                if (showTabs) ...[
+                  // Description and Care Tips tabs
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: () =>
+                                setState(() => _isDescriptionTab = true),
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: _isDescriptionTab
+                                        ? ColorsManager.mainRose
+                                        : Colors.transparent,
+                                    width: 2.0,
                                   ),
+                                ),
+                              ),
+                              child: Text(
+                                'Description',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: _isDescriptionTab
+                                      ? ColorsManager.mainRose
+                                      : Colors.grey,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                           ),
-                        ],
-                      ),
+                        ),
+                        Expanded(
+                          child: InkWell(
+                            onTap: () =>
+                                setState(() => _isDescriptionTab = false),
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: !_isDescriptionTab
+                                        ? ColorsManager.mainRose
+                                        : Colors.transparent,
+                                    width: 2.0,
+                                  ),
+                                ),
+                              ),
+                              child: Text(
+                                'Care Tips',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: !_isDescriptionTab
+                                      ? ColorsManager.mainRose
+                                      : Colors.grey,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                const SizedBox(height: 16),
+
+                  // Content area with expandable text
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          _isDescriptionTab
+                              ? widget.product.description
+                              : widget.product.careTips,
+                          maxLines: _isExpanded ? null : 3,
+                          overflow: _isExpanded ? null : TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 14.0,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () =>
+                              setState(() => _isExpanded = !_isExpanded),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                _isExpanded
+                                    ? context.el.seeLess
+                                    : context.el.seeMore,
+                                style: const TextStyle(
+                                  color: ColorsManager.mainRose,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Icon(
+                                _isExpanded
+                                    ? Icons.keyboard_arrow_up
+                                    : Icons.keyboard_arrow_down,
+                                color: ColorsManager.mainRose,
+                                size: 20,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ] else ...[
+                  // Show only description without tabs if no care tips or is a bundle
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+                    child: Text(context.el.descriptionHeader,
+                        style: GoogleFonts.inter(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.0.sp,
+                        )),
+                  ),
+                  VerticalSpace(height: 8.h),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Divider(
+                      color: ColorsManager.lightGrey,
+                      thickness: 1,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.product.description,
+                          maxLines: _isExpanded ? null : 3,
+                          overflow: _isExpanded ? null : TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 14.0,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () =>
+                              setState(() => _isExpanded = !_isExpanded),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                _isExpanded
+                                    ? context.el.seeLess
+                                    : context.el.seeMore,
+                                style: const TextStyle(
+                                  color: ColorsManager.mainRose,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Icon(
+                                _isExpanded
+                                    ? Icons.keyboard_arrow_up
+                                    : Icons.keyboard_arrow_down,
+                                color: ColorsManager.mainRose,
+                                size: 20,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
 
                 // Payment Options
                 Padding(

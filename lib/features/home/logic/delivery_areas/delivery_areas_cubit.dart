@@ -22,16 +22,22 @@ class DeliveryAreasCubit extends Cubit<DeliveryAreasState> {
       final response = await _homeRepo.getHomeDeliveryAreas();
       response.when(
         success: (List<DeliveryArea> data) async {
-          _cachedDeliveryAreas = _sortDeliveryAreas(data);
-          log('Successfully received Delivery Areas data with ${data.length} items');
-
-          // Log detailed information about each area and city
-          for (var area in data) {
-            log('Area: ${area.country} (${area.cities.length} cities)');
-            for (var city in area.cities) {
-              log('  - ${city.name}: Delivery Price ${city.deliveryPrice} ${city.currency ?? area.currency}');
+          // Filter cities - only keep cities for Saudi Arabia
+          final filteredData = data.map((area) {
+            if (area.country != 'Saudi Arabia') {
+              return DeliveryArea(
+                id: area.id,
+                country: area.country,
+                currency: area.currency,
+                language: area.language,
+                cities: [], // Empty cities list for non-Saudi areas
+              );
             }
-          }
+            return area; // Keep Saudi Arabia data as is
+          }).toList();
+
+          _cachedDeliveryAreas = _sortDeliveryAreas(filteredData);
+          log('Successfully received Delivery Areas data with ${data.length} items');
 
           // Load saved city ID and ensure it exists in the new data
           final savedCityId = await SharedPrefHelper.getSecuredString(

@@ -17,17 +17,6 @@ class CitySelectionBottomSheet extends StatelessWidget {
     this.currentCityId,
   });
 
-  List<DeliveryArea> _sortDeliveryAreas() {
-    final sorted = List<DeliveryArea>.from(deliveryAreas);
-    // Move Saudi Arabia to the front
-    sorted.sort((a, b) {
-      if (a.country == 'Saudi Arabia') return -1;
-      if (b.country == 'Saudi Arabia') return 1;
-      return a.country.compareTo(b.country);
-    });
-    return sorted;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -121,14 +110,12 @@ class CitySelectionBottomSheet extends StatelessWidget {
       );
     }
 
-    final sortedAreas = _sortDeliveryAreas();
-
     return ListView.builder(
       key: const PageStorageKey<String>('country_list'),
       padding: EdgeInsets.zero,
-      itemCount: sortedAreas.length,
+      itemCount: deliveryAreas.length,
       itemBuilder: (context, index) {
-        final area = sortedAreas[index];
+        final area = deliveryAreas[index];
         if (area.cities.isEmpty) {
           return const SizedBox.shrink();
         }
@@ -218,7 +205,7 @@ class CitySelectionBottomSheet extends StatelessWidget {
               },
             ),
             // Add a divider after each country except the last one
-            if (index < sortedAreas.length - 1)
+            if (index < deliveryAreas.length - 1)
               Divider(
                 color: Colors.grey.shade200,
                 height: 1,
