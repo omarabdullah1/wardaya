@@ -1,25 +1,30 @@
-import 'dart:developer';
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:wardaya/core/helpers/extensions.dart';
+
 import 'package:wardaya/core/helpers/spacing.dart';
+import 'package:wardaya/core/routing/routes.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/theming/font_weight_helper.dart';
 import 'package:wardaya/core/theming/styles.dart';
 import 'package:wardaya/core/widgets/app_app_bar.dart';
 import 'package:wardaya/core/widgets/app_text_button.dart';
-import 'package:wardaya/features/subscriptions/ui/recipient_address_sheet.dart';
-import 'package:wardaya/features/subscriptions/ui/address_option_preview.dart';
-import 'package:country_picker/country_picker.dart';
+import 'package:wardaya/core/widgets/loading_widget.dart';
 import 'package:wardaya/features/subscriptions/logic/subscription_checkout_cubit/subscription_checkout_cubit.dart';
 import 'package:wardaya/features/subscriptions/logic/subscription_checkout_cubit/subscription_checkout_state.dart';
+import 'package:wardaya/features/subscriptions/ui/address_option_preview.dart';
+import 'package:wardaya/features/subscriptions/ui/recipient_address_sheet.dart';
+
 import '../../../core/assets/assets.dart';
 
 class SubscripionCheckout extends StatefulWidget {
   const SubscripionCheckout({
     super.key,
+    required this.subscriptionPlan,
     required this.deliveryFrequency,
     required this.subscriptionDuration,
     required this.startDate,
@@ -27,6 +32,7 @@ class SubscripionCheckout extends StatefulWidget {
     required this.currency,
   });
 
+  final String subscriptionPlan;
   final String deliveryFrequency;
   final String subscriptionDuration;
   final String startDate;
@@ -74,6 +80,7 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
                 cubit.selectedLocation ?? const LatLng(30.0444, 31.2357),
             initialAddress: cubit.selectedAddress,
             initialArea: cubit.selectedArea,
+            additional: cubit.additionalInfo,
           ),
         );
 
@@ -83,6 +90,7 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
             result['location'] as LatLng,
             result['address'] as String,
             result['area'] as String,
+            result['additional'] as String,
           );
         } else {
           // If user cancels and there's no existing location, revert the selection
@@ -104,7 +112,7 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
     }
   }
 
-  void _handleProceedToPayment(String name, String phone) {
+  Future<void> _handleProceedToPayment(String name, String phone) async {
     final cubit = context.read<SubscriptionCheckoutCubit>();
 
     if (name.isEmpty ||
@@ -120,32 +128,59 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
       return;
     }
 
-    // If "Enter recipient address" was selected, verify we have location data
-    if (selectedAddressOption == 'Enter recipient address' &&
-        cubit.selectedLocation == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please select a delivery location'),
-          backgroundColor: ColorsManager.mainRose,
-        ),
-      );
-      return;
+    // Convert source_id based on payment method
+    String sourceId = '';
+    switch (selectedPaymentMethod) {
+      case 'Credit Card':
+        sourceId = 'src_card';
+        break;
+      case 'Mada':
+        sourceId = 'src_sa.mada';
+        break;
+      case 'Google Pay':
+        sourceId = 'src_google_pay';
+        break;
+      case 'STC Pay':
+        sourceId = 'src_sa.stcpay';
+        break;
+      default:
+        sourceId = 'src_all';
     }
 
-    log('Checkout Details:');
-    log('Recipient Name: $name');
-    log('Phone Number: $phone');
-    log('Address Option: $selectedAddressOption');
-    if (selectedAddressOption == 'Enter recipient address') {
-      log('Selected Location: ${cubit.selectedLocation?.latitude}, ${cubit.selectedLocation?.longitude}');
-      log('Address: ${cubit.selectedAddress}');
-      log('Area: ${cubit.selectedArea}');
-    }
-    log('Payment Method: $selectedPaymentMethod');
-    log('Delivery Frequency: ${widget.deliveryFrequency}');
-    log('Subscription Duration: ${widget.subscriptionDuration}');
-    log('Start Date: ${widget.startDate}');
-    log('Total Amount: ${widget.currency} ${(double.parse(widget.price) * 1.15).toStringAsFixed(2)}');
+    // Get location data and area based on selection
+    final location = selectedAddressOption == 'Enter recipient address'
+        ? cubit.selectedLocation ?? const LatLng(0, 0)
+        : const LatLng(0, 0);
+
+    final address = selectedAddressOption == 'Enter recipient address'
+        ? cubit.selectedAddress
+        : '';
+
+    final area = selectedAddressOption == 'Enter recipient address'
+        ? cubit.selectedArea
+        : 'To be provided by recipient';
+
+    final keepIdentitySecret =
+        selectedAddressOption == 'Ask the recipient for the address';
+
+    cubit.checkout(
+      plan: widget.subscriptionPlan,
+      deliveryFrequency: widget.deliveryFrequency,
+      duration: widget.subscriptionDuration,
+      startDate: widget.startDate,
+      amount: widget.price,
+      currency: widget.currency,
+      description: 'notes for wardaya',
+      sourceId: sourceId,
+      name: name,
+      code: '+${_selectedCountry.phoneCode}',
+      phone: phone,
+      location: location,
+      address: address,
+      area: area,
+      keepIdentitySecret: keepIdentitySecret,
+      additionalInfo: cubit.additionalInfo,
+    );
   }
 
   String calculateNextPaymentDate() {
@@ -168,41 +203,104 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorsManager.offWhite,
-      appBar: const AppAppBar(title: 'Checkout'),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(16.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildSectionTitle('Recipient Details'),
-              const VerticalSpace(height: 16),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18),
-                  color: ColorsManager.white,
-                ),
-                child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 8.0.w, vertical: 8.0.h),
-                  child: _buildRecipientDetailsSection(),
-                ),
+    return BlocListener<SubscriptionCheckoutCubit, SubscriptionCheckoutState>(
+      listener: (context, state) {
+        state.when(
+          initial: () {},
+          recipientSelected: (_, __) {},
+          locationSelected: (_, __, ___, ____) {},
+          loading: () {
+            // Show loading dialog
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return const LoadingWidget(loadingState: true);
+              },
+            );
+          },
+          loaded: (response) {
+            // Close loading dialog
+            Navigator.pop(context);
+            // Navigate to TapPaymentScreen with the redirect URL
+            context.pushNamed(Routes.tapPaymentScreen, arguments: {
+              'amount': double.parse(widget.price), // Including VAT
+              'orderId': response.ordersId ?? '',
+              'firstName': context
+                  .read<SubscriptionCheckoutCubit>()
+                  .nameController
+                  .text
+                  .split(' ')
+                  .first,
+              'lastName': context
+                  .read<SubscriptionCheckoutCubit>()
+                  .nameController
+                  .text
+                  .split(' ')
+                  .skip(1)
+                  .join(' '),
+              'email':
+                  '', // If email is required, you'll need to add it to the form
+              'phoneNumber': context
+                  .read<SubscriptionCheckoutCubit>()
+                  .phoneController
+                  .text,
+              'countryCode': '+${_selectedCountry.phoneCode}',
+              'paymentMethod': selectedPaymentMethod,
+              'redirectUrl': response.redirectUrl,
+            });
+          },
+          error: (message) {
+            // Close loading dialog if open
+            if (Navigator.canPop(context)) {
+              Navigator.pop(context);
+            }
+            // Show error message
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(message),
+                backgroundColor: ColorsManager.mainRose,
               ),
-              const VerticalSpace(height: 24),
-              _buildSectionTitle('Payment Method'),
-              const VerticalSpace(height: 16),
-              _buildPaymentMethodsSection(),
-              const VerticalSpace(height: 24),
-              _buildSectionTitle('Payment Method'),
-              const VerticalSpace(height: 8),
-              _buildTotalSection(),
-              const VerticalSpace(height: 16),
-              _buildNextPaymentInfo(),
-              const VerticalSpace(height: 24),
-              _buildProceedButton(),
-            ],
+            );
+          },
+        );
+      },
+      child: Scaffold(
+        backgroundColor: ColorsManager.offWhite,
+        appBar: const AppAppBar(title: 'Checkout'),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(16.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildSectionTitle('Recipient Details'),
+                const VerticalSpace(height: 16),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18),
+                    color: ColorsManager.white,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 8.0.w, vertical: 8.0.h),
+                    child: _buildRecipientDetailsSection(),
+                  ),
+                ),
+                const VerticalSpace(height: 24),
+                _buildSectionTitle('Payment Method'),
+                const VerticalSpace(height: 16),
+                _buildPaymentMethodsSection(),
+                const VerticalSpace(height: 24),
+                _buildSectionTitle('Payment Method'),
+                const VerticalSpace(height: 8),
+                _buildTotalSection(),
+                const VerticalSpace(height: 16),
+                _buildNextPaymentInfo(),
+                const VerticalSpace(height: 24),
+                _buildProceedButton(),
+              ],
+            ),
           ),
         ),
       ),
@@ -534,7 +632,7 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
               _buildPriceRow('Delivery charges', 'Free'),
               const VerticalSpace(height: 8),
               _buildPriceRow('Total (15.0% VAT Included)',
-                  '${widget.currency} ${(double.parse(widget.price) * 1.15).toStringAsFixed(2)}',
+                  '${widget.currency} ${(double.parse(widget.price)).toStringAsFixed(2)}',
                   isBold: true),
             ],
           ),

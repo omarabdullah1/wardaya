@@ -266,6 +266,32 @@ class LocalizationMessages {
     required this.vatLabel,
     required this.paymentMethod,
     required this.searchOrderPlaceholder,
+    required this.paymentTitle,
+    required this.cancelPaymentTitle,
+    required this.cancelPaymentMessage,
+    required this.cancelPaymentNo,
+    required this.cancelPaymentYes,
+    required this.paymentAmountTitle,
+    required this.paymentOrderIdLabel,
+    required this.paymentError,
+    required this.paymentTryAgain,
+    required this.paymentSuccessTitle,
+    required this.paymentSuccessMessage,
+    required this.paymentFailedTitle,
+    required this.paymentFailedMessage,
+    required this.paymentOkButton,
+    required this.paymentMethodsTitle,
+    required this.proceedToPaymentButton,
+    required this.creditDebitCardTitle,
+    required this.creditDebitCardDescription,
+    required this.madaTitle,
+    required this.madaDescription,
+    required this.applePayTitle,
+    required this.applePayDescription,
+    required this.googlePayTitle,
+    required this.googlePayDescription,
+    required this.benefitPayTitle,
+    required this.benefitPayDescription,
     required this.deliveryFrequency1,
     required this.subscriptionDuration1,
   });
@@ -518,6 +544,32 @@ class LocalizationMessages {
       vatLabel: (json['vatLabel'] ?? '').toString(),
       paymentMethod: (json['paymentMethod'] ?? '').toString(),
       searchOrderPlaceholder: (json['search_order_placeholder'] ?? '').toString(),
+      paymentTitle: (json['paymentTitle'] ?? '').toString(),
+      cancelPaymentTitle: (json['cancelPaymentTitle'] ?? '').toString(),
+      cancelPaymentMessage: (json['cancelPaymentMessage'] ?? '').toString(),
+      cancelPaymentNo: (json['cancelPaymentNo'] ?? '').toString(),
+      cancelPaymentYes: (json['cancelPaymentYes'] ?? '').toString(),
+      paymentAmountTitle: (json['paymentAmountTitle'] ?? '').toString(),
+      paymentOrderIdLabel: (json['paymentOrderIdLabel'] ?? '').toString(),
+      paymentError: (json['paymentError'] ?? '').toString(),
+      paymentTryAgain: (json['paymentTryAgain'] ?? '').toString(),
+      paymentSuccessTitle: (json['paymentSuccessTitle'] ?? '').toString(),
+      paymentSuccessMessage: (json['paymentSuccessMessage'] ?? '').toString(),
+      paymentFailedTitle: (json['paymentFailedTitle'] ?? '').toString(),
+      paymentFailedMessage: (json['paymentFailedMessage'] ?? '').toString(),
+      paymentOkButton: (json['paymentOkButton'] ?? '').toString(),
+      paymentMethodsTitle: (json['paymentMethodsTitle'] ?? '').toString(),
+      proceedToPaymentButton: (json['proceedToPaymentButton'] ?? '').toString(),
+      creditDebitCardTitle: (json['creditDebitCardTitle'] ?? '').toString(),
+      creditDebitCardDescription: (json['creditDebitCardDescription'] ?? '').toString(),
+      madaTitle: (json['madaTitle'] ?? '').toString(),
+      madaDescription: (json['madaDescription'] ?? '').toString(),
+      applePayTitle: (json['applePayTitle'] ?? '').toString(),
+      applePayDescription: (json['applePayDescription'] ?? '').toString(),
+      googlePayTitle: (json['googlePayTitle'] ?? '').toString(),
+      googlePayDescription: (json['googlePayDescription'] ?? '').toString(),
+      benefitPayTitle: (json['benefitPayTitle'] ?? '').toString(),
+      benefitPayDescription: (json['benefitPayDescription'] ?? '').toString(),
       deliveryFrequency1: (json['delivery_frequency'] ?? '').toString(),
       subscriptionDuration1: (json['subscription_duration'] ?? '').toString(),
     );
@@ -762,6 +814,32 @@ class LocalizationMessages {
   final String vatLabel;
   final String paymentMethod;
   final String searchOrderPlaceholder;
+  final String paymentTitle;
+  final String cancelPaymentTitle;
+  final String cancelPaymentMessage;
+  final String cancelPaymentNo;
+  final String cancelPaymentYes;
+  final String paymentAmountTitle;
+  final String paymentOrderIdLabel;
+  final String paymentError;
+  final String paymentTryAgain;
+  final String paymentSuccessTitle;
+  final String paymentSuccessMessage;
+  final String paymentFailedTitle;
+  final String paymentFailedMessage;
+  final String paymentOkButton;
+  final String paymentMethodsTitle;
+  final String proceedToPaymentButton;
+  final String creditDebitCardTitle;
+  final String creditDebitCardDescription;
+  final String madaTitle;
+  final String madaDescription;
+  final String applePayTitle;
+  final String applePayDescription;
+  final String googlePayTitle;
+  final String googlePayDescription;
+  final String benefitPayTitle;
+  final String benefitPayDescription;
   final String deliveryFrequency1;
   final String subscriptionDuration1;
   Map<String, Object> get _content => {
@@ -1005,6 +1083,32 @@ class LocalizationMessages {
         r'''vatLabel''': vatLabel,
         r'''paymentMethod''': paymentMethod,
         r'''search_order_placeholder''': searchOrderPlaceholder,
+        r'''paymentTitle''': paymentTitle,
+        r'''cancelPaymentTitle''': cancelPaymentTitle,
+        r'''cancelPaymentMessage''': cancelPaymentMessage,
+        r'''cancelPaymentNo''': cancelPaymentNo,
+        r'''cancelPaymentYes''': cancelPaymentYes,
+        r'''paymentAmountTitle''': paymentAmountTitle,
+        r'''paymentOrderIdLabel''': paymentOrderIdLabel,
+        r'''paymentError''': paymentError,
+        r'''paymentTryAgain''': paymentTryAgain,
+        r'''paymentSuccessTitle''': paymentSuccessTitle,
+        r'''paymentSuccessMessage''': paymentSuccessMessage,
+        r'''paymentFailedTitle''': paymentFailedTitle,
+        r'''paymentFailedMessage''': paymentFailedMessage,
+        r'''paymentOkButton''': paymentOkButton,
+        r'''paymentMethodsTitle''': paymentMethodsTitle,
+        r'''proceedToPaymentButton''': proceedToPaymentButton,
+        r'''creditDebitCardTitle''': creditDebitCardTitle,
+        r'''creditDebitCardDescription''': creditDebitCardDescription,
+        r'''madaTitle''': madaTitle,
+        r'''madaDescription''': madaDescription,
+        r'''applePayTitle''': applePayTitle,
+        r'''applePayDescription''': applePayDescription,
+        r'''googlePayTitle''': googlePayTitle,
+        r'''googlePayDescription''': googlePayDescription,
+        r'''benefitPayTitle''': benefitPayTitle,
+        r'''benefitPayDescription''': benefitPayDescription,
         r'''delivery_frequency''': deliveryFrequency1,
         r'''subscription_duration''': subscriptionDuration1,
       };
@@ -1280,6 +1384,32 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   vatLabel: 'VAT',
   paymentMethod: 'Payment Method',
   searchOrderPlaceholder: 'Search for orders by order number or recipient name',
+  paymentTitle: 'Payment',
+  cancelPaymentTitle: 'Cancel Payment?',
+  cancelPaymentMessage: 'Are you sure you want to cancel this payment?',
+  cancelPaymentNo: 'No',
+  cancelPaymentYes: 'Yes',
+  paymentAmountTitle: 'Payment Amount',
+  paymentOrderIdLabel: 'Order ID:',
+  paymentError: 'Error loading payment page:',
+  paymentTryAgain: 'Try Again',
+  paymentSuccessTitle: 'Payment Successful',
+  paymentSuccessMessage: 'Your payment has been processed successfully.',
+  paymentFailedTitle: 'Payment Failed',
+  paymentFailedMessage: 'Your payment could not be processed. Please try again.',
+  paymentOkButton: 'OK',
+  paymentMethodsTitle: 'Payment Methods',
+  proceedToPaymentButton: 'Proceed to Payment',
+  creditDebitCardTitle: 'Credit/Debit Card',
+  creditDebitCardDescription: 'Pay with Visa, Mastercard, or other cards',
+  madaTitle: 'Mada',
+  madaDescription: 'Pay with Mada debit card',
+  applePayTitle: 'Apple Pay',
+  applePayDescription: 'Quick and secure payment with Apple Pay',
+  googlePayTitle: 'Google Pay',
+  googlePayDescription: 'Quick and secure payment with Google Pay',
+  benefitPayTitle: 'Benefit Pay',
+  benefitPayDescription: 'Pay using Benefit Pay service',
   deliveryFrequency1: '',
   subscriptionDuration1: '',
 );
@@ -1527,6 +1657,32 @@ final LocalizationMessages ar = LocalizationMessages(
   vatLabel: 'ضريبة القيمة المضافة',
   paymentMethod: 'طريقة الدفع',
   searchOrderPlaceholder: 'ابحث عن رقم الطلب أو اسم المستلم',
+  paymentTitle: 'الدفع',
+  cancelPaymentTitle: 'إلغاء الدفع؟',
+  cancelPaymentMessage: 'هل أنت متأكد أنك تريد إلغاء عملية الدفع؟',
+  cancelPaymentNo: 'لا',
+  cancelPaymentYes: 'نعم',
+  paymentAmountTitle: 'مبلغ الدفع',
+  paymentOrderIdLabel: 'رقم الطلب:',
+  paymentError: 'خطأ في تحميل صفحة الدفع:',
+  paymentTryAgain: 'حاول مرة أخرى',
+  paymentSuccessTitle: 'تم الدفع بنجاح',
+  paymentSuccessMessage: 'تمت معالجة عملية الدفع الخاصة بك بنجاح.',
+  paymentFailedTitle: 'فشلت عملية الدفع',
+  paymentFailedMessage: 'تعذر معالجة عملية الدفع الخاصة بك. يرجى المحاولة مرة أخرى.',
+  paymentOkButton: 'موافق',
+  paymentMethodsTitle: 'طرق الدفع',
+  proceedToPaymentButton: 'المتابعة للدفع',
+  creditDebitCardTitle: 'بطاقة ائتمان/خصم',
+  creditDebitCardDescription: 'ادفع باستخدام فيزا، ماستركارد، أو بطاقات أخرى',
+  madaTitle: 'مدى',
+  madaDescription: 'ادفع باستخدام بطاقة مدى',
+  applePayTitle: 'Apple Pay',
+  applePayDescription: 'دفع سريع وآمن باستخدام Apple Pay',
+  googlePayTitle: 'Google Pay',
+  googlePayDescription: 'دفع سريع وآمن باستخدام Google Pay',
+  benefitPayTitle: 'بنفت باي',
+  benefitPayDescription: 'ادفع باستخدام خدمة بنفت باي',
   deliveryFrequency1: 'تكرار التوصيل',
   subscriptionDuration1: 'مدة الاشتراك',
 );

@@ -9,12 +9,15 @@ import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:wardaya/core/routing/routes.dart';
+import 'package:wardaya/core/widgets/loading_widget.dart'; // Added this import
 import 'package:wardaya/features/home/data/models/home_delivery_areas_response.dart';
 import 'package:wardaya/features/home/logic/delivery_areas/delivery_areas_cubit.dart';
 import 'package:wardaya/features/home/logic/delivery_areas/delivery_areas_state.dart';
 import 'package:wardaya/features/home/ui/widgets/city_selection_bottom_sheet.dart';
 
 import '../../../../core/di/dependency_injection.dart';
+import '../../../../core/helpers/constants.dart';
+import '../../../../core/helpers/shared_pref_helper.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
 
@@ -41,10 +44,29 @@ class _TransparentAppBarState extends State<TransparentAppBar> {
     // Get the DeliveryAreasCubit from dependency injection
     _deliveryAreasCubit = getIt<DeliveryAreasCubit>();
 
+    // Load the selected city ID from SharedPreferences
+    _loadSelectedCity();
+
     // Fetch delivery areas when widget initializes
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _fetchDeliveryAreas();
     });
+  }
+
+  Future<void> _loadSelectedCity() async {
+    try {
+      final savedCityId = await SharedPrefHelper.getSecuredString(
+        SharedPrefKeys.userAreaId,
+      );
+      if (savedCityId != null && savedCityId.isNotEmpty) {
+        setState(() {
+          _selectedCityId = savedCityId;
+          log('Loaded saved city ID: $savedCityId');
+        });
+      }
+    } catch (e) {
+      log('Error loading saved city: $e');
+    }
   }
 
   void _fetchDeliveryAreas() {
@@ -99,9 +121,9 @@ class _TransparentAppBarState extends State<TransparentAppBar> {
 
   Widget _buildLocationButton(BuildContext context) {
     return BlocConsumer<DeliveryAreasCubit, DeliveryAreasState>(
+      listenWhen: (previous, current) => true,
+      buildWhen: (previous, current) => true,
       listener: (context, state) {
-        log("DeliveryAreasState changed: ${state.runtimeType}");
-
         state.when(
           initial: () {
             log("DeliveryAreas: Initial state");
@@ -114,57 +136,72 @@ class _TransparentAppBarState extends State<TransparentAppBar> {
             setState(() {
               _isLoading = true;
             });
+            // Show loading dialog
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => const LoadingWidget(
+                  loadingState: true,
+                ),
+              );
+            });
           },
           success: (areas) {
             log("DeliveryAreas: Loaded ${areas.length} areas");
+            // Dismiss loading dialog if it's showing
+            if (Navigator.canPop(context)) {
+              Navigator.pop(context);
+            }
             setState(() {
               _isLoading = false;
             });
-
-            // Display details of each area
-            for (var area in areas) {
-              log("Area: ${area.country} (${area.cities.length} cities)");
-              for (var city in area.cities) {
-                log("  - ${city.name} (${city.id})");
-              }
-            }
-
-            // If we have areas and no selected city yet, select the first city by default
-            if (areas.isNotEmpty &&
-                areas.first.cities.isNotEmpty &&
-                _selectedCityId == null) {
-              // Try to find Saudi Arabia first
-              final area = areas
-                  .where((area) => area.country == areas.first.country)
-                  .firstOrNull;
-              final cities = area?.cities ?? areas.first.cities;
-
-              if (cities.isNotEmpty) {
+            // Update city name if needed
+            if (_selectedCityId != null) {
+              final city = _deliveryAreasCubit.getCityById(_selectedCityId!);
+              if (city != null) {
                 setState(() {
-                  _selectedCityId = cities.first.id;
-                  _cityName = cities.first.name;
-                  log("Selected city: $_cityName (${cities.first.id})");
+                  _cityName = city.name;
                 });
               }
             }
           },
-          error: (errorMsg) {
-            log("DeliveryAreas: Error - $errorMsg");
+          updateCity: (response) {
+            log("DeliveryAreas: City updated");
+            // Dismiss loading dialog if it's showing
+            if (Navigator.canPop(context)) {
+              Navigator.pop(context);
+            }
             setState(() {
               _isLoading = false;
             });
-
-            // Show error message to user
+            // Update the city name
+            final city = _deliveryAreasCubit
+                .getCityById(response.user.selectedDeliveryArea ?? '');
+            if (city != null) {
+              setState(() {
+                _cityName = city.name;
+              });
+            }
+          },
+          error: (message) {
+            log("DeliveryAreas: Error - $message");
+            // Dismiss loading dialog if it's showing
+            if (Navigator.canPop(context)) {
+              Navigator.pop(context);
+            }
+            setState(() {
+              _isLoading = false;
+            });
+            // Show error message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text("Error loading delivery areas: $errorMsg"),
+                content: Text(message),
                 backgroundColor: Colors.red,
                 action: SnackBarAction(
                   label: 'Retry',
                   textColor: Colors.white,
-                  onPressed: () {
-                    _fetchDeliveryAreas();
-                  },
+                  onPressed: () => _fetchDeliveryAreas(),
                 ),
               ),
             );
@@ -172,38 +209,8 @@ class _TransparentAppBarState extends State<TransparentAppBar> {
         );
       },
       builder: (context, state) {
-        List<DeliveryArea> deliveryAreas = [];
-
-        // Initialize city name with local context if not yet set
-        if (_cityName.isEmpty) {
-          _cityName = context.el.locationCity;
-        }
-
-        state.when(
-          initial: () {},
-          loading: () {},
-          success: (areas) {
-            deliveryAreas = areas;
-
-            // If we have a selected city ID, make sure the city name is correct
-            if (_selectedCityId != null) {
-              for (var area in areas) {
-                for (var city in area.cities) {
-                  if (city.id == _selectedCityId) {
-                    _cityName = city.name;
-                    break;
-                  }
-                }
-              }
-            }
-          },
-          error: (_) {},
-        );
-
         return GestureDetector(
           onTap: () {
-            log("Location button tapped - state: ${state.runtimeType}, isLoading: $_isLoading, areas: ${deliveryAreas.length}");
-
             if (_isLoading) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
@@ -214,34 +221,22 @@ class _TransparentAppBarState extends State<TransparentAppBar> {
               return;
             }
 
-            if (deliveryAreas.isEmpty) {
-              log("No delivery areas available, retrying API call...");
-              _fetchDeliveryAreas();
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text(
-                      "Loading delivery areas, please try again in a moment"),
-                  duration: Duration(seconds: 2),
-                ),
+            if (state is Success) {
+              CitySelectionBottomSheet.show(
+                context,
+                deliveryAreas: state.deliveryAreas,
+                currentCityId: _selectedCityId,
+                onCitySelected: (city) async {
+                  setState(() {
+                    _selectedCityId = city.id;
+                    _cityName = city.name;
+                  });
+                  await _deliveryAreasCubit.updateSelectedCity(city.id);
+                },
               );
-              return;
+            } else {
+              _fetchDeliveryAreas();
             }
-
-            CitySelectionBottomSheet.show(
-              context,
-              deliveryAreas: deliveryAreas,
-              currentCityId: _selectedCityId,
-              onCitySelected: (city) {
-                setState(() {
-                  _selectedCityId = city.id;
-                  _cityName = city.name;
-                });
-
-                // Here you could also save the selected city ID to SharedPreferences
-                // for persistence between app sessions
-                log('Selected city: ${city.name} (${city.id})');
-              },
-            );
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),

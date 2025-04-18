@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/widgets/app_app_bar.dart';
 
-import 'benefit_pay_screen.dart';
 import 'tap_payment_screen.dart';
 
 class PaymentMethodScreen extends StatefulWidget {
@@ -23,43 +23,6 @@ class PaymentMethodScreen extends StatefulWidget {
 }
 
 class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
-  final List<PaymentMethodOption> _paymentMethods = [
-    PaymentMethodOption(
-      id: 'card',
-      title: 'Credit/Debit Card',
-      description: 'Pay with Visa, Mastercard, or other cards',
-      icon: 'assets/pay_cards/master_card.png',
-    ),
-    PaymentMethodOption(
-      id: 'mada',
-      title: 'Mada',
-      description: 'Pay with Mada debit card',
-      icon: 'assets/pay_cards/mada.png',
-    ),
-    PaymentMethodOption(
-      id: 'apple_pay',
-      title: 'Apple Pay',
-      description: 'Quick and secure payment with Apple Pay',
-      icon:
-          'assets/svgs/apple.svg', // Using existing SVG instead of missing PNG
-      isSvg: true,
-      isApplePay: true,
-    ),
-    PaymentMethodOption(
-      id: 'google_pay',
-      title: 'Google Pay',
-      description: 'Quick and secure payment with Google Pay',
-      icon: 'assets/pay_cards/gpay.png',
-    ),
-    PaymentMethodOption(
-      id: 'benefitpay',
-      title: 'Benefit Pay',
-      description: 'Pay using Benefit Pay service',
-      icon:
-          'assets/pay_cards/master_card.png', // Fallback to a generic payment icon
-    ),
-  ];
-
   String? _selectedPaymentMethodId;
   bool _isProcessing = false;
 
@@ -67,8 +30,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsManager.white,
-      appBar: const AppAppBar(
-          title: 'context.el.paymentMethodsTitle' ?? 'Payment Methods'),
+      appBar: AppAppBar(title: context.el.paymentMethodsTitle),
       body: Column(
         children: [
           // Payment amount header
@@ -85,7 +47,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               child: Column(
                 children: [
                   Text(
-                    'context.el.paymentAmountTitle' ?? 'Payment Amount',
+                    context.el.paymentAmountTitle,
                     style: GoogleFonts.inter(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w500,
@@ -108,124 +70,12 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
 
           // Payment methods list
           Expanded(
-            child: ListView.builder(
-              itemCount: _paymentMethods.length,
-              padding: EdgeInsets.all(16.r),
-              itemBuilder: (context, index) {
-                final method = _paymentMethods[index];
-                final isSelected = method.id == _selectedPaymentMethodId;
-
-                // Check if we should show Apple Pay (only on iOS)
-                if (method.isApplePay &&
-                    Theme.of(context).platform != TargetPlatform.iOS) {
-                  return const SizedBox.shrink();
-                }
-
-                // Check if we should show Google Pay (only on Android)
-                if (method.id == 'google_pay' &&
-                    Theme.of(context).platform != TargetPlatform.android) {
-                  return const SizedBox.shrink();
-                }
-
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _selectedPaymentMethodId = method.id;
-                    });
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(bottom: 12.h),
-                    padding: EdgeInsets.all(16.r),
-                    decoration: BoxDecoration(
-                      color: isSelected
-                          ? ColorsManager.mainRose
-                              .withAlpha((0.1 * 255).toInt())
-                          : Colors.white,
-                      borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(
-                        color: isSelected
-                            ? ColorsManager.mainRose
-                            : ColorsManager.lightGrey,
-                        width: isSelected ? 2 : 1,
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        // Payment method icon
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.r),
-                          child: SizedBox(
-                            width: 48.w,
-                            height: 48.w,
-                            child: method.isSvg
-                                ? SvgPicture.asset(
-                                    method.icon,
-                                    fit: BoxFit.contain,
-                                  )
-                                : Image.asset(
-                                    method.icon,
-                                    fit: BoxFit.contain,
-                                  ),
-                          ),
-                        ),
-
-                        SizedBox(width: 16.w),
-
-                        // Payment method details
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                method.title,
-                                style: GoogleFonts.inter(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              SizedBox(height: 4.h),
-                              Text(
-                                method.description,
-                                style: GoogleFonts.inter(
-                                  fontSize: 12.sp,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        // Selection indicator
-                        Container(
-                          width: 24.w,
-                          height: 24.w,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: isSelected
-                                  ? ColorsManager.mainRose
-                                  : ColorsManager.lightGrey,
-                              width: 2,
-                            ),
-                            color: Colors.white,
-                          ),
-                          child: isSelected
-                              ? Center(
-                                  child: Container(
-                                    width: 12.w,
-                                    height: 12.w,
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: ColorsManager.mainRose,
-                                    ),
-                                  ),
-                                )
-                              : null,
-                        ),
-                      ],
-                    ),
-                  ),
-                );
+            child: PaymentMethodsList(
+              selectedPaymentMethodId: _selectedPaymentMethodId,
+              onPaymentMethodSelected: (id) {
+                setState(() {
+                  _selectedPaymentMethodId = id;
+                });
               },
             ),
           ),
@@ -256,8 +106,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                       ),
                     )
                   : Text(
-                      'context.el.proceedToPaymentButton' ??
-                          'Proceed to Payment',
+                      context.el.proceedToPaymentButton,
                       style: GoogleFonts.inter(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w600,
@@ -281,38 +130,23 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
       bool paymentSuccess = false;
 
       // Handle different payment methods
-      if (_selectedPaymentMethodId == 'benefitpay') {
-        // Use BenefitPay specific screen
-        paymentSuccess = await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BenefitPayScreen(
-                  amount: widget.amount,
-                  orderId: widget.orderId,
-                ),
+      // For all other payment methods, use the new Tap Payment screen
+      paymentSuccess = await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => TapPaymentScreen(
+                amount: widget.amount,
+                orderId: widget.orderId,
+                firstName: "John", // Replace with actual user data
+                lastName: "Smith", // Replace with actual user data
+                email: "customer@example.com", // Replace with actual user data
+                phoneNumber: "566123456", // Replace with actual user data
+                countryCode: "+966", // Replace with actual user data
+                paymentMethod: _selectedPaymentMethodId,
               ),
-            ) ??
-            false;
-      } else {
-        // For all other payment methods, use the new Tap Payment screen
-        paymentSuccess = await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => TapPaymentScreen(
-                  amount: widget.amount,
-                  orderId: widget.orderId,
-                  firstName: "John", // Replace with actual user data
-                  lastName: "Smith", // Replace with actual user data
-                  email:
-                      "customer@example.com", // Replace with actual user data
-                  phoneNumber: "566123456", // Replace with actual user data
-                  countryCode: "+966", // Replace with actual user data
-                  paymentMethod: _selectedPaymentMethodId,
-                ),
-              ),
-            ) ??
-            false;
-      }
+            ),
+          ) ??
+          false;
 
       // Handle payment result
       if (paymentSuccess) {
@@ -345,6 +179,190 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
         });
       }
     }
+  }
+}
+
+class PaymentMethodsList extends StatelessWidget {
+  final String? selectedPaymentMethodId;
+  final Function(String) onPaymentMethodSelected;
+
+  const PaymentMethodsList({
+    super.key,
+    required this.selectedPaymentMethodId,
+    required this.onPaymentMethodSelected,
+  });
+
+  List<PaymentMethodOption> _getPaymentMethods(BuildContext context) {
+    return [
+      PaymentMethodOption(
+        id: 'card',
+        title: context.el.creditDebitCardTitle,
+        description: context.el.creditDebitCardDescription,
+        icon: 'assets/pay_cards/master_card.png',
+      ),
+      PaymentMethodOption(
+        id: 'mada',
+        title: context.el.madaTitle,
+        description: context.el.madaDescription,
+        icon: 'assets/pay_cards/mada.png',
+      ),
+      PaymentMethodOption(
+        id: 'apple_pay',
+        title: context.el.applePayTitle,
+        description: context.el.applePayDescription,
+        icon: 'assets/svgs/apple.svg',
+        isSvg: true,
+        isApplePay: true,
+      ),
+      PaymentMethodOption(
+        id: 'google_pay',
+        title: context.el.googlePayTitle,
+        description: context.el.googlePayDescription,
+        icon: 'assets/pay_cards/gpay.png',
+      ),
+      PaymentMethodOption(
+        id: 'benefitpay',
+        title: context.el.benefitPayTitle,
+        description: context.el.benefitPayDescription,
+        icon: 'assets/pay_cards/master_card.png',
+      ),
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final paymentMethods = _getPaymentMethods(context);
+
+    return ListView.builder(
+      itemCount: paymentMethods.length,
+      padding: EdgeInsets.all(16.r),
+      itemBuilder: (context, index) {
+        final method = paymentMethods[index];
+        final isSelected = method.id == selectedPaymentMethodId;
+
+        // Check if we should show Apple Pay (only on iOS)
+        if (method.isApplePay &&
+            Theme.of(context).platform != TargetPlatform.iOS) {
+          return const SizedBox.shrink();
+        }
+
+        // Check if we should show Google Pay (only on Android)
+        if (method.id == 'google_pay' &&
+            Theme.of(context).platform != TargetPlatform.android) {
+          return const SizedBox.shrink();
+        }
+
+        return PaymentMethodCard(
+          method: method,
+          isSelected: isSelected,
+          onTap: () => onPaymentMethodSelected(method.id),
+        );
+      },
+    );
+  }
+}
+
+class PaymentMethodCard extends StatelessWidget {
+  final PaymentMethodOption method;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  const PaymentMethodCard({
+    super.key,
+    required this.method,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.only(bottom: 12.h),
+        padding: EdgeInsets.all(16.r),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? ColorsManager.mainRose.withAlpha((0.1 * 255).toInt())
+              : Colors.white,
+          borderRadius: BorderRadius.circular(12.r),
+          border: Border.all(
+            color:
+                isSelected ? ColorsManager.mainRose : ColorsManager.lightGrey,
+            width: isSelected ? 2 : 1,
+          ),
+        ),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8.r),
+              child: SizedBox(
+                width: 48.w,
+                height: 48.w,
+                child: method.isSvg
+                    ? SvgPicture.asset(
+                        method.icon,
+                        fit: BoxFit.contain,
+                      )
+                    : Image.asset(
+                        method.icon,
+                        fit: BoxFit.contain,
+                      ),
+              ),
+            ),
+            SizedBox(width: 16.w),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    method.title,
+                    style: GoogleFonts.inter(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 4.h),
+                  Text(
+                    method.description,
+                    style: GoogleFonts.inter(
+                      fontSize: 12.sp,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              width: 24.w,
+              height: 24.w,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: isSelected
+                      ? ColorsManager.mainRose
+                      : ColorsManager.lightGrey,
+                  width: 2,
+                ),
+                color: Colors.white,
+              ),
+              child: isSelected
+                  ? Center(
+                      child: Container(
+                        width: 12.w,
+                        height: 12.w,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: ColorsManager.mainRose,
+                        ),
+                      ),
+                    )
+                  : null,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 

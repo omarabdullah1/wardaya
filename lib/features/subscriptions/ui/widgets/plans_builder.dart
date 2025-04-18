@@ -46,6 +46,7 @@ class PlansBuilder extends StatelessWidget {
           return const Padding(
             padding: EdgeInsets.symmetric(vertical: 10.0),
             child: SubscriptionPlanCard(
+              planId: '',
               title: 'Loading plan...',
               description: 'Loading description...',
               price: '000',
@@ -79,6 +80,7 @@ class PlansBuilder extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 10.0),
           child: SubscriptionPlanCard(
+            planId: plan.id,
             title: plan.name,
             description: plan.miniDescription,
             price: plan.pricePerDelivery.toString(),

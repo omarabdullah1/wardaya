@@ -21,11 +21,13 @@ import 'widgets/build_radio_list.dart';
 import 'widgets/subscription_duration_bloc_listener.dart';
 
 class SubscriptionDurationScreen extends StatelessWidget {
+  final String planId;
   final String title;
   final String price;
   final String currency;
   const SubscriptionDurationScreen({
     super.key,
+    required this.planId,
     required this.title,
     required this.price,
     required this.currency,
@@ -72,6 +74,7 @@ class SubscriptionDurationScreen extends StatelessWidget {
                 context.pushNamed(
                   Routes.subscripionCheckout,
                   arguments: {
+                    'subscriptionPlan': planId,
                     'deliveryFrequency': cubit.deliveryFrequency,
                     'subscriptionDuration': cubit.subscriptionDuration,
                     'selectedDate': cubit.selectedDate,

@@ -302,6 +302,8 @@ class ProfileBody extends StatelessWidget {
                   onTap: () {
                     SharedPrefHelper.removeSecuredString(
                         SharedPrefKeys.userToken);
+                    SharedPrefHelper.removeSecuredString(
+                        SharedPrefKeys.userAreaId);
                     context.pushNamedAndRemoveUntil(
                       Routes.loginScreen,
                       predicate: (route) => false,

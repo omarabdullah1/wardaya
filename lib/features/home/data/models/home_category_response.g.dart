@@ -27,7 +27,7 @@ Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
       subCategories: (json['subCategories'] as List<dynamic>)
           .map((e) => SubCategory.fromJson(e as Map<String, dynamic>))
           .toList(),
-      version: (json['__v'] as num?)?.toInt() ?? 0,
+      version: (json['__v'] as num).toInt(),
       categoryOrder: (json['categoryOrder'] as num?)?.toInt(),
       products: (json['products'] as List<dynamic>)
           .map((e) => Product.fromJson(e as Map<String, dynamic>))
@@ -49,7 +49,7 @@ Map<String, dynamic> _$CategoryToJson(Category instance) => <String, dynamic>{
 SubCategory _$SubCategoryFromJson(Map<String, dynamic> json) => SubCategory(
       id: json['_id'] as String,
       name: json['name'] as String,
-      imageUrl: json['image_url'] as String,
+      imageUrl: json['image_url'] as String?,
       category: json['category'] as String,
       version: (json['__v'] as num).toInt(),
     );
@@ -73,43 +73,36 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
               ?.map((e) => e as String)
               .toList() ??
           [],
-      categories: (json['categories'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
-      subCategories: (json['subCategories'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
+      categories: json['categories'] == null
+          ? []
+          : Product._parseIdList(json['categories'] as List),
+      subCategories: json['subCategories'] == null
+          ? []
+          : Product._parseIdList(json['subCategories'] as List),
       expressDelivery: json['expressDelivery'] as bool,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
       version: (json['__v'] as num).toInt(),
       brand: json['brand'] as String?,
-      bundleTypes: (json['bundleTypes'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
+      bundleTypes: json['bundleTypes'] == null
+          ? []
+          : Product._parseIdList(json['bundleTypes'] as List),
       careTips: json['careTips'] as String?,
-      colors: (json['colors'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
+      colors: json['colors'] == null
+          ? []
+          : Product._parseIdList(json['colors'] as List),
       freeDelivery: json['freeDelivery'] as bool?,
-      occasions: (json['occasions'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
+      occasions: json['occasions'] == null
+          ? []
+          : Product._parseIdList(json['occasions'] as List),
       points: (json['points'] as num?)?.toInt(),
       premiumFlowers: json['premiumFlowers'] as bool?,
-      productTypes: (json['productTypes'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
-      recipients: (json['recipients'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
+      productTypes: json['productTypes'] == null
+          ? []
+          : Product._parseIdList(json['productTypes'] as List),
+      recipients: json['recipients'] == null
+          ? []
+          : Product._parseIdList(json['recipients'] as List),
       isBundle: json['isBundle'] as bool?,
       components: (json['components'] as List<dynamic>?)
               ?.map((e) => e as String)
@@ -128,7 +121,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
               .toList() ??
           [],
       bundleItems: (json['bundleItems'] as List<dynamic>?)
-              ?.map((e) => e as String)
+              ?.map((e) => BundleItem.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
     );
@@ -184,4 +177,35 @@ Map<String, dynamic> _$DimensionsToJson(Dimensions instance) =>
     <String, dynamic>{
       'width': instance.width,
       'height': instance.height,
+    };
+
+BundleItem _$BundleItemFromJson(Map<String, dynamic> json) => BundleItem(
+      categories: (json['categories'] as List<dynamic>)
+          .map((e) => BundleCategory.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$BundleItemToJson(BundleItem instance) =>
+    <String, dynamic>{
+      'categories': instance.categories,
+    };
+
+BundleCategory _$BundleCategoryFromJson(Map<String, dynamic> json) =>
+    BundleCategory(
+      categoryTitle: json['category_title'] as String,
+      categoryTitleAr: json['category_title_ar'] as String?,
+      items: json['items'] == null
+          ? []
+          : BundleCategory._parseIdList(json['items'] as List),
+      isRequired: json['isRequired'] as bool,
+      id: json['_id'] as String,
+    );
+
+Map<String, dynamic> _$BundleCategoryToJson(BundleCategory instance) =>
+    <String, dynamic>{
+      'category_title': instance.categoryTitle,
+      'category_title_ar': instance.categoryTitleAr,
+      'items': instance.items,
+      'isRequired': instance.isRequired,
+      '_id': instance.id,
     };

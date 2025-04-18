@@ -10,6 +10,7 @@ import '../models/home_category_response.dart';
 import '../models/home_delivery_areas_response.dart';
 import '../models/home_occassions_response.dart';
 import '../models/home_recipients_response.dart';
+import '../models/home_update_city_response.dart';
 
 class HomeRepo {
   final HomeService _apiService;
@@ -74,6 +75,18 @@ class HomeRepo {
       return ApiResult.success(response);
     } catch (error, stackTrace) {
       log('Error in getHomeDeliveryAreas: $error', stackTrace: stackTrace);
+      return ApiResult.failure(ApiErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<HomeUpdateCityResponse>> updateUserCity(
+      String selectedDeliveryArea) async {
+    try {
+      final response = await _apiService
+          .updateUserCity({'selectedDeliveryArea': selectedDeliveryArea});
+      return ApiResult.success(response);
+    } catch (error, stackTrace) {
+      log('Error in updateUserCity: $error', stackTrace: stackTrace);
       return ApiResult.failure(ApiErrorHandler.handle(error));
     }
   }

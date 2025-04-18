@@ -6,6 +6,7 @@ import '../models/home_category_response.dart';
 import '../models/home_delivery_areas_response.dart';
 import '../models/home_occassions_response.dart';
 import '../models/home_recipients_response.dart';
+import '../models/home_update_city_response.dart';
 import 'home_api_constants.dart';
 
 part 'home_service.g.dart';
@@ -31,4 +32,9 @@ abstract class HomeService {
 
   @GET(HomeApiConstants.deliveryAreas)
   Future<List<DeliveryArea>> getHomeDeliveryAreas();
+
+  @PUT(HomeApiConstants.editUser)
+  Future<HomeUpdateCityResponse> updateUserCity(
+    @Body() Map<String, dynamic> body,
+  );
 }

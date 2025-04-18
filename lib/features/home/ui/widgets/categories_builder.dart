@@ -87,8 +87,9 @@ class CategoriesBuilder extends StatelessWidget {
                   const VerticalSpace(height: 10),
                   if (!e.subCategories.isNullOrEmpty())
                     CategoryProgressScroll(
-                      categoriesImages:
-                          e.subCategories.map((sub) => sub.imageUrl).toList(),
+                      categoriesImages: e.subCategories
+                          .map((sub) => sub.imageUrl ?? '')
+                          .toList(),
                       titles: e.subCategories.map((sub) => sub.name).toList(),
                       isBackgroundColor: true,
                       ids: e.subCategories.map((sub) => sub.id).toList(),

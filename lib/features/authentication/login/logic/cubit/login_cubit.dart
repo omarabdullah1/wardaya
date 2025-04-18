@@ -38,6 +38,10 @@ class LoginCubit extends Cubit<LoginState> {
         emit(LoginState.error(error: loginResponse.message ?? 'Login failed'));
         return;
       }
+      await SharedPrefHelper.setSecuredString(SharedPrefKeys.userAreaId,
+          loginResponse.user?.selectedDeliveryArea ?? '');
+      await SharedPrefHelper.setSecuredString(SharedPrefKeys.userName,
+          '${loginResponse.user!.firstName ?? ''} ${loginResponse.user!.lastName ?? ''}');
 
       await saveUserToken(loginResponse.token ?? '');
       await userDataToString(loginResponse);

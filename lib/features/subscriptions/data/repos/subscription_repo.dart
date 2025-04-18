@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:wardaya/features/subscriptions/data/models/subscription_checkout_request.dart';
+import 'package:wardaya/features/subscriptions/data/models/subscription_checkout_response.dart';
 import 'package:wardaya/features/subscriptions/data/models/subscription_duration_response.dart';
 
 import '../../../../../core/networking/api_error_handler.dart';
@@ -31,6 +33,18 @@ class SubscriptionRepo {
     } catch (error, stackTrace) {
       // Log the error and stack trace for debugging
       log('Error fetching subscription durations: $error $stackTrace');
+      return ApiResult.failure(ApiErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<SubscriptionCheckoutResponse>> checkout(
+      SubscriptionCheckoutRequest body) async {
+    try {
+      final response = await _apiService.checkout(body);
+      return ApiResult.success(response);
+    } catch (error, stackTrace) {
+      // Log the error and stack trace for debugging
+      log('Error fetching checkout durations: $error $stackTrace');
       return ApiResult.failure(ApiErrorHandler.handle(error));
     }
   }

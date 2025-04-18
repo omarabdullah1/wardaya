@@ -13,12 +13,14 @@ class RecipientAddressSheet extends StatefulWidget {
   final LatLng? initialLocation;
   final String initialAddress;
   final String initialArea;
+  final String additional;
 
   const RecipientAddressSheet({
     super.key,
     this.initialLocation,
     this.initialAddress = '',
     this.initialArea = '',
+    this.additional = '',
   });
 
   @override
@@ -40,6 +42,7 @@ class _RecipientAddressSheetState extends State<RecipientAddressSheet> {
         widget.initialLocation ?? const LatLng(30.0444, 31.2357);
     _addressController.text = widget.initialAddress;
     _areaController.text = widget.initialArea;
+    _additionalInfoController.text = widget.additional;
   }
 
   @override
@@ -107,6 +110,7 @@ class _RecipientAddressSheetState extends State<RecipientAddressSheet> {
         'location': _selectedLocation,
         'address': _addressController.text,
         'area': _areaController.text,
+        'additional': _additionalInfoController.text,
       });
     }
   }

@@ -28,7 +28,6 @@ import '../../features/subscriptions/ui/subscripion_checkout.dart';
 import '../../features/subscriptions/ui/subscription_duration_screen.dart';
 import '../../features/subscriptions/ui/susbcriptions_screen.dart';
 import 'router_imports.dart';
-import '../../features/payment/ui/benefit_pay_screen.dart';
 import '../../features/payment/ui/payment_method_screen.dart';
 import '../../features/payment/ui/tap_payment_screen.dart';
 
@@ -264,6 +263,21 @@ class AppRouter {
             child: const SusbcriptionsScreen(),
           ),
         );
+      case Routes.tapPaymentScreen:
+        final Map<String, dynamic> args = arguments as Map<String, dynamic>;
+        return _buildRoute(
+          screen: TapPaymentScreen(
+            amount: args['amount'],
+            orderId: args['orderId'],
+            firstName: args['firstName'],
+            lastName: args['lastName'],
+            email: args['email'],
+            phoneNumber: args['phoneNumber'],
+            countryCode: args['countryCode'],
+            paymentMethod: args['paymentMethod'],
+            redirectUrl: args['redirectUrl'],
+          ),
+        );
       case Routes.susbcriptionsDurationScreen:
         final Map<String, dynamic> args = arguments as Map<String, dynamic>;
 
@@ -279,6 +293,7 @@ class AppRouter {
               ),
             ],
             child: SubscriptionDurationScreen(
+              planId: args['planId'],
               title: args['title'],
               price: args['price'],
               currency: args['currency'],
@@ -291,6 +306,7 @@ class AppRouter {
           screen: BlocProvider(
             create: (context) => getIt<SubscriptionCheckoutCubit>(),
             child: SubscripionCheckout(
+              subscriptionPlan: args['subscriptionPlan'] as String,
               deliveryFrequency: args['deliveryFrequency'] as String,
               subscriptionDuration: args['subscriptionDuration'] as String,
               startDate: args['selectedDate'],
@@ -332,15 +348,7 @@ class AppRouter {
             child: const OccasionsScreen(),
           ),
         );
-      case Routes.benefitPayScreen:
-        final Map<String, dynamic> args =
-            settings.arguments as Map<String, dynamic>;
-        return _buildRoute(
-          screen: BenefitPayScreen(
-            amount: args['amount'] as double,
-            orderId: args['orderId'] as String,
-          ),
-        );
+
       case Routes.paymentMethodScreen:
         final Map<String, dynamic> args =
             settings.arguments as Map<String, dynamic>;

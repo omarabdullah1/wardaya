@@ -12,12 +12,14 @@ import 'subscription_slider.dart';
 class SubscriptionPlanCard extends StatefulWidget {
   const SubscriptionPlanCard({
     super.key,
+    required this.planId,
     required this.title,
     required this.description,
     required this.price,
     required this.currency,
     required this.images,
   });
+  final String planId;
   final String title;
   final String description;
   final String price;
@@ -134,6 +136,7 @@ class _SubscriptionPlanCardState extends State<SubscriptionPlanCard> {
                           context.pushNamed(
                             Routes.susbcriptionsDurationScreen,
                             arguments: {
+                              'planId': widget.planId,
                               'title': widget.title,
                               'price': widget.price,
                               'currency': widget.currency,

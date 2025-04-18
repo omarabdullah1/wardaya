@@ -130,7 +130,7 @@ Future<void> setupGetIt() async {
   getIt
       .registerFactory<ProductDetailsCubit>(() => ProductDetailsCubit(getIt()));
   getIt.registerFactory<SubscriptionCheckoutCubit>(
-      () => SubscriptionCheckoutCubit());
+      () => SubscriptionCheckoutCubit(getIt()));
   getIt.registerFactory<MyOrdersCubit>(() => MyOrdersCubit(getIt()));
 
   getIt.registerFactory<LayoutCubit>(() => LayoutCubit());

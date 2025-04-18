@@ -2,10 +2,15 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
+import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/widgets/app_app_bar.dart';
+
+import '../../../core/routing/routes.dart';
+import '../../../core/widgets/loading_widget.dart';
 
 class TapPaymentScreen extends StatefulWidget {
   final double amount;
@@ -16,6 +21,7 @@ class TapPaymentScreen extends StatefulWidget {
   final String phoneNumber;
   final String countryCode;
   final String? paymentMethod;
+  final String? redirectUrl; // Add redirectUrl parameter
 
   const TapPaymentScreen({
     super.key,
@@ -27,6 +33,7 @@ class TapPaymentScreen extends StatefulWidget {
     this.phoneNumber = "",
     this.countryCode = "+966",
     this.paymentMethod,
+    this.redirectUrl, // Add to constructor
   });
 
   @override
@@ -38,10 +45,6 @@ class _TapPaymentScreenState extends State<TapPaymentScreen> {
   bool _isError = false;
   String _errorMessage = "";
   late WebViewController _controller;
-
-  // Tap checkout URL - this is the direct URL you want to load
-  final String _tapCheckoutUrl =
-      "https://checkout.beta.tap.company/?mode=page&themeMode=&language=en&token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY3ZmQ0ZWQ0ZDJhM2NmNTc1MmM2YTVkMyJ9.Y5r5MeIJqvZLybW3Ih5KeiZ4CL7w1GIfhBQsPTWjOzI";
 
   @override
   void initState() {
@@ -75,6 +78,13 @@ class _TapPaymentScreenState extends State<TapPaymentScreen> {
               setState(() {
                 _isLoading = true;
               });
+              // Check if the URL contains 'wardaya.net' to determine payment status
+              if (url.contains('wardaya.net')) {
+                log('Redirect to wardaya.net detected: $url');
+                bool isSuccess =
+                    !url.contains('error') && !url.contains('cancel');
+                _showResultDialog(isSuccess);
+              }
             },
             onPageFinished: (String url) {
               log('Page finished loading: $url');
@@ -105,7 +115,7 @@ class _TapPaymentScreenState extends State<TapPaymentScreen> {
           ),
         );
 
-      // Load the URL
+      // Load the URL from the widget if provided, otherwise use default
       _loadUrl();
     } catch (e) {
       log('Error initializing WebView: $e');
@@ -119,7 +129,8 @@ class _TapPaymentScreenState extends State<TapPaymentScreen> {
 
   void _loadUrl() {
     try {
-      _controller.loadRequest(Uri.parse(_tapCheckoutUrl));
+      final url = widget.redirectUrl;
+      _controller.loadRequest(Uri.parse(url!));
     } catch (e) {
       log('Error loading URL: $e');
       setState(() {
@@ -135,20 +146,20 @@ class _TapPaymentScreenState extends State<TapPaymentScreen> {
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: Text(isSuccess ? 'Payment Successful' : 'Payment Failed'),
+        title: Text(isSuccess
+            ? context.el.paymentSuccessTitle
+            : context.el.paymentFailedTitle),
         content: Text(
           isSuccess
-              ? 'Your payment has been processed successfully.'
-              : 'Your payment could not be processed. Please try again.',
+              ? context.el.paymentSuccessMessage
+              : context.el.paymentFailedMessage,
         ),
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pop(context); // Close dialog
-              Navigator.pop(
-                  context, isSuccess); // Return to previous screen with result
+              context.pushReplacementNamed(Routes.homeLayout);
             },
-            child: const Text('OK'),
+            child: Text(context.el.paymentOkButton),
           ),
         ],
       ),
@@ -160,25 +171,23 @@ class _TapPaymentScreenState extends State<TapPaymentScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppAppBar(
-        title: 'context.el.paymentTitle' ?? 'Payment',
+        title: context.el.paymentTitle,
         onBackButtonPressed: () {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
-              title: const Text('Cancel Payment?'),
-              content:
-                  const Text('Are you sure you want to cancel this payment?'),
+              title: Text(context.el.cancelPaymentTitle),
+              content: Text(context.el.cancelPaymentMessage),
               actions: [
                 TextButton(
-                  onPressed: () => Navigator.pop(context), // Close dialog
-                  child: const Text('No'),
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(context.el.cancelPaymentNo),
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.pop(context); // Close dialog
-                    Navigator.pop(context, false); // Return to previous screen
+                    context.pushReplacementNamed(Routes.homeLayout);
                   },
-                  child: const Text('Yes'),
+                  child: Text(context.el.cancelPaymentYes),
                 ),
               ],
             ),
@@ -200,7 +209,7 @@ class _TapPaymentScreenState extends State<TapPaymentScreen> {
               child: Column(
                 children: [
                   Text(
-                    'context.el.paymentAmountTitle' ?? 'Payment Amount',
+                    context.el.paymentAmountTitle,
                     style: GoogleFonts.inter(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w500,
@@ -218,7 +227,7 @@ class _TapPaymentScreenState extends State<TapPaymentScreen> {
                   ),
                   SizedBox(height: 8.h),
                   Text(
-                    'Order ID: ${widget.orderId}',
+                    '${context.el.paymentOrderIdLabel} ${widget.orderId}',
                     style: GoogleFonts.inter(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
@@ -235,9 +244,7 @@ class _TapPaymentScreenState extends State<TapPaymentScreen> {
             const Center(
               child: Padding(
                 padding: EdgeInsets.all(20.0),
-                child: CircularProgressIndicator(
-                  color: ColorsManager.mainRose,
-                ),
+                child: LoadingWidget(loadingState: true),
               ),
             ),
 
@@ -260,7 +267,7 @@ class _TapPaymentScreenState extends State<TapPaymentScreen> {
                     ),
                     SizedBox(height: 12.h),
                     Text(
-                      _errorMessage,
+                      '${context.el.paymentError} $_errorMessage',
                       style: GoogleFonts.inter(
                         fontSize: 14.sp,
                         color: ColorsManager.red,
@@ -279,7 +286,7 @@ class _TapPaymentScreenState extends State<TapPaymentScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: ColorsManager.mainRose,
                       ),
-                      child: const Text('Try Again'),
+                      child: Text(context.el.paymentTryAgain),
                     ),
                   ],
                 ),

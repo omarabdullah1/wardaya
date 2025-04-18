@@ -21,8 +21,11 @@ mixin _$SubscriptionCheckoutState {
     required TResult Function() initial,
     required TResult Function(String recipientName, String phoneNumber)
         recipientSelected,
-    required TResult Function(LatLng location, String address, String area)
+    required TResult Function(
+            LatLng location, String address, String area, String additionalInfo)
         locationSelected,
+    required TResult Function() loading,
+    required TResult Function(SubscriptionCheckoutResponse response) loaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -31,8 +34,11 @@ mixin _$SubscriptionCheckoutState {
     TResult? Function()? initial,
     TResult? Function(String recipientName, String phoneNumber)?
         recipientSelected,
-    TResult? Function(LatLng location, String address, String area)?
+    TResult? Function(LatLng location, String address, String area,
+            String additionalInfo)?
         locationSelected,
+    TResult? Function()? loading,
+    TResult? Function(SubscriptionCheckoutResponse response)? loaded,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -41,8 +47,11 @@ mixin _$SubscriptionCheckoutState {
     TResult Function()? initial,
     TResult Function(String recipientName, String phoneNumber)?
         recipientSelected,
-    TResult Function(LatLng location, String address, String area)?
+    TResult Function(LatLng location, String address, String area,
+            String additionalInfo)?
         locationSelected,
+    TResult Function()? loading,
+    TResult Function(SubscriptionCheckoutResponse response)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -52,6 +61,8 @@ mixin _$SubscriptionCheckoutState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_RecipientSelected value) recipientSelected,
     required TResult Function(_LocationSelected value) locationSelected,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -60,6 +71,8 @@ mixin _$SubscriptionCheckoutState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_RecipientSelected value)? recipientSelected,
     TResult? Function(_LocationSelected value)? locationSelected,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
     TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -68,6 +81,8 @@ mixin _$SubscriptionCheckoutState {
     TResult Function(_Initial value)? initial,
     TResult Function(_RecipientSelected value)? recipientSelected,
     TResult Function(_LocationSelected value)? locationSelected,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -140,8 +155,11 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function(String recipientName, String phoneNumber)
         recipientSelected,
-    required TResult Function(LatLng location, String address, String area)
+    required TResult Function(
+            LatLng location, String address, String area, String additionalInfo)
         locationSelected,
+    required TResult Function() loading,
+    required TResult Function(SubscriptionCheckoutResponse response) loaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -153,8 +171,11 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function(String recipientName, String phoneNumber)?
         recipientSelected,
-    TResult? Function(LatLng location, String address, String area)?
+    TResult? Function(LatLng location, String address, String area,
+            String additionalInfo)?
         locationSelected,
+    TResult? Function()? loading,
+    TResult? Function(SubscriptionCheckoutResponse response)? loaded,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -166,8 +187,11 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function(String recipientName, String phoneNumber)?
         recipientSelected,
-    TResult Function(LatLng location, String address, String area)?
+    TResult Function(LatLng location, String address, String area,
+            String additionalInfo)?
         locationSelected,
+    TResult Function()? loading,
+    TResult Function(SubscriptionCheckoutResponse response)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -183,6 +207,8 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_RecipientSelected value) recipientSelected,
     required TResult Function(_LocationSelected value) locationSelected,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -194,6 +220,8 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_RecipientSelected value)? recipientSelected,
     TResult? Function(_LocationSelected value)? locationSelected,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
     TResult? Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -205,6 +233,8 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_RecipientSelected value)? recipientSelected,
     TResult Function(_LocationSelected value)? locationSelected,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -303,8 +333,11 @@ class _$RecipientSelectedImpl implements _RecipientSelected {
     required TResult Function() initial,
     required TResult Function(String recipientName, String phoneNumber)
         recipientSelected,
-    required TResult Function(LatLng location, String address, String area)
+    required TResult Function(
+            LatLng location, String address, String area, String additionalInfo)
         locationSelected,
+    required TResult Function() loading,
+    required TResult Function(SubscriptionCheckoutResponse response) loaded,
     required TResult Function(String message) error,
   }) {
     return recipientSelected(recipientName, phoneNumber);
@@ -316,8 +349,11 @@ class _$RecipientSelectedImpl implements _RecipientSelected {
     TResult? Function()? initial,
     TResult? Function(String recipientName, String phoneNumber)?
         recipientSelected,
-    TResult? Function(LatLng location, String address, String area)?
+    TResult? Function(LatLng location, String address, String area,
+            String additionalInfo)?
         locationSelected,
+    TResult? Function()? loading,
+    TResult? Function(SubscriptionCheckoutResponse response)? loaded,
     TResult? Function(String message)? error,
   }) {
     return recipientSelected?.call(recipientName, phoneNumber);
@@ -329,8 +365,11 @@ class _$RecipientSelectedImpl implements _RecipientSelected {
     TResult Function()? initial,
     TResult Function(String recipientName, String phoneNumber)?
         recipientSelected,
-    TResult Function(LatLng location, String address, String area)?
+    TResult Function(LatLng location, String address, String area,
+            String additionalInfo)?
         locationSelected,
+    TResult Function()? loading,
+    TResult Function(SubscriptionCheckoutResponse response)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -346,6 +385,8 @@ class _$RecipientSelectedImpl implements _RecipientSelected {
     required TResult Function(_Initial value) initial,
     required TResult Function(_RecipientSelected value) recipientSelected,
     required TResult Function(_LocationSelected value) locationSelected,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
     required TResult Function(_Error value) error,
   }) {
     return recipientSelected(this);
@@ -357,6 +398,8 @@ class _$RecipientSelectedImpl implements _RecipientSelected {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_RecipientSelected value)? recipientSelected,
     TResult? Function(_LocationSelected value)? locationSelected,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
     TResult? Function(_Error value)? error,
   }) {
     return recipientSelected?.call(this);
@@ -368,6 +411,8 @@ class _$RecipientSelectedImpl implements _RecipientSelected {
     TResult Function(_Initial value)? initial,
     TResult Function(_RecipientSelected value)? recipientSelected,
     TResult Function(_LocationSelected value)? locationSelected,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -399,7 +444,8 @@ abstract class _$$LocationSelectedImplCopyWith<$Res> {
           $Res Function(_$LocationSelectedImpl) then) =
       __$$LocationSelectedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({LatLng location, String address, String area});
+  $Res call(
+      {LatLng location, String address, String area, String additionalInfo});
 }
 
 /// @nodoc
@@ -419,6 +465,7 @@ class __$$LocationSelectedImplCopyWithImpl<$Res>
     Object? location = null,
     Object? address = null,
     Object? area = null,
+    Object? additionalInfo = null,
   }) {
     return _then(_$LocationSelectedImpl(
       location: null == location
@@ -433,6 +480,10 @@ class __$$LocationSelectedImplCopyWithImpl<$Res>
           ? _value.area
           : area // ignore: cast_nullable_to_non_nullable
               as String,
+      additionalInfo: null == additionalInfo
+          ? _value.additionalInfo
+          : additionalInfo // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -441,7 +492,10 @@ class __$$LocationSelectedImplCopyWithImpl<$Res>
 
 class _$LocationSelectedImpl implements _LocationSelected {
   const _$LocationSelectedImpl(
-      {required this.location, required this.address, required this.area});
+      {required this.location,
+      required this.address,
+      required this.area,
+      required this.additionalInfo});
 
   @override
   final LatLng location;
@@ -449,10 +503,12 @@ class _$LocationSelectedImpl implements _LocationSelected {
   final String address;
   @override
   final String area;
+  @override
+  final String additionalInfo;
 
   @override
   String toString() {
-    return 'SubscriptionCheckoutState.locationSelected(location: $location, address: $address, area: $area)';
+    return 'SubscriptionCheckoutState.locationSelected(location: $location, address: $address, area: $area, additionalInfo: $additionalInfo)';
   }
 
   @override
@@ -463,11 +519,14 @@ class _$LocationSelectedImpl implements _LocationSelected {
             (identical(other.location, location) ||
                 other.location == location) &&
             (identical(other.address, address) || other.address == address) &&
-            (identical(other.area, area) || other.area == area));
+            (identical(other.area, area) || other.area == area) &&
+            (identical(other.additionalInfo, additionalInfo) ||
+                other.additionalInfo == additionalInfo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, location, address, area);
+  int get hashCode =>
+      Object.hash(runtimeType, location, address, area, additionalInfo);
 
   /// Create a copy of SubscriptionCheckoutState
   /// with the given fields replaced by the non-null parameter values.
@@ -484,11 +543,14 @@ class _$LocationSelectedImpl implements _LocationSelected {
     required TResult Function() initial,
     required TResult Function(String recipientName, String phoneNumber)
         recipientSelected,
-    required TResult Function(LatLng location, String address, String area)
+    required TResult Function(
+            LatLng location, String address, String area, String additionalInfo)
         locationSelected,
+    required TResult Function() loading,
+    required TResult Function(SubscriptionCheckoutResponse response) loaded,
     required TResult Function(String message) error,
   }) {
-    return locationSelected(location, address, area);
+    return locationSelected(location, address, area, additionalInfo);
   }
 
   @override
@@ -497,11 +559,14 @@ class _$LocationSelectedImpl implements _LocationSelected {
     TResult? Function()? initial,
     TResult? Function(String recipientName, String phoneNumber)?
         recipientSelected,
-    TResult? Function(LatLng location, String address, String area)?
+    TResult? Function(LatLng location, String address, String area,
+            String additionalInfo)?
         locationSelected,
+    TResult? Function()? loading,
+    TResult? Function(SubscriptionCheckoutResponse response)? loaded,
     TResult? Function(String message)? error,
   }) {
-    return locationSelected?.call(location, address, area);
+    return locationSelected?.call(location, address, area, additionalInfo);
   }
 
   @override
@@ -510,13 +575,16 @@ class _$LocationSelectedImpl implements _LocationSelected {
     TResult Function()? initial,
     TResult Function(String recipientName, String phoneNumber)?
         recipientSelected,
-    TResult Function(LatLng location, String address, String area)?
+    TResult Function(LatLng location, String address, String area,
+            String additionalInfo)?
         locationSelected,
+    TResult Function()? loading,
+    TResult Function(SubscriptionCheckoutResponse response)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (locationSelected != null) {
-      return locationSelected(location, address, area);
+      return locationSelected(location, address, area, additionalInfo);
     }
     return orElse();
   }
@@ -527,6 +595,8 @@ class _$LocationSelectedImpl implements _LocationSelected {
     required TResult Function(_Initial value) initial,
     required TResult Function(_RecipientSelected value) recipientSelected,
     required TResult Function(_LocationSelected value) locationSelected,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
     required TResult Function(_Error value) error,
   }) {
     return locationSelected(this);
@@ -538,6 +608,8 @@ class _$LocationSelectedImpl implements _LocationSelected {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_RecipientSelected value)? recipientSelected,
     TResult? Function(_LocationSelected value)? locationSelected,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
     TResult? Function(_Error value)? error,
   }) {
     return locationSelected?.call(this);
@@ -549,6 +621,8 @@ class _$LocationSelectedImpl implements _LocationSelected {
     TResult Function(_Initial value)? initial,
     TResult Function(_RecipientSelected value)? recipientSelected,
     TResult Function(_LocationSelected value)? locationSelected,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -563,16 +637,331 @@ abstract class _LocationSelected implements SubscriptionCheckoutState {
   const factory _LocationSelected(
       {required final LatLng location,
       required final String address,
-      required final String area}) = _$LocationSelectedImpl;
+      required final String area,
+      required final String additionalInfo}) = _$LocationSelectedImpl;
 
   LatLng get location;
   String get address;
   String get area;
+  String get additionalInfo;
 
   /// Create a copy of SubscriptionCheckoutState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LocationSelectedImplCopyWith<_$LocationSelectedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadingImplCopyWith<$Res> {
+  factory _$$LoadingImplCopyWith(
+          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
+      __$$LoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadingImplCopyWithImpl<$Res>
+    extends _$SubscriptionCheckoutStateCopyWithImpl<$Res, _$LoadingImpl>
+    implements _$$LoadingImplCopyWith<$Res> {
+  __$$LoadingImplCopyWithImpl(
+      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SubscriptionCheckoutState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$LoadingImpl implements Loading {
+  const _$LoadingImpl();
+
+  @override
+  String toString() {
+    return 'SubscriptionCheckoutState.loading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(String recipientName, String phoneNumber)
+        recipientSelected,
+    required TResult Function(
+            LatLng location, String address, String area, String additionalInfo)
+        locationSelected,
+    required TResult Function() loading,
+    required TResult Function(SubscriptionCheckoutResponse response) loaded,
+    required TResult Function(String message) error,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(String recipientName, String phoneNumber)?
+        recipientSelected,
+    TResult? Function(LatLng location, String address, String area,
+            String additionalInfo)?
+        locationSelected,
+    TResult? Function()? loading,
+    TResult? Function(SubscriptionCheckoutResponse response)? loaded,
+    TResult? Function(String message)? error,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(String recipientName, String phoneNumber)?
+        recipientSelected,
+    TResult Function(LatLng location, String address, String area,
+            String additionalInfo)?
+        locationSelected,
+    TResult Function()? loading,
+    TResult Function(SubscriptionCheckoutResponse response)? loaded,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_RecipientSelected value) recipientSelected,
+    required TResult Function(_LocationSelected value) locationSelected,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(_Error value) error,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_RecipientSelected value)? recipientSelected,
+    TResult? Function(_LocationSelected value)? locationSelected,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(_Error value)? error,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_RecipientSelected value)? recipientSelected,
+    TResult Function(_LocationSelected value)? locationSelected,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Loading implements SubscriptionCheckoutState {
+  const factory Loading() = _$LoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$LoadedImplCopyWith<$Res> {
+  factory _$$LoadedImplCopyWith(
+          _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
+      __$$LoadedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({SubscriptionCheckoutResponse response});
+}
+
+/// @nodoc
+class __$$LoadedImplCopyWithImpl<$Res>
+    extends _$SubscriptionCheckoutStateCopyWithImpl<$Res, _$LoadedImpl>
+    implements _$$LoadedImplCopyWith<$Res> {
+  __$$LoadedImplCopyWithImpl(
+      _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SubscriptionCheckoutState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? response = null,
+  }) {
+    return _then(_$LoadedImpl(
+      null == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as SubscriptionCheckoutResponse,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoadedImpl implements Loaded {
+  const _$LoadedImpl(this.response);
+
+  @override
+  final SubscriptionCheckoutResponse response;
+
+  @override
+  String toString() {
+    return 'SubscriptionCheckoutState.loaded(response: $response)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadedImpl &&
+            (identical(other.response, response) ||
+                other.response == response));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, response);
+
+  /// Create a copy of SubscriptionCheckoutState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+      __$$LoadedImplCopyWithImpl<_$LoadedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(String recipientName, String phoneNumber)
+        recipientSelected,
+    required TResult Function(
+            LatLng location, String address, String area, String additionalInfo)
+        locationSelected,
+    required TResult Function() loading,
+    required TResult Function(SubscriptionCheckoutResponse response) loaded,
+    required TResult Function(String message) error,
+  }) {
+    return loaded(response);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(String recipientName, String phoneNumber)?
+        recipientSelected,
+    TResult? Function(LatLng location, String address, String area,
+            String additionalInfo)?
+        locationSelected,
+    TResult? Function()? loading,
+    TResult? Function(SubscriptionCheckoutResponse response)? loaded,
+    TResult? Function(String message)? error,
+  }) {
+    return loaded?.call(response);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(String recipientName, String phoneNumber)?
+        recipientSelected,
+    TResult Function(LatLng location, String address, String area,
+            String additionalInfo)?
+        locationSelected,
+    TResult Function()? loading,
+    TResult Function(SubscriptionCheckoutResponse response)? loaded,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (loaded != null) {
+      return loaded(response);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_RecipientSelected value) recipientSelected,
+    required TResult Function(_LocationSelected value) locationSelected,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(_Error value) error,
+  }) {
+    return loaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_RecipientSelected value)? recipientSelected,
+    TResult? Function(_LocationSelected value)? locationSelected,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(_Error value)? error,
+  }) {
+    return loaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_RecipientSelected value)? recipientSelected,
+    TResult Function(_LocationSelected value)? locationSelected,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (loaded != null) {
+      return loaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Loaded implements SubscriptionCheckoutState {
+  const factory Loaded(final SubscriptionCheckoutResponse response) =
+      _$LoadedImpl;
+
+  SubscriptionCheckoutResponse get response;
+
+  /// Create a copy of SubscriptionCheckoutState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -647,8 +1036,11 @@ class _$ErrorImpl implements _Error {
     required TResult Function() initial,
     required TResult Function(String recipientName, String phoneNumber)
         recipientSelected,
-    required TResult Function(LatLng location, String address, String area)
+    required TResult Function(
+            LatLng location, String address, String area, String additionalInfo)
         locationSelected,
+    required TResult Function() loading,
+    required TResult Function(SubscriptionCheckoutResponse response) loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -660,8 +1052,11 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? initial,
     TResult? Function(String recipientName, String phoneNumber)?
         recipientSelected,
-    TResult? Function(LatLng location, String address, String area)?
+    TResult? Function(LatLng location, String address, String area,
+            String additionalInfo)?
         locationSelected,
+    TResult? Function()? loading,
+    TResult? Function(SubscriptionCheckoutResponse response)? loaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -673,8 +1068,11 @@ class _$ErrorImpl implements _Error {
     TResult Function()? initial,
     TResult Function(String recipientName, String phoneNumber)?
         recipientSelected,
-    TResult Function(LatLng location, String address, String area)?
+    TResult Function(LatLng location, String address, String area,
+            String additionalInfo)?
         locationSelected,
+    TResult Function()? loading,
+    TResult Function(SubscriptionCheckoutResponse response)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -690,6 +1088,8 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_RecipientSelected value) recipientSelected,
     required TResult Function(_LocationSelected value) locationSelected,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -701,6 +1101,8 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_RecipientSelected value)? recipientSelected,
     TResult? Function(_LocationSelected value)? locationSelected,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
     TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -712,6 +1114,8 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_RecipientSelected value)? recipientSelected,
     TResult Function(_LocationSelected value)? locationSelected,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

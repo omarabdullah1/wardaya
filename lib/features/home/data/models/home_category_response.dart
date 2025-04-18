@@ -29,7 +29,7 @@ class Category {
   @JsonKey(name: 'image_url')
   final String? imageUrl;
   final List<SubCategory> subCategories;
-  @JsonKey(name: '__v', defaultValue: 0)
+  @JsonKey(name: '__v')
   final int version;
   final int? categoryOrder;
   final List<Product> products;
@@ -49,7 +49,6 @@ class Category {
 
   factory Category.fromJson(Map<String, dynamic> json) =>
       _$CategoryFromJson(json);
-
   Map<String, dynamic> toJson() => _$CategoryToJson(this);
 }
 
@@ -59,7 +58,7 @@ class SubCategory {
   final String id;
   final String name;
   @JsonKey(name: 'image_url')
-  final String imageUrl;
+  final String? imageUrl;
   final String category;
   @JsonKey(name: '__v')
   final int version;
@@ -67,7 +66,7 @@ class SubCategory {
   SubCategory({
     required this.id,
     required this.name,
-    required this.imageUrl,
+    this.imageUrl,
     required this.category,
     required this.version,
   });
@@ -87,9 +86,9 @@ class Product {
   final String? productType;
   @JsonKey(defaultValue: [])
   final List<String> images;
-  @JsonKey(defaultValue: [])
+  @JsonKey(defaultValue: [], fromJson: _parseIdList)
   final List<String> categories;
-  @JsonKey(defaultValue: [])
+  @JsonKey(defaultValue: [], fromJson: _parseIdList)
   final List<String> subCategories;
   final bool expressDelivery;
   final DateTime createdAt;
@@ -97,19 +96,19 @@ class Product {
   @JsonKey(name: '__v')
   final int version;
   final String? brand;
-  @JsonKey(defaultValue: [])
+  @JsonKey(defaultValue: [], fromJson: _parseIdList)
   final List<String> bundleTypes;
   final String? careTips;
-  @JsonKey(defaultValue: [])
+  @JsonKey(defaultValue: [], fromJson: _parseIdList)
   final List<String> colors;
   final bool? freeDelivery;
-  @JsonKey(defaultValue: [])
+  @JsonKey(defaultValue: [], fromJson: _parseIdList)
   final List<String> occasions;
   final int? points;
   final bool? premiumFlowers;
-  @JsonKey(defaultValue: [])
+  @JsonKey(defaultValue: [], fromJson: _parseIdList)
   final List<String> productTypes;
-  @JsonKey(defaultValue: [])
+  @JsonKey(defaultValue: [], fromJson: _parseIdList)
   final List<String> recipients;
   final bool? isBundle;
   @JsonKey(defaultValue: [])
@@ -121,7 +120,7 @@ class Product {
   @JsonKey(defaultValue: [])
   final List<String> subMenuItems;
   @JsonKey(defaultValue: [])
-  final List<String> bundleItems;
+  final List<BundleItem> bundleItems;
 
   Product({
     required this.id,
@@ -155,8 +154,36 @@ class Product {
     required this.bundleItems,
   });
 
-  factory Product.fromJson(Map<String, dynamic> json) =>
-      _$ProductFromJson(json);
+  static List<String> _parseIdList(List<dynamic> list) {
+    return list.map((item) {
+      if (item is String) return item;
+      if (item is Map<String, dynamic> && item.containsKey('_id')) {
+        return item['_id'] as String;
+      }
+      return item.toString();
+    }).toList();
+  }
+
+  factory Product.fromJson(Map<String, dynamic> json) {
+    json['createdAt'] ??= DateTime.now().toIso8601String();
+    json['updatedAt'] ??= DateTime.now().toIso8601String();
+    json['isBundle'] ??= false;
+    json['expressDelivery'] ??= false;
+    json['version'] ??= 0;
+    json['price'] ??= {'total': 0, 'currency': 'SAR'};
+
+    // Handle bundleItems parsing
+    if (json['bundleItems'] is List) {
+      json['bundleItems'] = (json['bundleItems'] as List)
+          .map((item) => item as Map<String, dynamic>)
+          .toList();
+    } else {
+      json['bundleItems'] = [];
+    }
+
+    return _$ProductFromJson(json);
+  }
+
   Map<String, dynamic> toJson() => _$ProductToJson(this);
 }
 
@@ -167,7 +194,16 @@ class Price {
 
   Price({required this.total, required this.currency});
 
-  factory Price.fromJson(Map<String, dynamic> json) => _$PriceFromJson(json);
+  factory Price.fromJson(Map<String, dynamic> json) {
+    if (json is Map<String, dynamic>) {
+      return Price(
+        total: (json['total'] as num).toInt(),
+        currency: json['currency'] as String,
+      );
+    }
+    return Price(total: 0, currency: 'SAR');
+  }
+
   Map<String, dynamic> toJson() => _$PriceToJson(this);
 }
 
@@ -178,7 +214,66 @@ class Dimensions {
 
   Dimensions({this.width, this.height});
 
-  factory Dimensions.fromJson(Map<String, dynamic> json) =>
-      _$DimensionsFromJson(json);
+  factory Dimensions.fromJson(Map<String, dynamic> json) {
+    if (json == null) return Dimensions();
+    return Dimensions(
+      width: json['width'] == null ? null : (json['width'] as num).toInt(),
+      height: json['height'] == null ? null : (json['height'] as num).toInt(),
+    );
+  }
+
   Map<String, dynamic> toJson() => _$DimensionsToJson(this);
+}
+
+@JsonSerializable()
+class BundleItem {
+  final List<BundleCategory> categories;
+
+  BundleItem({required this.categories});
+
+  factory BundleItem.fromJson(Map<String, dynamic> json) {
+    return BundleItem(
+      categories: (json['categories'] as List?)
+              ?.map((e) => BundleCategory.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+  }
+
+  Map<String, dynamic> toJson() => _$BundleItemToJson(this);
+}
+
+@JsonSerializable()
+class BundleCategory {
+  @JsonKey(name: 'category_title')
+  final String categoryTitle;
+  @JsonKey(name: 'category_title_ar')
+  final String? categoryTitleAr;
+  @JsonKey(defaultValue: [], fromJson: _parseIdList)
+  final List<String> items;
+  final bool isRequired;
+  @JsonKey(name: '_id')
+  final String id;
+
+  BundleCategory({
+    required this.categoryTitle,
+    this.categoryTitleAr,
+    required this.items,
+    required this.isRequired,
+    required this.id,
+  });
+
+  static List<String> _parseIdList(List<dynamic> list) {
+    return list.map((item) {
+      if (item is String) return item;
+      if (item is Map<String, dynamic> && item.containsKey('_id')) {
+        return item['_id'] as String;
+      }
+      return item.toString();
+    }).toList();
+  }
+
+  factory BundleCategory.fromJson(Map<String, dynamic> json) =>
+      _$BundleCategoryFromJson(json);
+  Map<String, dynamic> toJson() => _$BundleCategoryToJson(this);
 }

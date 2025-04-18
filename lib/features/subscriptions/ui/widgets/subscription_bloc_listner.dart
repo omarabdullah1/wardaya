@@ -20,6 +20,7 @@ class SubscriptionBlocListner extends StatelessWidget {
               Navigator.of(context).popUntil((route) => route.isFirst);
             });
             return SubscriptionPlanCard(
+              planId: '',
               title: context.el.addMediaTitle,
               description: context.el.addToMessageButton,
               price: '173',

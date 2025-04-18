@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:wardaya/features/subscriptions/data/apis/subscription_api_constants.dart';
+import 'package:wardaya/features/subscriptions/data/models/subscription_checkout_request.dart';
+import 'package:wardaya/features/subscriptions/data/models/subscription_checkout_response.dart';
 
 import '../models/subscription_duration_response.dart';
 import '../models/subscription_plans_response.dart';
@@ -16,4 +18,9 @@ abstract class SubscriptionService {
 
   @GET(SubscriptionApiConstants.durations)
   Future<List<SubscriptionDuration>> getSubcriptionDurations();
+
+  @POST(SubscriptionApiConstants.checkout)
+  Future<SubscriptionCheckoutResponse> checkout(
+    @Body() SubscriptionCheckoutRequest subscriptionCheckoutRequest,
+  );
 }

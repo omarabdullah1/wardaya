@@ -7,4 +7,5 @@ class HomeApiConstants {
   static const String brands = "api/brands";
   static const String recipients = "api/filter/recipients";
   static const String deliveryAreas = "api/delivery-areas";
+  static const String editUser = "api/auth/update-user";
 }
