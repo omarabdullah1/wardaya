@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +14,25 @@ import '../../search/ui/widgets/search_body.dart';
 
 class CategoryScreen extends StatefulWidget {
   final String momentTitle;
-  const CategoryScreen({super.key, required this.momentTitle});
+  final String? occasionId;
+  final String? categoryId;
+  final String? subCategoryId;
+  final String? recipientId;
+  final String? brandId;
+  final String? subMenuItemsId;
+  final bool? expressDelivery;
+
+  const CategoryScreen({
+    super.key,
+    required this.momentTitle,
+    this.occasionId,
+    this.categoryId,
+    this.subCategoryId,
+    this.recipientId,
+    this.brandId,
+    this.subMenuItemsId,
+    this.expressDelivery,
+  });
 
   @override
   State<CategoryScreen> createState() => _CategoryScreenState();
@@ -22,10 +42,28 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   void initState() {
     super.initState();
-    // Initialize search with moment title as category
+    // Initialize search based on available parameters
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Get navigation state
+      log('CategoryScreen initState');
+      log(widget.momentTitle);
+      log(widget.occasionId.toString());
+      log(widget.categoryId.toString());
+      log(widget.subCategoryId.toString());
+      log(widget.recipientId.toString());
+      log(widget.brandId.toString());
+      log(widget.subMenuItemsId.toString());
+      log(widget.expressDelivery.toString());
+
+      // Use all available filters simultaneously
       context.read<SearchCubit>().emitSearchStates(
-            search: widget.momentTitle,
+            expressDelivery: widget.expressDelivery,
+            filterBrand: widget.brandId,
+            filterRecipients: widget.recipientId,
+            filterOccasion: widget.occasionId,
+            filterCategory: widget.categoryId,
+            filterSubCategory: widget.subCategoryId,
+            filterSubMenuItems: widget.subMenuItemsId,
           );
     });
   }

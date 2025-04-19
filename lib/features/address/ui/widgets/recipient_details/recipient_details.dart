@@ -1,0 +1,111 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:wardaya/core/helpers/spacing.dart';
+import 'package:wardaya/core/theming/colors.dart';
+import 'package:wardaya/features/address/ui/widgets/recipient_details/area_field.dart';
+
+import '../../../../../core/routing/router_imports.dart';
+import '../../../../../core/widgets/app_text_button.dart';
+import '../../../data/models/address_response.dart';
+import '../../../logic/recipient_details_cubit/recipient_details_cubit.dart';
+import 'address_detail_field.dart';
+import 'recipient_map_widget.dart';
+import 'recipient_name_phone_fields.dart';
+
+class RecipientDetails extends StatelessWidget {
+  final Address? address;
+  const RecipientDetails({super.key, this.address});
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.read<RecipientDetailsCubit>();
+
+    // Initialize with existing address if available
+    if (address != null && cubit.nameController.text.isEmpty) {
+      // Assuming address has these fields or they're null
+      cubit.initializeWithAddress(
+        address?.title,
+        '', // Phone number field might be missing in your model
+        address?.recipientArea,
+        address?.recipientAddress,
+        address?.extraAddressDetails,
+        address != null ? LatLng(address!.latitude, address!.longitude) : null,
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RecipientNamePhoneFields(
+          nameController: cubit.nameController,
+          phoneController: cubit.phoneController,
+        ),
+        VerticalSpace(height: 24.h),
+        Text(
+          'Drop address from Map',
+          style: TextStyle(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w500,
+            color: ColorsManager.black87,
+          ),
+        ),
+        VerticalSpace(height: 8.h),
+        RecipientMapWidget(
+          address: address,
+        ), // Using the correctly named widget
+        VerticalSpace(height: 16.h),
+        AreaField(
+          areaController: cubit.areaController,
+        ),
+        VerticalSpace(height: 16.h),
+        AddressDetailField(
+          label: 'Address',
+          hint: 'Ex:15b Cairo - Sweis Rd, El-Basatin Sharkeya, Tura,',
+          controller: cubit.addressController,
+        ),
+        VerticalSpace(height: 16.h),
+        AddressDetailField(
+          label: 'Extra address details(Optional)',
+          hint: 'Ex:Apartment number, floor, landmark, etc.',
+          controller: cubit.extraAddressController,
+        ),
+        VerticalSpace(height: 32.h),
+        AppTextButton(
+          buttonText: 'Save Address',
+          textStyle: GoogleFonts.inter(
+            color: ColorsManager.white,
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w500,
+          ),
+          onPressed: () => _saveAddress(context, cubit),
+        ),
+        VerticalSpace(height: 16.h),
+      ],
+    );
+  }
+
+  void _saveAddress(BuildContext context, RecipientDetailsCubit cubit) {
+    // Validate address fields
+    if (cubit.nameController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter recipient name')),
+      );
+      return;
+    }
+
+    if (cubit.phoneController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter phone number')),
+      );
+      return;
+    }
+
+    if (cubit.addressController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter address')),
+      );
+      return;
+    }
+  }
+}

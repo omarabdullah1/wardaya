@@ -106,6 +106,8 @@ wardaya_points: "Wardaya Points"
 currency_sar: "SAR "
 split_payments_with_tamara: "Split in up to 4 payments with Tamara"
 earn: "Earn "
+similarProducts: "Similar Products"
+noSimilarProducts: "No similar products found"
 
 # Cart Screen texts
 cart_empty_title: "Your Cart is Empty!"
@@ -248,3 +250,97 @@ select_other_date: "Select Other Date"
 we_select_delevery_based_area: "We’ll select the best delivery time based on your area and delivery date"
 off: "OFF"
 perـdelivery: "Per delivery"
+
+# FavoritesScreen texts
+favorites_screen_title: "Favorites"
+favorites_empty_title: "No Favorite products found!"
+favorites_empty_button: "Start Shopping"
+
+# SubMenuItemsScreen texts
+sub_menu_items_screen_title: "Sub Menu Items"
+sub_menu_items_empty_title: "No sub-menu items available"
+
+# AddressesScreen texts
+addresses_screen_title: "Saved Addresses"
+addresses_screen_add_new_address_button: "Add a new Address"
+addresses_screen_no_addresses_found: "No addresses found"
+
+# RecipientDetails texts
+recipient_details_screen_title: "Recipient Details"
+recipient_details_screen_continue_button: "Continue"
+recipient_details_screen_recipient_name_label: "Recipient Name"
+recipient_details_screen_recipient_phone_label: "Phone Number"
+recipient_details_screen_recipient_area_label: "Area"
+recipient_details_screen_recipient_address_label: "Address"
+recipient_details_screen_recipient_extra_address_label: "Extra address details(optional)"
+
+# Order Card texts
+orderNumber: "Order Number"
+date: "Date"
+orderId: "Order ID"
+orderStatus: "Status"
+deliveryInfo: "Delivery Info"
+recipientName: "Name"
+phoneNumber: "Phone Number"
+address: "Address"
+estimatedDeliveryTime: "Estimated Delivery Time"
+myIdentity: "My Identity"
+expressDelivery: "Express Delivery"
+hidden: "Hidden"
+visible: "Visible"
+yes: "Yes"
+no: "No"
+quantity: "x"
+noOrders: "No orders found"
+recipient: "Recipient"
+deliveryDate: "Delivery Date"
+
+# Order Details Screen
+paymentDetails: "Payment Details"
+subtotal: "Subtotal"
+deliveryCharges: "Delivery charges"
+vatLabel: "VAT"
+paymentMethod: "Payment Method"
+
+search_order_placeholder: "Search for orders by order number or recipient name"
+
+# Payment Screen texts
+paymentTitle: "Payment"
+cancelPaymentTitle: "Cancel Payment?"
+cancelPaymentMessage: "Are you sure you want to cancel this payment?"
+cancelPaymentNo: "No"
+cancelPaymentYes: "Yes"
+paymentAmountTitle: "Payment Amount"
+paymentOrderIdLabel: "Order ID:"
+paymentError: "Error loading payment page:"
+paymentTryAgain: "Try Again"
+paymentSuccessTitle: "Payment Successful"
+paymentSuccessMessage: "Your payment has been processed successfully."
+paymentFailedTitle: "Payment Failed"
+paymentFailedMessage: "Your payment could not be processed. Please try again."
+paymentOkButton: "OK"
+
+# Payment Method Screen texts
+paymentMethodsTitle: "Payment Methods"
+proceedToPaymentButton: "Proceed to Payment"
+creditDebitCardTitle: "Credit/Debit Card"
+creditDebitCardDescription: "Pay with Visa, Mastercard, or other cards"
+madaTitle: "Mada"
+madaDescription: "Pay with Mada debit card"
+applePayTitle: "Apple Pay"
+applePayDescription: "Quick and secure payment with Apple Pay"
+googlePayTitle: "Google Pay"
+googlePayDescription: "Quick and secure payment with Google Pay"
+benefitPayTitle: "Benefit Pay"
+benefitPayDescription: "Pay using Benefit Pay service"
+
+# Select City
+selectCityTitle: "Select City"
+sAFilter: "Saudi Arabia"
+SendYourGiftTo: "Send your gift to..."
+
+# OccasionsScreen texts
+myOccasions: "My Occasions"
+quickAdd: "Quick Add"
+selectAnOccasionToCreateAReminder: "Select an occasion to create a reminder"
+yourUpcomingOccasion: "Your Upcoming Occasion"

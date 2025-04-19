@@ -19,63 +19,226 @@ class SearchCubit extends Cubit<SearchState> {
   bool isGridView = true;
   Map<String, String?> selectedFilters = {};
   Map<String, String?> tempFilters = {};
+  Map<String, String?> initialFilter = {};
+  Map<String, List<String>> filterLists = {};
 
-  // Helper method to process image URLs
+  // Pagination variables
+  int currentPage = 1;
+  bool hasMorePages = true;
+  bool isLoadingMore = false;
+  SearchResponse? currentResponse;
+
   String getCompleteImageUrl(String relativePath) {
     if (relativePath.startsWith('http')) {
       return relativePath;
     }
-
     const baseUrl = SearchApiConstants.apiBaseUrlForImages;
-
-    // Handle path with or without leading slash
-    if (relativePath.startsWith('/')) {
-      return '$baseUrl$relativePath';
-    } else {
-      return '$baseUrl/$relativePath';
-    }
+    return relativePath.startsWith('/')
+        ? '$baseUrl$relativePath'
+        : '$baseUrl/$relativePath';
   }
 
   void emitSearchStates({
     String? search,
     String? filterCategory,
+    String? filterSubCategory,
     String? filterOccasion,
     String? filterRecipients,
     String? filterColor,
     String? filterBundleTypes,
     String? filterPriceRange,
+    String? filterBrand,
+    String? filterSubMenuItems,
+    bool? expressDelivery,
+    bool loadMore = false,
   }) async {
-    emit(const SearchState.loading());
+    if (loadMore) {
+      if (isLoadingMore || !hasMorePages) return;
+      isLoadingMore = true;
+      currentPage++;
+      emit(const SearchState.loading());
+    } else {
+      emit(const SearchState.loading());
+      currentPage = 1;
+      hasMorePages = true;
+      currentResponse = null;
+      originalProducts = [];
+      filteredProducts = [];
+    }
+
     try {
+      String? searchText = search ??
+          (searchController.text.isNotEmpty ? searchController.text : null);
+
+      if (initialFilter.isEmpty && !loadMore) {
+        _updateInitialFilters(
+          filterCategory: filterCategory,
+          filterSubCategory: filterSubCategory,
+          filterOccasion: filterOccasion,
+          filterRecipients: filterRecipients,
+          filterColor: filterColor,
+          filterBundleTypes: filterBundleTypes,
+          filterPriceRange: filterPriceRange,
+          filterBrand: filterBrand,
+          filterSubMenuItems: filterSubMenuItems,
+          expressDelivery: expressDelivery,
+        );
+      }
+
       final response = await _searchRepo.search(SearchRequestBody(
         limit: 10,
-        page: 1,
-        search: search ?? searchController.text,
-        category: filterCategory,
-        occasion: filterOccasion,
-        recipients: filterRecipients,
-        color: filterColor,
-        bundleTypes: filterBundleTypes,
-        priceRange: filterPriceRange,
+        page: currentPage,
+        search: searchText,
+        category: filterLists['category']?.join(','),
+        subCategory: filterLists['subCategory']?.join(','),
+        occasion: filterLists['occasion']?.join(','),
+        recipients: filterLists['recipient']?.join(','),
+        color: filterLists['color']?.join(','),
+        bundleTypes: filterLists['bundleTypes']?.join(','),
+        priceRange: filterLists['priceRange']?.join(','),
+        brand: filterLists['brand']?.join(','),
+        subMenuItems: filterLists['subMenuItems']?.join(','),
+        expressDelivery: expressDelivery,
       ));
 
-      response.when(success: (SearchResponse data) {
-        // Process images for all products
-        for (var product in data.products) {
-          for (int i = 0; i < product.images.length; i++) {
-            product.images[i] = getCompleteImageUrl(product.images[i]);
-          }
-        }
-        originalProducts = data.products;
-        filteredProducts = data.products;
-        emit(SearchState.success(data));
-      }, failure: (error) {
-        emit(SearchState.error(error.message ?? 'Unknown error occurred'));
-      });
+      response.when(
+        success: (SearchResponse data) {
+          _processResponse(data, loadMore: loadMore);
+        },
+        failure: (error) {
+          if (loadMore) currentPage--;
+          _handleError(error);
+        },
+      );
     } catch (e, stackTrace) {
-      log('Search error: $e', stackTrace: stackTrace);
+      if (loadMore) currentPage--;
+      _handleException(e, stackTrace);
+    }
+  }
+
+  void _updateInitialFilters({
+    String? filterCategory,
+    String? filterSubCategory,
+    String? filterOccasion,
+    String? filterRecipients,
+    String? filterColor,
+    String? filterBundleTypes,
+    String? filterPriceRange,
+    String? filterBrand,
+    String? filterSubMenuItems,
+    bool? expressDelivery,
+  }) {
+    if (filterCategory != null) {
+      initialFilter['category'] = filterCategory;
+      filterLists['category'] = [filterCategory];
+    }
+    if (filterSubCategory != null) {
+      initialFilter['subCategory'] = filterSubCategory;
+      filterLists['subCategory'] = [filterSubCategory];
+    }
+    if (filterOccasion != null) {
+      initialFilter['occasion'] = filterOccasion;
+      filterLists['occasion'] = [filterOccasion];
+    }
+    if (filterRecipients != null) {
+      initialFilter['recipient'] = filterRecipients;
+      filterLists['recipient'] = [filterRecipients];
+    }
+    if (filterColor != null) {
+      initialFilter['color'] = filterColor;
+    }
+    if (filterBundleTypes != null) {
+      initialFilter['bundleTypes'] = filterBundleTypes;
+      filterLists['bundleTypes'] = [filterBundleTypes];
+    }
+    if (filterPriceRange != null) {
+      initialFilter['priceRange'] = filterPriceRange;
+      filterLists['priceRange'] = [filterPriceRange];
+    }
+    if (filterBrand != null) {
+      initialFilter['brand'] = filterBrand;
+      filterLists['brand'] = [filterBrand];
+    }
+    if (expressDelivery != null) {
+      initialFilter['expressDelivery'] = expressDelivery.toString();
+    }
+    if (filterSubMenuItems != null) {
+      initialFilter['subMenuItems'] = filterSubMenuItems;
+      filterLists['subMenuItems'] = [filterSubMenuItems];
+    }
+  }
+
+  void _processResponse(SearchResponse data, {required bool loadMore}) {
+    if (loadMore) {
+      _handleLoadMoreResponse(data);
+    } else {
+      _handleInitialResponse(data);
+    }
+  }
+
+  void _handleInitialResponse(SearchResponse data) {
+    originalProducts = List.from(data.products);
+    filteredProducts = List.from(data.products);
+    hasMorePages = data.products.isNotEmpty && data.products.length >= 10;
+    currentResponse = data;
+    emit(SearchState.success(data));
+  }
+
+  void _handleLoadMoreResponse(SearchResponse data) {
+    final newOriginalProducts = List<Product>.from(originalProducts)
+      ..addAll(data.products);
+    final newFilteredProducts = List<Product>.from(filteredProducts)
+      ..addAll(data.products);
+
+    originalProducts = newOriginalProducts;
+    filteredProducts = newFilteredProducts;
+    hasMorePages = data.products.isNotEmpty && data.products.length >= 10;
+    isLoadingMore = false;
+    currentResponse = data;
+
+    emit(SearchState.success(SearchResponse(
+      total: data.total,
+      page: currentPage,
+      limit: data.limit,
+      totalPages: data.totalPages,
+      products: newOriginalProducts,
+    )));
+  }
+
+  void _handleError(error) {
+    isLoadingMore = false;
+    if (error.message?.contains('504') == true) {
+      emit(const SearchState.error(
+          'Server is taking too long to respond. Please try again in a moment.'));
+    } else {
+      emit(SearchState.error(error.message ?? 'Unknown error occurred'));
+    }
+  }
+
+  void _handleException(e, StackTrace stackTrace) {
+    isLoadingMore = false;
+    log('Search error: $e', stackTrace: stackTrace);
+    if (e.toString().contains('504')) {
+      emit(const SearchState.error(
+          'Server is taking too long to respond. Please try again in a moment.'));
+    } else {
       emit(SearchState.error('An unexpected error occurred: ${e.toString()}'));
     }
+  }
+
+  void loadMoreProducts() {
+    emitSearchStates(
+      loadMore: true,
+      filterCategory: selectedFilters["category"],
+      filterSubCategory: selectedFilters["subCategory"],
+      filterOccasion: selectedFilters["occasion"],
+      filterRecipients: selectedFilters["recipient"],
+      filterColor: selectedFilters["color"],
+      filterBundleTypes: selectedFilters["bundleTypes"],
+      filterPriceRange: selectedFilters["priceRange"],
+      filterSubMenuItems: selectedFilters["subMenuItems"],
+      expressDelivery: selectedFilters["expressDelivery"] == "true",
+    );
   }
 
   void setIsGridView(bool isGrid) {
@@ -87,48 +250,39 @@ class SearchCubit extends Cubit<SearchState> {
     log(filters.toString());
     selectedFilters = filters;
 
-    // If no filters are selected, show all products
     if (filters.values.every((value) => value == null)) {
-      filteredProducts = originalProducts;
+      filteredProducts = List.from(originalProducts);
+      filterLists.clear();
+      if (initialFilter['category'] != null) {
+        filterLists['category'] = [initialFilter['category']!];
+      }
       emitSearchStates(
         filterCategory: filters["category"],
+        filterSubCategory: filters["subCategory"],
         filterOccasion: filters["occasion"],
         filterRecipients: filters["recipient"],
         filterColor: filters["color"],
         filterBundleTypes: filters["bundleTypes"],
         filterPriceRange: filters["priceRange"],
+        filterSubMenuItems: filters["subMenuItems"],
+        expressDelivery: filters["expressDelivery"] == "true",
       );
       return;
     }
 
-    // // Filter the products based on selected filters
-    // filteredProducts = originalProducts.where((product) {
-    //   bool categoryMatch = filters["category"] == null ||
-    //       product.subCategories.any((cat) => cat.name == filters["category"]);
+    String? searchText =
+        searchController.text.isNotEmpty ? searchController.text : null;
 
-    //   bool occasionMatch = filters["occasion"] == null ||
-    //       (product.occasions.isNotEmpty &&
-    //           product.occasions.any((occ) => occ.name == filters["occasion"]));
-
-    //   bool recipientMatch = filters["recipient"] == null ||
-    //       (product.recipients.isNotEmpty &&
-    //           product.recipients
-    //               .any((rec) => rec.name == filters["recipient"]));
-
-    //   bool colorMatch = filters["color"] == null ||
-    //       (product.colors.isNotEmpty &&
-    //           product.colors.any((col) => col.name == filters["color"]));
-
-    //   return categoryMatch && occasionMatch && recipientMatch && colorMatch;
-    // }).toList();
-    // emit(SearchState.applyFilters(selectedFilters));
     emitSearchStates(
+      search: searchText,
       filterCategory: filters["category"],
+      filterSubCategory: filters["subCategory"],
       filterOccasion: filters["occasion"],
       filterRecipients: filters["recipient"],
       filterColor: filters["color"],
       filterBundleTypes: filters["bundleTypes"],
       filterPriceRange: filters["priceRange"],
+      expressDelivery: filters["expressDelivery"] == "true",
     );
   }
 
@@ -142,8 +296,20 @@ class SearchCubit extends Cubit<SearchState> {
 
     if (value == null) {
       tempFilters.remove(filterType);
+      filterLists[filterType]?.remove(value);
+      if (filterLists[filterType]?.isEmpty == true) {
+        filterLists.remove(filterType);
+      }
     } else {
       tempFilters[filterType] = value;
+      if (filterType == 'category') {
+        if (!filterLists.containsKey(filterType)) {
+          filterLists[filterType] = [];
+        }
+        if (!filterLists[filterType]!.contains(value)) {
+          filterLists[filterType]!.add(value);
+        }
+      }
     }
     selectedFilters = tempFilters;
     emit(SearchState.setTempFiltersTypeValue(filterType, value));
@@ -151,16 +317,27 @@ class SearchCubit extends Cubit<SearchState> {
 
   void emitFilterDataStates({
     String? filterCategory,
+    String? filterSubCategory,
     String? filterOccasion,
     String? filterRecipients,
     String? filterColor,
   }) async {
     emit(const SearchState.loadingFilterData());
+
+    final category = filterCategory?.isNotEmpty == true ? filterCategory : null;
+    final subCategory =
+        filterSubCategory?.isNotEmpty == true ? filterSubCategory : null;
+    final occasion = filterOccasion?.isNotEmpty == true ? filterOccasion : null;
+    final recipients =
+        filterRecipients?.isNotEmpty == true ? filterRecipients : null;
+    final color = filterColor?.isNotEmpty == true ? filterColor : null;
+
     final response = await _searchRepo.productFilterData(FilterDataBody(
-      category: filterCategory,
-      occasion: filterOccasion,
-      recipients: filterRecipients,
-      color: filterColor,
+      category: category,
+      subCategory: subCategory,
+      occasion: occasion,
+      recipients: recipients,
+      color: color,
     ));
     response.when(success: (data) {
       emit(SearchState.successFilterData(data));

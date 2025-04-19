@@ -4,10 +4,13 @@
 
 import 'dart:developer' show log;
 
-import 'package:easiest_localization/easiest_localization.dart' show LocalizationProvider;
+import 'package:easiest_localization/easiest_localization.dart'
+    show LocalizationProvider;
 import 'package:flutter/foundation.dart' show kDebugMode;
-import 'package:flutter/widgets.dart' show BuildContext, Locale, Localizations, LocalizationsDelegate;
-import 'package:flutter_localizations/flutter_localizations.dart' show GlobalMaterialLocalizations;
+import 'package:flutter/widgets.dart'
+    show BuildContext, Locale, Localizations, LocalizationsDelegate;
+import 'package:flutter_localizations/flutter_localizations.dart'
+    show GlobalMaterialLocalizations;
 import 'package:intl/intl.dart' show Intl;
 
 final RegExp _variableRegExp = RegExp(r'\$\{[^}]+\} ?');
@@ -226,6 +229,79 @@ class LocalizationMessages {
     required this.weSelectDeleveryBasedArea,
     required this.off,
     required this.perDelivery1,
+    required this.favoritesScreenTitle,
+    required this.favoritesEmptyTitle,
+    required this.favoritesEmptyButton,
+    required this.subMenuItemsScreenTitle,
+    required this.subMenuItemsEmptyTitle,
+    required this.addressesScreenTitle,
+    required this.addressesScreenAddNewAddressButton,
+    required this.addressesScreenNoAddressesFound,
+    required this.recipientDetailsScreenTitle,
+    required this.recipientDetailsScreenContinueButton,
+    required this.recipientDetailsScreenRecipientNameLabel,
+    required this.recipientDetailsScreenRecipientPhoneLabel,
+    required this.recipientDetailsScreenRecipientAreaLabel,
+    required this.recipientDetailsScreenRecipientAddressLabel,
+    required this.recipientDetailsScreenRecipientExtraAddressLabel,
+    required this.orderNumber,
+    required this.date,
+    required this.orderId,
+    required this.orderStatus,
+    required this.deliveryInfo,
+    required this.recipientName,
+    required this.phoneNumber,
+    required this.address,
+    required this.estimatedDeliveryTime,
+    required this.myIdentity,
+    required this.expressDelivery,
+    required this.hidden,
+    required this.visible,
+    required this.yes,
+    required this.no,
+    required this.quantity,
+    required this.noOrders,
+    required this.recipient,
+    required this.deliveryDate,
+    required this.paymentDetails,
+    required this.subtotal,
+    required this.deliveryCharges,
+    required this.vatLabel,
+    required this.paymentMethod,
+    required this.searchOrderPlaceholder,
+    required this.paymentTitle,
+    required this.cancelPaymentTitle,
+    required this.cancelPaymentMessage,
+    required this.cancelPaymentNo,
+    required this.cancelPaymentYes,
+    required this.paymentAmountTitle,
+    required this.paymentOrderIdLabel,
+    required this.paymentError,
+    required this.paymentTryAgain,
+    required this.paymentSuccessTitle,
+    required this.paymentSuccessMessage,
+    required this.paymentFailedTitle,
+    required this.paymentFailedMessage,
+    required this.paymentOkButton,
+    required this.paymentMethodsTitle,
+    required this.proceedToPaymentButton,
+    required this.creditDebitCardTitle,
+    required this.creditDebitCardDescription,
+    required this.madaTitle,
+    required this.madaDescription,
+    required this.applePayTitle,
+    required this.applePayDescription,
+    required this.googlePayTitle,
+    required this.googlePayDescription,
+    required this.benefitPayTitle,
+    required this.benefitPayDescription,
+    required this.selectCityTitle,
+    required this.sAfilter,
+    required this.sendYourGiftTo,
+    required this.myOccasions,
+    required this.quickAdd,
+    required this.selectAnOccasionToCreateAreminder,
+    required this.yourUpcomingOccasion,
     required this.deliveryFrequency1,
     required this.subscriptionDuration1,
   });
@@ -243,25 +319,35 @@ class LocalizationMessages {
       dividerText: (json['divider_text'] ?? '').toString(),
       signInWith: (json['sign_in_with'] ?? '').toString(),
       forgetPasswordTitle: (json['forget_password_title'] ?? '').toString(),
-      forgetPasswordInstruction: (json['forget_password_instruction'] ?? '').toString(),
+      forgetPasswordInstruction:
+          (json['forget_password_instruction'] ?? '').toString(),
       resetPasswordButton: (json['reset_password_button'] ?? '').toString(),
       createAccountTitle: (json['create_account_title'] ?? '').toString(),
       createAccountButton: (json['create_account_button'] ?? '').toString(),
       nameLabel: (json['name_label'] ?? '').toString(),
       phoneLabel: (json['phone_label'] ?? '').toString(),
       selectCountryLabel: (json['select_country_label'] ?? '').toString(),
-      homeGiftsForEveryMoment: (json['home_gifts_for_every_moment'] ?? '').toString(),
-      homeExploreUniqueGiftIdeas: (json['home_explore_unique_gift_ideas'] ?? '').toString(),
+      homeGiftsForEveryMoment:
+          (json['home_gifts_for_every_moment'] ?? '').toString(),
+      homeExploreUniqueGiftIdeas:
+          (json['home_explore_unique_gift_ideas'] ?? '').toString(),
       homeChooseGiftsNow: (json['home_choose_gifts_now'] ?? '').toString(),
-      homeRoundedBeautyEndlessCharm: (json['home_rounded_beauty_endless_charm'] ?? '').toString(),
-      homeStartTheYearWithTulips: (json['home_start_the_year_with_tulips'] ?? '').toString(),
-      homeWoodntYouLoveThis: (json['home_woodnt_you_love_this'] ?? '').toString(),
-      homeAnExtraLuxuriousTouch: (json['home_an_extra_luxurious_touch'] ?? '').toString(),
+      homeRoundedBeautyEndlessCharm:
+          (json['home_rounded_beauty_endless_charm'] ?? '').toString(),
+      homeStartTheYearWithTulips:
+          (json['home_start_the_year_with_tulips'] ?? '').toString(),
+      homeWoodntYouLoveThis:
+          (json['home_woodnt_you_love_this'] ?? '').toString(),
+      homeAnExtraLuxuriousTouch:
+          (json['home_an_extra_luxurious_touch'] ?? '').toString(),
       homeBestSellers: (json['home_best_sellers'] ?? '').toString(),
-      homeCaptivationAromasOfMubkhar: (json['home_captivation_aromas_of_mubkhar'] ?? '').toString(),
-      homeGiftYourLovedOnes: (json['home_gift_your_loved_ones'] ?? '').toString(),
+      homeCaptivationAromasOfMubkhar:
+          (json['home_captivation_aromas_of_mubkhar'] ?? '').toString(),
+      homeGiftYourLovedOnes:
+          (json['home_gift_your_loved_ones'] ?? '').toString(),
       homeNaturesMagic: (json['home_natures_magic'] ?? '').toString(),
-      homeLatestAndLoveliest: (json['home_latest_and_loveliest'] ?? '').toString(),
+      homeLatestAndLoveliest:
+          (json['home_latest_and_loveliest'] ?? '').toString(),
       homeGiftsForEveryone: (json['home_gifts_for_everyone'] ?? '').toString(),
       homeBrandsYoullLove: (json['home_brands_youll_love'] ?? '').toString(),
       bottomNavHome: (json['bottom_nav_home'] ?? '').toString(),
@@ -272,20 +358,32 @@ class LocalizationMessages {
       exploreSearchHint: (json['explore_search_hint'] ?? '').toString(),
       exploreCardMoments: (json['explore_card_moments'] ?? '').toString(),
       exploreCardRecipients: (json['explore_card_recipients'] ?? '').toString(),
-      exploreCategoryFlowersPlants: (json['explore_category_flowers_plants'] ?? '').toString(),
-      exploreCategoryFlowersGifts: (json['explore_category_flowers_gifts'] ?? '').toString(),
-      exploreCategoryExpressDelivery: (json['explore_category_express_delivery'] ?? '').toString(),
-      exploreCategoryFloralSubscription: (json['explore_category_floral_subscription'] ?? '').toString(),
-      exploreBrandsYoullLove: (json['explore_brands_youll_love'] ?? '').toString(),
-      discoverNewIdeasTitle: (json['discover_new_ideas_title'] ?? '').toString(),
-      discoverCardExpressDeliveryTitle: (json['discover_card_express_delivery_title'] ?? '').toString(),
-      discoverCardExpressDeliveryButton: (json['discover_card_express_delivery_button'] ?? '').toString(),
-      discoverCardWeeklySurpriseTitle: (json['discover_card_weekly_surprise_title'] ?? '').toString(),
-      discoverCardWeeklySurpriseButton: (json['discover_card_weekly_surprise_button'] ?? '').toString(),
+      exploreCategoryFlowersPlants:
+          (json['explore_category_flowers_plants'] ?? '').toString(),
+      exploreCategoryFlowersGifts:
+          (json['explore_category_flowers_gifts'] ?? '').toString(),
+      exploreCategoryExpressDelivery:
+          (json['explore_category_express_delivery'] ?? '').toString(),
+      exploreCategoryFloralSubscription:
+          (json['explore_category_floral_subscription'] ?? '').toString(),
+      exploreBrandsYoullLove:
+          (json['explore_brands_youll_love'] ?? '').toString(),
+      discoverNewIdeasTitle:
+          (json['discover_new_ideas_title'] ?? '').toString(),
+      discoverCardExpressDeliveryTitle:
+          (json['discover_card_express_delivery_title'] ?? '').toString(),
+      discoverCardExpressDeliveryButton:
+          (json['discover_card_express_delivery_button'] ?? '').toString(),
+      discoverCardWeeklySurpriseTitle:
+          (json['discover_card_weekly_surprise_title'] ?? '').toString(),
+      discoverCardWeeklySurpriseButton:
+          (json['discover_card_weekly_surprise_button'] ?? '').toString(),
       momentsScreenTitle: (json['moments_screen_title'] ?? '').toString(),
       recipientsScreenTitle: (json['recipients_screen_title'] ?? '').toString(),
-      flowersPlanetsScreenTitle: (json['flowers_planets_screen_title'] ?? '').toString(),
-      flowersGiftsScreenTitle: (json['flowers_gifts_screen_title'] ?? '').toString(),
+      flowersPlanetsScreenTitle:
+          (json['flowers_planets_screen_title'] ?? '').toString(),
+      flowersGiftsScreenTitle:
+          (json['flowers_gifts_screen_title'] ?? '').toString(),
       searchPlaceholder: (json['search_placeholder'] ?? '').toString(),
       searchButton: (json['search_button'] ?? '').toString(),
       categoryFilterTitle: (json['category_filter_title'] ?? '').toString(),
@@ -306,7 +404,8 @@ class LocalizationMessages {
       productDetailsTitle: (json['product_details_title'] ?? '').toString(),
       wardayaPoints: (json['wardaya_points'] ?? '').toString(),
       currencySar: (json['currency_sar'] ?? '').toString(),
-      splitPaymentsWithTamara: (json['split_payments_with_tamara'] ?? '').toString(),
+      splitPaymentsWithTamara:
+          (json['split_payments_with_tamara'] ?? '').toString(),
       earn: (json['earn'] ?? '').toString(),
       cartEmptyTitle: (json['cart_empty_title'] ?? '').toString(),
       cartEmptySubtitle: (json['cart_empty_subtitle'] ?? '').toString(),
@@ -327,8 +426,10 @@ class LocalizationMessages {
       toLabel: (json['to_label'] ?? '').toString(),
       fromLabel: (json['from_label'] ?? '').toString(),
       optionalHint: (json['optional_hint'] ?? '').toString(),
-      suggestedMessagesPromptPart1: (json['suggested_messages_prompt_part1'] ?? '').toString(),
-      suggestedMessagesPromptPart2: (json['suggested_messages_prompt_part2'] ?? '').toString(),
+      suggestedMessagesPromptPart1:
+          (json['suggested_messages_prompt_part1'] ?? '').toString(),
+      suggestedMessagesPromptPart2:
+          (json['suggested_messages_prompt_part2'] ?? '').toString(),
       signatureButton: (json['signature_button'] ?? '').toString(),
       qrCodeLabel: (json['qr_code_label'] ?? '').toString(),
       recordVideoButton: (json['record_video_button'] ?? '').toString(),
@@ -349,7 +450,8 @@ class LocalizationMessages {
       mediaIntroText: (json['media_intro_text'] ?? '').toString(),
       howItWorks: (json['how_it_works'] ?? '').toString(),
       pasteLinkInstruction: (json['paste_link_instruction'] ?? '').toString(),
-      recordVideoInstruction: (json['record_video_instruction'] ?? '').toString(),
+      recordVideoInstruction:
+          (json['record_video_instruction'] ?? '').toString(),
       qrCodeNote: (json['qr_code_note'] ?? '').toString(),
       freeLabel: (json['free_label'] ?? '').toString(),
       pasteLinkHint: (json['paste_link_hint'] ?? '').toString(),
@@ -403,24 +505,34 @@ class LocalizationMessages {
       birthdayLabel: (json['birthday_label'] ?? '').toString(),
       mySubscriptionsTitle: (json['my_subscriptions_title'] ?? '').toString(),
       wardayaSubscriptions: (json['wardaya_subscriptions'] ?? '').toString(),
-      subscriptionDescription: (json['subscription_description'] ?? '').toString(),
-      subscriptionHowItWorks: (json['subscription_how_it_works'] ?? '').toString(),
-      subscriptionSelectYourPlan: (json['subscription_select_your_plan'] ?? '').toString(),
-      subscriptionChooseWhatFitsYourNeeds: (json['subscription_choose_what_fits_your_needs'] ?? '').toString(),
-      subscriptionCustomizeDelivery: (json['subscription_customize_delivery'] ?? '').toString(),
+      subscriptionDescription:
+          (json['subscription_description'] ?? '').toString(),
+      subscriptionHowItWorks:
+          (json['subscription_how_it_works'] ?? '').toString(),
+      subscriptionSelectYourPlan:
+          (json['subscription_select_your_plan'] ?? '').toString(),
+      subscriptionChooseWhatFitsYourNeeds:
+          (json['subscription_choose_what_fits_your_needs'] ?? '').toString(),
+      subscriptionCustomizeDelivery:
+          (json['subscription_customize_delivery'] ?? '').toString(),
       subscriptionSetDeliveryFrequencyAndPayment:
-          (json['subscription_set_delivery_frequency_and_payment'] ?? '').toString(),
-      subscriptionEnjoyFreshFlowers: (json['subscription_enjoy_fresh_flowers'] ?? '').toString(),
+          (json['subscription_set_delivery_frequency_and_payment'] ?? '')
+              .toString(),
+      subscriptionEnjoyFreshFlowers:
+          (json['subscription_enjoy_fresh_flowers'] ?? '').toString(),
       subscriptionReceiveFreshFlowersEveryTime:
-          (json['subscription_receive_fresh_flowers_every_time'] ?? '').toString(),
+          (json['subscription_receive_fresh_flowers_every_time'] ?? '')
+              .toString(),
       subscriptionPlans: (json['subscription_plans'] ?? '').toString(),
-      subscriptionStartingFrom: (json['subscription_starting_from'] ?? '').toString(),
+      subscriptionStartingFrom:
+          (json['subscription_starting_from'] ?? '').toString(),
       subscriptionButton: (json['subscription_button'] ?? '').toString(),
       more: (json['more'] ?? '').toString(),
       less: (json['less'] ?? '').toString(),
       startingFrom: (json['starting_from'] ?? '').toString(),
       perDelivery: (json['per_delivery'] ?? '').toString(),
-      subscriptionDurationTitle: (json['subscription_duration_title'] ?? '').toString(),
+      subscriptionDurationTitle:
+          (json['subscription_duration_title'] ?? '').toString(),
       deliveryFrequency: (json['deliveryـfrequency'] ?? '').toString(),
       onceAWeek: (json['once_a_week'] ?? '').toString(),
       everyTwoWeeks: (json['every_two_weeks'] ?? '').toString(),
@@ -430,9 +542,102 @@ class LocalizationMessages {
       total: (json['total'] ?? '').toString(),
       startingDate: (json['starting_date'] ?? '').toString(),
       selectOtherDate: (json['select_other_date'] ?? '').toString(),
-      weSelectDeleveryBasedArea: (json['we_select_delevery_based_area'] ?? '').toString(),
+      weSelectDeleveryBasedArea:
+          (json['we_select_delevery_based_area'] ?? '').toString(),
       off: (json['off'] ?? '').toString(),
       perDelivery1: (json['perـdelivery'] ?? '').toString(),
+      favoritesScreenTitle: (json['favorites_screen_title'] ?? '').toString(),
+      favoritesEmptyTitle: (json['favorites_empty_title'] ?? '').toString(),
+      favoritesEmptyButton: (json['favorites_empty_button'] ?? '').toString(),
+      subMenuItemsScreenTitle:
+          (json['sub_menu_items_screen_title'] ?? '').toString(),
+      subMenuItemsEmptyTitle:
+          (json['sub_menu_items_empty_title'] ?? '').toString(),
+      addressesScreenTitle: (json['addresses_screen_title'] ?? '').toString(),
+      addressesScreenAddNewAddressButton:
+          (json['addresses_screen_add_new_address_button'] ?? '').toString(),
+      addressesScreenNoAddressesFound:
+          (json['addresses_screen_no_addresses_found'] ?? '').toString(),
+      recipientDetailsScreenTitle:
+          (json['recipient_details_screen_title'] ?? '').toString(),
+      recipientDetailsScreenContinueButton:
+          (json['recipient_details_screen_continue_button'] ?? '').toString(),
+      recipientDetailsScreenRecipientNameLabel:
+          (json['recipient_details_screen_recipient_name_label'] ?? '')
+              .toString(),
+      recipientDetailsScreenRecipientPhoneLabel:
+          (json['recipient_details_screen_recipient_phone_label'] ?? '')
+              .toString(),
+      recipientDetailsScreenRecipientAreaLabel:
+          (json['recipient_details_screen_recipient_area_label'] ?? '')
+              .toString(),
+      recipientDetailsScreenRecipientAddressLabel:
+          (json['recipient_details_screen_recipient_address_label'] ?? '')
+              .toString(),
+      recipientDetailsScreenRecipientExtraAddressLabel:
+          (json['recipient_details_screen_recipient_extra_address_label'] ?? '')
+              .toString(),
+      orderNumber: (json['orderNumber'] ?? '').toString(),
+      date: (json['date'] ?? '').toString(),
+      orderId: (json['orderId'] ?? '').toString(),
+      orderStatus: (json['orderStatus'] ?? '').toString(),
+      deliveryInfo: (json['deliveryInfo'] ?? '').toString(),
+      recipientName: (json['recipientName'] ?? '').toString(),
+      phoneNumber: (json['phoneNumber'] ?? '').toString(),
+      address: (json['address'] ?? '').toString(),
+      estimatedDeliveryTime: (json['estimatedDeliveryTime'] ?? '').toString(),
+      myIdentity: (json['myIdentity'] ?? '').toString(),
+      expressDelivery: (json['expressDelivery'] ?? '').toString(),
+      hidden: (json['hidden'] ?? '').toString(),
+      visible: (json['visible'] ?? '').toString(),
+      yes: (json['yes'] ?? '').toString(),
+      no: (json['no'] ?? '').toString(),
+      quantity: (json['quantity'] ?? '').toString(),
+      noOrders: (json['noOrders'] ?? '').toString(),
+      recipient: (json['recipient'] ?? '').toString(),
+      deliveryDate: (json['deliveryDate'] ?? '').toString(),
+      paymentDetails: (json['paymentDetails'] ?? '').toString(),
+      subtotal: (json['subtotal'] ?? '').toString(),
+      deliveryCharges: (json['deliveryCharges'] ?? '').toString(),
+      vatLabel: (json['vatLabel'] ?? '').toString(),
+      paymentMethod: (json['paymentMethod'] ?? '').toString(),
+      searchOrderPlaceholder:
+          (json['search_order_placeholder'] ?? '').toString(),
+      paymentTitle: (json['paymentTitle'] ?? '').toString(),
+      cancelPaymentTitle: (json['cancelPaymentTitle'] ?? '').toString(),
+      cancelPaymentMessage: (json['cancelPaymentMessage'] ?? '').toString(),
+      cancelPaymentNo: (json['cancelPaymentNo'] ?? '').toString(),
+      cancelPaymentYes: (json['cancelPaymentYes'] ?? '').toString(),
+      paymentAmountTitle: (json['paymentAmountTitle'] ?? '').toString(),
+      paymentOrderIdLabel: (json['paymentOrderIdLabel'] ?? '').toString(),
+      paymentError: (json['paymentError'] ?? '').toString(),
+      paymentTryAgain: (json['paymentTryAgain'] ?? '').toString(),
+      paymentSuccessTitle: (json['paymentSuccessTitle'] ?? '').toString(),
+      paymentSuccessMessage: (json['paymentSuccessMessage'] ?? '').toString(),
+      paymentFailedTitle: (json['paymentFailedTitle'] ?? '').toString(),
+      paymentFailedMessage: (json['paymentFailedMessage'] ?? '').toString(),
+      paymentOkButton: (json['paymentOkButton'] ?? '').toString(),
+      paymentMethodsTitle: (json['paymentMethodsTitle'] ?? '').toString(),
+      proceedToPaymentButton: (json['proceedToPaymentButton'] ?? '').toString(),
+      creditDebitCardTitle: (json['creditDebitCardTitle'] ?? '').toString(),
+      creditDebitCardDescription:
+          (json['creditDebitCardDescription'] ?? '').toString(),
+      madaTitle: (json['madaTitle'] ?? '').toString(),
+      madaDescription: (json['madaDescription'] ?? '').toString(),
+      applePayTitle: (json['applePayTitle'] ?? '').toString(),
+      applePayDescription: (json['applePayDescription'] ?? '').toString(),
+      googlePayTitle: (json['googlePayTitle'] ?? '').toString(),
+      googlePayDescription: (json['googlePayDescription'] ?? '').toString(),
+      benefitPayTitle: (json['benefitPayTitle'] ?? '').toString(),
+      benefitPayDescription: (json['benefitPayDescription'] ?? '').toString(),
+      selectCityTitle: (json['selectCityTitle'] ?? '').toString(),
+      sAfilter: (json['sAFilter'] ?? '').toString(),
+      sendYourGiftTo: (json['SendYourGiftTo'] ?? '').toString(),
+      myOccasions: (json['myOccasions'] ?? '').toString(),
+      quickAdd: (json['quickAdd'] ?? '').toString(),
+      selectAnOccasionToCreateAreminder:
+          (json['selectAnOccasionToCreateAReminder'] ?? '').toString(),
+      yourUpcomingOccasion: (json['yourUpcomingOccasion'] ?? '').toString(),
       deliveryFrequency1: (json['delivery_frequency'] ?? '').toString(),
       subscriptionDuration1: (json['subscription_duration'] ?? '').toString(),
     );
@@ -637,6 +842,79 @@ class LocalizationMessages {
   final String weSelectDeleveryBasedArea;
   final String off;
   final String perDelivery1;
+  final String favoritesScreenTitle;
+  final String favoritesEmptyTitle;
+  final String favoritesEmptyButton;
+  final String subMenuItemsScreenTitle;
+  final String subMenuItemsEmptyTitle;
+  final String addressesScreenTitle;
+  final String addressesScreenAddNewAddressButton;
+  final String addressesScreenNoAddressesFound;
+  final String recipientDetailsScreenTitle;
+  final String recipientDetailsScreenContinueButton;
+  final String recipientDetailsScreenRecipientNameLabel;
+  final String recipientDetailsScreenRecipientPhoneLabel;
+  final String recipientDetailsScreenRecipientAreaLabel;
+  final String recipientDetailsScreenRecipientAddressLabel;
+  final String recipientDetailsScreenRecipientExtraAddressLabel;
+  final String orderNumber;
+  final String date;
+  final String orderId;
+  final String orderStatus;
+  final String deliveryInfo;
+  final String recipientName;
+  final String phoneNumber;
+  final String address;
+  final String estimatedDeliveryTime;
+  final String myIdentity;
+  final String expressDelivery;
+  final String hidden;
+  final String visible;
+  final String yes;
+  final String no;
+  final String quantity;
+  final String noOrders;
+  final String recipient;
+  final String deliveryDate;
+  final String paymentDetails;
+  final String subtotal;
+  final String deliveryCharges;
+  final String vatLabel;
+  final String paymentMethod;
+  final String searchOrderPlaceholder;
+  final String paymentTitle;
+  final String cancelPaymentTitle;
+  final String cancelPaymentMessage;
+  final String cancelPaymentNo;
+  final String cancelPaymentYes;
+  final String paymentAmountTitle;
+  final String paymentOrderIdLabel;
+  final String paymentError;
+  final String paymentTryAgain;
+  final String paymentSuccessTitle;
+  final String paymentSuccessMessage;
+  final String paymentFailedTitle;
+  final String paymentFailedMessage;
+  final String paymentOkButton;
+  final String paymentMethodsTitle;
+  final String proceedToPaymentButton;
+  final String creditDebitCardTitle;
+  final String creditDebitCardDescription;
+  final String madaTitle;
+  final String madaDescription;
+  final String applePayTitle;
+  final String applePayDescription;
+  final String googlePayTitle;
+  final String googlePayDescription;
+  final String benefitPayTitle;
+  final String benefitPayDescription;
+  final String selectCityTitle;
+  final String sAfilter;
+  final String sendYourGiftTo;
+  final String myOccasions;
+  final String quickAdd;
+  final String selectAnOccasionToCreateAreminder;
+  final String yourUpcomingOccasion;
   final String deliveryFrequency1;
   final String subscriptionDuration1;
   Map<String, Object> get _content => {
@@ -667,7 +945,8 @@ class LocalizationMessages {
         r'''home_woodnt_you_love_this''': homeWoodntYouLoveThis,
         r'''home_an_extra_luxurious_touch''': homeAnExtraLuxuriousTouch,
         r'''home_best_sellers''': homeBestSellers,
-        r'''home_captivation_aromas_of_mubkhar''': homeCaptivationAromasOfMubkhar,
+        r'''home_captivation_aromas_of_mubkhar''':
+            homeCaptivationAromasOfMubkhar,
         r'''home_gift_your_loved_ones''': homeGiftYourLovedOnes,
         r'''home_natures_magic''': homeNaturesMagic,
         r'''home_latest_and_loveliest''': homeLatestAndLoveliest,
@@ -683,14 +962,20 @@ class LocalizationMessages {
         r'''explore_card_recipients''': exploreCardRecipients,
         r'''explore_category_flowers_plants''': exploreCategoryFlowersPlants,
         r'''explore_category_flowers_gifts''': exploreCategoryFlowersGifts,
-        r'''explore_category_express_delivery''': exploreCategoryExpressDelivery,
-        r'''explore_category_floral_subscription''': exploreCategoryFloralSubscription,
+        r'''explore_category_express_delivery''':
+            exploreCategoryExpressDelivery,
+        r'''explore_category_floral_subscription''':
+            exploreCategoryFloralSubscription,
         r'''explore_brands_youll_love''': exploreBrandsYoullLove,
         r'''discover_new_ideas_title''': discoverNewIdeasTitle,
-        r'''discover_card_express_delivery_title''': discoverCardExpressDeliveryTitle,
-        r'''discover_card_express_delivery_button''': discoverCardExpressDeliveryButton,
-        r'''discover_card_weekly_surprise_title''': discoverCardWeeklySurpriseTitle,
-        r'''discover_card_weekly_surprise_button''': discoverCardWeeklySurpriseButton,
+        r'''discover_card_express_delivery_title''':
+            discoverCardExpressDeliveryTitle,
+        r'''discover_card_express_delivery_button''':
+            discoverCardExpressDeliveryButton,
+        r'''discover_card_weekly_surprise_title''':
+            discoverCardWeeklySurpriseTitle,
+        r'''discover_card_weekly_surprise_button''':
+            discoverCardWeeklySurpriseButton,
         r'''moments_screen_title''': momentsScreenTitle,
         r'''recipients_screen_title''': recipientsScreenTitle,
         r'''flowers_planets_screen_title''': flowersPlanetsScreenTitle,
@@ -815,11 +1100,14 @@ class LocalizationMessages {
         r'''subscription_description''': subscriptionDescription,
         r'''subscription_how_it_works''': subscriptionHowItWorks,
         r'''subscription_select_your_plan''': subscriptionSelectYourPlan,
-        r'''subscription_choose_what_fits_your_needs''': subscriptionChooseWhatFitsYourNeeds,
+        r'''subscription_choose_what_fits_your_needs''':
+            subscriptionChooseWhatFitsYourNeeds,
         r'''subscription_customize_delivery''': subscriptionCustomizeDelivery,
-        r'''subscription_set_delivery_frequency_and_payment''': subscriptionSetDeliveryFrequencyAndPayment,
+        r'''subscription_set_delivery_frequency_and_payment''':
+            subscriptionSetDeliveryFrequencyAndPayment,
         r'''subscription_enjoy_fresh_flowers''': subscriptionEnjoyFreshFlowers,
-        r'''subscription_receive_fresh_flowers_every_time''': subscriptionReceiveFreshFlowersEveryTime,
+        r'''subscription_receive_fresh_flowers_every_time''':
+            subscriptionReceiveFreshFlowersEveryTime,
         r'''subscription_plans''': subscriptionPlans,
         r'''subscription_starting_from''': subscriptionStartingFrom,
         r'''subscription_button''': subscriptionButton,
@@ -840,6 +1128,88 @@ class LocalizationMessages {
         r'''we_select_delevery_based_area''': weSelectDeleveryBasedArea,
         r'''off''': off,
         r'''perـdelivery''': perDelivery1,
+        r'''favorites_screen_title''': favoritesScreenTitle,
+        r'''favorites_empty_title''': favoritesEmptyTitle,
+        r'''favorites_empty_button''': favoritesEmptyButton,
+        r'''sub_menu_items_screen_title''': subMenuItemsScreenTitle,
+        r'''sub_menu_items_empty_title''': subMenuItemsEmptyTitle,
+        r'''addresses_screen_title''': addressesScreenTitle,
+        r'''addresses_screen_add_new_address_button''':
+            addressesScreenAddNewAddressButton,
+        r'''addresses_screen_no_addresses_found''':
+            addressesScreenNoAddressesFound,
+        r'''recipient_details_screen_title''': recipientDetailsScreenTitle,
+        r'''recipient_details_screen_continue_button''':
+            recipientDetailsScreenContinueButton,
+        r'''recipient_details_screen_recipient_name_label''':
+            recipientDetailsScreenRecipientNameLabel,
+        r'''recipient_details_screen_recipient_phone_label''':
+            recipientDetailsScreenRecipientPhoneLabel,
+        r'''recipient_details_screen_recipient_area_label''':
+            recipientDetailsScreenRecipientAreaLabel,
+        r'''recipient_details_screen_recipient_address_label''':
+            recipientDetailsScreenRecipientAddressLabel,
+        r'''recipient_details_screen_recipient_extra_address_label''':
+            recipientDetailsScreenRecipientExtraAddressLabel,
+        r'''orderNumber''': orderNumber,
+        r'''date''': date,
+        r'''orderId''': orderId,
+        r'''orderStatus''': orderStatus,
+        r'''deliveryInfo''': deliveryInfo,
+        r'''recipientName''': recipientName,
+        r'''phoneNumber''': phoneNumber,
+        r'''address''': address,
+        r'''estimatedDeliveryTime''': estimatedDeliveryTime,
+        r'''myIdentity''': myIdentity,
+        r'''expressDelivery''': expressDelivery,
+        r'''hidden''': hidden,
+        r'''visible''': visible,
+        r'''yes''': yes,
+        r'''no''': no,
+        r'''quantity''': quantity,
+        r'''noOrders''': noOrders,
+        r'''recipient''': recipient,
+        r'''deliveryDate''': deliveryDate,
+        r'''paymentDetails''': paymentDetails,
+        r'''subtotal''': subtotal,
+        r'''deliveryCharges''': deliveryCharges,
+        r'''vatLabel''': vatLabel,
+        r'''paymentMethod''': paymentMethod,
+        r'''search_order_placeholder''': searchOrderPlaceholder,
+        r'''paymentTitle''': paymentTitle,
+        r'''cancelPaymentTitle''': cancelPaymentTitle,
+        r'''cancelPaymentMessage''': cancelPaymentMessage,
+        r'''cancelPaymentNo''': cancelPaymentNo,
+        r'''cancelPaymentYes''': cancelPaymentYes,
+        r'''paymentAmountTitle''': paymentAmountTitle,
+        r'''paymentOrderIdLabel''': paymentOrderIdLabel,
+        r'''paymentError''': paymentError,
+        r'''paymentTryAgain''': paymentTryAgain,
+        r'''paymentSuccessTitle''': paymentSuccessTitle,
+        r'''paymentSuccessMessage''': paymentSuccessMessage,
+        r'''paymentFailedTitle''': paymentFailedTitle,
+        r'''paymentFailedMessage''': paymentFailedMessage,
+        r'''paymentOkButton''': paymentOkButton,
+        r'''paymentMethodsTitle''': paymentMethodsTitle,
+        r'''proceedToPaymentButton''': proceedToPaymentButton,
+        r'''creditDebitCardTitle''': creditDebitCardTitle,
+        r'''creditDebitCardDescription''': creditDebitCardDescription,
+        r'''madaTitle''': madaTitle,
+        r'''madaDescription''': madaDescription,
+        r'''applePayTitle''': applePayTitle,
+        r'''applePayDescription''': applePayDescription,
+        r'''googlePayTitle''': googlePayTitle,
+        r'''googlePayDescription''': googlePayDescription,
+        r'''benefitPayTitle''': benefitPayTitle,
+        r'''benefitPayDescription''': benefitPayDescription,
+        r'''selectCityTitle''': selectCityTitle,
+        r'''sAFilter''': sAfilter,
+        r'''SendYourGiftTo''': sendYourGiftTo,
+        r'''myOccasions''': myOccasions,
+        r'''quickAdd''': quickAdd,
+        r'''selectAnOccasionToCreateAReminder''':
+            selectAnOccasionToCreateAreminder,
+        r'''yourUpcomingOccasion''': yourUpcomingOccasion,
         r'''delivery_frequency''': deliveryFrequency1,
         r'''subscription_duration''': subscriptionDuration1,
       };
@@ -884,7 +1254,8 @@ final LocalizationMessages en = LocalizationMessages(
   dividerText: 'OR',
   signInWith: 'Sign in with',
   forgetPasswordTitle: 'Forget Password?',
-  forgetPasswordInstruction: 'Enter the email address associated with your account',
+  forgetPasswordInstruction:
+      'Enter the email address associated with your account',
   resetPasswordButton: 'Reset Password',
   createAccountTitle: 'Create Account',
   createAccountButton: 'Create Account',
@@ -1002,7 +1373,8 @@ final LocalizationMessages en = LocalizationMessages(
   frontSideLabel: 'Front Side (Message)',
   backSideLabel: 'Back Side (Cover)',
   qrQuestion: 'Did you enjoy this gift?',
-  qrInstruction: 'Scan the QR code to share your heartfelt message with the sender.',
+  qrInstruction:
+      'Scan the QR code to share your heartfelt message with the sender.',
   signatureTitle: 'Your Signature',
   drawInstruction: 'Draw your signature inside the frame',
   clearButton: 'Clear',
@@ -1052,7 +1424,8 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   subscriptionSelectYourPlan: 'Select Your Plan:',
   subscriptionChooseWhatFitsYourNeeds: 'Choose what fits your needs.',
   subscriptionCustomizeDelivery: 'Customize Delivery:',
-  subscriptionSetDeliveryFrequencyAndPayment: 'Set delivery frequency and payment.',
+  subscriptionSetDeliveryFrequencyAndPayment:
+      'Set delivery frequency and payment.',
   subscriptionEnjoyFreshFlowers: 'Enjoy Fresh Flowers:',
   subscriptionReceiveFreshFlowersEveryTime: 'Receive fresh flowers every time.',
   subscriptionPlans: 'Subscription Plans',
@@ -1072,9 +1445,85 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   total: 'Total',
   startingDate: 'Starting Date',
   selectOtherDate: 'Select Other Date',
-  weSelectDeleveryBasedArea: 'We’ll select the best delivery time based on your area and delivery date',
+  weSelectDeleveryBasedArea:
+      'We’ll select the best delivery time based on your area and delivery date',
   off: 'OFF',
   perDelivery1: 'Per delivery',
+  favoritesScreenTitle: 'Favorites',
+  favoritesEmptyTitle: 'No Favorite products found!',
+  favoritesEmptyButton: 'Start Shopping',
+  subMenuItemsScreenTitle: 'Sub Menu Items',
+  subMenuItemsEmptyTitle: 'No sub-menu items available',
+  addressesScreenTitle: 'Saved Addresses',
+  addressesScreenAddNewAddressButton: 'Add a new Address',
+  addressesScreenNoAddressesFound: 'No addresses found',
+  recipientDetailsScreenTitle: 'Recipient Details',
+  recipientDetailsScreenContinueButton: 'Continue',
+  recipientDetailsScreenRecipientNameLabel: 'Recipient Name',
+  recipientDetailsScreenRecipientPhoneLabel: 'Phone Number',
+  recipientDetailsScreenRecipientAreaLabel: 'Area',
+  recipientDetailsScreenRecipientAddressLabel: 'Address',
+  recipientDetailsScreenRecipientExtraAddressLabel:
+      'Extra address details(optional)',
+  orderNumber: 'Order Number',
+  date: 'Date',
+  orderId: 'Order ID',
+  orderStatus: 'Status',
+  deliveryInfo: 'Delivery Info',
+  recipientName: 'Name',
+  phoneNumber: 'Phone Number',
+  address: 'Address',
+  estimatedDeliveryTime: 'Estimated Delivery Time',
+  myIdentity: 'My Identity',
+  expressDelivery: 'Express Delivery',
+  hidden: 'Hidden',
+  visible: 'Visible',
+  yes: 'Yes',
+  no: 'No',
+  quantity: 'x',
+  noOrders: 'No orders found',
+  recipient: 'Recipient',
+  deliveryDate: 'Delivery Date',
+  paymentDetails: 'Payment Details',
+  subtotal: 'Subtotal',
+  deliveryCharges: 'Delivery charges',
+  vatLabel: 'VAT',
+  paymentMethod: 'Payment Method',
+  searchOrderPlaceholder: 'Search for orders by order number or recipient name',
+  paymentTitle: 'Payment',
+  cancelPaymentTitle: 'Cancel Payment?',
+  cancelPaymentMessage: 'Are you sure you want to cancel this payment?',
+  cancelPaymentNo: 'No',
+  cancelPaymentYes: 'Yes',
+  paymentAmountTitle: 'Payment Amount',
+  paymentOrderIdLabel: 'Order ID:',
+  paymentError: 'Error loading payment page:',
+  paymentTryAgain: 'Try Again',
+  paymentSuccessTitle: 'Payment Successful',
+  paymentSuccessMessage: 'Your payment has been processed successfully.',
+  paymentFailedTitle: 'Payment Failed',
+  paymentFailedMessage:
+      'Your payment could not be processed. Please try again.',
+  paymentOkButton: 'OK',
+  paymentMethodsTitle: 'Payment Methods',
+  proceedToPaymentButton: 'Proceed to Payment',
+  creditDebitCardTitle: 'Credit/Debit Card',
+  creditDebitCardDescription: 'Pay with Visa, Mastercard, or other cards',
+  madaTitle: 'Mada',
+  madaDescription: 'Pay with Mada debit card',
+  applePayTitle: 'Apple Pay',
+  applePayDescription: 'Quick and secure payment with Apple Pay',
+  googlePayTitle: 'Google Pay',
+  googlePayDescription: 'Quick and secure payment with Google Pay',
+  benefitPayTitle: 'Benefit Pay',
+  benefitPayDescription: 'Pay using Benefit Pay service',
+  selectCityTitle: 'Select City',
+  sAfilter: 'Saudi Arabia',
+  sendYourGiftTo: 'Send your gift to...',
+  myOccasions: 'My Occasions',
+  quickAdd: 'Quick Add',
+  selectAnOccasionToCreateAreminder: 'Select an occasion to create a reminder',
+  yourUpcomingOccasion: 'Your Upcoming Occasion',
   deliveryFrequency1: '',
   subscriptionDuration1: '',
 );
@@ -1279,9 +1728,84 @@ final LocalizationMessages ar = LocalizationMessages(
   total: 'الإجمالي',
   startingDate: 'تاريخ البدء',
   selectOtherDate: 'اختر تاريخًا آخر',
-  weSelectDeleveryBasedArea: 'سنختار أفضل وقت توصيل بناءً على منطقتك وتاريخ التوصيل',
+  weSelectDeleveryBasedArea:
+      'سنختار أفضل وقت توصيل بناءً على منطقتك وتاريخ التوصيل',
   off: 'خصم',
   perDelivery1: '',
+  favoritesScreenTitle: 'المفضلة',
+  favoritesEmptyTitle: 'لا يوجد منتجات مفضلة بعد',
+  favoritesEmptyButton: 'ابدأ التسوق',
+  subMenuItemsScreenTitle: 'المنتجات',
+  subMenuItemsEmptyTitle: 'لا يوجد منتجات بعد',
+  addressesScreenTitle: 'العنوان المحفوظ',
+  addressesScreenAddNewAddressButton: 'إضافة عنوان جديد',
+  addressesScreenNoAddressesFound: 'لا يوجد عنوان محفوظ',
+  recipientDetailsScreenTitle: 'تفاصيل المستلم',
+  recipientDetailsScreenContinueButton: 'متابعة',
+  recipientDetailsScreenRecipientNameLabel: 'الاسم',
+  recipientDetailsScreenRecipientPhoneLabel: 'رقم الهاتف',
+  recipientDetailsScreenRecipientAreaLabel: 'المنطقة',
+  recipientDetailsScreenRecipientAddressLabel: 'العنوان',
+  recipientDetailsScreenRecipientExtraAddressLabel: 'العنوان الإضافي (اختياري)',
+  orderNumber: 'رقم الطلب',
+  date: 'التاريخ',
+  orderId: 'رقم الطلب',
+  orderStatus: 'الحالة',
+  deliveryInfo: 'معلومات التوصيل',
+  recipientName: 'الاسم',
+  phoneNumber: 'رقم الهاتف',
+  address: 'العنوان',
+  estimatedDeliveryTime: 'وقت التوصيل المتوقع',
+  myIdentity: 'هويتي',
+  expressDelivery: 'توصيل سريع',
+  hidden: 'مخفي',
+  visible: 'ظاهر',
+  yes: 'نعم',
+  no: 'لا',
+  quantity: '×',
+  noOrders: 'لا توجد طلبات',
+  recipient: 'المستلم',
+  deliveryDate: 'تاريخ التوصيل',
+  paymentDetails: 'تفاصيل الدفع',
+  subtotal: 'المجموع الفرعي',
+  deliveryCharges: 'رسوم التوصيل',
+  vatLabel: 'ضريبة القيمة المضافة',
+  paymentMethod: 'طريقة الدفع',
+  searchOrderPlaceholder: 'ابحث عن رقم الطلب أو اسم المستلم',
+  paymentTitle: 'الدفع',
+  cancelPaymentTitle: 'إلغاء الدفع؟',
+  cancelPaymentMessage: 'هل أنت متأكد أنك تريد إلغاء عملية الدفع؟',
+  cancelPaymentNo: 'لا',
+  cancelPaymentYes: 'نعم',
+  paymentAmountTitle: 'مبلغ الدفع',
+  paymentOrderIdLabel: 'رقم الطلب:',
+  paymentError: 'خطأ في تحميل صفحة الدفع:',
+  paymentTryAgain: 'حاول مرة أخرى',
+  paymentSuccessTitle: 'تم الدفع بنجاح',
+  paymentSuccessMessage: 'تمت معالجة عملية الدفع الخاصة بك بنجاح.',
+  paymentFailedTitle: 'فشلت عملية الدفع',
+  paymentFailedMessage:
+      'تعذر معالجة عملية الدفع الخاصة بك. يرجى المحاولة مرة أخرى.',
+  paymentOkButton: 'موافق',
+  paymentMethodsTitle: 'طرق الدفع',
+  proceedToPaymentButton: 'المتابعة للدفع',
+  creditDebitCardTitle: 'بطاقة ائتمان/خصم',
+  creditDebitCardDescription: 'ادفع باستخدام فيزا، ماستركارد، أو بطاقات أخرى',
+  madaTitle: 'مدى',
+  madaDescription: 'ادفع باستخدام بطاقة مدى',
+  applePayTitle: 'Apple Pay',
+  applePayDescription: 'دفع سريع وآمن باستخدام Apple Pay',
+  googlePayTitle: 'Google Pay',
+  googlePayDescription: 'دفع سريع وآمن باستخدام Google Pay',
+  benefitPayTitle: 'بنفت باي',
+  benefitPayDescription: 'ادفع باستخدام خدمة بنفت باي',
+  selectCityTitle: 'اختر المدينة',
+  sAfilter: 'المملكة العربية السعودية',
+  sendYourGiftTo: 'أرسل هديتك إلى...',
+  myOccasions: 'مناسباتي',
+  quickAdd: 'إضافة سريعة',
+  selectAnOccasionToCreateAreminder: 'اختر مناسبة لإنشاء تذكير',
+  yourUpcomingOccasion: 'مناسباتك القادمة',
   deliveryFrequency1: 'تكرار التوصيل',
   subscriptionDuration1: 'مدة الاشتراك',
 );
@@ -1292,7 +1816,8 @@ final Map<Locale, LocalizationMessages> _languageMap = {
 
 final Map<Locale, LocalizationMessages> _providersLanguagesMap = {};
 
-class EasiestLocalizationDelegate extends LocalizationsDelegate<LocalizationMessages> {
+class EasiestLocalizationDelegate
+    extends LocalizationsDelegate<LocalizationMessages> {
   EasiestLocalizationDelegate({
     List<LocalizationProvider<LocalizationMessages>> providers = const [],
   }) {
@@ -1307,7 +1832,8 @@ class EasiestLocalizationDelegate extends LocalizationsDelegate<LocalizationMess
 
   @override
   bool isSupported(Locale locale) {
-    final bool supportedByProviders = _providers.any((LocalizationProvider value) => value.canLoad(locale));
+    final bool supportedByProviders =
+        _providers.any((LocalizationProvider value) => value.canLoad(locale));
     if (supportedByProviders) {
       return true;
     }
@@ -1328,7 +1854,8 @@ class EasiestLocalizationDelegate extends LocalizationsDelegate<LocalizationMess
 
     LocalizationProvider<LocalizationMessages>? localizationProvider;
 
-    for (final LocalizationProvider<LocalizationMessages> provider in _providers) {
+    for (final LocalizationProvider<LocalizationMessages> provider
+        in _providers) {
       if (provider.canLoad(locale)) {
         localizationProvider = provider;
         break;
@@ -1352,20 +1879,26 @@ class EasiestLocalizationDelegate extends LocalizationsDelegate<LocalizationMess
   }
 
   @override
-  bool shouldReload(LocalizationsDelegate<LocalizationMessages> old) => old != this;
+  bool shouldReload(LocalizationsDelegate<LocalizationMessages> old) =>
+      old != this;
 }
 
 class Messages {
-  static LocalizationMessages of(BuildContext context) => Localizations.of(context, LocalizationMessages)!;
+  static LocalizationMessages of(BuildContext context) =>
+      Localizations.of(context, LocalizationMessages)!;
 
-  static LocalizationMessages? getContent(Locale locale) => _loadLocalLocale(locale);
+  static LocalizationMessages? getContent(Locale locale) =>
+      _loadLocalLocale(locale);
 
   static LocalizationMessages get el {
     final String? defaultLocaleString = Intl.defaultLocale;
-    final List<String> localeParticles = defaultLocaleString == null ? [] : defaultLocaleString.split(RegExp(r'[_-]'));
+    final List<String> localeParticles = defaultLocaleString == null
+        ? []
+        : defaultLocaleString.split(RegExp(r'[_-]'));
     final Locale? defaultLocale = localeParticles.isEmpty
         ? null
-        : Locale(localeParticles.first, localeParticles.length > 1 ? localeParticles[1] : null);
+        : Locale(localeParticles.first,
+            localeParticles.length > 1 ? localeParticles[1] : null);
     LocalizationMessages? localeContent = _providersLanguagesMap[defaultLocale];
     localeContent ??= _languageMap[defaultLocale] ?? _languageMap.values.first;
     return localeContent;
@@ -1406,8 +1939,11 @@ const List<Locale> supportedLocales = [
   Locale('ar'),
 ];
 
-List<Locale> supportedLocalesWithProviders(List<LocalizationProvider<LocalizationMessages>> providers) => [
-      for (final LocalizationProvider provider in providers) ...provider.supportedLocales,
+List<Locale> supportedLocalesWithProviders(
+        List<LocalizationProvider<LocalizationMessages>> providers) =>
+    [
+      for (final LocalizationProvider provider in providers)
+        ...provider.supportedLocales,
       ...supportedLocales,
     ];
 

@@ -106,6 +106,8 @@ wardaya_points: "نقاط وردايا"
 currency_sar: "ر.س. "
 split_payments_with_tamara: "قسط دفعاتك على 4 دفعات مع تمارا"
 earn: "اكسب "
+similarProducts: "منتجات مشابهة"
+noSimilarProducts: "لا توجد منتجات مشابهة"
 
 # Cart Screen texts
 cart_empty_title: "سلة التسوق فارغة!"
@@ -245,3 +247,97 @@ starting_date: "تاريخ البدء"
 select_other_date: "اختر تاريخًا آخر"
 we_select_delevery_based_area: "سنختار أفضل وقت توصيل بناءً على منطقتك وتاريخ التوصيل"
 off: "خصم"
+
+# FavoritesScreen texts
+favorites_screen_title: "المفضلة"
+favorites_empty_title: "لا يوجد منتجات مفضلة بعد"
+favorites_empty_button: "ابدأ التسوق"
+
+# SubMenuItemsScreen texts
+sub_menu_items_screen_title: "المنتجات"
+sub_menu_items_empty_title: "لا يوجد منتجات بعد"
+
+# AddressesScreen texts
+addresses_screen_title: "العنوان المحفوظ"
+addresses_screen_add_new_address_button: "إضافة عنوان جديد"
+addresses_screen_no_addresses_found: "لا يوجد عنوان محفوظ"
+
+# RecipientDetails texts
+recipient_details_screen_title: "تفاصيل المستلم"
+recipient_details_screen_continue_button: "متابعة"
+recipient_details_screen_recipient_name_label: "الاسم"
+recipient_details_screen_recipient_phone_label: "رقم الهاتف"
+recipient_details_screen_recipient_area_label: "المنطقة"
+recipient_details_screen_recipient_address_label: "العنوان"
+recipient_details_screen_recipient_extra_address_label: "العنوان الإضافي (اختياري)"
+
+# Order Card texts
+orderNumber: "رقم الطلب"
+date: "التاريخ"
+orderId: "رقم الطلب"
+orderStatus: "الحالة"
+deliveryInfo: "معلومات التوصيل"
+recipientName: "الاسم"
+phoneNumber: "رقم الهاتف"
+address: "العنوان"
+estimatedDeliveryTime: "وقت التوصيل المتوقع"
+myIdentity: "هويتي"
+expressDelivery: "توصيل سريع"
+hidden: "مخفي"
+visible: "ظاهر"
+yes: "نعم"
+no: "لا"
+quantity: "×"
+noOrders: "لا توجد طلبات"
+recipient: "المستلم"
+deliveryDate: "تاريخ التوصيل"
+
+# Order Details Screen
+paymentDetails: "تفاصيل الدفع"
+subtotal: "المجموع الفرعي"
+deliveryCharges: "رسوم التوصيل"
+vatLabel: "ضريبة القيمة المضافة"
+paymentMethod: "طريقة الدفع"
+
+search_order_placeholder: "ابحث عن رقم الطلب أو اسم المستلم"
+
+# Payment Screen texts
+paymentTitle: "الدفع"
+cancelPaymentTitle: "إلغاء الدفع؟"
+cancelPaymentMessage: "هل أنت متأكد أنك تريد إلغاء عملية الدفع؟"
+cancelPaymentNo: "لا"
+cancelPaymentYes: "نعم"
+paymentAmountTitle: "مبلغ الدفع"
+paymentOrderIdLabel: "رقم الطلب:"
+paymentError: "خطأ في تحميل صفحة الدفع:"
+paymentTryAgain: "حاول مرة أخرى"
+paymentSuccessTitle: "تم الدفع بنجاح"
+paymentSuccessMessage: "تمت معالجة عملية الدفع الخاصة بك بنجاح."
+paymentFailedTitle: "فشلت عملية الدفع"
+paymentFailedMessage: "تعذر معالجة عملية الدفع الخاصة بك. يرجى المحاولة مرة أخرى."
+paymentOkButton: "موافق"
+
+# Payment Method Screen texts
+paymentMethodsTitle: "طرق الدفع"
+proceedToPaymentButton: "المتابعة للدفع"
+creditDebitCardTitle: "بطاقة ائتمان/خصم"
+creditDebitCardDescription: "ادفع باستخدام فيزا، ماستركارد، أو بطاقات أخرى"
+madaTitle: "مدى"
+madaDescription: "ادفع باستخدام بطاقة مدى"
+applePayTitle: "Apple Pay"
+applePayDescription: "دفع سريع وآمن باستخدام Apple Pay"
+googlePayTitle: "Google Pay"
+googlePayDescription: "دفع سريع وآمن باستخدام Google Pay"
+benefitPayTitle: "بنفت باي"
+benefitPayDescription: "ادفع باستخدام خدمة بنفت باي"
+
+# Select City
+selectCityTitle: "اختر المدينة"
+sAFilter: "المملكة العربية السعودية"
+SendYourGiftTo: "أرسل هديتك إلى..."
+
+# OccasionsScreen texts
+myOccasions: "مناسباتي"
+quickAdd: "إضافة سريعة"
+selectAnOccasionToCreateAReminder: "اختر مناسبة لإنشاء تذكير"
+yourUpcomingOccasion: "مناسباتك القادمة"

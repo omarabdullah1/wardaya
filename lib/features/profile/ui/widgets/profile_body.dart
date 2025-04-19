@@ -90,12 +90,7 @@ class ProfileBody extends StatelessWidget {
                   context.el.myOrders,
                   Assets.of(context).svgs.orders_truck_svg,
                   onTap: () async {
-                    // String token = await SharedPrefHelper.getSecuredString(
-                    //     SharedPrefKeys.userToken);
-                    // log('Saved Token: $token');
-                    // String userData = await SharedPrefHelper.getSecuredString(
-                    //     SharedPrefKeys.userData);
-                    // log('Saved User Data: $userData');
+                    context.pushNamed(Routes.myOrdersScreen);
                   },
                 ),
                 const Divider(
@@ -114,26 +109,48 @@ class ProfileBody extends StatelessWidget {
                   color: ColorsManager.lightGrey,
                   height: 0.0,
                 ),
-                _buildOptionRow(context, context.el.invoices,
-                    Assets.of(context).svgs.invoices_svg),
+                _buildOptionRow(
+                  context,
+                  context.el.invoices,
+                  Assets.of(context).svgs.invoices_svg,
+                  onTap: () {
+                    context.pushNamed(Routes.invoicesScreen);
+                  },
+                ),
                 const Divider(
                   color: ColorsManager.lightGrey,
                   height: 0.0,
                 ),
-                _buildOptionRow(context, context.el.savedAddresses,
-                    Assets.of(context).svgs.addresses_svg),
+                _buildOptionRow(
+                  context,
+                  context.el.savedAddresses,
+                  Assets.of(context).svgs.addresses_svg,
+                  onTap: () {
+                    context.pushNamed(Routes.addressesScreen);
+                  },
+                ),
                 const Divider(
                   color: ColorsManager.lightGrey,
                   height: 0.0,
                 ),
-                _buildOptionRow(context, context.el.occasions,
-                    Assets.of(context).svgs.occassions_svg),
+                _buildOptionRow(
+                  context,
+                  context.el.occasions,
+                  Assets.of(context).svgs.occassions_svg,
+                  onTap: () => context.pushNamed(Routes.occasionsScreen),
+                ),
                 const Divider(
                   color: ColorsManager.lightGrey,
                   height: 0.0,
                 ),
-                _buildOptionRow(context, context.el.favouriteGifts,
-                    Assets.of(context).svgs.fav_gifs_svg),
+                _buildOptionRow(
+                  context,
+                  context.el.favouriteGifts,
+                  Assets.of(context).svgs.fav_gifs_svg,
+                  onTap: () {
+                    context.pushNamed(Routes.favoritesScreen);
+                  },
+                ),
               ],
             ),
           ),
@@ -285,6 +302,8 @@ class ProfileBody extends StatelessWidget {
                   onTap: () {
                     SharedPrefHelper.removeSecuredString(
                         SharedPrefKeys.userToken);
+                    SharedPrefHelper.removeSecuredString(
+                        SharedPrefKeys.userAreaId);
                     context.pushNamedAndRemoveUntil(
                       Routes.loginScreen,
                       predicate: (route) => false,

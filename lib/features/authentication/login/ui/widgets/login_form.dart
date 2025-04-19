@@ -11,9 +11,16 @@ import '../../../../../core/theming/colors.dart';
 import '../../../../../core/widgets/app_text_button.dart';
 import '../../logic/cubit/login_cubit.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
 
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  bool _isPasswordVisible = false;
+ 
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<LoginCubit>();
@@ -62,8 +69,19 @@ class LoginForm extends StatelessWidget {
                 ),
               ),
               labelStyle: TextStylesInter.font15GreyRegular,
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                  color: ColorsManager.darkGray,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _isPasswordVisible = !_isPasswordVisible;
+                  });
+                },
+              ),
             ),
-            obscureText: true, // Hide password
+            obscureText: !_isPasswordVisible, // Toggle password visibility
           ),
           const VerticalSpace(height: 18),
           // "Sign in with" text from localization
@@ -74,8 +92,8 @@ class LoginForm extends StatelessWidget {
             buttonHeight: 45.h,
             onPressed: () => validateThenDoLogin(context),
           ),
+          // Rest of the form remains unchanged
           const VerticalSpace(height: 13),
-          // Row for "Forget Password?" and "Create Account"
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -100,7 +118,6 @@ class LoginForm extends StatelessWidget {
             ],
           ),
           const VerticalSpace(height: 18),
-          // Row for divider with localized "OR"
           Row(
             children: [
               const Expanded(child: Divider()),
@@ -122,6 +139,17 @@ class LoginForm extends StatelessWidget {
 
   void validateThenDoLogin(BuildContext context) {
     final cubit = context.read<LoginCubit>();
+    // Add basic validation to prevent empty submissions
+    if (cubit.emailController.text.isEmpty ||
+        cubit.passwordController.text.isEmpty) {
+      cubit.snackbarShow(
+        context,
+        'Email and password are required',
+        color: ColorsManager.red,
+      );
+      return;
+    }
+
     if (cubit.formKey.currentState!.validate()) {
       cubit.emitLoginStates();
     }

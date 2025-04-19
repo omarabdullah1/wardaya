@@ -40,14 +40,19 @@ class SearchBody extends StatelessWidget {
   Widget _buildBody() {
     return BlocBuilder<SearchCubit, SearchState>(
       builder: (context, state) {
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 25.0.h),
-          child: const Column(
+        return Container(
+          height: MediaQuery.of(context).size.height,
+          padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 16.0.h),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FilterChipsRow(),
-              Divider(color: ColorsManager.lightGrey, thickness: 1.0),
-              ProductCountAndView(),
-              Expanded(
+              const FilterChipsRow(),
+              SizedBox(height: 8.h),
+              const Divider(color: ColorsManager.lightGrey, thickness: 1.0),
+              SizedBox(height: 8.h),
+              const ProductCountAndView(),
+              SizedBox(height: 8.h),
+              const Expanded(
                 child: ProductView(),
               ),
             ],
@@ -98,8 +103,8 @@ class SearchBody extends StatelessWidget {
                           const SizedBox(width: 8.0),
                           Text(
                             context.el.searchButton,
-                            style: const TextStyle(
-                                color: ColorsManager.white, fontSize: 16),
+                            style: TextStyle(
+                                color: ColorsManager.white, fontSize: 16.sp),
                           ),
                         ],
                 ),

@@ -41,6 +41,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
           .toList(),
       points: (json['points'] as num?)?.toInt(),
       cart: (json['cart'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      selectedDeliveryArea: json['selectedDeliveryArea'] as String?,
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
@@ -58,6 +59,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'favorites': instance.favorites,
       'points': instance.points,
       'cart': instance.cart,
+      'selectedDeliveryArea': instance.selectedDeliveryArea,
     };
 
 Wallet _$WalletFromJson(Map<String, dynamic> json) => Wallet(

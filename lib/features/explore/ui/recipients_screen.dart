@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 
-import '../../../core/helpers/dummy_vars.dart';
+import '../../../core/assets/assets.dart';
 import '../../../core/routing/routes.dart';
 import '../../../core/theming/colors.dart';
+import '../../../core/widgets/loading_widget.dart';
+import '../../home/data/apis/home_api_constants.dart';
+import '../../home/data/models/home_recipients_response.dart';
+import '../../home/logic/recipients/recipients_cubit.dart';
+import '../../home/logic/recipients/recipients_state.dart';
 
 class RecipientsScreen extends StatelessWidget {
-  final BuildContext cartContext;
-  const RecipientsScreen({super.key, required this.cartContext});
+  const RecipientsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,51 +42,135 @@ class RecipientsScreen extends StatelessWidget {
             fontSize: 29.0.sp,
           ),
         ),
-
-        backgroundColor:
-            ColorsManager.transparent, // Make the AppBar transparent
+        backgroundColor: ColorsManager.transparent,
         elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, // Number of columns
-            crossAxisSpacing: 12.0, // Spacing between columns
-            mainAxisSpacing: 12.0, // Spacing between rows
-            childAspectRatio: 0.8, // Aspect ratio of grid items (square)
-          ),
-          itemCount: recipients.length,
-          itemBuilder: (context, index) {
-            return _buildRecipientItem(
-                context, recipients[index], recipientsImages(context)[index]);
+        child: BlocBuilder<RecipientsCubit, RecipientsState>(
+          builder: (context, state) {
+            return state.when(
+              initial: () =>
+                  const Center(child: Text("Let's explore recipients!")),
+              loading: () => _buildLoadingState(),
+              success: (List<Recipient> recipients) =>
+                  _buildRecipientsGrid(recipients),
+              error: (String message) => Center(child: Text("Error: $message")),
+            );
           },
         ),
       ),
     );
   }
 
-  Widget _buildRecipientItem(
-      BuildContext context, String recipient, String recipientImage) {
+  // Create a loading state with fake items
+  Widget _buildLoadingState() {
+    // Create a list of 15 fake items
+    final List<Recipient> fakeItems = List.generate(
+      15,
+      (index) => Recipient(
+        id: 'loading_$index',
+        name: 'Loading...',
+        images: [],
+      ),
+    );
+
+    return Skeletonizer(
+      enabled: true,
+      child: _buildRecipientsGrid(fakeItems),
+    );
+  }
+
+  Widget _buildRecipientsGrid(List<Recipient> recipients) {
+    return Builder(builder: (context) {
+      if (recipients.isEmpty) {
+        return const Center(child: Text("No recipients available"));
+      }
+
+      return RefreshIndicator(
+        color: ColorsManager.mainRose,
+        onRefresh: () {
+          context.read<RecipientsCubit>().getRecipients();
+          return Future.value();
+        },
+        child: GridView.builder(
+          physics: const AlwaysScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3, // Number of columns
+            crossAxisSpacing: 12.0, // Spacing between columns
+            mainAxisSpacing: 12.0, // Spacing between rows
+            childAspectRatio: 0.8, // Aspect ratio of grid items
+          ),
+          itemCount: recipients.length,
+          itemBuilder: (context, index) {
+            return _buildRecipientItem(context, recipients[index]);
+          },
+        ),
+      );
+    });
+  }
+
+  Widget _buildRecipientItem(BuildContext context, Recipient recipient) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(Routes.categoryScreen,
-            arguments: [recipient, cartContext]);
+        // Pass recipient ID as argument
+        Map<String, dynamic> arguments = {
+          'recipientId': recipient.id,
+          'extraArgs': recipient.name,
+        };
+
+        context.pushNamed(
+          Routes.categoryScreen,
+          arguments: arguments,
+        );
       },
       child: Column(
         children: [
-          Container(
+          SizedBox(
             width: context.pOW(25).w,
             height: context.pOH(8.5).h,
-            decoration: BoxDecoration(
-              color: const Color(0xFFF0F0F0), // Background color of grid item
-              borderRadius: BorderRadius.circular(8.0), // Rounded corners
-            ),
-            child: Center(
-              child: Image.asset(
-                recipientImage,
-              ),
-            ),
+            child: recipient.images.isEmpty
+                ? Container(
+                    decoration: BoxDecoration(
+                      color: ColorsManager.lightLighterGrey,
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child:
+                        const Icon(Icons.person, color: ColorsManager.mainRose),
+                  )
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          '${HomeApiConstants.apiBaseUrlForImages}${recipient.images.first}',
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                      placeholder: (context, url) => Container(
+                        color: ColorsManager.lightLighterGrey,
+                        child: Center(
+                          child: LoadingWidget(
+                            loadingState: true,
+                            height: 60.h,
+                            width: 60.w,
+                            backgroundColor: ColorsManager.lightLighterGrey,
+                          ),
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Container(
+                        color: ColorsManager.lightLighterGrey,
+                        child: Center(
+                          child: SvgPicture.asset(
+                            Assets.of(context).svgs.small_logo_svg,
+                            colorFilter: const ColorFilter.mode(
+                              ColorsManager.lightGrey,
+                              BlendMode.srcIn,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
           ),
           SizedBox(height: 8.0.h), // Add spacing between image and text
           SizedBox(
@@ -86,7 +178,7 @@ class RecipientsScreen extends StatelessWidget {
             child: FittedBox(
               fit: BoxFit.scaleDown,
               child: Text(
-                recipient,
+                recipient.name,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.inter(
                   color: ColorsManager.mainRose,

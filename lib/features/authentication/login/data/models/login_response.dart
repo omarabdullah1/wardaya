@@ -40,6 +40,7 @@ class User {
   List<String>? favorites;
   int? points;
   List<String>? cart;
+  String? selectedDeliveryArea;
 
   User({
     this.wallet,
@@ -56,6 +57,7 @@ class User {
     this.favorites,
     this.points,
     this.cart,
+    this.selectedDeliveryArea,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

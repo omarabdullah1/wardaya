@@ -10,8 +10,7 @@ class Routes {
   static const String searchScreen = '/searchScreen';
   static const String momentsScreen = '/momentsScreen';
   static const String recipientsScreen = '/recipientsScreen';
-  static const String flowersPlantsScreen = '/flowersPlantsScreen';
-  static const String flowersGiftsScreen = '/flowersGiftsScreen';
+  static const String subMenuItemsScreen = '/subMenuItemsScreen';
   static const String categoryScreen = '/categoryScreen';
   static const String productDetailsScreen = '/productDetailsScreen';
   static const String faqScreen = '/faqScreen';
@@ -25,4 +24,14 @@ class Routes {
   static const String susbcriptionsDurationScreen =
       '/susbcriptionsDurationScreen';
   static const String subscripionCheckout = '/subscripionCheckout';
+  static const String favoritesScreen = '/favoritesScreen';
+  static const String addressesScreen = '/addressesScreen';
+  static const String recipientDetailsScreen = '/recipientDetailsScreen';
+  static const String occasionsScreen = '/occasionsScreen';
+  static const String invoicesScreen = '/invoicesScreen';
+  static const String benefitPayScreen = '/benefit-pay';
+  static const String paymentMethodScreen = '/payment-method';
+  static const String tapPaymentScreen = '/tap-payment';
+  static const String myOrdersScreen = '/myOrdersScreen';
+  static const String orderDetailsScreen = '/orderDetailsScreen';
 }

@@ -4,7 +4,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-        
+
 class Assets extends StatelessWidget {
   final AssetsData assets;
   final Widget child;
@@ -16,7 +16,8 @@ class Assets extends StatelessWidget {
   });
 
   static AssetsData of(BuildContext context) {
-    final widget = context.dependOnInheritedWidgetOfExactType<_InheritedAssets>();
+    final widget =
+        context.dependOnInheritedWidgetOfExactType<_InheritedAssets>();
     return widget?.assets ?? AssetsData.light();
   }
 
@@ -38,16 +39,20 @@ class _InheritedAssets extends InheritedWidget {
   });
 
   @override
-  bool updateShouldNotify(covariant _InheritedAssets oldWidget) => assets != oldWidget.assets;
+  bool updateShouldNotify(covariant _InheritedAssets oldWidget) =>
+      assets != oldWidget.assets;
 }
 
 class AssetsData {
   static AssetsData? _light;
   static AssetsData? _dark;
 
-  factory AssetsData.light() => _light ??= AssetsData._(brightness: Brightness.light);
-  factory AssetsData.dark() => _dark ??= AssetsData._(brightness: Brightness.dark);
-  factory AssetsData.brightness(Brightness brightness) => brightness == Brightness.light ? AssetsData.light() : AssetsData.dark();
+  factory AssetsData.light() =>
+      _light ??= AssetsData._(brightness: Brightness.light);
+  factory AssetsData.dark() =>
+      _dark ??= AssetsData._(brightness: Brightness.dark);
+  factory AssetsData.brightness(Brightness brightness) =>
+      brightness == Brightness.light ? AssetsData.light() : AssetsData.dark();
 
   final Brightness _brightness;
 
@@ -74,7 +79,7 @@ class _assets_fonts_dart {
 
   _assets_fonts_dart._({
     required Brightness brightness,
-  })  : _brightness = brightness;
+  }) : _brightness = brightness;
 
   final Kammerlander_Bold_ttf = 'assets/fonts/Kammerlander-Bold.ttf';
   final Kammerlander_Regular_ttf = 'assets/fonts/Kammerlander-Regular.ttf';
@@ -86,7 +91,7 @@ class _assets_i18n_dart {
 
   _assets_i18n_dart._({
     required Brightness brightness,
-  })  : _brightness = brightness;
+  }) : _brightness = brightness;
 
   final ar_yaml = 'assets/i18n/ar.yaml';
   final en_yaml = 'assets/i18n/en.yaml';
@@ -111,12 +116,15 @@ class _assets_images_dart {
   final cake_png = 'assets/images/cake.png';
   final chocolate_png = 'assets/images/chocolate.png';
   final delivery_png = 'assets/images/delivery.png';
+  final empty_favs_png = 'assets/images/empty_favs.png';
   final flower_gift_png = 'assets/images/flower_gift.png';
   final flowers_png = 'assets/images/flowers.png';
   final flowersAndGifts_png = 'assets/images/flowersAndGifts.png';
   final flowersAndPlants_png = 'assets/images/flowersAndPlants.png';
   final flowers_gifts_png = 'assets/images/flowers_gifts.png';
   final jewlary_png = 'assets/images/jewlary.png';
+  final moments_png = 'assets/images/moments.png';
+  final recipients_png = 'assets/images/recipients.png';
   final ring_png = 'assets/images/ring.png';
   final sub1_png = 'assets/images/sub1.png';
   final sub2_png = 'assets/images/sub2.png';
@@ -131,7 +139,7 @@ class _assets_images_cards_dart {
 
   _assets_images_cards_dart._({
     required Brightness brightness,
-  })  : _brightness = brightness;
+  }) : _brightness = brightness;
 
   final card1_png = 'assets/images/cards/card1.png';
   final card2_png = 'assets/images/cards/card2.png';
@@ -143,7 +151,7 @@ class _assets_images_categories_dart {
 
   _assets_images_categories_dart._({
     required Brightness brightness,
-  })  : _brightness = brightness;
+  }) : _brightness = brightness;
 
   final aunt_png = 'assets/images/categories/aunt.png';
   final children_png = 'assets/images/categories/children.png';
@@ -163,13 +171,16 @@ class _assets_images_logo_dart {
 
   _assets_images_logo_dart._({
     required Brightness brightness,
-  })  : _brightness = brightness;
+  }) : _brightness = brightness;
 
-  final Wardaya_Application_splash_gif = 'assets/images/logo/Wardaya_Application_splash.gif';
+  final Wardaya_Application_splash_gif =
+      'assets/images/logo/Wardaya_Application_splash.gif';
   final loading_gif_gif = 'assets/images/logo/loading_gif.gif';
   final splash_png = 'assets/images/logo/splash.png';
-  final splash_android12_logo_png = 'assets/images/logo/splash_android12_logo.png';
-  final splash_android12_logo_empty_png = 'assets/images/logo/splash_android12_logo_empty.png';
+  final splash_android12_logo_png =
+      'assets/images/logo/splash_android12_logo.png';
+  final splash_android12_logo_empty_png =
+      'assets/images/logo/splash_android12_logo_empty.png';
 }
 
 class _assets_lottie_dart {
@@ -177,7 +188,7 @@ class _assets_lottie_dart {
 
   _assets_lottie_dart._({
     required Brightness brightness,
-  })  : _brightness = brightness;
+  }) : _brightness = brightness;
 
   final loading_animation_json = 'assets/lottie/loading_animation.json';
 }
@@ -187,14 +198,16 @@ class _assets_pay_cards_dart {
 
   _assets_pay_cards_dart._({
     required Brightness brightness,
-  })  : _brightness = brightness;
+  }) : _brightness = brightness;
 
+  final apple_pay_png = 'assets/pay_cards/apple_pay.png';
   final gpay_png = 'assets/pay_cards/gpay.png';
   final mada_png = 'assets/pay_cards/mada.png';
   final master_card_png = 'assets/pay_cards/master_card.png';
   final paypal_png = 'assets/pay_cards/paypal.png';
   final tamara_png = 'assets/pay_cards/tamara.png';
   final visa_png = 'assets/pay_cards/visa.png';
+  final stc_png = 'assets/pay_cards/stc.png';
 }
 
 class _assets_svgs_dart {
@@ -202,7 +215,7 @@ class _assets_svgs_dart {
 
   _assets_svgs_dart._({
     required Brightness brightness,
-  })  : _brightness = brightness;
+  }) : _brightness = brightness;
 
   final add_cart_svg = 'assets/svgs/add_cart.svg';
   final addresses_svg = 'assets/svgs/addresses.svg';
@@ -215,6 +228,8 @@ class _assets_svgs_dart {
   final delivery_svg = 'assets/svgs/delivery.svg';
   final edit_pen_svg = 'assets/svgs/edit_pen.svg';
   final empty_cart_svg = 'assets/svgs/empty_cart.svg';
+  final empty_orders_svg = 'assets/svgs/orders_empty.svg';
+  final empty_favs_svg = 'assets/svgs/empty_favs.svg';
   final enjoy_fresh_flowers_svg = 'assets/svgs/enjoy_fresh_flowers.svg';
   final explore_svg = 'assets/svgs/explore.svg';
   final faq_svg = 'assets/svgs/faq.svg';
@@ -238,6 +253,7 @@ class _assets_svgs_dart {
   final profile_svg = 'assets/svgs/profile.svg';
   final profile_avatar_svg = 'assets/svgs/profile_avatar.svg';
   final remove_svg = 'assets/svgs/remove.svg';
+  final riyal_symbol_svg = 'assets/svgs/riyal_symbol.svg';
   final select_plan_svg = 'assets/svgs/select_plan.svg';
   final share_svg = 'assets/svgs/share.svg';
   final signature_svg = 'assets/svgs/signature.svg';

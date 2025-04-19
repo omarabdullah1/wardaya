@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:wardaya/features/search/data/models/filter_data_body.dart';
 import 'package:wardaya/features/search/data/models/filter_data_response.dart';
 
@@ -27,9 +29,12 @@ class SearchRepo {
         searchRequestBody.recipients,
         searchRequestBody.bundleTypes,
         searchRequestBody.priceRange,
+        searchRequestBody.subMenuItems,
+        searchRequestBody.expressDelivery,
       );
       return ApiResult.success(response);
-    } catch (error) {
+    } catch (error, stackTrace) {
+      log('Error in search: $error', stackTrace: stackTrace);
       return ApiResult.failure(ApiErrorHandler.handle(error));
     }
   }

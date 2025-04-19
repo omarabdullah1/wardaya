@@ -1,0 +1,57 @@
+import 'dart:developer';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wardaya/features/subscriptions/data/repos/subscription_repo.dart';
+import 'subscription_state.dart';
+
+class SubscriptionCubit extends Cubit<SubscriptionState> {
+  final SubscriptionRepo _subscriptionRepo;
+
+  SubscriptionCubit(this._subscriptionRepo)
+      : super(const SubscriptionState.initial());
+
+  String? deliveryFrequency;
+  String? subscriptionDuration;
+  String? selectedDate;
+
+  Future<void> emitGetSubscription() async {
+    if (isClosed) return; // Prevent operations on closed cubit
+
+    emit(const SubscriptionState.loading());
+    try {
+      log('Fetching subscription plans');
+
+      final response = await _subscriptionRepo.getSubscriptionPlans();
+
+      if (isClosed) return; // Check again after async operation
+
+      response.when(success: (data) {
+        log('Subscription plans fetched successfully');
+        emit(SubscriptionState.success(data));
+      }, failure: (error) {
+        log('Error fetching subscription plans: ${error.message}');
+        emit(
+            SubscriptionState.error(error.message ?? 'Unknown error occurred'));
+      });
+    } catch (e) {
+      if (isClosed) return; // Check again after exception
+
+      log('Exception in emitGetSubscription: $e');
+      emit(const SubscriptionState.error('An unexpected error occurred'));
+    }
+  }
+
+  setDeliveryFrequency(String value) {
+    deliveryFrequency = value;
+    emit(SubscriptionState.setDeliveryFrequency(value));
+  }
+
+  setSubscriptionDuration(String value) {
+    subscriptionDuration = value;
+    emit(SubscriptionState.setSubscriptionDuration(value));
+  }
+
+  setSelectedDate(String value) {
+    selectedDate = value;
+    emit(SubscriptionState.setSelectedDate(value));
+  }
+}

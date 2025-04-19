@@ -14,7 +14,7 @@ class _SubscriptionService implements SubscriptionService {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'https://wardaya-tan.vercel.app/';
+    baseUrl ??= 'https://wecareroot.ddns.net:5100/';
   }
 
   final Dio _dio;
@@ -24,19 +24,93 @@ class _SubscriptionService implements SubscriptionService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<SubscriptionResponse> getSubcriptionPlan() async {
+  Future<List<SubscriptionPlan>> getSubcriptionPlans() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<SubscriptionResponse>(Options(
+    final _options = _setStreamType<List<SubscriptionPlan>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          'api/subscriptions',
+          'api/subscriptionPlans',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<SubscriptionPlan> _value;
+    try {
+      _value = _result.data!
+          .map((dynamic i) =>
+              SubscriptionPlan.fromJson(i as Map<String, dynamic>))
+          .toList();
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<List<SubscriptionDuration>> getSubcriptionDurations() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<List<SubscriptionDuration>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'api/durations',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<SubscriptionDuration> _value;
+    try {
+      _value = _result.data!
+          .map((dynamic i) =>
+              SubscriptionDuration.fromJson(i as Map<String, dynamic>))
+          .toList();
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<SubscriptionCheckoutResponse> checkout(
+      SubscriptionCheckoutRequest subscriptionCheckoutRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(subscriptionCheckoutRequest.toJson());
+    final _options = _setStreamType<SubscriptionCheckoutResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'api/cart/subscription_checkout',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -46,9 +120,9 @@ class _SubscriptionService implements SubscriptionService {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late SubscriptionResponse _value;
+    late SubscriptionCheckoutResponse _value;
     try {
-      _value = SubscriptionResponse.fromJson(_result.data!);
+      _value = SubscriptionCheckoutResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

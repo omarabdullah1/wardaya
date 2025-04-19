@@ -24,6 +24,8 @@ abstract class SearchService {
     @Query("recipients") String? recipients,
     @Query("bundleTypes") String? bundleTypes,
     @Query("priceRange") String? priceRange,
+    @Query("subMenuItems") String? subMenuItems,
+    @Query("expressDelivery") bool? expressDelivery,
   );
   @GET(SearchApiConstants.productsFilterData)
   Future<FilterDataResponse> productsFilterData(
