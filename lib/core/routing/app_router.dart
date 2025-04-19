@@ -153,14 +153,16 @@ class AppRouter {
                   create: (context) => getIt<FavoritesCubit>()..getFavorites(),
                 ),
                 BlocProvider(
-                  create: (context) => getIt<ProductDetailsCubit>()
-                    ..getProductById(extraArgs.id),
+                  create: (context) => getIt<ProductDetailsCubit>(),
                 ),
                 BlocProvider(
                   create: (context) => getIt<AddToCartCubit>(),
                 ),
                 BlocProvider(
                   create: (context) => getIt<CartCubit>(),
+                ),
+                BlocProvider(
+                  create: (context) => getIt<SearchCubit>(),
                 ),
               ],
               child: ProductDetailsScreen(

@@ -19,6 +19,27 @@ class HomeUpdateCityResponse {
 }
 
 @JsonSerializable()
+class CartItem {
+  @JsonKey(name: '_id')
+  final String id;
+  final String productId;
+  final int quantity;
+  @JsonKey(defaultValue: <dynamic>[])
+  final List<dynamic> bundleItems;
+
+  CartItem({
+    required this.id,
+    required this.productId,
+    required this.quantity,
+    this.bundleItems = const [],
+  });
+
+  factory CartItem.fromJson(Map<String, dynamic> json) =>
+      _$CartItemFromJson(json);
+  Map<String, dynamic> toJson() => _$CartItemToJson(this);
+}
+
+@JsonSerializable()
 class User {
   final Wallet? wallet;
   @JsonKey(name: '_id')
@@ -44,16 +65,20 @@ class User {
   @JsonKey(name: '__v')
   final int version;
   @JsonKey(name: 'phone_number')
-  final String? phoneNumber; // Made optional
-  final List<String>? cart; // Made optional
-  final List<String>? favorites; // Made optional
-  final int? points; // Made optional
-  final List<String>? invoices; // Made optional
-  @JsonKey(name: 'userOccasions')
-  final List<String>? userOccasions; // Made optional
-  final List<String>? addresses; // Made optional
+  final String? phoneNumber;
+  @JsonKey(defaultValue: <CartItem>[])
+  final List<CartItem> cart;
+  @JsonKey(defaultValue: <String>[])
+  final List<String> favorites;
+  final int? points;
+  @JsonKey(defaultValue: <String>[])
+  final List<String> invoices;
+  @JsonKey(name: 'userOccasions', defaultValue: <String>[])
+  final List<String> userOccasions;
+  @JsonKey(defaultValue: <String>[])
+  final List<String> addresses;
   @JsonKey(name: 'selectedDeliveryArea')
-  final String? selectedDeliveryArea; // Made optional
+  final String? selectedDeliveryArea;
 
   User({
     this.wallet,
@@ -71,18 +96,17 @@ class User {
     required this.createdAt,
     required this.updatedAt,
     required this.version,
-    this.phoneNumber, // Made optional
-    this.cart = const [], // Default empty list
-    this.favorites = const [], // Default empty list
-    this.points = 0, // Default value
-    this.invoices = const [], // Default empty list
-    this.userOccasions = const [], // Default empty list
-    this.addresses = const [], // Default empty list
+    this.phoneNumber,
+    this.cart = const [],
+    this.favorites = const [],
+    this.points,
+    this.invoices = const [],
+    this.userOccasions = const [],
+    this.addresses = const [],
     this.selectedDeliveryArea,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
-
   Map<String, dynamic> toJson() => _$UserToJson(this);
 }
 
@@ -97,6 +121,5 @@ class Wallet {
   });
 
   factory Wallet.fromJson(Map<String, dynamic> json) => _$WalletFromJson(json);
-
   Map<String, dynamic> toJson() => _$WalletToJson(this);
 }

@@ -4,4 +4,9 @@ class CartApiConstants {
 
   // Endpoints
   static const String cart = 'api/cart';
+  static const String removeFromCart = "api/cart/remove/{productId}";
+
+  // Full API paths
+  static String removeFromCartByIdPath(String productId) =>
+      "api/cart/remove/$productId";
 }

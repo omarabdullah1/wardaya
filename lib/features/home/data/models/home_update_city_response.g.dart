@@ -20,6 +20,20 @@ Map<String, dynamic> _$HomeUpdateCityResponseToJson(
       'user': instance.user,
     };
 
+CartItem _$CartItemFromJson(Map<String, dynamic> json) => CartItem(
+      id: json['_id'] as String,
+      productId: json['productId'] as String,
+      quantity: (json['quantity'] as num).toInt(),
+      bundleItems: json['bundleItems'] as List<dynamic>? ?? [],
+    );
+
+Map<String, dynamic> _$CartItemToJson(CartItem instance) => <String, dynamic>{
+      '_id': instance.id,
+      'productId': instance.productId,
+      'quantity': instance.quantity,
+      'bundleItems': instance.bundleItems,
+    };
+
 User _$UserFromJson(Map<String, dynamic> json) => User(
       wallet: json['wallet'] == null
           ? null
@@ -39,26 +53,27 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       updatedAt: json['updatedAt'] as String,
       version: (json['__v'] as num).toInt(),
       phoneNumber: json['phone_number'] as String?,
-      cart:
-          (json['cart'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-              const [],
+      cart: (json['cart'] as List<dynamic>?)
+              ?.map((e) => CartItem.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
       favorites: (json['favorites'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
-          const [],
-      points: (json['points'] as num?)?.toInt() ?? 0,
+          [],
+      points: (json['points'] as num?)?.toInt(),
       invoices: (json['invoices'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
-          const [],
+          [],
       userOccasions: (json['userOccasions'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
-          const [],
+          [],
       addresses: (json['addresses'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
-          const [],
+          [],
       selectedDeliveryArea: json['selectedDeliveryArea'] as String?,
     );
 

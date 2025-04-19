@@ -15,8 +15,7 @@ import 'package:wardaya/features/product_details/data/apis/product_details_api_c
 import 'package:wardaya/features/product_details/data/models/product_response.dart';
 
 class ProductDetailsBody extends StatefulWidget {
-  final ProductResponse
-      product; // Accept both Product and ProductResponse types
+  final ProductResponse product;
 
   final VoidCallback onAddToCart;
 
@@ -34,72 +33,6 @@ class _ProductDetailsBodyState extends State<ProductDetailsBody> {
   int _currentImageIndex = 0;
   bool _isDescriptionTab = true; // Controls which tab is selected
   bool _isExpanded = false;
-
-  Widget _buildBundleItemsSection() {
-    if (!widget.product.isBundle && widget.product.bundleItems.isEmpty) {
-      return const SizedBox.shrink();
-    }
-
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const VerticalSpace(height: 16),
-          Text(
-            'What\'s included in your bundle',
-            style: GoogleFonts.inter(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: ColorsManager.darkGray,
-            ),
-          ),
-          const VerticalSpace(height: 8),
-          Text(
-            'Customizable items (${widget.product.bundleItems.length})',
-            style: GoogleFonts.inter(
-              fontSize: 14,
-              color: ColorsManager.darkGray,
-            ),
-          ),
-          const VerticalSpace(height: 16),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: widget.product.bundleItems.length,
-            separatorBuilder: (context, index) =>
-                const VerticalSpace(height: 12),
-            itemBuilder: (context, index) {
-              final bundleItem = widget.product.bundleItems[index];
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.grey.shade200),
-                ),
-                child: ListTile(
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-                  title: Text(
-                    bundleItem.categories.first.categoryTitle,
-                    style: GoogleFonts.inter(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () {
-                    // Handle bundle item customization
-                  },
-                ),
-              );
-            },
-          ),
-          const VerticalSpace(height: 16),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -315,11 +248,91 @@ class _ProductDetailsBodyState extends State<ProductDetailsBody> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16.h),
-                // Bundle Items Section
-                _buildBundleItemsSection(),
-
                 SizedBox(height: 8.h),
+
+                // Bundle Items Section
+                if (widget.product.isBundle ||
+                    widget.product.bundleItems.isNotEmpty)
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const VerticalSpace(height: 16),
+                        Text(
+                          'What\'s included in your bundle',
+                          style: GoogleFonts.inter(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: ColorsManager.darkGray,
+                          ),
+                        ),
+                        const VerticalSpace(height: 8),
+                        Text(
+                          'Customizable items (${widget.product.bundleItems.length})',
+                          style: GoogleFonts.inter(
+                            fontSize: 14,
+                            color: ColorsManager.darkGray,
+                          ),
+                        ),
+                        const VerticalSpace(height: 16),
+                        ListView.separated(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: widget.product.bundleItems.length,
+                          separatorBuilder: (context, index) =>
+                              const VerticalSpace(height: 12),
+                          itemBuilder: (context, index) {
+                            final bundleItem =
+                                widget.product.bundleItems[index];
+                            // Filter out any empty categories
+                            final categories = bundleItem.categories
+                                .where((cat) => cat.categoryTitle.isNotEmpty)
+                                .toList();
+
+                            if (categories.isEmpty) {
+                              return const SizedBox.shrink();
+                            }
+
+                            return ListView.separated(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: categories.length,
+                              separatorBuilder: (_, __) =>
+                                  const VerticalSpace(height: 8),
+                              itemBuilder: (context, catIndex) {
+                                final category = categories[catIndex];
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(8),
+                                    border:
+                                        Border.all(color: Colors.grey.shade200),
+                                  ),
+                                  child: ListTile(
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 16.w, vertical: 8.h),
+                                    title: Text(
+                                      category.categoryTitle,
+                                      style: GoogleFonts.inter(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    trailing: const Icon(Icons.chevron_right),
+                                    onTap: () {
+                                      // Handle bundle item customization
+                                    },
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                        const VerticalSpace(height: 16),
+                      ],
+                    ),
+                  ),
 
                 // No Address Hassle
                 Container(
@@ -617,7 +630,11 @@ class _ProductDetailsBodyState extends State<ProductDetailsBody> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16.h),
+                // const Padding(
+                //   padding: EdgeInsets.all(16.0),
+                //   child: MakeItPerfectSection(),
+                // ),
+                const VerticalSpace(height: 16),
               ],
             ),
           ),

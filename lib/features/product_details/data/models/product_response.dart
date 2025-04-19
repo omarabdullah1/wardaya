@@ -11,6 +11,7 @@ class ProductResponse {
   final String description;
   @JsonKey(defaultValue: false)
   final bool isBundle;
+  @JsonKey(fromJson: _priceFromJson)
   final Price price;
   final List<String> images;
 
@@ -133,6 +134,14 @@ class ProductResponse {
       // Return default dimensions if parsing fails
       return Dimensions(width: 0, height: 0);
     }
+  }
+
+  static Price _priceFromJson(dynamic price) {
+    if (price is Map<String, dynamic>) {
+      return Price.fromJson(price);
+    }
+    // Default fallback
+    return Price(total: 0, currency: 'SAR');
   }
 
   factory ProductResponse.fromJson(Map<String, dynamic> json) =>

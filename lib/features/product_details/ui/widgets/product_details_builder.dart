@@ -1,6 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/widgets/loading_widget.dart';
 import 'package:wardaya/features/cart/logic/addToCart/cubit/add_to_cart_cubit.dart';
@@ -14,6 +19,9 @@ import 'package:wardaya/features/product_details/logic/product_details/product_d
 import 'package:wardaya/features/product_details/logic/product_details/product_details_state.dart';
 import 'package:wardaya/features/search/data/models/search_response.dart';
 
+import '../../../../core/assets/assets.dart';
+import '../../../search/logic/cubit/search_cubit.dart';
+import 'make_it_perfect_section.dart';
 import 'product_details_app_bar.dart';
 import 'product_details_body.dart';
 
@@ -35,18 +43,22 @@ class _ProductDetailsBuilderState extends State<ProductDetailsBuilder> {
     super.initState();
     // Fetch product details when the builder initializes
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ProductDetailsCubit>().getProductById(widget.product.id);
+      context
+          .read<ProductDetailsCubit>()
+          .getProductById(widget.product.id, context);
     });
   }
 
   void _showLoadingDialog() {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return const LoadingWidget(loadingState: true);
-      },
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const LoadingWidget(
+          loadingState: true,
+        ),
+      );
+    });
   }
 
   @override
@@ -131,15 +143,59 @@ class _ProductDetailsBuilderState extends State<ProductDetailsBuilder> {
                 context
                     .read<CartCubit>()
                     .changeLength(context.read<CartCubit>().cartItems + 1);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'Product added to cart successfully',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    backgroundColor: Colors.green,
-                    duration: Duration(seconds: 1),
-                  ),
+
+                // Get the current product's category ID from ProductDetailsCubit state
+                final productState = context.read<ProductDetailsCubit>().state;
+                String? categoryId;
+
+                productState.maybeWhen(
+                  success: (product) {
+                    log('Product categories: ${product.categories}');
+
+                    // Check if categories exists and has items
+                    if (product.categories != null &&
+                        product.categories.isNotEmpty) {
+                      // Assuming the first category is a Map with an 'id' field
+                      if (product.categories.first is Map) {
+                        categoryId =
+                            (product.categories.first as Map)['id']?.toString();
+                      } else {
+                        categoryId = product.categories.first.toString();
+                      }
+                    }
+
+                    // Show bottom sheet with MakeItPerfectSection
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(20)),
+                      ),
+                      builder: (context) {
+                        // Trigger search for recommended products with category ID
+
+                        return DraggableScrollableSheet(
+                          initialChildSize: 0.9,
+                          minChildSize: 0.5,
+                          maxChildSize: 0.95,
+                          expand: false,
+                          builder: (context, scrollController) =>
+                              SingleChildScrollView(
+                            controller: scrollController,
+                            child: MakeItPerfectSection(
+                              catID: product.categories.isNullOrEmpty()
+                                  ? ''
+                                  : product.categories.first['id']
+                                          ?.toString() ??
+                                      '',
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  orElse: () {},
                 );
               },
               error: (errorState) {
@@ -166,6 +222,11 @@ class _ProductDetailsBuilderState extends State<ProductDetailsBuilder> {
                   appBar: ProductDetailsAppBar(product: widget.product),
                   body: state.maybeWhen(
                     success: (product) {
+                      // WidgetsBinding.instance.addPostFrameCallback((_) {
+                      //   Navigator.of(context)
+                      //       .popUntil((route) => route.isFirst);
+                      // });
+
                       return ProductDetailsBody(
                         product: product,
                         onAddToCart: () {
@@ -202,7 +263,7 @@ class _ProductDetailsBuilderState extends State<ProductDetailsBuilder> {
                                 // Retry loading product details
                                 context
                                     .read<ProductDetailsCubit>()
-                                    .getProductById(widget.product.id);
+                                    .getProductById(widget.product.id, context);
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: ColorsManager.mainRose,

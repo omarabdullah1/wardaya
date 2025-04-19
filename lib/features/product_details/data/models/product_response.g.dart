@@ -13,7 +13,7 @@ ProductResponse _$ProductResponseFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
       description: json['description'] as String,
       isBundle: json['isBundle'] as bool? ?? false,
-      price: Price.fromJson(json['price'] as Map<String, dynamic>),
+      price: ProductResponse._priceFromJson(json['price']),
       images:
           (json['images'] as List<dynamic>).map((e) => e as String).toList(),
       categories:

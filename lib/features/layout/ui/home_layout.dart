@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wardaya/features/cart/logic/getCart/cubit/get_cart_cubit.dart';
+import 'package:wardaya/features/cart/logic/removeCart/cubit/remove_cart_cubit.dart';
 import 'package:wardaya/features/explore/logic/cubit/explore_cubit.dart';
 import 'package:wardaya/features/home/logic/brands/brands_cubit.dart';
 import 'package:wardaya/features/profile/logic/cubit/profile_cubit.dart';
@@ -10,6 +12,7 @@ import 'package:wardaya/features/home/logic/new_ideas/new_ideas_cubit.dart';
 import '../../../core/di/dependency_injection.dart';
 import '../../../core/theming/colors.dart';
 
+import '../../cart/logic/addToCart/cubit/add_to_cart_cubit.dart';
 import '../../cart/ui/cart_screen.dart';
 import '../../home/logic/categories/categories_cubit.dart';
 import '../../home/logic/delivery_areas/delivery_areas_cubit.dart';
@@ -85,7 +88,21 @@ class HomeLayout extends StatelessWidget {
                         child: const ExploreScreen(),
                       );
                     case 2:
-                      return const CartScreen();
+                      return MultiBlocProvider(
+                        providers: [
+                          BlocProvider(
+                            create: (context) =>
+                                getIt<GetCartCubit>()..getCart(),
+                          ),
+                          BlocProvider(
+                            create: (context) => getIt<AddToCartCubit>(),
+                          ),
+                          BlocProvider(
+                            create: (context) => getIt<RemoveCartCubit>(),
+                          ),
+                        ],
+                        child: const CartScreen(),
+                      );
                     case 3:
                       return BlocProvider(
                         create: (context) =>

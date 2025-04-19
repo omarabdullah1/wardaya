@@ -106,6 +106,8 @@ wardaya_points: "نقاط وردايا"
 currency_sar: "ر.س. "
 split_payments_with_tamara: "قسط دفعاتك على 4 دفعات مع تمارا"
 earn: "اكسب "
+similarProducts: "منتجات مشابهة"
+noSimilarProducts: "لا توجد منتجات مشابهة"
 
 # Cart Screen texts
 cart_empty_title: "سلة التسوق فارغة!"

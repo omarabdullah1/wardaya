@@ -106,6 +106,8 @@ wardaya_points: "Wardaya Points"
 currency_sar: "SAR "
 split_payments_with_tamara: "Split in up to 4 payments with Tamara"
 earn: "Earn "
+similarProducts: "Similar Products"
+noSimilarProducts: "No similar products found"
 
 # Cart Screen texts
 cart_empty_title: "Your Cart is Empty!"

@@ -27,8 +27,10 @@ Future<void> main() async {
   // To fix texts being hidden bug in flutter_screenutil in release mode.
   await ScreenUtil.ensureScreenSize();
   log('message From Production');
-  log(token!);
-  log(isLoggedInUser.toString());
+  // Safely log token value
+  log('Token: ${token ?? 'No token found'}');
+  log('isLoggedInUser: $isLoggedInUser');
+
   runApp(
     EasyLocalization(
       path: Constants.i18nPath,
