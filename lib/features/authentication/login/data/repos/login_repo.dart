@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '../../../../../core/networking/api_error_handler.dart';
 import '../../../../../core/networking/api_result.dart';
 import '../../../apis/auth_service.dart';
@@ -14,7 +16,8 @@ class LoginRepo {
     try {
       final response = await _apiService.login(loginRequestBody);
       return ApiResult.success(response);
-    } catch (error) {
+    } catch (error, stackTrace) {
+      log('Login error: $error', stackTrace: stackTrace);
       return ApiResult.failure(ApiErrorHandler.handle(error));
     }
   }
