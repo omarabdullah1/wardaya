@@ -15,7 +15,7 @@ dependencies:
 
   # UI packages
   cupertino_icons: ^1.0.8
-  flutter_svg: ^2.0.17
+  flutter_svg: ^2.0.17 
   google_fonts: ^6.2.1
   flutter_screenutil: ^5.9.3
   skeletonizer: ^1.4.3

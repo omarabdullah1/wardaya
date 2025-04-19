@@ -140,6 +140,9 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
       case 'Google Pay':
         sourceId = 'src_google_pay';
         break;
+      case 'Apple Pay':
+        sourceId = 'src_apple_pay';
+        break;
       case 'STC Pay':
         sourceId = 'src_sa.stcpay';
         break;
@@ -547,11 +550,11 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
           'Credit Card',
           Assets.of(context).pay_cards.master_card_png,
         ),
-        const VerticalSpace(height: 8),
-        _buildPaymentOption(
-          'Mada',
-          Assets.of(context).pay_cards.mada_png,
-        ),
+        // const VerticalSpace(height: 8),
+        // _buildPaymentOption(
+        //   'Mada',
+        //   Assets.of(context).pay_cards.mada_png,
+        // ),
         const VerticalSpace(height: 8),
         _buildPaymentOption(
           'Google Pay',
@@ -559,15 +562,20 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
         ),
         const VerticalSpace(height: 8),
         _buildPaymentOption(
-          'STC Pay',
-          Assets.of(context).pay_cards.stc_png,
-          height: 10,
+          'Apple Pay',
+          Assets.of(context).pay_cards.apple_pay_png,
         ),
-        const VerticalSpace(height: 8),
-        _buildPaymentOption(
-          'Paypal',
-          Assets.of(context).pay_cards.paypal_png,
-        ),
+        // const VerticalSpace(height: 8),
+        // _buildPaymentOption(
+        //   'STC Pay',
+        //   Assets.of(context).pay_cards.stc_png,
+        //   height: 10,
+        // ),
+        // const VerticalSpace(height: 8),
+        // _buildPaymentOption(
+        //   'Paypal',
+        //   Assets.of(context).pay_cards.paypal_png,
+        // ),
       ],
     );
   }

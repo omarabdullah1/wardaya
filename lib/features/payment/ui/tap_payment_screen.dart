@@ -197,47 +197,47 @@ class _TapPaymentScreenState extends State<TapPaymentScreen> {
       body: Column(
         children: [
           // Payment amount header
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
-            child: Container(
-              padding: EdgeInsets.all(16.r),
-              decoration: BoxDecoration(
-                color: ColorsManager.offWhite,
-                borderRadius: BorderRadius.circular(12.r),
-                border: Border.all(color: ColorsManager.lightGrey, width: 1),
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    context.el.paymentAmountTitle,
-                    style: GoogleFonts.inter(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w500,
-                      color: ColorsManager.mainRose,
-                    ),
-                  ),
-                  SizedBox(height: 12.h),
-                  Text(
-                    'SAR ${widget.amount.toStringAsFixed(2)}',
-                    style: GoogleFonts.inter(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.w700,
-                      color: ColorsManager.mainRose,
-                    ),
-                  ),
-                  SizedBox(height: 8.h),
-                  Text(
-                    '${context.el.paymentOrderIdLabel} ${widget.orderId}',
-                    style: GoogleFonts.inter(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                      color: ColorsManager.grey,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+          //   child: Container(
+          //     padding: EdgeInsets.all(16.r),
+          //     decoration: BoxDecoration(
+          //       color: ColorsManager.offWhite,
+          //       borderRadius: BorderRadius.circular(12.r),
+          //       border: Border.all(color: ColorsManager.lightGrey, width: 1),
+          //     ),
+          //     child: Column(
+          //       children: [
+          //         Text(
+          //           context.el.paymentAmountTitle,
+          //           style: GoogleFonts.inter(
+          //             fontSize: 18.sp,
+          //             fontWeight: FontWeight.w500,
+          //             color: ColorsManager.mainRose,
+          //           ),
+          //         ),
+          //         SizedBox(height: 12.h),
+          //         Text(
+          //           'SAR ${widget.amount.toStringAsFixed(2)}',
+          //           style: GoogleFonts.inter(
+          //             fontSize: 24.sp,
+          //             fontWeight: FontWeight.w700,
+          //             color: ColorsManager.mainRose,
+          //           ),
+          //         ),
+          //         SizedBox(height: 8.h),
+          //         Text(
+          //           '${context.el.paymentOrderIdLabel} ${widget.orderId}',
+          //           style: GoogleFonts.inter(
+          //             fontSize: 14.sp,
+          //             fontWeight: FontWeight.w400,
+          //             color: ColorsManager.grey,
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
 
           // Loading indicator
           if (_isLoading)

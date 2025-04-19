@@ -200,6 +200,7 @@ class _assets_pay_cards_dart {
     required Brightness brightness,
   }) : _brightness = brightness;
 
+  final apple_pay_png = 'assets/pay_cards/apple_pay.png';
   final gpay_png = 'assets/pay_cards/gpay.png';
   final mada_png = 'assets/pay_cards/mada.png';
   final master_card_png = 'assets/pay_cards/master_card.png';
