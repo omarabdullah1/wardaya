@@ -1,4 +1,5 @@
 import 'package:wardaya/features/address/logic/address_cubit/address_cubit.dart';
+import 'package:wardaya/features/cart/logic/addToCart/cubit/add_to_cart_cubit.dart';
 import 'package:wardaya/features/favorites/logic/cubit/favorites_cubit.dart';
 import 'package:wardaya/features/home/logic/occassions/occassions_cubit.dart';
 import 'package:wardaya/features/home/logic/recipients/recipients_cubit.dart';
@@ -146,9 +147,22 @@ class AppRouter {
         if (arguments is Map<String, dynamic>) {
           final extraArgs = arguments['extraArgs'] as Product;
           return _buildRoute(
-            screen: BlocProvider(
-              create: (context) =>
-                  getIt<ProductDetailsCubit>()..getProductById(extraArgs.id),
+            screen: MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => getIt<FavoritesCubit>()..getFavorites(),
+                ),
+                BlocProvider(
+                  create: (context) => getIt<ProductDetailsCubit>()
+                    ..getProductById(extraArgs.id),
+                ),
+                BlocProvider(
+                  create: (context) => getIt<AddToCartCubit>(),
+                ),
+                BlocProvider(
+                  create: (context) => getIt<CartCubit>(),
+                ),
+              ],
               child: ProductDetailsScreen(
                 product: extraArgs,
               ),

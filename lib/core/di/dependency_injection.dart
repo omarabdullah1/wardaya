@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:wardaya/features/address/data/api/address_service.dart';
 import 'package:wardaya/features/address/data/repos/address_repo.dart';
+import 'package:wardaya/features/cart/data/repos/cart_repo.dart';
+import 'package:wardaya/features/cart/logic/addToCart/cubit/add_to_cart_cubit.dart';
 import 'package:wardaya/features/explore/data/apis/explore_service.dart';
 import 'package:wardaya/features/explore/data/repos/explore_repo.dart';
 import 'package:wardaya/features/explore/logic/cubit/explore_cubit.dart';
@@ -19,6 +21,7 @@ import 'package:wardaya/features/my_occasions/logic/create_occassion/cubit/creat
 import 'package:wardaya/features/my_occasions/logic/cubit/my_occasions_cubit.dart';
 import 'package:wardaya/features/my_orders/data/apis/my_orders_service.dart';
 import 'package:wardaya/features/my_orders/logic/cubit/my_orders_cubit.dart';
+import 'package:wardaya/features/product_details/data/apis/product_details_service.dart';
 import 'package:wardaya/features/product_details/data/repos/product_details_repo.dart';
 import 'package:wardaya/features/product_details/logic/product_details/product_details_cubit.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
@@ -37,6 +40,7 @@ import '../../features/authentication/create_account/data/repos/create_account_r
 import '../../features/authentication/create_account/logic/cubit/register_cubit.dart';
 import '../../features/authentication/login/data/repos/login_repo.dart';
 import '../../features/authentication/login/logic/cubit/login_cubit.dart';
+import '../../features/cart/data/apis/cart_service.dart';
 import '../../features/favorites/data/repos/favorites_repo.dart';
 import '../../features/home/logic/delivery_areas/delivery_areas_cubit.dart';
 import '../../features/home/logic/gallery/gallery_cubit.dart';
@@ -45,7 +49,6 @@ import '../../features/home/logic/recipients/recipients_cubit.dart';
 import '../../features/invoices/data/repos/invoices_repo.dart';
 import '../../features/layout/logic/cubit/layout_cubit.dart';
 import '../../features/my_orders/data/repos/my_orders_repo.dart';
-import '../../features/product_details/data/apis/product_details_service.dart';
 import '../../features/profile/logic/cubit/profile_cubit.dart';
 import '../../features/subscriptions/logic/subscription_checkout_cubit/subscription_checkout_cubit.dart';
 import '../blocs/general/cubit/general_cubit.dart';
@@ -75,6 +78,7 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<InvoicesService>(() => InvoicesService(dio));
   getIt.registerLazySingleton<ProductDetailsService>(
       () => ProductDetailsService(dio));
+  getIt.registerLazySingleton<CartService>(() => CartService(dio));
   getIt.registerLazySingleton<MyOrdersService>(() => MyOrdersService(dio));
 
   /************************* */
@@ -99,6 +103,7 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<MyOccasionsRepo>(() => MyOccasionsRepo(getIt()));
   getIt.registerLazySingleton<InvoicesRepo>(() => InvoicesRepo(getIt()));
   getIt.registerLazySingleton<MyOrdersRepo>(() => MyOrdersRepo(getIt()));
+  getIt.registerLazySingleton<CartRepo>(() => CartRepo(getIt()));
 
   /************************* */
   /* ******** CUBIT *********
@@ -139,4 +144,5 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<CartCubit>(() => CartCubit());
   getIt
       .registerFactory<CreateOccasionCubit>(() => CreateOccasionCubit(getIt()));
+  getIt.registerFactory<AddToCartCubit>(() => AddToCartCubit(getIt()));
 }

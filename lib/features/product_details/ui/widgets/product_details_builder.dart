@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:wardaya/core/theming/colors.dart';
+import 'package:wardaya/core/widgets/loading_widget.dart';
+import 'package:wardaya/features/cart/logic/addToCart/cubit/add_to_cart_cubit.dart';
+import 'package:wardaya/features/cart/logic/addToCart/cubit/add_to_cart_state.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
 import 'package:wardaya/features/favorites/logic/cubit/favorites_cubit.dart';
 import 'package:wardaya/features/favorites/logic/cubit/favorites_state.dart';
@@ -34,6 +37,16 @@ class _ProductDetailsBuilderState extends State<ProductDetailsBuilder> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ProductDetailsCubit>().getProductById(widget.product.id);
     });
+  }
+
+  void _showLoadingDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return const LoadingWidget(loadingState: true);
+      },
+    );
   }
 
   @override
@@ -107,64 +120,108 @@ class _ProductDetailsBuilderState extends State<ProductDetailsBuilder> {
         );
       },
       builder: (context, favoritesState) {
-        return BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
-          builder: (context, state) {
-            return Scaffold(
-              extendBodyBehindAppBar: true,
-              appBar: ProductDetailsAppBar(product: widget.product),
-              body: state.maybeWhen(
-                success: (product) {
-                  return ProductDetailsBody(
-                    product: product,
-                    onAddToCart: () {
-                      context.read<CartCubit>().changeLength(
-                          context.read<CartCubit>().cartItems + 1);
-                    },
-                  );
-                },
-                loading: () => _buildLoading(),
-                error: (error) {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.error_outline,
-                          color: ColorsManager.mainRose,
-                          size: 48,
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          error,
-                          style: const TextStyle(
-                            color: ColorsManager.darkGray,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 24),
-                        ElevatedButton(
-                          onPressed: () {
-                            // Retry loading product details
-                            context
-                                .read<ProductDetailsCubit>()
-                                .getProductById(widget.product.id);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: ColorsManager.mainRose,
-                            foregroundColor: Colors.white,
-                          ),
-                          child: const Text('Retry'),
-                        ),
-                      ],
+        return BlocConsumer<AddToCartCubit, AddToCartState>(
+          listener: (context, state) {
+            state.maybeMap(
+              loading: (_) {
+                _showLoadingDialog();
+              },
+              loaded: (loadedState) {
+                Navigator.of(context).pop(); // Dismiss loading dialog
+                context
+                    .read<CartCubit>()
+                    .changeLength(context.read<CartCubit>().cartItems + 1);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text(
+                      'Product added to cart successfully',
+                      style: TextStyle(color: Colors.white),
                     ),
-                  );
-                },
-                orElse: () => const Center(
-                  child: CircularProgressIndicator(
-                    color: ColorsManager.mainRose,
+                    backgroundColor: Colors.green,
+                    duration: Duration(seconds: 1),
                   ),
-                ),
-              ),
+                );
+              },
+              error: (errorState) {
+                Navigator.of(context).pop(); // Dismiss loading dialog
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      errorState.message,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    backgroundColor: Colors.red,
+                    duration: const Duration(seconds: 1),
+                  ),
+                );
+              },
+              orElse: () {},
+            );
+          },
+          builder: (context, addToCartState) {
+            return BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
+              builder: (context, state) {
+                return Scaffold(
+                  extendBodyBehindAppBar: true,
+                  appBar: ProductDetailsAppBar(product: widget.product),
+                  body: state.maybeWhen(
+                    success: (product) {
+                      return ProductDetailsBody(
+                        product: product,
+                        onAddToCart: () {
+                          context.read<AddToCartCubit>().addToCart(
+                            product.id,
+                            1, // Default quantity
+                            [], // Empty bundle items
+                          );
+                        },
+                      );
+                    },
+                    loading: () => _buildLoading(),
+                    error: (error) {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.error_outline,
+                              color: ColorsManager.mainRose,
+                              size: 48,
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              error,
+                              style: const TextStyle(
+                                color: ColorsManager.darkGray,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 24),
+                            ElevatedButton(
+                              onPressed: () {
+                                // Retry loading product details
+                                context
+                                    .read<ProductDetailsCubit>()
+                                    .getProductById(widget.product.id);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: ColorsManager.mainRose,
+                                foregroundColor: Colors.white,
+                              ),
+                              child: const Text('Retry'),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    orElse: () => const Center(
+                      child: CircularProgressIndicator(
+                        color: ColorsManager.mainRose,
+                      ),
+                    ),
+                  ),
+                );
+              },
             );
           },
         );
