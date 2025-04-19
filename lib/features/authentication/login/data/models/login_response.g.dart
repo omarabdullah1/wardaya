@@ -40,8 +40,23 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
           ?.map((e) => e as String)
           .toList(),
       points: (json['points'] as num?)?.toInt(),
-      cart: (json['cart'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      cart: (json['cart'] as List<dynamic>?)
+          ?.map((e) => CartItem.fromJson(e as Map<String, dynamic>))
+          .toList(),
       selectedDeliveryArea: json['selectedDeliveryArea'] as String?,
+      invoices: (json['invoices'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      userOccasions: (json['userOccasions'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      addresses: (json['addresses'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      createdAt: User.dateTimeFromJson(json['createdAt'] as String?),
+      updatedAt: User.dateTimeFromJson(json['updatedAt'] as String?),
+      version: (json['__v'] as num?)?.toInt(),
+      phoneNumber: json['phone_number'] as String?,
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
@@ -60,6 +75,29 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'points': instance.points,
       'cart': instance.cart,
       'selectedDeliveryArea': instance.selectedDeliveryArea,
+      'invoices': instance.invoices,
+      'userOccasions': instance.userOccasions,
+      'addresses': instance.addresses,
+      'createdAt': User.dateTimeToJson(instance.createdAt),
+      'updatedAt': User.dateTimeToJson(instance.updatedAt),
+      '__v': instance.version,
+      'phone_number': instance.phoneNumber,
+    };
+
+CartItem _$CartItemFromJson(Map<String, dynamic> json) => CartItem(
+      productId: json['productId'] as String?,
+      quantity: (json['quantity'] as num?)?.toInt(),
+      bundleItems: (json['bundleItems'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      id: json['_id'] as String?,
+    );
+
+Map<String, dynamic> _$CartItemToJson(CartItem instance) => <String, dynamic>{
+      'productId': instance.productId,
+      'quantity': instance.quantity,
+      'bundleItems': instance.bundleItems,
+      '_id': instance.id,
     };
 
 Wallet _$WalletFromJson(Map<String, dynamic> json) => Wallet(
