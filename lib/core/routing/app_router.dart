@@ -60,7 +60,7 @@ class AppRouter {
                 create: (context) => getIt<LayoutCubit>(),
               ),
             ],
-            child: const HomeLayout(),
+            child: HomeLayout(arguments: arguments as Map<String, dynamic>?),
           ),
         );
       case Routes.searchScreen:
@@ -122,12 +122,16 @@ class AppRouter {
           final bool expressDelivery =
               arguments['expressDelivery'] as bool? ?? false;
 
-          // Create a new SearchCubit instance
+          // Create instances of required cubits
           final searchCubit = getIt<SearchCubit>();
+          final layoutCubit = getIt<LayoutCubit>();
 
           return _buildRoute(
-            screen: BlocProvider.value(
-              value: searchCubit,
+            screen: MultiBlocProvider(
+              providers: [
+                BlocProvider.value(value: searchCubit),
+                BlocProvider.value(value: layoutCubit),
+              ],
               child: CategoryScreen(
                 momentTitle: extraArgs ?? "",
                 occasionId: occasionId,
@@ -162,7 +166,7 @@ class AppRouter {
                   create: (context) => getIt<CartCubit>(),
                 ),
                 BlocProvider(
-                  create: (context) => getIt<SearchCubit>(),
+                  create: (context) => getIt<LayoutCubit>(),
                 ),
               ],
               child: ProductDetailsScreen(

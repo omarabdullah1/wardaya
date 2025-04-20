@@ -5,9 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
 import 'package:wardaya/core/theming/colors.dart';
-import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
 import '../../../../core/assets/assets.dart';
-import '../../../cart/logic/cubit/cart_state.dart';
+import '../../../cart/logic/getCart/cubit/get_cart_cubit.dart';
+import '../../../cart/logic/getCart/cubit/get_cart_state.dart';
 import '../../logic/cubit/layout_cubit.dart';
 import '../../logic/cubit/layout_state.dart';
 
@@ -47,11 +47,11 @@ class BottomNavBarWidget extends StatelessWidget {
                   context,
                   height: 14.0.h,
                 ),
-                BlocBuilder<CartCubit, CartState>(
+                BlocBuilder<GetCartCubit, GetCartState>(
                   builder: (context, state) {
-                    return context.read<CartCubit>().cartItems > 0
+                    return context.read<GetCartCubit>().cartItems > 0
                         ? Badge.count(
-                            count: context.read<CartCubit>().cartItems,
+                            count: context.read<GetCartCubit>().cartItems,
                             backgroundColor: ColorsManager.mainRose,
 
                             ///TODO: Fix the offset with localization in arabic
