@@ -16,6 +16,7 @@ import 'package:wardaya/core/theming/styles.dart';
 import 'package:wardaya/core/widgets/app_app_bar.dart';
 import 'package:wardaya/core/widgets/app_text_button.dart';
 import 'package:wardaya/core/widgets/loading_widget.dart';
+import 'package:wardaya/features/cart/data/apis/cart_api_constants.dart';
 import 'package:wardaya/features/cart/logic/checkout/checkout_cubit.dart';
 
 import '../../../core/assets/assets.dart';
@@ -231,7 +232,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
           ? widget.link.isNullOrEmpty()
               ? null
               : widget.link
-          : widget.videoLink,
+          : CartApiConstants.apiBaseUrlForImages + (widget.videoLink ?? ''),
       promoId: context.read<PromoCubit>().promoId,
       giftCardID: widget.giftCardId,
     );

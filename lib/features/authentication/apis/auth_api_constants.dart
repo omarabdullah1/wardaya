@@ -4,4 +4,5 @@ class AuthenticationApiConstants {
   static const String login = "api/auth/login";
   static const String createAccount = "api/auth/register";
   static const String myProfile = "api/auth/my-profile";
+  static const String delete = "api/users/delete";
 }

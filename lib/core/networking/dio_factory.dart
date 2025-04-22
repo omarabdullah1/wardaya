@@ -23,8 +23,10 @@ class DioFactory {
         ..options.connectTimeout = timeOut
         ..options.receiveTimeout = timeOut
         ..options.sendTimeout = timeOut
+        // Fix: Correctly validate status codes to throw exceptions for 4xx and 5xx responses
+        // This ensures error responses are properly caught and handled
         ..options.validateStatus = (status) {
-          return status != null && status < 600;
+          return status != null && status >= 200 && status < 300;
         };
       addDioHeaders();
       addDioInterceptor();

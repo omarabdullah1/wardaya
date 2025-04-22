@@ -1,10 +1,16 @@
 import 'package:dio/dio.dart';
+import 'dart:developer';
 
 import 'api_error_model.dart';
 
 class ApiErrorHandler {
   static ApiErrorModel handle(dynamic error) {
     if (error is DioException) {
+      // Log error details for debugging
+      log('DioException: ${error.type}');
+      log('Error response: ${error.response?.data}');
+      log('Status code: ${error.response?.statusCode}');
+
       // Check if this is resolved with a cached response
       final bool isFromCache =
           error.response?.headers.value('x-from-cache') == 'true';
@@ -67,6 +73,7 @@ class ApiErrorHandler {
           return ApiErrorModel(message: "Something went wrong");
       }
     } else {
+      log('Non-Dio error: $error');
       return ApiErrorModel(message: "Unknown error occurred");
     }
   }
@@ -75,13 +82,27 @@ class ApiErrorHandler {
 ApiErrorModel _handleError(dynamic data) {
   if (data == null) return ApiErrorModel(message: "Unknown error occurred");
 
+  log('Handling error response: $data');
+
   // Check if data is already a Map, if not try to decode it
   final Map<String, dynamic> errorData = data is Map
       ? data as Map<String, dynamic>
       : {'message': 'Unknown error occurred'};
 
+  // Look for error messages in different possible formats
+  String? errorMessage;
+  String? errorCode;
+
+  if (errorData.containsKey('error')) {
+    errorMessage = errorData['error'];
+    errorCode = 'Error';
+  } else if (errorData.containsKey('message')) {
+    errorMessage = errorData['message'];
+    errorCode = errorData['code'] ?? 'Error';
+  }
+
   return ApiErrorModel(
-    message: errorData['message'],
-    error: errorData['error'],
+    message: errorMessage ?? "Unknown error occurred",
+    error: errorCode,
   );
 }

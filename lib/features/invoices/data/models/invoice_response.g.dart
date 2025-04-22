@@ -134,3 +134,11 @@ Map<String, dynamic> _$GiftCardToJson(GiftCard instance) => <String, dynamic>{
       'signature_image_url': instance.signatureImageUrl,
       'qr_image_url': instance.qrImageUrl,
     };
+
+Template _$TemplateFromJson(Map<String, dynamic> json) => Template(
+      id: json['_id'] as String,
+    );
+
+Map<String, dynamic> _$TemplateToJson(Template instance) => <String, dynamic>{
+      '_id': instance.id,
+    };

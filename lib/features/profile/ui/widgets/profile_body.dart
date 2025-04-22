@@ -304,22 +304,26 @@ class ProfileBody extends StatelessWidget {
                         SharedPrefKeys.userToken);
                     SharedPrefHelper.removeSecuredString(
                         SharedPrefKeys.userAreaId);
+                    SharedPrefHelper.removeSecuredString(SharedPrefKeys.userID);
                     context.pushNamedAndRemoveUntil(
                       Routes.loginScreen,
                       predicate: (route) => false,
                     );
                   },
                 ),
-                const Divider(
-                  color: ColorsManager.lightGrey,
-                  height: 0.0,
-                ),
-                _buildOptionRow(
-                  context,
-                  context.el.deleteAccount,
-                  Assets.of(context).svgs.delete_account_svg,
-                  color: ColorsManager.red,
-                ),
+                // const Divider(
+                //   color: ColorsManager.lightGrey,
+                //   height: 0.0,
+                // ),
+                // _buildOptionRow(
+                //   context,
+                //   context.el.deleteAccount,
+                //   Assets.of(context).svgs.delete_account_svg,
+                //   color: ColorsManager.red,
+                //   onTap: () {
+                //     _showDeleteAccountConfirmationDialog(context);
+                //   },
+                // ),
               ],
             ),
           ),
@@ -482,5 +486,41 @@ class ProfileBody extends StatelessWidget {
       points = profile.points.toString();
     });
     return points;
+  }
+
+  void _showDeleteAccountConfirmationDialog(BuildContext context) {
+    // Store reference to the original context that has access to ProfileCubit
+    final outerContext = context;
+
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: Text(outerContext.el.deleteAccount),
+          content: Text(outerContext.el.deleteAccountConfirmation),
+          actions: <Widget>[
+            TextButton(
+              child: Text(outerContext.el.cancel),
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+              },
+            ),
+            TextButton(
+              child: Text(
+                outerContext.el.confirm,
+                style: const TextStyle(color: ColorsManager.red),
+              ),
+              onPressed: () {
+                // Close dialog first
+                Navigator.of(dialogContext).pop();
+
+                // Call the deleteAccount method from ProfileCubit using the original context
+                outerContext.read<ProfileCubit>().deleteAccount(outerContext);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

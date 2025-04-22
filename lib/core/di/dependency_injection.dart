@@ -28,6 +28,7 @@ import 'package:wardaya/features/product_details/data/apis/product_details_servi
 import 'package:wardaya/features/product_details/data/repos/product_details_repo.dart';
 import 'package:wardaya/features/product_details/logic/product_details/product_details_cubit.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
+import 'package:wardaya/features/profile/data/apis/profile_service.dart';
 import 'package:wardaya/features/profile/data/repos/profile_repo.dart';
 import 'package:wardaya/features/search/data/apis/search_service.dart';
 import 'package:wardaya/features/search/data/repos/search_repo.dart';
@@ -87,6 +88,7 @@ Future<void> setupGetIt() async {
       () => ProductDetailsService(dio));
   getIt.registerLazySingleton<CartService>(() => CartService(dio));
   getIt.registerLazySingleton<MyOrdersService>(() => MyOrdersService(dio));
+  getIt.registerLazySingleton<ProfileService>(() => ProfileService(dio));
 
   /************************* */
   /* ******** REPOS *********
@@ -96,7 +98,7 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<LoginRepo>(() => LoginRepo(getIt()));
   getIt.registerLazySingleton<CreateAccountRepo>(
       () => CreateAccountRepo(getIt()));
-  getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepo(getIt()));
+  getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepo(getIt(), getIt()));
   getIt.registerLazySingleton<SearchRepo>(() => SearchRepo(getIt()));
   getIt
       .registerLazySingleton<SubscriptionRepo>(() => SubscriptionRepo(getIt()));

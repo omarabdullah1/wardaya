@@ -7,6 +7,7 @@ class SharedPrefKeys {
   static const String userToken = 'userToken';
   static const String userName = 'userName';
   static const String userData = 'userData';
+  static const String userID = 'userID';
   static const String userAreaId =
       'userAreaId'; // Make sure this is the exact key being used
   static const String language = 'language_code';

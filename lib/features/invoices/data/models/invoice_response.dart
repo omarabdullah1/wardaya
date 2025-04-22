@@ -301,6 +301,21 @@ class GiftCard {
   }
 }
 
+@JsonSerializable()
+class Template {
+  @JsonKey(name: '_id')
+  final String id;
+
+  Template({
+    required this.id,
+  });
+
+  factory Template.fromJson(Map<String, dynamic> json) =>
+      _$TemplateFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TemplateToJson(this);
+}
+
 class InvoicesResponse {
   final List<InvoiceItem> items;
 

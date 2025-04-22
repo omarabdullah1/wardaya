@@ -203,7 +203,10 @@ whatsapp: "واتساب"
 arabic: "العربية"
 english: "الإنجليزية"
 logout: "تسجيل خروج"
-delete_account: "تسجيل خروج من الحساب"
+delete_account: "حذف حسابي"
+delete_account_confirmation: "هل أنت متأكد أنك تريد حذف حسابك؟ هذا الإجراء لا يمكن التراجع عنه."
+confirm: "تأكيد"
+cancel: "إلغاء"
 
 # Edit Profile texts
 edit_profile_title: "تعديل الملف الشخصي"

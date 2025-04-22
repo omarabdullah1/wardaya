@@ -54,6 +54,8 @@ class LoginCubit extends Cubit<LoginState> {
 
   Future<void> userDataToString(LoginResponse response) async {
     try {
+      await SharedPrefHelper.setSecuredString(
+          SharedPrefKeys.userID, response.user!.id!);
       final String serializedData = jsonEncode(response.toJson());
       await saveUserData(serializedData);
     } catch (e) {

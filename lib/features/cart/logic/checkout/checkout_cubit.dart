@@ -156,7 +156,8 @@ class CheckoutCubit extends Cubit<CheckoutState> {
     try {
       final cityId = await _getCityId();
       final formattedStartDate = startDate; //_formatDateForApi(startDate);
-
+      log(qrImageUrl.toString());
+      log(giftCardID.toString());
       final checkoutRequest = _buildCheckoutRequest(
         startDate: formattedStartDate,
         amount: amount,

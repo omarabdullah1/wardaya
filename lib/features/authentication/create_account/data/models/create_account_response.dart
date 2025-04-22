@@ -5,10 +5,12 @@ part 'create_account_response.g.dart';
 @JsonSerializable()
 class CreateAccountResponse {
   String? message;
+  String? error; // Added error field to handle API error responses
 
   CreateAccountResponse({
     this.message,
-  }); // Update constructor
+    this.error,
+  });
 
   factory CreateAccountResponse.fromJson(Map<String, dynamic> json) =>
       _$CreateAccountResponseFromJson(json);

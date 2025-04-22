@@ -30,206 +30,210 @@ class RegisterForm extends StatelessWidget {
 
     return FormBuilder(
       key: cubit.formKey,
-      child: Column(
-        children: [
-          const RegisterBlocListener(),
-          FormBuilderTextField(
-            name: FormFieldsKeys.fullName,
-            decoration: InputDecoration(
-              labelText: context.el.fullNameLabel,
-              border: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: ColorsManager.grey,
-                  width: 1.0,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const RegisterBlocListener(),
+            FormBuilderTextField(
+              name: FormFieldsKeys.fullName,
+              decoration: InputDecoration(
+                labelText: context.el.fullNameLabel,
+                border: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: ColorsManager.grey,
+                    width: 1.0,
+                  ),
                 ),
-              ),
-              enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: ColorsManager.grey,
-                  width: 1.0,
+                enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: ColorsManager.grey,
+                    width: 1.0,
+                  ),
                 ),
+                suffixIcon: FormBuilderField(
+                  name: FormFieldsKeys.fullNameErrorListner,
+                  builder: (FormFieldState<dynamic> field) {
+                    return Visibility(
+                      visible: cubit.formKey.currentState
+                              ?.fields[FormFieldsKeys.fullName]?.hasError ??
+                          false,
+                      child:
+                          toolTipBuilder(cubit.fullNameTooltipKey, 'Required'),
+                    );
+                  },
+                ),
+                labelStyle: TextStylesInter.font15GreyRegular,
               ),
-              suffixIcon: FormBuilderField(
-                name: FormFieldsKeys.fullNameErrorListner,
-                builder: (FormFieldState<dynamic> field) {
-                  return Visibility(
-                    visible: cubit.formKey.currentState
-                            ?.fields[FormFieldsKeys.fullName]?.hasError ??
-                        false,
-                    child: toolTipBuilder(cubit.fullNameTooltipKey, 'Required'),
-                  );
-                },
-              ),
-              labelStyle: TextStylesInter.font15GreyRegular,
+              // Re-enable the validator
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(errorText: ''),
+              ]),
             ),
-            // Re-enable the validator
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(errorText: ''),
-            ]),
-          ),
-          const VerticalSpace(height: 10.0),
-          FormBuilderTextField(
-            key: cubit.emailFieldKey,
-            name: FormFieldsKeys.email,
-            decoration: InputDecoration(
-              labelText: context.el.emailAddressLabel,
-              border: borderStyle(),
-              enabledBorder: borderStyle(),
-              suffixIcon: FormBuilderField(
-                name: FormFieldsKeys.emailErrorListner,
-                builder: (FormFieldState<dynamic> field) {
-                  return Visibility(
-                    visible: cubit.formKey.currentState
-                            ?.fields[FormFieldsKeys.email]?.hasError ??
-                        false,
-                    child: toolTipBuilder(cubit.emailTooltipKey, 'Required'),
-                  );
-                },
+            const VerticalSpace(height: 10.0),
+            FormBuilderTextField(
+              key: cubit.emailFieldKey,
+              name: FormFieldsKeys.email,
+              decoration: InputDecoration(
+                labelText: context.el.emailAddressLabel,
+                border: borderStyle(),
+                enabledBorder: borderStyle(),
+                suffixIcon: FormBuilderField(
+                  name: FormFieldsKeys.emailErrorListner,
+                  builder: (FormFieldState<dynamic> field) {
+                    return Visibility(
+                      visible: cubit.formKey.currentState
+                              ?.fields[FormFieldsKeys.email]?.hasError ??
+                          false,
+                      child: toolTipBuilder(cubit.emailTooltipKey, 'Required'),
+                    );
+                  },
+                ),
+                labelStyle: TextStylesInter.font15GreyRegular,
               ),
-              labelStyle: TextStylesInter.font15GreyRegular,
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(errorText: ''),
+                FormBuilderValidators.email(errorText: ''),
+              ]),
             ),
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(errorText: ''),
-              FormBuilderValidators.email(errorText: ''),
-            ]),
-          ),
-          const VerticalSpace(height: 10.0),
-          BlocBuilder<RegisterCubit, RegisterState>(
-            builder: (context, state) {
-              return FormBuilderTextField(
-                name: FormFieldsKeys.password,
-                decoration: InputDecoration(
-                  labelText: context.el.passwordLabel,
-                  border: borderStyle(),
-                  enabledBorder: borderStyle(),
-                  suffixIcon: FormBuilderField(
-                    name: FormFieldsKeys.passwordErrorListner,
-                    builder: (FormFieldState<dynamic> field) {
-                      return Stack(
-                        alignment: AlignmentDirectional.center,
-                        children: [
-                          Visibility(
-                            visible: cubit
-                                    .formKey
-                                    .currentState
-                                    ?.fields[FormFieldsKeys.password]
-                                    ?.hasError ??
-                                false,
-                            child: toolTipBuilder(
-                                cubit.passwordTooltipKey, 'Required'),
-                          ),
-                          IconButton(
-                            icon: Icon(
-                              cubit.isPasswordVisible
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: ColorsManager.darkGray,
-                            ),
-                            onPressed: () {
-                              cubit.togglePasswordVisibility();
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                  labelStyle: TextStylesInter.font15GreyRegular,
-                ),
-                obscureText: !cubit.isPasswordVisible,
-                validator: FormBuilderValidators.compose([
-                  FormBuilderValidators.required(errorText: ''),
-                  FormBuilderValidators.minLength(6, errorText: ''),
-                ]),
-              );
-            },
-          ),
-          const VerticalSpace(height: 10.0),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsetsDirectional.only(end: 16.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4.0),
-                    border: Border.all(
-                      color: ColorsManager.grey,
-                      width: 1.0,
-                    ),
-                  ),
-                  child: ccp.CountryCodePicker(
-                    onChanged: (ccp.CountryCode countryCode) {
-                      cubit.setCountryCode(countryCode.dialCode.toString());
-                      log(cubit.countryCode.toString());
-                    },
-                    headerText: context.el.selectCountryLabel,
-                    initialSelection: 'SA',
-                    favorite: const ['SA', 'EG', 'AE'],
-                    showCountryOnly: false,
-                    showOnlyCountryWhenClosed: false,
-                    alignLeft: false,
-                    textStyle: TextStylesInter.font15DarkGreyRegular,
-                    headerTextStyle: TextStylesEBGaramond.font25MainRoseRegular,
-                    closeIcon: const Icon(
-                      Icons.close,
-                      color: ColorsManager.mainRose,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                // Phone TextField using localized label
-                child: FormBuilderTextField(
-                  name: 'phone',
-                  keyboardType: TextInputType.phone,
+            const VerticalSpace(height: 10.0),
+            BlocBuilder<RegisterCubit, RegisterState>(
+              builder: (context, state) {
+                return FormBuilderTextField(
+                  name: FormFieldsKeys.password,
                   decoration: InputDecoration(
-                    labelText: 'Phone',
+                    labelText: context.el.passwordLabel,
+                    border: borderStyle(),
+                    enabledBorder: borderStyle(),
                     suffixIcon: FormBuilderField(
-                      name: FormFieldsKeys.phoneErrorListner,
+                      name: FormFieldsKeys.passwordErrorListner,
                       builder: (FormFieldState<dynamic> field) {
-                        return Visibility(
-                          visible: cubit.formKey.currentState?.fields['phone']
-                                  ?.hasError ??
-                              false,
-                          child:
-                              toolTipBuilder(cubit.phoneTooltipKey, 'Required'),
+                        return Stack(
+                          alignment: AlignmentDirectional.center,
+                          children: [
+                            Visibility(
+                              visible: cubit
+                                      .formKey
+                                      .currentState
+                                      ?.fields[FormFieldsKeys.password]
+                                      ?.hasError ??
+                                  false,
+                              child: toolTipBuilder(
+                                  cubit.passwordTooltipKey, 'Required'),
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                cubit.isPasswordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: ColorsManager.darkGray,
+                              ),
+                              onPressed: () {
+                                cubit.togglePasswordVisibility();
+                              },
+                            ),
+                          ],
                         );
                       },
                     ),
-                    border: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: ColorsManager.grey,
-                        width: 1.0,
-                      ),
-                    ),
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: ColorsManager.grey,
-                        width: 1.0,
-                      ),
-                    ),
                     labelStyle: TextStylesInter.font15GreyRegular,
                   ),
+                  obscureText: !cubit.isPasswordVisible,
                   validator: FormBuilderValidators.compose([
                     FormBuilderValidators.required(errorText: ''),
-                    FormBuilderValidators.minLength(10, errorText: ''),
-                    FormBuilderValidators.maxLength(11, errorText: ''),
-                    FormBuilderValidators.numeric(errorText: ''),
+                    FormBuilderValidators.minLength(6, errorText: ''),
                   ]),
+                );
+              },
+            ),
+            const VerticalSpace(height: 10.0),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsetsDirectional.only(end: 16.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4.0),
+                      border: Border.all(
+                        color: ColorsManager.grey,
+                        width: 1.0,
+                      ),
+                    ),
+                    child: ccp.CountryCodePicker(
+                      onChanged: (ccp.CountryCode countryCode) {
+                        cubit.setCountryCode(countryCode.dialCode.toString());
+                        log(cubit.countryCode.toString());
+                      },
+                      headerText: context.el.selectCountryLabel,
+                      initialSelection: 'SA',
+                      favorite: const ['SA', 'EG', 'AE'],
+                      showCountryOnly: false,
+                      showOnlyCountryWhenClosed: false,
+                      alignLeft: false,
+                      textStyle: TextStylesInter.font15DarkGreyRegular,
+                      headerTextStyle:
+                          TextStylesEBGaramond.font25MainRoseRegular,
+                      closeIcon: const Icon(
+                        Icons.close,
+                        color: ColorsManager.mainRose,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const VerticalSpace(height: 10.0),
-          const CreateAccountBirthdayPicker(),
-          const VerticalSpace(height: 30.0),
-          bottomCreateAccount(
-            context: context,
-            onPressed: () {
-              validateThenRegister(context);
-            },
-          ),
-        ],
+                Expanded(
+                  // Phone TextField using localized label
+                  child: FormBuilderTextField(
+                    name: 'phone',
+                    keyboardType: TextInputType.phone,
+                    decoration: InputDecoration(
+                      labelText: 'Phone',
+                      suffixIcon: FormBuilderField(
+                        name: FormFieldsKeys.phoneErrorListner,
+                        builder: (FormFieldState<dynamic> field) {
+                          return Visibility(
+                            visible: cubit.formKey.currentState?.fields['phone']
+                                    ?.hasError ??
+                                false,
+                            child: toolTipBuilder(
+                                cubit.phoneTooltipKey, 'Required'),
+                          );
+                        },
+                      ),
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: ColorsManager.grey,
+                          width: 1.0,
+                        ),
+                      ),
+                      enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: ColorsManager.grey,
+                          width: 1.0,
+                        ),
+                      ),
+                      labelStyle: TextStylesInter.font15GreyRegular,
+                    ),
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(errorText: ''),
+                      FormBuilderValidators.minLength(10, errorText: ''),
+                      FormBuilderValidators.maxLength(11, errorText: ''),
+                      FormBuilderValidators.numeric(errorText: ''),
+                    ]),
+                  ),
+                ),
+              ],
+            ),
+            const VerticalSpace(height: 10.0),
+            const CreateAccountBirthdayPicker(),
+            const VerticalSpace(height: 30.0),
+            bottomCreateAccount(
+              context: context,
+              onPressed: () {
+                validateThenRegister(context);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
