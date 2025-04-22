@@ -3,7 +3,6 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wardaya/core/assets/assets.dart';
 
 import 'cart_state.dart';
 
@@ -20,23 +19,10 @@ class CartCubit extends Cubit<CartState> {
   String message = '';
   String from = '';
   Uint8List? signature; // Store signature image
+  String? signatureLink; // Store signature image
+  String? videoLink; // Store signature image
 
   // Card Data
-  List<Map<String, dynamic>> cards(context) => [
-        {
-          'image': Assets.of(context).images.cards.card1_png,
-          'title': 'Floward Card',
-          'price': 'Free',
-          'currency': '',
-        },
-        {
-          'image': Assets.of(context).images.cards.card2_png,
-          'title': 'You Complete Me',
-          'price': '99',
-          'currency': 'EGP',
-        },
-      ];
-
   CartCubit() : super(const CartState.initial());
 
   void changeLength(int newLength) async {
@@ -44,35 +30,59 @@ class CartCubit extends Cubit<CartState> {
     emit(CartState.changeLength(cartItems));
   }
 
-  void setSelectedCard(int index) {
+  void setSelectedCard(int index, {bool shouldEmit = true}) {
     selectedCardIndex = index;
-    emit(CartState.changeSelectedCardIndex(index));
+    if (shouldEmit) {
+      emit(CartState.changeSelectedCardIndex(index));
+    }
   }
 
   void setMessageData({
     required String to,
     required String message,
     required String from,
+    bool shouldEmit = true,
   }) {
     this.to = to;
     this.message = message;
     this.from = from;
-    toController.text = to;
-    messageController.text = message;
-    fromController.text = from;
 
-    log(to);
-    log(message);
-    log(from);
-    emit(
-      CartState.changeSelectedMessage(to, message, from),
-    );
+    // Update controller values without triggering additional notifications
+    if (toController.text != to) {
+      toController.text = to;
+    }
+    if (messageController.text != message) {
+      messageController.text = message;
+    }
+    if (fromController.text != from) {
+      fromController.text = from;
+    }
+
+    // Only emit state when explicitly requested (not during normal typing)
+    if (shouldEmit) {
+      log("Emitting message state change - to: $to, message: $message, from: $from");
+      emit(CartState.changeSelectedMessage(to, message, from));
+    }
   }
 
   void setSignature({required Uint8List? signature}) {
     this.signature = signature;
     emit(
       CartState.changeSignature(signature),
+    );
+  }
+
+  void setSignatureLink({required String? signatureLink}) {
+    this.signatureLink = signatureLink;
+    emit(
+      CartState.changeSignatureLink(signatureLink),
+    );
+  }
+
+  void setVideoLink({required String? videoLink}) {
+    this.videoLink = videoLink;
+    emit(
+      CartState.changeVideoLink(videoLink),
     );
   }
 

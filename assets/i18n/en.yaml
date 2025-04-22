@@ -344,3 +344,6 @@ myOccasions: "My Occasions"
 quickAdd: "Quick Add"
 selectAnOccasionToCreateAReminder: "Select an occasion to create a reminder"
 yourUpcomingOccasion: "Your Upcoming Occasion"
+
+# chckout screen texts
+selectDeliveryDate: "Select Delivery Date"

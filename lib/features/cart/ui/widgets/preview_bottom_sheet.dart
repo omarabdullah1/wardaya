@@ -5,9 +5,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:wardaya/core/assets/assets.dart';
-import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
+import 'package:wardaya/core/theming/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:wardaya/features/cart/data/apis/cart_api_constants.dart';
+import 'package:wardaya/features/cart/data/models/get_gift_cards_response.dart';
+import 'package:wardaya/features/cart/logic/giftCards/gift_cards_cubit.dart';
+import 'package:wardaya/features/cart/logic/giftCards/gift_cards_state.dart';
 
 import '../../logic/cubit/cart_cubit.dart';
 
@@ -43,6 +48,12 @@ class _PreviewBottomSheetState extends State<PreviewBottomSheet> {
   }
 
   @override
+  void dispose() {
+    _currentPageNotifier.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 12.h),
@@ -55,7 +66,7 @@ class _PreviewBottomSheetState extends State<PreviewBottomSheet> {
               controller: widget.pageController,
               onPageChanged: (page) => _currentPageNotifier.value = page,
               children: [
-                _buildFrontPreview(context),
+                _buildFrontPreview(widget.cartContext),
                 _buildBackPreview(context),
               ],
             ),
@@ -69,8 +80,8 @@ class _PreviewBottomSheetState extends State<PreviewBottomSheet> {
                   SizedBox(height: 16.h),
                   Text(
                     currentPage == 0
-                        ? context.el.backSideLabel
-                        : context.el.frontSideLabel,
+                        ? context.el.frontSideLabel
+                        : context.el.backSideLabel,
                     style: GoogleFonts.inter(
                       color: ColorsManager.mainRose,
                       fontSize: 14.sp,
@@ -94,26 +105,85 @@ class _PreviewBottomSheetState extends State<PreviewBottomSheet> {
     );
   }
 
-  Widget _buildFrontPreview(BuildContext context) {
-    final cards = context.read<CartCubit>().cards;
-    if (cards(context).isEmpty ||
-        widget.selectedCardIndex >= cards(context).length) {
-      return Center(
-        child: Text(context.el.noCardSelected),
-      );
-    }
-    final card = cards(context)[widget.selectedCardIndex];
+  Widget _buildFrontPreview(BuildContext giftCardContext) {
+    return BlocBuilder<GiftCardsCubit, GiftCardsState>(
+      builder: (context, state) {
+        return giftCardContext.read<GiftCardsCubit>().state.maybeWhen(
+              loaded: (giftCards) {
+                // Make sure the selectedCardIndex is within valid range
+                if (widget.selectedCardIndex < 0 ||
+                    widget.selectedCardIndex >= giftCards.length) {
+                  return _buildNoCardSelectedView(giftCardContext);
+                }
+
+                final selectedCard = giftCards[widget.selectedCardIndex];
+                return _buildCardPreview(giftCardContext, selectedCard);
+              },
+              // For all other states, show loading or no card selected view
+              orElse: () => _buildNoCardSelectedView(giftCardContext),
+            );
+      },
+    );
+  }
+
+  Widget _buildCardPreview(
+      BuildContext giftCardContext, GiftCardTemplate card) {
     return Container(
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
         color: ColorsManager.white,
-      ),
-      child: ClipRRect(
         borderRadius: BorderRadius.circular(15),
-        child: Image.asset(
-          card['image'],
-          fit: BoxFit.cover,
-          width: double.infinity,
+      ),
+      child: CachedNetworkImage(
+        imageUrl: CartApiConstants.apiBaseUrlForImages + card.image,
+        fit: BoxFit.cover,
+        height: 250.h,
+        placeholder: (context, url) => Container(
+          color: ColorsManager.lighterGrey,
+          height: 250.h,
+          child: const Center(
+            child: CircularProgressIndicator(color: ColorsManager.mainRose),
+          ),
+        ),
+        errorWidget: (context, url, error) => Container(
+          color: ColorsManager.lighterGrey,
+          height: 250.h,
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.image_not_supported,
+                    color: ColorsManager.mainRose),
+                SizedBox(height: 4.h),
+                Text(
+                  'Gift card image',
+                  style: GoogleFonts.inter(
+                    color: ColorsManager.mainRose,
+                    fontSize: 12.sp,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNoCardSelectedView(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: ColorsManager.white,
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Center(
+        child: Text(
+          context.el.noCardSelected,
+          style: GoogleFonts.inter(
+            fontSize: 16.sp,
+            color: ColorsManager.grey,
+          ),
         ),
       ),
     );
@@ -188,56 +258,113 @@ class _PreviewBottomSheetState extends State<PreviewBottomSheet> {
                   textAlign: TextAlign.center,
                 ),
           SizedBox(height: 8.h),
-          Container(
-            alignment: AlignmentDirectional.bottomCenter,
-            decoration: BoxDecoration(
-              color: ColorsManager.mainRose.withAlpha(35),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                children: [
-                  Container(
-                    width: 80.w,
-                    height: 65.h,
-                    decoration: BoxDecoration(
-                      color: ColorsManager.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: QrImageView(
-                      data: context.read<CartCubit>().linkController.text,
-                    ),
+          (context.read<CartCubit>().videoLink.isNullOrEmpty())
+              ? (!context.read<CartCubit>().linkController.text.isNullOrEmpty())
+                  ? Container(
+                      alignment: AlignmentDirectional.bottomCenter,
+                      decoration: BoxDecoration(
+                        color: ColorsManager.mainRose.withAlpha(35),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 80.w,
+                              height: 65.h,
+                              decoration: BoxDecoration(
+                                color: ColorsManager.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: QrImageView(
+                                data: context
+                                    .read<CartCubit>()
+                                    .linkController
+                                    .text,
+                              ),
+                            ),
+                            SizedBox(width: 10.w),
+                            SizedBox(
+                              width: context.screenWidth * 0.50.w,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    context.el.qrQuestion,
+                                    style: GoogleFonts.inter(
+                                      color: ColorsManager.mainRose,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14.sp,
+                                    ),
+                                  ),
+                                  Text(
+                                    context.el.qrInstruction,
+                                    style: GoogleFonts.inter(
+                                      color: ColorsManager.mainRose,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 10.sp,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  : const SizedBox()
+              : Container(
+                  alignment: AlignmentDirectional.bottomCenter,
+                  decoration: BoxDecoration(
+                    color: ColorsManager.mainRose.withAlpha(35),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  SizedBox(width: 10.w),
-                  SizedBox(
-                    width: context.screenWidth * 0.50.w,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Row(
                       children: [
-                        Text(
-                          context.el.qrQuestion,
-                          style: GoogleFonts.inter(
-                            color: ColorsManager.mainRose,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14.sp,
+                        Container(
+                          width: 80.w,
+                          height: 65.h,
+                          decoration: BoxDecoration(
+                            color: ColorsManager.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: QrImageView(
+                            data: CartApiConstants.apiBaseUrlForImages +
+                                context.read<CartCubit>().videoLink!,
                           ),
                         ),
-                        Text(
-                          context.el.qrInstruction,
-                          style: GoogleFonts.inter(
-                            color: ColorsManager.mainRose,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 10.sp,
+                        SizedBox(width: 10.w),
+                        SizedBox(
+                          width: context.screenWidth * 0.50.w,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                context.el.qrQuestion,
+                                style: GoogleFonts.inter(
+                                  color: ColorsManager.mainRose,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14.sp,
+                                ),
+                              ),
+                              Text(
+                                context.el.qrInstruction,
+                                style: GoogleFonts.inter(
+                                  color: ColorsManager.mainRose,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 10.sp,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
                   ),
-                ],
-              ),
-            ),
-          ),
+                )
         ],
       ),
     );
@@ -248,7 +375,7 @@ class _PreviewBottomSheetState extends State<PreviewBottomSheet> {
       onTap: () {
         widget.pageController.animateToPage(
           index,
-          duration: const Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 100),
           curve: Curves.easeInOut,
         );
       },

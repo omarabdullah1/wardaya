@@ -73,7 +73,13 @@ class _PasteLinkBottomSheetState extends State<PasteLinkBottomSheet> {
                           Navigator.pop(context);
                         }
                   : () {
-                      context.pushNamed(Routes.recordScreen);
+                      // Use the widget.cartContext which has access to CartCubit
+                      widget.cartContext.pushNamed(
+                        Routes.recordScreen,
+                        arguments: {
+                          'extraArgs': widget.cartContext.read<CartCubit>(),
+                        },
+                      );
                     },
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(

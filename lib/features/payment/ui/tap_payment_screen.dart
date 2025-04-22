@@ -14,24 +14,14 @@ import '../../../core/widgets/loading_widget.dart';
 
 class TapPaymentScreen extends StatefulWidget {
   final double amount;
-  final String orderId;
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String phoneNumber;
-  final String countryCode;
+  // final String orderId;
   final String? paymentMethod;
   final String? redirectUrl; // Add redirectUrl parameter
 
   const TapPaymentScreen({
     super.key,
     required this.amount,
-    required this.orderId,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    this.phoneNumber = "",
-    this.countryCode = "+966",
+    // required this.orderId,
     this.paymentMethod,
     this.redirectUrl, // Add to constructor
   });

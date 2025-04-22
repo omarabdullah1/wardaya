@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -16,8 +17,11 @@ import 'package:wardaya/features/cart/logic/getCart/cubit/get_cart_cubit.dart';
 import 'package:wardaya/features/cart/logic/getCart/cubit/get_cart_state.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_state.dart';
+import 'package:wardaya/features/cart/logic/giftCards/gift_cards_cubit.dart';
 import 'package:wardaya/features/cart/ui/widgets/delivery_banner.dart';
 import 'package:wardaya/features/cart/ui/widgets/proceed_payment_button.dart';
+import 'package:wardaya/features/cart/data/models/get_gift_cards_response.dart'
+    as gift_card_response;
 
 import '../../../../../core/assets/assets.dart';
 import '../../../../../core/helpers/spacing.dart';
@@ -28,23 +32,27 @@ import '../empty_cart.dart';
 import '../gift_card_section.dart';
 
 class CartBuilder extends StatelessWidget {
-  final List<String> styles;
-
-  const CartBuilder({super.key, required this.styles});
+  const CartBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
         final cartCubit = context.read<CartCubit>();
-        final selectedCard =
-            context.read<CartCubit>().selectedCardIndex != -1 &&
-                    context.read<CartCubit>().selectedCardIndex <
-                        context.read<CartCubit>().cards(context).length
-                ? context
-                    .read<CartCubit>()
-                    .cards(context)[context.read<CartCubit>().selectedCardIndex]
+        final giftCubit = context.read<GiftCardsCubit>();
+        final gift_card_response.GiftCardTemplate? selectedCard =
+            cartCubit.selectedCardIndex != -1
+                ? giftCubit.state.whenOrNull(
+                    initial: () {
+                      log("GiftCardCubit initial state");
+                      return null;
+                    },
+                    loaded: (giftCards) =>
+                        giftCards[cartCubit.selectedCardIndex]
+                            as gift_card_response.GiftCardTemplate?,
+                  )
                 : null;
+
         final signatureImage = cartCubit.signature;
 
         return Scaffold(
@@ -124,10 +132,11 @@ class CartBuilder extends StatelessWidget {
           body: RefreshIndicator(
             onRefresh: () async {
               context.read<GetCartCubit>().getCart();
+              context.read<GiftCardsCubit>().getGiftCards();
             },
             child: BlocBuilder<GetCartCubit, GetCartState>(
-              builder: (context, getCartState) {
-                return getCartState.maybeWhen(
+              builder: (context, state) {
+                return state.maybeWhen(
                   initial: () => const SizedBox.shrink(),
                   loading: () => _buildLoading(
                     cartItems: [],
@@ -173,20 +182,10 @@ class CartBuilder extends StatelessWidget {
     );
   }
 
-  Widget _buildGiftCardSection(BuildContext context, dynamic selectedCard,
-      dynamic signatureImage, CartCubit cartCubit, List<String> styles) {
-    return GiftCardSection(
-      selectedCard: selectedCard,
-      signatureImage: signatureImage,
-      cartCubit: cartCubit,
-      styles: styles,
-    );
-  }
-
   Widget _buildSuccess({
     required List<GetCartItem> cartItems,
     required BuildContext context,
-    Map<String, dynamic>? selectedCard,
+    required gift_card_response.GiftCardTemplate? selectedCard,
     Uint8List? signatureImage,
     required CartCubit cartCubit,
   }) {
@@ -219,8 +218,8 @@ class CartBuilder extends StatelessWidget {
                             color: ColorsManager.lightGrey,
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          width: 100,
-                          height: 100,
+                          width: 80.w,
+                          height: 80.h,
                           child: item.product.images.isNotEmpty == true
                               ? CachedNetworkImage(
                                   imageUrl:
@@ -369,8 +368,7 @@ class CartBuilder extends StatelessWidget {
 
             // Gift Card & Message Section
             const SizedBox(height: 16),
-            _buildGiftCardSection(
-                context, selectedCard, signatureImage, cartCubit, styles),
+            const GiftCardSection(),
           ],
         ),
       ),
@@ -380,7 +378,7 @@ class CartBuilder extends StatelessWidget {
   Widget _buildLoading({
     required List<GetCartItem> cartItems,
     required BuildContext context,
-    Map<String, dynamic>? selectedCard,
+    gift_card_response.GiftCardTemplate? selectedCard,
     Uint8List? signatureImage,
     required CartCubit cartCubit,
   }) {
@@ -557,8 +555,7 @@ class CartBuilder extends StatelessWidget {
 
               // Gift Card & Message Section
               const SizedBox(height: 16),
-              _buildGiftCardSection(
-                  context, selectedCard, signatureImage, cartCubit, styles),
+              const GiftCardSection(),
             ],
           ),
         ),

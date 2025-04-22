@@ -13,6 +13,8 @@ import '../../../core/di/dependency_injection.dart';
 import '../../../core/theming/colors.dart';
 
 import '../../cart/logic/addToCart/cubit/add_to_cart_cubit.dart';
+import '../../cart/logic/giftCards/gift_cards_cubit.dart';
+import '../../cart/logic/uploadSignature/upload_signature_cubit.dart';
 import '../../cart/ui/cart_screen.dart';
 import '../../home/logic/categories/categories_cubit.dart';
 import '../../home/logic/delivery_areas/delivery_areas_cubit.dart';
@@ -100,10 +102,18 @@ class HomeLayout extends StatelessWidget {
                         return MultiBlocProvider(
                           providers: [
                             BlocProvider(
+                              create: (context) =>
+                                  getIt<UploadSignatureCubit>(),
+                            ),
+                            BlocProvider(
                               create: (context) => getIt<AddToCartCubit>(),
                             ),
                             BlocProvider(
                               create: (context) => getIt<RemoveCartCubit>(),
+                            ),
+                            BlocProvider(
+                              create: (context) =>
+                                  getIt<GiftCardsCubit>()..getGiftCards(),
                             ),
                           ],
                           child: const CartScreen(),

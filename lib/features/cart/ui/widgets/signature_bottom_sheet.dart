@@ -9,7 +9,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
+import 'package:wardaya/core/widgets/loading_widget.dart';
 import 'package:wardaya/features/cart/logic/cubit/cart_cubit.dart';
+import 'package:wardaya/features/cart/logic/uploadSignature/upload_signature_cubit.dart';
+import 'package:wardaya/features/cart/logic/uploadSignature/upload_signature_state.dart';
 import 'package:wardaya/features/cart/ui/widgets/signature_text_selector.dart';
 
 import 'custom_field_with_dropdown.dart';
@@ -57,13 +60,71 @@ class _SignatureBottomSheetState extends State<SignatureBottomSheet> {
   Future<void> _saveSignatureHandWritten() async {
     final signature = await _signatureKey.currentState?.getData();
     if (signature != null) {
+      // Ensure we're using PNG format with proper image byte format
       final Uint8List data = await signature
           .toByteData(format: ui.ImageByteFormat.png)
           .then((byteData) => byteData!.buffer.asUint8List());
-      widget.onSave(data);
-    }
-    if (mounted) {
-      context.pop();
+
+      // Use BlocProvider to get UploadSignatureCubit
+      final uploadCubit = widget.cartContext.read<UploadSignatureCubit>();
+
+      // Show upload dialog with status management
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (dialogContext) =>
+            BlocConsumer<UploadSignatureCubit, UploadSignatureState>(
+          bloc: uploadCubit,
+          listener: (context, state) {
+            state.maybeWhen(
+              loaded: (response) {
+                // Set signature link in CartCubit on success
+                widget.cartContext.read<CartCubit>().setSignatureLink(
+                      signatureLink: response.imageUrl,
+                    );
+
+                // Close the dialog and bottom sheet
+                Navigator.of(dialogContext).pop();
+
+                // Save signature data and close
+                if (mounted) {
+                  widget.onSave(data);
+                  context.pop();
+                }
+              },
+              error: (message) {
+                // Close the loading dialog
+                Navigator.of(dialogContext).pop();
+
+                // Show error message
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      message,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              },
+              orElse: () {},
+            );
+          },
+          builder: (context, state) {
+            return state.maybeWhen(
+              loading: () => const LoadingWidget(loadingState: true),
+              orElse: () => const LoadingWidget(loadingState: true),
+            );
+          },
+        ),
+      );
+
+      // Always use a timestamp in filename to avoid caching issues and ensure .png extension
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
+      final filename = 'signature_$timestamp.png';
+
+      // Start the upload process with explicit PNG filename
+      await uploadCubit.uploadSignature(data, fileName: filename);
     }
   }
 

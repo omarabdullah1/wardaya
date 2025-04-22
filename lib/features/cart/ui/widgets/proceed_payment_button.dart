@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
+import 'package:wardaya/features/cart/data/models/get_gift_cards_response.dart';
+import 'package:wardaya/features/cart/logic/giftCards/gift_cards_cubit.dart';
 
 import '../../../../core/routing/router_imports.dart';
 import '../../../../core/theming/colors.dart';
@@ -12,6 +16,7 @@ class ProceedPaymentButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartCubit = context.read<CartCubit>();
     return BlocBuilder<GetCartCubit, GetCartState>(
       builder: (context, getCartState) {
         return getCartState.maybeWhen(
@@ -40,13 +45,49 @@ class ProceedPaymentButton extends StatelessWidget {
                   onPressed: cartItems.isEmpty
                       ? null
                       : () {
+                          final getCartCubit = context.read<GetCartCubit>();
+                          final giftCardCubit = context.read<GiftCardsCubit>();
+                          // log(getCartCubit.state
+                          //     .maybeWhen(
+                          //         loaded: (data) => data.first.product.title,
+                          //         orElse: () => null)
+                          //     .toString());
+                          // log(cartCubit.to.toString());
+                          // log(cartCubit.message.toString());
+                          // log(cartCubit.from.toString());
+                          // log(cartCubit.selectedTypingStyle.toString());
+                          // log(cartCubit.signatureLink.toString());
+                          // log(cartCubit.linkController.text.toString());
+                          // log(cartCubit.videoLink.toString());
+                          cartItems = getCartCubit.state.maybeWhen(
+                              loaded: (data) => data, orElse: () => []);
+                          final List<GiftCardTemplate> cards =
+                              giftCardCubit.state.maybeWhen(
+                            orElse: () {
+                              return [];
+                            },
+                            loaded: (data) {
+                              return data;
+                            },
+                          );
+                          // log(cartItems.toString());
                           Navigator.pushNamed(
                             context,
-                            Routes.paymentMethodScreen,
+                            Routes.chckoutDetails,
                             arguments: {
-                              'amount': totalAmount,
-                              'orderId':
-                                  'ORD-${DateTime.now().millisecondsSinceEpoch}',
+                              "giftCardId":
+                                  cards[cartCubit.selectedCardIndex].id,
+                              "cartItems": cartItems,
+                              "from": cartCubit.from,
+                              "to": cartCubit.to,
+                              "message": cartCubit.message,
+                              "selectedTypingStyle":
+                                  cartCubit.selectedTypingStyle,
+                              "signatureLink": cartCubit.signatureLink,
+                              "linkController": cartCubit.linkController.text,
+                              "videoLink": cartCubit.videoLink,
+                              'price': totalAmount.toString(),
+                              'currency': 'SAR',
                             },
                           ).then((value) {
                             if (value == true) {

@@ -1,5 +1,8 @@
 import 'package:wardaya/features/address/logic/address_cubit/address_cubit.dart';
 import 'package:wardaya/features/cart/logic/addToCart/cubit/add_to_cart_cubit.dart';
+import 'package:wardaya/features/cart/logic/checkout/checkout_cubit.dart';
+import 'package:wardaya/features/cart/logic/promo/promo_cubit.dart';
+import 'package:wardaya/features/cart/ui/checkout_details_screen.dart';
 import 'package:wardaya/features/favorites/logic/cubit/favorites_cubit.dart';
 import 'package:wardaya/features/home/logic/occassions/occassions_cubit.dart';
 import 'package:wardaya/features/home/logic/recipients/recipients_cubit.dart';
@@ -14,6 +17,7 @@ import 'package:wardaya/features/subscriptions/logic/subscription_checkout_cubit
 
 import '../../features/address/data/models/address_response.dart';
 import '../../features/address/logic/recipient_details_cubit/recipient_details_cubit.dart';
+import '../../features/cart/logic/videoUpload/video_upload_cubit.dart';
 import '../../features/favorites/ui/favorites_screen.dart';
 import '../../features/address/ui/addresses_screen.dart';
 import '../../features/address/ui/recipient_details_screen.dart';
@@ -32,6 +36,7 @@ import '../../features/subscriptions/ui/susbcriptions_screen.dart';
 import 'router_imports.dart';
 import '../../features/payment/ui/payment_method_screen.dart';
 import '../../features/payment/ui/tap_payment_screen.dart';
+import '../../features/cart/logic/giftCards/gift_cards_cubit.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -236,11 +241,18 @@ class AppRouter {
         final CartCubit cartCubit = BlocProvider.of<CartCubit>(parentContext);
         return PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) {
-            return BlocProvider.value(
-              value: cartCubit,
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider.value(
+                  value: cartCubit,
+                ),
+                BlocProvider(
+                  create: (_) => getIt<GiftCardsCubit>()..getGiftCards(),
+                ),
+              ],
               child: CustomizeGiftCardScreen(
                 initialTabIndex: args[0] as int,
-                cartContext: parentContext,
+                parentContext: parentContext,
               ),
             );
           },
@@ -259,7 +271,21 @@ class AppRouter {
           },
         );
       case Routes.recordScreen:
-        return _buildRoute(screen: const RecordScreen());
+        if (arguments is Map<String, dynamic>) {
+          final extraArgs = arguments['extraArgs'] as CartCubit;
+
+          return _buildRoute(
+            screen: BlocProvider(
+              create: (context) => getIt<VideoUploadCubit>(),
+              child: RecordScreen(
+                cartCubit: extraArgs,
+              ),
+            ),
+          );
+        } else {
+          throw ArgumentError("Invalid arguments for ${Routes.categoryScreen}");
+        }
+
       case Routes.editProfileScreen:
         final cubit =
             (arguments as Map<String, dynamic>?)?['cubit'] as ProfileCubit?;
@@ -289,12 +315,12 @@ class AppRouter {
         return _buildRoute(
           screen: TapPaymentScreen(
             amount: args['amount'],
-            orderId: args['orderId'],
-            firstName: args['firstName'],
-            lastName: args['lastName'],
-            email: args['email'],
-            phoneNumber: args['phoneNumber'],
-            countryCode: args['countryCode'],
+            // orderId: args['orderId'],
+            // firstName: args['firstName'],
+            // lastName: args['lastName'],
+            // email: args['email'],
+            // phoneNumber: args['phoneNumber'],
+            // countryCode: args['countryCode'],
             paymentMethod: args['paymentMethod'],
             redirectUrl: args['redirectUrl'],
           ),
@@ -379,7 +405,6 @@ class AppRouter {
         return _buildRoute(
           screen: PaymentMethodScreen(
             amount: args['amount'] as double,
-            orderId: args['orderId'] as String,
           ),
         );
       // case Routes.tapPaymentScreen:
@@ -414,6 +439,33 @@ class AppRouter {
         }
         throw ArgumentError(
             "Invalid arguments for ${Routes.orderDetailsScreen}");
+      case Routes.chckoutDetails:
+        final Map<String, dynamic> args = arguments as Map<String, dynamic>;
+        return _buildRoute(
+          screen: MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => getIt<CheckoutCubit>(),
+              ),
+              BlocProvider(
+                create: (context) => getIt<PromoCubit>(),
+              ),
+            ],
+            child: CheckoutDetails(
+              giftCardId: args['giftCardId'],
+              price: args['price'],
+              currency: args['currency'],
+              to: args['to'],
+              message: args['message'],
+              from: args['from'],
+              signatureLink: args['signatureLink'],
+              link: args['link'],
+              videoLink: args['videoLink'],
+              selectedTypingStyle: args['selectedTypingStyle'],
+              cartItems: args['cartItems'],
+            ),
+          ),
+        );
       default:
         return null;
     }

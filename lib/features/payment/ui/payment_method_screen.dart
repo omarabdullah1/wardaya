@@ -10,12 +10,10 @@ import 'tap_payment_screen.dart';
 
 class PaymentMethodScreen extends StatefulWidget {
   final double amount;
-  final String orderId;
 
   const PaymentMethodScreen({
     super.key,
     required this.amount,
-    required this.orderId,
   });
 
   @override
@@ -136,12 +134,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             MaterialPageRoute(
               builder: (context) => TapPaymentScreen(
                 amount: widget.amount,
-                orderId: widget.orderId,
-                firstName: "John", // Replace with actual user data
-                lastName: "Smith", // Replace with actual user data
-                email: "customer@example.com", // Replace with actual user data
-                phoneNumber: "566123456", // Replace with actual user data
-                countryCode: "+966", // Replace with actual user data
+                // orderId: widget.orderId,
                 paymentMethod: _selectedPaymentMethodId,
               ),
             ),

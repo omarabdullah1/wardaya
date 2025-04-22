@@ -34,4 +34,5 @@ class Routes {
   static const String tapPaymentScreen = '/tap-payment';
   static const String myOrdersScreen = '/myOrdersScreen';
   static const String orderDetailsScreen = '/orderDetailsScreen';
+  static const String chckoutDetails = '/checkoutDetails';
 }

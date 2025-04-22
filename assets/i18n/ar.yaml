@@ -341,3 +341,6 @@ myOccasions: "مناسباتي"
 quickAdd: "إضافة سريعة"
 selectAnOccasionToCreateAReminder: "اختر مناسبة لإنشاء تذكير"
 yourUpcomingOccasion: "مناسباتك القادمة"
+
+# chckout screen texts
+selectDeliveryDate: "اختر تاريخ التوصيل"

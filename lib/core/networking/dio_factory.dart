@@ -37,6 +37,24 @@ class DioFactory {
     }
   }
 
+  /// Resets the Dio instance, clearing all interceptors and creating a new instance
+  /// This is useful when auth tokens expire or session timeouts occur
+  static Future<Dio> resetDio() async {
+    log('Resetting Dio instance...');
+
+    // Cancel all ongoing requests
+    if (dio != null) {
+      dio!.close(force: true);
+      dio = null;
+    }
+
+    // Create a new instance
+    Dio newDio = getDio();
+    log('Dio instance reset successfully');
+
+    return newDio;
+  }
+
   static void addDioHeaders() async {
     dio?.options.headers = {
       'Accept': 'application/json',
@@ -71,6 +89,9 @@ class DioFactory {
       // Moved debouncing to be the first interceptor
       DebouncingInterceptor(debounceDelay: const Duration(milliseconds: 1000)),
 
+      // Special handler for 408 Request Timeout errors
+      SessionTimeoutInterceptor(),
+
       // Custom retry interceptor with debounce checks
       _DebounceAwareRetryInterceptor(
         dio: dio!,
@@ -89,6 +110,10 @@ class DioFactory {
         responseHeader: true,
       ),
     ]);
+  }
+
+  static void handleSessionTimeout() {
+    // Implement navigation to login screen here
   }
 }
 
@@ -212,5 +237,28 @@ class DebouncingInterceptor extends Interceptor {
     final requestKey = _getRequestKey(err.requestOptions);
     _lastRequestTimes.remove(requestKey);
     handler.next(err);
+  }
+}
+
+class SessionTimeoutInterceptor extends Interceptor {
+  @override
+  void onError(DioException err, ErrorInterceptorHandler handler) async {
+    if (err.response?.statusCode == 408) {
+      log('Session timeout detected: ${err.requestOptions.path}');
+
+      // Clear all data from SharedPreferences and SecureStorage
+      await SharedPrefHelper.clearAllData();
+      await SharedPrefHelper.clearAllSecuredData();
+
+      // Navigate to login screen
+      _navigateToLogin();
+    }
+    handler.next(err);
+  }
+
+  void _navigateToLogin() {
+    // Use a static method to navigate to login screen to handle
+    // the navigation from non-context environment
+    DioFactory.handleSessionTimeout();
   }
 }

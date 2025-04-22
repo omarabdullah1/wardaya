@@ -77,7 +77,7 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
           backgroundColor: Colors.transparent,
           builder: (context) => RecipientAddressSheet(
             initialLocation:
-                cubit.selectedLocation ?? const LatLng(30.0444, 31.2357),
+                cubit.selectedLocation ?? const LatLng(24.0444, 46.2357),
             initialAddress: cubit.selectedAddress,
             initialArea: cubit.selectedArea,
             additional: cubit.additionalInfo,

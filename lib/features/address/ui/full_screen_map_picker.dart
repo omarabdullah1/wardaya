@@ -7,7 +7,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 
-
 import '../../../core/theming/colors.dart';
 
 class FullScreenMapPicker extends StatefulWidget {
@@ -458,8 +457,7 @@ class _FullScreenMapPickerState extends State<FullScreenMapPicker> {
                       ),
                     ),
                   ),
-
-                  ],
+                ],
               ),
             ),
 
@@ -499,7 +497,7 @@ class _FullScreenMapPickerState extends State<FullScreenMapPicker> {
                       ],
                     ),
                   ),
-                ElevatedButton( 
+                ElevatedButton(
                   onPressed: () {
                     // Pop with data and prevent multiple navigations
                     // if (Navigator.canPop(context)) {
@@ -520,7 +518,7 @@ class _FullScreenMapPickerState extends State<FullScreenMapPicker> {
                     // context.pop();
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF006A78),
+                    backgroundColor: ColorsManager.mainRose,
                     padding: EdgeInsets.symmetric(vertical: 12.h),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.r),

@@ -4,7 +4,9 @@ import 'package:wardaya/features/address/data/api/address_service.dart';
 import 'package:wardaya/features/address/data/repos/address_repo.dart';
 import 'package:wardaya/features/cart/data/repos/cart_repo.dart';
 import 'package:wardaya/features/cart/logic/addToCart/cubit/add_to_cart_cubit.dart';
+import 'package:wardaya/features/cart/logic/giftCards/gift_cards_cubit.dart';
 import 'package:wardaya/features/cart/logic/removeCart/cubit/remove_cart_cubit.dart';
+import 'package:wardaya/features/cart/logic/videoUpload/video_upload_cubit.dart';
 import 'package:wardaya/features/explore/data/apis/explore_service.dart';
 import 'package:wardaya/features/explore/data/repos/explore_repo.dart';
 import 'package:wardaya/features/explore/logic/cubit/explore_cubit.dart';
@@ -42,7 +44,9 @@ import '../../features/authentication/create_account/logic/cubit/register_cubit.
 import '../../features/authentication/login/data/repos/login_repo.dart';
 import '../../features/authentication/login/logic/cubit/login_cubit.dart';
 import '../../features/cart/data/apis/cart_service.dart';
+import '../../features/cart/logic/checkout/checkout_cubit.dart';
 import '../../features/cart/logic/getCart/cubit/get_cart_cubit.dart';
+import '../../features/cart/logic/promo/promo_cubit.dart';
 import '../../features/favorites/data/repos/favorites_repo.dart';
 import '../../features/home/logic/delivery_areas/delivery_areas_cubit.dart';
 import '../../features/home/logic/gallery/gallery_cubit.dart';
@@ -56,6 +60,7 @@ import '../../features/subscriptions/logic/subscription_checkout_cubit/subscript
 import '../blocs/general/cubit/general_cubit.dart';
 import '../networking/dio_factory.dart';
 import '../../features/home/logic/new_ideas/new_ideas_cubit.dart';
+import 'package:wardaya/features/cart/logic/uploadSignature/upload_signature_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -149,4 +154,10 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<AddToCartCubit>(() => AddToCartCubit(getIt()));
   getIt.registerFactory<GetCartCubit>(() => GetCartCubit(getIt()));
   getIt.registerFactory<RemoveCartCubit>(() => RemoveCartCubit(getIt()));
+  getIt.registerFactory<GiftCardsCubit>(() => GiftCardsCubit(getIt()));
+  getIt.registerFactory<UploadSignatureCubit>(
+      () => UploadSignatureCubit(getIt()));
+  getIt.registerFactory<VideoUploadCubit>(() => VideoUploadCubit(getIt()));
+  getIt.registerFactory<CheckoutCubit>(() => CheckoutCubit(getIt()));
+  getIt.registerFactory<PromoCubit>(() => PromoCubit(getIt()));
 }
