@@ -14,8 +14,19 @@ abstract class MyOccassionsService {
   @GET(MyOrdersApiConstants.useroccasions)
   Future<List<MyOccasionItem>> getMyOccasions();
 
-  @GET(MyOrdersApiConstants.useroccasions)
+  @POST(MyOrdersApiConstants.useroccasions)
   Future<CreateOccasionResponse> createOccasion(
     @Body() Map<String, dynamic> body,
+  );
+
+  @PUT("${MyOrdersApiConstants.useroccasions}/{id}")
+  Future<CreateOccasionResponse> updateOccasion(
+    @Path("id") String id,
+    @Body() Map<String, dynamic> body,
+  );
+
+  @DELETE("${MyOrdersApiConstants.useroccasions}/{id}")
+  Future<dynamic> deleteOccasion(
+    @Path("id") String id,
   );
 }

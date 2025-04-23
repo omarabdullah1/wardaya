@@ -22,6 +22,10 @@ mixin _$MyOccasionsState {
     required TResult Function() loading,
     required TResult Function(List<MyOccasionItem> response) success,
     required TResult Function(String message) error,
+    required TResult Function() actionLoading,
+    required TResult Function(String message, MyOccasionItem? occasion)
+        actionSuccess,
+    required TResult Function(String message) actionError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +34,9 @@ mixin _$MyOccasionsState {
     TResult? Function()? loading,
     TResult? Function(List<MyOccasionItem> response)? success,
     TResult? Function(String message)? error,
+    TResult? Function()? actionLoading,
+    TResult? Function(String message, MyOccasionItem? occasion)? actionSuccess,
+    TResult? Function(String message)? actionError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +45,9 @@ mixin _$MyOccasionsState {
     TResult Function()? loading,
     TResult Function(List<MyOccasionItem> response)? success,
     TResult Function(String message)? error,
+    TResult Function()? actionLoading,
+    TResult Function(String message, MyOccasionItem? occasion)? actionSuccess,
+    TResult Function(String message)? actionError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +57,9 @@ mixin _$MyOccasionsState {
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
+    required TResult Function(ActionLoading value) actionLoading,
+    required TResult Function(ActionSuccess value) actionSuccess,
+    required TResult Function(ActionError value) actionError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +68,9 @@ mixin _$MyOccasionsState {
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
+    TResult? Function(ActionLoading value)? actionLoading,
+    TResult? Function(ActionSuccess value)? actionSuccess,
+    TResult? Function(ActionError value)? actionError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +79,9 @@ mixin _$MyOccasionsState {
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
+    TResult Function(ActionLoading value)? actionLoading,
+    TResult Function(ActionSuccess value)? actionSuccess,
+    TResult Function(ActionError value)? actionError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,6 +153,10 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loading,
     required TResult Function(List<MyOccasionItem> response) success,
     required TResult Function(String message) error,
+    required TResult Function() actionLoading,
+    required TResult Function(String message, MyOccasionItem? occasion)
+        actionSuccess,
+    required TResult Function(String message) actionError,
   }) {
     return initial();
   }
@@ -145,6 +168,9 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? loading,
     TResult? Function(List<MyOccasionItem> response)? success,
     TResult? Function(String message)? error,
+    TResult? Function()? actionLoading,
+    TResult? Function(String message, MyOccasionItem? occasion)? actionSuccess,
+    TResult? Function(String message)? actionError,
   }) {
     return initial?.call();
   }
@@ -156,6 +182,9 @@ class _$InitialImpl implements _Initial {
     TResult Function()? loading,
     TResult Function(List<MyOccasionItem> response)? success,
     TResult Function(String message)? error,
+    TResult Function()? actionLoading,
+    TResult Function(String message, MyOccasionItem? occasion)? actionSuccess,
+    TResult Function(String message)? actionError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -171,6 +200,9 @@ class _$InitialImpl implements _Initial {
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
+    required TResult Function(ActionLoading value) actionLoading,
+    required TResult Function(ActionSuccess value) actionSuccess,
+    required TResult Function(ActionError value) actionError,
   }) {
     return initial(this);
   }
@@ -182,6 +214,9 @@ class _$InitialImpl implements _Initial {
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
+    TResult? Function(ActionLoading value)? actionLoading,
+    TResult? Function(ActionSuccess value)? actionSuccess,
+    TResult? Function(ActionError value)? actionError,
   }) {
     return initial?.call(this);
   }
@@ -193,6 +228,9 @@ class _$InitialImpl implements _Initial {
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
+    TResult Function(ActionLoading value)? actionLoading,
+    TResult Function(ActionSuccess value)? actionSuccess,
+    TResult Function(ActionError value)? actionError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -251,6 +289,10 @@ class _$LoadingImpl implements Loading {
     required TResult Function() loading,
     required TResult Function(List<MyOccasionItem> response) success,
     required TResult Function(String message) error,
+    required TResult Function() actionLoading,
+    required TResult Function(String message, MyOccasionItem? occasion)
+        actionSuccess,
+    required TResult Function(String message) actionError,
   }) {
     return loading();
   }
@@ -262,6 +304,9 @@ class _$LoadingImpl implements Loading {
     TResult? Function()? loading,
     TResult? Function(List<MyOccasionItem> response)? success,
     TResult? Function(String message)? error,
+    TResult? Function()? actionLoading,
+    TResult? Function(String message, MyOccasionItem? occasion)? actionSuccess,
+    TResult? Function(String message)? actionError,
   }) {
     return loading?.call();
   }
@@ -273,6 +318,9 @@ class _$LoadingImpl implements Loading {
     TResult Function()? loading,
     TResult Function(List<MyOccasionItem> response)? success,
     TResult Function(String message)? error,
+    TResult Function()? actionLoading,
+    TResult Function(String message, MyOccasionItem? occasion)? actionSuccess,
+    TResult Function(String message)? actionError,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -288,6 +336,9 @@ class _$LoadingImpl implements Loading {
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
+    required TResult Function(ActionLoading value) actionLoading,
+    required TResult Function(ActionSuccess value) actionSuccess,
+    required TResult Function(ActionError value) actionError,
   }) {
     return loading(this);
   }
@@ -299,6 +350,9 @@ class _$LoadingImpl implements Loading {
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
+    TResult? Function(ActionLoading value)? actionLoading,
+    TResult? Function(ActionSuccess value)? actionSuccess,
+    TResult? Function(ActionError value)? actionError,
   }) {
     return loading?.call(this);
   }
@@ -310,6 +364,9 @@ class _$LoadingImpl implements Loading {
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
+    TResult Function(ActionLoading value)? actionLoading,
+    TResult Function(ActionSuccess value)? actionSuccess,
+    TResult Function(ActionError value)? actionError,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -402,6 +459,10 @@ class _$SuccessImpl implements Success {
     required TResult Function() loading,
     required TResult Function(List<MyOccasionItem> response) success,
     required TResult Function(String message) error,
+    required TResult Function() actionLoading,
+    required TResult Function(String message, MyOccasionItem? occasion)
+        actionSuccess,
+    required TResult Function(String message) actionError,
   }) {
     return success(response);
   }
@@ -413,6 +474,9 @@ class _$SuccessImpl implements Success {
     TResult? Function()? loading,
     TResult? Function(List<MyOccasionItem> response)? success,
     TResult? Function(String message)? error,
+    TResult? Function()? actionLoading,
+    TResult? Function(String message, MyOccasionItem? occasion)? actionSuccess,
+    TResult? Function(String message)? actionError,
   }) {
     return success?.call(response);
   }
@@ -424,6 +488,9 @@ class _$SuccessImpl implements Success {
     TResult Function()? loading,
     TResult Function(List<MyOccasionItem> response)? success,
     TResult Function(String message)? error,
+    TResult Function()? actionLoading,
+    TResult Function(String message, MyOccasionItem? occasion)? actionSuccess,
+    TResult Function(String message)? actionError,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -439,6 +506,9 @@ class _$SuccessImpl implements Success {
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
+    required TResult Function(ActionLoading value) actionLoading,
+    required TResult Function(ActionSuccess value) actionSuccess,
+    required TResult Function(ActionError value) actionError,
   }) {
     return success(this);
   }
@@ -450,6 +520,9 @@ class _$SuccessImpl implements Success {
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
+    TResult? Function(ActionLoading value)? actionLoading,
+    TResult? Function(ActionSuccess value)? actionSuccess,
+    TResult? Function(ActionError value)? actionError,
   }) {
     return success?.call(this);
   }
@@ -461,6 +534,9 @@ class _$SuccessImpl implements Success {
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
+    TResult Function(ActionLoading value)? actionLoading,
+    TResult Function(ActionSuccess value)? actionSuccess,
+    TResult Function(ActionError value)? actionError,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -554,6 +630,10 @@ class _$ErrorImpl implements Error {
     required TResult Function() loading,
     required TResult Function(List<MyOccasionItem> response) success,
     required TResult Function(String message) error,
+    required TResult Function() actionLoading,
+    required TResult Function(String message, MyOccasionItem? occasion)
+        actionSuccess,
+    required TResult Function(String message) actionError,
   }) {
     return error(message);
   }
@@ -565,6 +645,9 @@ class _$ErrorImpl implements Error {
     TResult? Function()? loading,
     TResult? Function(List<MyOccasionItem> response)? success,
     TResult? Function(String message)? error,
+    TResult? Function()? actionLoading,
+    TResult? Function(String message, MyOccasionItem? occasion)? actionSuccess,
+    TResult? Function(String message)? actionError,
   }) {
     return error?.call(message);
   }
@@ -576,6 +659,9 @@ class _$ErrorImpl implements Error {
     TResult Function()? loading,
     TResult Function(List<MyOccasionItem> response)? success,
     TResult Function(String message)? error,
+    TResult Function()? actionLoading,
+    TResult Function(String message, MyOccasionItem? occasion)? actionSuccess,
+    TResult Function(String message)? actionError,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -591,6 +677,9 @@ class _$ErrorImpl implements Error {
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
+    required TResult Function(ActionLoading value) actionLoading,
+    required TResult Function(ActionSuccess value) actionSuccess,
+    required TResult Function(ActionError value) actionError,
   }) {
     return error(this);
   }
@@ -602,6 +691,9 @@ class _$ErrorImpl implements Error {
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
+    TResult? Function(ActionLoading value)? actionLoading,
+    TResult? Function(ActionSuccess value)? actionSuccess,
+    TResult? Function(ActionError value)? actionError,
   }) {
     return error?.call(this);
   }
@@ -613,6 +705,9 @@ class _$ErrorImpl implements Error {
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
+    TResult Function(ActionLoading value)? actionLoading,
+    TResult Function(ActionSuccess value)? actionSuccess,
+    TResult Function(ActionError value)? actionError,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -631,5 +726,494 @@ abstract class Error implements MyOccasionsState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ActionLoadingImplCopyWith<$Res> {
+  factory _$$ActionLoadingImplCopyWith(
+          _$ActionLoadingImpl value, $Res Function(_$ActionLoadingImpl) then) =
+      __$$ActionLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ActionLoadingImplCopyWithImpl<$Res>
+    extends _$MyOccasionsStateCopyWithImpl<$Res, _$ActionLoadingImpl>
+    implements _$$ActionLoadingImplCopyWith<$Res> {
+  __$$ActionLoadingImplCopyWithImpl(
+      _$ActionLoadingImpl _value, $Res Function(_$ActionLoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of MyOccasionsState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ActionLoadingImpl implements ActionLoading {
+  const _$ActionLoadingImpl();
+
+  @override
+  String toString() {
+    return 'MyOccasionsState.actionLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ActionLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<MyOccasionItem> response) success,
+    required TResult Function(String message) error,
+    required TResult Function() actionLoading,
+    required TResult Function(String message, MyOccasionItem? occasion)
+        actionSuccess,
+    required TResult Function(String message) actionError,
+  }) {
+    return actionLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<MyOccasionItem> response)? success,
+    TResult? Function(String message)? error,
+    TResult? Function()? actionLoading,
+    TResult? Function(String message, MyOccasionItem? occasion)? actionSuccess,
+    TResult? Function(String message)? actionError,
+  }) {
+    return actionLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<MyOccasionItem> response)? success,
+    TResult Function(String message)? error,
+    TResult Function()? actionLoading,
+    TResult Function(String message, MyOccasionItem? occasion)? actionSuccess,
+    TResult Function(String message)? actionError,
+    required TResult orElse(),
+  }) {
+    if (actionLoading != null) {
+      return actionLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) error,
+    required TResult Function(ActionLoading value) actionLoading,
+    required TResult Function(ActionSuccess value) actionSuccess,
+    required TResult Function(ActionError value) actionError,
+  }) {
+    return actionLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? error,
+    TResult? Function(ActionLoading value)? actionLoading,
+    TResult? Function(ActionSuccess value)? actionSuccess,
+    TResult? Function(ActionError value)? actionError,
+  }) {
+    return actionLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? error,
+    TResult Function(ActionLoading value)? actionLoading,
+    TResult Function(ActionSuccess value)? actionSuccess,
+    TResult Function(ActionError value)? actionError,
+    required TResult orElse(),
+  }) {
+    if (actionLoading != null) {
+      return actionLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ActionLoading implements MyOccasionsState {
+  const factory ActionLoading() = _$ActionLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$ActionSuccessImplCopyWith<$Res> {
+  factory _$$ActionSuccessImplCopyWith(
+          _$ActionSuccessImpl value, $Res Function(_$ActionSuccessImpl) then) =
+      __$$ActionSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message, MyOccasionItem? occasion});
+}
+
+/// @nodoc
+class __$$ActionSuccessImplCopyWithImpl<$Res>
+    extends _$MyOccasionsStateCopyWithImpl<$Res, _$ActionSuccessImpl>
+    implements _$$ActionSuccessImplCopyWith<$Res> {
+  __$$ActionSuccessImplCopyWithImpl(
+      _$ActionSuccessImpl _value, $Res Function(_$ActionSuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of MyOccasionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+    Object? occasion = freezed,
+  }) {
+    return _then(_$ActionSuccessImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      occasion: freezed == occasion
+          ? _value.occasion
+          : occasion // ignore: cast_nullable_to_non_nullable
+              as MyOccasionItem?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ActionSuccessImpl implements ActionSuccess {
+  const _$ActionSuccessImpl(this.message, {this.occasion});
+
+  @override
+  final String message;
+  @override
+  final MyOccasionItem? occasion;
+
+  @override
+  String toString() {
+    return 'MyOccasionsState.actionSuccess(message: $message, occasion: $occasion)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ActionSuccessImpl &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.occasion, occasion) ||
+                other.occasion == occasion));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message, occasion);
+
+  /// Create a copy of MyOccasionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ActionSuccessImplCopyWith<_$ActionSuccessImpl> get copyWith =>
+      __$$ActionSuccessImplCopyWithImpl<_$ActionSuccessImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<MyOccasionItem> response) success,
+    required TResult Function(String message) error,
+    required TResult Function() actionLoading,
+    required TResult Function(String message, MyOccasionItem? occasion)
+        actionSuccess,
+    required TResult Function(String message) actionError,
+  }) {
+    return actionSuccess(message, occasion);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<MyOccasionItem> response)? success,
+    TResult? Function(String message)? error,
+    TResult? Function()? actionLoading,
+    TResult? Function(String message, MyOccasionItem? occasion)? actionSuccess,
+    TResult? Function(String message)? actionError,
+  }) {
+    return actionSuccess?.call(message, occasion);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<MyOccasionItem> response)? success,
+    TResult Function(String message)? error,
+    TResult Function()? actionLoading,
+    TResult Function(String message, MyOccasionItem? occasion)? actionSuccess,
+    TResult Function(String message)? actionError,
+    required TResult orElse(),
+  }) {
+    if (actionSuccess != null) {
+      return actionSuccess(message, occasion);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) error,
+    required TResult Function(ActionLoading value) actionLoading,
+    required TResult Function(ActionSuccess value) actionSuccess,
+    required TResult Function(ActionError value) actionError,
+  }) {
+    return actionSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? error,
+    TResult? Function(ActionLoading value)? actionLoading,
+    TResult? Function(ActionSuccess value)? actionSuccess,
+    TResult? Function(ActionError value)? actionError,
+  }) {
+    return actionSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? error,
+    TResult Function(ActionLoading value)? actionLoading,
+    TResult Function(ActionSuccess value)? actionSuccess,
+    TResult Function(ActionError value)? actionError,
+    required TResult orElse(),
+  }) {
+    if (actionSuccess != null) {
+      return actionSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ActionSuccess implements MyOccasionsState {
+  const factory ActionSuccess(final String message,
+      {final MyOccasionItem? occasion}) = _$ActionSuccessImpl;
+
+  String get message;
+  MyOccasionItem? get occasion;
+
+  /// Create a copy of MyOccasionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ActionSuccessImplCopyWith<_$ActionSuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ActionErrorImplCopyWith<$Res> {
+  factory _$$ActionErrorImplCopyWith(
+          _$ActionErrorImpl value, $Res Function(_$ActionErrorImpl) then) =
+      __$$ActionErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$ActionErrorImplCopyWithImpl<$Res>
+    extends _$MyOccasionsStateCopyWithImpl<$Res, _$ActionErrorImpl>
+    implements _$$ActionErrorImplCopyWith<$Res> {
+  __$$ActionErrorImplCopyWithImpl(
+      _$ActionErrorImpl _value, $Res Function(_$ActionErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of MyOccasionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$ActionErrorImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ActionErrorImpl implements ActionError {
+  const _$ActionErrorImpl(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'MyOccasionsState.actionError(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ActionErrorImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of MyOccasionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ActionErrorImplCopyWith<_$ActionErrorImpl> get copyWith =>
+      __$$ActionErrorImplCopyWithImpl<_$ActionErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<MyOccasionItem> response) success,
+    required TResult Function(String message) error,
+    required TResult Function() actionLoading,
+    required TResult Function(String message, MyOccasionItem? occasion)
+        actionSuccess,
+    required TResult Function(String message) actionError,
+  }) {
+    return actionError(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<MyOccasionItem> response)? success,
+    TResult? Function(String message)? error,
+    TResult? Function()? actionLoading,
+    TResult? Function(String message, MyOccasionItem? occasion)? actionSuccess,
+    TResult? Function(String message)? actionError,
+  }) {
+    return actionError?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<MyOccasionItem> response)? success,
+    TResult Function(String message)? error,
+    TResult Function()? actionLoading,
+    TResult Function(String message, MyOccasionItem? occasion)? actionSuccess,
+    TResult Function(String message)? actionError,
+    required TResult orElse(),
+  }) {
+    if (actionError != null) {
+      return actionError(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) error,
+    required TResult Function(ActionLoading value) actionLoading,
+    required TResult Function(ActionSuccess value) actionSuccess,
+    required TResult Function(ActionError value) actionError,
+  }) {
+    return actionError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? error,
+    TResult? Function(ActionLoading value)? actionLoading,
+    TResult? Function(ActionSuccess value)? actionSuccess,
+    TResult? Function(ActionError value)? actionError,
+  }) {
+    return actionError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? error,
+    TResult Function(ActionLoading value)? actionLoading,
+    TResult Function(ActionSuccess value)? actionSuccess,
+    TResult Function(ActionError value)? actionError,
+    required TResult orElse(),
+  }) {
+    if (actionError != null) {
+      return actionError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ActionError implements MyOccasionsState {
+  const factory ActionError(final String message) = _$ActionErrorImpl;
+
+  String get message;
+
+  /// Create a copy of MyOccasionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ActionErrorImplCopyWith<_$ActionErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

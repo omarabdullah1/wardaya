@@ -23,7 +23,6 @@ import '../../features/favorites/ui/favorites_screen.dart';
 import '../../features/address/ui/addresses_screen.dart';
 import '../../features/address/ui/recipient_details_screen.dart';
 import '../../features/invoices/ui/invoices_screen.dart';
-import '../../features/my_occasions/logic/create_occassion/cubit/create_occasion_cubit.dart';
 import '../../features/my_occasions/logic/cubit/my_occasions_cubit.dart';
 import '../../features/my_occasions/ui/occassions_screen.dart';
 import '../../features/my_orders/data/models/my_orders_response.dart'
@@ -396,7 +395,7 @@ class AppRouter {
           screen: MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) => getIt<CreateOccasionCubit>(),
+                create: (context) => getIt<MyOccasionsCubit>(),
               ),
               BlocProvider(
                 create: (context) =>
