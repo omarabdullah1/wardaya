@@ -5,7 +5,8 @@ part 'address_request.g.dart';
 @JsonSerializable()
 class AddressRequest {
   final String? userId;
-  final String title;
+  final String? title;
+  final String recipientCity;
   final String recipientArea;
   final String recipientName;
   @JsonKey(name: 'recipientCountryCode')
@@ -19,6 +20,7 @@ class AddressRequest {
   AddressRequest({
     this.userId,
     required this.title,
+    required this.recipientCity,
     required this.recipientArea,
     required this.recipientName,
     required this.recipientCountryCode,

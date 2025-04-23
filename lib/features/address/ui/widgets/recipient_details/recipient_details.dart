@@ -7,8 +7,10 @@ import 'package:wardaya/features/address/ui/widgets/recipient_details/area_field
 
 import '../../../../../core/routing/router_imports.dart';
 import '../../../../../core/widgets/app_text_button.dart';
+import '../../../../../core/widgets/loading_widget.dart';
 import '../../../data/models/address_response.dart';
 import '../../../logic/recipient_details_cubit/recipient_details_cubit.dart';
+import '../../../logic/recipient_details_cubit/recipient_details_state.dart';
 import 'address_detail_field.dart';
 import 'recipient_map_widget.dart';
 import 'recipient_name_phone_fields.dart';
@@ -25,12 +27,13 @@ class RecipientDetails extends StatelessWidget {
     if (address != null && cubit.nameController.text.isEmpty) {
       // Assuming address has these fields or they're null
       cubit.initializeWithAddress(
-        address?.title,
-        '', // Phone number field might be missing in your model
-        address?.recipientArea,
-        address?.recipientAddress,
-        address?.extraAddressDetails,
-        address != null ? LatLng(address!.latitude, address!.longitude) : null,
+        address: address?.recipientAddress,
+        area: address?.recipientArea,
+        recipientName: address?.recipientName,
+        phoneNumber: address?.recipientPhoneNumber,
+        extraDetails: address?.extraAddressDetails,
+        location: LatLng(address!.latitude, address!.longitude),
+        id: address!.id, // Pass the address ID for editing
       );
     }
 
@@ -71,21 +74,62 @@ class RecipientDetails extends StatelessWidget {
           controller: cubit.extraAddressController,
         ),
         VerticalSpace(height: 32.h),
-        AppTextButton(
-          buttonText: 'Save Address',
-          textStyle: GoogleFonts.inter(
-            color: ColorsManager.white,
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w500,
-          ),
-          onPressed: () => _saveAddress(context, cubit),
+        BlocConsumer<RecipientDetailsCubit, RecipientDetailsState>(
+          listener: (context, state) {
+            state.maybeMap(
+              loading: (_) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) => const LoadingWidget(
+                      loadingState: true,
+                    ),
+                  );
+                });
+              },
+              error: (state) {
+                Navigator.pop(context, true); // Return with success result
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.error)),
+                );
+              },
+              success: (state) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Address saved successfully')),
+                );
+                Navigator.pop(context, true); // Return with success result
+                Navigator.pop(context, true); // Return with success result
+              },
+              orElse: () {},
+            );
+          },
+          builder: (context, state) {
+            final isLoading = state.maybeMap(
+              loading: (_) => true,
+              orElse: () => false,
+            );
+
+            final buttonText =
+                address != null ? 'Update Address' : 'Save Address';
+
+            return AppTextButton(
+              buttonText: buttonText,
+              textStyle: GoogleFonts.inter(
+                color: ColorsManager.white,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w500,
+              ),
+              onPressed: isLoading ? () {} : () => _saveAddress(context, cubit),
+            );
+          },
         ),
         VerticalSpace(height: 16.h),
       ],
     );
   }
 
-  void _saveAddress(BuildContext context, RecipientDetailsCubit cubit) {
+  void _saveAddress(BuildContext context, RecipientDetailsCubit cubit) async {
     // Validate address fields
     if (cubit.nameController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -107,5 +151,11 @@ class RecipientDetails extends StatelessWidget {
       );
       return;
     }
+
+    // Set the city ID before saving
+    await cubit.setSelectedCityId();
+
+    // Save address (create or update based on addressId)
+    await cubit.saveAddress();
   }
 }

@@ -27,6 +27,8 @@ class Routes {
   static const String favoritesScreen = '/favoritesScreen';
   static const String addressesScreen = '/addressesScreen';
   static const String recipientDetailsScreen = '/recipientDetailsScreen';
+  static const String createRecipientDetailsScreen =
+      '/createRecipientDetailsScreen';
   static const String occasionsScreen = '/occasionsScreen';
   static const String invoicesScreen = '/invoicesScreen';
   static const String benefitPayScreen = '/benefit-pay';

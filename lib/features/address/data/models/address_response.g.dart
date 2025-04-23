@@ -18,10 +18,24 @@ Map<String, dynamic> _$AddressResponseToJson(AddressResponse instance) =>
       'addresses': instance.addresses,
     };
 
+CreateAddressResponse _$CreateAddressResponseFromJson(
+        Map<String, dynamic> json) =>
+    CreateAddressResponse(
+      message: json['message'] as String,
+      address: Address.fromJson(json['address'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CreateAddressResponseToJson(
+        CreateAddressResponse instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'address': instance.address,
+    };
+
 Address _$AddressFromJson(Map<String, dynamic> json) => Address(
       id: json['_id'] as String,
       userId: json['userId'] as String,
-      title: json['title'] as String,
+      title: json['title'] as String?,
       recipientArea: json['recipientArea'] as String? ?? '',
       recipientAddress: json['recipientAddress'] as String? ?? '',
       extraAddressDetails: json['extraAddressDetails'] as String? ?? '',

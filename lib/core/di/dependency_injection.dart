@@ -140,7 +140,10 @@ Future<void> setupGetIt() async {
 
   getIt.registerFactory<AddressCubit>(() => AddressCubit(getIt()));
 
-  getIt.registerFactory<RecipientDetailsCubit>(() => RecipientDetailsCubit());
+  // Fix: Pass AddressRepo instance to RecipientDetailsCubit
+  getIt.registerFactory<RecipientDetailsCubit>(
+      () => RecipientDetailsCubit(getIt()));
+
   getIt.registerFactory<MyOccasionsCubit>(() => MyOccasionsCubit(getIt()));
   getIt.registerFactory<InvoicesCubit>(() => InvoicesCubit(getIt()));
   getIt

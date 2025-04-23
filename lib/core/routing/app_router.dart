@@ -17,6 +17,7 @@ import 'package:wardaya/features/subscriptions/logic/subscription_checkout_cubit
 
 import '../../features/address/data/models/address_response.dart';
 import '../../features/address/logic/recipient_details_cubit/recipient_details_cubit.dart';
+import '../../features/address/ui/create_recipient_details_screen.dart';
 import '../../features/cart/logic/videoUpload/video_upload_cubit.dart';
 import '../../features/favorites/ui/favorites_screen.dart';
 import '../../features/address/ui/addresses_screen.dart';
@@ -230,6 +231,20 @@ class AppRouter {
           throw ArgumentError(
               "Invalid arguments for ${Routes.productDetailsScreen}");
         }
+      case Routes.createRecipientDetailsScreen:
+        return _buildRoute(
+          screen: MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) => getIt<RecipientDetailsCubit>(),
+              ),
+              BlocProvider(
+                create: (_) => getIt<AddressCubit>(),
+              ),
+            ],
+            child: const CreateRecipientDetailsScreen(),
+          ),
+        );
 
       case Routes.faqScreen:
         return _buildRoute(screen: const FAQScreen());

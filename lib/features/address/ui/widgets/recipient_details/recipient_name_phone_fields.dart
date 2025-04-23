@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:country_picker/country_picker.dart';
@@ -12,11 +13,13 @@ import '../../../../../core/theming/colors.dart';
 class RecipientNamePhoneFields extends StatefulWidget {
   final TextEditingController nameController;
   final TextEditingController phoneController;
+  final Function(String)? onCountryCodeChanged;
 
   const RecipientNamePhoneFields({
     super.key,
     required this.nameController,
     required this.phoneController,
+    this.onCountryCodeChanged,
   });
 
   @override
@@ -27,17 +30,29 @@ class RecipientNamePhoneFields extends StatefulWidget {
 class _RecipientNamePhoneFieldsState extends State<RecipientNamePhoneFields> {
   // Default country to Egypt
   Country _selectedCountry = Country(
-    phoneCode: '20',
-    countryCode: 'EG',
+    phoneCode: '966',
+    countryCode: 'SA',
     e164Sc: 0,
     geographic: true,
     level: 1,
-    name: 'Egypt',
-    example: '1001234567',
-    displayName: 'Egypt (EG) [+20]',
-    displayNameNoCountryCode: 'Egypt (EG)',
-    e164Key: '20-EG-0',
+    name: 'SAUDI ARABIA',
+    example: '512345678',
+    displayName: 'SAUDI ARABIA (SA) [+966]',
+    displayNameNoCountryCode: 'SAUDI ARABIA (SA)',
+    e164Key: '966-SA-0',
   );
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Set the initial country code when the widget initializes
+    if (widget.onCountryCodeChanged != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        widget.onCountryCodeChanged!('+${_selectedCountry.phoneCode}');
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +62,7 @@ class _RecipientNamePhoneFieldsState extends State<RecipientNamePhoneFields> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text( 
+            Text(
               'Recipient name',
               style: TextStyle(
                 fontSize: 16.sp,
@@ -81,7 +96,7 @@ class _RecipientNamePhoneFieldsState extends State<RecipientNamePhoneFields> {
                 suffixIcon: InkWell(
                   onTap: () async {
                     await pickContact();
-                  }, 
+                  },
                   child: Icon(
                     Icons.contacts_outlined,
                     color: ColorsManager.mainRose,
@@ -123,6 +138,10 @@ class _RecipientNamePhoneFieldsState extends State<RecipientNamePhoneFields> {
                           setState(() {
                             _selectedCountry = country;
                           });
+                          if (widget.onCountryCodeChanged != null) {
+                            widget.onCountryCodeChanged!(
+                                '+${_selectedCountry.phoneCode}');
+                          }
                         },
                         countryListTheme: CountryListThemeData(
                           borderRadius: BorderRadius.circular(8.r),
@@ -183,7 +202,13 @@ class _RecipientNamePhoneFieldsState extends State<RecipientNamePhoneFields> {
                 Expanded(
                   child: TextField(
                     controller: widget.phoneController,
-                    keyboardType: TextInputType.phone,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      FilteringTextInputFormatter.allow(
+                        RegExp(r'^\d{0,15}$'),
+                      ),
+                    ],
                     decoration: InputDecoration(
                       hintText: 'Ex:${_selectedCountry.example}',
                       hintStyle: TextStyle(

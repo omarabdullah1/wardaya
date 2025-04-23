@@ -9,7 +9,8 @@ part of 'address_request.dart';
 AddressRequest _$AddressRequestFromJson(Map<String, dynamic> json) =>
     AddressRequest(
       userId: json['userId'] as String?,
-      title: json['title'] as String,
+      title: json['title'] as String?,
+      recipientCity: json['recipientCity'] as String,
       recipientArea: json['recipientArea'] as String,
       recipientName: json['recipientName'] as String,
       recipientCountryCode: json['recipientCountryCode'] as String,
@@ -24,6 +25,7 @@ Map<String, dynamic> _$AddressRequestToJson(AddressRequest instance) =>
     <String, dynamic>{
       'userId': instance.userId,
       'title': instance.title,
+      'recipientCity': instance.recipientCity,
       'recipientArea': instance.recipientArea,
       'recipientName': instance.recipientName,
       'recipientCountryCode': instance.recipientCountryCode,
