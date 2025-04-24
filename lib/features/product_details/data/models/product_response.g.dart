@@ -17,28 +17,30 @@ ProductResponse _$ProductResponseFromJson(Map<String, dynamic> json) =>
       images:
           (json['images'] as List<dynamic>).map((e) => e as String).toList(),
       categories:
-          ProductResponse._categoriesFromJson(json['categories'] as List),
-      subCategories:
-          ProductResponse._subCategoriesFromJson(json['subCategories'] as List),
+          ProductResponse._categoriesFromJson(json['categories'] as List?),
+      subCategories: ProductResponse._subCategoriesFromJson(
+          json['subCategories'] as List?),
       menuItems: json['menuItems'] as List<dynamic>,
       subMenuItems: json['subMenuItems'] as List<dynamic>,
       productTypes:
-          ProductResponse._productTypesFromJson(json['productTypes'] as List),
-      occasions: ProductResponse._occasionsFromJson(json['occasions'] as List),
+          ProductResponse._productTypesFromJson(json['productTypes'] as List?),
+      occasions: ProductResponse._occasionsFromJson(json['occasions'] as List?),
       brand: ProductResponse._brandFromJson(json['brand']),
       expressDelivery: json['expressDelivery'] as bool? ?? false,
       points: (json['points'] as num?)?.toInt() ?? 0,
-      components: json['components'] as List<dynamic>,
+      components:
+          ProductResponse._componentsFromJson(json['components'] as List?),
       dimensions: ProductResponse._dimensionsFromJson(json['dimensions']),
       bundleItems: (json['bundleItems'] as List<dynamic>?)
               ?.map(
                   (e) => BundleItemResponse.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      colors: ProductResponse._colorsFromJson(json['colors'] as List),
+      colors: ProductResponse._colorsFromJson(json['colors'] as List?),
       recipients:
-          ProductResponse._recipientsFromJson(json['recipients'] as List),
-      bundleTypes: json['bundleTypes'] as List<dynamic>,
+          ProductResponse._recipientsFromJson(json['recipients'] as List?),
+      bundleTypes:
+          ProductResponse._bundleTypesFromJson(json['bundleTypes'] as List?),
       careTips: json['careTips'] as String? ?? '',
       freeDelivery: json['freeDelivery'] as bool? ?? false,
       premiumFlowers: json['premiumFlowers'] as bool? ?? false,

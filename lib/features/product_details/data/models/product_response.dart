@@ -37,6 +37,8 @@ class ProductResponse {
   final bool expressDelivery;
   @JsonKey(defaultValue: 0)
   final int points;
+
+  @JsonKey(fromJson: _componentsFromJson)
   final List<dynamic> components;
 
   @JsonKey(fromJson: _dimensionsFromJson)
@@ -51,7 +53,9 @@ class ProductResponse {
   @JsonKey(fromJson: _recipientsFromJson)
   final List<dynamic> recipients;
 
+  @JsonKey(fromJson: _bundleTypesFromJson)
   final List<dynamic> bundleTypes;
+
   @JsonKey(defaultValue: '')
   final String careTips;
   @JsonKey(defaultValue: false)
@@ -95,34 +99,42 @@ class ProductResponse {
     required this.version,
   });
 
-  // Helper methods to handle mixed data types
-  static List<dynamic> _categoriesFromJson(List<dynamic> categories) {
-    // This accepts both ID strings and category objects
-    return categories;
+  // Helper methods to handle mixed data types and null values
+  static List<dynamic> _categoriesFromJson(List? categories) {
+    // Safely handle null values
+    return categories ?? [];
   }
 
-  static List<dynamic> _subCategoriesFromJson(List<dynamic> subCategories) {
-    return subCategories;
+  static List<dynamic> _subCategoriesFromJson(List? subCategories) {
+    return subCategories ?? [];
   }
 
-  static List<dynamic> _productTypesFromJson(List<dynamic> productTypes) {
-    return productTypes;
+  static List<dynamic> _productTypesFromJson(List? productTypes) {
+    return productTypes ?? [];
   }
 
-  static List<dynamic> _occasionsFromJson(List<dynamic> occasions) {
-    return occasions;
+  static List<dynamic> _occasionsFromJson(List? occasions) {
+    return occasions ?? [];
   }
 
-  static List<dynamic> _colorsFromJson(List<dynamic> colors) {
-    return colors;
+  static List<dynamic> _colorsFromJson(List? colors) {
+    return colors ?? [];
   }
 
-  static List<dynamic> _recipientsFromJson(List<dynamic> recipients) {
-    return recipients;
+  static List<dynamic> _recipientsFromJson(List? recipients) {
+    return recipients ?? [];
+  }
+
+  static List<dynamic> _bundleTypesFromJson(List? bundleTypes) {
+    return bundleTypes ?? [];
+  }
+
+  static List<dynamic> _componentsFromJson(List? components) {
+    return components ?? [];
   }
 
   static dynamic _brandFromJson(dynamic brand) {
-    return brand;
+    return brand; // Already handles null
   }
 
   static Dimensions? _dimensionsFromJson(dynamic dimensions) {
