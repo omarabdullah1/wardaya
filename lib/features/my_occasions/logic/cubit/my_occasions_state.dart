@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../data/models/my_occasions_response.dart';
-import '../../data/models/create_occasion_response.dart';
 
 part 'my_occasions_state.freezed.dart';
 

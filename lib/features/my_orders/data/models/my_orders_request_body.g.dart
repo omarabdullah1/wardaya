@@ -12,11 +12,3 @@ MyOrdersRequestBody _$MyOrdersRequestBodyFromJson(Map<String, dynamic> json) =>
       page: (json['page'] as num).toInt(),
       search: json['search'] as String?,
     );
-
-Map<String, dynamic> _$MyOrdersRequestBodyToJson(
-        MyOrdersRequestBody instance) =>
-    <String, dynamic>{
-      'limit': instance.limit,
-      'page': instance.page,
-      'search': instance.search,
-    };

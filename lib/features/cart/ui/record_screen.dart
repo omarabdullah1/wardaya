@@ -192,9 +192,12 @@ class _RecordScreenState extends State<RecordScreen>
       log('Video recorded to ${videoFile.path}');
 
       // Show a notification that video is ready to send
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Video recorded! Click send to upload.')),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text('Video recorded! Click send to upload.')),
+        );
+      }
     } catch (e) {
       log('Error stopping video recording: $e');
     }
@@ -217,17 +220,23 @@ class _RecordScreenState extends State<RecordScreen>
       final String fileName = path.basename(_recordedVideo!.path);
 
       // Get the VideoUploadCubit instance from context and call uploadVideo
-      context.read<VideoUploadCubit>().uploadVideo(videoBytes, fileName);
-
+      if (mounted) {
+        context.read<VideoUploadCubit>().uploadVideo(videoBytes, fileName);
+      }
       // Show a loading indicator
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Uploading video...')),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Uploading video...')),
+        );
+      }
     } catch (e) {
       log('Error preparing video for upload: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to upload video: ${e.toString()}')),
-      );
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to upload video: ${e.toString()}')),
+        );
+      }
     }
   }
 
@@ -489,7 +498,7 @@ class _RecordScreenState extends State<RecordScreen>
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8.0, vertical: 4.0),
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.5),
+                        color: Colors.black.withAlpha((0.5 * 255).toInt()),
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: Text(

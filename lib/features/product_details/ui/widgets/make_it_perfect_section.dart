@@ -13,7 +13,7 @@ import 'package:wardaya/features/search/data/models/search_response.dart';
 import 'package:wardaya/features/search/logic/cubit/search_cubit.dart';
 
 import '../../../../core/routing/router_imports.dart';
-import '../../../search/data/models/search_response.dart' as searchModels;
+import '../../../search/data/models/search_response.dart' as search_models;
 import '../../../search/logic/cubit/search_state.dart';
 
 class MakeItPerfectSection extends StatefulWidget {
@@ -44,13 +44,13 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection>
   }
 
   // Dummy products for loading state
-  List<searchModels.Product> get _dummyProducts => List.generate(
+  List<search_models.Product> get _dummyProducts => List.generate(
         8,
-        (index) => searchModels.Product(
+        (index) => search_models.Product(
           id: index.toString(),
           title: 'Loading Product...',
           description: 'Loading description...',
-          price: searchModels.Price(total: 0, currency: 'SAR'),
+          price: search_models.Price(total: 0, currency: 'SAR'),
           images: ['assets/images/placeholder.png'],
           sku: 'SKU$index',
           productType: 'flower',
@@ -93,10 +93,10 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection>
       ],
       child: BlocBuilder<SearchCubit, SearchState>(
         builder: (context, state) {
-          final List<searchModels.Product> products = state is Loading
+          final List<search_models.Product> products = state is Loading
               ? _dummyProducts
               : (state is Success
-                  ? state.response.products.cast<searchModels.Product>()
+                  ? state.response.products.cast<search_models.Product>()
                   : []);
 
           return Container(
@@ -237,7 +237,7 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection>
   }
 
   Widget _buildProductGrid(
-      BuildContext context, List<searchModels.Product> products) {
+      BuildContext context, List<search_models.Product> products) {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -252,7 +252,8 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection>
     );
   }
 
-  Widget _buildProductItem(BuildContext context, searchModels.Product product) {
+  Widget _buildProductItem(
+      BuildContext context, search_models.Product product) {
     return GestureDetector(
       onTap: () {
         context.pushNamed(
@@ -357,7 +358,7 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection>
   }
 
   Widget _buildProductImage(
-      BuildContext context, searchModels.Product product) {
+      BuildContext context, search_models.Product product) {
     if (product.images.isEmpty) {
       return Center(
         child: SvgPicture.asset(

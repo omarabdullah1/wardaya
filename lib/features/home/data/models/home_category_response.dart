@@ -195,13 +195,10 @@ class Price {
   Price({required this.total, required this.currency});
 
   factory Price.fromJson(Map<String, dynamic> json) {
-    if (json is Map<String, dynamic>) {
-      return Price(
-        total: (json['total'] as num).toInt(),
-        currency: json['currency'] as String,
-      );
-    }
-    return Price(total: 0, currency: 'SAR');
+    return Price(
+      total: (json['total'] as num).toInt(),
+      currency: json['currency'] as String,
+    );
   }
 
   Map<String, dynamic> toJson() => _$PriceToJson(this);
@@ -215,7 +212,6 @@ class Dimensions {
   Dimensions({this.width, this.height});
 
   factory Dimensions.fromJson(Map<String, dynamic> json) {
-    if (json == null) return Dimensions();
     return Dimensions(
       width: json['width'] == null ? null : (json['width'] as num).toInt(),
       height: json['height'] == null ? null : (json['height'] as num).toInt(),

@@ -18,6 +18,7 @@ import '../../../core/widgets/app_text_button.dart';
 import '../../../core/widgets/loading_widget.dart';
 import '../logic/cubit/profile_cubit.dart';
 import '../logic/cubit/profile_state.dart';
+import '../ui/widgets/country_codes.dart'; // Import country_codes.dart
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -46,7 +47,66 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     fullNameController.text = getFullName(context);
     emailController.text = getEmail(context);
     phoneController.text = getPhone(context);
+
+    log('bef Country code: $countryCode');
+    countryCode = getCountryCode(context);
+    log('Country  getcode: ${getCountryCode(context)}');
+    log('aft Country code: $countryCode');
+
     // passwordController.text = getPassword(context);
+  }
+
+  // Store a global key for the scaffold to use for showing loading and snackbars
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  // Store loading dialog reference to avoid context issues
+  OverlayEntry? _loadingOverlay;
+
+  void _showLoading() {
+    // Create an overlay entry that shows a loading indicator
+    _loadingOverlay = OverlayEntry(
+      builder: (context) => Container(
+        color: Colors.black.withOpacity(0.5),
+        child: const Center(
+          child: LoadingWidget(loadingState: true),
+        ),
+      ),
+    );
+
+    // Insert the overlay entry into the overlay
+    Overlay.of(context).insert(_loadingOverlay!);
+  }
+
+  void _hideLoading() {
+    _loadingOverlay?.remove();
+    _loadingOverlay = null;
+  }
+
+  @override
+  void dispose() {
+    // Make sure to remove loading overlay when the widget is disposed
+    _hideLoading();
+    super.dispose();
+  }
+
+  // Helper method to find country code from dial code
+  String findCountryCodeFromDialCode(String dialCode) {
+    // Default to 'SA' if no match is found
+    String countryCode = 'SA';
+
+    // Remove the '+' if it exists in the dial code
+    String normalizedDialCode =
+        dialCode.startsWith('+') ? dialCode : '+$dialCode';
+
+    // Find the country with matching dial code
+    for (var country in codes) {
+      if (country['dial_code'] == normalizedDialCode) {
+        countryCode = country['code'] ?? 'SA';
+        break;
+      }
+    }
+
+    log('Found country code $countryCode for dial code $dialCode');
+    return countryCode;
   }
 
   @override
@@ -55,30 +115,67 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       listener: (context, state) {
         state.maybeWhen(
           updating: () {
-            // Show loading indicator
-            showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (context) => const LoadingWidget(
-                loadingState: true,
-              ),
-            );
+            // Show loading without using context-dependent dialog
+            _showLoading();
           },
           updateSuccess: (updateResponse) {
-            // Close loading dialog if open
-            if (Navigator.of(context).canPop()) {
-              Navigator.of(context).pop();
-            }
+            // Hide loading overlay safely
+            _hideLoading();
 
-            // Success actions are handled in the cubit
+            // Show success message
+            if (mounted) {
+              showToastWidget(
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.check_circle_outline,
+                          color: Colors.white, size: 24.sp),
+                      SizedBox(width: 12.w),
+                      Expanded(
+                        child: Text(
+                          "Profile updated successfully",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                context: context,
+                animation: StyledToastAnimation.slideFromTop,
+                position: StyledToastPosition.top,
+                duration: const Duration(seconds: 4),
+                animDuration: const Duration(seconds: 1),
+                curve: Curves.elasticOut,
+                reverseCurve: Curves.linear,
+              );
+
+              // Pop screen after successful update
+              Future.delayed(const Duration(milliseconds: 500), () {
+                if (context.mounted) {
+                  Navigator.of(context).pop(true);
+                }
+              });
+            }
           },
           updateError: (error) {
-            // Close loading dialog if open
-            if (Navigator.of(context).canPop()) {
-              Navigator.of(context).pop();
-            }
+            // Hide loading overlay safely
+            _hideLoading();
 
-            // Error handling is done in the cubit
+            // Show error message if the widget is still mounted
+            if (mounted) {
+              showToastError(context, error);
+            }
           },
           orElse: () {
             // Do nothing for other states
@@ -86,6 +183,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         );
       },
       child: Scaffold(
+        key: _scaffoldKey,
         appBar: AppBackAppBar(
           title: context.el.editProfileTitle,
           onBack: () => context.pop(),
@@ -149,11 +247,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               // Update the country code when user selects a new country
                               if (countryCode.dialCode != null) {
                                 this.countryCode = countryCode.dialCode!;
-                                log('Selected country code: ${countryCode.dialCode}');
+                                log('Selected country code: ${this.countryCode}');
                               }
                             });
                           },
-                          initialSelection: 'SA',
+                          // Use the findCountryCodeFromDialCode helper to set initial selection
+                          initialSelection:
+                              findCountryCodeFromDialCode(countryCode),
                           favorite: const ['SA', 'EG', 'AE'],
                           showCountryOnly: false,
                           showOnlyCountryWhenClosed: false,
@@ -406,6 +506,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
     log(phone);
     return phone;
+  }
+
+  String getCountryCode(BuildContext context) {
+    final cubit = context.read<ProfileCubit>();
+    String code = '';
+    cubit.state.whenOrNull(
+      success: (profileResponse) {
+        code = '+${profileResponse.countryCode}';
+      },
+    );
+    log(code);
+    return code;
   }
 
   String getPassword(BuildContext context) {

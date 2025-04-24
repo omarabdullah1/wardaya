@@ -6,14 +6,6 @@ part of 'home_recipients_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-HomeRecipientsResponse _$HomeRecipientsResponseFromJson(
-        Map<String, dynamic> json) =>
-    HomeRecipientsResponse(
-      recipients: (json['recipients'] as List<dynamic>)
-          .map((e) => Recipient.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
 Map<String, dynamic> _$HomeRecipientsResponseToJson(
         HomeRecipientsResponse instance) =>
     <String, dynamic>{

@@ -95,6 +95,7 @@ dependencies:
   share_plus: ^10.1.4
   oktoast: ^3.4.0
   app_links: ^3.4.3  # Replacing uni_links (discontinued)
+  http_parser: ^4.1.2
 
 dev_dependencies:
   flutter_test:

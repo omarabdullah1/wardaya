@@ -29,13 +29,6 @@ Map<String, dynamic> _$GalleryItemToJson(GalleryItem instance) =>
       'image_url': instance.imageUrl,
     };
 
-GalleryResponse _$GalleryResponseFromJson(Map<String, dynamic> json) =>
-    GalleryResponse(
-      items: (json['items'] as List<dynamic>)
-          .map((e) => GalleryItem.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
 Map<String, dynamic> _$GalleryResponseToJson(GalleryResponse instance) =>
     <String, dynamic>{
       'items': instance.items,

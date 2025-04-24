@@ -6,13 +6,6 @@ part of 'home_brands_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-HomeBrandsResponse _$HomeBrandsResponseFromJson(Map<String, dynamic> json) =>
-    HomeBrandsResponse(
-      brands: (json['brands'] as List<dynamic>)
-          .map((e) => Brand.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
 Map<String, dynamic> _$HomeBrandsResponseToJson(HomeBrandsResponse instance) =>
     <String, dynamic>{
       'brands': instance.brands,

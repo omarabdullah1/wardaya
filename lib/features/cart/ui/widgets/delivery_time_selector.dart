@@ -116,7 +116,7 @@ class _DeliveryTimeSelectorState extends State<DeliveryTimeSelector> {
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
           color: isSelected
-              ? ColorsManager.mainRose.withOpacity(0.1)
+              ? ColorsManager.mainRose.withAlpha((0.1 * 255).toInt())
               : Colors.white,
           border: Border.all(
             color:

@@ -262,7 +262,8 @@ class OccasionCard extends StatelessWidget {
                             width: 40.w,
                             height: 40.h,
                             decoration: BoxDecoration(
-                              color: ColorsManager.mainRose.withOpacity(0.1),
+                              color: ColorsManager.mainRose
+                                  .withAlpha((0.1 * 255).toInt()),
                               borderRadius: BorderRadius.circular(4.0),
                             ),
                             child: Icon(
@@ -296,7 +297,7 @@ class OccasionCard extends StatelessWidget {
                             width: 40.w,
                             height: 40.h,
                             decoration: BoxDecoration(
-                              color: Colors.red.withOpacity(0.1),
+                              color: Colors.red.withAlpha((0.1 * 255).toInt()),
                               borderRadius: BorderRadius.circular(4.0),
                             ),
                             child: Icon(

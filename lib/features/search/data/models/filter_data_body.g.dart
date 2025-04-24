@@ -17,15 +17,3 @@ FilterDataBody _$FilterDataBodyFromJson(Map<String, dynamic> json) =>
       bundleTypes: json['bundleTypes'] as String?,
       priceRange: json['priceRange'] as String?,
     );
-
-Map<String, dynamic> _$FilterDataBodyToJson(FilterDataBody instance) =>
-    <String, dynamic>{
-      'category': instance.category,
-      'subCategory': instance.subCategory,
-      'brand': instance.brand,
-      'occasion': instance.occasion,
-      'color': instance.color,
-      'recipients': instance.recipients,
-      'bundleTypes': instance.bundleTypes,
-      'priceRange': instance.priceRange,
-    };

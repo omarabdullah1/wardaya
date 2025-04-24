@@ -37,7 +37,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     final response = await _profileRepo.getProfile();
     response.when(success: (profileResponse) {
       // First check if we got a proper response with data
-      if (profileResponse != null && profileResponse.firstName != null) {
+      if (profileResponse.firstName != null) {
         emit(ProfileState.success(profileResponse));
         firstNameController.text = profileResponse.firstName!;
         lastNameController.text = profileResponse.lastName!;

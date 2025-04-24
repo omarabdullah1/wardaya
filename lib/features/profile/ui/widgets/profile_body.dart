@@ -48,10 +48,16 @@ class ProfileBody extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      context.pushNamedWithCubit(
+                      Navigator.of(context).pushNamed(
                         Routes.editProfileScreen,
-                        context.read<ProfileCubit>(),
-                      );
+                        arguments: {'cubit': context.read<ProfileCubit>()},
+                      ).then((result) {
+                        if (result == true) {
+                          if (context.mounted) {
+                            context.read<ProfileCubit>().getProfile(context);
+                          }
+                        }
+                      });
                     },
                     child: Row(
                       children: [
@@ -486,41 +492,5 @@ class ProfileBody extends StatelessWidget {
       points = profile.points.toString();
     });
     return points;
-  }
-
-  void _showDeleteAccountConfirmationDialog(BuildContext context) {
-    // Store reference to the original context that has access to ProfileCubit
-    final outerContext = context;
-
-    showDialog(
-      context: context,
-      builder: (BuildContext dialogContext) {
-        return AlertDialog(
-          title: Text(outerContext.el.deleteAccount),
-          content: Text(outerContext.el.deleteAccountConfirmation),
-          actions: <Widget>[
-            TextButton(
-              child: Text(outerContext.el.cancel),
-              onPressed: () {
-                Navigator.of(dialogContext).pop();
-              },
-            ),
-            TextButton(
-              child: Text(
-                outerContext.el.confirm,
-                style: const TextStyle(color: ColorsManager.red),
-              ),
-              onPressed: () {
-                // Close dialog first
-                Navigator.of(dialogContext).pop();
-
-                // Call the deleteAccount method from ProfileCubit using the original context
-                outerContext.read<ProfileCubit>().deleteAccount(outerContext);
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 }

@@ -114,18 +114,6 @@ class CheckoutCubit extends Cubit<CheckoutState> {
     }
   }
 
-  String _formatDateForApi(String dateStr) {
-    // Parse the start date, removing the day name if present
-    final parts = dateStr.split(', ');
-    final datePart = parts.length > 1 ? parts[1] : parts[0];
-    final dateParts = datePart.split('/');
-    final day = int.parse(dateParts[0]);
-    final month = int.parse(dateParts[1]);
-    final year = int.parse(dateParts[2]);
-
-    return "$year-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')}";
-  }
-
   Future<void> checkout({
     required String startDate,
     required String amount,

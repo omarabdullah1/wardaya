@@ -185,16 +185,12 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
         selectedAddressOption == 'Ask the recipient for the address';
 
     // Format the delivery date correctly
-    final startDate = cubit.selectedDeliveryDate;
 
     // Get promo code information if applied
     final promoCubit = context.read<PromoCubit>();
-    final String? promoCode = promoCubit.promoCode;
-    final String? promoId = promoCubit.promoId;
 
     // Get original price from widget
     final originalPrice = double.parse(widget.price);
-    double discountedPrice = originalPrice;
     double discountAmount = 0;
 
     // Check if a promo code has been successfully validated
@@ -204,7 +200,6 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
     // Calculate discount if promo is applied
     if (hasValidPromo && promoCubit.discountPercentage != null) {
       discountAmount = originalPrice * (promoCubit.discountPercentage! / 100);
-      discountedPrice = originalPrice - discountAmount;
     }
 
     cubit.checkout(
@@ -325,7 +320,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
               final discount = promoResponse.discountPercentage;
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('Promo code applied! ${discount}% discount'),
+                  content: Text('Promo code applied! $discount% discount'),
                   backgroundColor: Colors.green,
                 ),
               );
@@ -822,7 +817,8 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
       decoration: BoxDecoration(
         color: ColorsManager.white,
         borderRadius: BorderRadius.circular(8.r),
-        border: Border.all(color: ColorsManager.lightGrey.withOpacity(0.5)),
+        border: Border.all(
+            color: ColorsManager.lightGrey.withAlpha((0.5 * 255).toInt())),
       ),
       child: Row(
         children: [

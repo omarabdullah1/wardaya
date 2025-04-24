@@ -66,59 +66,66 @@ class _SignatureBottomSheetState extends State<SignatureBottomSheet> {
           .then((byteData) => byteData!.buffer.asUint8List());
 
       // Use BlocProvider to get UploadSignatureCubit
-      final uploadCubit = widget.cartContext.read<UploadSignatureCubit>();
-
+      UploadSignatureCubit? uploadCubit;
+      if (widget.cartContext.mounted) {
+        uploadCubit = widget.cartContext.read<UploadSignatureCubit>();
+      }
+      if (uploadCubit == null) {
+        throw Exception(
+            'UploadSignatureCubit is not available in the context.');
+      }
       // Show upload dialog with status management
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (dialogContext) =>
-            BlocConsumer<UploadSignatureCubit, UploadSignatureState>(
-          bloc: uploadCubit,
-          listener: (context, state) {
-            state.maybeWhen(
-              loaded: (response) {
-                // Set signature link in CartCubit on success
-                widget.cartContext.read<CartCubit>().setSignatureLink(
-                      signatureLink: response.imageUrl,
-                    );
+      if (mounted) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (dialogContext) =>
+              BlocConsumer<UploadSignatureCubit, UploadSignatureState>(
+            bloc: uploadCubit,
+            listener: (context, state) {
+              state.maybeWhen(
+                loaded: (response) {
+                  // Set signature link in CartCubit on success
+                  widget.cartContext.read<CartCubit>().setSignatureLink(
+                        signatureLink: response.imageUrl,
+                      );
 
-                // Close the dialog and bottom sheet
-                Navigator.of(dialogContext).pop();
+                  // Close the dialog and bottom sheet
+                  Navigator.of(dialogContext).pop();
 
-                // Save signature data and close
-                if (mounted) {
-                  widget.onSave(data);
-                  context.pop();
-                }
-              },
-              error: (message) {
-                // Close the loading dialog
-                Navigator.of(dialogContext).pop();
+                  // Save signature data and close
+                  if (mounted) {
+                    widget.onSave(data);
+                    context.pop();
+                  }
+                },
+                error: (message) {
+                  // Close the loading dialog
+                  Navigator.of(dialogContext).pop();
 
-                // Show error message
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      message,
-                      style: const TextStyle(color: Colors.white),
+                  // Show error message
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        message,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: Colors.red,
                     ),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              },
-              orElse: () {},
-            );
-          },
-          builder: (context, state) {
-            return state.maybeWhen(
-              loading: () => const LoadingWidget(loadingState: true),
-              orElse: () => const LoadingWidget(loadingState: true),
-            );
-          },
-        ),
-      );
-
+                  );
+                },
+                orElse: () {},
+              );
+            },
+            builder: (context, state) {
+              return state.maybeWhen(
+                loading: () => const LoadingWidget(loadingState: true),
+                orElse: () => const LoadingWidget(loadingState: true),
+              );
+            },
+          ),
+        );
+      }
       // Always use a timestamp in filename to avoid caching issues and ensure .png extension
       final timestamp = DateTime.now().millisecondsSinceEpoch;
       final filename = 'signature_$timestamp.png';
