@@ -24,6 +24,8 @@ mixin _$CartState {
     required TResult Function(String to, String message, String from)
         changeSelectedMessage,
     required TResult Function(Uint8List? signature) changeSignature,
+    required TResult Function(String? signatureLink) changeSignatureLink,
+    required TResult Function(String? videoLink) changeVideoLink,
     required TResult Function(String link) changeLink,
     required TResult Function(int index) changeSelectedTypingStyle,
   }) =>
@@ -36,6 +38,8 @@ mixin _$CartState {
     TResult? Function(String to, String message, String from)?
         changeSelectedMessage,
     TResult? Function(Uint8List? signature)? changeSignature,
+    TResult? Function(String? signatureLink)? changeSignatureLink,
+    TResult? Function(String? videoLink)? changeVideoLink,
     TResult? Function(String link)? changeLink,
     TResult? Function(int index)? changeSelectedTypingStyle,
   }) =>
@@ -48,6 +52,8 @@ mixin _$CartState {
     TResult Function(String to, String message, String from)?
         changeSelectedMessage,
     TResult Function(Uint8List? signature)? changeSignature,
+    TResult Function(String? signatureLink)? changeSignatureLink,
+    TResult Function(String? videoLink)? changeVideoLink,
     TResult Function(String link)? changeLink,
     TResult Function(int index)? changeSelectedTypingStyle,
     required TResult orElse(),
@@ -62,6 +68,8 @@ mixin _$CartState {
     required TResult Function(ChangeSelectedMessage value)
         changeSelectedMessage,
     required TResult Function(ChangeSignature value) changeSignature,
+    required TResult Function(ChangeSignatureLink value) changeSignatureLink,
+    required TResult Function(ChangeVideoLink value) changeVideoLink,
     required TResult Function(ChangeLink value) changeLink,
     required TResult Function(ChangeSelectedTypingStyle value)
         changeSelectedTypingStyle,
@@ -74,6 +82,8 @@ mixin _$CartState {
     TResult? Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
     TResult? Function(ChangeSelectedMessage value)? changeSelectedMessage,
     TResult? Function(ChangeSignature value)? changeSignature,
+    TResult? Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult? Function(ChangeVideoLink value)? changeVideoLink,
     TResult? Function(ChangeLink value)? changeLink,
     TResult? Function(ChangeSelectedTypingStyle value)?
         changeSelectedTypingStyle,
@@ -86,6 +96,8 @@ mixin _$CartState {
     TResult Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
     TResult Function(ChangeSelectedMessage value)? changeSelectedMessage,
     TResult Function(ChangeSignature value)? changeSignature,
+    TResult Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult Function(ChangeVideoLink value)? changeVideoLink,
     TResult Function(ChangeLink value)? changeLink,
     TResult Function(ChangeSelectedTypingStyle value)?
         changeSelectedTypingStyle,
@@ -161,6 +173,8 @@ class _$InitialImpl implements _Initial {
     required TResult Function(String to, String message, String from)
         changeSelectedMessage,
     required TResult Function(Uint8List? signature) changeSignature,
+    required TResult Function(String? signatureLink) changeSignatureLink,
+    required TResult Function(String? videoLink) changeVideoLink,
     required TResult Function(String link) changeLink,
     required TResult Function(int index) changeSelectedTypingStyle,
   }) {
@@ -176,6 +190,8 @@ class _$InitialImpl implements _Initial {
     TResult? Function(String to, String message, String from)?
         changeSelectedMessage,
     TResult? Function(Uint8List? signature)? changeSignature,
+    TResult? Function(String? signatureLink)? changeSignatureLink,
+    TResult? Function(String? videoLink)? changeVideoLink,
     TResult? Function(String link)? changeLink,
     TResult? Function(int index)? changeSelectedTypingStyle,
   }) {
@@ -191,6 +207,8 @@ class _$InitialImpl implements _Initial {
     TResult Function(String to, String message, String from)?
         changeSelectedMessage,
     TResult Function(Uint8List? signature)? changeSignature,
+    TResult Function(String? signatureLink)? changeSignatureLink,
+    TResult Function(String? videoLink)? changeVideoLink,
     TResult Function(String link)? changeLink,
     TResult Function(int index)? changeSelectedTypingStyle,
     required TResult orElse(),
@@ -211,6 +229,8 @@ class _$InitialImpl implements _Initial {
     required TResult Function(ChangeSelectedMessage value)
         changeSelectedMessage,
     required TResult Function(ChangeSignature value) changeSignature,
+    required TResult Function(ChangeSignatureLink value) changeSignatureLink,
+    required TResult Function(ChangeVideoLink value) changeVideoLink,
     required TResult Function(ChangeLink value) changeLink,
     required TResult Function(ChangeSelectedTypingStyle value)
         changeSelectedTypingStyle,
@@ -226,6 +246,8 @@ class _$InitialImpl implements _Initial {
     TResult? Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
     TResult? Function(ChangeSelectedMessage value)? changeSelectedMessage,
     TResult? Function(ChangeSignature value)? changeSignature,
+    TResult? Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult? Function(ChangeVideoLink value)? changeVideoLink,
     TResult? Function(ChangeLink value)? changeLink,
     TResult? Function(ChangeSelectedTypingStyle value)?
         changeSelectedTypingStyle,
@@ -241,6 +263,8 @@ class _$InitialImpl implements _Initial {
     TResult Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
     TResult Function(ChangeSelectedMessage value)? changeSelectedMessage,
     TResult Function(ChangeSignature value)? changeSignature,
+    TResult Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult Function(ChangeVideoLink value)? changeVideoLink,
     TResult Function(ChangeLink value)? changeLink,
     TResult Function(ChangeSelectedTypingStyle value)?
         changeSelectedTypingStyle,
@@ -332,6 +356,8 @@ class _$ChangeLengthImpl implements ChangeLength {
     required TResult Function(String to, String message, String from)
         changeSelectedMessage,
     required TResult Function(Uint8List? signature) changeSignature,
+    required TResult Function(String? signatureLink) changeSignatureLink,
+    required TResult Function(String? videoLink) changeVideoLink,
     required TResult Function(String link) changeLink,
     required TResult Function(int index) changeSelectedTypingStyle,
   }) {
@@ -347,6 +373,8 @@ class _$ChangeLengthImpl implements ChangeLength {
     TResult? Function(String to, String message, String from)?
         changeSelectedMessage,
     TResult? Function(Uint8List? signature)? changeSignature,
+    TResult? Function(String? signatureLink)? changeSignatureLink,
+    TResult? Function(String? videoLink)? changeVideoLink,
     TResult? Function(String link)? changeLink,
     TResult? Function(int index)? changeSelectedTypingStyle,
   }) {
@@ -362,6 +390,8 @@ class _$ChangeLengthImpl implements ChangeLength {
     TResult Function(String to, String message, String from)?
         changeSelectedMessage,
     TResult Function(Uint8List? signature)? changeSignature,
+    TResult Function(String? signatureLink)? changeSignatureLink,
+    TResult Function(String? videoLink)? changeVideoLink,
     TResult Function(String link)? changeLink,
     TResult Function(int index)? changeSelectedTypingStyle,
     required TResult orElse(),
@@ -382,6 +412,8 @@ class _$ChangeLengthImpl implements ChangeLength {
     required TResult Function(ChangeSelectedMessage value)
         changeSelectedMessage,
     required TResult Function(ChangeSignature value) changeSignature,
+    required TResult Function(ChangeSignatureLink value) changeSignatureLink,
+    required TResult Function(ChangeVideoLink value) changeVideoLink,
     required TResult Function(ChangeLink value) changeLink,
     required TResult Function(ChangeSelectedTypingStyle value)
         changeSelectedTypingStyle,
@@ -397,6 +429,8 @@ class _$ChangeLengthImpl implements ChangeLength {
     TResult? Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
     TResult? Function(ChangeSelectedMessage value)? changeSelectedMessage,
     TResult? Function(ChangeSignature value)? changeSignature,
+    TResult? Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult? Function(ChangeVideoLink value)? changeVideoLink,
     TResult? Function(ChangeLink value)? changeLink,
     TResult? Function(ChangeSelectedTypingStyle value)?
         changeSelectedTypingStyle,
@@ -412,6 +446,8 @@ class _$ChangeLengthImpl implements ChangeLength {
     TResult Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
     TResult Function(ChangeSelectedMessage value)? changeSelectedMessage,
     TResult Function(ChangeSignature value)? changeSignature,
+    TResult Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult Function(ChangeVideoLink value)? changeVideoLink,
     TResult Function(ChangeLink value)? changeLink,
     TResult Function(ChangeSelectedTypingStyle value)?
         changeSelectedTypingStyle,
@@ -514,6 +550,8 @@ class _$ChangeSelectedCardIndexImpl implements ChangeSelectedCardIndex {
     required TResult Function(String to, String message, String from)
         changeSelectedMessage,
     required TResult Function(Uint8List? signature) changeSignature,
+    required TResult Function(String? signatureLink) changeSignatureLink,
+    required TResult Function(String? videoLink) changeVideoLink,
     required TResult Function(String link) changeLink,
     required TResult Function(int index) changeSelectedTypingStyle,
   }) {
@@ -529,6 +567,8 @@ class _$ChangeSelectedCardIndexImpl implements ChangeSelectedCardIndex {
     TResult? Function(String to, String message, String from)?
         changeSelectedMessage,
     TResult? Function(Uint8List? signature)? changeSignature,
+    TResult? Function(String? signatureLink)? changeSignatureLink,
+    TResult? Function(String? videoLink)? changeVideoLink,
     TResult? Function(String link)? changeLink,
     TResult? Function(int index)? changeSelectedTypingStyle,
   }) {
@@ -544,6 +584,8 @@ class _$ChangeSelectedCardIndexImpl implements ChangeSelectedCardIndex {
     TResult Function(String to, String message, String from)?
         changeSelectedMessage,
     TResult Function(Uint8List? signature)? changeSignature,
+    TResult Function(String? signatureLink)? changeSignatureLink,
+    TResult Function(String? videoLink)? changeVideoLink,
     TResult Function(String link)? changeLink,
     TResult Function(int index)? changeSelectedTypingStyle,
     required TResult orElse(),
@@ -564,6 +606,8 @@ class _$ChangeSelectedCardIndexImpl implements ChangeSelectedCardIndex {
     required TResult Function(ChangeSelectedMessage value)
         changeSelectedMessage,
     required TResult Function(ChangeSignature value) changeSignature,
+    required TResult Function(ChangeSignatureLink value) changeSignatureLink,
+    required TResult Function(ChangeVideoLink value) changeVideoLink,
     required TResult Function(ChangeLink value) changeLink,
     required TResult Function(ChangeSelectedTypingStyle value)
         changeSelectedTypingStyle,
@@ -579,6 +623,8 @@ class _$ChangeSelectedCardIndexImpl implements ChangeSelectedCardIndex {
     TResult? Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
     TResult? Function(ChangeSelectedMessage value)? changeSelectedMessage,
     TResult? Function(ChangeSignature value)? changeSignature,
+    TResult? Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult? Function(ChangeVideoLink value)? changeVideoLink,
     TResult? Function(ChangeLink value)? changeLink,
     TResult? Function(ChangeSelectedTypingStyle value)?
         changeSelectedTypingStyle,
@@ -594,6 +640,8 @@ class _$ChangeSelectedCardIndexImpl implements ChangeSelectedCardIndex {
     TResult Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
     TResult Function(ChangeSelectedMessage value)? changeSelectedMessage,
     TResult Function(ChangeSignature value)? changeSignature,
+    TResult Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult Function(ChangeVideoLink value)? changeVideoLink,
     TResult Function(ChangeLink value)? changeLink,
     TResult Function(ChangeSelectedTypingStyle value)?
         changeSelectedTypingStyle,
@@ -711,6 +759,8 @@ class _$ChangeSelectedMessageImpl implements ChangeSelectedMessage {
     required TResult Function(String to, String message, String from)
         changeSelectedMessage,
     required TResult Function(Uint8List? signature) changeSignature,
+    required TResult Function(String? signatureLink) changeSignatureLink,
+    required TResult Function(String? videoLink) changeVideoLink,
     required TResult Function(String link) changeLink,
     required TResult Function(int index) changeSelectedTypingStyle,
   }) {
@@ -726,6 +776,8 @@ class _$ChangeSelectedMessageImpl implements ChangeSelectedMessage {
     TResult? Function(String to, String message, String from)?
         changeSelectedMessage,
     TResult? Function(Uint8List? signature)? changeSignature,
+    TResult? Function(String? signatureLink)? changeSignatureLink,
+    TResult? Function(String? videoLink)? changeVideoLink,
     TResult? Function(String link)? changeLink,
     TResult? Function(int index)? changeSelectedTypingStyle,
   }) {
@@ -741,6 +793,8 @@ class _$ChangeSelectedMessageImpl implements ChangeSelectedMessage {
     TResult Function(String to, String message, String from)?
         changeSelectedMessage,
     TResult Function(Uint8List? signature)? changeSignature,
+    TResult Function(String? signatureLink)? changeSignatureLink,
+    TResult Function(String? videoLink)? changeVideoLink,
     TResult Function(String link)? changeLink,
     TResult Function(int index)? changeSelectedTypingStyle,
     required TResult orElse(),
@@ -761,6 +815,8 @@ class _$ChangeSelectedMessageImpl implements ChangeSelectedMessage {
     required TResult Function(ChangeSelectedMessage value)
         changeSelectedMessage,
     required TResult Function(ChangeSignature value) changeSignature,
+    required TResult Function(ChangeSignatureLink value) changeSignatureLink,
+    required TResult Function(ChangeVideoLink value) changeVideoLink,
     required TResult Function(ChangeLink value) changeLink,
     required TResult Function(ChangeSelectedTypingStyle value)
         changeSelectedTypingStyle,
@@ -776,6 +832,8 @@ class _$ChangeSelectedMessageImpl implements ChangeSelectedMessage {
     TResult? Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
     TResult? Function(ChangeSelectedMessage value)? changeSelectedMessage,
     TResult? Function(ChangeSignature value)? changeSignature,
+    TResult? Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult? Function(ChangeVideoLink value)? changeVideoLink,
     TResult? Function(ChangeLink value)? changeLink,
     TResult? Function(ChangeSelectedTypingStyle value)?
         changeSelectedTypingStyle,
@@ -791,6 +849,8 @@ class _$ChangeSelectedMessageImpl implements ChangeSelectedMessage {
     TResult Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
     TResult Function(ChangeSelectedMessage value)? changeSelectedMessage,
     TResult Function(ChangeSignature value)? changeSignature,
+    TResult Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult Function(ChangeVideoLink value)? changeVideoLink,
     TResult Function(ChangeLink value)? changeLink,
     TResult Function(ChangeSelectedTypingStyle value)?
         changeSelectedTypingStyle,
@@ -895,6 +955,8 @@ class _$ChangeSignatureImpl implements ChangeSignature {
     required TResult Function(String to, String message, String from)
         changeSelectedMessage,
     required TResult Function(Uint8List? signature) changeSignature,
+    required TResult Function(String? signatureLink) changeSignatureLink,
+    required TResult Function(String? videoLink) changeVideoLink,
     required TResult Function(String link) changeLink,
     required TResult Function(int index) changeSelectedTypingStyle,
   }) {
@@ -910,6 +972,8 @@ class _$ChangeSignatureImpl implements ChangeSignature {
     TResult? Function(String to, String message, String from)?
         changeSelectedMessage,
     TResult? Function(Uint8List? signature)? changeSignature,
+    TResult? Function(String? signatureLink)? changeSignatureLink,
+    TResult? Function(String? videoLink)? changeVideoLink,
     TResult? Function(String link)? changeLink,
     TResult? Function(int index)? changeSelectedTypingStyle,
   }) {
@@ -925,6 +989,8 @@ class _$ChangeSignatureImpl implements ChangeSignature {
     TResult Function(String to, String message, String from)?
         changeSelectedMessage,
     TResult Function(Uint8List? signature)? changeSignature,
+    TResult Function(String? signatureLink)? changeSignatureLink,
+    TResult Function(String? videoLink)? changeVideoLink,
     TResult Function(String link)? changeLink,
     TResult Function(int index)? changeSelectedTypingStyle,
     required TResult orElse(),
@@ -945,6 +1011,8 @@ class _$ChangeSignatureImpl implements ChangeSignature {
     required TResult Function(ChangeSelectedMessage value)
         changeSelectedMessage,
     required TResult Function(ChangeSignature value) changeSignature,
+    required TResult Function(ChangeSignatureLink value) changeSignatureLink,
+    required TResult Function(ChangeVideoLink value) changeVideoLink,
     required TResult Function(ChangeLink value) changeLink,
     required TResult Function(ChangeSelectedTypingStyle value)
         changeSelectedTypingStyle,
@@ -960,6 +1028,8 @@ class _$ChangeSignatureImpl implements ChangeSignature {
     TResult? Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
     TResult? Function(ChangeSelectedMessage value)? changeSelectedMessage,
     TResult? Function(ChangeSignature value)? changeSignature,
+    TResult? Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult? Function(ChangeVideoLink value)? changeVideoLink,
     TResult? Function(ChangeLink value)? changeLink,
     TResult? Function(ChangeSelectedTypingStyle value)?
         changeSelectedTypingStyle,
@@ -975,6 +1045,8 @@ class _$ChangeSignatureImpl implements ChangeSignature {
     TResult Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
     TResult Function(ChangeSelectedMessage value)? changeSelectedMessage,
     TResult Function(ChangeSignature value)? changeSignature,
+    TResult Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult Function(ChangeVideoLink value)? changeVideoLink,
     TResult Function(ChangeLink value)? changeLink,
     TResult Function(ChangeSelectedTypingStyle value)?
         changeSelectedTypingStyle,
@@ -997,6 +1069,392 @@ abstract class ChangeSignature implements CartState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChangeSignatureImplCopyWith<_$ChangeSignatureImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ChangeSignatureLinkImplCopyWith<$Res> {
+  factory _$$ChangeSignatureLinkImplCopyWith(_$ChangeSignatureLinkImpl value,
+          $Res Function(_$ChangeSignatureLinkImpl) then) =
+      __$$ChangeSignatureLinkImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String? signatureLink});
+}
+
+/// @nodoc
+class __$$ChangeSignatureLinkImplCopyWithImpl<$Res>
+    extends _$CartStateCopyWithImpl<$Res, _$ChangeSignatureLinkImpl>
+    implements _$$ChangeSignatureLinkImplCopyWith<$Res> {
+  __$$ChangeSignatureLinkImplCopyWithImpl(_$ChangeSignatureLinkImpl _value,
+      $Res Function(_$ChangeSignatureLinkImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CartState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? signatureLink = freezed,
+  }) {
+    return _then(_$ChangeSignatureLinkImpl(
+      freezed == signatureLink
+          ? _value.signatureLink
+          : signatureLink // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ChangeSignatureLinkImpl implements ChangeSignatureLink {
+  const _$ChangeSignatureLinkImpl(this.signatureLink);
+
+  @override
+  final String? signatureLink;
+
+  @override
+  String toString() {
+    return 'CartState.changeSignatureLink(signatureLink: $signatureLink)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChangeSignatureLinkImpl &&
+            (identical(other.signatureLink, signatureLink) ||
+                other.signatureLink == signatureLink));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, signatureLink);
+
+  /// Create a copy of CartState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ChangeSignatureLinkImplCopyWith<_$ChangeSignatureLinkImpl> get copyWith =>
+      __$$ChangeSignatureLinkImplCopyWithImpl<_$ChangeSignatureLinkImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(int newLength) changeLength,
+    required TResult Function(int selectedCardIndex) changeSelectedCardIndex,
+    required TResult Function(String to, String message, String from)
+        changeSelectedMessage,
+    required TResult Function(Uint8List? signature) changeSignature,
+    required TResult Function(String? signatureLink) changeSignatureLink,
+    required TResult Function(String? videoLink) changeVideoLink,
+    required TResult Function(String link) changeLink,
+    required TResult Function(int index) changeSelectedTypingStyle,
+  }) {
+    return changeSignatureLink(signatureLink);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(int newLength)? changeLength,
+    TResult? Function(int selectedCardIndex)? changeSelectedCardIndex,
+    TResult? Function(String to, String message, String from)?
+        changeSelectedMessage,
+    TResult? Function(Uint8List? signature)? changeSignature,
+    TResult? Function(String? signatureLink)? changeSignatureLink,
+    TResult? Function(String? videoLink)? changeVideoLink,
+    TResult? Function(String link)? changeLink,
+    TResult? Function(int index)? changeSelectedTypingStyle,
+  }) {
+    return changeSignatureLink?.call(signatureLink);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(int newLength)? changeLength,
+    TResult Function(int selectedCardIndex)? changeSelectedCardIndex,
+    TResult Function(String to, String message, String from)?
+        changeSelectedMessage,
+    TResult Function(Uint8List? signature)? changeSignature,
+    TResult Function(String? signatureLink)? changeSignatureLink,
+    TResult Function(String? videoLink)? changeVideoLink,
+    TResult Function(String link)? changeLink,
+    TResult Function(int index)? changeSelectedTypingStyle,
+    required TResult orElse(),
+  }) {
+    if (changeSignatureLink != null) {
+      return changeSignatureLink(signatureLink);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(ChangeLength value) changeLength,
+    required TResult Function(ChangeSelectedCardIndex value)
+        changeSelectedCardIndex,
+    required TResult Function(ChangeSelectedMessage value)
+        changeSelectedMessage,
+    required TResult Function(ChangeSignature value) changeSignature,
+    required TResult Function(ChangeSignatureLink value) changeSignatureLink,
+    required TResult Function(ChangeVideoLink value) changeVideoLink,
+    required TResult Function(ChangeLink value) changeLink,
+    required TResult Function(ChangeSelectedTypingStyle value)
+        changeSelectedTypingStyle,
+  }) {
+    return changeSignatureLink(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(ChangeLength value)? changeLength,
+    TResult? Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
+    TResult? Function(ChangeSelectedMessage value)? changeSelectedMessage,
+    TResult? Function(ChangeSignature value)? changeSignature,
+    TResult? Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult? Function(ChangeVideoLink value)? changeVideoLink,
+    TResult? Function(ChangeLink value)? changeLink,
+    TResult? Function(ChangeSelectedTypingStyle value)?
+        changeSelectedTypingStyle,
+  }) {
+    return changeSignatureLink?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(ChangeLength value)? changeLength,
+    TResult Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
+    TResult Function(ChangeSelectedMessage value)? changeSelectedMessage,
+    TResult Function(ChangeSignature value)? changeSignature,
+    TResult Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult Function(ChangeVideoLink value)? changeVideoLink,
+    TResult Function(ChangeLink value)? changeLink,
+    TResult Function(ChangeSelectedTypingStyle value)?
+        changeSelectedTypingStyle,
+    required TResult orElse(),
+  }) {
+    if (changeSignatureLink != null) {
+      return changeSignatureLink(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ChangeSignatureLink implements CartState {
+  const factory ChangeSignatureLink(final String? signatureLink) =
+      _$ChangeSignatureLinkImpl;
+
+  String? get signatureLink;
+
+  /// Create a copy of CartState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ChangeSignatureLinkImplCopyWith<_$ChangeSignatureLinkImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ChangeVideoLinkImplCopyWith<$Res> {
+  factory _$$ChangeVideoLinkImplCopyWith(_$ChangeVideoLinkImpl value,
+          $Res Function(_$ChangeVideoLinkImpl) then) =
+      __$$ChangeVideoLinkImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String? videoLink});
+}
+
+/// @nodoc
+class __$$ChangeVideoLinkImplCopyWithImpl<$Res>
+    extends _$CartStateCopyWithImpl<$Res, _$ChangeVideoLinkImpl>
+    implements _$$ChangeVideoLinkImplCopyWith<$Res> {
+  __$$ChangeVideoLinkImplCopyWithImpl(
+      _$ChangeVideoLinkImpl _value, $Res Function(_$ChangeVideoLinkImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CartState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? videoLink = freezed,
+  }) {
+    return _then(_$ChangeVideoLinkImpl(
+      freezed == videoLink
+          ? _value.videoLink
+          : videoLink // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ChangeVideoLinkImpl implements ChangeVideoLink {
+  const _$ChangeVideoLinkImpl(this.videoLink);
+
+  @override
+  final String? videoLink;
+
+  @override
+  String toString() {
+    return 'CartState.changeVideoLink(videoLink: $videoLink)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChangeVideoLinkImpl &&
+            (identical(other.videoLink, videoLink) ||
+                other.videoLink == videoLink));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, videoLink);
+
+  /// Create a copy of CartState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ChangeVideoLinkImplCopyWith<_$ChangeVideoLinkImpl> get copyWith =>
+      __$$ChangeVideoLinkImplCopyWithImpl<_$ChangeVideoLinkImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(int newLength) changeLength,
+    required TResult Function(int selectedCardIndex) changeSelectedCardIndex,
+    required TResult Function(String to, String message, String from)
+        changeSelectedMessage,
+    required TResult Function(Uint8List? signature) changeSignature,
+    required TResult Function(String? signatureLink) changeSignatureLink,
+    required TResult Function(String? videoLink) changeVideoLink,
+    required TResult Function(String link) changeLink,
+    required TResult Function(int index) changeSelectedTypingStyle,
+  }) {
+    return changeVideoLink(videoLink);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(int newLength)? changeLength,
+    TResult? Function(int selectedCardIndex)? changeSelectedCardIndex,
+    TResult? Function(String to, String message, String from)?
+        changeSelectedMessage,
+    TResult? Function(Uint8List? signature)? changeSignature,
+    TResult? Function(String? signatureLink)? changeSignatureLink,
+    TResult? Function(String? videoLink)? changeVideoLink,
+    TResult? Function(String link)? changeLink,
+    TResult? Function(int index)? changeSelectedTypingStyle,
+  }) {
+    return changeVideoLink?.call(videoLink);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(int newLength)? changeLength,
+    TResult Function(int selectedCardIndex)? changeSelectedCardIndex,
+    TResult Function(String to, String message, String from)?
+        changeSelectedMessage,
+    TResult Function(Uint8List? signature)? changeSignature,
+    TResult Function(String? signatureLink)? changeSignatureLink,
+    TResult Function(String? videoLink)? changeVideoLink,
+    TResult Function(String link)? changeLink,
+    TResult Function(int index)? changeSelectedTypingStyle,
+    required TResult orElse(),
+  }) {
+    if (changeVideoLink != null) {
+      return changeVideoLink(videoLink);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(ChangeLength value) changeLength,
+    required TResult Function(ChangeSelectedCardIndex value)
+        changeSelectedCardIndex,
+    required TResult Function(ChangeSelectedMessage value)
+        changeSelectedMessage,
+    required TResult Function(ChangeSignature value) changeSignature,
+    required TResult Function(ChangeSignatureLink value) changeSignatureLink,
+    required TResult Function(ChangeVideoLink value) changeVideoLink,
+    required TResult Function(ChangeLink value) changeLink,
+    required TResult Function(ChangeSelectedTypingStyle value)
+        changeSelectedTypingStyle,
+  }) {
+    return changeVideoLink(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(ChangeLength value)? changeLength,
+    TResult? Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
+    TResult? Function(ChangeSelectedMessage value)? changeSelectedMessage,
+    TResult? Function(ChangeSignature value)? changeSignature,
+    TResult? Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult? Function(ChangeVideoLink value)? changeVideoLink,
+    TResult? Function(ChangeLink value)? changeLink,
+    TResult? Function(ChangeSelectedTypingStyle value)?
+        changeSelectedTypingStyle,
+  }) {
+    return changeVideoLink?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(ChangeLength value)? changeLength,
+    TResult Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
+    TResult Function(ChangeSelectedMessage value)? changeSelectedMessage,
+    TResult Function(ChangeSignature value)? changeSignature,
+    TResult Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult Function(ChangeVideoLink value)? changeVideoLink,
+    TResult Function(ChangeLink value)? changeLink,
+    TResult Function(ChangeSelectedTypingStyle value)?
+        changeSelectedTypingStyle,
+    required TResult orElse(),
+  }) {
+    if (changeVideoLink != null) {
+      return changeVideoLink(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ChangeVideoLink implements CartState {
+  const factory ChangeVideoLink(final String? videoLink) =
+      _$ChangeVideoLinkImpl;
+
+  String? get videoLink;
+
+  /// Create a copy of CartState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ChangeVideoLinkImplCopyWith<_$ChangeVideoLinkImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1074,6 +1532,8 @@ class _$ChangeLinkImpl implements ChangeLink {
     required TResult Function(String to, String message, String from)
         changeSelectedMessage,
     required TResult Function(Uint8List? signature) changeSignature,
+    required TResult Function(String? signatureLink) changeSignatureLink,
+    required TResult Function(String? videoLink) changeVideoLink,
     required TResult Function(String link) changeLink,
     required TResult Function(int index) changeSelectedTypingStyle,
   }) {
@@ -1089,6 +1549,8 @@ class _$ChangeLinkImpl implements ChangeLink {
     TResult? Function(String to, String message, String from)?
         changeSelectedMessage,
     TResult? Function(Uint8List? signature)? changeSignature,
+    TResult? Function(String? signatureLink)? changeSignatureLink,
+    TResult? Function(String? videoLink)? changeVideoLink,
     TResult? Function(String link)? changeLink,
     TResult? Function(int index)? changeSelectedTypingStyle,
   }) {
@@ -1104,6 +1566,8 @@ class _$ChangeLinkImpl implements ChangeLink {
     TResult Function(String to, String message, String from)?
         changeSelectedMessage,
     TResult Function(Uint8List? signature)? changeSignature,
+    TResult Function(String? signatureLink)? changeSignatureLink,
+    TResult Function(String? videoLink)? changeVideoLink,
     TResult Function(String link)? changeLink,
     TResult Function(int index)? changeSelectedTypingStyle,
     required TResult orElse(),
@@ -1124,6 +1588,8 @@ class _$ChangeLinkImpl implements ChangeLink {
     required TResult Function(ChangeSelectedMessage value)
         changeSelectedMessage,
     required TResult Function(ChangeSignature value) changeSignature,
+    required TResult Function(ChangeSignatureLink value) changeSignatureLink,
+    required TResult Function(ChangeVideoLink value) changeVideoLink,
     required TResult Function(ChangeLink value) changeLink,
     required TResult Function(ChangeSelectedTypingStyle value)
         changeSelectedTypingStyle,
@@ -1139,6 +1605,8 @@ class _$ChangeLinkImpl implements ChangeLink {
     TResult? Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
     TResult? Function(ChangeSelectedMessage value)? changeSelectedMessage,
     TResult? Function(ChangeSignature value)? changeSignature,
+    TResult? Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult? Function(ChangeVideoLink value)? changeVideoLink,
     TResult? Function(ChangeLink value)? changeLink,
     TResult? Function(ChangeSelectedTypingStyle value)?
         changeSelectedTypingStyle,
@@ -1154,6 +1622,8 @@ class _$ChangeLinkImpl implements ChangeLink {
     TResult Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
     TResult Function(ChangeSelectedMessage value)? changeSelectedMessage,
     TResult Function(ChangeSignature value)? changeSignature,
+    TResult Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult Function(ChangeVideoLink value)? changeVideoLink,
     TResult Function(ChangeLink value)? changeLink,
     TResult Function(ChangeSelectedTypingStyle value)?
         changeSelectedTypingStyle,
@@ -1255,6 +1725,8 @@ class _$ChangeSelectedTypingStyleImpl implements ChangeSelectedTypingStyle {
     required TResult Function(String to, String message, String from)
         changeSelectedMessage,
     required TResult Function(Uint8List? signature) changeSignature,
+    required TResult Function(String? signatureLink) changeSignatureLink,
+    required TResult Function(String? videoLink) changeVideoLink,
     required TResult Function(String link) changeLink,
     required TResult Function(int index) changeSelectedTypingStyle,
   }) {
@@ -1270,6 +1742,8 @@ class _$ChangeSelectedTypingStyleImpl implements ChangeSelectedTypingStyle {
     TResult? Function(String to, String message, String from)?
         changeSelectedMessage,
     TResult? Function(Uint8List? signature)? changeSignature,
+    TResult? Function(String? signatureLink)? changeSignatureLink,
+    TResult? Function(String? videoLink)? changeVideoLink,
     TResult? Function(String link)? changeLink,
     TResult? Function(int index)? changeSelectedTypingStyle,
   }) {
@@ -1285,6 +1759,8 @@ class _$ChangeSelectedTypingStyleImpl implements ChangeSelectedTypingStyle {
     TResult Function(String to, String message, String from)?
         changeSelectedMessage,
     TResult Function(Uint8List? signature)? changeSignature,
+    TResult Function(String? signatureLink)? changeSignatureLink,
+    TResult Function(String? videoLink)? changeVideoLink,
     TResult Function(String link)? changeLink,
     TResult Function(int index)? changeSelectedTypingStyle,
     required TResult orElse(),
@@ -1305,6 +1781,8 @@ class _$ChangeSelectedTypingStyleImpl implements ChangeSelectedTypingStyle {
     required TResult Function(ChangeSelectedMessage value)
         changeSelectedMessage,
     required TResult Function(ChangeSignature value) changeSignature,
+    required TResult Function(ChangeSignatureLink value) changeSignatureLink,
+    required TResult Function(ChangeVideoLink value) changeVideoLink,
     required TResult Function(ChangeLink value) changeLink,
     required TResult Function(ChangeSelectedTypingStyle value)
         changeSelectedTypingStyle,
@@ -1320,6 +1798,8 @@ class _$ChangeSelectedTypingStyleImpl implements ChangeSelectedTypingStyle {
     TResult? Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
     TResult? Function(ChangeSelectedMessage value)? changeSelectedMessage,
     TResult? Function(ChangeSignature value)? changeSignature,
+    TResult? Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult? Function(ChangeVideoLink value)? changeVideoLink,
     TResult? Function(ChangeLink value)? changeLink,
     TResult? Function(ChangeSelectedTypingStyle value)?
         changeSelectedTypingStyle,
@@ -1335,6 +1815,8 @@ class _$ChangeSelectedTypingStyleImpl implements ChangeSelectedTypingStyle {
     TResult Function(ChangeSelectedCardIndex value)? changeSelectedCardIndex,
     TResult Function(ChangeSelectedMessage value)? changeSelectedMessage,
     TResult Function(ChangeSignature value)? changeSignature,
+    TResult Function(ChangeSignatureLink value)? changeSignatureLink,
+    TResult Function(ChangeVideoLink value)? changeVideoLink,
     TResult Function(ChangeLink value)? changeLink,
     TResult Function(ChangeSelectedTypingStyle value)?
         changeSelectedTypingStyle,

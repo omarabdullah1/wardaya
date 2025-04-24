@@ -6,20 +6,6 @@ part of 'home_category_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-HomeCategoryResponse _$HomeCategoryResponseFromJson(
-        Map<String, dynamic> json) =>
-    HomeCategoryResponse(
-      categories: (json['categories'] as List<dynamic>)
-          .map((e) => Category.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$HomeCategoryResponseToJson(
-        HomeCategoryResponse instance) =>
-    <String, dynamic>{
-      'categories': instance.categories,
-    };
-
 Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
       id: json['_id'] as String,
       name: json['name'] as String,
@@ -158,32 +144,16 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'bundleItems': instance.bundleItems,
     };
 
-Price _$PriceFromJson(Map<String, dynamic> json) => Price(
-      total: (json['total'] as num).toInt(),
-      currency: json['currency'] as String,
-    );
-
 Map<String, dynamic> _$PriceToJson(Price instance) => <String, dynamic>{
       'total': instance.total,
       'currency': instance.currency,
     };
-
-Dimensions _$DimensionsFromJson(Map<String, dynamic> json) => Dimensions(
-      width: (json['width'] as num?)?.toInt(),
-      height: (json['height'] as num?)?.toInt(),
-    );
 
 Map<String, dynamic> _$DimensionsToJson(Dimensions instance) =>
     <String, dynamic>{
       'width': instance.width,
       'height': instance.height,
     };
-
-BundleItem _$BundleItemFromJson(Map<String, dynamic> json) => BundleItem(
-      categories: (json['categories'] as List<dynamic>)
-          .map((e) => BundleCategory.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
 
 Map<String, dynamic> _$BundleItemToJson(BundleItem instance) =>
     <String, dynamic>{

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wardaya/core/theming/colors.dart';
+import 'package:wardaya/features/home/data/apis/home_api_constants.dart';
 import 'package:wardaya/features/search/data/models/search_response.dart';
 
 import '../../../../core/assets/assets.dart';
@@ -33,7 +34,8 @@ class ProductItem extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: CachedNetworkImage(
-                  imageUrl: product.images.first,
+                  imageUrl: HomeApiConstants.apiBaseUrlForImages +
+                      product.images.first,
                   height: isGrid ? 110.h : 200.h,
                   width: double.infinity,
                   fit: BoxFit.cover,

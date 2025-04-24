@@ -9,14 +9,8 @@ import '../logic/addToCart/cubit/add_to_cart_cubit.dart';
 import '../logic/addToCart/cubit/add_to_cart_state.dart';
 import '../logic/removeCart/cubit/remove_cart_state.dart';
 
-class CartScreen extends StatefulWidget {
+class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
-  @override
-  State<CartScreen> createState() => _CartScreenState();
-}
-
-class _CartScreenState extends State<CartScreen> {
-  List<String> styles = ['Handwritten', 'Typed'];
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +90,7 @@ class _CartScreenState extends State<CartScreen> {
             );
           },
           builder: (context, state) {
-            return CartBuilder(styles: styles);
+            return const CartBuilder();
           },
         );
       },

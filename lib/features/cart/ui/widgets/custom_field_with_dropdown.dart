@@ -136,19 +136,26 @@ class _CustomTextFieldWithDropdownState
                           );
                         }).toList(),
                         onChanged: (String? newValue) {
-                          setState(
-                            () {
+                          if (newValue != _selectedValue) {
+                            // Update local state
+                            setState(() {
                               _selectedValue = newValue;
-                              final cartCubit = BlocProvider.of<CartCubit>(
-                                  widget.cartContext,
-                                  listen: false);
+                            });
+
+                            // Update the cubit state separately after UI update
+                            final cartCubit = BlocProvider.of<CartCubit>(
+                                widget.cartContext,
+                                listen: false);
+
+                            // Use Future.microtask to run after the current frame is complete
+                            Future.microtask(() {
                               cartCubit.setSelectingType(
                                 widget.dropdownItems.indexOf(
                                     newValue ?? widget.dropdownItems.first),
                               );
                               log(cartCubit.selectedTypingStyle.toString());
-                            },
-                          );
+                            });
+                          }
                         },
                         icon: const Icon(Icons.keyboard_arrow_down),
                         underline: const SizedBox(),

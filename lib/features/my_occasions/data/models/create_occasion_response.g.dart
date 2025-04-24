@@ -6,27 +6,12 @@ part of 'create_occasion_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserOccasion _$UserOccasionFromJson(Map<String, dynamic> json) => UserOccasion(
-      id: json['_id'] as String,
-      name: json['name'] as String,
-      date: DateTime.parse(json['date'] as String),
-      version: (json['__v'] as num).toInt(),
-    );
-
-Map<String, dynamic> _$UserOccasionToJson(UserOccasion instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'name': instance.name,
-      'date': instance.date.toIso8601String(),
-      '__v': instance.version,
-    };
-
 CreateOccasionResponse _$CreateOccasionResponseFromJson(
         Map<String, dynamic> json) =>
     CreateOccasionResponse(
       message: json['message'] as String,
       userOccasion:
-          UserOccasion.fromJson(json['userOccasion'] as Map<String, dynamic>),
+          MyOccasionItem.fromJson(json['userOccasion'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$CreateOccasionResponseToJson(
@@ -34,4 +19,18 @@ Map<String, dynamic> _$CreateOccasionResponseToJson(
     <String, dynamic>{
       'message': instance.message,
       'userOccasion': instance.userOccasion,
+    };
+
+CreateOccasionRequest _$CreateOccasionRequestFromJson(
+        Map<String, dynamic> json) =>
+    CreateOccasionRequest(
+      name: json['name'] as String,
+      date: json['date'] as String,
+    );
+
+Map<String, dynamic> _$CreateOccasionRequestToJson(
+        CreateOccasionRequest instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'date': instance.date,
     };

@@ -3,20 +3,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
+import 'package:wardaya/core/widgets/loading_widget.dart';
 import '../logic/cubit/cart_cubit.dart';
+import '../logic/giftCards/gift_cards_cubit.dart';
+import '../logic/giftCards/gift_cards_state.dart';
 import 'widgets/add_message_tab.dart';
 import 'widgets/preview_bottom_sheet.dart';
 import 'widgets/select_card_tab.dart';
 
 class CustomizeGiftCardScreen extends StatefulWidget {
   final int initialTabIndex;
-  final BuildContext cartContext;
+  final BuildContext parentContext;
   const CustomizeGiftCardScreen({
     super.key,
     this.initialTabIndex = 0,
-    required this.cartContext,
+    required this.parentContext,
   });
 
   @override
@@ -57,8 +61,10 @@ class _CustomizeGiftCardScreenState extends State<CustomizeGiftCardScreen>
   }
 
   void _saveAndContinue() {
-    final cartCubit = widget.cartContext.read<CartCubit>();
-    cartCubit.setSelectedCard(selectedCardIndex);
+    final cartCubit = widget.parentContext.read<CartCubit>();
+    cartCubit.setSelectedCard(
+      selectedCardIndex,
+    );
     cartCubit.setMessageData(
       to: cartCubit.toController.text,
       message: cartCubit.messageController.text,
@@ -68,18 +74,22 @@ class _CustomizeGiftCardScreenState extends State<CustomizeGiftCardScreen>
   }
 
   void _showPreview() {
-    final cartCubit = widget.cartContext.read<CartCubit>();
+    final cartCubit = widget.parentContext.read<CartCubit>();
+    final giftCard = widget.parentContext.read<GiftCardsCubit>();
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       builder: (_) => BlocProvider.value(
         value: cartCubit,
-        child: SizedBox(
-          height: 450.h,
-          child: PreviewBottomSheet(
-            selectedCardIndex: selectedCardIndex,
-            cartContext: context,
-            pageController: _pageController,
+        child: BlocProvider.value(
+          value: giftCard,
+          child: SizedBox(
+            height: 450.h,
+            child: PreviewBottomSheet(
+              selectedCardIndex: selectedCardIndex,
+              cartContext: context,
+              pageController: _pageController,
+            ),
           ),
         ),
       ),
@@ -131,18 +141,90 @@ class _CustomizeGiftCardScreenState extends State<CustomizeGiftCardScreen>
             child: TabBarView(
               controller: _tabController,
               children: [
-                // Extracted SelectCardTab widget:
-                SelectCardTab(
-                  selectedCardIndex: selectedCardIndex,
-                  onCardSelected: (index) =>
-                      setState(() => selectedCardIndex = index),
+                // Gift cards builder with loading and error states
+                BlocConsumer<GiftCardsCubit, GiftCardsState>(
+                  listener: (context, state) {
+                    state.maybeWhen(
+                      loading: () {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => const LoadingWidget(
+                              loadingState: true,
+                            ),
+                          );
+                        });
+                      },
+                      loaded: (_) {
+                        // Navigator.of(context).pop();
+                      },
+                      error: (message) {
+                        Navigator.of(context)
+                            .popUntil((route) => route.isFirst);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              message,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      },
+                      orElse: () {},
+                    );
+                  },
+                  builder: (context, state) {
+                    return state.when(
+                      initial: () => const SizedBox.shrink(),
+                      loading: () => Skeletonizer(
+                        enabled: true,
+                        child: ListView.builder(
+                          itemCount: 3,
+                          itemBuilder: (_, index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(vertical: 8.h),
+                              child: Container(
+                                height: 300.h,
+                                decoration: BoxDecoration(
+                                  color: ColorsManager.white,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      loaded: (giftCards) => SelectCardTab(
+                        selectedCardIndex: selectedCardIndex,
+                        onCardSelected: (index) {
+                          // Update local state first
+                          setState(() => selectedCardIndex = index);
+
+                          // Don't call setSelectedCard here - we'll save all changes when "Save and Continue" is pressed
+                          // This was causing the screen to close prematurely
+                        },
+                        giftCards: giftCards,
+                      ),
+                      error: (message) => Center(
+                        child: Text(
+                          message,
+                          style: GoogleFonts.inter(
+                            color: ColorsManager.mainRose,
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 // Extracted AddMessageTab widget:
                 AddMessageTab(
                   isSignatureSelected: isSignatureSelected,
                   onSignatureToggle: () => setState(
                       () => isSignatureSelected = !isSignatureSelected),
-                  cartContext: widget.cartContext,
+                  cartContext: widget.parentContext,
                 ),
               ],
             ),

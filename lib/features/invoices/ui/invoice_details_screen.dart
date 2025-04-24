@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:localization/localization.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:wardaya/core/assets/assets.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/helpers/spacing.dart';
@@ -271,30 +272,53 @@ class InvoiceDetailsScreen extends StatelessWidget {
                         VerticalSpace(
                           height: 8.h,
                         ),
-                        Center(
-                          child: CachedNetworkImage(
-                            imageUrl: !giftCardInfo.qrImageUrl.isNullOrEmpty()
-                                ? InvoicesApiConstants.apiBaseUrlForImages +
-                                    giftCardInfo.qrImageUrl!
-                                : (giftCardInfo.link ?? ''),
-                            height: 80.h,
-                            width: double.infinity,
-                            fit: BoxFit.contain,
-                            placeholder: (context, url) => const Center(
-                              child: CircularProgressIndicator(
-                                color: ColorsManager.mainRose,
-                              ),
-                            ),
-                            errorWidget: (context, url, error) =>
-                                SvgPicture.asset(
-                              Assets.of(context).svgs.small_logo_svg,
-                              height: 60.h,
-                              width: 60.w,
-                              colorFilter: const ColorFilter.mode(
-                                Colors.grey,
-                                BlendMode.srcIn,
-                              ),
-                            ),
+                        // Center(
+                        // child: CachedNetworkImage(
+                        //   imageUrl: InvoicesApiConstants.apiBaseUrlForImages +
+                        //       giftCardInfo.template.,
+                        //   height: 80.h,
+                        //   width: double.infinity,
+                        //   fit: BoxFit.contain,
+                        //   placeholder: (context, url) => const Center(
+                        //     child: CircularProgressIndicator(
+                        //       color: ColorsManager.mainRose,
+                        //     ),
+                        //   ),
+                        //   errorWidget: (context, url, error) =>
+                        //       SvgPicture.asset(
+                        //     Assets.of(context).svgs.small_logo_svg,
+                        //     height: 60.h,
+                        //     width: 60.w,
+                        //     colorFilter: const ColorFilter.mode(
+                        //       Colors.grey,
+                        //       BlendMode.srcIn,
+                        //     ),
+                        //   ),
+                        // ),
+                        // ),
+                        Container(
+                          height: 80.h,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: ColorsManager.white,
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 80.h,
+                                width: 80.w,
+                                decoration: BoxDecoration(
+                                  color: ColorsManager.white,
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                child: QrImageView(
+                                    data:
+                                        !giftCardInfo.qrImageUrl.isNullOrEmpty()
+                                            ? giftCardInfo.qrImageUrl!
+                                            : (giftCardInfo.link ?? '')),
+                              )
+                            ],
                           ),
                         ),
                       ],

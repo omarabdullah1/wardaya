@@ -15,9 +15,8 @@ class NewAddressButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-      
         final result = await context.pushNamed(
-          Routes.recipientDetailsScreen,
+          Routes.createRecipientDetailsScreen,
         );
 
         if (result == true) {

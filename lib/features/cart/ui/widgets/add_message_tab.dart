@@ -9,10 +9,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:localization/localization.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
+import 'package:wardaya/features/cart/logic/giftCards/gift_cards_cubit.dart';
 import 'package:wardaya/features/cart/ui/widgets/previewer.dart';
 
 import '../../../../core/assets/assets.dart';
+import '../../data/apis/cart_api_constants.dart';
 import '../../logic/cubit/cart_cubit.dart';
+import '../../logic/giftCards/gift_cards_state.dart';
 import 'past_link_buttom_sheet.dart';
 import 'signature_bottom_sheet.dart';
 import 'suggested_messages_bottom_sheet.dart'; // Import
@@ -68,30 +71,36 @@ class _AddMessageTabState extends State<AddMessageTab> {
                     SizedBox(height: 16.h),
                     _buildMessageField(context),
                     SizedBox(height: 16.h),
-                    Text.rich(
-                      TextSpan(
-                        text: context.el.suggestedMessagesPromptPart1,
-                        style: GoogleFonts.inter(
-                          color: ColorsManager.lighterLightGrey,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        children: [
+                    BlocBuilder<GiftCardsCubit, GiftCardsState>(
+                      builder: (context, state) {
+                        return Text.rich(
                           TextSpan(
-                            text: context.el.suggestedMessagesPromptPart2,
+                            text: context.el.suggestedMessagesPromptPart1,
                             style: GoogleFonts.inter(
-                              color: ColorsManager.mainRose,
+                              color: ColorsManager.lighterLightGrey,
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w400,
                             ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                // Show the suggested messages bottom sheet
-                                _showSuggestedMessagesBottomSheet(context);
-                              },
+                            children: [
+                              TextSpan(
+                                text: context.el.suggestedMessagesPromptPart2,
+                                style: GoogleFonts.inter(
+                                  color: ColorsManager.mainRose,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    // Show the suggested messages bottom sheet
+                                    return _showSuggestedMessagesBottomSheet(
+                                      context,
+                                    );
+                                  },
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        );
+                      },
                     ),
                     SizedBox(height: 16.h),
 
@@ -174,8 +183,172 @@ class _AddMessageTabState extends State<AddMessageTab> {
                 ),
               ),
               const Divider(color: ColorsManager.lighterLightGrey),
-              !context.read<CartCubit>().linkController.text.isNullOrEmpty()
-                  ? Padding(
+              context.read<CartCubit>().videoLink.isNullOrEmpty()
+                  ? !context
+                          .read<CartCubit>()
+                          .linkController
+                          .text
+                          .isNullOrEmpty()
+                      ? Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 80.w,
+                                height: 65.h,
+                                decoration: BoxDecoration(
+                                  color: ColorsManager.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: LinkPreviewGenerator(
+                                  url: context
+                                      .read<CartCubit>()
+                                      .linkController
+                                      .text,
+                                ),
+                              ),
+                              SizedBox(width: 10.w),
+                              FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: SizedBox(
+                                  width: context.screenWidth * 0.4.w,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        context
+                                            .read<CartCubit>()
+                                            .linkController
+                                            .text,
+                                        style: GoogleFonts.inter(
+                                          color: ColorsManager.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16.sp,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      Text(
+                                        context.el.qrCodeLabel,
+                                        style: GoogleFonts.inter(
+                                          color: ColorsManager.lightGrey,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 10.sp,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const Spacer(),
+                              Padding(
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: 16.0.w),
+                                child: InkWell(
+                                  onTap: () {
+                                    context.read<CartCubit>().setLink(link: '');
+                                  },
+                                  child: SvgPicture.asset(
+                                    Assets.of(context).svgs.remove_svg,
+                                    colorFilter: const ColorFilter.mode(
+                                      ColorsManager.lightGrey,
+                                      BlendMode.srcIn,
+                                    ),
+                                    height: 20.0.h,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Row(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    isScrollControlled:
+                                        true, // Allows the bottom sheet to take up more of the screen if needed
+                                    builder: (_) {
+                                      return SizedBox(
+                                        height: 450.h,
+                                        child: PasteLinkBottomSheet(
+                                          cartContext: widget.cartContext,
+                                          initialTabIndex: 0,
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                                child: Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      Assets.of(context).svgs.video_svg,
+                                      height: 15.h,
+                                    ),
+                                    SizedBox(width: 10.w),
+                                    Text(
+                                      context.el.recordVideoButton,
+                                      style: GoogleFonts.inter(
+                                        color: ColorsManager.mainRose,
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const Spacer(),
+                              Text(
+                                context.el.orLabel,
+                                style: GoogleFonts.inter(
+                                  color: ColorsManager.lighterLightGrey,
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              const Spacer(),
+                              InkWell(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    isScrollControlled:
+                                        true, // Allows the bottom sheet to take up more of the screen if needed
+                                    builder: (_) {
+                                      return SizedBox(
+                                        height: 450.h,
+                                        child: PasteLinkBottomSheet(
+                                          cartContext: widget.cartContext,
+                                          initialTabIndex: 1,
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                                child: Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      Assets.of(context).svgs.link_svg,
+                                      height: 15.h,
+                                    ),
+                                    SizedBox(width: 10.w),
+                                    Text(
+                                      context.el.pasteLinkButton,
+                                      style: GoogleFonts.inter(
+                                        color: ColorsManager.mainRose,
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                  : Padding(
                       padding: const EdgeInsets.all(8),
                       child: Row(
                         children: [
@@ -187,8 +360,8 @@ class _AddMessageTabState extends State<AddMessageTab> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: LinkPreviewGenerator(
-                              url:
-                                  context.read<CartCubit>().linkController.text,
+                              url: CartApiConstants.apiBaseUrlForImages +
+                                  (context.read<CartCubit>().videoLink ?? ''),
                             ),
                           ),
                           SizedBox(width: 10.w),
@@ -200,10 +373,9 @@ class _AddMessageTabState extends State<AddMessageTab> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    context
-                                        .read<CartCubit>()
-                                        .linkController
-                                        .text,
+                                    CartApiConstants.apiBaseUrlForImages +
+                                        (context.read<CartCubit>().videoLink ??
+                                            ''),
                                     style: GoogleFonts.inter(
                                       color: ColorsManager.black,
                                       fontWeight: FontWeight.bold,
@@ -228,7 +400,10 @@ class _AddMessageTabState extends State<AddMessageTab> {
                             padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                             child: InkWell(
                               onTap: () {
-                                context.read<CartCubit>().setLink(link: '');
+                                // log('Video link: ${context.read<CartCubit>().videoLink}');
+                                context
+                                    .read<CartCubit>()
+                                    .setVideoLink(videoLink: '');
                               },
                               child: SvgPicture.asset(
                                 Assets.of(context).svgs.remove_svg,
@@ -238,93 +413,6 @@ class _AddMessageTabState extends State<AddMessageTab> {
                                 ),
                                 height: 20.0.h,
                               ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Row(
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              showModalBottomSheet(
-                                context: context,
-                                isScrollControlled:
-                                    true, // Allows the bottom sheet to take up more of the screen if needed
-                                builder: (_) {
-                                  return SizedBox(
-                                    height: 450.h,
-                                    child: PasteLinkBottomSheet(
-                                      cartContext: widget.cartContext,
-                                      initialTabIndex: 0,
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                            child: Row(
-                              children: [
-                                SvgPicture.asset(
-                                  Assets.of(context).svgs.video_svg,
-                                  height: 15.h,
-                                ),
-                                SizedBox(width: 10.w),
-                                Text(
-                                  context.el.recordVideoButton,
-                                  style: GoogleFonts.inter(
-                                    color: ColorsManager.mainRose,
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Spacer(),
-                          Text(
-                            context.el.orLabel,
-                            style: GoogleFonts.inter(
-                              color: ColorsManager.lighterLightGrey,
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          const Spacer(),
-                          InkWell(
-                            onTap: () {
-                              showModalBottomSheet(
-                                context: context,
-                                isScrollControlled:
-                                    true, // Allows the bottom sheet to take up more of the screen if needed
-                                builder: (_) {
-                                  return SizedBox(
-                                    height: 450.h,
-                                    child: PasteLinkBottomSheet(
-                                      cartContext: widget.cartContext,
-                                      initialTabIndex: 1,
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                            child: Row(
-                              children: [
-                                SvgPicture.asset(
-                                  Assets.of(context).svgs.link_svg,
-                                  height: 15.h,
-                                ),
-                                SizedBox(width: 10.w),
-                                Text(
-                                  context.el.pasteLinkButton,
-                                  style: GoogleFonts.inter(
-                                    color: ColorsManager.mainRose,
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ],
                             ),
                           ),
                         ],
@@ -389,9 +477,9 @@ class _AddMessageTabState extends State<AddMessageTab> {
                     ),
                     onChanged: (value) {
                       context.read<CartCubit>().setMessageData(
-                            to: label == context.el.fromLabel
-                                ? context.read<CartCubit>().toController.text
-                                : value,
+                            to: label == context.el.toLabel
+                                ? value
+                                : context.read<CartCubit>().toController.text,
                             message: context
                                 .read<CartCubit>()
                                 .messageController
@@ -399,6 +487,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                             from: label == context.el.fromLabel
                                 ? value
                                 : context.read<CartCubit>().fromController.text,
+                            shouldEmit: false,
                           );
                     },
                     style: (label == context.el.fromLabel &&
@@ -460,6 +549,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                       to: context.read<CartCubit>().toController.text,
                       message: value,
                       from: context.read<CartCubit>().fromController.text,
+                      shouldEmit: false,
                     );
               },
             ),
@@ -501,18 +591,48 @@ class _AddMessageTabState extends State<AddMessageTab> {
   }
 
   void _showSuggestedMessagesBottomSheet(BuildContext context) {
+    // Get the GiftCardsCubit and CartCubit from the widget's cartContext where they're provided
+    final giftCardsCubit = widget.cartContext.read<GiftCardsCubit>();
+    final cartCubit = context.read<CartCubit>();
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      builder: (_) => SizedBox(
-        height: 450.h,
-        child: SuggestedMessagesBottomSheet(
-          onMessageSelected: (String message) {
-            final cubit = context.read<CartCubit>();
-            cubit.setMessageData(
-              to: cubit.to,
-              message: message,
-              from: cubit.from,
+      // Use MultiBlocProvider to provide both cubits
+      builder: (_) => MultiBlocProvider(
+        providers: [
+          BlocProvider.value(value: giftCardsCubit),
+          BlocProvider.value(value: cartCubit),
+        ],
+        child: BlocBuilder<GiftCardsCubit, GiftCardsState>(
+          builder: (context, state) {
+            final cartCubit = context.read<CartCubit>();
+
+            return SizedBox(
+              height: 450.h,
+              child: SuggestedMessagesBottomSheet(
+                messages: state.maybeWhen(
+                  orElse: () => [],
+                  loaded: (data) =>
+                      data[cartCubit.selectedCardIndex].suggestedMessages,
+                ),
+                occassions: state.maybeWhen(
+                  orElse: () => [],
+                  loaded: (data) => data[cartCubit.selectedCardIndex]
+                      .occasions
+                      .map((e) => e.name)
+                      .toList(),
+                ),
+                onMessageSelected: (String message) {
+                  final cubit = context.read<CartCubit>();
+                  cubit.setMessageData(
+                    to: cubit.to,
+                    message: message,
+                    from: cubit.from,
+                    shouldEmit: false,
+                  );
+                },
+              ),
             );
           },
         ),

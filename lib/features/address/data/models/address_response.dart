@@ -20,11 +20,24 @@ class AddressResponse {
 }
 
 @JsonSerializable()
+class CreateAddressResponse {
+  final String message;
+  final Address address;
+
+  CreateAddressResponse({required this.message, required this.address});
+
+  factory CreateAddressResponse.fromJson(Map<String, dynamic> json) =>
+      _$CreateAddressResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CreateAddressResponseToJson(this);
+}
+
+@JsonSerializable()
 class Address {
   @JsonKey(name: '_id')
   final String id;
   final String userId;
-  final String title;
+  final String? title; // Changed to nullable
   @JsonKey(defaultValue: '')
   final String recipientArea;
   @JsonKey(defaultValue: '')
@@ -44,7 +57,7 @@ class Address {
   Address({
     required this.id,
     required this.userId,
-    required this.title,
+    this.title, // Changed to optional
     required this.recipientArea,
     required this.recipientAddress,
     required this.extraAddressDetails,

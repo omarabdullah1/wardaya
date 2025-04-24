@@ -27,14 +27,15 @@ class SubscriptionDurationCubit extends Cubit<SubscriptionDurationState> {
         emit(SubscriptionDurationState.success(data));
       }, failure: (error) {
         log('Error fetching subscription durations: ${error.message}');
-        emit(
-            SubscriptionDurationState.error(error.message ?? 'Unknown error occurred'));
+        emit(SubscriptionDurationState.error(
+            error.message ?? 'Unknown error occurred'));
       });
     } catch (e) {
       if (isClosed) return; // Check again after exception
 
       log('Exception in emitGetSubscriptionDurations: $e');
-      emit(const SubscriptionDurationState.error('An unexpected error occurred'));
+      emit(const SubscriptionDurationState.error(
+          'An unexpected error occurred'));
     }
   }
 

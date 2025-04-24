@@ -14,7 +14,7 @@ class InvoicesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsManager.offWhite,
-      appBar: AppAppBar(title: context.el.invoices ?? 'Invoices'),
+      appBar: AppAppBar(title: context.el.invoices),
       body: SafeArea(
         child: RefreshIndicator(
           color: ColorsManager.mainRose,

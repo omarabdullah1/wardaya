@@ -82,7 +82,7 @@ class MyOrdersCubit extends Cubit<MyOrdersState> {
       );
     } catch (e) {
       currentPage--;
-      emit(MyOrdersState.error('Failed to load more orders'));
+      emit(const MyOrdersState.error('Failed to load more orders'));
     } finally {
       isLoadingMore = false;
     }

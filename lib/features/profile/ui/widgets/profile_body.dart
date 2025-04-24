@@ -48,10 +48,16 @@ class ProfileBody extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      context.pushNamedWithCubit(
+                      Navigator.of(context).pushNamed(
                         Routes.editProfileScreen,
-                        context.read<ProfileCubit>(),
-                      );
+                        arguments: {'cubit': context.read<ProfileCubit>()},
+                      ).then((result) {
+                        if (result == true) {
+                          if (context.mounted) {
+                            context.read<ProfileCubit>().getProfile(context);
+                          }
+                        }
+                      });
                     },
                     child: Row(
                       children: [
@@ -304,22 +310,26 @@ class ProfileBody extends StatelessWidget {
                         SharedPrefKeys.userToken);
                     SharedPrefHelper.removeSecuredString(
                         SharedPrefKeys.userAreaId);
+                    SharedPrefHelper.removeSecuredString(SharedPrefKeys.userID);
                     context.pushNamedAndRemoveUntil(
                       Routes.loginScreen,
                       predicate: (route) => false,
                     );
                   },
                 ),
-                const Divider(
-                  color: ColorsManager.lightGrey,
-                  height: 0.0,
-                ),
-                _buildOptionRow(
-                  context,
-                  context.el.deleteAccount,
-                  Assets.of(context).svgs.delete_account_svg,
-                  color: ColorsManager.red,
-                ),
+                // const Divider(
+                //   color: ColorsManager.lightGrey,
+                //   height: 0.0,
+                // ),
+                // _buildOptionRow(
+                //   context,
+                //   context.el.deleteAccount,
+                //   Assets.of(context).svgs.delete_account_svg,
+                //   color: ColorsManager.red,
+                //   onTap: () {
+                //     _showDeleteAccountConfirmationDialog(context);
+                //   },
+                // ),
               ],
             ),
           ),

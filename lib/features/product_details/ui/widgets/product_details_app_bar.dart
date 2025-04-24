@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wardaya/core/assets/assets.dart';
 import 'package:wardaya/core/theming/colors.dart';
+import 'package:wardaya/core/helpers/share_service.dart';
 import 'package:wardaya/features/favorites/logic/cubit/favorites_cubit.dart';
 import 'package:wardaya/features/favorites/logic/cubit/favorites_state.dart';
 import 'package:wardaya/features/search/data/models/search_response.dart';
@@ -99,8 +101,12 @@ class ProductDetailsAppBar extends StatelessWidget
                   height: 12.h,
                 ),
                 () {
-                  // Handle share action
-                  // print('share action');
+                  // Use the fixed ShareService to copy product link to clipboard
+                  ShareService().shareProduct(
+                    context,
+                    productId: product.id,
+                    productTitle: product.title,
+                  );
                 },
               ),
             ],

@@ -59,11 +59,28 @@ class RegisterCubit extends Cubit<RegisterState> {
         gender: 'Male',
       ),
     );
+
+    log('Registration API response: $response');
+
     response.when(success: (registerResponse) {
-      emit(RegisterState.success(registerResponse));
+      // Check if there's an error message in the response despite a "success" HTTP status
+      if (registerResponse.error != null &&
+          registerResponse.error!.isNotEmpty) {
+        log('Registration error from response: ${registerResponse.error}');
+        emit(RegisterState.error(error: registerResponse.error ?? ''));
+      } else {
+        log('Registration success: $registerResponse');
+        emit(RegisterState.success(registerResponse));
+      }
     }, failure: (error) {
-      log('message: ${error.error}');
-      emit(RegisterState.error(error: error.error ?? ''));
+      log('Registration failure: ${error.error} - ${error.message}');
+      // Use error.error if available, otherwise fall back to error.message
+      final errorMessage = error.error?.isNotEmpty == true
+          ? error.error!
+          : (error.message?.isNotEmpty == true
+              ? error.message!
+              : 'Registration failed');
+      emit(RegisterState.error(error: errorMessage));
     });
   }
 

@@ -6,18 +6,6 @@ part of 'get_cart_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetCartResponse _$GetCartResponseFromJson(Map<String, dynamic> json) =>
-    GetCartResponse(
-      items: (json['items'] as List<dynamic>)
-          .map((e) => GetCartItem.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$GetCartResponseToJson(GetCartResponse instance) =>
-    <String, dynamic>{
-      'items': instance.items,
-    };
-
 GetCartItem _$GetCartItemFromJson(Map<String, dynamic> json) => GetCartItem(
       product: Product.fromJson(json['product'] as Map<String, dynamic>),
       quantity: (json['quantity'] as num).toInt(),

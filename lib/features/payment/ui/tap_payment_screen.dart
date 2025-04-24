@@ -1,39 +1,34 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
-import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
+
+import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/widgets/app_app_bar.dart';
+import 'package:wardaya/features/cart/logic/getCart/cubit/get_cart_cubit.dart';
 
 import '../../../core/routing/routes.dart';
 import '../../../core/widgets/loading_widget.dart';
 
 class TapPaymentScreen extends StatefulWidget {
   final double amount;
-  final String orderId;
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String phoneNumber;
-  final String countryCode;
+  // final String orderId;
   final String? paymentMethod;
   final String? redirectUrl; // Add redirectUrl parameter
+  final GetCartCubit? cartCubit;
 
   const TapPaymentScreen({
     super.key,
     required this.amount,
-    required this.orderId,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    this.phoneNumber = "",
-    this.countryCode = "+966",
+    // required this.orderId,
     this.paymentMethod,
-    this.redirectUrl, // Add to constructor
+    this.redirectUrl,
+    this.cartCubit, // Add to constructor
   });
 
   @override
@@ -158,6 +153,7 @@ class _TapPaymentScreenState extends State<TapPaymentScreen> {
           TextButton(
             onPressed: () {
               context.pushReplacementNamed(Routes.homeLayout);
+              widget.cartCubit?.getCart();
             },
             child: Text(context.el.paymentOkButton),
           ),

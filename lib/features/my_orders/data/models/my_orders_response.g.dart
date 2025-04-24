@@ -76,16 +76,6 @@ Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'customStatusSort': instance.customStatusSort,
     };
 
-OrderProduct _$OrderProductFromJson(Map<String, dynamic> json) => OrderProduct(
-      productId: json['productId'] == null
-          ? null
-          : Product.fromJson(json['productId'] as Map<String, dynamic>),
-      quantity: (json['quantity'] as num?)?.toInt() ?? 1,
-      price: json['price'] as num? ?? 0,
-      id: json['_id'] as String? ?? '',
-      bundleItems: json['bundleItems'] as List<dynamic>? ?? [],
-    );
-
 Map<String, dynamic> _$OrderProductToJson(OrderProduct instance) =>
     <String, dynamic>{
       'productId': instance.productId?.toJson(),

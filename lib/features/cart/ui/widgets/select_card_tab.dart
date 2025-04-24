@@ -2,27 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wardaya/core/theming/colors.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../logic/cubit/cart_cubit.dart';
+import 'package:wardaya/features/cart/data/models/get_gift_cards_response.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:wardaya/features/cart/data/apis/cart_api_constants.dart';
 
 class SelectCardTab extends StatelessWidget {
   final int selectedCardIndex;
   final ValueChanged<int> onCardSelected;
+  final List<GiftCardTemplate> giftCards;
 
   const SelectCardTab({
     super.key,
     required this.selectedCardIndex,
     required this.onCardSelected,
+    required this.giftCards,
   });
 
   @override
   Widget build(BuildContext context) {
-    final cards = context.read<CartCubit>().cards;
     return ListView.builder(
-      itemCount: cards(context).length,
+      itemCount: giftCards.length,
       itemBuilder: (_, index) {
-        final card = cards(context)[index];
+        final card = giftCards[index];
         return Padding(
           padding: EdgeInsets.symmetric(vertical: 8.h),
           child: Container(
@@ -43,11 +44,24 @@ class SelectCardTab extends StatelessWidget {
                   onTap: () => onCardSelected(index),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      card['image'],
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          CartApiConstants.apiBaseUrlForImages + card.image,
                       fit: BoxFit.cover,
                       width: double.infinity,
                       height: 300.h,
+                      placeholder: (context, url) => Container(
+                        color: ColorsManager.lighterGrey,
+                        child: const Center(
+                          child: CircularProgressIndicator(
+                            color: ColorsManager.mainRose,
+                          ),
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Container(
+                        color: ColorsManager.lighterGrey,
+                        child: const Icon(Icons.error),
+                      ),
                     ),
                   ),
                 ),
@@ -68,7 +82,7 @@ class SelectCardTab extends StatelessWidget {
                             MainAxisSize.min, // Essential for fitting content
                         children: [
                           Text(
-                            card['title'],
+                            card.name,
                             style: GoogleFonts.inter(
                               color: ColorsManager.mainRose,
                               fontWeight: FontWeight.w500,
@@ -76,7 +90,7 @@ class SelectCardTab extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            ' | ${card['currency']}${card['price']}',
+                            "  ${card.price.currency} ${card.price.total}",
                             style: GoogleFonts.inter(
                               color: ColorsManager.mainRose,
                               fontWeight: FontWeight.w700,

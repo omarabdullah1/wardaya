@@ -49,12 +49,12 @@ class User {
   final String firstName;
   @JsonKey(name: 'last_name')
   final String lastName;
-  final String gender;
+  final String? gender;
   @JsonKey(name: 'country_code')
-  final String countryCode;
+  final String? countryCode;
   @JsonKey(name: 'birth_date')
-  final String birthDate;
-  final String password;
+  final String? birthDate;
+  final String? password;
   @JsonKey(name: 'is_profile_complete')
   final bool isProfileComplete;
   @JsonKey(name: 'is_blocked')
@@ -86,10 +86,10 @@ class User {
     required this.email,
     required this.firstName,
     required this.lastName,
-    required this.gender,
-    required this.countryCode,
-    required this.birthDate,
-    required this.password,
+    this.gender,
+    this.countryCode,
+    this.birthDate,
+    this.password,
     required this.isProfileComplete,
     required this.isBlocked,
     required this.role,

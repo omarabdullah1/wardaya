@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
+import 'dart:developer';
 
-import '../../../../../core/helpers/extensions.dart';
 import '../../../../../core/theming/colors.dart';
 import '../../../../../core/widgets/loading_widget.dart';
 import '../../../../../core/widgets/styled_toast.dart';
@@ -18,6 +18,7 @@ class RegisterBlocListener extends StatelessWidget {
       listenWhen: (previous, current) =>
           current is Loading || current is RegisterSuccess || current is Error,
       listener: (context, state) {
+        log('RegisterBlocListener state: $state');
         state.whenOrNull(
           loading: () {
             WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -30,12 +31,13 @@ class RegisterBlocListener extends StatelessWidget {
             });
           },
           success: (registerResponse) {
+            log('Register success: $registerResponse');
             WidgetsBinding.instance.addPostFrameCallback((_) {
               Navigator.of(context).popUntil((route) => route.isFirst);
-              context.pop();
             });
           },
           error: (error) {
+            log('Register error: $error');
             setupErrorState(context, error);
           },
         );
@@ -46,7 +48,7 @@ class RegisterBlocListener extends StatelessWidget {
 
   void setupErrorState(BuildContext context, String error) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Navigator.of(context).popUntil((route) => route.isFirst);
+      Navigator.of(context).pop();
       showToastWidget(
         StyledToastWidget(
           message: error,

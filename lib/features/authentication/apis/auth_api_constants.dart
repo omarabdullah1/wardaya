@@ -1,7 +1,9 @@
 class AuthenticationApiConstants {
-  static const String apiBaseUrl = "https://wardaya-tan.vercel.app/";
+  static const String apiBaseUrl = "https://wecareroot.ddns.net:5100/";
 
   static const String login = "api/auth/login";
+  static const String loginGoogle = "api/auth/login-google";
   static const String createAccount = "api/auth/register";
   static const String myProfile = "api/auth/my-profile";
+  static const String delete = "api/users/delete";
 }

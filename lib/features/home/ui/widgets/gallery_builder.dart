@@ -50,12 +50,11 @@ class GalleryBuilder extends StatelessWidget {
                     CachedNetworkImage(
                       imageUrl: HomeApiConstants.apiBaseUrlForImages,
                       fit: BoxFit.cover,
-                      placeholder: (context, url) => Center(
-                        child: LoadingWidget(
-                          loadingState: true,
-                          height: 60.h,
-                          width: 60.w,
-                          backgroundColor: ColorsManager.lightLighterGrey,
+                      placeholder: (context, url) => SvgPicture.asset(
+                        Assets.of(context).svgs.small_logo_svg,
+                        colorFilter: const ColorFilter.mode(
+                          ColorsManager.lightGrey,
+                          BlendMode.srcIn,
                         ),
                       ),
                       errorWidget: (context, url, error) => Center(
@@ -149,11 +148,11 @@ class GalleryBuilder extends StatelessWidget {
                     imageUrl: HomeApiConstants.apiBaseUrlForImages +
                         data[index].imageUrl,
                     fit: BoxFit.cover,
-                    placeholder: (context, url) => Center(
-                      child: LoadingWidget(
-                        loadingState: true,
-                        height: 60.h,
-                        width: 60.w,
+                    placeholder: (context, url) => SvgPicture.asset(
+                      Assets.of(context).svgs.small_logo_svg,
+                      colorFilter: const ColorFilter.mode(
+                        ColorsManager.lightGrey,
+                        BlendMode.srcIn,
                       ),
                     ),
                     errorWidget: (context, url, error) => Center(

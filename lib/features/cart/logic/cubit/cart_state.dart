@@ -14,6 +14,9 @@ class CartState with _$CartState {
       String to, String message, String from) = ChangeSelectedMessage;
   const factory CartState.changeSignature(Uint8List? signature) =
       ChangeSignature;
+  const factory CartState.changeSignatureLink(String? signatureLink) =
+      ChangeSignatureLink;
+  const factory CartState.changeVideoLink(String? videoLink) = ChangeVideoLink;
   const factory CartState.changeLink(String link) = ChangeLink;
   const factory CartState.changeSelectedTypingStyle(int index) =
       ChangeSelectedTypingStyle;

@@ -13,8 +13,6 @@ import 'package:flutter_localizations/flutter_localizations.dart'
     show GlobalMaterialLocalizations;
 import 'package:intl/intl.dart' show Intl;
 
-final RegExp _variableRegExp = RegExp(r'\$\{[^}]+\} ?');
-
 typedef Checker<T> = bool Function(T value);
 
 const String localizationPackageVersion = r'1.0.0';
@@ -106,6 +104,8 @@ class LocalizationMessages {
     required this.currencySar,
     required this.splitPaymentsWithTamara,
     required this.earn,
+    required this.similarProducts,
+    required this.noSimilarProducts,
     required this.cartEmptyTitle,
     required this.cartEmptySubtitle,
     required this.startShoppingButton,
@@ -181,7 +181,6 @@ class LocalizationMessages {
     required this.language,
     required this.faq,
     required this.termsConditions,
-    required this.deleteMyAccount,
     required this.customerCareTitle,
     required this.phoneCall,
     required this.whatsapp,
@@ -189,6 +188,9 @@ class LocalizationMessages {
     required this.english,
     required this.logout,
     required this.deleteAccount,
+    required this.deleteAccountConfirmation,
+    required this.confirm,
+    required this.cancel,
     required this.editProfileTitle,
     required this.saveChangesButton,
     required this.firstNameLabel,
@@ -302,6 +304,8 @@ class LocalizationMessages {
     required this.quickAdd,
     required this.selectAnOccasionToCreateAreminder,
     required this.yourUpcomingOccasion,
+    required this.selectDeliveryDate,
+    required this.deleteMyAccount,
     required this.deliveryFrequency1,
     required this.subscriptionDuration1,
   });
@@ -407,6 +411,8 @@ class LocalizationMessages {
       splitPaymentsWithTamara:
           (json['split_payments_with_tamara'] ?? '').toString(),
       earn: (json['earn'] ?? '').toString(),
+      similarProducts: (json['similarProducts'] ?? '').toString(),
+      noSimilarProducts: (json['noSimilarProducts'] ?? '').toString(),
       cartEmptyTitle: (json['cart_empty_title'] ?? '').toString(),
       cartEmptySubtitle: (json['cart_empty_subtitle'] ?? '').toString(),
       startShoppingButton: (json['start_shopping_button'] ?? '').toString(),
@@ -485,7 +491,6 @@ class LocalizationMessages {
       language: (json['language'] ?? '').toString(),
       faq: (json['faq'] ?? '').toString(),
       termsConditions: (json['terms_conditions'] ?? '').toString(),
-      deleteMyAccount: (json['delete_my_account'] ?? '').toString(),
       customerCareTitle: (json['customer_care_title'] ?? '').toString(),
       phoneCall: (json['phone_call'] ?? '').toString(),
       whatsapp: (json['whatsapp'] ?? '').toString(),
@@ -493,6 +498,10 @@ class LocalizationMessages {
       english: (json['english'] ?? '').toString(),
       logout: (json['logout'] ?? '').toString(),
       deleteAccount: (json['delete_account'] ?? '').toString(),
+      deleteAccountConfirmation:
+          (json['delete_account_confirmation'] ?? '').toString(),
+      confirm: (json['confirm'] ?? '').toString(),
+      cancel: (json['cancel'] ?? '').toString(),
       editProfileTitle: (json['edit_profile_title'] ?? '').toString(),
       saveChangesButton: (json['save_changes_button'] ?? '').toString(),
       firstNameLabel: (json['first_name_label'] ?? '').toString(),
@@ -638,6 +647,8 @@ class LocalizationMessages {
       selectAnOccasionToCreateAreminder:
           (json['selectAnOccasionToCreateAReminder'] ?? '').toString(),
       yourUpcomingOccasion: (json['yourUpcomingOccasion'] ?? '').toString(),
+      selectDeliveryDate: (json['selectDeliveryDate'] ?? '').toString(),
+      deleteMyAccount: (json['delete_my_account'] ?? '').toString(),
       deliveryFrequency1: (json['delivery_frequency'] ?? '').toString(),
       subscriptionDuration1: (json['subscription_duration'] ?? '').toString(),
     );
@@ -719,6 +730,8 @@ class LocalizationMessages {
   final String currencySar;
   final String splitPaymentsWithTamara;
   final String earn;
+  final String similarProducts;
+  final String noSimilarProducts;
   final String cartEmptyTitle;
   final String cartEmptySubtitle;
   final String startShoppingButton;
@@ -794,7 +807,6 @@ class LocalizationMessages {
   final String language;
   final String faq;
   final String termsConditions;
-  final String deleteMyAccount;
   final String customerCareTitle;
   final String phoneCall;
   final String whatsapp;
@@ -802,6 +814,9 @@ class LocalizationMessages {
   final String english;
   final String logout;
   final String deleteAccount;
+  final String deleteAccountConfirmation;
+  final String confirm;
+  final String cancel;
   final String editProfileTitle;
   final String saveChangesButton;
   final String firstNameLabel;
@@ -915,6 +930,8 @@ class LocalizationMessages {
   final String quickAdd;
   final String selectAnOccasionToCreateAreminder;
   final String yourUpcomingOccasion;
+  final String selectDeliveryDate;
+  final String deleteMyAccount;
   final String deliveryFrequency1;
   final String subscriptionDuration1;
   Map<String, Object> get _content => {
@@ -1002,6 +1019,8 @@ class LocalizationMessages {
         r'''currency_sar''': currencySar,
         r'''split_payments_with_tamara''': splitPaymentsWithTamara,
         r'''earn''': earn,
+        r'''similarProducts''': similarProducts,
+        r'''noSimilarProducts''': noSimilarProducts,
         r'''cart_empty_title''': cartEmptyTitle,
         r'''cart_empty_subtitle''': cartEmptySubtitle,
         r'''start_shopping_button''': startShoppingButton,
@@ -1077,7 +1096,6 @@ class LocalizationMessages {
         r'''language''': language,
         r'''faq''': faq,
         r'''terms_conditions''': termsConditions,
-        r'''delete_my_account''': deleteMyAccount,
         r'''customer_care_title''': customerCareTitle,
         r'''phone_call''': phoneCall,
         r'''whatsapp''': whatsapp,
@@ -1085,6 +1103,9 @@ class LocalizationMessages {
         r'''english''': english,
         r'''logout''': logout,
         r'''delete_account''': deleteAccount,
+        r'''delete_account_confirmation''': deleteAccountConfirmation,
+        r'''confirm''': confirm,
+        r'''cancel''': cancel,
         r'''edit_profile_title''': editProfileTitle,
         r'''save_changes_button''': saveChangesButton,
         r'''first_name_label''': firstNameLabel,
@@ -1210,6 +1231,8 @@ class LocalizationMessages {
         r'''selectAnOccasionToCreateAReminder''':
             selectAnOccasionToCreateAreminder,
         r'''yourUpcomingOccasion''': yourUpcomingOccasion,
+        r'''selectDeliveryDate''': selectDeliveryDate,
+        r'''delete_my_account''': deleteMyAccount,
         r'''delivery_frequency''': deliveryFrequency1,
         r'''subscription_duration''': subscriptionDuration1,
       };
@@ -1320,6 +1343,8 @@ final LocalizationMessages en = LocalizationMessages(
   currencySar: 'SAR ',
   splitPaymentsWithTamara: 'Split in up to 4 payments with Tamara',
   earn: 'Earn ',
+  similarProducts: 'Similar Products',
+  noSimilarProducts: 'No similar products found',
   cartEmptyTitle: 'Your Cart is Empty!',
   cartEmptySubtitle: 'Looks like you havn’t added anything to your cart yet.',
   startShoppingButton: 'Start Shopping',
@@ -1396,7 +1421,6 @@ final LocalizationMessages en = LocalizationMessages(
   language: 'Language',
   faq: 'FAQ',
   termsConditions: 'Terms & Conditions',
-  deleteMyAccount: 'Delete My Account',
   customerCareTitle: '''We are happy to help you!
 Need help with something?''',
   phoneCall: 'Phone Call',
@@ -1405,6 +1429,10 @@ Need help with something?''',
   english: 'English',
   logout: 'Logout',
   deleteAccount: 'Delete My Account',
+  deleteAccountConfirmation:
+      'Are you sure you want to delete your account? This action cannot be undone.',
+  confirm: 'Confirm',
+  cancel: 'Cancel',
   editProfileTitle: 'Edit Profile',
   saveChangesButton: 'Save',
   firstNameLabel: 'First Name',
@@ -1524,6 +1552,8 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   quickAdd: 'Quick Add',
   selectAnOccasionToCreateAreminder: 'Select an occasion to create a reminder',
   yourUpcomingOccasion: 'Your Upcoming Occasion',
+  selectDeliveryDate: 'Select Delivery Date',
+  deleteMyAccount: '',
   deliveryFrequency1: '',
   subscriptionDuration1: '',
 );
@@ -1605,6 +1635,8 @@ final LocalizationMessages ar = LocalizationMessages(
   currencySar: 'ر.س. ',
   splitPaymentsWithTamara: 'قسط دفعاتك على 4 دفعات مع تمارا',
   earn: 'اكسب ',
+  similarProducts: 'منتجات مشابهة',
+  noSimilarProducts: 'لا توجد منتجات مشابهة',
   cartEmptyTitle: 'سلة التسوق فارغة!',
   cartEmptySubtitle: 'يبدو أنك لم تضيف أي شيء إلى سلة التسوق بعد.',
   startShoppingButton: 'ابدأ التسوق',
@@ -1680,7 +1712,6 @@ final LocalizationMessages ar = LocalizationMessages(
   language: 'اللغة',
   faq: 'الأسئلة الشائعة',
   termsConditions: 'الشروط والأحكام',
-  deleteMyAccount: 'حذف الحساب',
   customerCareTitle: '''يسعدنا مساعدتك!
 هل تحتاج مساعدة في شيء ما؟''',
   phoneCall: 'مكالمة هاتفية',
@@ -1688,7 +1719,11 @@ final LocalizationMessages ar = LocalizationMessages(
   arabic: 'العربية',
   english: 'الإنجليزية',
   logout: 'تسجيل خروج',
-  deleteAccount: 'تسجيل خروج من الحساب',
+  deleteAccount: 'حذف حسابي',
+  deleteAccountConfirmation:
+      'هل أنت متأكد أنك تريد حذف حسابك؟ هذا الإجراء لا يمكن التراجع عنه.',
+  confirm: 'تأكيد',
+  cancel: 'إلغاء',
   editProfileTitle: 'تعديل الملف الشخصي',
   saveChangesButton: 'حفظ',
   firstNameLabel: 'الاسم الأول',
@@ -1806,6 +1841,8 @@ final LocalizationMessages ar = LocalizationMessages(
   quickAdd: 'إضافة سريعة',
   selectAnOccasionToCreateAreminder: 'اختر مناسبة لإنشاء تذكير',
   yourUpcomingOccasion: 'مناسباتك القادمة',
+  selectDeliveryDate: 'اختر تاريخ التوصيل',
+  deleteMyAccount: 'حذف الحساب',
   deliveryFrequency1: 'تكرار التوصيل',
   subscriptionDuration1: 'مدة الاشتراك',
 );

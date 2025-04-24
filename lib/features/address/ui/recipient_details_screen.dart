@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wardaya/features/address/logic/recipient_details_cubit/recipient_details_cubit.dart';
 import 'package:wardaya/features/address/ui/widgets/recipient_details/recipient_details.dart';
 
+import '../../../core/di/dependency_injection.dart';
 import '../../../core/widgets/app_app_bar.dart';
 import '../data/models/address_response.dart';
 
@@ -19,7 +20,7 @@ class RecipientDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RecipientDetailsCubit(),
+      create: (context) => getIt<RecipientDetailsCubit>(),
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: const AppAppBar(title: 'Recipient Details'),

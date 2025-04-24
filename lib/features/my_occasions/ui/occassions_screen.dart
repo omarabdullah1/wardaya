@@ -22,9 +22,20 @@ class OccasionsScreen extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       backgroundColor: ColorsManager.transparent,
-      builder: (bottomSheetContext) => BlocProvider(
-        create: (context) => getIt<RecipientsCubit>()..getRecipients(),
-        child: ReminderBottomSheet(occasion: occasion),
+      builder: (bottomSheetContext) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<RecipientsCubit>()..getRecipients(),
+          ),
+          BlocProvider.value(
+            value: context.read<MyOccasionsCubit>(),
+          ),
+        ],
+        child: ReminderBottomSheet(
+          occasion: occasion,
+          // Always set isEdit to false when called from quick add section
+          isEdit: false,
+        ),
       ),
     );
   }

@@ -22,20 +22,3 @@ SearchRequestBody _$SearchRequestBodyFromJson(Map<String, dynamic> json) =>
       subMenuItems: json['subMenuItems'] as String?,
       expressDelivery: json['expressDelivery'] as bool?,
     );
-
-Map<String, dynamic> _$SearchRequestBodyToJson(SearchRequestBody instance) =>
-    <String, dynamic>{
-      'limit': instance.limit,
-      'page': instance.page,
-      'category': instance.category,
-      'subCategory': instance.subCategory,
-      'search': instance.search,
-      'brand': instance.brand,
-      'occasion': instance.occasion,
-      'color': instance.color,
-      'recipients': instance.recipients,
-      'bundleTypes': instance.bundleTypes,
-      'priceRange': instance.priceRange,
-      'subMenuItems': instance.subMenuItems,
-      'expressDelivery': instance.expressDelivery,
-    };

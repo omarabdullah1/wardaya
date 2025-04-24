@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'create_occasion_state.dart';
+part of 'video_upload_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,12 +15,12 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$CreateOccasionState {
+mixin _$VideoUploadState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CreateOccasionResponse response) success,
+    required TResult Function(String videoUrl) loaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$CreateOccasionState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CreateOccasionResponse response)? success,
+    TResult? Function(String videoUrl)? loaded,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$CreateOccasionState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CreateOccasionResponse response)? success,
+    TResult Function(String videoUrl)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -44,48 +44,48 @@ mixin _$CreateOccasionState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(Loading value) loading,
-    required TResult Function(Success value) success,
-    required TResult Function(Error value) error,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(Loading value)? loading,
-    TResult? Function(Success value)? success,
-    TResult? Function(Error value)? error,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Success value)? success,
-    TResult Function(Error value)? error,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CreateOccasionStateCopyWith<$Res> {
-  factory $CreateOccasionStateCopyWith(
-          CreateOccasionState value, $Res Function(CreateOccasionState) then) =
-      _$CreateOccasionStateCopyWithImpl<$Res, CreateOccasionState>;
+abstract class $VideoUploadStateCopyWith<$Res> {
+  factory $VideoUploadStateCopyWith(
+          VideoUploadState value, $Res Function(VideoUploadState) then) =
+      _$VideoUploadStateCopyWithImpl<$Res, VideoUploadState>;
 }
 
 /// @nodoc
-class _$CreateOccasionStateCopyWithImpl<$Res, $Val extends CreateOccasionState>
-    implements $CreateOccasionStateCopyWith<$Res> {
-  _$CreateOccasionStateCopyWithImpl(this._value, this._then);
+class _$VideoUploadStateCopyWithImpl<$Res, $Val extends VideoUploadState>
+    implements $VideoUploadStateCopyWith<$Res> {
+  _$VideoUploadStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateOccasionState
+  /// Create a copy of VideoUploadState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -98,13 +98,13 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$CreateOccasionStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$VideoUploadStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateOccasionState
+  /// Create a copy of VideoUploadState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -115,7 +115,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'CreateOccasionState.initial()';
+    return 'VideoUploadState.initial()';
   }
 
   @override
@@ -132,7 +132,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CreateOccasionResponse response) success,
+    required TResult Function(String videoUrl) loaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -143,7 +143,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CreateOccasionResponse response)? success,
+    TResult? Function(String videoUrl)? loaded,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -154,7 +154,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CreateOccasionResponse response)? success,
+    TResult Function(String videoUrl)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -168,9 +168,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(Loading value) loading,
-    required TResult Function(Success value) success,
-    required TResult Function(Error value) error,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Error value) error,
   }) {
     return initial(this);
   }
@@ -179,9 +179,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(Loading value)? loading,
-    TResult? Function(Success value)? success,
-    TResult? Function(Error value)? error,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Error value)? error,
   }) {
     return initial?.call(this);
   }
@@ -190,9 +190,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Success value)? success,
-    TResult Function(Error value)? error,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -202,7 +202,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements CreateOccasionState {
+abstract class _Initial implements VideoUploadState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -215,24 +215,24 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$CreateOccasionStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$VideoUploadStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateOccasionState
+  /// Create a copy of VideoUploadState
   /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$LoadingImpl implements Loading {
+class _$LoadingImpl implements _Loading {
   const _$LoadingImpl();
 
   @override
   String toString() {
-    return 'CreateOccasionState.loading()';
+    return 'VideoUploadState.loading()';
   }
 
   @override
@@ -249,7 +249,7 @@ class _$LoadingImpl implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CreateOccasionResponse response) success,
+    required TResult Function(String videoUrl) loaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -260,7 +260,7 @@ class _$LoadingImpl implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CreateOccasionResponse response)? success,
+    TResult? Function(String videoUrl)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -271,7 +271,7 @@ class _$LoadingImpl implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CreateOccasionResponse response)? success,
+    TResult Function(String videoUrl)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -285,9 +285,9 @@ class _$LoadingImpl implements Loading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(Loading value) loading,
-    required TResult Function(Success value) success,
-    required TResult Function(Error value) error,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Error value) error,
   }) {
     return loading(this);
   }
@@ -296,9 +296,9 @@ class _$LoadingImpl implements Loading {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(Loading value)? loading,
-    TResult? Function(Success value)? success,
-    TResult? Function(Error value)? error,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Error value)? error,
   }) {
     return loading?.call(this);
   }
@@ -307,9 +307,9 @@ class _$LoadingImpl implements Loading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Success value)? success,
-    TResult Function(Error value)? error,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -319,85 +319,85 @@ class _$LoadingImpl implements Loading {
   }
 }
 
-abstract class Loading implements CreateOccasionState {
-  const factory Loading() = _$LoadingImpl;
+abstract class _Loading implements VideoUploadState {
+  const factory _Loading() = _$LoadingImpl;
 }
 
 /// @nodoc
-abstract class _$$SuccessImplCopyWith<$Res> {
-  factory _$$SuccessImplCopyWith(
-          _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
-      __$$SuccessImplCopyWithImpl<$Res>;
+abstract class _$$LoadedImplCopyWith<$Res> {
+  factory _$$LoadedImplCopyWith(
+          _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
+      __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({CreateOccasionResponse response});
+  $Res call({String videoUrl});
 }
 
 /// @nodoc
-class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$CreateOccasionStateCopyWithImpl<$Res, _$SuccessImpl>
-    implements _$$SuccessImplCopyWith<$Res> {
-  __$$SuccessImplCopyWithImpl(
-      _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
+class __$$LoadedImplCopyWithImpl<$Res>
+    extends _$VideoUploadStateCopyWithImpl<$Res, _$LoadedImpl>
+    implements _$$LoadedImplCopyWith<$Res> {
+  __$$LoadedImplCopyWithImpl(
+      _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateOccasionState
+  /// Create a copy of VideoUploadState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? response = null,
+    Object? videoUrl = null,
   }) {
-    return _then(_$SuccessImpl(
-      null == response
-          ? _value.response
-          : response // ignore: cast_nullable_to_non_nullable
-              as CreateOccasionResponse,
+    return _then(_$LoadedImpl(
+      null == videoUrl
+          ? _value.videoUrl
+          : videoUrl // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _$SuccessImpl implements Success {
-  const _$SuccessImpl(this.response);
+class _$LoadedImpl implements _Loaded {
+  const _$LoadedImpl(this.videoUrl);
 
   @override
-  final CreateOccasionResponse response;
+  final String videoUrl;
 
   @override
   String toString() {
-    return 'CreateOccasionState.success(response: $response)';
+    return 'VideoUploadState.loaded(videoUrl: $videoUrl)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SuccessImpl &&
-            (identical(other.response, response) ||
-                other.response == response));
+            other is _$LoadedImpl &&
+            (identical(other.videoUrl, videoUrl) ||
+                other.videoUrl == videoUrl));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, response);
+  int get hashCode => Object.hash(runtimeType, videoUrl);
 
-  /// Create a copy of CreateOccasionState
+  /// Create a copy of VideoUploadState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
-      __$$SuccessImplCopyWithImpl<_$SuccessImpl>(this, _$identity);
+  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+      __$$LoadedImplCopyWithImpl<_$LoadedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CreateOccasionResponse response) success,
+    required TResult Function(String videoUrl) loaded,
     required TResult Function(String message) error,
   }) {
-    return success(response);
+    return loaded(videoUrl);
   }
 
   @override
@@ -405,10 +405,10 @@ class _$SuccessImpl implements Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CreateOccasionResponse response)? success,
+    TResult? Function(String videoUrl)? loaded,
     TResult? Function(String message)? error,
   }) {
-    return success?.call(response);
+    return loaded?.call(videoUrl);
   }
 
   @override
@@ -416,12 +416,12 @@ class _$SuccessImpl implements Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CreateOccasionResponse response)? success,
+    TResult Function(String videoUrl)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success(response);
+    if (loaded != null) {
+      return loaded(videoUrl);
     }
     return orElse();
   }
@@ -430,49 +430,49 @@ class _$SuccessImpl implements Success {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(Loading value) loading,
-    required TResult Function(Success value) success,
-    required TResult Function(Error value) error,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Error value) error,
   }) {
-    return success(this);
+    return loaded(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(Loading value)? loading,
-    TResult? Function(Success value)? success,
-    TResult? Function(Error value)? error,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Error value)? error,
   }) {
-    return success?.call(this);
+    return loaded?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Success value)? success,
-    TResult Function(Error value)? error,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success(this);
+    if (loaded != null) {
+      return loaded(this);
     }
     return orElse();
   }
 }
 
-abstract class Success implements CreateOccasionState {
-  const factory Success(final CreateOccasionResponse response) = _$SuccessImpl;
+abstract class _Loaded implements VideoUploadState {
+  const factory _Loaded(final String videoUrl) = _$LoadedImpl;
 
-  CreateOccasionResponse get response;
+  String get videoUrl;
 
-  /// Create a copy of CreateOccasionState
+  /// Create a copy of VideoUploadState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -487,13 +487,13 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$CreateOccasionStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$VideoUploadStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateOccasionState
+  /// Create a copy of VideoUploadState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -511,7 +511,7 @@ class __$$ErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ErrorImpl implements Error {
+class _$ErrorImpl implements _Error {
   const _$ErrorImpl(this.message);
 
   @override
@@ -519,7 +519,7 @@ class _$ErrorImpl implements Error {
 
   @override
   String toString() {
-    return 'CreateOccasionState.error(message: $message)';
+    return 'VideoUploadState.error(message: $message)';
   }
 
   @override
@@ -533,7 +533,7 @@ class _$ErrorImpl implements Error {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  /// Create a copy of CreateOccasionState
+  /// Create a copy of VideoUploadState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -546,7 +546,7 @@ class _$ErrorImpl implements Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CreateOccasionResponse response) success,
+    required TResult Function(String videoUrl) loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -557,7 +557,7 @@ class _$ErrorImpl implements Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CreateOccasionResponse response)? success,
+    TResult? Function(String videoUrl)? loaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -568,7 +568,7 @@ class _$ErrorImpl implements Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CreateOccasionResponse response)? success,
+    TResult Function(String videoUrl)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -582,9 +582,9 @@ class _$ErrorImpl implements Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(Loading value) loading,
-    required TResult Function(Success value) success,
-    required TResult Function(Error value) error,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Error value) error,
   }) {
     return error(this);
   }
@@ -593,9 +593,9 @@ class _$ErrorImpl implements Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(Loading value)? loading,
-    TResult? Function(Success value)? success,
-    TResult? Function(Error value)? error,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
   }
@@ -604,9 +604,9 @@ class _$ErrorImpl implements Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Success value)? success,
-    TResult Function(Error value)? error,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -616,12 +616,12 @@ class _$ErrorImpl implements Error {
   }
 }
 
-abstract class Error implements CreateOccasionState {
-  const factory Error(final String message) = _$ErrorImpl;
+abstract class _Error implements VideoUploadState {
+  const factory _Error(final String message) = _$ErrorImpl;
 
   String get message;
 
-  /// Create a copy of CreateOccasionState
+  /// Create a copy of VideoUploadState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>

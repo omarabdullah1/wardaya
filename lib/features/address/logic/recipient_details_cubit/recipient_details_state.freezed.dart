@@ -25,30 +25,55 @@ mixin _$RecipientDetailsState {
             String? area,
             String? address,
             String? extraDetails,
-            LatLng? location)
+            LatLng? location,
+            String? id)
         initialized,
     required TResult Function(LatLng location, String address, String area)
         locationUpdated,
+    required TResult Function(String countryCode) countryCodeUpdated,
+    required TResult Function() loading,
+    required TResult Function(Address address) success,
+    required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String? recipientName, String? phoneNumber, String? area,
-            String? address, String? extraDetails, LatLng? location)?
+    TResult? Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)?
         initialized,
     TResult? Function(LatLng location, String address, String area)?
         locationUpdated,
+    TResult? Function(String countryCode)? countryCodeUpdated,
+    TResult? Function()? loading,
+    TResult? Function(Address address)? success,
+    TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String? recipientName, String? phoneNumber, String? area,
-            String? address, String? extraDetails, LatLng? location)?
+    TResult Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)?
         initialized,
     TResult Function(LatLng location, String address, String area)?
         locationUpdated,
+    TResult Function(String countryCode)? countryCodeUpdated,
+    TResult Function()? loading,
+    TResult Function(Address address)? success,
+    TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -57,6 +82,10 @@ mixin _$RecipientDetailsState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_LocationUpdated value) locationUpdated,
+    required TResult Function(_CountryCodeUpdated value) countryCodeUpdated,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,6 +93,10 @@ mixin _$RecipientDetailsState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_LocationUpdated value)? locationUpdated,
+    TResult? Function(_CountryCodeUpdated value)? countryCodeUpdated,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,6 +104,10 @@ mixin _$RecipientDetailsState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Initialized value)? initialized,
     TResult Function(_LocationUpdated value)? locationUpdated,
+    TResult Function(_CountryCodeUpdated value)? countryCodeUpdated,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -146,10 +183,15 @@ class _$InitialImpl implements _Initial {
             String? area,
             String? address,
             String? extraDetails,
-            LatLng? location)
+            LatLng? location,
+            String? id)
         initialized,
     required TResult Function(LatLng location, String address, String area)
         locationUpdated,
+    required TResult Function(String countryCode) countryCodeUpdated,
+    required TResult Function() loading,
+    required TResult Function(Address address) success,
+    required TResult Function(String error) error,
   }) {
     return initial();
   }
@@ -158,11 +200,21 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String? recipientName, String? phoneNumber, String? area,
-            String? address, String? extraDetails, LatLng? location)?
+    TResult? Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)?
         initialized,
     TResult? Function(LatLng location, String address, String area)?
         locationUpdated,
+    TResult? Function(String countryCode)? countryCodeUpdated,
+    TResult? Function()? loading,
+    TResult? Function(Address address)? success,
+    TResult? Function(String error)? error,
   }) {
     return initial?.call();
   }
@@ -171,11 +223,21 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String? recipientName, String? phoneNumber, String? area,
-            String? address, String? extraDetails, LatLng? location)?
+    TResult Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)?
         initialized,
     TResult Function(LatLng location, String address, String area)?
         locationUpdated,
+    TResult Function(String countryCode)? countryCodeUpdated,
+    TResult Function()? loading,
+    TResult Function(Address address)? success,
+    TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -190,6 +252,10 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_LocationUpdated value) locationUpdated,
+    required TResult Function(_CountryCodeUpdated value) countryCodeUpdated,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
   }) {
     return initial(this);
   }
@@ -200,6 +266,10 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_LocationUpdated value)? locationUpdated,
+    TResult? Function(_CountryCodeUpdated value)? countryCodeUpdated,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
   }) {
     return initial?.call(this);
   }
@@ -210,6 +280,10 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Initialized value)? initialized,
     TResult Function(_LocationUpdated value)? locationUpdated,
+    TResult Function(_CountryCodeUpdated value)? countryCodeUpdated,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -235,7 +309,8 @@ abstract class _$$InitializedImplCopyWith<$Res> {
       String? area,
       String? address,
       String? extraDetails,
-      LatLng? location});
+      LatLng? location,
+      String? id});
 }
 
 /// @nodoc
@@ -257,6 +332,7 @@ class __$$InitializedImplCopyWithImpl<$Res>
     Object? address = freezed,
     Object? extraDetails = freezed,
     Object? location = freezed,
+    Object? id = freezed,
   }) {
     return _then(_$InitializedImpl(
       recipientName: freezed == recipientName
@@ -283,6 +359,10 @@ class __$$InitializedImplCopyWithImpl<$Res>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as LatLng?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -296,7 +376,8 @@ class _$InitializedImpl implements _Initialized {
       this.area,
       this.address,
       this.extraDetails,
-      this.location});
+      this.location,
+      this.id});
 
   @override
   final String? recipientName;
@@ -310,10 +391,12 @@ class _$InitializedImpl implements _Initialized {
   final String? extraDetails;
   @override
   final LatLng? location;
+  @override
+  final String? id;
 
   @override
   String toString() {
-    return 'RecipientDetailsState.initialized(recipientName: $recipientName, phoneNumber: $phoneNumber, area: $area, address: $address, extraDetails: $extraDetails, location: $location)';
+    return 'RecipientDetailsState.initialized(recipientName: $recipientName, phoneNumber: $phoneNumber, area: $area, address: $address, extraDetails: $extraDetails, location: $location, id: $id)';
   }
 
   @override
@@ -330,12 +413,13 @@ class _$InitializedImpl implements _Initialized {
             (identical(other.extraDetails, extraDetails) ||
                 other.extraDetails == extraDetails) &&
             (identical(other.location, location) ||
-                other.location == location));
+                other.location == location) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, recipientName, phoneNumber, area,
-      address, extraDetails, location);
+      address, extraDetails, location, id);
 
   /// Create a copy of RecipientDetailsState
   /// with the given fields replaced by the non-null parameter values.
@@ -355,43 +439,68 @@ class _$InitializedImpl implements _Initialized {
             String? area,
             String? address,
             String? extraDetails,
-            LatLng? location)
+            LatLng? location,
+            String? id)
         initialized,
     required TResult Function(LatLng location, String address, String area)
         locationUpdated,
+    required TResult Function(String countryCode) countryCodeUpdated,
+    required TResult Function() loading,
+    required TResult Function(Address address) success,
+    required TResult Function(String error) error,
   }) {
     return initialized(
-        recipientName, phoneNumber, area, address, extraDetails, location);
+        recipientName, phoneNumber, area, address, extraDetails, location, id);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String? recipientName, String? phoneNumber, String? area,
-            String? address, String? extraDetails, LatLng? location)?
+    TResult? Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)?
         initialized,
     TResult? Function(LatLng location, String address, String area)?
         locationUpdated,
+    TResult? Function(String countryCode)? countryCodeUpdated,
+    TResult? Function()? loading,
+    TResult? Function(Address address)? success,
+    TResult? Function(String error)? error,
   }) {
     return initialized?.call(
-        recipientName, phoneNumber, area, address, extraDetails, location);
+        recipientName, phoneNumber, area, address, extraDetails, location, id);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String? recipientName, String? phoneNumber, String? area,
-            String? address, String? extraDetails, LatLng? location)?
+    TResult Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)?
         initialized,
     TResult Function(LatLng location, String address, String area)?
         locationUpdated,
+    TResult Function(String countryCode)? countryCodeUpdated,
+    TResult Function()? loading,
+    TResult Function(Address address)? success,
+    TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized(
-          recipientName, phoneNumber, area, address, extraDetails, location);
+      return initialized(recipientName, phoneNumber, area, address,
+          extraDetails, location, id);
     }
     return orElse();
   }
@@ -402,6 +511,10 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_LocationUpdated value) locationUpdated,
+    required TResult Function(_CountryCodeUpdated value) countryCodeUpdated,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
   }) {
     return initialized(this);
   }
@@ -412,6 +525,10 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_LocationUpdated value)? locationUpdated,
+    TResult? Function(_CountryCodeUpdated value)? countryCodeUpdated,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
   }) {
     return initialized?.call(this);
   }
@@ -422,6 +539,10 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(_Initial value)? initial,
     TResult Function(_Initialized value)? initialized,
     TResult Function(_LocationUpdated value)? locationUpdated,
+    TResult Function(_CountryCodeUpdated value)? countryCodeUpdated,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -438,7 +559,8 @@ abstract class _Initialized implements RecipientDetailsState {
       final String? area,
       final String? address,
       final String? extraDetails,
-      final LatLng? location}) = _$InitializedImpl;
+      final LatLng? location,
+      final String? id}) = _$InitializedImpl;
 
   String? get recipientName;
   String? get phoneNumber;
@@ -446,6 +568,7 @@ abstract class _Initialized implements RecipientDetailsState {
   String? get address;
   String? get extraDetails;
   LatLng? get location;
+  String? get id;
 
   /// Create a copy of RecipientDetailsState
   /// with the given fields replaced by the non-null parameter values.
@@ -548,10 +671,15 @@ class _$LocationUpdatedImpl implements _LocationUpdated {
             String? area,
             String? address,
             String? extraDetails,
-            LatLng? location)
+            LatLng? location,
+            String? id)
         initialized,
     required TResult Function(LatLng location, String address, String area)
         locationUpdated,
+    required TResult Function(String countryCode) countryCodeUpdated,
+    required TResult Function() loading,
+    required TResult Function(Address address) success,
+    required TResult Function(String error) error,
   }) {
     return locationUpdated(location, address, area);
   }
@@ -560,11 +688,21 @@ class _$LocationUpdatedImpl implements _LocationUpdated {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String? recipientName, String? phoneNumber, String? area,
-            String? address, String? extraDetails, LatLng? location)?
+    TResult? Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)?
         initialized,
     TResult? Function(LatLng location, String address, String area)?
         locationUpdated,
+    TResult? Function(String countryCode)? countryCodeUpdated,
+    TResult? Function()? loading,
+    TResult? Function(Address address)? success,
+    TResult? Function(String error)? error,
   }) {
     return locationUpdated?.call(location, address, area);
   }
@@ -573,11 +711,21 @@ class _$LocationUpdatedImpl implements _LocationUpdated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String? recipientName, String? phoneNumber, String? area,
-            String? address, String? extraDetails, LatLng? location)?
+    TResult Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)?
         initialized,
     TResult Function(LatLng location, String address, String area)?
         locationUpdated,
+    TResult Function(String countryCode)? countryCodeUpdated,
+    TResult Function()? loading,
+    TResult Function(Address address)? success,
+    TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (locationUpdated != null) {
@@ -592,6 +740,10 @@ class _$LocationUpdatedImpl implements _LocationUpdated {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_LocationUpdated value) locationUpdated,
+    required TResult Function(_CountryCodeUpdated value) countryCodeUpdated,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
   }) {
     return locationUpdated(this);
   }
@@ -602,6 +754,10 @@ class _$LocationUpdatedImpl implements _LocationUpdated {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_LocationUpdated value)? locationUpdated,
+    TResult? Function(_CountryCodeUpdated value)? countryCodeUpdated,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
   }) {
     return locationUpdated?.call(this);
   }
@@ -612,6 +768,10 @@ class _$LocationUpdatedImpl implements _LocationUpdated {
     TResult Function(_Initial value)? initial,
     TResult Function(_Initialized value)? initialized,
     TResult Function(_LocationUpdated value)? locationUpdated,
+    TResult Function(_CountryCodeUpdated value)? countryCodeUpdated,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
     if (locationUpdated != null) {
@@ -635,5 +795,761 @@ abstract class _LocationUpdated implements RecipientDetailsState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LocationUpdatedImplCopyWith<_$LocationUpdatedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CountryCodeUpdatedImplCopyWith<$Res> {
+  factory _$$CountryCodeUpdatedImplCopyWith(_$CountryCodeUpdatedImpl value,
+          $Res Function(_$CountryCodeUpdatedImpl) then) =
+      __$$CountryCodeUpdatedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String countryCode});
+}
+
+/// @nodoc
+class __$$CountryCodeUpdatedImplCopyWithImpl<$Res>
+    extends _$RecipientDetailsStateCopyWithImpl<$Res, _$CountryCodeUpdatedImpl>
+    implements _$$CountryCodeUpdatedImplCopyWith<$Res> {
+  __$$CountryCodeUpdatedImplCopyWithImpl(_$CountryCodeUpdatedImpl _value,
+      $Res Function(_$CountryCodeUpdatedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of RecipientDetailsState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? countryCode = null,
+  }) {
+    return _then(_$CountryCodeUpdatedImpl(
+      countryCode: null == countryCode
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CountryCodeUpdatedImpl implements _CountryCodeUpdated {
+  const _$CountryCodeUpdatedImpl({required this.countryCode});
+
+  @override
+  final String countryCode;
+
+  @override
+  String toString() {
+    return 'RecipientDetailsState.countryCodeUpdated(countryCode: $countryCode)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CountryCodeUpdatedImpl &&
+            (identical(other.countryCode, countryCode) ||
+                other.countryCode == countryCode));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, countryCode);
+
+  /// Create a copy of RecipientDetailsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CountryCodeUpdatedImplCopyWith<_$CountryCodeUpdatedImpl> get copyWith =>
+      __$$CountryCodeUpdatedImplCopyWithImpl<_$CountryCodeUpdatedImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)
+        initialized,
+    required TResult Function(LatLng location, String address, String area)
+        locationUpdated,
+    required TResult Function(String countryCode) countryCodeUpdated,
+    required TResult Function() loading,
+    required TResult Function(Address address) success,
+    required TResult Function(String error) error,
+  }) {
+    return countryCodeUpdated(countryCode);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)?
+        initialized,
+    TResult? Function(LatLng location, String address, String area)?
+        locationUpdated,
+    TResult? Function(String countryCode)? countryCodeUpdated,
+    TResult? Function()? loading,
+    TResult? Function(Address address)? success,
+    TResult? Function(String error)? error,
+  }) {
+    return countryCodeUpdated?.call(countryCode);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)?
+        initialized,
+    TResult Function(LatLng location, String address, String area)?
+        locationUpdated,
+    TResult Function(String countryCode)? countryCodeUpdated,
+    TResult Function()? loading,
+    TResult Function(Address address)? success,
+    TResult Function(String error)? error,
+    required TResult orElse(),
+  }) {
+    if (countryCodeUpdated != null) {
+      return countryCodeUpdated(countryCode);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_LocationUpdated value) locationUpdated,
+    required TResult Function(_CountryCodeUpdated value) countryCodeUpdated,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+  }) {
+    return countryCodeUpdated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_LocationUpdated value)? locationUpdated,
+    TResult? Function(_CountryCodeUpdated value)? countryCodeUpdated,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+  }) {
+    return countryCodeUpdated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_LocationUpdated value)? locationUpdated,
+    TResult Function(_CountryCodeUpdated value)? countryCodeUpdated,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (countryCodeUpdated != null) {
+      return countryCodeUpdated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CountryCodeUpdated implements RecipientDetailsState {
+  const factory _CountryCodeUpdated({required final String countryCode}) =
+      _$CountryCodeUpdatedImpl;
+
+  String get countryCode;
+
+  /// Create a copy of RecipientDetailsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CountryCodeUpdatedImplCopyWith<_$CountryCodeUpdatedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadingImplCopyWith<$Res> {
+  factory _$$LoadingImplCopyWith(
+          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
+      __$$LoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadingImplCopyWithImpl<$Res>
+    extends _$RecipientDetailsStateCopyWithImpl<$Res, _$LoadingImpl>
+    implements _$$LoadingImplCopyWith<$Res> {
+  __$$LoadingImplCopyWithImpl(
+      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of RecipientDetailsState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$LoadingImpl implements _Loading {
+  const _$LoadingImpl();
+
+  @override
+  String toString() {
+    return 'RecipientDetailsState.loading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)
+        initialized,
+    required TResult Function(LatLng location, String address, String area)
+        locationUpdated,
+    required TResult Function(String countryCode) countryCodeUpdated,
+    required TResult Function() loading,
+    required TResult Function(Address address) success,
+    required TResult Function(String error) error,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)?
+        initialized,
+    TResult? Function(LatLng location, String address, String area)?
+        locationUpdated,
+    TResult? Function(String countryCode)? countryCodeUpdated,
+    TResult? Function()? loading,
+    TResult? Function(Address address)? success,
+    TResult? Function(String error)? error,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)?
+        initialized,
+    TResult Function(LatLng location, String address, String area)?
+        locationUpdated,
+    TResult Function(String countryCode)? countryCodeUpdated,
+    TResult Function()? loading,
+    TResult Function(Address address)? success,
+    TResult Function(String error)? error,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_LocationUpdated value) locationUpdated,
+    required TResult Function(_CountryCodeUpdated value) countryCodeUpdated,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_LocationUpdated value)? locationUpdated,
+    TResult? Function(_CountryCodeUpdated value)? countryCodeUpdated,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_LocationUpdated value)? locationUpdated,
+    TResult Function(_CountryCodeUpdated value)? countryCodeUpdated,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Loading implements RecipientDetailsState {
+  const factory _Loading() = _$LoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$SuccessImplCopyWith<$Res> {
+  factory _$$SuccessImplCopyWith(
+          _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
+      __$$SuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Address address});
+}
+
+/// @nodoc
+class __$$SuccessImplCopyWithImpl<$Res>
+    extends _$RecipientDetailsStateCopyWithImpl<$Res, _$SuccessImpl>
+    implements _$$SuccessImplCopyWith<$Res> {
+  __$$SuccessImplCopyWithImpl(
+      _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of RecipientDetailsState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? address = null,
+  }) {
+    return _then(_$SuccessImpl(
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as Address,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SuccessImpl implements _Success {
+  const _$SuccessImpl({required this.address});
+
+  @override
+  final Address address;
+
+  @override
+  String toString() {
+    return 'RecipientDetailsState.success(address: $address)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessImpl &&
+            (identical(other.address, address) || other.address == address));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, address);
+
+  /// Create a copy of RecipientDetailsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      __$$SuccessImplCopyWithImpl<_$SuccessImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)
+        initialized,
+    required TResult Function(LatLng location, String address, String area)
+        locationUpdated,
+    required TResult Function(String countryCode) countryCodeUpdated,
+    required TResult Function() loading,
+    required TResult Function(Address address) success,
+    required TResult Function(String error) error,
+  }) {
+    return success(address);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)?
+        initialized,
+    TResult? Function(LatLng location, String address, String area)?
+        locationUpdated,
+    TResult? Function(String countryCode)? countryCodeUpdated,
+    TResult? Function()? loading,
+    TResult? Function(Address address)? success,
+    TResult? Function(String error)? error,
+  }) {
+    return success?.call(address);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)?
+        initialized,
+    TResult Function(LatLng location, String address, String area)?
+        locationUpdated,
+    TResult Function(String countryCode)? countryCodeUpdated,
+    TResult Function()? loading,
+    TResult Function(Address address)? success,
+    TResult Function(String error)? error,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(address);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_LocationUpdated value) locationUpdated,
+    required TResult Function(_CountryCodeUpdated value) countryCodeUpdated,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+  }) {
+    return success(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_LocationUpdated value)? locationUpdated,
+    TResult? Function(_CountryCodeUpdated value)? countryCodeUpdated,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+  }) {
+    return success?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_LocationUpdated value)? locationUpdated,
+    TResult Function(_CountryCodeUpdated value)? countryCodeUpdated,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Success implements RecipientDetailsState {
+  const factory _Success({required final Address address}) = _$SuccessImpl;
+
+  Address get address;
+
+  /// Create a copy of RecipientDetailsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ErrorImplCopyWith<$Res> {
+  factory _$$ErrorImplCopyWith(
+          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
+      __$$ErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String error});
+}
+
+/// @nodoc
+class __$$ErrorImplCopyWithImpl<$Res>
+    extends _$RecipientDetailsStateCopyWithImpl<$Res, _$ErrorImpl>
+    implements _$$ErrorImplCopyWith<$Res> {
+  __$$ErrorImplCopyWithImpl(
+      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of RecipientDetailsState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$ErrorImpl(
+      error: null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ErrorImpl implements _Error {
+  const _$ErrorImpl({required this.error});
+
+  @override
+  final String error;
+
+  @override
+  String toString() {
+    return 'RecipientDetailsState.error(error: $error)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ErrorImpl &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, error);
+
+  /// Create a copy of RecipientDetailsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)
+        initialized,
+    required TResult Function(LatLng location, String address, String area)
+        locationUpdated,
+    required TResult Function(String countryCode) countryCodeUpdated,
+    required TResult Function() loading,
+    required TResult Function(Address address) success,
+    required TResult Function(String error) error,
+  }) {
+    return error(this.error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)?
+        initialized,
+    TResult? Function(LatLng location, String address, String area)?
+        locationUpdated,
+    TResult? Function(String countryCode)? countryCodeUpdated,
+    TResult? Function()? loading,
+    TResult? Function(Address address)? success,
+    TResult? Function(String error)? error,
+  }) {
+    return error?.call(this.error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(
+            String? recipientName,
+            String? phoneNumber,
+            String? area,
+            String? address,
+            String? extraDetails,
+            LatLng? location,
+            String? id)?
+        initialized,
+    TResult Function(LatLng location, String address, String area)?
+        locationUpdated,
+    TResult Function(String countryCode)? countryCodeUpdated,
+    TResult Function()? loading,
+    TResult Function(Address address)? success,
+    TResult Function(String error)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this.error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_LocationUpdated value) locationUpdated,
+    required TResult Function(_CountryCodeUpdated value) countryCodeUpdated,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_LocationUpdated value)? locationUpdated,
+    TResult? Function(_CountryCodeUpdated value)? countryCodeUpdated,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_LocationUpdated value)? locationUpdated,
+    TResult Function(_CountryCodeUpdated value)? countryCodeUpdated,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Error implements RecipientDetailsState {
+  const factory _Error({required final String error}) = _$ErrorImpl;
+
+  String get error;
+
+  /// Create a copy of RecipientDetailsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
