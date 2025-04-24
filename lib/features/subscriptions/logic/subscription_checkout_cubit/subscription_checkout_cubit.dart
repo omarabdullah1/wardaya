@@ -111,6 +111,7 @@ class SubscriptionCheckoutCubit extends Cubit<SubscriptionCheckoutState> {
     required String area,
     required bool keepIdentitySecret,
     required String additionalInfo,
+    required bool saveAddress,
   }) async {
     final String? cityId =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userAreaId);

@@ -86,6 +86,7 @@ class ProceedPaymentButton extends StatelessWidget {
                               "videoLink": cartCubit.videoLink,
                               'price': totalAmount.toString(),
                               'currency': 'SAR',
+                              'cartCubit': context.read<GetCartCubit>(),
                             },
                           ).then((value) {
                             if (value == true) {

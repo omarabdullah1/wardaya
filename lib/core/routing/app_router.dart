@@ -337,6 +337,7 @@ class AppRouter {
             // countryCode: args['countryCode'],
             paymentMethod: args['paymentMethod'],
             redirectUrl: args['redirectUrl'],
+            cartCubit: args['cartCubit'],
           ),
         );
       case Routes.susbcriptionsDurationScreen:
@@ -477,6 +478,7 @@ class AppRouter {
               videoLink: args['videoLink'],
               selectedTypingStyle: args['selectedTypingStyle'],
               cartItems: args['cartItems'],
+              cartCubit: args['cartCubit'],
             ),
           ),
         );

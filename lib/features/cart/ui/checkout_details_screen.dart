@@ -16,8 +16,10 @@ import 'package:wardaya/core/theming/styles.dart';
 import 'package:wardaya/core/widgets/app_app_bar.dart';
 import 'package:wardaya/core/widgets/app_text_button.dart';
 import 'package:wardaya/core/widgets/loading_widget.dart';
+import 'package:wardaya/core/di/dependency_injection.dart';
 import 'package:wardaya/features/cart/data/apis/cart_api_constants.dart';
 import 'package:wardaya/features/cart/logic/checkout/checkout_cubit.dart';
+import 'package:wardaya/features/cart/logic/getCart/cubit/get_cart_cubit.dart';
 
 import '../../../core/assets/assets.dart';
 import '../data/models/get_cart_response.dart';
@@ -27,6 +29,11 @@ import '../logic/promo/promo_state.dart';
 import 'widgets/address_option_preview.dart';
 import 'widgets/delivery_time_selector.dart';
 import 'widgets/recipient_address_sheet.dart';
+import 'package:wardaya/features/address/data/models/address_response.dart';
+import 'package:wardaya/features/address/logic/address_cubit/address_cubit.dart';
+import 'package:wardaya/features/address/logic/address_cubit/address_state.dart'
+    as address_state;
+import 'package:wardaya/features/address/ui/widgets/saved_addresses/address_selector_card.dart';
 
 class CheckoutDetails extends StatefulWidget {
   final List<GetCartItem> cartItems;
@@ -40,6 +47,7 @@ class CheckoutDetails extends StatefulWidget {
   final String price;
   final String currency;
   final String giftCardId;
+  final GetCartCubit cartCubit;
 
   const CheckoutDetails({
     super.key,
@@ -54,6 +62,7 @@ class CheckoutDetails extends StatefulWidget {
     required this.price,
     required this.currency,
     required this.giftCardId,
+    required this.cartCubit,
   });
 
   @override
@@ -63,6 +72,8 @@ class CheckoutDetails extends StatefulWidget {
 class _CheckoutDetailsState extends State<CheckoutDetails> {
   String selectedAddressOption = '';
   String selectedPaymentMethod = '';
+  bool showUserRecipient =
+      false; // Changed to false to make the "Use saved addresses" as default
   // Default country to Saudi Arabia
   Country _selectedCountry = Country(
     phoneCode: '966',
@@ -233,6 +244,61 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
     );
   }
 
+  void _handleSelectAddress(Address address) {
+    final cubit = context.read<CheckoutCubit>();
+    setState(() {
+      // Set the selected address
+      selectedAddressOption = address.id;
+    });
+
+    // Update checkout cubit with selected address data
+    if (address.latitude != 0 && address.longitude != 0) {
+      cubit.updateLocationData(
+        LatLng(address.latitude, address.longitude),
+        address.recipientAddress,
+        address.recipientArea,
+        address.extraAddressDetails,
+      );
+    }
+
+    // Update recipient name and phone if available
+    if (address.recipientName != null && address.recipientName!.isNotEmpty) {
+      cubit.nameController.text = address.recipientName!;
+    }
+
+    if (address.recipientPhoneNumber != null &&
+        address.recipientPhoneNumber!.isNotEmpty) {
+      cubit.phoneController.text = address.recipientPhoneNumber!;
+    }
+  }
+
+  void _handleSavedAddressToggle(bool value) {
+    setState(() {
+      showUserRecipient = !value;
+    });
+
+    // If toggling to show saved addresses, load them
+    if (!showUserRecipient) {
+      context.read<AddressCubit>().getAddresses();
+      // Clear the manual address selection since we're using saved addresses
+      if (selectedAddressOption == 'Ask the recipient for the address' ||
+          selectedAddressOption == 'Enter recipient address') {
+        setState(() {
+          selectedAddressOption = '';
+        });
+      }
+    } else {
+      // Clear selected address if switching back to manual entry and no option is selected
+      if (selectedAddressOption.isNotEmpty &&
+          selectedAddressOption != 'Ask the recipient for the address' &&
+          selectedAddressOption != 'Enter recipient address') {
+        setState(() {
+          selectedAddressOption = '';
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     log(widget.price.toString());
@@ -284,6 +350,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
               'countryCode': '+${_selectedCountry.phoneCode}',
               'paymentMethod': selectedPaymentMethod,
               'redirectUrl': response.redirectUrl,
+              'cartCubit': widget.cartCubit,
             });
           },
           error: (message) {
@@ -344,54 +411,64 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
             },
           );
         },
-        child: Scaffold(
-          backgroundColor: ColorsManager.offWhite,
-          appBar: const AppAppBar(title: 'Checkout'),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(16.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildSectionTitle('Recipient Details'),
-                  const VerticalSpace(height: 16),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(18),
-                      color: ColorsManager.white,
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<CheckoutCubit>(
+              create: (context) => getIt<CheckoutCubit>(),
+            ),
+            BlocProvider<AddressCubit>(
+              create: (context) => getIt<AddressCubit>()..getAddresses(),
+            ),
+          ],
+          child: Scaffold(
+            backgroundColor: ColorsManager.offWhite,
+            appBar: const AppAppBar(title: 'Checkout'),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(16.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildSectionTitle('Recipient Details'),
+                    const VerticalSpace(height: 16),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(18),
+                        color: ColorsManager.white,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 8.0.w, vertical: 8.0.h),
+                        child: _buildRecipientDetailsSection(),
+                      ),
                     ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 8.0.w, vertical: 8.0.h),
-                      child: _buildRecipientDetailsSection(),
+
+                    // Add Delivery Time Section
+                    const VerticalSpace(height: 24),
+                    _buildSectionTitle('Delivery Time'),
+                    const VerticalSpace(height: 16),
+                    DeliveryTimeSelector(
+                      checkoutCubit: context.read<CheckoutCubit>(),
                     ),
-                  ),
 
-                  // Add Delivery Time Section
-                  const VerticalSpace(height: 24),
-                  _buildSectionTitle('Delivery Time'),
-                  const VerticalSpace(height: 16),
-                  DeliveryTimeSelector(
-                    checkoutCubit: context.read<CheckoutCubit>(),
-                  ),
+                    // Add Promo Code Section
+                    const VerticalSpace(height: 24),
+                    _buildSectionTitle('Voucher Code'),
+                    const VerticalSpace(height: 16),
+                    _buildPromoCodeSection(),
 
-                  // Add Promo Code Section
-                  const VerticalSpace(height: 24),
-                  _buildSectionTitle('Voucher Code'),
-                  const VerticalSpace(height: 16),
-                  _buildPromoCodeSection(),
-
-                  const VerticalSpace(height: 24),
-                  _buildSectionTitle('Payment Method'),
-                  const VerticalSpace(height: 16),
-                  _buildPaymentMethodsSection(),
-                  const VerticalSpace(height: 24),
-                  _buildSectionTitle('Payment Details'),
-                  const VerticalSpace(height: 8),
-                  _buildTotalSection(),
-                  const VerticalSpace(height: 24),
-                  _buildProceedButton(),
-                ],
+                    const VerticalSpace(height: 24),
+                    _buildSectionTitle('Payment Method'),
+                    const VerticalSpace(height: 16),
+                    _buildPaymentMethodsSection(),
+                    const VerticalSpace(height: 24),
+                    _buildSectionTitle('Payment Details'),
+                    const VerticalSpace(height: 8),
+                    _buildTotalSection(),
+                    const VerticalSpace(height: 24),
+                    _buildProceedButton(),
+                  ],
+                ),
               ),
             ),
           ),
@@ -416,41 +493,69 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const VerticalSpace(height: 8),
-            _buildTextField(
-              'Recipient Name',
-              'Enter Recipient Name',
-              onTapSuffix: () {
-                cubit.pickContact();
-              },
-              cubit.nameController,
-              suffixIcon: Icons.contacts_outlined,
+
+            // Toggle switch between manual input and saved addresses
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Use saved addresses",
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: ColorsManager.black87,
+                  ),
+                ),
+                Switch(
+                  value: !showUserRecipient,
+                  onChanged: _handleSavedAddressToggle,
+                  activeColor: ColorsManager.mainRose,
+                ),
+              ],
             ),
-            const VerticalSpace(height: 16),
-            _buildPhoneField(cubit.phoneController),
-            Text(
-              'Delivery Address',
-              style: TextStylesInter.font14BlackRegular.copyWith(
-                color: ColorsManager.mainRose,
+            VerticalSpace(height: 16.h),
+
+            // Show either delivery address options or saved addresses list
+            if (showUserRecipient) ...[
+              // Recipient Name and Phone Fields (only displayed when manual entry is selected)
+              _buildTextField(
+                'Recipient Name',
+                'Enter Recipient Name',
+                onTapSuffix: () {
+                  cubit.pickContact();
+                },
+                cubit.nameController,
+                suffixIcon: Icons.contacts_outlined,
               ),
-            ),
-            const VerticalSpace(height: 8),
-            AddressOptionPreview(
-              text: 'Ask the recipient for the address',
-              isSelected:
-                  selectedAddressOption == 'Ask the recipient for the address',
-              groupValue: selectedAddressOption,
-              onChanged: _handleAddressOptionChange,
-            ),
-            const VerticalSpace(height: 8),
-            AddressOptionPreview(
-              text: 'Enter recipient address',
-              isSelected: selectedAddressOption == 'Enter recipient address',
-              location: cubit.selectedLocation,
-              address: cubit.selectedAddress,
-              area: cubit.selectedArea,
-              groupValue: selectedAddressOption,
-              onChanged: _handleAddressOptionChange,
-            ),
+              const VerticalSpace(height: 16),
+              _buildPhoneField(cubit.phoneController),
+
+              Text(
+                'Delivery Address',
+                style: TextStylesInter.font14BlackRegular.copyWith(
+                  color: ColorsManager.mainRose,
+                ),
+              ),
+              const VerticalSpace(height: 8),
+              AddressOptionPreview(
+                text: 'Ask the recipient for the address',
+                isSelected: selectedAddressOption ==
+                    'Ask the recipient for the address',
+                groupValue: selectedAddressOption,
+                onChanged: _handleAddressOptionChange,
+              ),
+              const VerticalSpace(height: 8),
+              AddressOptionPreview(
+                text: 'Enter recipient address',
+                isSelected: selectedAddressOption == 'Enter recipient address',
+                location: cubit.selectedLocation,
+                address: cubit.selectedAddress,
+                area: cubit.selectedArea,
+                groupValue: selectedAddressOption,
+                onChanged: _handleAddressOptionChange,
+              ),
+            ] else ...[
+              _buildSavedAddressesList(),
+            ],
           ],
         );
       },
@@ -650,11 +755,11 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
           'Google Pay',
           Assets.of(context).pay_cards.gpay_png,
         ),
-        const VerticalSpace(height: 8),
-        _buildPaymentOption(
-          'Apple Pay',
-          Assets.of(context).pay_cards.apple_pay_png,
-        ),
+        // const VerticalSpace(height: 8),
+        // _buildPaymentOption(
+        //   'Apple Pay',
+        //   Assets.of(context).pay_cards.apple_pay_png,
+        // ),
         // const VerticalSpace(height: 8),
         // _buildPaymentOption(
         //   'STC Pay',
@@ -889,6 +994,116 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildSavedAddressesList() {
+    // This fetches and displays saved addresses
+    return BlocBuilder<AddressCubit, address_state.AddressState>(
+      builder: (context, state) {
+        return state.maybeWhen(
+          loading: () => Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 24.h),
+              child: const CircularProgressIndicator(
+                  color: ColorsManager.mainRose),
+            ),
+          ),
+          success: (addresses) {
+            if (addresses.isEmpty) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 24.h),
+                    child: Column(
+                      children: [
+                        Icon(Icons.location_off,
+                            size: 48.w, color: Colors.grey),
+                        VerticalSpace(height: 8.h),
+                        Text(
+                          'No saved addresses found',
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: ColorsManager.grey,
+                          ),
+                        ),
+                        VerticalSpace(height: 16.h),
+                        AppTextButton(
+                          buttonText: 'Add New Address',
+                          onPressed: () {
+                            // Switch to manual entry mode
+                            setState(() {
+                              showUserRecipient = true;
+                            });
+                          },
+                          textStyle:
+                              TextStylesInter.font14BlackSemiBold.copyWith(
+                            color: ColorsManager.white,
+                          ),
+                          backgroundColor: ColorsManager.mainRose,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            }
+
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Select a saved address",
+                  style: TextStylesInter.font14BlackRegular.copyWith(
+                    color: ColorsManager.mainRose,
+                  ),
+                ),
+                VerticalSpace(height: 12.h),
+                ...addresses.map((address) {
+                  return AddressSelectorCard(
+                    address: address,
+                    isSelected: selectedAddressOption == address.id,
+                    onSelect: _handleSelectAddress,
+                  );
+                }).toList(),
+              ],
+            );
+          },
+          error: (error) => Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 24.h),
+              child: Column(
+                children: [
+                  Icon(Icons.error_outline,
+                      size: 48.w, color: ColorsManager.red),
+                  VerticalSpace(height: 8.h),
+                  Text(
+                    'Error loading addresses: $error',
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      color: ColorsManager.red,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  VerticalSpace(height: 16.h),
+                  AppTextButton(
+                    buttonText: 'Try Again',
+                    onPressed: () {
+                      context.read<AddressCubit>().getAddresses();
+                    },
+                    textStyle: TextStylesInter.font14BlackSemiBold.copyWith(
+                      color: ColorsManager.white,
+                    ),
+                    backgroundColor: ColorsManager.mainRose,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          orElse: () => const Center(child: Text('No addresses available')),
+        );
+      },
     );
   }
 }
