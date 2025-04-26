@@ -65,7 +65,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     // Create an overlay entry that shows a loading indicator
     _loadingOverlay = OverlayEntry(
       builder: (context) => Container(
-        color: Colors.black.withOpacity(0.5),
+        color: Colors.black.withAlpha((0.5 * 255).toInt()),
         child: const Center(
           child: LoadingWidget(loadingState: true),
         ),

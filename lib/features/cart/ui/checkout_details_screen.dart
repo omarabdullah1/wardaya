@@ -1066,7 +1066,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
                     isSelected: selectedAddressOption == address.id,
                     onSelect: _handleSelectAddress,
                   );
-                }).toList(),
+                }),
               ],
             );
           },

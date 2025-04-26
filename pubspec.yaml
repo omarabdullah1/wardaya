@@ -67,6 +67,8 @@ dependencies:
   url_launcher: ^6.3.1
   intl: ^0.19.0
   logger: ^2.5.0
+  path_provider: ^2.0.11
+  path: ^1.8.3
 
   # Other functionality
   benefit_pay_flutter: ^1.0.1

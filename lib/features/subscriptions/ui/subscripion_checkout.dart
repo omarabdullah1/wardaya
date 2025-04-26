@@ -363,8 +363,8 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
                         boxShadow: selectedAddressOption == address.id
                             ? [
                                 BoxShadow(
-                                  color:
-                                      ColorsManager.mainRose.withOpacity(0.2),
+                                  color: ColorsManager.mainRose
+                                      .withAlpha((0.2 * 255).toInt()),
                                   blurRadius: 4,
                                   offset: const Offset(0, 2),
                                 )
@@ -380,7 +380,8 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
                               width: 48.w,
                               height: 48.w,
                               decoration: BoxDecoration(
-                                color: ColorsManager.mainRose.withOpacity(0.1),
+                                color: ColorsManager.mainRose
+                                    .withAlpha((0.1 * 255).toInt()),
                                 shape: BoxShape.circle,
                               ),
                               child: Center(
@@ -444,7 +445,7 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
                       ),
                     ),
                   );
-                }).toList(),
+                }),
               ],
             );
           },

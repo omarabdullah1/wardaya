@@ -347,3 +347,9 @@ yourUpcomingOccasion: "مناسباتك القادمة"
 
 # chckout screen texts
 selectDeliveryDate: "اختر تاريخ التوصيل"
+
+#invoice screen texts
+invoiceTitle: "الفواتير"
+noInvoicesTitle: "لا توجد فواتير"
+noInvoicesSubtitle: "لا توجد فواتير متاحة"
+invoiceDetails: "تفاصيل الفاتورة"

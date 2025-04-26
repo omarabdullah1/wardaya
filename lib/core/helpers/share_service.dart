@@ -39,7 +39,9 @@ class ShareService {
       debugPrint('Error showing share options: $e');
 
       // Fallback to clipboard if modal fails
-      await _copyToClipboard(context, productUrl);
+      if (context.mounted) {
+        await _copyToClipboard(context, productUrl);
+      }
     }
   }
 
@@ -77,10 +79,10 @@ class ShareOptionsSheet extends StatelessWidget {
   final String productTitle;
 
   const ShareOptionsSheet({
-    Key? key,
+    super.key,
     required this.productUrl,
     required this.productTitle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +166,9 @@ class ShareOptionsSheet extends StatelessWidget {
 
   Future<void> _shareViaApps(BuildContext context) async {
     // Close the bottom sheet
-    Navigator.pop(context);
+    if (context.mounted) {
+      Navigator.pop(context);
+    }
 
     // Share using system share sheet
     await Share.share(
@@ -179,7 +183,9 @@ class ShareOptionsSheet extends StatelessWidget {
       await Clipboard.setData(ClipboardData(text: productUrl));
 
       // Close the sheet
-      Navigator.pop(context);
+      if (context.mounted) {
+        Navigator.pop(context);
+      }
 
       // Show snackbar
       if (context.mounted) {

@@ -171,8 +171,6 @@ class LoginCubit extends Cubit<LoginState> {
       );
       log('Apple User: ${credential.email}');
       log('Apple ID Token: ${credential.identityToken}');
-
-      // TODO: Send the token to your backend server
     } catch (error) {
       log('Error signing in with Apple: $error');
       snackbarShow(

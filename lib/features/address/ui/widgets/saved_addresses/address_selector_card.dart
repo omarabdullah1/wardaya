@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/theming/font_weight_helper.dart';
@@ -35,7 +34,8 @@ class AddressSelectorCard extends StatelessWidget {
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: ColorsManager.mainRose.withOpacity(0.2),
+                    color:
+                        ColorsManager.mainRose.withAlpha((0.2 * 255).toInt()),
                     blurRadius: 4,
                     offset: const Offset(0, 2),
                   )
@@ -51,7 +51,7 @@ class AddressSelectorCard extends StatelessWidget {
                 width: 48.w,
                 height: 48.w,
                 decoration: BoxDecoration(
-                  color: ColorsManager.mainRose.withOpacity(0.1),
+                  color: ColorsManager.mainRose.withAlpha((0.1 * 255).toInt()),
                   shape: BoxShape.circle,
                 ),
                 child: Center(
