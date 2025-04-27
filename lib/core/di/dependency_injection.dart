@@ -41,6 +41,8 @@ import '../../features/address/logic/recipient_details_cubit/recipient_details_c
 import '../../features/authentication/apis/auth_service.dart';
 import '../../features/authentication/create_account/data/repos/create_account_repo.dart';
 import '../../features/authentication/create_account/logic/cubit/register_cubit.dart';
+import '../../features/authentication/forget_password/data/repos/forget_password_repo.dart';
+import '../../features/authentication/forget_password/logic/cubit/forget_password_cubit.dart';
 import '../../features/authentication/login/data/repos/login_repo.dart';
 import '../../features/authentication/login/logic/cubit/login_cubit.dart';
 import '../../features/cart/data/apis/cart_service.dart';
@@ -112,6 +114,8 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<InvoicesRepo>(() => InvoicesRepo(getIt()));
   getIt.registerLazySingleton<MyOrdersRepo>(() => MyOrdersRepo(getIt()));
   getIt.registerLazySingleton<CartRepo>(() => CartRepo(getIt()));
+  getIt.registerLazySingleton<ForgetPasswordRepo>(
+      () => ForgetPasswordRepo(getIt()));
 
   /************************* */
   /* ******** CUBIT *********
@@ -163,4 +167,6 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<VideoUploadCubit>(() => VideoUploadCubit(getIt()));
   getIt.registerFactory<CheckoutCubit>(() => CheckoutCubit(getIt()));
   getIt.registerFactory<PromoCubit>(() => PromoCubit(getIt()));
+  getIt
+      .registerFactory<ForgetPasswordCubit>(() => ForgetPasswordCubit(getIt()));
 }

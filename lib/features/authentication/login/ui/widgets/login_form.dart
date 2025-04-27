@@ -20,7 +20,7 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   bool _isPasswordVisible = false;
- 
+
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<LoginCubit>();
@@ -89,7 +89,7 @@ class _LoginFormState extends State<LoginForm> {
             buttonText: context.el.signInButton,
             textStyle: TextStylesInter.font15WhiteRegular,
             borderRadius: 5,
-            buttonHeight: 45.h,
+            buttonHeight: 50.h,
             onPressed: () => validateThenDoLogin(context),
           ),
           // Rest of the form remains unchanged

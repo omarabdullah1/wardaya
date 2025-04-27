@@ -280,7 +280,7 @@ class RegisterForm extends StatelessWidget {
           buttonText: context.el.createAccountButton,
           textStyle: TextStylesInter.font15WhiteRegular,
           borderRadius: 5,
-          buttonHeight: 45.h,
+          buttonHeight: 50.h,
           buttonWidth: 200.w,
           onPressed: onPressed,
         ),
