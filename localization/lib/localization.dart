@@ -93,6 +93,20 @@ class LocalizationMessages {
     required this.flowersGiftsScreenTitle,
     required this.searchPlaceholder,
     required this.searchButton,
+    required this.filterTitle,
+    required this.filterApply,
+    required this.filterOccasion,
+    required this.filterRecipient,
+    required this.filterColor,
+    required this.filterBundleType,
+    required this.filterClear,
+    required this.filterClose,
+    required this.gotIt,
+    required this.filterButton,
+    required this.showingProductsCount,
+    required this.viewGrid,
+    required this.viewList,
+    required this.allChip,
     required this.categoryFilterTitle,
     required this.occasionFilterTitle,
     required this.recipientFilterTitle,
@@ -391,6 +405,20 @@ class LocalizationMessages {
       flowersGiftsScreenTitle: (json['flowers_gifts_screen_title'] ?? '').toString(),
       searchPlaceholder: (json['search_placeholder'] ?? '').toString(),
       searchButton: (json['search_button'] ?? '').toString(),
+      filterTitle: (json['filter_title'] ?? '').toString(),
+      filterApply: (json['filter_apply'] ?? '').toString(),
+      filterOccasion: (json['filter_occasion'] ?? '').toString(),
+      filterRecipient: (json['filter_recipient'] ?? '').toString(),
+      filterColor: (json['filter_color'] ?? '').toString(),
+      filterBundleType: (json['filter_bundle_type'] ?? '').toString(),
+      filterClear: (json['filter_clear'] ?? '').toString(),
+      filterClose: (json['filter_close'] ?? '').toString(),
+      gotIt: (json['got_it'] ?? '').toString(),
+      filterButton: (json['filter_button'] ?? '').toString(),
+      showingProductsCount: (json['showing_products_count'] ?? '').toString(),
+      viewGrid: (json['view_grid'] ?? '').toString(),
+      viewList: (json['view_list'] ?? '').toString(),
+      allChip: (json['all_chip'] ?? '').toString(),
       categoryFilterTitle: (json['category_filter_title'] ?? '').toString(),
       occasionFilterTitle: (json['occasion_filter_title'] ?? '').toString(),
       recipientFilterTitle: (json['recipient_filter_title'] ?? '').toString(),
@@ -695,6 +723,20 @@ class LocalizationMessages {
   final String flowersGiftsScreenTitle;
   final String searchPlaceholder;
   final String searchButton;
+  final String filterTitle;
+  final String filterApply;
+  final String filterOccasion;
+  final String filterRecipient;
+  final String filterColor;
+  final String filterBundleType;
+  final String filterClear;
+  final String filterClose;
+  final String gotIt;
+  final String filterButton;
+  final String showingProductsCount;
+  final String viewGrid;
+  final String viewList;
+  final String allChip;
   final String categoryFilterTitle;
   final String occasionFilterTitle;
   final String recipientFilterTitle;
@@ -991,6 +1033,20 @@ class LocalizationMessages {
         r'''flowers_gifts_screen_title''': flowersGiftsScreenTitle,
         r'''search_placeholder''': searchPlaceholder,
         r'''search_button''': searchButton,
+        r'''filter_title''': filterTitle,
+        r'''filter_apply''': filterApply,
+        r'''filter_occasion''': filterOccasion,
+        r'''filter_recipient''': filterRecipient,
+        r'''filter_color''': filterColor,
+        r'''filter_bundle_type''': filterBundleType,
+        r'''filter_clear''': filterClear,
+        r'''filter_close''': filterClose,
+        r'''got_it''': gotIt,
+        r'''filter_button''': filterButton,
+        r'''showing_products_count''': showingProductsCount,
+        r'''view_grid''': viewGrid,
+        r'''view_list''': viewList,
+        r'''all_chip''': allChip,
         r'''category_filter_title''': categoryFilterTitle,
         r'''occasion_filter_title''': occasionFilterTitle,
         r'''recipient_filter_title''': recipientFilterTitle,
@@ -1316,6 +1372,20 @@ final LocalizationMessages en = LocalizationMessages(
   flowersGiftsScreenTitle: 'Flowers & Gifts',
   searchPlaceholder: 'Search for flowers, gifts, and more',
   searchButton: 'Search',
+  filterTitle: 'Filters',
+  filterApply: 'Apply',
+  filterOccasion: 'Occasion',
+  filterRecipient: 'Recipient',
+  filterColor: 'Color',
+  filterBundleType: 'Bundle Type',
+  filterClear: 'Clear',
+  filterClose: 'Close',
+  gotIt: 'Got it',
+  filterButton: 'Filter',
+  showingProductsCount: 'Showing {count} products',
+  viewGrid: 'Grid View',
+  viewList: 'List View',
+  allChip: 'All',
   categoryFilterTitle: 'Category',
   occasionFilterTitle: 'Occasion',
   recipientFilterTitle: 'Recipient',
@@ -1616,6 +1686,20 @@ final LocalizationMessages ar = LocalizationMessages(
   flowersGiftsScreenTitle: 'الزهور والهدايا',
   searchPlaceholder: 'ابحث عن زهور، هدايا، والمزيد',
   searchButton: 'بحث',
+  filterTitle: 'الفلاتر',
+  filterApply: 'تطبيق',
+  filterOccasion: 'المناسبة',
+  filterRecipient: 'المستلم',
+  filterColor: 'اللون',
+  filterBundleType: 'نوع الباقة',
+  filterClear: 'مسح',
+  filterClose: 'إغلاق',
+  gotIt: 'فهمت',
+  filterButton: 'فلتر',
+  showingProductsCount: 'عرض {count} منتج',
+  viewGrid: 'عرض شبكي',
+  viewList: 'عرض قائمة',
+  allChip: 'الكل',
   categoryFilterTitle: 'الفئة',
   occasionFilterTitle: 'المناسبة',
   recipientFilterTitle: 'المستلم',

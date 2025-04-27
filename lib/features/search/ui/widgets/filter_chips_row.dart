@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/features/search/data/apis/search_api_constants.dart';
 import '../../../../core/routing/router_imports.dart';
@@ -84,8 +85,8 @@ class FilterChipsRow extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             children: [
               _buildFilterChip(
-                "All",
-                "All",
+                context.el.allChip,
+                context.el.allChip,
                 '',
                 context: context,
               ),

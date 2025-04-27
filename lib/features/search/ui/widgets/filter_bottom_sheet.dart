@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/features/search/data/models/filter_data_response.dart';
@@ -133,7 +134,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Filters',
+                      context.el.filterTitle,
                       style: GoogleFonts.ebGaramond(
                         fontSize: 30.sp,
                         fontWeight: FontWeight.w400,
@@ -172,6 +173,24 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
   Widget _buildFilterSection(
       String title, String filterType, List<String> options) {
     final cubit = context.read<SearchCubit>();
+    String filterTitle;
+    switch (filterType) {
+      case 'occasion':
+        filterTitle = context.el.filterOccasion;
+        break;
+      case 'recipient':
+        filterTitle = context.el.filterRecipient;
+        break;
+      case 'color':
+        filterTitle = context.el.filterColor;
+        break;
+      case 'bundleType':
+        filterTitle = context.el.filterBundleType;
+        break;
+      default:
+        filterTitle = title;
+    }
+
     return Padding(
       padding: const EdgeInsets.only(top: 16.0),
       child: Container(
@@ -184,7 +203,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
           collapsedIconColor: ColorsManager.mainRose,
           backgroundColor: ColorsManager.white,
           title: Text(
-            title,
+            filterTitle,
             style: GoogleFonts.inter(
               fontSize: 16.0.sp,
               fontWeight: FontWeight.w500,
@@ -379,7 +398,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
     final filteredCount =
         _calculateFilteredCount(context.read<SearchCubit>().originalProducts);
     final String showFilteredNumberText =
-        'Showing $filteredCount products'; // Replace with localization
+        '${context.el.showProductsPart1}$filteredCount${context.el.showProductsPart2}';
     final cubit = context.read<SearchCubit>();
 
     return Padding(

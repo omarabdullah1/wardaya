@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/assets/assets.dart';
 import 'package:wardaya/features/search/logic/cubit/search_cubit.dart';
@@ -28,7 +29,8 @@ class ProductCountAndView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Showing ${cubit.filteredProducts.length} products',
+                context.el.showingProductsCount
+                    .replaceAll('{count}', '${cubit.filteredProducts.length}'),
                 style: GoogleFonts.inter(
                   fontSize: 14.0.sp,
                   fontWeight: FontWeight.w700,
@@ -60,6 +62,7 @@ class ProductCountAndView extends StatelessWidget {
               svgPath: Assets.of(context).svgs.grid_svg,
               isActive: cubit.isGridView,
               onTap: () => cubit.setIsGridView(true),
+              tooltip: context.el.viewGrid,
             ),
             SizedBox(width: 15.0.w),
             _buildViewModeButton(
@@ -67,6 +70,7 @@ class ProductCountAndView extends StatelessWidget {
               svgPath: Assets.of(context).svgs.tile_svg,
               isActive: !cubit.isGridView,
               onTap: () => cubit.setIsGridView(false),
+              tooltip: context.el.viewList,
             ),
           ],
         ),
@@ -79,24 +83,20 @@ class ProductCountAndView extends StatelessWidget {
     required String svgPath,
     required bool isActive,
     required VoidCallback onTap,
+    required String tooltip,
   }) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: isActive ? ColorsManager.white : ColorsManager.transparent,
-          borderRadius: BorderRadius.circular(16.0),
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 10.0.w, vertical: 3.0.h),
+    return Tooltip(
+      message: tooltip,
+      child: GestureDetector(
+        onTap: onTap,
         child: SvgPicture.asset(
           svgPath,
           colorFilter: ColorFilter.mode(
-            isActive
-                ? ColorsManager.mainRose
-                : ColorsManager.mainRose.withAlpha(128),
+            isActive ? ColorsManager.mainRose : ColorsManager.grey,
             BlendMode.srcIn,
           ),
-          height: 14.0.h,
+          height: 20.0.h,
+          width: 20.0.w,
         ),
       ),
     );

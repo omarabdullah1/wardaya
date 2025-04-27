@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 
 import '../../../../../core/helpers/extensions.dart';
 import '../../../../../core/theming/styles.dart';
@@ -42,7 +43,7 @@ class _SearchBlocListenerState extends State<SearchBlocListener> {
                 context.pop();
               },
               child: Text(
-                'Got it',
+                context.el.gotIt,
                 style: TextStyles.font22MainRoseSemiBold,
               ),
             ),
