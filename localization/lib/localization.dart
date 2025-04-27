@@ -4,14 +4,13 @@
 
 import 'dart:developer' show log;
 
-import 'package:easiest_localization/easiest_localization.dart'
-    show LocalizationProvider;
+import 'package:easiest_localization/easiest_localization.dart' show LocalizationProvider;
 import 'package:flutter/foundation.dart' show kDebugMode;
-import 'package:flutter/widgets.dart'
-    show BuildContext, Locale, Localizations, LocalizationsDelegate;
-import 'package:flutter_localizations/flutter_localizations.dart'
-    show GlobalMaterialLocalizations;
+import 'package:flutter/widgets.dart' show BuildContext, Locale, Localizations, LocalizationsDelegate;
+import 'package:flutter_localizations/flutter_localizations.dart' show GlobalMaterialLocalizations;
 import 'package:intl/intl.dart' show Intl;
+
+final RegExp _variableRegExp = RegExp(r'\$\{[^}]+\} ?');
 
 typedef Checker<T> = bool Function(T value);
 
@@ -31,6 +30,9 @@ class LocalizationMessages {
     required this.appBarTitle,
     required this.deliveryTo,
     required this.locationCity,
+    required this.retry,
+    required this.continueShopping,
+    required this.viewCart,
     required this.emailLabel,
     required this.passwordLabel,
     required this.signInButton,
@@ -38,9 +40,19 @@ class LocalizationMessages {
     required this.createAccount,
     required this.dividerText,
     required this.signInWith,
+    required this.validationEmailPasswordRequired,
+    required this.googleSignInSuccess,
+    required this.googleSignInFailed,
+    required this.googleTokenError,
+    required this.loginFailed,
+    required this.registrationFailed,
+    required this.generalError,
+    required this.formAllFieldRequired,
+    required this.fieldRequired,
     required this.forgetPasswordTitle,
     required this.forgetPasswordInstruction,
     required this.resetPasswordButton,
+    required this.passwordResetLinkSent,
     required this.createAccountTitle,
     required this.createAccountButton,
     required this.nameLabel,
@@ -84,6 +96,20 @@ class LocalizationMessages {
     required this.flowersGiftsScreenTitle,
     required this.searchPlaceholder,
     required this.searchButton,
+    required this.filterTitle,
+    required this.filterApply,
+    required this.filterOccasion,
+    required this.filterRecipient,
+    required this.filterColor,
+    required this.filterBundleType,
+    required this.filterClear,
+    required this.filterClose,
+    required this.gotIt,
+    required this.filterButton,
+    required this.showingProductsCount,
+    required this.viewGrid,
+    required this.viewList,
+    required this.allChip,
     required this.categoryFilterTitle,
     required this.occasionFilterTitle,
     required this.recipientFilterTitle,
@@ -95,6 +121,8 @@ class LocalizationMessages {
     required this.noAddressHassle,
     required this.collectAddressText,
     required this.descriptionHeader,
+    required this.descriptionTab,
+    required this.careTipsTab,
     required this.seeMore,
     required this.seeLess,
     required this.allPricesIncludeTax,
@@ -239,6 +267,18 @@ class LocalizationMessages {
     required this.addressesScreenTitle,
     required this.addressesScreenAddNewAddressButton,
     required this.addressesScreenNoAddressesFound,
+    required this.addressSavedSuccessfully,
+    required this.addressUpdatedSuccessfully,
+    required this.addressDeletedSuccessfully,
+    required this.fillRequiredFields,
+    required this.dropAddressFromMap,
+    required this.enterAddressDetails,
+    required this.enterPhoneNumber,
+    required this.enterRecipientName,
+    required this.defaultAddressTitle,
+    required this.defaultAddressWithArea,
+    required this.addressLabelHint,
+    required this.extraAddressLabelHint,
     required this.recipientDetailsScreenTitle,
     required this.recipientDetailsScreenContinueButton,
     required this.recipientDetailsScreenRecipientNameLabel,
@@ -304,7 +344,82 @@ class LocalizationMessages {
     required this.quickAdd,
     required this.selectAnOccasionToCreateAreminder,
     required this.yourUpcomingOccasion,
+    required this.noUpcomingOccasions,
+    required this.noOccasionsAvailable,
+    required this.edit,
+    required this.delete,
+    required this.loading,
+    required this.deleteOccasionTitle,
+    required this.deleteOccasionConfirm,
+    required this.deleteButton,
+    required this.cancelButton,
+    required this.errorText,
     required this.selectDeliveryDate,
+    required this.invoiceTitle,
+    required this.noInvoicesTitle,
+    required this.noInvoicesSubtitle,
+    required this.invoiceDetails,
+    required this.subscriptionCheckoutTitle,
+    required this.recipientDetailsTitle,
+    required this.paymentMethodTitle,
+    required this.paymentDetailsTitle,
+    required this.proceedToPaymentButton1,
+    required this.useSavedAddresses,
+    required this.recipientNameLabel,
+    required this.recipientNameHint,
+    required this.recipientPhoneLabel,
+    required this.deliveryAddressLabel,
+    required this.askRecipientForAddress,
+    required this.enterRecipientAddress,
+    required this.selectSavedAddress,
+    required this.noSavedAddresses,
+    required this.addNewAddress,
+    required this.tryAgain,
+    required this.errorLoadingAddresses,
+    required this.creditCard,
+    required this.mada,
+    required this.googlePay,
+    required this.applePay,
+    required this.stcPay,
+    required this.firstDeliveryPaymentDetails,
+    required this.subtotalLabel,
+    required this.deliveryChargesLabel,
+    required this.totalVatIncluded,
+    required this.totalVatIncludedLabel,
+    required this.nextPaymentLabel,
+    required this.pleaseFillFields,
+    required this.selectLocation,
+    required this.searchForLocation,
+    required this.dragMapToAdjustLocation,
+    required this.selectedLocation,
+    required this.confirmLocation,
+    required this.locationServicesDisabled,
+    required this.locationPermissionsDenied,
+    required this.locationPermissionsPermanentlyDenied,
+    required this.currentLocationPinned,
+    required this.couldNotGetCurrentLocation,
+    required this.voucherCode,
+    required this.addVoucherCode,
+    required this.validatingPromoCode,
+    required this.promoCodeApplied,
+    required this.discount,
+    required this.invalidPromoCode,
+    required this.pleaseEnterVoucherCode,
+    required this.applied,
+    required this.apply,
+    required this.startTypingToSearch,
+    required this.toBeProvidedByRecipient,
+    required this.tomorrow,
+    required this.editOccasion,
+    required this.remindMeAbout,
+    required this.updateOccasionDetails,
+    required this.occasionDetailsPrompt,
+    required this.nameLabel1,
+    required this.dateLabel,
+    required this.pleaseEnterName,
+    required this.updateOccasionButton,
+    required this.createOccasionButton,
+    required this.errorPrefix,
     required this.deleteMyAccount,
     required this.deliveryFrequency1,
     required this.subscriptionDuration1,
@@ -315,6 +430,9 @@ class LocalizationMessages {
       appBarTitle: (json['app_bar_title'] ?? '').toString(),
       deliveryTo: (json['delivery_to'] ?? '').toString(),
       locationCity: (json['location_city'] ?? '').toString(),
+      retry: (json['retry'] ?? '').toString(),
+      continueShopping: (json['continue_shopping'] ?? '').toString(),
+      viewCart: (json['view_cart'] ?? '').toString(),
       emailLabel: (json['email_label'] ?? '').toString(),
       passwordLabel: (json['password_label'] ?? '').toString(),
       signInButton: (json['sign_in_button'] ?? '').toString(),
@@ -322,36 +440,36 @@ class LocalizationMessages {
       createAccount: (json['create_account'] ?? '').toString(),
       dividerText: (json['divider_text'] ?? '').toString(),
       signInWith: (json['sign_in_with'] ?? '').toString(),
+      validationEmailPasswordRequired: (json['validation_email_password_required'] ?? '').toString(),
+      googleSignInSuccess: (json['google_sign_in_success'] ?? '').toString(),
+      googleSignInFailed: (json['google_sign_in_failed'] ?? '').toString(),
+      googleTokenError: (json['google_token_error'] ?? '').toString(),
+      loginFailed: (json['login_failed'] ?? '').toString(),
+      registrationFailed: (json['registration_failed'] ?? '').toString(),
+      generalError: (json['general_error'] ?? '').toString(),
+      formAllFieldRequired: (json['form_all_field_required'] ?? '').toString(),
+      fieldRequired: (json['field_required'] ?? '').toString(),
       forgetPasswordTitle: (json['forget_password_title'] ?? '').toString(),
-      forgetPasswordInstruction:
-          (json['forget_password_instruction'] ?? '').toString(),
+      forgetPasswordInstruction: (json['forget_password_instruction'] ?? '').toString(),
       resetPasswordButton: (json['reset_password_button'] ?? '').toString(),
+      passwordResetLinkSent: (json['password_reset_link_sent'] ?? '').toString(),
       createAccountTitle: (json['create_account_title'] ?? '').toString(),
       createAccountButton: (json['create_account_button'] ?? '').toString(),
       nameLabel: (json['name_label'] ?? '').toString(),
       phoneLabel: (json['phone_label'] ?? '').toString(),
       selectCountryLabel: (json['select_country_label'] ?? '').toString(),
-      homeGiftsForEveryMoment:
-          (json['home_gifts_for_every_moment'] ?? '').toString(),
-      homeExploreUniqueGiftIdeas:
-          (json['home_explore_unique_gift_ideas'] ?? '').toString(),
+      homeGiftsForEveryMoment: (json['home_gifts_for_every_moment'] ?? '').toString(),
+      homeExploreUniqueGiftIdeas: (json['home_explore_unique_gift_ideas'] ?? '').toString(),
       homeChooseGiftsNow: (json['home_choose_gifts_now'] ?? '').toString(),
-      homeRoundedBeautyEndlessCharm:
-          (json['home_rounded_beauty_endless_charm'] ?? '').toString(),
-      homeStartTheYearWithTulips:
-          (json['home_start_the_year_with_tulips'] ?? '').toString(),
-      homeWoodntYouLoveThis:
-          (json['home_woodnt_you_love_this'] ?? '').toString(),
-      homeAnExtraLuxuriousTouch:
-          (json['home_an_extra_luxurious_touch'] ?? '').toString(),
+      homeRoundedBeautyEndlessCharm: (json['home_rounded_beauty_endless_charm'] ?? '').toString(),
+      homeStartTheYearWithTulips: (json['home_start_the_year_with_tulips'] ?? '').toString(),
+      homeWoodntYouLoveThis: (json['home_woodnt_you_love_this'] ?? '').toString(),
+      homeAnExtraLuxuriousTouch: (json['home_an_extra_luxurious_touch'] ?? '').toString(),
       homeBestSellers: (json['home_best_sellers'] ?? '').toString(),
-      homeCaptivationAromasOfMubkhar:
-          (json['home_captivation_aromas_of_mubkhar'] ?? '').toString(),
-      homeGiftYourLovedOnes:
-          (json['home_gift_your_loved_ones'] ?? '').toString(),
+      homeCaptivationAromasOfMubkhar: (json['home_captivation_aromas_of_mubkhar'] ?? '').toString(),
+      homeGiftYourLovedOnes: (json['home_gift_your_loved_ones'] ?? '').toString(),
       homeNaturesMagic: (json['home_natures_magic'] ?? '').toString(),
-      homeLatestAndLoveliest:
-          (json['home_latest_and_loveliest'] ?? '').toString(),
+      homeLatestAndLoveliest: (json['home_latest_and_loveliest'] ?? '').toString(),
       homeGiftsForEveryone: (json['home_gifts_for_everyone'] ?? '').toString(),
       homeBrandsYoullLove: (json['home_brands_youll_love'] ?? '').toString(),
       bottomNavHome: (json['bottom_nav_home'] ?? '').toString(),
@@ -362,34 +480,36 @@ class LocalizationMessages {
       exploreSearchHint: (json['explore_search_hint'] ?? '').toString(),
       exploreCardMoments: (json['explore_card_moments'] ?? '').toString(),
       exploreCardRecipients: (json['explore_card_recipients'] ?? '').toString(),
-      exploreCategoryFlowersPlants:
-          (json['explore_category_flowers_plants'] ?? '').toString(),
-      exploreCategoryFlowersGifts:
-          (json['explore_category_flowers_gifts'] ?? '').toString(),
-      exploreCategoryExpressDelivery:
-          (json['explore_category_express_delivery'] ?? '').toString(),
-      exploreCategoryFloralSubscription:
-          (json['explore_category_floral_subscription'] ?? '').toString(),
-      exploreBrandsYoullLove:
-          (json['explore_brands_youll_love'] ?? '').toString(),
-      discoverNewIdeasTitle:
-          (json['discover_new_ideas_title'] ?? '').toString(),
-      discoverCardExpressDeliveryTitle:
-          (json['discover_card_express_delivery_title'] ?? '').toString(),
-      discoverCardExpressDeliveryButton:
-          (json['discover_card_express_delivery_button'] ?? '').toString(),
-      discoverCardWeeklySurpriseTitle:
-          (json['discover_card_weekly_surprise_title'] ?? '').toString(),
-      discoverCardWeeklySurpriseButton:
-          (json['discover_card_weekly_surprise_button'] ?? '').toString(),
+      exploreCategoryFlowersPlants: (json['explore_category_flowers_plants'] ?? '').toString(),
+      exploreCategoryFlowersGifts: (json['explore_category_flowers_gifts'] ?? '').toString(),
+      exploreCategoryExpressDelivery: (json['explore_category_express_delivery'] ?? '').toString(),
+      exploreCategoryFloralSubscription: (json['explore_category_floral_subscription'] ?? '').toString(),
+      exploreBrandsYoullLove: (json['explore_brands_youll_love'] ?? '').toString(),
+      discoverNewIdeasTitle: (json['discover_new_ideas_title'] ?? '').toString(),
+      discoverCardExpressDeliveryTitle: (json['discover_card_express_delivery_title'] ?? '').toString(),
+      discoverCardExpressDeliveryButton: (json['discover_card_express_delivery_button'] ?? '').toString(),
+      discoverCardWeeklySurpriseTitle: (json['discover_card_weekly_surprise_title'] ?? '').toString(),
+      discoverCardWeeklySurpriseButton: (json['discover_card_weekly_surprise_button'] ?? '').toString(),
       momentsScreenTitle: (json['moments_screen_title'] ?? '').toString(),
       recipientsScreenTitle: (json['recipients_screen_title'] ?? '').toString(),
-      flowersPlanetsScreenTitle:
-          (json['flowers_planets_screen_title'] ?? '').toString(),
-      flowersGiftsScreenTitle:
-          (json['flowers_gifts_screen_title'] ?? '').toString(),
+      flowersPlanetsScreenTitle: (json['flowers_planets_screen_title'] ?? '').toString(),
+      flowersGiftsScreenTitle: (json['flowers_gifts_screen_title'] ?? '').toString(),
       searchPlaceholder: (json['search_placeholder'] ?? '').toString(),
       searchButton: (json['search_button'] ?? '').toString(),
+      filterTitle: (json['filter_title'] ?? '').toString(),
+      filterApply: (json['filter_apply'] ?? '').toString(),
+      filterOccasion: (json['filter_occasion'] ?? '').toString(),
+      filterRecipient: (json['filter_recipient'] ?? '').toString(),
+      filterColor: (json['filter_color'] ?? '').toString(),
+      filterBundleType: (json['filter_bundle_type'] ?? '').toString(),
+      filterClear: (json['filter_clear'] ?? '').toString(),
+      filterClose: (json['filter_close'] ?? '').toString(),
+      gotIt: (json['got_it'] ?? '').toString(),
+      filterButton: (json['filter_button'] ?? '').toString(),
+      showingProductsCount: (json['showing_products_count'] ?? '').toString(),
+      viewGrid: (json['view_grid'] ?? '').toString(),
+      viewList: (json['view_list'] ?? '').toString(),
+      allChip: (json['all_chip'] ?? '').toString(),
       categoryFilterTitle: (json['category_filter_title'] ?? '').toString(),
       occasionFilterTitle: (json['occasion_filter_title'] ?? '').toString(),
       recipientFilterTitle: (json['recipient_filter_title'] ?? '').toString(),
@@ -401,6 +521,8 @@ class LocalizationMessages {
       noAddressHassle: (json['no_address_hassle'] ?? '').toString(),
       collectAddressText: (json['collect_address_text'] ?? '').toString(),
       descriptionHeader: (json['description_header'] ?? '').toString(),
+      descriptionTab: (json['description_tab'] ?? '').toString(),
+      careTipsTab: (json['care_tips_tab'] ?? '').toString(),
       seeMore: (json['see_more'] ?? '').toString(),
       seeLess: (json['see_less'] ?? '').toString(),
       allPricesIncludeTax: (json['all_prices_include_tax'] ?? '').toString(),
@@ -408,8 +530,7 @@ class LocalizationMessages {
       productDetailsTitle: (json['product_details_title'] ?? '').toString(),
       wardayaPoints: (json['wardaya_points'] ?? '').toString(),
       currencySar: (json['currency_sar'] ?? '').toString(),
-      splitPaymentsWithTamara:
-          (json['split_payments_with_tamara'] ?? '').toString(),
+      splitPaymentsWithTamara: (json['split_payments_with_tamara'] ?? '').toString(),
       earn: (json['earn'] ?? '').toString(),
       similarProducts: (json['similarProducts'] ?? '').toString(),
       noSimilarProducts: (json['noSimilarProducts'] ?? '').toString(),
@@ -432,10 +553,8 @@ class LocalizationMessages {
       toLabel: (json['to_label'] ?? '').toString(),
       fromLabel: (json['from_label'] ?? '').toString(),
       optionalHint: (json['optional_hint'] ?? '').toString(),
-      suggestedMessagesPromptPart1:
-          (json['suggested_messages_prompt_part1'] ?? '').toString(),
-      suggestedMessagesPromptPart2:
-          (json['suggested_messages_prompt_part2'] ?? '').toString(),
+      suggestedMessagesPromptPart1: (json['suggested_messages_prompt_part1'] ?? '').toString(),
+      suggestedMessagesPromptPart2: (json['suggested_messages_prompt_part2'] ?? '').toString(),
       signatureButton: (json['signature_button'] ?? '').toString(),
       qrCodeLabel: (json['qr_code_label'] ?? '').toString(),
       recordVideoButton: (json['record_video_button'] ?? '').toString(),
@@ -456,8 +575,7 @@ class LocalizationMessages {
       mediaIntroText: (json['media_intro_text'] ?? '').toString(),
       howItWorks: (json['how_it_works'] ?? '').toString(),
       pasteLinkInstruction: (json['paste_link_instruction'] ?? '').toString(),
-      recordVideoInstruction:
-          (json['record_video_instruction'] ?? '').toString(),
+      recordVideoInstruction: (json['record_video_instruction'] ?? '').toString(),
       qrCodeNote: (json['qr_code_note'] ?? '').toString(),
       freeLabel: (json['free_label'] ?? '').toString(),
       pasteLinkHint: (json['paste_link_hint'] ?? '').toString(),
@@ -498,8 +616,7 @@ class LocalizationMessages {
       english: (json['english'] ?? '').toString(),
       logout: (json['logout'] ?? '').toString(),
       deleteAccount: (json['delete_account'] ?? '').toString(),
-      deleteAccountConfirmation:
-          (json['delete_account_confirmation'] ?? '').toString(),
+      deleteAccountConfirmation: (json['delete_account_confirmation'] ?? '').toString(),
       confirm: (json['confirm'] ?? '').toString(),
       cancel: (json['cancel'] ?? '').toString(),
       editProfileTitle: (json['edit_profile_title'] ?? '').toString(),
@@ -514,34 +631,24 @@ class LocalizationMessages {
       birthdayLabel: (json['birthday_label'] ?? '').toString(),
       mySubscriptionsTitle: (json['my_subscriptions_title'] ?? '').toString(),
       wardayaSubscriptions: (json['wardaya_subscriptions'] ?? '').toString(),
-      subscriptionDescription:
-          (json['subscription_description'] ?? '').toString(),
-      subscriptionHowItWorks:
-          (json['subscription_how_it_works'] ?? '').toString(),
-      subscriptionSelectYourPlan:
-          (json['subscription_select_your_plan'] ?? '').toString(),
-      subscriptionChooseWhatFitsYourNeeds:
-          (json['subscription_choose_what_fits_your_needs'] ?? '').toString(),
-      subscriptionCustomizeDelivery:
-          (json['subscription_customize_delivery'] ?? '').toString(),
+      subscriptionDescription: (json['subscription_description'] ?? '').toString(),
+      subscriptionHowItWorks: (json['subscription_how_it_works'] ?? '').toString(),
+      subscriptionSelectYourPlan: (json['subscription_select_your_plan'] ?? '').toString(),
+      subscriptionChooseWhatFitsYourNeeds: (json['subscription_choose_what_fits_your_needs'] ?? '').toString(),
+      subscriptionCustomizeDelivery: (json['subscription_customize_delivery'] ?? '').toString(),
       subscriptionSetDeliveryFrequencyAndPayment:
-          (json['subscription_set_delivery_frequency_and_payment'] ?? '')
-              .toString(),
-      subscriptionEnjoyFreshFlowers:
-          (json['subscription_enjoy_fresh_flowers'] ?? '').toString(),
+          (json['subscription_set_delivery_frequency_and_payment'] ?? '').toString(),
+      subscriptionEnjoyFreshFlowers: (json['subscription_enjoy_fresh_flowers'] ?? '').toString(),
       subscriptionReceiveFreshFlowersEveryTime:
-          (json['subscription_receive_fresh_flowers_every_time'] ?? '')
-              .toString(),
+          (json['subscription_receive_fresh_flowers_every_time'] ?? '').toString(),
       subscriptionPlans: (json['subscription_plans'] ?? '').toString(),
-      subscriptionStartingFrom:
-          (json['subscription_starting_from'] ?? '').toString(),
+      subscriptionStartingFrom: (json['subscription_starting_from'] ?? '').toString(),
       subscriptionButton: (json['subscription_button'] ?? '').toString(),
       more: (json['more'] ?? '').toString(),
       less: (json['less'] ?? '').toString(),
       startingFrom: (json['starting_from'] ?? '').toString(),
       perDelivery: (json['per_delivery'] ?? '').toString(),
-      subscriptionDurationTitle:
-          (json['subscription_duration_title'] ?? '').toString(),
+      subscriptionDurationTitle: (json['subscription_duration_title'] ?? '').toString(),
       deliveryFrequency: (json['deliveryـfrequency'] ?? '').toString(),
       onceAWeek: (json['once_a_week'] ?? '').toString(),
       everyTwoWeeks: (json['every_two_weeks'] ?? '').toString(),
@@ -551,41 +658,41 @@ class LocalizationMessages {
       total: (json['total'] ?? '').toString(),
       startingDate: (json['starting_date'] ?? '').toString(),
       selectOtherDate: (json['select_other_date'] ?? '').toString(),
-      weSelectDeleveryBasedArea:
-          (json['we_select_delevery_based_area'] ?? '').toString(),
+      weSelectDeleveryBasedArea: (json['we_select_delevery_based_area'] ?? '').toString(),
       off: (json['off'] ?? '').toString(),
       perDelivery1: (json['perـdelivery'] ?? '').toString(),
       favoritesScreenTitle: (json['favorites_screen_title'] ?? '').toString(),
       favoritesEmptyTitle: (json['favorites_empty_title'] ?? '').toString(),
       favoritesEmptyButton: (json['favorites_empty_button'] ?? '').toString(),
-      subMenuItemsScreenTitle:
-          (json['sub_menu_items_screen_title'] ?? '').toString(),
-      subMenuItemsEmptyTitle:
-          (json['sub_menu_items_empty_title'] ?? '').toString(),
+      subMenuItemsScreenTitle: (json['sub_menu_items_screen_title'] ?? '').toString(),
+      subMenuItemsEmptyTitle: (json['sub_menu_items_empty_title'] ?? '').toString(),
       addressesScreenTitle: (json['addresses_screen_title'] ?? '').toString(),
-      addressesScreenAddNewAddressButton:
-          (json['addresses_screen_add_new_address_button'] ?? '').toString(),
-      addressesScreenNoAddressesFound:
-          (json['addresses_screen_no_addresses_found'] ?? '').toString(),
-      recipientDetailsScreenTitle:
-          (json['recipient_details_screen_title'] ?? '').toString(),
-      recipientDetailsScreenContinueButton:
-          (json['recipient_details_screen_continue_button'] ?? '').toString(),
+      addressesScreenAddNewAddressButton: (json['addresses_screen_add_new_address_button'] ?? '').toString(),
+      addressesScreenNoAddressesFound: (json['addresses_screen_no_addresses_found'] ?? '').toString(),
+      addressSavedSuccessfully: (json['address_saved_successfully'] ?? '').toString(),
+      addressUpdatedSuccessfully: (json['address_updated_successfully'] ?? '').toString(),
+      addressDeletedSuccessfully: (json['address_deleted_successfully'] ?? '').toString(),
+      fillRequiredFields: (json['fill_required_fields'] ?? '').toString(),
+      dropAddressFromMap: (json['drop_address_from_map'] ?? '').toString(),
+      enterAddressDetails: (json['enter_address_details'] ?? '').toString(),
+      enterPhoneNumber: (json['enter_phone_number'] ?? '').toString(),
+      enterRecipientName: (json['enter_recipient_name'] ?? '').toString(),
+      defaultAddressTitle: (json['default_address_title'] ?? '').toString(),
+      defaultAddressWithArea: (json['default_address_with_area'] ?? '').toString(),
+      addressLabelHint: (json['address_label_hint'] ?? '').toString(),
+      extraAddressLabelHint: (json['extra_address_label_hint'] ?? '').toString(),
+      recipientDetailsScreenTitle: (json['recipient_details_screen_title'] ?? '').toString(),
+      recipientDetailsScreenContinueButton: (json['recipient_details_screen_continue_button'] ?? '').toString(),
       recipientDetailsScreenRecipientNameLabel:
-          (json['recipient_details_screen_recipient_name_label'] ?? '')
-              .toString(),
+          (json['recipient_details_screen_recipient_name_label'] ?? '').toString(),
       recipientDetailsScreenRecipientPhoneLabel:
-          (json['recipient_details_screen_recipient_phone_label'] ?? '')
-              .toString(),
+          (json['recipient_details_screen_recipient_phone_label'] ?? '').toString(),
       recipientDetailsScreenRecipientAreaLabel:
-          (json['recipient_details_screen_recipient_area_label'] ?? '')
-              .toString(),
+          (json['recipient_details_screen_recipient_area_label'] ?? '').toString(),
       recipientDetailsScreenRecipientAddressLabel:
-          (json['recipient_details_screen_recipient_address_label'] ?? '')
-              .toString(),
+          (json['recipient_details_screen_recipient_address_label'] ?? '').toString(),
       recipientDetailsScreenRecipientExtraAddressLabel:
-          (json['recipient_details_screen_recipient_extra_address_label'] ?? '')
-              .toString(),
+          (json['recipient_details_screen_recipient_extra_address_label'] ?? '').toString(),
       orderNumber: (json['orderNumber'] ?? '').toString(),
       date: (json['date'] ?? '').toString(),
       orderId: (json['orderId'] ?? '').toString(),
@@ -610,8 +717,7 @@ class LocalizationMessages {
       deliveryCharges: (json['deliveryCharges'] ?? '').toString(),
       vatLabel: (json['vatLabel'] ?? '').toString(),
       paymentMethod: (json['paymentMethod'] ?? '').toString(),
-      searchOrderPlaceholder:
-          (json['search_order_placeholder'] ?? '').toString(),
+      searchOrderPlaceholder: (json['search_order_placeholder'] ?? '').toString(),
       paymentTitle: (json['paymentTitle'] ?? '').toString(),
       cancelPaymentTitle: (json['cancelPaymentTitle'] ?? '').toString(),
       cancelPaymentMessage: (json['cancelPaymentMessage'] ?? '').toString(),
@@ -629,8 +735,7 @@ class LocalizationMessages {
       paymentMethodsTitle: (json['paymentMethodsTitle'] ?? '').toString(),
       proceedToPaymentButton: (json['proceedToPaymentButton'] ?? '').toString(),
       creditDebitCardTitle: (json['creditDebitCardTitle'] ?? '').toString(),
-      creditDebitCardDescription:
-          (json['creditDebitCardDescription'] ?? '').toString(),
+      creditDebitCardDescription: (json['creditDebitCardDescription'] ?? '').toString(),
       madaTitle: (json['madaTitle'] ?? '').toString(),
       madaDescription: (json['madaDescription'] ?? '').toString(),
       applePayTitle: (json['applePayTitle'] ?? '').toString(),
@@ -644,10 +749,84 @@ class LocalizationMessages {
       sendYourGiftTo: (json['SendYourGiftTo'] ?? '').toString(),
       myOccasions: (json['myOccasions'] ?? '').toString(),
       quickAdd: (json['quickAdd'] ?? '').toString(),
-      selectAnOccasionToCreateAreminder:
-          (json['selectAnOccasionToCreateAReminder'] ?? '').toString(),
+      selectAnOccasionToCreateAreminder: (json['selectAnOccasionToCreateAReminder'] ?? '').toString(),
       yourUpcomingOccasion: (json['yourUpcomingOccasion'] ?? '').toString(),
+      noUpcomingOccasions: (json['noUpcomingOccasions'] ?? '').toString(),
+      noOccasionsAvailable: (json['noOccasionsAvailable'] ?? '').toString(),
+      edit: (json['edit'] ?? '').toString(),
+      delete: (json['delete'] ?? '').toString(),
+      loading: (json['loading'] ?? '').toString(),
+      deleteOccasionTitle: (json['deleteOccasionTitle'] ?? '').toString(),
+      deleteOccasionConfirm: (json['deleteOccasionConfirm'] ?? '').toString(),
+      deleteButton: (json['deleteButton'] ?? '').toString(),
+      cancelButton: (json['cancelButton'] ?? '').toString(),
+      errorText: (json['errorText'] ?? '').toString(),
       selectDeliveryDate: (json['selectDeliveryDate'] ?? '').toString(),
+      invoiceTitle: (json['invoiceTitle'] ?? '').toString(),
+      noInvoicesTitle: (json['noInvoicesTitle'] ?? '').toString(),
+      noInvoicesSubtitle: (json['noInvoicesSubtitle'] ?? '').toString(),
+      invoiceDetails: (json['invoiceDetails'] ?? '').toString(),
+      subscriptionCheckoutTitle: (json['subscription_checkout_title'] ?? '').toString(),
+      recipientDetailsTitle: (json['recipient_details_title'] ?? '').toString(),
+      paymentMethodTitle: (json['payment_method_title'] ?? '').toString(),
+      paymentDetailsTitle: (json['payment_details_title'] ?? '').toString(),
+      proceedToPaymentButton1: (json['proceed_to_payment_button'] ?? '').toString(),
+      useSavedAddresses: (json['use_saved_addresses'] ?? '').toString(),
+      recipientNameLabel: (json['recipient_name_label'] ?? '').toString(),
+      recipientNameHint: (json['recipient_name_hint'] ?? '').toString(),
+      recipientPhoneLabel: (json['recipient_phone_label'] ?? '').toString(),
+      deliveryAddressLabel: (json['delivery_address_label'] ?? '').toString(),
+      askRecipientForAddress: (json['ask_recipient_for_address'] ?? '').toString(),
+      enterRecipientAddress: (json['enter_recipient_address'] ?? '').toString(),
+      selectSavedAddress: (json['select_saved_address'] ?? '').toString(),
+      noSavedAddresses: (json['no_saved_addresses'] ?? '').toString(),
+      addNewAddress: (json['add_new_address'] ?? '').toString(),
+      tryAgain: (json['try_again'] ?? '').toString(),
+      errorLoadingAddresses: (json['error_loading_addresses'] ?? '').toString(),
+      creditCard: (json['credit_card'] ?? '').toString(),
+      mada: (json['mada'] ?? '').toString(),
+      googlePay: (json['google_pay'] ?? '').toString(),
+      applePay: (json['apple_pay'] ?? '').toString(),
+      stcPay: (json['stc_pay'] ?? '').toString(),
+      firstDeliveryPaymentDetails: (json['first_delivery_payment_details'] ?? '').toString(),
+      subtotalLabel: (json['subtotal_label'] ?? '').toString(),
+      deliveryChargesLabel: (json['delivery_charges_label'] ?? '').toString(),
+      totalVatIncluded: (json['total_vat_included'] ?? '').toString(),
+      totalVatIncludedLabel: (json['total_vat_included_label'] ?? '').toString(),
+      nextPaymentLabel: (json['next_payment_label'] ?? '').toString(),
+      pleaseFillFields: (json['please_fill_fields'] ?? '').toString(),
+      selectLocation: (json['selectLocation'] ?? '').toString(),
+      searchForLocation: (json['searchForLocation'] ?? '').toString(),
+      dragMapToAdjustLocation: (json['dragMapToAdjustLocation'] ?? '').toString(),
+      selectedLocation: (json['selectedLocation'] ?? '').toString(),
+      confirmLocation: (json['confirmLocation'] ?? '').toString(),
+      locationServicesDisabled: (json['locationServicesDisabled'] ?? '').toString(),
+      locationPermissionsDenied: (json['locationPermissionsDenied'] ?? '').toString(),
+      locationPermissionsPermanentlyDenied: (json['locationPermissionsPermanentlyDenied'] ?? '').toString(),
+      currentLocationPinned: (json['currentLocationPinned'] ?? '').toString(),
+      couldNotGetCurrentLocation: (json['couldNotGetCurrentLocation'] ?? '').toString(),
+      voucherCode: (json['voucher_code'] ?? '').toString(),
+      addVoucherCode: (json['add_voucher_code'] ?? '').toString(),
+      validatingPromoCode: (json['validating_promo_code'] ?? '').toString(),
+      promoCodeApplied: (json['promo_code_applied'] ?? '').toString(),
+      discount: (json['discount'] ?? '').toString(),
+      invalidPromoCode: (json['invalid_promo_code'] ?? '').toString(),
+      pleaseEnterVoucherCode: (json['please_enter_voucher_code'] ?? '').toString(),
+      applied: (json['applied'] ?? '').toString(),
+      apply: (json['apply'] ?? '').toString(),
+      startTypingToSearch: (json['start_typing_to_search'] ?? '').toString(),
+      toBeProvidedByRecipient: (json['to_be_provided_by_recipient'] ?? '').toString(),
+      tomorrow: (json['tomorrow'] ?? '').toString(),
+      editOccasion: (json['editOccasion'] ?? '').toString(),
+      remindMeAbout: (json['remindMeAbout'] ?? '').toString(),
+      updateOccasionDetails: (json['updateOccasionDetails'] ?? '').toString(),
+      occasionDetailsPrompt: (json['occasionDetailsPrompt'] ?? '').toString(),
+      nameLabel1: (json['nameLabel'] ?? '').toString(),
+      dateLabel: (json['dateLabel'] ?? '').toString(),
+      pleaseEnterName: (json['pleaseEnterName'] ?? '').toString(),
+      updateOccasionButton: (json['updateOccasionButton'] ?? '').toString(),
+      createOccasionButton: (json['createOccasionButton'] ?? '').toString(),
+      errorPrefix: (json['errorPrefix'] ?? '').toString(),
       deleteMyAccount: (json['delete_my_account'] ?? '').toString(),
       deliveryFrequency1: (json['delivery_frequency'] ?? '').toString(),
       subscriptionDuration1: (json['subscription_duration'] ?? '').toString(),
@@ -657,6 +836,9 @@ class LocalizationMessages {
   final String appBarTitle;
   final String deliveryTo;
   final String locationCity;
+  final String retry;
+  final String continueShopping;
+  final String viewCart;
   final String emailLabel;
   final String passwordLabel;
   final String signInButton;
@@ -664,9 +846,19 @@ class LocalizationMessages {
   final String createAccount;
   final String dividerText;
   final String signInWith;
+  final String validationEmailPasswordRequired;
+  final String googleSignInSuccess;
+  final String googleSignInFailed;
+  final String googleTokenError;
+  final String loginFailed;
+  final String registrationFailed;
+  final String generalError;
+  final String formAllFieldRequired;
+  final String fieldRequired;
   final String forgetPasswordTitle;
   final String forgetPasswordInstruction;
   final String resetPasswordButton;
+  final String passwordResetLinkSent;
   final String createAccountTitle;
   final String createAccountButton;
   final String nameLabel;
@@ -710,6 +902,20 @@ class LocalizationMessages {
   final String flowersGiftsScreenTitle;
   final String searchPlaceholder;
   final String searchButton;
+  final String filterTitle;
+  final String filterApply;
+  final String filterOccasion;
+  final String filterRecipient;
+  final String filterColor;
+  final String filterBundleType;
+  final String filterClear;
+  final String filterClose;
+  final String gotIt;
+  final String filterButton;
+  final String showingProductsCount;
+  final String viewGrid;
+  final String viewList;
+  final String allChip;
   final String categoryFilterTitle;
   final String occasionFilterTitle;
   final String recipientFilterTitle;
@@ -721,6 +927,8 @@ class LocalizationMessages {
   final String noAddressHassle;
   final String collectAddressText;
   final String descriptionHeader;
+  final String descriptionTab;
+  final String careTipsTab;
   final String seeMore;
   final String seeLess;
   final String allPricesIncludeTax;
@@ -865,6 +1073,18 @@ class LocalizationMessages {
   final String addressesScreenTitle;
   final String addressesScreenAddNewAddressButton;
   final String addressesScreenNoAddressesFound;
+  final String addressSavedSuccessfully;
+  final String addressUpdatedSuccessfully;
+  final String addressDeletedSuccessfully;
+  final String fillRequiredFields;
+  final String dropAddressFromMap;
+  final String enterAddressDetails;
+  final String enterPhoneNumber;
+  final String enterRecipientName;
+  final String defaultAddressTitle;
+  final String defaultAddressWithArea;
+  final String addressLabelHint;
+  final String extraAddressLabelHint;
   final String recipientDetailsScreenTitle;
   final String recipientDetailsScreenContinueButton;
   final String recipientDetailsScreenRecipientNameLabel;
@@ -930,7 +1150,82 @@ class LocalizationMessages {
   final String quickAdd;
   final String selectAnOccasionToCreateAreminder;
   final String yourUpcomingOccasion;
+  final String noUpcomingOccasions;
+  final String noOccasionsAvailable;
+  final String edit;
+  final String delete;
+  final String loading;
+  final String deleteOccasionTitle;
+  final String deleteOccasionConfirm;
+  final String deleteButton;
+  final String cancelButton;
+  final String errorText;
   final String selectDeliveryDate;
+  final String invoiceTitle;
+  final String noInvoicesTitle;
+  final String noInvoicesSubtitle;
+  final String invoiceDetails;
+  final String subscriptionCheckoutTitle;
+  final String recipientDetailsTitle;
+  final String paymentMethodTitle;
+  final String paymentDetailsTitle;
+  final String proceedToPaymentButton1;
+  final String useSavedAddresses;
+  final String recipientNameLabel;
+  final String recipientNameHint;
+  final String recipientPhoneLabel;
+  final String deliveryAddressLabel;
+  final String askRecipientForAddress;
+  final String enterRecipientAddress;
+  final String selectSavedAddress;
+  final String noSavedAddresses;
+  final String addNewAddress;
+  final String tryAgain;
+  final String errorLoadingAddresses;
+  final String creditCard;
+  final String mada;
+  final String googlePay;
+  final String applePay;
+  final String stcPay;
+  final String firstDeliveryPaymentDetails;
+  final String subtotalLabel;
+  final String deliveryChargesLabel;
+  final String totalVatIncluded;
+  final String totalVatIncludedLabel;
+  final String nextPaymentLabel;
+  final String pleaseFillFields;
+  final String selectLocation;
+  final String searchForLocation;
+  final String dragMapToAdjustLocation;
+  final String selectedLocation;
+  final String confirmLocation;
+  final String locationServicesDisabled;
+  final String locationPermissionsDenied;
+  final String locationPermissionsPermanentlyDenied;
+  final String currentLocationPinned;
+  final String couldNotGetCurrentLocation;
+  final String voucherCode;
+  final String addVoucherCode;
+  final String validatingPromoCode;
+  final String promoCodeApplied;
+  final String discount;
+  final String invalidPromoCode;
+  final String pleaseEnterVoucherCode;
+  final String applied;
+  final String apply;
+  final String startTypingToSearch;
+  final String toBeProvidedByRecipient;
+  final String tomorrow;
+  final String editOccasion;
+  final String remindMeAbout;
+  final String updateOccasionDetails;
+  final String occasionDetailsPrompt;
+  final String nameLabel1;
+  final String dateLabel;
+  final String pleaseEnterName;
+  final String updateOccasionButton;
+  final String createOccasionButton;
+  final String errorPrefix;
   final String deleteMyAccount;
   final String deliveryFrequency1;
   final String subscriptionDuration1;
@@ -939,6 +1234,9 @@ class LocalizationMessages {
         r'''app_bar_title''': appBarTitle,
         r'''delivery_to''': deliveryTo,
         r'''location_city''': locationCity,
+        r'''retry''': retry,
+        r'''continue_shopping''': continueShopping,
+        r'''view_cart''': viewCart,
         r'''email_label''': emailLabel,
         r'''password_label''': passwordLabel,
         r'''sign_in_button''': signInButton,
@@ -946,9 +1244,19 @@ class LocalizationMessages {
         r'''create_account''': createAccount,
         r'''divider_text''': dividerText,
         r'''sign_in_with''': signInWith,
+        r'''validation_email_password_required''': validationEmailPasswordRequired,
+        r'''google_sign_in_success''': googleSignInSuccess,
+        r'''google_sign_in_failed''': googleSignInFailed,
+        r'''google_token_error''': googleTokenError,
+        r'''login_failed''': loginFailed,
+        r'''registration_failed''': registrationFailed,
+        r'''general_error''': generalError,
+        r'''form_all_field_required''': formAllFieldRequired,
+        r'''field_required''': fieldRequired,
         r'''forget_password_title''': forgetPasswordTitle,
         r'''forget_password_instruction''': forgetPasswordInstruction,
         r'''reset_password_button''': resetPasswordButton,
+        r'''password_reset_link_sent''': passwordResetLinkSent,
         r'''create_account_title''': createAccountTitle,
         r'''create_account_button''': createAccountButton,
         r'''name_label''': nameLabel,
@@ -962,8 +1270,7 @@ class LocalizationMessages {
         r'''home_woodnt_you_love_this''': homeWoodntYouLoveThis,
         r'''home_an_extra_luxurious_touch''': homeAnExtraLuxuriousTouch,
         r'''home_best_sellers''': homeBestSellers,
-        r'''home_captivation_aromas_of_mubkhar''':
-            homeCaptivationAromasOfMubkhar,
+        r'''home_captivation_aromas_of_mubkhar''': homeCaptivationAromasOfMubkhar,
         r'''home_gift_your_loved_ones''': homeGiftYourLovedOnes,
         r'''home_natures_magic''': homeNaturesMagic,
         r'''home_latest_and_loveliest''': homeLatestAndLoveliest,
@@ -979,26 +1286,34 @@ class LocalizationMessages {
         r'''explore_card_recipients''': exploreCardRecipients,
         r'''explore_category_flowers_plants''': exploreCategoryFlowersPlants,
         r'''explore_category_flowers_gifts''': exploreCategoryFlowersGifts,
-        r'''explore_category_express_delivery''':
-            exploreCategoryExpressDelivery,
-        r'''explore_category_floral_subscription''':
-            exploreCategoryFloralSubscription,
+        r'''explore_category_express_delivery''': exploreCategoryExpressDelivery,
+        r'''explore_category_floral_subscription''': exploreCategoryFloralSubscription,
         r'''explore_brands_youll_love''': exploreBrandsYoullLove,
         r'''discover_new_ideas_title''': discoverNewIdeasTitle,
-        r'''discover_card_express_delivery_title''':
-            discoverCardExpressDeliveryTitle,
-        r'''discover_card_express_delivery_button''':
-            discoverCardExpressDeliveryButton,
-        r'''discover_card_weekly_surprise_title''':
-            discoverCardWeeklySurpriseTitle,
-        r'''discover_card_weekly_surprise_button''':
-            discoverCardWeeklySurpriseButton,
+        r'''discover_card_express_delivery_title''': discoverCardExpressDeliveryTitle,
+        r'''discover_card_express_delivery_button''': discoverCardExpressDeliveryButton,
+        r'''discover_card_weekly_surprise_title''': discoverCardWeeklySurpriseTitle,
+        r'''discover_card_weekly_surprise_button''': discoverCardWeeklySurpriseButton,
         r'''moments_screen_title''': momentsScreenTitle,
         r'''recipients_screen_title''': recipientsScreenTitle,
         r'''flowers_planets_screen_title''': flowersPlanetsScreenTitle,
         r'''flowers_gifts_screen_title''': flowersGiftsScreenTitle,
         r'''search_placeholder''': searchPlaceholder,
         r'''search_button''': searchButton,
+        r'''filter_title''': filterTitle,
+        r'''filter_apply''': filterApply,
+        r'''filter_occasion''': filterOccasion,
+        r'''filter_recipient''': filterRecipient,
+        r'''filter_color''': filterColor,
+        r'''filter_bundle_type''': filterBundleType,
+        r'''filter_clear''': filterClear,
+        r'''filter_close''': filterClose,
+        r'''got_it''': gotIt,
+        r'''filter_button''': filterButton,
+        r'''showing_products_count''': showingProductsCount,
+        r'''view_grid''': viewGrid,
+        r'''view_list''': viewList,
+        r'''all_chip''': allChip,
         r'''category_filter_title''': categoryFilterTitle,
         r'''occasion_filter_title''': occasionFilterTitle,
         r'''recipient_filter_title''': recipientFilterTitle,
@@ -1010,6 +1325,8 @@ class LocalizationMessages {
         r'''no_address_hassle''': noAddressHassle,
         r'''collect_address_text''': collectAddressText,
         r'''description_header''': descriptionHeader,
+        r'''description_tab''': descriptionTab,
+        r'''care_tips_tab''': careTipsTab,
         r'''see_more''': seeMore,
         r'''see_less''': seeLess,
         r'''all_prices_include_tax''': allPricesIncludeTax,
@@ -1121,14 +1438,11 @@ class LocalizationMessages {
         r'''subscription_description''': subscriptionDescription,
         r'''subscription_how_it_works''': subscriptionHowItWorks,
         r'''subscription_select_your_plan''': subscriptionSelectYourPlan,
-        r'''subscription_choose_what_fits_your_needs''':
-            subscriptionChooseWhatFitsYourNeeds,
+        r'''subscription_choose_what_fits_your_needs''': subscriptionChooseWhatFitsYourNeeds,
         r'''subscription_customize_delivery''': subscriptionCustomizeDelivery,
-        r'''subscription_set_delivery_frequency_and_payment''':
-            subscriptionSetDeliveryFrequencyAndPayment,
+        r'''subscription_set_delivery_frequency_and_payment''': subscriptionSetDeliveryFrequencyAndPayment,
         r'''subscription_enjoy_fresh_flowers''': subscriptionEnjoyFreshFlowers,
-        r'''subscription_receive_fresh_flowers_every_time''':
-            subscriptionReceiveFreshFlowersEveryTime,
+        r'''subscription_receive_fresh_flowers_every_time''': subscriptionReceiveFreshFlowersEveryTime,
         r'''subscription_plans''': subscriptionPlans,
         r'''subscription_starting_from''': subscriptionStartingFrom,
         r'''subscription_button''': subscriptionButton,
@@ -1155,23 +1469,27 @@ class LocalizationMessages {
         r'''sub_menu_items_screen_title''': subMenuItemsScreenTitle,
         r'''sub_menu_items_empty_title''': subMenuItemsEmptyTitle,
         r'''addresses_screen_title''': addressesScreenTitle,
-        r'''addresses_screen_add_new_address_button''':
-            addressesScreenAddNewAddressButton,
-        r'''addresses_screen_no_addresses_found''':
-            addressesScreenNoAddressesFound,
+        r'''addresses_screen_add_new_address_button''': addressesScreenAddNewAddressButton,
+        r'''addresses_screen_no_addresses_found''': addressesScreenNoAddressesFound,
+        r'''address_saved_successfully''': addressSavedSuccessfully,
+        r'''address_updated_successfully''': addressUpdatedSuccessfully,
+        r'''address_deleted_successfully''': addressDeletedSuccessfully,
+        r'''fill_required_fields''': fillRequiredFields,
+        r'''drop_address_from_map''': dropAddressFromMap,
+        r'''enter_address_details''': enterAddressDetails,
+        r'''enter_phone_number''': enterPhoneNumber,
+        r'''enter_recipient_name''': enterRecipientName,
+        r'''default_address_title''': defaultAddressTitle,
+        r'''default_address_with_area''': defaultAddressWithArea,
+        r'''address_label_hint''': addressLabelHint,
+        r'''extra_address_label_hint''': extraAddressLabelHint,
         r'''recipient_details_screen_title''': recipientDetailsScreenTitle,
-        r'''recipient_details_screen_continue_button''':
-            recipientDetailsScreenContinueButton,
-        r'''recipient_details_screen_recipient_name_label''':
-            recipientDetailsScreenRecipientNameLabel,
-        r'''recipient_details_screen_recipient_phone_label''':
-            recipientDetailsScreenRecipientPhoneLabel,
-        r'''recipient_details_screen_recipient_area_label''':
-            recipientDetailsScreenRecipientAreaLabel,
-        r'''recipient_details_screen_recipient_address_label''':
-            recipientDetailsScreenRecipientAddressLabel,
-        r'''recipient_details_screen_recipient_extra_address_label''':
-            recipientDetailsScreenRecipientExtraAddressLabel,
+        r'''recipient_details_screen_continue_button''': recipientDetailsScreenContinueButton,
+        r'''recipient_details_screen_recipient_name_label''': recipientDetailsScreenRecipientNameLabel,
+        r'''recipient_details_screen_recipient_phone_label''': recipientDetailsScreenRecipientPhoneLabel,
+        r'''recipient_details_screen_recipient_area_label''': recipientDetailsScreenRecipientAreaLabel,
+        r'''recipient_details_screen_recipient_address_label''': recipientDetailsScreenRecipientAddressLabel,
+        r'''recipient_details_screen_recipient_extra_address_label''': recipientDetailsScreenRecipientExtraAddressLabel,
         r'''orderNumber''': orderNumber,
         r'''date''': date,
         r'''orderId''': orderId,
@@ -1228,10 +1546,84 @@ class LocalizationMessages {
         r'''SendYourGiftTo''': sendYourGiftTo,
         r'''myOccasions''': myOccasions,
         r'''quickAdd''': quickAdd,
-        r'''selectAnOccasionToCreateAReminder''':
-            selectAnOccasionToCreateAreminder,
+        r'''selectAnOccasionToCreateAReminder''': selectAnOccasionToCreateAreminder,
         r'''yourUpcomingOccasion''': yourUpcomingOccasion,
+        r'''noUpcomingOccasions''': noUpcomingOccasions,
+        r'''noOccasionsAvailable''': noOccasionsAvailable,
+        r'''edit''': edit,
+        r'''delete''': delete,
+        r'''loading''': loading,
+        r'''deleteOccasionTitle''': deleteOccasionTitle,
+        r'''deleteOccasionConfirm''': deleteOccasionConfirm,
+        r'''deleteButton''': deleteButton,
+        r'''cancelButton''': cancelButton,
+        r'''errorText''': errorText,
         r'''selectDeliveryDate''': selectDeliveryDate,
+        r'''invoiceTitle''': invoiceTitle,
+        r'''noInvoicesTitle''': noInvoicesTitle,
+        r'''noInvoicesSubtitle''': noInvoicesSubtitle,
+        r'''invoiceDetails''': invoiceDetails,
+        r'''subscription_checkout_title''': subscriptionCheckoutTitle,
+        r'''recipient_details_title''': recipientDetailsTitle,
+        r'''payment_method_title''': paymentMethodTitle,
+        r'''payment_details_title''': paymentDetailsTitle,
+        r'''proceed_to_payment_button''': proceedToPaymentButton1,
+        r'''use_saved_addresses''': useSavedAddresses,
+        r'''recipient_name_label''': recipientNameLabel,
+        r'''recipient_name_hint''': recipientNameHint,
+        r'''recipient_phone_label''': recipientPhoneLabel,
+        r'''delivery_address_label''': deliveryAddressLabel,
+        r'''ask_recipient_for_address''': askRecipientForAddress,
+        r'''enter_recipient_address''': enterRecipientAddress,
+        r'''select_saved_address''': selectSavedAddress,
+        r'''no_saved_addresses''': noSavedAddresses,
+        r'''add_new_address''': addNewAddress,
+        r'''try_again''': tryAgain,
+        r'''error_loading_addresses''': errorLoadingAddresses,
+        r'''credit_card''': creditCard,
+        r'''mada''': mada,
+        r'''google_pay''': googlePay,
+        r'''apple_pay''': applePay,
+        r'''stc_pay''': stcPay,
+        r'''first_delivery_payment_details''': firstDeliveryPaymentDetails,
+        r'''subtotal_label''': subtotalLabel,
+        r'''delivery_charges_label''': deliveryChargesLabel,
+        r'''total_vat_included''': totalVatIncluded,
+        r'''total_vat_included_label''': totalVatIncludedLabel,
+        r'''next_payment_label''': nextPaymentLabel,
+        r'''please_fill_fields''': pleaseFillFields,
+        r'''selectLocation''': selectLocation,
+        r'''searchForLocation''': searchForLocation,
+        r'''dragMapToAdjustLocation''': dragMapToAdjustLocation,
+        r'''selectedLocation''': selectedLocation,
+        r'''confirmLocation''': confirmLocation,
+        r'''locationServicesDisabled''': locationServicesDisabled,
+        r'''locationPermissionsDenied''': locationPermissionsDenied,
+        r'''locationPermissionsPermanentlyDenied''': locationPermissionsPermanentlyDenied,
+        r'''currentLocationPinned''': currentLocationPinned,
+        r'''couldNotGetCurrentLocation''': couldNotGetCurrentLocation,
+        r'''voucher_code''': voucherCode,
+        r'''add_voucher_code''': addVoucherCode,
+        r'''validating_promo_code''': validatingPromoCode,
+        r'''promo_code_applied''': promoCodeApplied,
+        r'''discount''': discount,
+        r'''invalid_promo_code''': invalidPromoCode,
+        r'''please_enter_voucher_code''': pleaseEnterVoucherCode,
+        r'''applied''': applied,
+        r'''apply''': apply,
+        r'''start_typing_to_search''': startTypingToSearch,
+        r'''to_be_provided_by_recipient''': toBeProvidedByRecipient,
+        r'''tomorrow''': tomorrow,
+        r'''editOccasion''': editOccasion,
+        r'''remindMeAbout''': remindMeAbout,
+        r'''updateOccasionDetails''': updateOccasionDetails,
+        r'''occasionDetailsPrompt''': occasionDetailsPrompt,
+        r'''nameLabel''': nameLabel1,
+        r'''dateLabel''': dateLabel,
+        r'''pleaseEnterName''': pleaseEnterName,
+        r'''updateOccasionButton''': updateOccasionButton,
+        r'''createOccasionButton''': createOccasionButton,
+        r'''errorPrefix''': errorPrefix,
         r'''delete_my_account''': deleteMyAccount,
         r'''delivery_frequency''': deliveryFrequency1,
         r'''subscription_duration''': subscriptionDuration1,
@@ -1269,6 +1661,9 @@ final LocalizationMessages en = LocalizationMessages(
   appBarTitle: 'WARDAYA',
   deliveryTo: 'Delivery To',
   locationCity: 'Riyadh',
+  retry: 'Retry',
+  continueShopping: 'Continue Shopping',
+  viewCart: 'View Cart',
   emailLabel: 'Email',
   passwordLabel: 'Password',
   signInButton: 'Sign In',
@@ -1276,10 +1671,19 @@ final LocalizationMessages en = LocalizationMessages(
   createAccount: 'Create Account',
   dividerText: 'OR',
   signInWith: 'Sign in with',
+  validationEmailPasswordRequired: 'Email and password are required',
+  googleSignInSuccess: 'Successfully signed in with Google',
+  googleSignInFailed: 'Google login failed',
+  googleTokenError: 'Failed to get authentication token from Google',
+  loginFailed: 'Login failed',
+  registrationFailed: 'Registration failed',
+  generalError: 'An error occurred. Please try again.',
+  formAllFieldRequired: 'Make sure to fill all fields',
+  fieldRequired: 'Required',
   forgetPasswordTitle: 'Forget Password?',
-  forgetPasswordInstruction:
-      'Enter the email address associated with your account',
+  forgetPasswordInstruction: 'Enter the email address associated with your account',
   resetPasswordButton: 'Reset Password',
+  passwordResetLinkSent: 'Password reset link sent to your email',
   createAccountTitle: 'Create Account',
   createAccountButton: 'Create Account',
   nameLabel: 'Name',
@@ -1323,6 +1727,20 @@ final LocalizationMessages en = LocalizationMessages(
   flowersGiftsScreenTitle: 'Flowers & Gifts',
   searchPlaceholder: 'Search for flowers, gifts, and more',
   searchButton: 'Search',
+  filterTitle: 'Filters',
+  filterApply: 'Apply',
+  filterOccasion: 'Occasion',
+  filterRecipient: 'Recipient',
+  filterColor: 'Color',
+  filterBundleType: 'Bundle Type',
+  filterClear: 'Clear',
+  filterClose: 'Close',
+  gotIt: 'Got it',
+  filterButton: 'Filter',
+  showingProductsCount: 'Showing {count} products',
+  viewGrid: 'Grid View',
+  viewList: 'List View',
+  allChip: 'All',
   categoryFilterTitle: 'Category',
   occasionFilterTitle: 'Occasion',
   recipientFilterTitle: 'Recipient',
@@ -1334,6 +1752,8 @@ final LocalizationMessages en = LocalizationMessages(
   noAddressHassle: 'No Address Hassle',
   collectAddressText: 'We will collect the address for you',
   descriptionHeader: 'Description',
+  descriptionTab: 'Description',
+  careTipsTab: 'Care Tips',
   seeMore: 'See More',
   seeLess: 'See Less',
   allPricesIncludeTax: 'All prices include tax',
@@ -1398,8 +1818,7 @@ final LocalizationMessages en = LocalizationMessages(
   frontSideLabel: 'Front Side (Message)',
   backSideLabel: 'Back Side (Cover)',
   qrQuestion: 'Did you enjoy this gift?',
-  qrInstruction:
-      'Scan the QR code to share your heartfelt message with the sender.',
+  qrInstruction: 'Scan the QR code to share your heartfelt message with the sender.',
   signatureTitle: 'Your Signature',
   drawInstruction: 'Draw your signature inside the frame',
   clearButton: 'Clear',
@@ -1429,8 +1848,7 @@ Need help with something?''',
   english: 'English',
   logout: 'Logout',
   deleteAccount: 'Delete My Account',
-  deleteAccountConfirmation:
-      'Are you sure you want to delete your account? This action cannot be undone.',
+  deleteAccountConfirmation: 'Are you sure you want to delete your account? This action cannot be undone.',
   confirm: 'Confirm',
   cancel: 'Cancel',
   editProfileTitle: 'Edit Profile',
@@ -1452,8 +1870,7 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   subscriptionSelectYourPlan: 'Select Your Plan:',
   subscriptionChooseWhatFitsYourNeeds: 'Choose what fits your needs.',
   subscriptionCustomizeDelivery: 'Customize Delivery:',
-  subscriptionSetDeliveryFrequencyAndPayment:
-      'Set delivery frequency and payment.',
+  subscriptionSetDeliveryFrequencyAndPayment: 'Set delivery frequency and payment.',
   subscriptionEnjoyFreshFlowers: 'Enjoy Fresh Flowers:',
   subscriptionReceiveFreshFlowersEveryTime: 'Receive fresh flowers every time.',
   subscriptionPlans: 'Subscription Plans',
@@ -1473,8 +1890,7 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   total: 'Total',
   startingDate: 'Starting Date',
   selectOtherDate: 'Select Other Date',
-  weSelectDeleveryBasedArea:
-      'We’ll select the best delivery time based on your area and delivery date',
+  weSelectDeleveryBasedArea: 'We’ll select the best delivery time based on your area and delivery date',
   off: 'OFF',
   perDelivery1: 'Per delivery',
   favoritesScreenTitle: 'Favorites',
@@ -1485,14 +1901,25 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   addressesScreenTitle: 'Saved Addresses',
   addressesScreenAddNewAddressButton: 'Add a new Address',
   addressesScreenNoAddressesFound: 'No addresses found',
+  addressSavedSuccessfully: 'Address saved successfully',
+  addressUpdatedSuccessfully: 'Address updated successfully',
+  addressDeletedSuccessfully: 'Address deleted successfully',
+  fillRequiredFields: 'Please fill all required fields',
+  dropAddressFromMap: 'Drop address from Map',
+  enterAddressDetails: 'Enter address details',
+  enterPhoneNumber: 'Enter phone number',
+  enterRecipientName: 'Enter recipient name',
+  defaultAddressTitle: 'My Address',
+  defaultAddressWithArea: 'My Address in {area}',
+  addressLabelHint: 'Ex:Building 125, King Fahd Road, Al Olaya District',
+  extraAddressLabelHint: 'Ex:Apartment number, floor, landmark, etc.',
   recipientDetailsScreenTitle: 'Recipient Details',
   recipientDetailsScreenContinueButton: 'Continue',
   recipientDetailsScreenRecipientNameLabel: 'Recipient Name',
   recipientDetailsScreenRecipientPhoneLabel: 'Phone Number',
   recipientDetailsScreenRecipientAreaLabel: 'Area',
   recipientDetailsScreenRecipientAddressLabel: 'Address',
-  recipientDetailsScreenRecipientExtraAddressLabel:
-      'Extra address details(optional)',
+  recipientDetailsScreenRecipientExtraAddressLabel: 'Extra address details(optional)',
   orderNumber: 'Order Number',
   date: 'Date',
   orderId: 'Order ID',
@@ -1530,8 +1957,7 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   paymentSuccessTitle: 'Payment Successful',
   paymentSuccessMessage: 'Your payment has been processed successfully.',
   paymentFailedTitle: 'Payment Failed',
-  paymentFailedMessage:
-      'Your payment could not be processed. Please try again.',
+  paymentFailedMessage: 'Your payment could not be processed. Please try again.',
   paymentOkButton: 'OK',
   paymentMethodsTitle: 'Payment Methods',
   proceedToPaymentButton: 'Proceed to Payment',
@@ -1552,7 +1978,83 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   quickAdd: 'Quick Add',
   selectAnOccasionToCreateAreminder: 'Select an occasion to create a reminder',
   yourUpcomingOccasion: 'Your Upcoming Occasion',
+  noUpcomingOccasions: 'No upcoming occasions found',
+  noOccasionsAvailable: 'No occasions available',
+  edit: 'Edit',
+  delete: 'Delete',
+  loading: 'Loading...',
+  deleteOccasionTitle: 'Delete Occasion',
+  deleteOccasionConfirm: '''Are you sure you want to delete "{name}"?''',
+  deleteButton: 'Delete',
+  cancelButton: 'Cancel',
+  errorText: 'Error: {message}',
   selectDeliveryDate: 'Select Delivery Date',
+  invoiceTitle: 'Invoice',
+  noInvoicesTitle: 'You have no invoices from Wardaya.',
+  noInvoicesSubtitle: '''Order's invoices will appear here.''',
+  invoiceDetails: 'Invoice Details',
+  subscriptionCheckoutTitle: 'Checkout',
+  recipientDetailsTitle: 'Recipient Details',
+  paymentMethodTitle: 'Payment Method',
+  paymentDetailsTitle: 'Payment Details',
+  proceedToPaymentButton1: 'Proceed To Payment',
+  useSavedAddresses: 'Use saved addresses',
+  recipientNameLabel: 'Recipient Name',
+  recipientNameHint: 'Enter Recipient Name',
+  recipientPhoneLabel: 'Recipient Phone Number',
+  deliveryAddressLabel: 'Delivery Address',
+  askRecipientForAddress: 'Ask the recipient for the address',
+  enterRecipientAddress: 'Enter recipient address',
+  selectSavedAddress: 'Select a saved address',
+  noSavedAddresses: 'No saved addresses found',
+  addNewAddress: 'Add New Address',
+  tryAgain: 'Try Again',
+  errorLoadingAddresses: 'Error loading addresses',
+  creditCard: 'Credit Card',
+  mada: 'Mada',
+  googlePay: 'Google Pay',
+  applePay: 'Apple Pay',
+  stcPay: 'STC Pay',
+  firstDeliveryPaymentDetails: 'First delivery payment details',
+  subtotalLabel: 'Subtotal',
+  deliveryChargesLabel: 'Delivery charges',
+  totalVatIncluded: 'Total (15.0% VAT Included)',
+  totalVatIncludedLabel: 'Total (15.0% VAT Included)',
+  nextPaymentLabel: 'Next payment',
+  pleaseFillFields: 'Please fill in all required fields',
+  selectLocation: 'Select Location',
+  searchForLocation: 'Search for location',
+  dragMapToAdjustLocation: 'Drag map to adjust location',
+  selectedLocation: 'Selected Location',
+  confirmLocation: 'Confirm Location',
+  locationServicesDisabled: 'Location services are disabled. Please enable them in settings.',
+  locationPermissionsDenied: 'Location permissions denied. Please grant permission to use your location.',
+  locationPermissionsPermanentlyDenied:
+      'Location permissions are permanently denied. Please enable them in app settings.',
+  currentLocationPinned: 'Current location pinned',
+  couldNotGetCurrentLocation: 'Could not get your current location',
+  voucherCode: 'Voucher Code',
+  addVoucherCode: 'Add a voucher code',
+  validatingPromoCode: 'Validating promo code...',
+  promoCodeApplied: 'Promo code applied! You get',
+  discount: 'discount',
+  invalidPromoCode: 'Invalid promo code:',
+  pleaseEnterVoucherCode: 'Please enter a voucher code',
+  applied: 'Applied',
+  apply: 'Apply',
+  startTypingToSearch: 'Start typing to search',
+  toBeProvidedByRecipient: 'To be provided by recipient',
+  tomorrow: 'Tomorrow',
+  editOccasion: 'Edit Occasion',
+  remindMeAbout: 'Remind me about...',
+  updateOccasionDetails: 'Update your occasion details',
+  occasionDetailsPrompt: 'Tell us a few details to save your reminder',
+  nameLabel1: 'Name',
+  dateLabel: 'Date',
+  pleaseEnterName: 'Please enter a name for the occasion',
+  updateOccasionButton: 'Update Occasion',
+  createOccasionButton: 'Create Occasion',
+  errorPrefix: 'Error: {message}',
   deleteMyAccount: '',
   deliveryFrequency1: '',
   subscriptionDuration1: '',
@@ -1562,6 +2064,9 @@ final LocalizationMessages ar = LocalizationMessages(
   appBarTitle: 'وردايا',
   deliveryTo: 'التوصيل إلى',
   locationCity: 'الرياض',
+  retry: 'إعادة المحاولة',
+  continueShopping: 'مواصلة التسوق',
+  viewCart: 'عرض السلة',
   emailLabel: 'البريد الإلكتروني',
   passwordLabel: 'كلمة المرور',
   signInButton: 'تسجيل الدخول',
@@ -1569,9 +2074,19 @@ final LocalizationMessages ar = LocalizationMessages(
   createAccount: 'إنشاء حساب',
   dividerText: 'أو',
   signInWith: 'سجل دخول باستخدام',
+  validationEmailPasswordRequired: 'البريد الإلكتروني وكلمة المرور مطلوبان',
+  googleSignInSuccess: 'تم تسجيل الدخول بنجاح باستخدام Google',
+  googleSignInFailed: 'فشل تسجيل الدخول باستخدام Google',
+  googleTokenError: 'فشل في الحصول على رمز المصادقة من Google',
+  loginFailed: 'فشل تسجيل الدخول',
+  registrationFailed: 'فشل التسجيل',
+  generalError: 'حدث خطأ. يرجى المحاولة مرة أخرى.',
+  formAllFieldRequired: 'جميع الحقول مطلوبة',
+  fieldRequired: 'هذا الحقل مطلوب',
   forgetPasswordTitle: 'نسيت كلمة المرور؟',
   forgetPasswordInstruction: 'أدخل البريد الإلكتروني المرتبط بحسابك',
   resetPasswordButton: 'إعادة تعيين كلمة المرور',
+  passwordResetLinkSent: 'تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني',
   createAccountTitle: 'إنشاء حساب',
   createAccountButton: 'إنشاء حساب',
   nameLabel: 'الاسم',
@@ -1615,6 +2130,20 @@ final LocalizationMessages ar = LocalizationMessages(
   flowersGiftsScreenTitle: 'الزهور والهدايا',
   searchPlaceholder: 'ابحث عن زهور، هدايا، والمزيد',
   searchButton: 'بحث',
+  filterTitle: 'الفلاتر',
+  filterApply: 'تطبيق',
+  filterOccasion: 'المناسبة',
+  filterRecipient: 'المستلم',
+  filterColor: 'اللون',
+  filterBundleType: 'نوع الباقة',
+  filterClear: 'مسح',
+  filterClose: 'إغلاق',
+  gotIt: 'فهمت',
+  filterButton: 'فلتر',
+  showingProductsCount: 'عرض {count} منتج',
+  viewGrid: 'عرض شبكي',
+  viewList: 'عرض قائمة',
+  allChip: 'الكل',
   categoryFilterTitle: 'الفئة',
   occasionFilterTitle: 'المناسبة',
   recipientFilterTitle: 'المستلم',
@@ -1626,6 +2155,8 @@ final LocalizationMessages ar = LocalizationMessages(
   noAddressHassle: 'لا مشكلة في العنوان',
   collectAddressText: 'سنقوم بجمع العنوان نيابة عنك',
   descriptionHeader: 'الوصف',
+  descriptionTab: 'الوصف',
+  careTipsTab: 'نصائح العناية',
   seeMore: 'عرض المزيد',
   seeLess: 'عرض أقل',
   allPricesIncludeTax: 'جميع الأسعار تشمل الضريبة',
@@ -1720,8 +2251,7 @@ final LocalizationMessages ar = LocalizationMessages(
   english: 'الإنجليزية',
   logout: 'تسجيل خروج',
   deleteAccount: 'حذف حسابي',
-  deleteAccountConfirmation:
-      'هل أنت متأكد أنك تريد حذف حسابك؟ هذا الإجراء لا يمكن التراجع عنه.',
+  deleteAccountConfirmation: 'هل أنت متأكد أنك تريد حذف حسابك؟ هذا الإجراء لا يمكن التراجع عنه.',
   confirm: 'تأكيد',
   cancel: 'إلغاء',
   editProfileTitle: 'تعديل الملف الشخصي',
@@ -1763,8 +2293,7 @@ final LocalizationMessages ar = LocalizationMessages(
   total: 'الإجمالي',
   startingDate: 'تاريخ البدء',
   selectOtherDate: 'اختر تاريخًا آخر',
-  weSelectDeleveryBasedArea:
-      'سنختار أفضل وقت توصيل بناءً على منطقتك وتاريخ التوصيل',
+  weSelectDeleveryBasedArea: 'سنختار أفضل وقت توصيل بناءً على منطقتك وتاريخ التوصيل',
   off: 'خصم',
   perDelivery1: '',
   favoritesScreenTitle: 'المفضلة',
@@ -1775,6 +2304,18 @@ final LocalizationMessages ar = LocalizationMessages(
   addressesScreenTitle: 'العنوان المحفوظ',
   addressesScreenAddNewAddressButton: 'إضافة عنوان جديد',
   addressesScreenNoAddressesFound: 'لا يوجد عنوان محفوظ',
+  addressSavedSuccessfully: 'تم حفظ العنوان بنجاح',
+  addressUpdatedSuccessfully: 'تم تحديث العنوان بنجاح',
+  addressDeletedSuccessfully: 'تم حذف العنوان بنجاح',
+  fillRequiredFields: 'يرجى ملء جميع الحقول المطلوبة',
+  dropAddressFromMap: 'حدد العنوان من الخريطة',
+  enterAddressDetails: 'أدخل تفاصيل العنوان',
+  enterPhoneNumber: 'أدخل رقم الهاتف',
+  enterRecipientName: 'أدخل اسم المستلم',
+  defaultAddressTitle: 'عنواني',
+  defaultAddressWithArea: 'عنواني في {area}',
+  addressLabelHint: 'مثال: مبنى 125، طريق الملك فهد، حي العليا',
+  extraAddressLabelHint: 'مثال: الطابق الثاني، شقة 5',
   recipientDetailsScreenTitle: 'تفاصيل المستلم',
   recipientDetailsScreenContinueButton: 'متابعة',
   recipientDetailsScreenRecipientNameLabel: 'الاسم',
@@ -1819,8 +2360,7 @@ final LocalizationMessages ar = LocalizationMessages(
   paymentSuccessTitle: 'تم الدفع بنجاح',
   paymentSuccessMessage: 'تمت معالجة عملية الدفع الخاصة بك بنجاح.',
   paymentFailedTitle: 'فشلت عملية الدفع',
-  paymentFailedMessage:
-      'تعذر معالجة عملية الدفع الخاصة بك. يرجى المحاولة مرة أخرى.',
+  paymentFailedMessage: 'تعذر معالجة عملية الدفع الخاصة بك. يرجى المحاولة مرة أخرى.',
   paymentOkButton: 'موافق',
   paymentMethodsTitle: 'طرق الدفع',
   proceedToPaymentButton: 'المتابعة للدفع',
@@ -1841,7 +2381,82 @@ final LocalizationMessages ar = LocalizationMessages(
   quickAdd: 'إضافة سريعة',
   selectAnOccasionToCreateAreminder: 'اختر مناسبة لإنشاء تذكير',
   yourUpcomingOccasion: 'مناسباتك القادمة',
+  noUpcomingOccasions: 'لا توجد مناسبات قادمة',
+  noOccasionsAvailable: 'لا توجد مناسبات متاحة',
+  edit: 'تعديل',
+  delete: 'حذف',
+  loading: 'جار التحميل...',
+  deleteOccasionTitle: 'حذف المناسبة',
+  deleteOccasionConfirm: 'هل أنت متأكد أنك تريد حذف هذه المناسبة؟',
+  deleteButton: 'حذف',
+  cancelButton: 'إلغاء',
+  errorText: 'حدث خطأ أثناء تحميل المناسبات',
   selectDeliveryDate: 'اختر تاريخ التوصيل',
+  invoiceTitle: 'الفواتير',
+  noInvoicesTitle: 'لا توجد فواتير',
+  noInvoicesSubtitle: 'لا توجد فواتير متاحة',
+  invoiceDetails: 'تفاصيل الفاتورة',
+  subscriptionCheckoutTitle: 'إتمام الطلب',
+  recipientDetailsTitle: 'بيانات المستلم',
+  paymentMethodTitle: 'طريقة الدفع',
+  paymentDetailsTitle: 'تفاصيل الدفع',
+  proceedToPaymentButton1: 'المتابعة للدفع',
+  useSavedAddresses: 'استخدم العناوين المحفوظة',
+  recipientNameLabel: 'اسم المستلم',
+  recipientNameHint: 'أدخل اسم المستلم',
+  recipientPhoneLabel: 'رقم هاتف المستلم',
+  deliveryAddressLabel: 'عنوان التوصيل',
+  askRecipientForAddress: 'اطلب العنوان من المستلم',
+  enterRecipientAddress: 'أدخل عنوان المستلم',
+  selectSavedAddress: 'اختر عنوانًا محفوظًا',
+  noSavedAddresses: 'لا توجد عناوين محفوظة',
+  addNewAddress: 'إضافة عنوان جديد',
+  tryAgain: 'حاول مرة أخرى',
+  errorLoadingAddresses: 'خطأ في تحميل العناوين',
+  creditCard: 'بطاقة ائتمان',
+  mada: 'مدى',
+  googlePay: 'جوجل باي',
+  applePay: 'آبل باي',
+  stcPay: 'STC باي',
+  firstDeliveryPaymentDetails: 'تفاصيل دفع التوصيل الأول',
+  subtotalLabel: 'المجموع الفرعي',
+  deliveryChargesLabel: 'رسوم التوصيل',
+  totalVatIncluded: 'الإجمالي (شامل ض.ق.م 15.0%)',
+  totalVatIncludedLabel: 'الإجمالي (شامل ض.ق.م 15.0%)',
+  nextPaymentLabel: 'الدفعة التالية',
+  pleaseFillFields: 'يرجى تعبئة جميع الحقول المطلوبة',
+  selectLocation: 'اختيار الموقع',
+  searchForLocation: 'ابحث عن موقع',
+  dragMapToAdjustLocation: 'اسحب الخريطة لتعديل الموقع',
+  selectedLocation: 'الموقع المحدد',
+  confirmLocation: 'تأكيد الموقع',
+  locationServicesDisabled: 'خدمات الموقع معطلة. يرجى تفعيلها في الإعدادات.',
+  locationPermissionsDenied: 'تم رفض أذونات الموقع. يرجى منح الإذن لاستخدام موقعك.',
+  locationPermissionsPermanentlyDenied: 'تم رفض أذونات الموقع بشكل دائم. يرجى تمكينها في إعدادات التطبيق.',
+  currentLocationPinned: 'تم تحديد موقعك الحالي',
+  couldNotGetCurrentLocation: 'تعذر الحصول على موقعك الحالي',
+  voucherCode: 'كود الخصم',
+  addVoucherCode: 'أضف كود خصم',
+  validatingPromoCode: 'جاري التحقق من كود الخصم...',
+  promoCodeApplied: 'تم تطبيق كود الخصم! لديك',
+  discount: 'خصم',
+  invalidPromoCode: 'كود الخصم غير صالح:',
+  pleaseEnterVoucherCode: 'الرجاء إدخال كود خصم',
+  applied: 'تم التطبيق',
+  apply: 'تطبيق',
+  startTypingToSearch: 'ابدأ الكتابة للبحث',
+  toBeProvidedByRecipient: 'سيقدمه المستلم',
+  tomorrow: 'غداً',
+  editOccasion: 'تعديل المناسبة',
+  remindMeAbout: '...ذكرني عن',
+  updateOccasionDetails: 'تحديث تفاصيل المناسبة',
+  occasionDetailsPrompt: 'أدخل تفاصيل المناسبة',
+  nameLabel1: 'الاسم',
+  dateLabel: 'التاريخ',
+  pleaseEnterName: 'الرجاء إدخال الاسم',
+  updateOccasionButton: 'تحديث المناسبة',
+  createOccasionButton: 'إنشاء مناسبة',
+  errorPrefix: 'خطأ: ',
   deleteMyAccount: 'حذف الحساب',
   deliveryFrequency1: 'تكرار التوصيل',
   subscriptionDuration1: 'مدة الاشتراك',
@@ -1853,8 +2468,7 @@ final Map<Locale, LocalizationMessages> _languageMap = {
 
 final Map<Locale, LocalizationMessages> _providersLanguagesMap = {};
 
-class EasiestLocalizationDelegate
-    extends LocalizationsDelegate<LocalizationMessages> {
+class EasiestLocalizationDelegate extends LocalizationsDelegate<LocalizationMessages> {
   EasiestLocalizationDelegate({
     List<LocalizationProvider<LocalizationMessages>> providers = const [],
   }) {
@@ -1869,8 +2483,7 @@ class EasiestLocalizationDelegate
 
   @override
   bool isSupported(Locale locale) {
-    final bool supportedByProviders =
-        _providers.any((LocalizationProvider value) => value.canLoad(locale));
+    final bool supportedByProviders = _providers.any((LocalizationProvider value) => value.canLoad(locale));
     if (supportedByProviders) {
       return true;
     }
@@ -1891,8 +2504,7 @@ class EasiestLocalizationDelegate
 
     LocalizationProvider<LocalizationMessages>? localizationProvider;
 
-    for (final LocalizationProvider<LocalizationMessages> provider
-        in _providers) {
+    for (final LocalizationProvider<LocalizationMessages> provider in _providers) {
       if (provider.canLoad(locale)) {
         localizationProvider = provider;
         break;
@@ -1916,26 +2528,20 @@ class EasiestLocalizationDelegate
   }
 
   @override
-  bool shouldReload(LocalizationsDelegate<LocalizationMessages> old) =>
-      old != this;
+  bool shouldReload(LocalizationsDelegate<LocalizationMessages> old) => old != this;
 }
 
 class Messages {
-  static LocalizationMessages of(BuildContext context) =>
-      Localizations.of(context, LocalizationMessages)!;
+  static LocalizationMessages of(BuildContext context) => Localizations.of(context, LocalizationMessages)!;
 
-  static LocalizationMessages? getContent(Locale locale) =>
-      _loadLocalLocale(locale);
+  static LocalizationMessages? getContent(Locale locale) => _loadLocalLocale(locale);
 
   static LocalizationMessages get el {
     final String? defaultLocaleString = Intl.defaultLocale;
-    final List<String> localeParticles = defaultLocaleString == null
-        ? []
-        : defaultLocaleString.split(RegExp(r'[_-]'));
+    final List<String> localeParticles = defaultLocaleString == null ? [] : defaultLocaleString.split(RegExp(r'[_-]'));
     final Locale? defaultLocale = localeParticles.isEmpty
         ? null
-        : Locale(localeParticles.first,
-            localeParticles.length > 1 ? localeParticles[1] : null);
+        : Locale(localeParticles.first, localeParticles.length > 1 ? localeParticles[1] : null);
     LocalizationMessages? localeContent = _providersLanguagesMap[defaultLocale];
     localeContent ??= _languageMap[defaultLocale] ?? _languageMap.values.first;
     return localeContent;
@@ -1976,11 +2582,8 @@ const List<Locale> supportedLocales = [
   Locale('ar'),
 ];
 
-List<Locale> supportedLocalesWithProviders(
-        List<LocalizationProvider<LocalizationMessages>> providers) =>
-    [
-      for (final LocalizationProvider provider in providers)
-        ...provider.supportedLocales,
+List<Locale> supportedLocalesWithProviders(List<LocalizationProvider<LocalizationMessages>> providers) => [
+      for (final LocalizationProvider provider in providers) ...provider.supportedLocales,
       ...supportedLocales,
     ];
 

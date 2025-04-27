@@ -6,4 +6,5 @@ class AuthenticationApiConstants {
   static const String createAccount = "api/auth/register";
   static const String myProfile = "api/auth/my-profile";
   static const String delete = "api/users/delete";
+  static const String forget = "api/auth/forgot-password";
 }

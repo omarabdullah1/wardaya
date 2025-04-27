@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
@@ -257,7 +258,7 @@ class _ProductDetailsBuilderState extends State<ProductDetailsBuilder> {
                                 backgroundColor: ColorsManager.mainRose,
                                 foregroundColor: Colors.white,
                               ),
-                              child: const Text('Retry'),
+                              child: Text(context.el.retry),
                             ),
                           ],
                         ),

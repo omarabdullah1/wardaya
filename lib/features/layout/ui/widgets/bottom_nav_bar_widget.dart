@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import '../../../../core/assets/assets.dart';
+import '../../../../core/blocs/general/cubit/general_cubit.dart';
 import '../../../cart/logic/getCart/cubit/get_cart_cubit.dart';
 import '../../../cart/logic/getCart/cubit/get_cart_state.dart';
 import '../../logic/cubit/layout_cubit.dart';
@@ -53,9 +54,9 @@ class BottomNavBarWidget extends StatelessWidget {
                         ? Badge.count(
                             count: context.read<GetCartCubit>().cartItems,
                             backgroundColor: ColorsManager.mainRose,
-
-                            ///TODO: Fix the offset with localization in arabic
-                            offset: const Offset(10, -10.0),
+                            offset: context.read<GeneralCubit>().lang == 'ar'
+                                ? const Offset(-10, -3.0)
+                                : const Offset(15, -5.0),
                             child: _buildNavItem(
                               Assets.of(context).svgs.cart_svg,
                               context.el.bottomNavCart,

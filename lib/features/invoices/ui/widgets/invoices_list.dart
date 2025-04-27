@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:localization/localization.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/styles.dart';
@@ -78,15 +79,13 @@ class InvoicesList extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'context.el.noInvoicesTitle' ??
-                            'You have no invoices from Wardaya.',
+                        context.el.noInvoicesTitle,
                         style: TextStylesInter.font16BlackSemiBold,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
-                        'context.el.noInvoicesSubtitle' ??
-                            'Order\'s invoices will appear here',
+                        context.el.noInvoicesSubtitle,
                         style: TextStylesInter.font15GreyRegular,
                       ),
                     ],
@@ -135,7 +134,7 @@ class InvoiceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Format the date
-    final dateFormat = DateFormat('dd MMM, yyyy');
+    final dateFormat = DateFormat('dd MMM, yyyy', 'en_US');
     final formattedDate = dateFormat.format(invoice.invoiceDate);
 
     // Safely extract the ID suffix

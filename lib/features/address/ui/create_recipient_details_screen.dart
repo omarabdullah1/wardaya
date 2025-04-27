@@ -1,9 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 
 import 'package:wardaya/features/address/logic/recipient_details_cubit/recipient_details_cubit.dart';
@@ -97,7 +97,7 @@ class _CreateRecipientDetailsScreenState
           cubit = context.read<RecipientDetailsCubit>();
           return Scaffold(
             backgroundColor: Colors.white,
-            appBar: const AppAppBar(title: 'Recipient Details'),
+            appBar: AppAppBar(title: context.el.recipientDetailsScreenTitle),
             body: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(
@@ -116,7 +116,7 @@ class _CreateRecipientDetailsScreenState
                     ),
                     VerticalSpace(height: 24.h),
                     Text(
-                      'Drop address from Map',
+                      context.el.recipientDetailsScreenRecipientAreaLabel,
                       style: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w500,
@@ -138,15 +138,16 @@ class _CreateRecipientDetailsScreenState
                     ),
                     VerticalSpace(height: 16.h),
                     AddressDetailField(
-                      label: 'Address',
-                      hint:
-                          'Ex:15b Cairo - Sweis Rd, El-Basatin Sharkeya, Tura,',
+                      label: context
+                          .el.recipientDetailsScreenRecipientAddressLabel,
+                      hint: context.el.addressLabelHint,
                       controller: cubit.addressController,
                     ),
                     VerticalSpace(height: 16.h),
                     AddressDetailField(
-                      label: 'Extra address details(Optional)',
-                      hint: 'Ex:Apartment number, floor, landmark, etc.',
+                      label: context
+                          .el.recipientDetailsScreenRecipientExtraAddressLabel,
+                      hint: context.el.extraAddressLabelHint,
                       controller: cubit.extraAddressController,
                     ),
                     VerticalSpace(height: 32.h),
@@ -154,7 +155,7 @@ class _CreateRecipientDetailsScreenState
                       loading: () =>
                           const Center(child: CircularProgressIndicator()),
                       orElse: () => AppTextButton(
-                        buttonText: 'Save Address',
+                        buttonText: context.el.saveButton,
                         textStyle: GoogleFonts.inter(
                           color: ColorsManager.white,
                           fontSize: 16.sp,
@@ -178,28 +179,28 @@ class _CreateRecipientDetailsScreenState
     // Validate address fields
     if (cubit.nameController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter recipient name')),
+        SnackBar(content: Text(context.el.fieldRequired)),
       );
       return;
     }
 
     if (cubit.phoneController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter phone number')),
+        SnackBar(content: Text(context.el.fieldRequired)),
       );
       return;
     }
 
     if (cubit.addressController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter address')),
+        SnackBar(content: Text(context.el.fieldRequired)),
       );
       return;
     }
 
     if (cubit.selectedLocation == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please select a location on the map')),
+        SnackBar(content: Text(context.el.fieldRequired)),
       );
       return;
     }

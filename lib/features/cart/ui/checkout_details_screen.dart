@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:localization/localization.dart';
 
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/helpers/spacing.dart';
@@ -95,7 +96,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
         selectedAddressOption = value;
       });
 
-      if (value == 'Enter recipient address') {
+      if (value == context.el.enterRecipientAddress) {
         final cubit = context.read<CheckoutCubit>();
 
         // Show bottom sheet for recipient address - always show when selected
@@ -149,8 +150,8 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
         selectedPaymentMethod.isEmpty ||
         cubit.selectedDeliveryDate.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please fill in all required fields'),
+        SnackBar(
+          content: Text(context.el.pleaseFillFields),
           backgroundColor: ColorsManager.mainRose,
         ),
       );
@@ -180,20 +181,20 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
     }
 
     // Get location data and area based on selection
-    final location = selectedAddressOption == 'Enter recipient address'
+    final location = selectedAddressOption == context.el.enterRecipientAddress
         ? cubit.selectedLocation ?? const LatLng(0, 0)
         : const LatLng(0, 0);
 
-    final address = selectedAddressOption == 'Enter recipient address'
+    final address = selectedAddressOption == context.el.enterRecipientAddress
         ? cubit.selectedAddress
         : '';
 
-    final area = selectedAddressOption == 'Enter recipient address'
+    final area = selectedAddressOption == context.el.enterRecipientAddress
         ? cubit.selectedArea
-        : 'To be provided by recipient';
+        : context.el.toBeProvidedByRecipient;
 
     final keepIdentitySecret =
-        selectedAddressOption == 'Ask the recipient for the address';
+        selectedAddressOption == context.el.askRecipientForAddress;
 
     // Format the delivery date correctly
 
@@ -281,8 +282,8 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
     if (!showUserRecipient) {
       context.read<AddressCubit>().getAddresses();
       // Clear the manual address selection since we're using saved addresses
-      if (selectedAddressOption == 'Ask the recipient for the address' ||
-          selectedAddressOption == 'Enter recipient address') {
+      if (selectedAddressOption == context.el.askRecipientForAddress ||
+          selectedAddressOption == context.el.enterRecipientAddress) {
         setState(() {
           selectedAddressOption = '';
         });
@@ -290,8 +291,8 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
     } else {
       // Clear selected address if switching back to manual entry and no option is selected
       if (selectedAddressOption.isNotEmpty &&
-          selectedAddressOption != 'Ask the recipient for the address' &&
-          selectedAddressOption != 'Enter recipient address') {
+          selectedAddressOption != context.el.askRecipientForAddress &&
+          selectedAddressOption != context.el.enterRecipientAddress) {
         setState(() {
           selectedAddressOption = '';
         });
@@ -375,9 +376,9 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
             loading: () {
               // Show loading indicator when validating promo code
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Validating promo code...'),
-                  duration: Duration(seconds: 1),
+                SnackBar(
+                  content: Text(context.el.validatingPromoCode),
+                  duration: const Duration(seconds: 1),
                   backgroundColor: ColorsManager.darkGray,
                 ),
               );
@@ -387,7 +388,8 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
               final discount = promoResponse.discountPercentage;
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('Promo code applied! $discount% discount'),
+                  content: Text(
+                      '${context.el.promoCodeApplied} $discount% ${context.el.discount}'),
                   backgroundColor: Colors.green,
                 ),
               );
@@ -401,7 +403,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
               // Show error message
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('Invalid promo code: $message'),
+                  content: Text('${context.el.invalidPromoCode} $message'),
                   backgroundColor: ColorsManager.mainRose,
                 ),
               );
@@ -422,14 +424,14 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
           ],
           child: Scaffold(
             backgroundColor: ColorsManager.offWhite,
-            appBar: const AppAppBar(title: 'Checkout'),
+            appBar: AppAppBar(title: context.el.subscriptionCheckoutTitle),
             body: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.all(16.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildSectionTitle('Recipient Details'),
+                    _buildSectionTitle(context.el.recipientDetailsTitle),
                     const VerticalSpace(height: 16),
                     Container(
                       decoration: BoxDecoration(
@@ -445,7 +447,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
 
                     // Add Delivery Time Section
                     const VerticalSpace(height: 24),
-                    _buildSectionTitle('Delivery Time'),
+                    _buildSectionTitle(context.el.selectDeliveryDate),
                     const VerticalSpace(height: 16),
                     DeliveryTimeSelector(
                       checkoutCubit: context.read<CheckoutCubit>(),
@@ -453,16 +455,16 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
 
                     // Add Promo Code Section
                     const VerticalSpace(height: 24),
-                    _buildSectionTitle('Voucher Code'),
+                    _buildSectionTitle(context.el.voucherCode),
                     const VerticalSpace(height: 16),
                     _buildPromoCodeSection(),
 
                     const VerticalSpace(height: 24),
-                    _buildSectionTitle('Payment Method'),
+                    _buildSectionTitle(context.el.paymentMethodTitle),
                     const VerticalSpace(height: 16),
                     _buildPaymentMethodsSection(),
                     const VerticalSpace(height: 24),
-                    _buildSectionTitle('Payment Details'),
+                    _buildSectionTitle(context.el.paymentDetailsTitle),
                     const VerticalSpace(height: 8),
                     _buildTotalSection(),
                     const VerticalSpace(height: 24),
@@ -499,7 +501,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Use saved addresses",
+                  context.el.useSavedAddresses,
                   style: TextStyle(
                     fontSize: 14.sp,
                     color: ColorsManager.black87,
@@ -518,8 +520,8 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
             if (showUserRecipient) ...[
               // Recipient Name and Phone Fields (only displayed when manual entry is selected)
               _buildTextField(
-                'Recipient Name',
-                'Enter Recipient Name',
+                context.el.recipientNameLabel,
+                context.el.recipientNameHint,
                 onTapSuffix: () {
                   cubit.pickContact();
                 },
@@ -530,23 +532,24 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
               _buildPhoneField(cubit.phoneController),
 
               Text(
-                'Delivery Address',
+                context.el.deliveryAddressLabel,
                 style: TextStylesInter.font14BlackRegular.copyWith(
                   color: ColorsManager.mainRose,
                 ),
               ),
               const VerticalSpace(height: 8),
               AddressOptionPreview(
-                text: 'Ask the recipient for the address',
-                isSelected: selectedAddressOption ==
-                    'Ask the recipient for the address',
+                text: context.el.askRecipientForAddress,
+                isSelected:
+                    selectedAddressOption == context.el.askRecipientForAddress,
                 groupValue: selectedAddressOption,
                 onChanged: _handleAddressOptionChange,
               ),
               const VerticalSpace(height: 8),
               AddressOptionPreview(
-                text: 'Enter recipient address',
-                isSelected: selectedAddressOption == 'Enter recipient address',
+                text: context.el.enterRecipientAddress,
+                isSelected:
+                    selectedAddressOption == context.el.enterRecipientAddress,
                 location: cubit.selectedLocation,
                 address: cubit.selectedAddress,
                 area: cubit.selectedArea,
@@ -624,7 +627,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Recipient Phone Number',
+          context.el.recipientPhoneLabel,
           style: TextStylesInter.font16BlackSemiBold.copyWith(
             color: ColorsManager.mainRose,
           ),
@@ -646,11 +649,11 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
                     },
                     countryListTheme: CountryListThemeData(
                       borderRadius: BorderRadius.circular(8.r),
-                      inputDecoration: const InputDecoration(
-                        labelText: 'Search',
-                        hintText: 'Start typing to search',
-                        prefixIcon: Icon(Icons.search),
-                        border: OutlineInputBorder(
+                      inputDecoration: InputDecoration(
+                        labelText: context.el.searchButton,
+                        hintText: context.el.startTypingToSearch,
+                        prefixIcon: const Icon(Icons.search),
+                        border: const OutlineInputBorder(
                           borderSide: BorderSide(
                             color: ColorsManager.lightGrey,
                           ),
@@ -742,7 +745,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
     return Column(
       children: [
         _buildPaymentOption(
-          'Credit Card',
+          context.el.creditCard,
           Assets.of(context).pay_cards.master_card_png,
         ),
         // const VerticalSpace(height: 8),
@@ -752,7 +755,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
         // ),
         const VerticalSpace(height: 8),
         _buildPaymentOption(
-          'Google Pay',
+          context.el.googlePay,
           Assets.of(context).pay_cards.gpay_png,
         ),
         // const VerticalSpace(height: 8),
@@ -830,7 +833,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'First delivery payment details',
+          context.el.firstDeliveryPaymentDetails,
           style: TextStylesInter.font14DarkGrayBold.copyWith(
             color: ColorsManager.lighterLightGrey,
           ),
@@ -845,15 +848,17 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildPriceRow('Subtotal', '${widget.currency} ${widget.price}'),
+              _buildPriceRow(context.el.subtotalLabel,
+                  '${widget.currency} ${widget.price}'),
               const VerticalSpace(height: 8),
-              _buildPriceRow('Delivery charges', 'Free'),
+              _buildPriceRow(
+                  context.el.deliveryChargesLabel, context.el.freeLabel),
 
               // Show discount row if promo code is applied
               if (hasValidPromo && promoCubit.discountPercentage != null) ...[
                 const VerticalSpace(height: 8),
                 _buildPriceRow(
-                  'Discount (${promoCubit.discountPercentage}%)',
+                  '${context.el.discount} (${promoCubit.discountPercentage}%)',
                   '- ${widget.currency} ${discountAmount.toStringAsFixed(2)}',
                   textColor: Colors.green,
                 ),
@@ -861,7 +866,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
 
               const VerticalSpace(height: 8),
               _buildPriceRow(
-                'Total (15.0% VAT Included)',
+                context.el.totalVatIncludedLabel,
                 '${widget.currency} ${discountedPrice.toStringAsFixed(2)}',
                 isBold: true,
               ),
@@ -899,7 +904,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
 
   Widget _buildProceedButton() {
     return AppTextButton(
-      buttonText: 'Proceed To Payment',
+      buttonText: context.el.proceedToPaymentButton,
       textStyle: GoogleFonts.inter(
         color: Colors.white,
         fontSize: 16.sp,
@@ -937,7 +942,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
             child: TextField(
               controller: cubit.promoCodeController,
               decoration: InputDecoration(
-                hintText: 'Add voucher code',
+                hintText: context.el.addVoucherCode,
                 hintStyle: TextStyle(
                   fontSize: 14.sp,
                   color: ColorsManager.grey,
@@ -963,8 +968,8 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
                           .validatePromoCode(cubit.promoCodeController.text);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Please enter a voucher code'),
+                        SnackBar(
+                          content: Text(context.el.pleaseEnterVoucherCode),
                           backgroundColor: ColorsManager.mainRose,
                         ),
                       );
@@ -984,8 +989,8 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
             ),
             child: Text(
               context.watch<PromoCubit>().state is Success
-                  ? 'Applied'
-                  : 'Apply',
+                  ? context.el.applied
+                  : context.el.apply,
               style: TextStylesInter.font14BlackSemiBold.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
@@ -1022,7 +1027,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
                             size: 48.w, color: Colors.grey),
                         VerticalSpace(height: 8.h),
                         Text(
-                          'No saved addresses found',
+                          context.el.noSavedAddresses,
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: ColorsManager.grey,
@@ -1030,7 +1035,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
                         ),
                         VerticalSpace(height: 16.h),
                         AppTextButton(
-                          buttonText: 'Add New Address',
+                          buttonText: context.el.addNewAddress,
                           onPressed: () {
                             // Switch to manual entry mode
                             setState(() {
@@ -1054,7 +1059,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Select a saved address",
+                  context.el.selectSavedAddress,
                   style: TextStylesInter.font14BlackRegular.copyWith(
                     color: ColorsManager.mainRose,
                   ),
@@ -1066,7 +1071,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
                     isSelected: selectedAddressOption == address.id,
                     onSelect: _handleSelectAddress,
                   );
-                }).toList(),
+                }),
               ],
             );
           },
@@ -1079,7 +1084,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
                       size: 48.w, color: ColorsManager.red),
                   VerticalSpace(height: 8.h),
                   Text(
-                    'Error loading addresses: $error',
+                    '${context.el.errorLoadingAddresses}: $error',
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: ColorsManager.red,
@@ -1088,7 +1093,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
                   ),
                   VerticalSpace(height: 16.h),
                   AppTextButton(
-                    buttonText: 'Try Again',
+                    buttonText: context.el.tryAgain,
                     onPressed: () {
                       context.read<AddressCubit>().getAddresses();
                     },
@@ -1101,7 +1106,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
               ),
             ),
           ),
-          orElse: () => const Center(child: Text('No addresses available')),
+          orElse: () => Center(child: Text(context.el.noSavedAddresses)),
         );
       },
     );

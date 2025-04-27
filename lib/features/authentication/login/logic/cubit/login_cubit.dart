@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:localization/localization.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/theming/styles.dart';
@@ -25,7 +26,7 @@ class LoginCubit extends Cubit<LoginState> {
   final TextEditingController passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
-  void emitLoginStates() async {
+  void emitLoginStates(BuildContext context) async {
     emit(const LoginState.loading());
     final response = await _loginRepo.login(
       LoginRequestBody(
@@ -37,7 +38,8 @@ class LoginCubit extends Cubit<LoginState> {
       // Check if the response contains a valid token
       if (loginResponse.token == null || loginResponse.token!.isEmpty) {
         // If no token, treat as an error even if API returned 200
-        emit(LoginState.error(error: loginResponse.message ?? 'Login failed'));
+        emit(LoginState.error(
+            error: loginResponse.message ?? context.el.loginFailed));
         return;
       }
       await SharedPrefHelper.setSecuredString(SharedPrefKeys.userAreaId,
@@ -46,15 +48,18 @@ class LoginCubit extends Cubit<LoginState> {
           '${loginResponse.user!.firstName ?? ''} ${loginResponse.user!.lastName ?? ''}');
 
       await saveUserToken(loginResponse.token ?? '');
-      await userDataToString(loginResponse);
+      if (context.mounted) {
+        await userDataToString(loginResponse, context);
+      }
       emit(LoginState.success(loginResponse));
     }, failure: (error) {
       log('Login error: ${error.message}');
-      emit(LoginState.error(error: error.message ?? 'Login failed'));
+      emit(LoginState.error(error: error.message ?? context.el.loginFailed));
     });
   }
 
-  Future<void> userDataToString(LoginResponse response) async {
+  Future<void> userDataToString(
+      LoginResponse response, BuildContext context) async {
     try {
       await SharedPrefHelper.setSecuredString(
           SharedPrefKeys.userID, response.user!.id!);
@@ -62,7 +67,9 @@ class LoginCubit extends Cubit<LoginState> {
       await saveUserData(serializedData);
     } catch (e) {
       log('Error serializing login response: $e');
-      throw Exception('Failed to serialize login data');
+      if (context.mounted) {
+        throw Exception(context.el.generalError);
+      }
     }
   }
 
@@ -104,7 +111,8 @@ class LoginCubit extends Cubit<LoginState> {
             // Check if the response contains a valid token
             if (loginResponse.token == null || loginResponse.token!.isEmpty) {
               emit(LoginState.error(
-                  error: loginResponse.message ?? 'Google login failed'));
+                  error:
+                      loginResponse.message ?? context.el.googleSignInFailed));
               return;
             }
 
@@ -116,30 +124,35 @@ class LoginCubit extends Cubit<LoginState> {
 
             // Save token and user data
             await saveUserToken(loginResponse.token ?? '');
-            await userDataToString(loginResponse);
+            if (context.mounted) {
+              await userDataToString(loginResponse, context);
+            }
             emit(LoginState.success(loginResponse));
-
-            snackbarShow(
-              context.mounted ? context : context,
-              'Successfully signed in with Google',
-              color: ColorsManager.mintGreen,
-            );
+            if (context.mounted) {
+              snackbarShow(
+                context.mounted ? context : context,
+                context.el.googleSignInSuccess,
+                color: ColorsManager.mintGreen,
+              );
+            }
           }, failure: (error) {
             log('Google login error: ${error.message}');
             emit(LoginState.error(
-                error: error.message ?? 'Google login failed'));
+                error: error.message ?? context.el.googleSignInFailed));
             snackbarShow(
               context.mounted ? context : context,
-              error.message ?? 'Failed to sign in with Google',
+              error.message ?? context.el.googleSignInFailed,
               color: ColorsManager.red,
             );
           });
         } else {
-          emit(const LoginState.error(
-              error: 'Failed to get ID token from Google'));
+          emit(LoginState.error(
+              error: context.mounted
+                  ? context.el.googleTokenError
+                  : 'Error occurred'));
           snackbarShow(
             context.mounted ? context : context,
-            'Failed to get authentication token from Google',
+            context.mounted ? context.el.googleTokenError : 'Error occurred',
             color: ColorsManager.red,
           );
         }
@@ -152,7 +165,7 @@ class LoginCubit extends Cubit<LoginState> {
       log('Error signing in with Google: $error');
       snackbarShow(
         context.mounted ? context : context,
-        'Error signing in with Google: $error',
+        context.mounted ? context.el.generalError : 'An error occurred',
         color: ColorsManager.red,
       );
     } finally {
@@ -171,26 +184,28 @@ class LoginCubit extends Cubit<LoginState> {
       );
       log('Apple User: ${credential.email}');
       log('Apple ID Token: ${credential.identityToken}');
-
-      // TODO: Send the token to your backend server
     } catch (error) {
       log('Error signing in with Apple: $error');
       snackbarShow(
         context.mounted ? context : context,
-        'Error signing in with Apple: $error',
+        error.toString(),
         color: ColorsManager.red,
       );
     }
   }
 
-  void snackbarShow(BuildContext context, String message,
-      {Color color = Colors.green}) {
+  void snackbarShow(
+    BuildContext context,
+    String message, {
+    Color color = ColorsManager.darkGray,
+  }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
           message,
           style: TextStylesInter.font12WhiteBold,
         ),
+        duration: const Duration(seconds: 3),
         backgroundColor: color,
       ),
     );

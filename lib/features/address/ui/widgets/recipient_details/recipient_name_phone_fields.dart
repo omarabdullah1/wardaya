@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:country_picker/country_picker.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/spacing.dart';
 
 import '../../../../../core/theming/colors.dart';
@@ -28,7 +29,7 @@ class RecipientNamePhoneFields extends StatefulWidget {
 }
 
 class _RecipientNamePhoneFieldsState extends State<RecipientNamePhoneFields> {
-  // Default country to Egypt
+  // Default country to Saudi Arabia
   Country _selectedCountry = Country(
     phoneCode: '966',
     countryCode: 'SA',
@@ -63,223 +64,198 @@ class _RecipientNamePhoneFieldsState extends State<RecipientNamePhoneFields> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Recipient name',
+              context.el.recipientDetailsScreenRecipientNameLabel,
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w500,
                 color: ColorsManager.darkGray,
               ),
             ),
-            SizedBox(height: 8.h),
-            TextField(
+            VerticalSpace(height: 8.h),
+            TextFormField(
               controller: widget.nameController,
               decoration: InputDecoration(
-                hintText: 'Enter recipient name',
+                hintText: context.el.enterRecipientName,
                 hintStyle: TextStyle(
                   fontSize: 14.sp,
-                  color: ColorsManager.grey,
+                  color: ColorsManager.lightGrey,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                  borderSide: BorderSide.none,
                 ),
                 filled: true,
                 fillColor: ColorsManager.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.r),
-                  borderSide: const BorderSide(color: ColorsManager.lightGrey),
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 16.w,
+                  vertical: 16.h,
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.r),
-                  borderSide: const BorderSide(color: ColorsManager.lightGrey),
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.contact_phone, size: 24.sp),
+                  onPressed: _selectContact,
+                  color: ColorsManager.mainRose,
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.r),
-                  borderSide: const BorderSide(color: ColorsManager.mainRose),
-                ),
-                suffixIcon: InkWell(
-                  onTap: () async {
-                    await pickContact();
-                  },
-                  child: Icon(
-                    Icons.contacts_outlined,
-                    color: ColorsManager.mainRose,
-                    size: 24.sp,
-                  ),
-                ),
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
               ),
             ),
           ],
         ),
+        VerticalSpace(height: 24.h),
 
-        VerticalSpace(height: 16.h),
         // Phone number field
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Phone number',
+              context.el.recipientDetailsScreenRecipientPhoneLabel,
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w500,
                 color: ColorsManager.darkGray,
               ),
             ),
-            SizedBox(height: 8.h),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Replace fixed width container with a flexible Wrap widget
-                IntrinsicWidth(
-                  child: GestureDetector(
-                    onTap: () {
-                      showCountryPicker(
-                        context: context,
-                        showPhoneCode: true,
-                        onSelect: (Country country) {
-                          setState(() {
-                            _selectedCountry = country;
-                          });
-                          if (widget.onCountryCodeChanged != null) {
-                            widget.onCountryCodeChanged!(
-                                '+${_selectedCountry.phoneCode}');
-                          }
-                        },
-                        countryListTheme: CountryListThemeData(
-                          borderRadius: BorderRadius.circular(8.r),
-                          inputDecoration: const InputDecoration(
-                            labelText: 'Search',
-                            hintText: 'Start typing to search',
-                            prefixIcon: Icon(Icons.search),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: ColorsManager.lightGrey,
-                              ),
-                            ),
+            VerticalSpace(height: 8.h),
+            TextFormField(
+              controller: widget.phoneController,
+              keyboardType: TextInputType.phone,
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(10), // Limit to 10 digits
+              ],
+              decoration: InputDecoration(
+                hintText: context.el.enterPhoneNumber,
+                hintStyle: TextStyle(
+                  fontSize: 14.sp,
+                  color: ColorsManager.lightGrey,
+                ),
+                prefixIcon: GestureDetector(
+                  onTap: _showCountryPicker,
+                  child: Container(
+                    margin: EdgeInsets.only(right: 4.w),
+                    padding: EdgeInsets.only(left: 12.w, right: 8.w),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          '+${_selectedCountry.phoneCode}',
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            color: Colors.black87,
                           ),
                         ),
-                      );
-                    },
-                    child: Container(
-                      height: 50.h,
-                      padding: EdgeInsets.symmetric(horizontal: 8.w),
-                      decoration: BoxDecoration(
-                        color: ColorsManager.white,
-                        borderRadius: BorderRadius.circular(8.r),
-                        border: Border.all(color: ColorsManager.lightGrey),
-                      ),
-                      child: Center(
-                        child: Wrap(
-                          alignment: WrapAlignment.center,
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          children: [
-                            // Display country flag
-                            Text(
-                              _selectedCountry.flagEmoji,
-                              style: TextStyle(
-                                fontSize: 16.sp,
-                              ),
-                            ),
-                            SizedBox(width: 4.w),
-                            Text(
-                              '+${_selectedCountry.phoneCode}',
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
-                                color: ColorsManager.black,
-                              ),
-                            ),
-                            Icon(
-                              Icons.arrow_drop_down,
-                              color: ColorsManager.darkGray,
-                              size: 18.sp,
-                            ),
-                          ],
+                        SizedBox(width: 4.w),
+                        Icon(
+                          Icons.arrow_drop_down,
+                          size: 16.sp,
+                          color: Colors.black54,
                         ),
-                      ),
+                        SizedBox(width: 4.w),
+                        Container(
+                          width: 1,
+                          height: 24.h,
+                          color: Colors.black12,
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                SizedBox(width: 8.w),
-                Expanded(
-                  child: TextField(
-                    controller: widget.phoneController,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      FilteringTextInputFormatter.allow(
-                        RegExp(r'^\d{0,15}$'),
-                      ),
-                    ],
-                    decoration: InputDecoration(
-                      hintText: 'Ex:${_selectedCountry.example}',
-                      hintStyle: TextStyle(
-                        fontSize: 14.sp,
-                        color: ColorsManager.grey,
-                      ),
-                      filled: true,
-                      fillColor: ColorsManager.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                        borderSide:
-                            const BorderSide(color: ColorsManager.lightGrey),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                        borderSide:
-                            const BorderSide(color: ColorsManager.lightGrey),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                        borderSide:
-                            const BorderSide(color: ColorsManager.mainRose),
-                      ),
-                      contentPadding: EdgeInsets.symmetric(
-                          horizontal: 16.w, vertical: 16.h),
-                    ),
-                  ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                  borderSide: BorderSide.none,
                 ),
-              ],
+                filled: true,
+                fillColor: ColorsManager.white,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 16.w,
+                  vertical: 16.h,
+                ),
+                // Right-aligned icon for contacts
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.contact_phone, size: 24.sp),
+                  onPressed: _selectContact,
+                  color: ColorsManager.mainRose,
+                ),
+              ),
             ),
           ],
-        )
+        ),
       ],
     );
   }
 
-  Future<bool> _checkContactsPermission() async {
-    final permission = await FlutterContacts.requestPermission();
-    return permission;
+  void _showCountryPicker() {
+    showCountryPicker(
+      context: context,
+      showPhoneCode: true,
+      countryListTheme: CountryListThemeData(
+        flagSize: 25,
+        backgroundColor: Colors.white,
+        textStyle: TextStyle(fontSize: 16.sp, color: Colors.blueGrey),
+        bottomSheetHeight: 500.h,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20.r),
+          topRight: Radius.circular(20.r),
+        ),
+        inputDecoration: InputDecoration(
+          labelText: context
+              .el.searchOrderPlaceholder, // Using existing key for search
+          hintText: context.el.searchPlaceholder,
+          prefixIcon: const Icon(Icons.search),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: ColorsManager.mainRose.withAlpha((0.2 * 255).toInt()),
+            ),
+          ),
+        ),
+      ),
+      onSelect: (Country country) {
+        setState(() {
+          _selectedCountry = country;
+        });
+
+        if (widget.onCountryCodeChanged != null) {
+          widget.onCountryCodeChanged!('+${country.phoneCode}');
+        }
+      },
+    );
   }
 
-  Future<void> pickContact() async {
-    // Remove the setState wrapper around the async function
-    final hasPermission = await _checkContactsPermission();
-    if (!hasPermission) {
-      // Handle permission denied
-      await _checkContactsPermission();
-    }
-
-    try {
-      final contact = await FlutterContacts.openExternalPick();
-      if (contact != null) {
-        final fullContact = await FlutterContacts.getContact(contact.id);
-
-        if (fullContact != null) {
-          // Use setState correctly here to update the UI after async operations
-          setState(() {
-            widget.nameController.text = fullContact.displayName;
+  void _selectContact() async {
+    if (await FlutterContacts.requestPermission()) {
+      try {
+        // Show contact picker
+        final contact = await FlutterContacts.openExternalPick();
+        if (contact != null) {
+          // Load contact with full details
+          final fullContact = await FlutterContacts.getContact(contact.id);
+          if (fullContact != null) {
+            // Update name and phone fields
+            if (fullContact.name.first.isNotEmpty ||
+                fullContact.name.last.isNotEmpty) {
+              widget.nameController.text =
+                  '${fullContact.name.first} ${fullContact.name.last}';
+            }
 
             if (fullContact.phones.isNotEmpty) {
-              final phone = fullContact.phones.first.number;
-              // Remove non-numeric characters
-              widget.phoneController.text =
-                  phone.replaceAll(RegExp(r'[^\d]'), '');
+              final phoneNumber = fullContact.phones.first.number;
+              log('Full phone number: $phoneNumber');
+
+              // Format phone number if needed: remove country code and special chars
+              String formattedNumber =
+                  phoneNumber.replaceAll(RegExp(r'[^\d]'), '');
+
+              // Remove country code if it's part of the number
+              if (formattedNumber.startsWith(_selectedCountry.phoneCode)) {
+                formattedNumber = formattedNumber
+                    .substring(_selectedCountry.phoneCode.length);
+              }
+
+              widget.phoneController.text = formattedNumber;
             }
-          });
+          }
         }
+      } catch (e) {
+        log('Error selecting contact: $e');
       }
-    } catch (e) {
-      // Handle exception
-      log('Error picking contact: $e');
     }
   }
 }

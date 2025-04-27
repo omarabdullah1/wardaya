@@ -67,7 +67,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       if (registerResponse.error != null &&
           registerResponse.error!.isNotEmpty) {
         log('Registration error from response: ${registerResponse.error}');
-        emit(RegisterState.error(error: registerResponse.error ?? ''));
+        emit(RegisterState.error(error: registerResponse.message ?? ''));
       } else {
         log('Registration success: $registerResponse');
         emit(RegisterState.success(registerResponse));
@@ -75,8 +75,8 @@ class RegisterCubit extends Cubit<RegisterState> {
     }, failure: (error) {
       log('Registration failure: ${error.error} - ${error.message}');
       // Use error.error if available, otherwise fall back to error.message
-      final errorMessage = error.error?.isNotEmpty == true
-          ? error.error!
+      final errorMessage = error.message?.isNotEmpty == true
+          ? error.message!
           : (error.message?.isNotEmpty == true
               ? error.message!
               : 'Registration failed');

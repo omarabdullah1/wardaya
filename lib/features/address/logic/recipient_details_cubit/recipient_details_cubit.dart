@@ -67,9 +67,9 @@ class RecipientDetailsCubit extends Cubit<RecipientDetailsState> {
 
     // Set a default title based on the area if available
     if (area != null && area.isNotEmpty) {
-      titleController.text = 'My Address in $area';
+      titleController.text = "My Address in $area";
     } else {
-      titleController.text = 'My Address';
+      titleController.text = "My Address";
     }
 
     // Emit initialized state
@@ -105,7 +105,7 @@ class RecipientDetailsCubit extends Cubit<RecipientDetailsState> {
         selectedLocation == null ||
         selectedCityId == null) {
       emit(const RecipientDetailsState.error(
-        error: 'Please fill all required fields',
+        error: "Please fill all required fields",
       ));
       return;
     }
@@ -116,7 +116,7 @@ class RecipientDetailsCubit extends Cubit<RecipientDetailsState> {
       recipientCity: (await SharedPrefHelper.getSecuredString(
               SharedPrefKeys.userAreaId)) ??
           '',
-      title: null,
+      title: titleController.text.isEmpty ? null : titleController.text,
       userId: await SharedPrefHelper.getSecuredString(SharedPrefKeys.userID),
       recipientArea: areaController.text,
       recipientName: nameController.text,
@@ -136,13 +136,13 @@ class RecipientDetailsCubit extends Cubit<RecipientDetailsState> {
         },
         failure: (error) {
           emit(RecipientDetailsState.error(
-            error: error.message ?? 'Failed to create address',
+            error: error.message ?? "An error occurred. Please try again.",
           ));
         },
       );
     } catch (e) {
       emit(RecipientDetailsState.error(
-        error: 'An unexpected error occurred: ${e.toString()}',
+        error: "An unexpected error occurred: ${e.toString()}",
       ));
     }
   }
@@ -157,7 +157,7 @@ class RecipientDetailsCubit extends Cubit<RecipientDetailsState> {
         selectedCityId == null ||
         addressId == null) {
       emit(const RecipientDetailsState.error(
-        error: 'Please fill all required fields',
+        error: "Please fill all required fields",
       ));
       return;
     }
@@ -191,13 +191,13 @@ class RecipientDetailsCubit extends Cubit<RecipientDetailsState> {
         },
         failure: (error) {
           emit(RecipientDetailsState.error(
-            error: error.message ?? 'Failed to update address',
+            error: error.message ?? "Failed to update address",
           ));
         },
       );
     } catch (e) {
       emit(RecipientDetailsState.error(
-        error: 'An unexpected error occurred: ${e.toString()}',
+        error: "An unexpected error occurred: ${e.toString()}",
       ));
     }
   }

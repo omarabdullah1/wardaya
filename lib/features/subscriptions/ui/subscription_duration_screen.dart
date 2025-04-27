@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -35,8 +34,9 @@ class SubscriptionDurationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String today = DateFormat('EEE, d/M/yyyy').format(DateTime.now());
-    String tommorow = DateFormat('EEE, d/M/yyyy')
+    // Explicitly format dates in English (en_US) locale for consistent API communication
+    String today = DateFormat('EEE, d/M/yyyy', 'en_US').format(DateTime.now());
+    String tommorow = DateFormat('EEE, d/M/yyyy', 'en_US')
         .format(DateTime.now().add(const Duration(days: 1)));
     final cubit = context.watch<SubscriptionCubit>();
     return Scaffold(

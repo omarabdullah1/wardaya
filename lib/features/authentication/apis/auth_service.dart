@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:wardaya/features/authentication/forget_password/data/models/forget_password_request.dart';
+import 'package:wardaya/features/authentication/forget_password/data/models/forget_password_response.dart';
 import 'package:wardaya/features/profile/data/models/profile_response.dart';
 
 import '../create_account/data/models/create_account_request_body.dart';
@@ -29,6 +31,12 @@ abstract class AuthenticationService {
   Future<CreateAccountResponse> createAccount(
     @Body() CreateAccountRequestBody createAccountRequestBody,
   );
+
+  @POST(AuthenticationApiConstants.forget)
+  Future<ForgetPasswordResponse> forgetPassword(
+    @Body() ForgetPasswordRequest forgetPasswordRequest,
+  );
+
   @GET(AuthenticationApiConstants.myProfile)
   Future<ProfileResponse> getProfile();
 }

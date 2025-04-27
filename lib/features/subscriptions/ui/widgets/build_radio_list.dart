@@ -100,10 +100,13 @@ class BuildStartingDateRadioList extends StatelessWidget {
                                   initialDate: DateTime.now(),
                                   firstDate: DateTime(2025),
                                   lastDate: DateTime(2030),
+                                  locale: const Locale('en',
+                                      'US'), // Ensure English locale for date picker
                                 );
                                 if (picked != null) {
+                                  // Format date in English locale regardless of device settings
                                   String formattedDate =
-                                      DateFormat('EEE, d/M/yyyy')
+                                      DateFormat('EEE, d/M/yyyy', 'en_US')
                                           .format(picked);
 
                                   cubit.setSelectedDate(formattedDate);
@@ -134,10 +137,14 @@ class BuildStartingDateRadioList extends StatelessWidget {
                           initialDate: DateTime.now(),
                           firstDate: DateTime(2025),
                           lastDate: DateTime(2030),
+                          locale: const Locale('en',
+                              'US'), // Ensure English locale for date picker
                         );
                         if (picked != null) {
+                          // Format date in English locale regardless of device settings
                           String formattedDate =
-                              DateFormat('EEE, d/M/yyyy').format(picked);
+                              DateFormat('EEE, d/M/yyyy', 'en_US')
+                                  .format(picked);
                           cubit.setSelectedDate(formattedDate);
                         }
                       } else {

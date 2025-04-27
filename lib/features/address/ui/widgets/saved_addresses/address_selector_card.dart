@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/theming/font_weight_helper.dart';
@@ -35,7 +35,8 @@ class AddressSelectorCard extends StatelessWidget {
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: ColorsManager.mainRose.withOpacity(0.2),
+                    color:
+                        ColorsManager.mainRose.withAlpha((0.2 * 255).toInt()),
                     blurRadius: 4,
                     offset: const Offset(0, 2),
                   )
@@ -51,7 +52,7 @@ class AddressSelectorCard extends StatelessWidget {
                 width: 48.w,
                 height: 48.w,
                 decoration: BoxDecoration(
-                  color: ColorsManager.mainRose.withOpacity(0.1),
+                  color: ColorsManager.mainRose.withAlpha((0.1 * 255).toInt()),
                   shape: BoxShape.circle,
                 ),
                 child: Center(
@@ -67,43 +68,46 @@ class AddressSelectorCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      address.title ?? "My Address",
-                      style: TextStylesInter.font14BlackSemiBold,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    if (address.title != null && address.title!.isNotEmpty)
+                      Text(
+                        address.title!,
+                        style: TextStylesInter.font14BlackSemiBold,
+                      ),
+                    VerticalSpace(height: 4.h),
+                    if (address.recipientName != null &&
+                        address.recipientName!.isNotEmpty)
+                      Text(
+                        address.recipientName!,
+                        style: TextStylesInter.font14BlackSemiBold,
+                      ),
                     VerticalSpace(height: 4.h),
                     Text(
                       address.recipientAddress,
-                      style: TextStylesInter.font12BlackBold.copyWith(
-                        color: ColorsManager.grey,
-                        fontWeight: FontWeightHelper.regular,
+                      style: TextStylesInter.font14BlackRegular.copyWith(
+                        color: ColorsManager.darkGray,
+                        fontWeight: FontWeightHelper.medium,
                       ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
                     ),
-                    if (address.recipientName != null &&
-                        address.recipientName!.isNotEmpty) ...[
-                      VerticalSpace(height: 4.h),
-                      Text(
-                        address.recipientName!,
-                        style: TextStylesInter.font12BlackBold.copyWith(
-                          color: ColorsManager.grey,
-                          fontWeight: FontWeightHelper.regular,
+                    if (address.recipientPhoneNumber != null &&
+                        address.recipientPhoneNumber!.isNotEmpty)
+                      Padding(
+                        padding: EdgeInsets.only(top: 4.h),
+                        child: Text(
+                          "${context.el.phoneNumber}: ${address.recipientPhoneNumber!}",
+                          style: TextStylesInter.font14BlackRegular.copyWith(
+                            color: ColorsManager.darkGray,
+                            fontWeight: FontWeightHelper.medium,
+                          ),
                         ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
                       ),
-                    ],
                   ],
                 ),
               ),
-              Radio<bool>(
-                value: true,
-                groupValue: isSelected,
-                activeColor: ColorsManager.mainRose,
+              Radio(
+                value: address.id,
+                groupValue: isSelected ? address.id : null,
                 onChanged: (_) => onSelect(address),
+                activeColor: ColorsManager.mainRose,
               ),
             ],
           ),

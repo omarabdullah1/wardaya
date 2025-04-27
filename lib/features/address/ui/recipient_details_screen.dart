@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:localization/localization.dart';
 
 import 'package:wardaya/features/address/logic/recipient_details_cubit/recipient_details_cubit.dart';
 import 'package:wardaya/features/address/ui/widgets/recipient_details/recipient_details.dart';
@@ -23,7 +24,7 @@ class RecipientDetailsScreen extends StatelessWidget {
       create: (context) => getIt<RecipientDetailsCubit>(),
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: const AppAppBar(title: 'Recipient Details'),
+        appBar: AppAppBar(title: context.el.recipientDetailsScreenTitle),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(

@@ -54,7 +54,7 @@ class AddressBuilder extends StatelessWidget {
           SizedBox(height: 16.h),
           ElevatedButton(
             onPressed: () => context.read<AddressCubit>().getAddresses(),
-            child: const Text('Retry'),
+            child: Text(context.el.tryAgain),
           ),
         ],
       ),

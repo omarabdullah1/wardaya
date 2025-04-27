@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:localization/localization.dart';
 
 import '../../../../../core/theming/colors.dart';
 
@@ -13,7 +14,7 @@ class AreaField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Area',
+          context.el.recipientDetailsScreenRecipientAreaLabel,
           style: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.w500,
@@ -24,7 +25,7 @@ class AreaField extends StatelessWidget {
         TextField(
           controller: areaController,
           decoration: InputDecoration(
-            hintText: 'Enter area or neighborhood',
+            hintText: context.el.recipientDetailsScreenRecipientAreaLabel,
             hintStyle: TextStyle(
               fontSize: 14.sp,
               color: ColorsManager.grey,

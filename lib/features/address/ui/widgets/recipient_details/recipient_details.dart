@@ -1,6 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/features/address/ui/widgets/recipient_details/area_field.dart';
@@ -46,7 +47,7 @@ class RecipientDetails extends StatelessWidget {
         ),
         VerticalSpace(height: 24.h),
         Text(
-          'Drop address from Map',
+          context.el.recipientDetailsScreenRecipientAreaLabel,
           style: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.w500,
@@ -63,14 +64,14 @@ class RecipientDetails extends StatelessWidget {
         ),
         VerticalSpace(height: 16.h),
         AddressDetailField(
-          label: 'Address',
-          hint: 'Ex:15b Cairo - Sweis Rd, El-Basatin Sharkeya, Tura,',
+          label: context.el.recipientDetailsScreenRecipientAddressLabel,
+          hint: context.el.recipientDetailsScreenRecipientAddressLabel,
           controller: cubit.addressController,
         ),
         VerticalSpace(height: 16.h),
         AddressDetailField(
-          label: 'Extra address details(Optional)',
-          hint: 'Ex:Apartment number, floor, landmark, etc.',
+          label: context.el.recipientDetailsScreenRecipientExtraAddressLabel,
+          hint: context.el.recipientDetailsScreenRecipientExtraAddressLabel,
           controller: cubit.extraAddressController,
         ),
         VerticalSpace(height: 32.h),
@@ -96,7 +97,10 @@ class RecipientDetails extends StatelessWidget {
               },
               success: (state) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Address saved successfully')),
+                  SnackBar(
+                      content: Text(address != null
+                          ? context.el.addressUpdatedSuccessfully
+                          : context.el.addressSavedSuccessfully)),
                 );
                 Navigator.pop(context, true); // Return with success result
                 Navigator.pop(context, true); // Return with success result
@@ -110,8 +114,9 @@ class RecipientDetails extends StatelessWidget {
               orElse: () => false,
             );
 
-            final buttonText =
-                address != null ? 'Update Address' : 'Save Address';
+            final buttonText = address != null
+                ? context.el.editProfileTitle
+                : context.el.saveButton;
 
             return AppTextButton(
               buttonText: buttonText,
@@ -133,21 +138,21 @@ class RecipientDetails extends StatelessWidget {
     // Validate address fields
     if (cubit.nameController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter recipient name')),
+        SnackBar(content: Text(context.el.fieldRequired)),
       );
       return;
     }
 
     if (cubit.phoneController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter phone number')),
+        SnackBar(content: Text(context.el.fieldRequired)),
       );
       return;
     }
 
     if (cubit.addressController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter address')),
+        SnackBar(content: Text(context.el.fieldRequired)),
       );
       return;
     }

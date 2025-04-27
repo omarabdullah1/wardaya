@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:localization/localization.dart';
 
 import '../../../core/theming/colors.dart';
 
@@ -194,7 +195,7 @@ class _FullScreenMapPickerState extends State<FullScreenMapPicker> {
       serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
         // Location services are not enabled
-        _showSnackBar('Location services are disabled');
+        _showSnackBar(context.el.locationServicesDisabled);
         return;
       }
 
@@ -202,13 +203,13 @@ class _FullScreenMapPickerState extends State<FullScreenMapPicker> {
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
         if (permission == LocationPermission.denied) {
-          _showSnackBar('Location permissions are denied');
+          _showSnackBar(context.el.locationPermissionsDenied);
           return;
         }
       }
 
       if (permission == LocationPermission.deniedForever) {
-        _showSnackBar('Location permissions are permanently denied');
+        _showSnackBar(context.el.locationPermissionsPermanentlyDenied);
         return;
       }
 
@@ -230,10 +231,10 @@ class _FullScreenMapPickerState extends State<FullScreenMapPicker> {
         CameraUpdate.newLatLngZoom(currentLocation, 15),
       );
 
-      _showSnackBar('Current location pinned');
+      _showSnackBar(context.el.currentLocationPinned);
     } catch (e) {
       log('Error getting current location: $e');
-      _showSnackBar('Could not get current location');
+      _showSnackBar(context.el.couldNotGetCurrentLocation);
     }
   }
 
@@ -251,7 +252,7 @@ class _FullScreenMapPickerState extends State<FullScreenMapPicker> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Select Location',
+          context.el.selectLocation,
           style: TextStyle(
             fontSize: 18.sp,
             fontWeight: FontWeight.w600,
@@ -285,7 +286,7 @@ class _FullScreenMapPickerState extends State<FullScreenMapPicker> {
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Search for a location',
+                hintText: context.el.searchForLocation,
                 prefixIcon:
                     const Icon(Icons.search, color: ColorsManager.darkGray),
                 border: InputBorder.none,
@@ -412,7 +413,7 @@ class _FullScreenMapPickerState extends State<FullScreenMapPicker> {
                           borderRadius: BorderRadius.circular(20.r),
                         ),
                         child: Text(
-                          'Drag map or marker to adjust location',
+                          context.el.dragMapToAdjustLocation,
                           style: TextStyle(
                             color: ColorsManager.white,
                             fontSize: 12.sp,
@@ -477,7 +478,7 @@ class _FullScreenMapPickerState extends State<FullScreenMapPicker> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Selected Location:',
+                          context.el.selectedLocation,
                           style: TextStyle(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w600,
@@ -526,7 +527,7 @@ class _FullScreenMapPickerState extends State<FullScreenMapPicker> {
                     minimumSize: Size(double.infinity, 48.h),
                   ),
                   child: Text(
-                    'Confirm Location',
+                    context.el.confirmLocation,
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
