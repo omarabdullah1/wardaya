@@ -267,6 +267,18 @@ class LocalizationMessages {
     required this.addressesScreenTitle,
     required this.addressesScreenAddNewAddressButton,
     required this.addressesScreenNoAddressesFound,
+    required this.addressSavedSuccessfully,
+    required this.addressUpdatedSuccessfully,
+    required this.addressDeletedSuccessfully,
+    required this.fillRequiredFields,
+    required this.dropAddressFromMap,
+    required this.enterAddressDetails,
+    required this.enterPhoneNumber,
+    required this.enterRecipientName,
+    required this.defaultAddressTitle,
+    required this.defaultAddressWithArea,
+    required this.addressLabelHint,
+    required this.extraAddressLabelHint,
     required this.recipientDetailsScreenTitle,
     required this.recipientDetailsScreenContinueButton,
     required this.recipientDetailsScreenRecipientNameLabel,
@@ -366,6 +378,16 @@ class LocalizationMessages {
     required this.totalVatIncludedLabel,
     required this.nextPaymentLabel,
     required this.pleaseFillFields,
+    required this.selectLocation,
+    required this.searchForLocation,
+    required this.dragMapToAdjustLocation,
+    required this.selectedLocation,
+    required this.confirmLocation,
+    required this.locationServicesDisabled,
+    required this.locationPermissionsDenied,
+    required this.locationPermissionsPermanentlyDenied,
+    required this.currentLocationPinned,
+    required this.couldNotGetCurrentLocation,
     required this.deleteMyAccount,
     required this.deliveryFrequency1,
     required this.subscriptionDuration1,
@@ -615,6 +637,18 @@ class LocalizationMessages {
       addressesScreenTitle: (json['addresses_screen_title'] ?? '').toString(),
       addressesScreenAddNewAddressButton: (json['addresses_screen_add_new_address_button'] ?? '').toString(),
       addressesScreenNoAddressesFound: (json['addresses_screen_no_addresses_found'] ?? '').toString(),
+      addressSavedSuccessfully: (json['address_saved_successfully'] ?? '').toString(),
+      addressUpdatedSuccessfully: (json['address_updated_successfully'] ?? '').toString(),
+      addressDeletedSuccessfully: (json['address_deleted_successfully'] ?? '').toString(),
+      fillRequiredFields: (json['fill_required_fields'] ?? '').toString(),
+      dropAddressFromMap: (json['drop_address_from_map'] ?? '').toString(),
+      enterAddressDetails: (json['enter_address_details'] ?? '').toString(),
+      enterPhoneNumber: (json['enter_phone_number'] ?? '').toString(),
+      enterRecipientName: (json['enter_recipient_name'] ?? '').toString(),
+      defaultAddressTitle: (json['default_address_title'] ?? '').toString(),
+      defaultAddressWithArea: (json['default_address_with_area'] ?? '').toString(),
+      addressLabelHint: (json['address_label_hint'] ?? '').toString(),
+      extraAddressLabelHint: (json['extra_address_label_hint'] ?? '').toString(),
       recipientDetailsScreenTitle: (json['recipient_details_screen_title'] ?? '').toString(),
       recipientDetailsScreenContinueButton: (json['recipient_details_screen_continue_button'] ?? '').toString(),
       recipientDetailsScreenRecipientNameLabel:
@@ -719,6 +753,16 @@ class LocalizationMessages {
       totalVatIncludedLabel: (json['total_vat_included_label'] ?? '').toString(),
       nextPaymentLabel: (json['next_payment_label'] ?? '').toString(),
       pleaseFillFields: (json['please_fill_fields'] ?? '').toString(),
+      selectLocation: (json['selectLocation'] ?? '').toString(),
+      searchForLocation: (json['searchForLocation'] ?? '').toString(),
+      dragMapToAdjustLocation: (json['dragMapToAdjustLocation'] ?? '').toString(),
+      selectedLocation: (json['selectedLocation'] ?? '').toString(),
+      confirmLocation: (json['confirmLocation'] ?? '').toString(),
+      locationServicesDisabled: (json['locationServicesDisabled'] ?? '').toString(),
+      locationPermissionsDenied: (json['locationPermissionsDenied'] ?? '').toString(),
+      locationPermissionsPermanentlyDenied: (json['locationPermissionsPermanentlyDenied'] ?? '').toString(),
+      currentLocationPinned: (json['currentLocationPinned'] ?? '').toString(),
+      couldNotGetCurrentLocation: (json['couldNotGetCurrentLocation'] ?? '').toString(),
       deleteMyAccount: (json['delete_my_account'] ?? '').toString(),
       deliveryFrequency1: (json['delivery_frequency'] ?? '').toString(),
       subscriptionDuration1: (json['subscription_duration'] ?? '').toString(),
@@ -965,6 +1009,18 @@ class LocalizationMessages {
   final String addressesScreenTitle;
   final String addressesScreenAddNewAddressButton;
   final String addressesScreenNoAddressesFound;
+  final String addressSavedSuccessfully;
+  final String addressUpdatedSuccessfully;
+  final String addressDeletedSuccessfully;
+  final String fillRequiredFields;
+  final String dropAddressFromMap;
+  final String enterAddressDetails;
+  final String enterPhoneNumber;
+  final String enterRecipientName;
+  final String defaultAddressTitle;
+  final String defaultAddressWithArea;
+  final String addressLabelHint;
+  final String extraAddressLabelHint;
   final String recipientDetailsScreenTitle;
   final String recipientDetailsScreenContinueButton;
   final String recipientDetailsScreenRecipientNameLabel;
@@ -1064,6 +1120,16 @@ class LocalizationMessages {
   final String totalVatIncludedLabel;
   final String nextPaymentLabel;
   final String pleaseFillFields;
+  final String selectLocation;
+  final String searchForLocation;
+  final String dragMapToAdjustLocation;
+  final String selectedLocation;
+  final String confirmLocation;
+  final String locationServicesDisabled;
+  final String locationPermissionsDenied;
+  final String locationPermissionsPermanentlyDenied;
+  final String currentLocationPinned;
+  final String couldNotGetCurrentLocation;
   final String deleteMyAccount;
   final String deliveryFrequency1;
   final String subscriptionDuration1;
@@ -1309,6 +1375,18 @@ class LocalizationMessages {
         r'''addresses_screen_title''': addressesScreenTitle,
         r'''addresses_screen_add_new_address_button''': addressesScreenAddNewAddressButton,
         r'''addresses_screen_no_addresses_found''': addressesScreenNoAddressesFound,
+        r'''address_saved_successfully''': addressSavedSuccessfully,
+        r'''address_updated_successfully''': addressUpdatedSuccessfully,
+        r'''address_deleted_successfully''': addressDeletedSuccessfully,
+        r'''fill_required_fields''': fillRequiredFields,
+        r'''drop_address_from_map''': dropAddressFromMap,
+        r'''enter_address_details''': enterAddressDetails,
+        r'''enter_phone_number''': enterPhoneNumber,
+        r'''enter_recipient_name''': enterRecipientName,
+        r'''default_address_title''': defaultAddressTitle,
+        r'''default_address_with_area''': defaultAddressWithArea,
+        r'''address_label_hint''': addressLabelHint,
+        r'''extra_address_label_hint''': extraAddressLabelHint,
         r'''recipient_details_screen_title''': recipientDetailsScreenTitle,
         r'''recipient_details_screen_continue_button''': recipientDetailsScreenContinueButton,
         r'''recipient_details_screen_recipient_name_label''': recipientDetailsScreenRecipientNameLabel,
@@ -1408,6 +1486,16 @@ class LocalizationMessages {
         r'''total_vat_included_label''': totalVatIncludedLabel,
         r'''next_payment_label''': nextPaymentLabel,
         r'''please_fill_fields''': pleaseFillFields,
+        r'''selectLocation''': selectLocation,
+        r'''searchForLocation''': searchForLocation,
+        r'''dragMapToAdjustLocation''': dragMapToAdjustLocation,
+        r'''selectedLocation''': selectedLocation,
+        r'''confirmLocation''': confirmLocation,
+        r'''locationServicesDisabled''': locationServicesDisabled,
+        r'''locationPermissionsDenied''': locationPermissionsDenied,
+        r'''locationPermissionsPermanentlyDenied''': locationPermissionsPermanentlyDenied,
+        r'''currentLocationPinned''': currentLocationPinned,
+        r'''couldNotGetCurrentLocation''': couldNotGetCurrentLocation,
         r'''delete_my_account''': deleteMyAccount,
         r'''delivery_frequency''': deliveryFrequency1,
         r'''subscription_duration''': subscriptionDuration1,
@@ -1685,6 +1773,18 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   addressesScreenTitle: 'Saved Addresses',
   addressesScreenAddNewAddressButton: 'Add a new Address',
   addressesScreenNoAddressesFound: 'No addresses found',
+  addressSavedSuccessfully: 'Address saved successfully',
+  addressUpdatedSuccessfully: 'Address updated successfully',
+  addressDeletedSuccessfully: 'Address deleted successfully',
+  fillRequiredFields: 'Please fill all required fields',
+  dropAddressFromMap: 'Drop address from Map',
+  enterAddressDetails: 'Enter address details',
+  enterPhoneNumber: 'Enter phone number',
+  enterRecipientName: 'Enter recipient name',
+  defaultAddressTitle: 'My Address',
+  defaultAddressWithArea: 'My Address in {area}',
+  addressLabelHint: 'Ex:Building 125, King Fahd Road, Al Olaya District',
+  extraAddressLabelHint: 'Ex:Apartment number, floor, landmark, etc.',
   recipientDetailsScreenTitle: 'Recipient Details',
   recipientDetailsScreenContinueButton: 'Continue',
   recipientDetailsScreenRecipientNameLabel: 'Recipient Name',
@@ -1784,6 +1884,17 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   totalVatIncludedLabel: 'Total (15.0% VAT Included)',
   nextPaymentLabel: 'Next payment',
   pleaseFillFields: 'Please fill in all required fields',
+  selectLocation: 'Select Location',
+  searchForLocation: 'Search for location',
+  dragMapToAdjustLocation: 'Drag map to adjust location',
+  selectedLocation: 'Selected Location',
+  confirmLocation: 'Confirm Location',
+  locationServicesDisabled: 'Location services are disabled. Please enable them in settings.',
+  locationPermissionsDenied: 'Location permissions denied. Please grant permission to use your location.',
+  locationPermissionsPermanentlyDenied:
+      'Location permissions are permanently denied. Please enable them in app settings.',
+  currentLocationPinned: 'Current location pinned',
+  couldNotGetCurrentLocation: 'Could not get your current location',
   deleteMyAccount: '',
   deliveryFrequency1: '',
   subscriptionDuration1: '',
@@ -2033,6 +2144,18 @@ final LocalizationMessages ar = LocalizationMessages(
   addressesScreenTitle: 'العنوان المحفوظ',
   addressesScreenAddNewAddressButton: 'إضافة عنوان جديد',
   addressesScreenNoAddressesFound: 'لا يوجد عنوان محفوظ',
+  addressSavedSuccessfully: 'تم حفظ العنوان بنجاح',
+  addressUpdatedSuccessfully: 'تم تحديث العنوان بنجاح',
+  addressDeletedSuccessfully: 'تم حذف العنوان بنجاح',
+  fillRequiredFields: 'يرجى ملء جميع الحقول المطلوبة',
+  dropAddressFromMap: 'حدد العنوان من الخريطة',
+  enterAddressDetails: 'أدخل تفاصيل العنوان',
+  enterPhoneNumber: 'أدخل رقم الهاتف',
+  enterRecipientName: 'أدخل اسم المستلم',
+  defaultAddressTitle: 'عنواني',
+  defaultAddressWithArea: 'عنواني في {area}',
+  addressLabelHint: 'مثال: مبنى 125، طريق الملك فهد، حي العليا',
+  extraAddressLabelHint: 'مثال: الطابق الثاني، شقة 5',
   recipientDetailsScreenTitle: 'تفاصيل المستلم',
   recipientDetailsScreenContinueButton: 'متابعة',
   recipientDetailsScreenRecipientNameLabel: 'الاسم',
@@ -2132,6 +2255,16 @@ final LocalizationMessages ar = LocalizationMessages(
   totalVatIncludedLabel: 'الإجمالي (شامل ض.ق.م 15.0%)',
   nextPaymentLabel: 'الدفعة التالية',
   pleaseFillFields: 'يرجى تعبئة جميع الحقول المطلوبة',
+  selectLocation: 'اختيار الموقع',
+  searchForLocation: 'ابحث عن موقع',
+  dragMapToAdjustLocation: 'اسحب الخريطة لتعديل الموقع',
+  selectedLocation: 'الموقع المحدد',
+  confirmLocation: 'تأكيد الموقع',
+  locationServicesDisabled: 'خدمات الموقع معطلة. يرجى تفعيلها في الإعدادات.',
+  locationPermissionsDenied: 'تم رفض أذونات الموقع. يرجى منح الإذن لاستخدام موقعك.',
+  locationPermissionsPermanentlyDenied: 'تم رفض أذونات الموقع بشكل دائم. يرجى تمكينها في إعدادات التطبيق.',
+  currentLocationPinned: 'تم تحديد موقعك الحالي',
+  couldNotGetCurrentLocation: 'تعذر الحصول على موقعك الحالي',
   deleteMyAccount: 'حذف الحساب',
   deliveryFrequency1: 'تكرار التوصيل',
   subscriptionDuration1: 'مدة الاشتراك',

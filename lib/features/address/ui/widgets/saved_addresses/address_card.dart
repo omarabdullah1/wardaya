@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 
 import '../../../../../core/assets/assets.dart';
@@ -97,7 +98,7 @@ class AddressCard extends StatelessWidget {
                   ),
                   SizedBox(height: 12.h),
                   Text(
-                    'Name: ${address?.recipientName ?? ''}',
+                    "${context.el.recipientName}: ${address?.recipientName ?? ''}",
                     style: TextStyle(
                       fontSize: 13.sp,
                       color: ColorsManager.darkGray,
@@ -105,7 +106,7 @@ class AddressCard extends StatelessWidget {
                   ),
                   SizedBox(height: 4.h),
                   Text(
-                    'Phone number: ${address?.recipientPhoneNumber ?? ''}',
+                    "${context.el.phoneNumber}: ${address?.recipientPhoneNumber ?? ''}",
                     style: TextStyle(
                       fontSize: 13.sp,
                       color: ColorsManager.darkGray,
