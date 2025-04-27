@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/features/my_occasions/data/models/my_occasions_response.dart';
@@ -45,7 +46,7 @@ class _ReminderBottomSheetState extends State<ReminderBottomSheet> {
   void _saveOccasion() {
     if (_nameController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter a name for the occasion')),
+        SnackBar(content: Text(context.el.pleaseEnterName)),
       );
       return;
     }
@@ -91,7 +92,7 @@ class _ReminderBottomSheetState extends State<ReminderBottomSheet> {
           actionError: (message) {
             setState(() => _isLoading = false);
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Error: $message')),
+              SnackBar(content: Text(context.el.errorText)),
             );
           },
           orElse: () {},
@@ -119,7 +120,9 @@ class _ReminderBottomSheetState extends State<ReminderBottomSheet> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      widget.isEdit ? 'Edit Occasion' : 'Remind me about...',
+                      widget.isEdit
+                          ? context.el.editOccasion
+                          : context.el.remindMeAbout,
                       style: TextStyle(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
@@ -135,8 +138,8 @@ class _ReminderBottomSheetState extends State<ReminderBottomSheet> {
                 VerticalSpace(height: 16.h),
                 Text(
                   widget.isEdit
-                      ? 'Update your occasion details'
-                      : 'Tell us a few details to save your reminder',
+                      ? context.el.updateOccasionDetails
+                      : context.el.occasionDetailsPrompt,
                   style: TextStyle(
                     fontSize: 14.sp,
                     color: ColorsManager.grey.withAlpha((0.75 * 255).toInt()),
@@ -146,7 +149,7 @@ class _ReminderBottomSheetState extends State<ReminderBottomSheet> {
 
                 // Name field
                 Text(
-                  'Name',
+                  context.el.nameLabel,
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
@@ -177,7 +180,7 @@ class _ReminderBottomSheetState extends State<ReminderBottomSheet> {
 
                 // Date field
                 Text(
-                  'Date',
+                  context.el.dateLabel,
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
@@ -193,11 +196,17 @@ class _ReminderBottomSheetState extends State<ReminderBottomSheet> {
                     final DateTime initialDate =
                         _selectedDate.isBefore(now) ? now : _selectedDate;
 
+                    // Set UI language to English for date picker
+                    // final Locale currentLocale =
+                    //     Localizations.localeOf(context);
+
                     final DateTime? picked = await showDatePicker(
                       context: context,
                       initialDate: initialDate,
                       firstDate: now,
                       lastDate: DateTime(2100),
+                      // Always display date picker in English
+                      locale: const Locale('en', 'US'),
                     );
                     if (picked != null && picked != _selectedDate) {
                       setState(() {
@@ -218,8 +227,10 @@ class _ReminderBottomSheetState extends State<ReminderBottomSheet> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        // Always format date in English
                         Text(
-                          DateFormat('dd MMMM yyyy').format(_selectedDate),
+                          DateFormat('dd MMMM yyyy', 'en_US')
+                              .format(_selectedDate),
                           style: TextStyle(fontSize: 16.sp),
                         ),
                         const Icon(Icons.calendar_today,
@@ -254,8 +265,8 @@ class _ReminderBottomSheetState extends State<ReminderBottomSheet> {
                           )
                         : Text(
                             widget.isEdit
-                                ? 'Update Occasion'
-                                : 'Create Occasion',
+                                ? context.el.updateOccasionButton
+                                : context.el.createOccasionButton,
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontWeight: FontWeight.bold,

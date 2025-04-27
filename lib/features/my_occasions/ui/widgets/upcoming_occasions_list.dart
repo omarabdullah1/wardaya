@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:localization/localization.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/theming/styles.dart';
@@ -33,10 +34,10 @@ class UpcomingOccasionsList extends StatelessWidget {
           loading: () => _buildLoading(context),
           success: (occasions) {
             if (occasions.isEmpty) {
-              return const Center(
+              return Center(
                 child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text('No upcoming occasions found'),
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(context.el.noOccasionsAvailable),
                 ),
               );
             }
@@ -60,7 +61,7 @@ class UpcomingOccasionsList extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'Error: $message',
+                context.el.errorText,
                 style: TextStyle(
                   color: Colors.red,
                   fontSize: 14.sp,
@@ -106,12 +107,14 @@ class UpcomingOccasionsList extends StatelessWidget {
     showDialog(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text('Delete Occasion'),
-        content: Text('Are you sure you want to delete "${occasion.name}"?'),
+        title: Text(
+          context.el.deleteOccasionTitle,
+        ),
+        content: Text(context.el.deleteOccasionConfirm),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            child: const Text('Cancel'),
+            child: Text(context.el.cancel),
           ),
           TextButton(
             onPressed: () {
@@ -122,7 +125,7 @@ class UpcomingOccasionsList extends StatelessWidget {
             style: TextButton.styleFrom(
               foregroundColor: Colors.red,
             ),
-            child: const Text('Delete'),
+            child: Text(context.el.delete),
           ),
         ],
       ),
@@ -139,7 +142,7 @@ class UpcomingOccasionsList extends StatelessWidget {
           return OccasionCard(
             occasion: MyOccasionItem(
               id: '1',
-              name: 'Loading...',
+              name: context.el.loading,
               date: DateTime.now(),
               version: 1,
             ),
@@ -274,7 +277,7 @@ class OccasionCard extends StatelessWidget {
                           ),
                           SizedBox(height: 4.h),
                           Text(
-                            'Edit',
+                            context.el.edit,
                             style: TextStyle(
                               color: ColorsManager.mainRose,
                               fontSize: 12.sp,
@@ -308,7 +311,7 @@ class OccasionCard extends StatelessWidget {
                           ),
                           SizedBox(height: 4.h),
                           Text(
-                            'Delete',
+                            context.el.delete,
                             style: TextStyle(
                               color: Colors.red,
                               fontSize: 12.sp,

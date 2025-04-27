@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:localization/localization.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:wardaya/core/widgets/loading_widget.dart';
 import 'package:wardaya/features/home/data/models/home_occassions_response.dart';
@@ -72,7 +73,7 @@ class OccasionsBuilder extends StatelessWidget {
       return Center(
         child: Padding(
           padding: EdgeInsets.all(16.w),
-          child: const Text('No occasions available'),
+          child: Text(context.el.noOccasionsAvailable),
         ),
       );
     }
@@ -112,7 +113,7 @@ class OccasionsBuilder extends StatelessWidget {
       }
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(error),
+          content: Text(context.el.errorText),
           backgroundColor: Colors.red,
           duration: const Duration(seconds: 3),
         ),
@@ -122,7 +123,7 @@ class OccasionsBuilder extends StatelessWidget {
     return Center(
       child: Padding(
         padding: EdgeInsets.all(16.w),
-        child: Text('Error: $error'),
+        child: Text(context.el.errorText),
       ),
     );
   }

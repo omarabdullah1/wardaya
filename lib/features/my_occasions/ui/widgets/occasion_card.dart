@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:localization/localization.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/features/home/data/apis/home_api_constants.dart';
 import 'package:wardaya/features/home/data/models/home_occassions_response.dart';
@@ -53,7 +54,7 @@ class OccasionCard extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             Text(
-              isLoading ? 'Loading...' : occasion?.name ?? 'Unknown',
+              isLoading ? context.el.loading : occasion?.name ?? 'Unknown',
               style: TextStyle(
                 fontSize: 12.sp,
                 fontWeight: FontWeight.w500,

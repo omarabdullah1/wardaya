@@ -75,7 +75,7 @@ class _DeliveryTimeSelectorState extends State<DeliveryTimeSelector> {
               // Tomorrow box
               Expanded(
                 child: _buildDateBox(
-                  title: 'Tomorrow',
+                  title: context.el.tomorrow,
                   date: _getTomorrowDate(),
                   isSelected: _isTomorrowSelected,
                   onTap: () => _selectTomorrow(),
@@ -87,7 +87,7 @@ class _DeliveryTimeSelectorState extends State<DeliveryTimeSelector> {
                 child: _buildDateBox(
                   title: _isCustomDateSelected && _selectedDate.isNotEmpty
                       ? _selectedDate
-                      : 'Select Date',
+                      : context.el.selectDeliveryDate,
                   isCentered: true,
                   date: null,
                   isSelected: _isCustomDateSelected,

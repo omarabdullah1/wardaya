@@ -76,7 +76,8 @@ class MyOccasionsCubit extends Cubit<MyOccasionsState> {
   Future<void> createOccasion(String name, DateTime date) async {
     emit(const MyOccasionsState.actionLoading());
     try {
-      final formattedDate = DateFormat('yyyy-MM-dd').format(date);
+      // Format date with explicit English locale to ensure consistency
+      final formattedDate = DateFormat('yyyy-MM-dd', 'en_US').format(date);
 
       final response = await _myOccasionsRepo.createOccasions({
         'name': name,
@@ -112,7 +113,8 @@ class MyOccasionsCubit extends Cubit<MyOccasionsState> {
   Future<void> updateOccasion(String id, String name, DateTime date) async {
     emit(const MyOccasionsState.actionLoading());
     try {
-      final formattedDate = DateFormat('yyyy-MM-dd').format(date);
+      // Format date with explicit English locale to ensure consistency
+      final formattedDate = DateFormat('yyyy-MM-dd', 'en_US').format(date);
 
       final response = await _myOccasionsRepo.updateOccasion(id, {
         'name': name,

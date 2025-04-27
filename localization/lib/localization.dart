@@ -344,6 +344,16 @@ class LocalizationMessages {
     required this.quickAdd,
     required this.selectAnOccasionToCreateAreminder,
     required this.yourUpcomingOccasion,
+    required this.noUpcomingOccasions,
+    required this.noOccasionsAvailable,
+    required this.edit,
+    required this.delete,
+    required this.loading,
+    required this.deleteOccasionTitle,
+    required this.deleteOccasionConfirm,
+    required this.deleteButton,
+    required this.cancelButton,
+    required this.errorText,
     required this.selectDeliveryDate,
     required this.invoiceTitle,
     required this.noInvoicesTitle,
@@ -388,6 +398,28 @@ class LocalizationMessages {
     required this.locationPermissionsPermanentlyDenied,
     required this.currentLocationPinned,
     required this.couldNotGetCurrentLocation,
+    required this.voucherCode,
+    required this.addVoucherCode,
+    required this.validatingPromoCode,
+    required this.promoCodeApplied,
+    required this.discount,
+    required this.invalidPromoCode,
+    required this.pleaseEnterVoucherCode,
+    required this.applied,
+    required this.apply,
+    required this.startTypingToSearch,
+    required this.toBeProvidedByRecipient,
+    required this.tomorrow,
+    required this.editOccasion,
+    required this.remindMeAbout,
+    required this.updateOccasionDetails,
+    required this.occasionDetailsPrompt,
+    required this.nameLabel1,
+    required this.dateLabel,
+    required this.pleaseEnterName,
+    required this.updateOccasionButton,
+    required this.createOccasionButton,
+    required this.errorPrefix,
     required this.deleteMyAccount,
     required this.deliveryFrequency1,
     required this.subscriptionDuration1,
@@ -719,6 +751,16 @@ class LocalizationMessages {
       quickAdd: (json['quickAdd'] ?? '').toString(),
       selectAnOccasionToCreateAreminder: (json['selectAnOccasionToCreateAReminder'] ?? '').toString(),
       yourUpcomingOccasion: (json['yourUpcomingOccasion'] ?? '').toString(),
+      noUpcomingOccasions: (json['noUpcomingOccasions'] ?? '').toString(),
+      noOccasionsAvailable: (json['noOccasionsAvailable'] ?? '').toString(),
+      edit: (json['edit'] ?? '').toString(),
+      delete: (json['delete'] ?? '').toString(),
+      loading: (json['loading'] ?? '').toString(),
+      deleteOccasionTitle: (json['deleteOccasionTitle'] ?? '').toString(),
+      deleteOccasionConfirm: (json['deleteOccasionConfirm'] ?? '').toString(),
+      deleteButton: (json['deleteButton'] ?? '').toString(),
+      cancelButton: (json['cancelButton'] ?? '').toString(),
+      errorText: (json['errorText'] ?? '').toString(),
       selectDeliveryDate: (json['selectDeliveryDate'] ?? '').toString(),
       invoiceTitle: (json['invoiceTitle'] ?? '').toString(),
       noInvoicesTitle: (json['noInvoicesTitle'] ?? '').toString(),
@@ -763,6 +805,28 @@ class LocalizationMessages {
       locationPermissionsPermanentlyDenied: (json['locationPermissionsPermanentlyDenied'] ?? '').toString(),
       currentLocationPinned: (json['currentLocationPinned'] ?? '').toString(),
       couldNotGetCurrentLocation: (json['couldNotGetCurrentLocation'] ?? '').toString(),
+      voucherCode: (json['voucher_code'] ?? '').toString(),
+      addVoucherCode: (json['add_voucher_code'] ?? '').toString(),
+      validatingPromoCode: (json['validating_promo_code'] ?? '').toString(),
+      promoCodeApplied: (json['promo_code_applied'] ?? '').toString(),
+      discount: (json['discount'] ?? '').toString(),
+      invalidPromoCode: (json['invalid_promo_code'] ?? '').toString(),
+      pleaseEnterVoucherCode: (json['please_enter_voucher_code'] ?? '').toString(),
+      applied: (json['applied'] ?? '').toString(),
+      apply: (json['apply'] ?? '').toString(),
+      startTypingToSearch: (json['start_typing_to_search'] ?? '').toString(),
+      toBeProvidedByRecipient: (json['to_be_provided_by_recipient'] ?? '').toString(),
+      tomorrow: (json['tomorrow'] ?? '').toString(),
+      editOccasion: (json['editOccasion'] ?? '').toString(),
+      remindMeAbout: (json['remindMeAbout'] ?? '').toString(),
+      updateOccasionDetails: (json['updateOccasionDetails'] ?? '').toString(),
+      occasionDetailsPrompt: (json['occasionDetailsPrompt'] ?? '').toString(),
+      nameLabel1: (json['nameLabel'] ?? '').toString(),
+      dateLabel: (json['dateLabel'] ?? '').toString(),
+      pleaseEnterName: (json['pleaseEnterName'] ?? '').toString(),
+      updateOccasionButton: (json['updateOccasionButton'] ?? '').toString(),
+      createOccasionButton: (json['createOccasionButton'] ?? '').toString(),
+      errorPrefix: (json['errorPrefix'] ?? '').toString(),
       deleteMyAccount: (json['delete_my_account'] ?? '').toString(),
       deliveryFrequency1: (json['delivery_frequency'] ?? '').toString(),
       subscriptionDuration1: (json['subscription_duration'] ?? '').toString(),
@@ -1086,6 +1150,16 @@ class LocalizationMessages {
   final String quickAdd;
   final String selectAnOccasionToCreateAreminder;
   final String yourUpcomingOccasion;
+  final String noUpcomingOccasions;
+  final String noOccasionsAvailable;
+  final String edit;
+  final String delete;
+  final String loading;
+  final String deleteOccasionTitle;
+  final String deleteOccasionConfirm;
+  final String deleteButton;
+  final String cancelButton;
+  final String errorText;
   final String selectDeliveryDate;
   final String invoiceTitle;
   final String noInvoicesTitle;
@@ -1130,6 +1204,28 @@ class LocalizationMessages {
   final String locationPermissionsPermanentlyDenied;
   final String currentLocationPinned;
   final String couldNotGetCurrentLocation;
+  final String voucherCode;
+  final String addVoucherCode;
+  final String validatingPromoCode;
+  final String promoCodeApplied;
+  final String discount;
+  final String invalidPromoCode;
+  final String pleaseEnterVoucherCode;
+  final String applied;
+  final String apply;
+  final String startTypingToSearch;
+  final String toBeProvidedByRecipient;
+  final String tomorrow;
+  final String editOccasion;
+  final String remindMeAbout;
+  final String updateOccasionDetails;
+  final String occasionDetailsPrompt;
+  final String nameLabel1;
+  final String dateLabel;
+  final String pleaseEnterName;
+  final String updateOccasionButton;
+  final String createOccasionButton;
+  final String errorPrefix;
   final String deleteMyAccount;
   final String deliveryFrequency1;
   final String subscriptionDuration1;
@@ -1452,6 +1548,16 @@ class LocalizationMessages {
         r'''quickAdd''': quickAdd,
         r'''selectAnOccasionToCreateAReminder''': selectAnOccasionToCreateAreminder,
         r'''yourUpcomingOccasion''': yourUpcomingOccasion,
+        r'''noUpcomingOccasions''': noUpcomingOccasions,
+        r'''noOccasionsAvailable''': noOccasionsAvailable,
+        r'''edit''': edit,
+        r'''delete''': delete,
+        r'''loading''': loading,
+        r'''deleteOccasionTitle''': deleteOccasionTitle,
+        r'''deleteOccasionConfirm''': deleteOccasionConfirm,
+        r'''deleteButton''': deleteButton,
+        r'''cancelButton''': cancelButton,
+        r'''errorText''': errorText,
         r'''selectDeliveryDate''': selectDeliveryDate,
         r'''invoiceTitle''': invoiceTitle,
         r'''noInvoicesTitle''': noInvoicesTitle,
@@ -1496,6 +1602,28 @@ class LocalizationMessages {
         r'''locationPermissionsPermanentlyDenied''': locationPermissionsPermanentlyDenied,
         r'''currentLocationPinned''': currentLocationPinned,
         r'''couldNotGetCurrentLocation''': couldNotGetCurrentLocation,
+        r'''voucher_code''': voucherCode,
+        r'''add_voucher_code''': addVoucherCode,
+        r'''validating_promo_code''': validatingPromoCode,
+        r'''promo_code_applied''': promoCodeApplied,
+        r'''discount''': discount,
+        r'''invalid_promo_code''': invalidPromoCode,
+        r'''please_enter_voucher_code''': pleaseEnterVoucherCode,
+        r'''applied''': applied,
+        r'''apply''': apply,
+        r'''start_typing_to_search''': startTypingToSearch,
+        r'''to_be_provided_by_recipient''': toBeProvidedByRecipient,
+        r'''tomorrow''': tomorrow,
+        r'''editOccasion''': editOccasion,
+        r'''remindMeAbout''': remindMeAbout,
+        r'''updateOccasionDetails''': updateOccasionDetails,
+        r'''occasionDetailsPrompt''': occasionDetailsPrompt,
+        r'''nameLabel''': nameLabel1,
+        r'''dateLabel''': dateLabel,
+        r'''pleaseEnterName''': pleaseEnterName,
+        r'''updateOccasionButton''': updateOccasionButton,
+        r'''createOccasionButton''': createOccasionButton,
+        r'''errorPrefix''': errorPrefix,
         r'''delete_my_account''': deleteMyAccount,
         r'''delivery_frequency''': deliveryFrequency1,
         r'''subscription_duration''': subscriptionDuration1,
@@ -1850,6 +1978,16 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   quickAdd: 'Quick Add',
   selectAnOccasionToCreateAreminder: 'Select an occasion to create a reminder',
   yourUpcomingOccasion: 'Your Upcoming Occasion',
+  noUpcomingOccasions: 'No upcoming occasions found',
+  noOccasionsAvailable: 'No occasions available',
+  edit: 'Edit',
+  delete: 'Delete',
+  loading: 'Loading...',
+  deleteOccasionTitle: 'Delete Occasion',
+  deleteOccasionConfirm: '''Are you sure you want to delete "{name}"?''',
+  deleteButton: 'Delete',
+  cancelButton: 'Cancel',
+  errorText: 'Error: {message}',
   selectDeliveryDate: 'Select Delivery Date',
   invoiceTitle: 'Invoice',
   noInvoicesTitle: 'You have no invoices from Wardaya.',
@@ -1895,6 +2033,28 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
       'Location permissions are permanently denied. Please enable them in app settings.',
   currentLocationPinned: 'Current location pinned',
   couldNotGetCurrentLocation: 'Could not get your current location',
+  voucherCode: 'Voucher Code',
+  addVoucherCode: 'Add a voucher code',
+  validatingPromoCode: 'Validating promo code...',
+  promoCodeApplied: 'Promo code applied! You get',
+  discount: 'discount',
+  invalidPromoCode: 'Invalid promo code:',
+  pleaseEnterVoucherCode: 'Please enter a voucher code',
+  applied: 'Applied',
+  apply: 'Apply',
+  startTypingToSearch: 'Start typing to search',
+  toBeProvidedByRecipient: 'To be provided by recipient',
+  tomorrow: 'Tomorrow',
+  editOccasion: 'Edit Occasion',
+  remindMeAbout: 'Remind me about...',
+  updateOccasionDetails: 'Update your occasion details',
+  occasionDetailsPrompt: 'Tell us a few details to save your reminder',
+  nameLabel1: 'Name',
+  dateLabel: 'Date',
+  pleaseEnterName: 'Please enter a name for the occasion',
+  updateOccasionButton: 'Update Occasion',
+  createOccasionButton: 'Create Occasion',
+  errorPrefix: 'Error: {message}',
   deleteMyAccount: '',
   deliveryFrequency1: '',
   subscriptionDuration1: '',
@@ -2221,6 +2381,16 @@ final LocalizationMessages ar = LocalizationMessages(
   quickAdd: 'إضافة سريعة',
   selectAnOccasionToCreateAreminder: 'اختر مناسبة لإنشاء تذكير',
   yourUpcomingOccasion: 'مناسباتك القادمة',
+  noUpcomingOccasions: 'لا توجد مناسبات قادمة',
+  noOccasionsAvailable: 'لا توجد مناسبات متاحة',
+  edit: 'تعديل',
+  delete: 'حذف',
+  loading: 'جار التحميل...',
+  deleteOccasionTitle: 'حذف المناسبة',
+  deleteOccasionConfirm: 'هل أنت متأكد أنك تريد حذف هذه المناسبة؟',
+  deleteButton: 'حذف',
+  cancelButton: 'إلغاء',
+  errorText: 'حدث خطأ أثناء تحميل المناسبات',
   selectDeliveryDate: 'اختر تاريخ التوصيل',
   invoiceTitle: 'الفواتير',
   noInvoicesTitle: 'لا توجد فواتير',
@@ -2265,6 +2435,28 @@ final LocalizationMessages ar = LocalizationMessages(
   locationPermissionsPermanentlyDenied: 'تم رفض أذونات الموقع بشكل دائم. يرجى تمكينها في إعدادات التطبيق.',
   currentLocationPinned: 'تم تحديد موقعك الحالي',
   couldNotGetCurrentLocation: 'تعذر الحصول على موقعك الحالي',
+  voucherCode: 'كود الخصم',
+  addVoucherCode: 'أضف كود خصم',
+  validatingPromoCode: 'جاري التحقق من كود الخصم...',
+  promoCodeApplied: 'تم تطبيق كود الخصم! لديك',
+  discount: 'خصم',
+  invalidPromoCode: 'كود الخصم غير صالح:',
+  pleaseEnterVoucherCode: 'الرجاء إدخال كود خصم',
+  applied: 'تم التطبيق',
+  apply: 'تطبيق',
+  startTypingToSearch: 'ابدأ الكتابة للبحث',
+  toBeProvidedByRecipient: 'سيقدمه المستلم',
+  tomorrow: 'غداً',
+  editOccasion: 'تعديل المناسبة',
+  remindMeAbout: '...ذكرني عن',
+  updateOccasionDetails: 'تحديث تفاصيل المناسبة',
+  occasionDetailsPrompt: 'أدخل تفاصيل المناسبة',
+  nameLabel1: 'الاسم',
+  dateLabel: 'التاريخ',
+  pleaseEnterName: 'الرجاء إدخال الاسم',
+  updateOccasionButton: 'تحديث المناسبة',
+  createOccasionButton: 'إنشاء مناسبة',
+  errorPrefix: 'خطأ: ',
   deleteMyAccount: 'حذف الحساب',
   deliveryFrequency1: 'تكرار التوصيل',
   subscriptionDuration1: 'مدة الاشتراك',
