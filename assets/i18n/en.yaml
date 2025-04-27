@@ -6,6 +6,11 @@ app_bar_title: "WARDAYA"
 delivery_to: "Delivery To"
 location_city: "Riyadh"
 
+# Common actions
+retry: "Retry"
+continue_shopping: "Continue Shopping"
+view_cart: "View Cart"
+
 # SignInScreen texts
 email_label: "Email"
 password_label: "Password"
@@ -123,6 +128,8 @@ add_to_cart: "Add To Cart"
 no_address_hassle: "No Address Hassle"
 collect_address_text: "We will collect the address for you"
 description_header: "Description"
+description_tab: "Description"
+care_tips_tab: "Care Tips"
 see_more: "See More"
 see_less: "See Less"
 all_prices_include_tax: "All prices include tax"

@@ -6,6 +6,11 @@ app_bar_title: "وردايا"
 delivery_to: "التوصيل إلى"
 location_city: "الرياض"
 
+# Common actions
+retry: "إعادة المحاولة"
+continue_shopping: "مواصلة التسوق"
+view_cart: "عرض السلة"
+
 # SignInScreen texts
 email_label: "البريد الإلكتروني"
 password_label: "كلمة المرور"
@@ -123,6 +128,8 @@ add_to_cart: "أضف إلى السلة"
 no_address_hassle: "لا مشكلة في العنوان"
 collect_address_text: "سنقوم بجمع العنوان نيابة عنك"
 description_header: "الوصف"
+description_tab: "الوصف"
+care_tips_tab: "نصائح العناية"
 see_more: "عرض المزيد"
 see_less: "عرض أقل"
 all_prices_include_tax: "جميع الأسعار تشمل الضريبة"

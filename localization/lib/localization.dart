@@ -30,6 +30,9 @@ class LocalizationMessages {
     required this.appBarTitle,
     required this.deliveryTo,
     required this.locationCity,
+    required this.retry,
+    required this.continueShopping,
+    required this.viewCart,
     required this.emailLabel,
     required this.passwordLabel,
     required this.signInButton,
@@ -118,6 +121,8 @@ class LocalizationMessages {
     required this.noAddressHassle,
     required this.collectAddressText,
     required this.descriptionHeader,
+    required this.descriptionTab,
+    required this.careTipsTab,
     required this.seeMore,
     required this.seeLess,
     required this.allPricesIncludeTax,
@@ -342,6 +347,9 @@ class LocalizationMessages {
       appBarTitle: (json['app_bar_title'] ?? '').toString(),
       deliveryTo: (json['delivery_to'] ?? '').toString(),
       locationCity: (json['location_city'] ?? '').toString(),
+      retry: (json['retry'] ?? '').toString(),
+      continueShopping: (json['continue_shopping'] ?? '').toString(),
+      viewCart: (json['view_cart'] ?? '').toString(),
       emailLabel: (json['email_label'] ?? '').toString(),
       passwordLabel: (json['password_label'] ?? '').toString(),
       signInButton: (json['sign_in_button'] ?? '').toString(),
@@ -430,6 +438,8 @@ class LocalizationMessages {
       noAddressHassle: (json['no_address_hassle'] ?? '').toString(),
       collectAddressText: (json['collect_address_text'] ?? '').toString(),
       descriptionHeader: (json['description_header'] ?? '').toString(),
+      descriptionTab: (json['description_tab'] ?? '').toString(),
+      careTipsTab: (json['care_tips_tab'] ?? '').toString(),
       seeMore: (json['see_more'] ?? '').toString(),
       seeLess: (json['see_less'] ?? '').toString(),
       allPricesIncludeTax: (json['all_prices_include_tax'] ?? '').toString(),
@@ -660,6 +670,9 @@ class LocalizationMessages {
   final String appBarTitle;
   final String deliveryTo;
   final String locationCity;
+  final String retry;
+  final String continueShopping;
+  final String viewCart;
   final String emailLabel;
   final String passwordLabel;
   final String signInButton;
@@ -748,6 +761,8 @@ class LocalizationMessages {
   final String noAddressHassle;
   final String collectAddressText;
   final String descriptionHeader;
+  final String descriptionTab;
+  final String careTipsTab;
   final String seeMore;
   final String seeLess;
   final String allPricesIncludeTax;
@@ -970,6 +985,9 @@ class LocalizationMessages {
         r'''app_bar_title''': appBarTitle,
         r'''delivery_to''': deliveryTo,
         r'''location_city''': locationCity,
+        r'''retry''': retry,
+        r'''continue_shopping''': continueShopping,
+        r'''view_cart''': viewCart,
         r'''email_label''': emailLabel,
         r'''password_label''': passwordLabel,
         r'''sign_in_button''': signInButton,
@@ -1058,6 +1076,8 @@ class LocalizationMessages {
         r'''no_address_hassle''': noAddressHassle,
         r'''collect_address_text''': collectAddressText,
         r'''description_header''': descriptionHeader,
+        r'''description_tab''': descriptionTab,
+        r'''care_tips_tab''': careTipsTab,
         r'''see_more''': seeMore,
         r'''see_less''': seeLess,
         r'''all_prices_include_tax''': allPricesIncludeTax,
@@ -1309,6 +1329,9 @@ final LocalizationMessages en = LocalizationMessages(
   appBarTitle: 'WARDAYA',
   deliveryTo: 'Delivery To',
   locationCity: 'Riyadh',
+  retry: 'Retry',
+  continueShopping: 'Continue Shopping',
+  viewCart: 'View Cart',
   emailLabel: 'Email',
   passwordLabel: 'Password',
   signInButton: 'Sign In',
@@ -1397,6 +1420,8 @@ final LocalizationMessages en = LocalizationMessages(
   noAddressHassle: 'No Address Hassle',
   collectAddressText: 'We will collect the address for you',
   descriptionHeader: 'Description',
+  descriptionTab: 'Description',
+  careTipsTab: 'Care Tips',
   seeMore: 'See More',
   seeLess: 'See Less',
   allPricesIncludeTax: 'All prices include tax',
@@ -1623,6 +1648,9 @@ final LocalizationMessages ar = LocalizationMessages(
   appBarTitle: 'وردايا',
   deliveryTo: 'التوصيل إلى',
   locationCity: 'الرياض',
+  retry: 'إعادة المحاولة',
+  continueShopping: 'مواصلة التسوق',
+  viewCart: 'عرض السلة',
   emailLabel: 'البريد الإلكتروني',
   passwordLabel: 'كلمة المرور',
   signInButton: 'تسجيل الدخول',
@@ -1711,6 +1739,8 @@ final LocalizationMessages ar = LocalizationMessages(
   noAddressHassle: 'لا مشكلة في العنوان',
   collectAddressText: 'سنقوم بجمع العنوان نيابة عنك',
   descriptionHeader: 'الوصف',
+  descriptionTab: 'الوصف',
+  careTipsTab: 'نصائح العناية',
   seeMore: 'عرض المزيد',
   seeLess: 'عرض أقل',
   allPricesIncludeTax: 'جميع الأسعار تشمل الضريبة',

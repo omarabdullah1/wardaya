@@ -398,7 +398,7 @@ class _ProductDetailsBodyState extends State<ProductDetailsBody> {
                                 ),
                               ),
                               child: Text(
-                                'Description',
+                                context.el.descriptionTab,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: _isDescriptionTab
@@ -428,7 +428,7 @@ class _ProductDetailsBodyState extends State<ProductDetailsBody> {
                                 ),
                               ),
                               child: Text(
-                                'Care Tips',
+                                context.el.careTipsTab,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: !_isDescriptionTab

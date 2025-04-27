@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -183,7 +182,7 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection>
                               ),
                             ),
                             child: Text(
-                              'Continue Shopping',
+                              context.el.continueShopping,
                               style: GoogleFonts.inter(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.bold,
@@ -215,7 +214,7 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection>
                               ),
                             ),
                             child: Text(
-                              'View Cart',
+                              context.el.viewCart,
                               style: GoogleFonts.inter(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.bold,
