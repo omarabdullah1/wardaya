@@ -144,14 +144,11 @@ class _LoginFormState extends State<LoginForm> {
         cubit.passwordController.text.isEmpty) {
       cubit.snackbarShow(
         context,
-        'Email and password are required',
+        context.el.validationEmailPasswordRequired,
         color: ColorsManager.red,
       );
       return;
     }
-
-    if (cubit.formKey.currentState!.validate()) {
-      cubit.emitLoginStates();
-    }
+    cubit.emitLoginStates(context);
   }
 }

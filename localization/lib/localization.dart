@@ -37,9 +37,19 @@ class LocalizationMessages {
     required this.createAccount,
     required this.dividerText,
     required this.signInWith,
+    required this.validationEmailPasswordRequired,
+    required this.googleSignInSuccess,
+    required this.googleSignInFailed,
+    required this.googleTokenError,
+    required this.loginFailed,
+    required this.registrationFailed,
+    required this.generalError,
+    required this.formAllFieldRequired,
+    required this.fieldRequired,
     required this.forgetPasswordTitle,
     required this.forgetPasswordInstruction,
     required this.resetPasswordButton,
+    required this.passwordResetLinkSent,
     required this.createAccountTitle,
     required this.createAccountButton,
     required this.nameLabel,
@@ -325,9 +335,19 @@ class LocalizationMessages {
       createAccount: (json['create_account'] ?? '').toString(),
       dividerText: (json['divider_text'] ?? '').toString(),
       signInWith: (json['sign_in_with'] ?? '').toString(),
+      validationEmailPasswordRequired: (json['validation_email_password_required'] ?? '').toString(),
+      googleSignInSuccess: (json['google_sign_in_success'] ?? '').toString(),
+      googleSignInFailed: (json['google_sign_in_failed'] ?? '').toString(),
+      googleTokenError: (json['google_token_error'] ?? '').toString(),
+      loginFailed: (json['login_failed'] ?? '').toString(),
+      registrationFailed: (json['registration_failed'] ?? '').toString(),
+      generalError: (json['general_error'] ?? '').toString(),
+      formAllFieldRequired: (json['form_all_field_required'] ?? '').toString(),
+      fieldRequired: (json['field_required'] ?? '').toString(),
       forgetPasswordTitle: (json['forget_password_title'] ?? '').toString(),
       forgetPasswordInstruction: (json['forget_password_instruction'] ?? '').toString(),
       resetPasswordButton: (json['reset_password_button'] ?? '').toString(),
+      passwordResetLinkSent: (json['password_reset_link_sent'] ?? '').toString(),
       createAccountTitle: (json['create_account_title'] ?? '').toString(),
       createAccountButton: (json['create_account_button'] ?? '').toString(),
       nameLabel: (json['name_label'] ?? '').toString(),
@@ -619,9 +639,19 @@ class LocalizationMessages {
   final String createAccount;
   final String dividerText;
   final String signInWith;
+  final String validationEmailPasswordRequired;
+  final String googleSignInSuccess;
+  final String googleSignInFailed;
+  final String googleTokenError;
+  final String loginFailed;
+  final String registrationFailed;
+  final String generalError;
+  final String formAllFieldRequired;
+  final String fieldRequired;
   final String forgetPasswordTitle;
   final String forgetPasswordInstruction;
   final String resetPasswordButton;
+  final String passwordResetLinkSent;
   final String createAccountTitle;
   final String createAccountButton;
   final String nameLabel;
@@ -905,9 +935,19 @@ class LocalizationMessages {
         r'''create_account''': createAccount,
         r'''divider_text''': dividerText,
         r'''sign_in_with''': signInWith,
+        r'''validation_email_password_required''': validationEmailPasswordRequired,
+        r'''google_sign_in_success''': googleSignInSuccess,
+        r'''google_sign_in_failed''': googleSignInFailed,
+        r'''google_token_error''': googleTokenError,
+        r'''login_failed''': loginFailed,
+        r'''registration_failed''': registrationFailed,
+        r'''general_error''': generalError,
+        r'''form_all_field_required''': formAllFieldRequired,
+        r'''field_required''': fieldRequired,
         r'''forget_password_title''': forgetPasswordTitle,
         r'''forget_password_instruction''': forgetPasswordInstruction,
         r'''reset_password_button''': resetPasswordButton,
+        r'''password_reset_link_sent''': passwordResetLinkSent,
         r'''create_account_title''': createAccountTitle,
         r'''create_account_button''': createAccountButton,
         r'''name_label''': nameLabel,
@@ -1220,9 +1260,19 @@ final LocalizationMessages en = LocalizationMessages(
   createAccount: 'Create Account',
   dividerText: 'OR',
   signInWith: 'Sign in with',
+  validationEmailPasswordRequired: 'Email and password are required',
+  googleSignInSuccess: 'Successfully signed in with Google',
+  googleSignInFailed: 'Google login failed',
+  googleTokenError: 'Failed to get authentication token from Google',
+  loginFailed: 'Login failed',
+  registrationFailed: 'Registration failed',
+  generalError: 'An error occurred. Please try again.',
+  formAllFieldRequired: 'Make sure to fill all fields',
+  fieldRequired: 'Required',
   forgetPasswordTitle: 'Forget Password?',
   forgetPasswordInstruction: 'Enter the email address associated with your account',
   resetPasswordButton: 'Reset Password',
+  passwordResetLinkSent: 'Password reset link sent to your email',
   createAccountTitle: 'Create Account',
   createAccountButton: 'Create Account',
   nameLabel: 'Name',
@@ -1510,9 +1560,19 @@ final LocalizationMessages ar = LocalizationMessages(
   createAccount: 'إنشاء حساب',
   dividerText: 'أو',
   signInWith: 'سجل دخول باستخدام',
+  validationEmailPasswordRequired: 'البريد الإلكتروني وكلمة المرور مطلوبان',
+  googleSignInSuccess: 'تم تسجيل الدخول بنجاح باستخدام Google',
+  googleSignInFailed: 'فشل تسجيل الدخول باستخدام Google',
+  googleTokenError: 'فشل في الحصول على رمز المصادقة من Google',
+  loginFailed: 'فشل تسجيل الدخول',
+  registrationFailed: 'فشل التسجيل',
+  generalError: 'حدث خطأ. يرجى المحاولة مرة أخرى.',
+  formAllFieldRequired: 'جميع الحقول مطلوبة',
+  fieldRequired: 'هذا الحقل مطلوب',
   forgetPasswordTitle: 'نسيت كلمة المرور؟',
   forgetPasswordInstruction: 'أدخل البريد الإلكتروني المرتبط بحسابك',
   resetPasswordButton: 'إعادة تعيين كلمة المرور',
+  passwordResetLinkSent: 'تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني',
   createAccountTitle: 'إنشاء حساب',
   createAccountButton: 'إنشاء حساب',
   nameLabel: 'الاسم',

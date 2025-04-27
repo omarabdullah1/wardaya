@@ -15,10 +15,22 @@ create_account: "إنشاء حساب"
 divider_text: "أو"
 sign_in_with: "سجل دخول باستخدام"
 
+# Authentication validation and messages
+validation_email_password_required: "البريد الإلكتروني وكلمة المرور مطلوبان"
+google_sign_in_success: "تم تسجيل الدخول بنجاح باستخدام Google"
+google_sign_in_failed: "فشل تسجيل الدخول باستخدام Google"
+google_token_error: "فشل في الحصول على رمز المصادقة من Google"
+login_failed: "فشل تسجيل الدخول"
+registration_failed: "فشل التسجيل"
+general_error: "حدث خطأ. يرجى المحاولة مرة أخرى."
+form_all_field_required: "جميع الحقول مطلوبة"
+field_required: "هذا الحقل مطلوب"
+
 # ForgetPasswordScreen texts
 forget_password_title: "نسيت كلمة المرور؟"
 forget_password_instruction: "أدخل البريد الإلكتروني المرتبط بحسابك"
 reset_password_button: "إعادة تعيين كلمة المرور"
+password_reset_link_sent: "تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني"
 
 # CreateAccountScreen texts
 create_account_title: "إنشاء حساب"

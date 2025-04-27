@@ -41,7 +41,7 @@ class ForgetPasswordScreen extends StatelessWidget {
 
                 context.read<ForgetPasswordCubit>().snackbarShow(
                       context,
-                      'Password reset link sent to your email',
+                      context.el.passwordResetLinkSent,
                       color: ColorsManager.mintGreen,
                     );
                 Future.delayed(const Duration(seconds: 2), () {
@@ -96,67 +96,49 @@ class ForgetPasswordScreen extends StatelessWidget {
                         style: GoogleFonts.inter(
                           fontSize: 27.0.sp,
                           fontWeight: FontWeight.w400,
-                          color: ColorsManager.darkGray,
+                          color: Colors.black,
                         ),
-                        textAlign: TextAlign.center,
                       ),
-                      // Localized instruction text
+                      const VerticalSpace(height: 40),
+                      // Instructions also using localization
                       Text(
                         context.el.forgetPasswordInstruction,
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.inter(
                           fontSize: 16.0.sp,
                           fontWeight: FontWeight.w400,
-                          color: ColorsManager.grey,
+                          color: Colors.black,
                         ),
-                        textAlign: TextAlign.center,
                       ),
-                      const VerticalSpace(height: 18),
-                      // Localized label for email TextField
+                      const VerticalSpace(height: 24),
+                      // Email Input Field
                       TextField(
                         controller: cubit.emailController,
                         decoration: InputDecoration(
                           labelText: context.el.emailLabel,
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: ColorsManager.grey,
-                              width: 1.0,
-                            ),
-                          ),
-                          enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: ColorsManager.grey,
-                              width: 1.0,
-                            ),
-                          ),
-                          labelStyle: GoogleFonts.inter(
-                            fontSize: 15.0.sp,
-                            fontWeight: FontWeight.w400,
-                            color: ColorsManager.grey,
+                          border: const OutlineInputBorder(),
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                      const VerticalSpace(height: 40),
+                      // Reset Password Button
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorsManager.mainRose,
+                          minimumSize: Size(double.infinity, 50.0.h),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.0),
                           ),
                         ),
-                      ),
-                      const VerticalSpace(height: 18),
-                      // Localized reset password button text
-                      ElevatedButton(
                         onPressed: () {
-                          // Call the requestPasswordReset method from the cubit
                           cubit.requestPasswordReset();
                         },
-                        style: ElevatedButton.styleFrom(
-                          fixedSize: Size(context.screenWidth.w, 50.h),
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                          alignment: AlignmentDirectional.center,
-                          backgroundColor: ColorsManager.mainRose,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4.0),
-                          ),
-                        ),
                         child: Text(
                           context.el.resetPasswordButton,
                           style: GoogleFonts.inter(
                             fontSize: 15.0.sp,
-                            fontWeight: FontWeight.w400,
-                            color: ColorsManager.white,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
                           ),
                         ),
                       ),

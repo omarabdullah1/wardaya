@@ -15,10 +15,22 @@ create_account: "Create Account"
 divider_text: "OR"
 sign_in_with: "Sign in with"
 
+# Authentication validation and messages
+validation_email_password_required: "Email and password are required"
+google_sign_in_success: "Successfully signed in with Google"
+google_sign_in_failed: "Google login failed"
+google_token_error: "Failed to get authentication token from Google"
+login_failed: "Login failed"
+registration_failed: "Registration failed"
+general_error: "An error occurred. Please try again."
+form_all_field_required: "Make sure to fill all fields"
+field_required: "Required"
+
 # ForgetPasswordScreen texts
 forget_password_title: "Forget Password?"
 forget_password_instruction: "Enter the email address associated with your account"
 reset_password_button: "Reset Password"
+password_reset_link_sent: "Password reset link sent to your email"
 
 # CreateAccountScreen texts
 create_account_title: "Create Account"

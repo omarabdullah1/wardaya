@@ -57,8 +57,8 @@ class RegisterForm extends StatelessWidget {
                       visible: cubit.formKey.currentState
                               ?.fields[FormFieldsKeys.fullName]?.hasError ??
                           false,
-                      child:
-                          toolTipBuilder(cubit.fullNameTooltipKey, 'Required'),
+                      child: toolTipBuilder(
+                          cubit.fullNameTooltipKey, context.el.fieldRequired),
                     );
                   },
                 ),
@@ -84,7 +84,8 @@ class RegisterForm extends StatelessWidget {
                       visible: cubit.formKey.currentState
                               ?.fields[FormFieldsKeys.email]?.hasError ??
                           false,
-                      child: toolTipBuilder(cubit.emailTooltipKey, 'Required'),
+                      child: toolTipBuilder(
+                          cubit.emailTooltipKey, context.el.fieldRequired),
                     );
                   },
                 ),
@@ -117,8 +118,8 @@ class RegisterForm extends StatelessWidget {
                                       ?.fields[FormFieldsKeys.password]
                                       ?.hasError ??
                                   false,
-                              child: toolTipBuilder(
-                                  cubit.passwordTooltipKey, 'Required'),
+                              child: toolTipBuilder(cubit.passwordTooltipKey,
+                                  context.el.fieldRequired),
                             ),
                             IconButton(
                               icon: Icon(
@@ -186,7 +187,7 @@ class RegisterForm extends StatelessWidget {
                     name: 'phone',
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
-                      labelText: 'Phone',
+                      labelText: context.el.phoneLabel,
                       suffixIcon: FormBuilderField(
                         name: FormFieldsKeys.phoneErrorListner,
                         builder: (FormFieldState<dynamic> field) {
@@ -194,8 +195,8 @@ class RegisterForm extends StatelessWidget {
                             visible: cubit.formKey.currentState?.fields['phone']
                                     ?.hasError ??
                                 false,
-                            child: toolTipBuilder(
-                                cubit.phoneTooltipKey, 'Required'),
+                            child: toolTipBuilder(cubit.phoneTooltipKey,
+                                context.el.fieldRequired),
                           );
                         },
                       ),
@@ -303,7 +304,7 @@ class RegisterForm extends StatelessWidget {
     } else {
       showToastWidget(
         StyledToastWidget(
-          message: 'Make sure to fill all fields',
+          message: context.el.formAllFieldRequired,
           icon: Icons.error_outline,
           color: ColorsManager.red.withGreen(20).withBlue(20).withRed(230),
         ),
