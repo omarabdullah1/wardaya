@@ -22,8 +22,8 @@ class InvoiceDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Format dates
-    final dateFormat = DateFormat('dd MMM, yyyy');
-    final timeFormat = DateFormat('hh:mm a');
+    final dateFormat = DateFormat('dd MMM, yyyy', 'en_US');
+    final timeFormat = DateFormat('hh:mm a', 'en_US');
     final invoiceDate = dateFormat.format(invoice.invoiceDate);
     final invoiceTime = timeFormat.format(invoice.invoiceDate);
 

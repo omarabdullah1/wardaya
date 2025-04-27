@@ -33,7 +33,8 @@ class _DeliveryTimeSelectorState extends State<DeliveryTimeSelector> {
 
       // Determine if the selected date is tomorrow
       final tomorrow = DateTime.now().add(const Duration(days: 1));
-      final tomorrowFormatted = DateFormat('dd MMMM yyyy').format(tomorrow);
+      final tomorrowFormatted =
+          DateFormat('dd MMMM yyyy', 'en_US').format(tomorrow);
 
       if (_selectedDate == tomorrowFormatted) {
         _isTomorrowSelected = true;
@@ -174,13 +175,14 @@ class _DeliveryTimeSelectorState extends State<DeliveryTimeSelector> {
   // Get tomorrow's date as a formatted string
   String _getTomorrowDate() {
     final tomorrow = DateTime.now().add(const Duration(days: 1));
-    return DateFormat('dd MMM').format(tomorrow);
+    return DateFormat('dd MMM', 'en_US').format(tomorrow);
   }
 
   // Select tomorrow as the delivery date
   void _selectTomorrow() {
     final tomorrow = DateTime.now().add(const Duration(days: 1));
-    final tomorrowFormatted = DateFormat('dd MMMM yyyy').format(tomorrow);
+    final tomorrowFormatted =
+        DateFormat('dd MMMM yyyy', 'en_US').format(tomorrow);
 
     setState(() {
       _isTomorrowSelected = true;
@@ -226,7 +228,8 @@ class _DeliveryTimeSelectorState extends State<DeliveryTimeSelector> {
 
     if (pickedDate != null) {
       // Format the selected date
-      final formattedDate = DateFormat('dd MMMM yyyy').format(pickedDate);
+      final formattedDate =
+          DateFormat('dd MMMM yyyy', 'en_US').format(pickedDate);
 
       // Check if the selected date is tomorrow
       final tomorrowDate = DateTime.now().add(const Duration(days: 1));

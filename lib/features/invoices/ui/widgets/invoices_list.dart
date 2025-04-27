@@ -134,7 +134,7 @@ class InvoiceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Format the date
-    final dateFormat = DateFormat('dd MMM, yyyy');
+    final dateFormat = DateFormat('dd MMM, yyyy', 'en_US');
     final formattedDate = dateFormat.format(invoice.invoiceDate);
 
     // Safely extract the ID suffix

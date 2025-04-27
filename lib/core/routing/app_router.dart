@@ -34,7 +34,6 @@ import '../../features/subscriptions/ui/subscripion_checkout.dart';
 import '../../features/subscriptions/ui/subscription_duration_screen.dart';
 import '../../features/subscriptions/ui/susbcriptions_screen.dart';
 import 'router_imports.dart';
-import '../../features/payment/ui/payment_method_screen.dart';
 import '../../features/payment/ui/tap_payment_screen.dart';
 import '../../features/cart/logic/giftCards/gift_cards_cubit.dart';
 
@@ -414,14 +413,6 @@ class AppRouter {
           ),
         );
 
-      case Routes.paymentMethodScreen:
-        final Map<String, dynamic> args =
-            settings.arguments as Map<String, dynamic>;
-        return _buildRoute(
-          screen: PaymentMethodScreen(
-            amount: args['amount'] as double,
-          ),
-        );
       // case Routes.tapPaymentScreen:
       //   final Map<String, dynamic> args =
       //       settings.arguments as Map<String, dynamic>;

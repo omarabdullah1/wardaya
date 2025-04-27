@@ -20,7 +20,7 @@ class OrderCard extends StatelessWidget {
   const OrderCard({super.key, required this.order});
 
   String _formatDate(DateTime date) {
-    return DateFormat('MMM dd, yyyy').format(date);
+    return DateFormat('MMM dd, yyyy', 'en_US').format(date);
   }
 
   String _formatOrderNumber(String orderId) {

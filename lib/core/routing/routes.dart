@@ -32,7 +32,6 @@ class Routes {
   static const String occasionsScreen = '/occasionsScreen';
   static const String invoicesScreen = '/invoicesScreen';
   static const String benefitPayScreen = '/benefit-pay';
-  static const String paymentMethodScreen = '/payment-method';
   static const String tapPaymentScreen = '/tap-payment';
   static const String myOrdersScreen = '/myOrdersScreen';
   static const String orderDetailsScreen = '/orderDetailsScreen';

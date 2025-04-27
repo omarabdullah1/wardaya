@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:localization/localization.dart';
+import 'package:wardaya/core/blocs/general/cubit/general_cubit.dart';
 import 'package:wardaya/core/di/dependency_injection.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/helpers/spacing.dart';
@@ -65,7 +67,16 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
     displayNameNoCountryCode: 'Saudi Arabia (SA)',
     e164Key: '966-SA-0',
   );
-
+  List<String> deliveryEN = [
+    "Once a week",
+    "Every two weeks",
+    "Once a month",
+  ];
+  List<String> deliveryAR = [
+    "مرة واحدة في الأسبوع",
+    "كل أسبوعين",
+    "مرة واحدة في الشهر",
+  ];
   void _handleAddressOptionChange(String? value) async {
     if (value != null) {
       final addressCubit = context.read<AddressCubit>();
@@ -81,7 +92,7 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
         showUserRecipient = !isSavedAddress;
       });
 
-      if (value == 'Enter recipient address') {
+      if (value == context.el.enterRecipientAddress) {
         final cubit = context.read<SubscriptionCheckoutCubit>();
 
         // Show bottom sheet for recipient address - always show when selected
@@ -142,8 +153,8 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
         selectedAddressOption.isEmpty ||
         selectedPaymentMethod.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please fill in all required fields'),
+        SnackBar(
+          content: Text(context.el.pleaseFillFields),
           backgroundColor: ColorsManager.mainRose,
         ),
       );
@@ -190,7 +201,9 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
 
     cubit.checkout(
       plan: widget.subscriptionPlan,
-      deliveryFrequency: widget.deliveryFrequency,
+      deliveryFrequency: context.read<GeneralCubit>().lang == 'ar'
+          ? deliveryEN[deliveryAR.indexOf(widget.deliveryFrequency)]
+          : widget.deliveryFrequency,
       duration: widget.subscriptionDuration,
       startDate: widget.startDate,
       amount: widget.price,
@@ -307,7 +320,7 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
                             size: 48.w, color: Colors.grey),
                         VerticalSpace(height: 8.h),
                         Text(
-                          'No saved addresses found',
+                          context.el.noSavedAddresses,
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: ColorsManager.grey,
@@ -315,7 +328,7 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
                         ),
                         VerticalSpace(height: 16.h),
                         AppTextButton(
-                          buttonText: 'Add New Address',
+                          buttonText: context.el.addNewAddress,
                           onPressed: () {
                             // Switch to manual entry mode
                             setState(() {
@@ -339,7 +352,7 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Select a saved address",
+                  context.el.selectSavedAddress,
                   style: TextStylesInter.font14BlackRegular.copyWith(
                     color: ColorsManager.mainRose,
                   ),
@@ -554,14 +567,14 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
         create: (context) => getIt<AddressCubit>()..getAddresses(),
         child: Scaffold(
           backgroundColor: ColorsManager.offWhite,
-          appBar: const AppAppBar(title: 'Checkout'),
+          appBar: AppAppBar(title: context.el.subscriptionCheckoutTitle),
           body: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.all(16.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildSectionTitle('Recipient Details'),
+                  _buildSectionTitle(context.el.recipientDetailsTitle),
                   const VerticalSpace(height: 16),
                   Container(
                     decoration: BoxDecoration(
@@ -575,11 +588,11 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
                     ),
                   ),
                   const VerticalSpace(height: 24),
-                  _buildSectionTitle('Payment Method'),
+                  _buildSectionTitle(context.el.paymentMethodTitle),
                   const VerticalSpace(height: 16),
                   _buildPaymentMethodsSection(),
                   const VerticalSpace(height: 24),
-                  _buildSectionTitle('Payment Details'),
+                  _buildSectionTitle(context.el.paymentDetailsTitle),
                   const VerticalSpace(height: 8),
                   _buildTotalSection(),
                   const VerticalSpace(height: 16),
@@ -617,7 +630,7 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Use saved addresses",
+                  context.el.useSavedAddresses,
                   style: TextStyle(
                     fontSize: 14.sp,
                     color: ColorsManager.black87,
@@ -636,8 +649,8 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
             if (showUserRecipient) ...[
               // Recipient Name and Phone Fields (only displayed when manual entry is selected)
               _buildTextField(
-                'Recipient Name',
-                'Enter Recipient Name',
+                context.el.recipientNameLabel,
+                context.el.recipientNameHint,
                 onTapSuffix: () {
                   cubit.pickContact();
                 },
@@ -648,14 +661,14 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
               _buildPhoneField(cubit.phoneController),
 
               Text(
-                'Delivery Address',
+                context.el.deliveryAddressLabel,
                 style: TextStylesInter.font14BlackRegular.copyWith(
                   color: ColorsManager.mainRose,
                 ),
               ),
               const VerticalSpace(height: 8),
               AddressOptionPreview(
-                text: 'Ask the recipient for the address',
+                text: context.el.askRecipientForAddress,
                 isSelected: selectedAddressOption ==
                     'Ask the recipient for the address',
                 groupValue: selectedAddressOption,
@@ -663,7 +676,7 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
               ),
               const VerticalSpace(height: 8),
               AddressOptionPreview(
-                text: 'Enter recipient address',
+                text: context.el.enterRecipientAddress,
                 isSelected: selectedAddressOption == 'Enter recipient address',
                 location: cubit.selectedLocation,
                 address: cubit.selectedAddress,
@@ -742,7 +755,7 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Recipient Phone Number',
+          context.el.recipientPhoneLabel,
           style: TextStylesInter.font16BlackSemiBold.copyWith(
             color: ColorsManager.mainRose,
           ),
@@ -863,32 +876,11 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
           'Credit Card',
           Assets.of(context).pay_cards.master_card_png,
         ),
-        // const VerticalSpace(height: 8),
-        // _buildPaymentOption(
-        //   'Mada',
-        //   Assets.of(context).pay_cards.mada_png,
-        // ),
         const VerticalSpace(height: 8),
         _buildPaymentOption(
           'Google Pay',
           Assets.of(context).pay_cards.gpay_png,
         ),
-        // const VerticalSpace(height: 8),
-        // _buildPaymentOption(
-        //   'Apple Pay',
-        //   Assets.of(context).pay_cards.apple_pay_png,
-        // ),
-        // const VerticalSpace(height: 8),
-        // _buildPaymentOption(
-        //   'STC Pay',
-        //   Assets.of(context).pay_cards.stc_png,
-        //   height: 10,
-        // ),
-        // const VerticalSpace(height: 8),
-        // _buildPaymentOption(
-        //   'Paypal',
-        //   Assets.of(context).pay_cards.paypal_png,
-        // ),
       ],
     );
   }
@@ -933,7 +925,7 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'First delivery payment details',
+          context.el.firstDeliveryPaymentDetails,
           style: TextStylesInter.font14DarkGrayBold.copyWith(
             color: ColorsManager.lighterLightGrey,
           ),
@@ -948,11 +940,12 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildPriceRow('Subtotal', '${widget.currency} ${widget.price}'),
+              _buildPriceRow(context.el.subtotalLabel,
+                  '${widget.currency} ${widget.price}'),
               const VerticalSpace(height: 8),
-              _buildPriceRow('Delivery charges', 'Free'),
+              _buildPriceRow(context.el.deliveryChargesLabel, 'Free'),
               const VerticalSpace(height: 8),
-              _buildPriceRow('Total (15.0% VAT Included)',
+              _buildPriceRow(context.el.totalVatIncluded,
                   '${widget.currency} ${(double.parse(widget.price)).toStringAsFixed(2)}',
                   isBold: true),
             ],
@@ -990,7 +983,7 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
         Icon(Icons.info_outline, color: Colors.grey[600], size: 20.w),
         const HorizontalSpace(width: 8),
         Text(
-          'Next payment ${calculateNextPaymentDate()}',
+          '${context.el.nextPaymentLabel} ${calculateNextPaymentDate()}',
           style: TextStyle(
             fontSize: 14.sp,
             color: Colors.grey[600],
@@ -1002,7 +995,7 @@ class _SubscripionCheckoutState extends State<SubscripionCheckout> {
 
   Widget _buildProceedButton() {
     return AppTextButton(
-      buttonText: 'Proceed To Payment',
+      buttonText: context.el.proceedToPaymentButton,
       textStyle: GoogleFonts.inter(
         color: Colors.white,
         fontSize: 16.sp,
