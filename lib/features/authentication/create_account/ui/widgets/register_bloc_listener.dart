@@ -33,8 +33,23 @@ class RegisterBlocListener extends StatelessWidget {
           success: (registerResponse) {
             log('Register success: $registerResponse');
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              Navigator.of(context).popUntil((route) => route.isFirst);
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
             });
+            showToastWidget(
+              StyledToastWidget(
+                message: registerResponse.message,
+                icon: Icons.check_circle_outline,
+                color: ColorsManager.mintGreen,
+              ),
+              context: context,
+              axis: Axis.horizontal,
+              alignment: Alignment.center,
+              position: StyledToastPosition.top,
+              reverseAnimation: StyledToastAnimation.slideFromTopFade,
+              animation: StyledToastAnimation.slideFromTopFade,
+              duration: const Duration(milliseconds: 2500),
+            );
           },
           error: (error) {
             log('Register error: $error');

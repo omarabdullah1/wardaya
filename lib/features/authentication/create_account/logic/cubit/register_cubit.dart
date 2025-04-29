@@ -39,7 +39,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   void emitRegisterStates({
     required String fullName,
     required String password,
-    required String phone,
+    String? phone,
     required String email,
   }) async {
     final names = splitFullName(fullName);
@@ -47,6 +47,12 @@ class RegisterCubit extends Cubit<RegisterState> {
     final lastName = names['lastName']!;
 
     emit(const RegisterState.loading());
+
+    // Only include phone number and country code if the phone is not empty
+    final String? phoneNumber =
+        phone != null && phone.trim().isNotEmpty ? phone : null;
+    // final String? phoneCountryCode = phoneNumber != null ? countryCode : null;
+
     final response = await _createAccountRepo.createAccount(
       CreateAccountRequestBody(
         email: email,
@@ -54,7 +60,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         firstName: firstName,
         lastName: lastName,
         countryCode: countryCode,
-        phoneNumber: phone,
+        phoneNumber: phoneNumber,
         birthDate: selectedBirthDate,
         gender: 'Male',
       ),

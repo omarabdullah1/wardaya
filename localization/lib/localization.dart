@@ -33,6 +33,13 @@ class LocalizationMessages {
     required this.retry,
     required this.continueShopping,
     required this.viewCart,
+    required this.cancel,
+    required this.signIn,
+    required this.loginRequired,
+    required this.loginRequiredToAccess,
+    required this.loginToViewCart,
+    required this.loginToViewProfile,
+    required this.loginToSelectCity,
     required this.emailLabel,
     required this.passwordLabel,
     required this.signInButton,
@@ -218,7 +225,6 @@ class LocalizationMessages {
     required this.deleteAccount,
     required this.deleteAccountConfirmation,
     required this.confirm,
-    required this.cancel,
     required this.editProfileTitle,
     required this.saveChangesButton,
     required this.firstNameLabel,
@@ -433,6 +439,13 @@ class LocalizationMessages {
       retry: (json['retry'] ?? '').toString(),
       continueShopping: (json['continue_shopping'] ?? '').toString(),
       viewCart: (json['view_cart'] ?? '').toString(),
+      cancel: (json['cancel'] ?? '').toString(),
+      signIn: (json['sign_in'] ?? '').toString(),
+      loginRequired: (json['loginRequired'] ?? '').toString(),
+      loginRequiredToAccess: (json['loginRequiredToAccess'] ?? '').toString(),
+      loginToViewCart: (json['loginToViewCart'] ?? '').toString(),
+      loginToViewProfile: (json['loginToViewProfile'] ?? '').toString(),
+      loginToSelectCity: (json['loginToSelectCity'] ?? '').toString(),
       emailLabel: (json['email_label'] ?? '').toString(),
       passwordLabel: (json['password_label'] ?? '').toString(),
       signInButton: (json['sign_in_button'] ?? '').toString(),
@@ -618,7 +631,6 @@ class LocalizationMessages {
       deleteAccount: (json['delete_account'] ?? '').toString(),
       deleteAccountConfirmation: (json['delete_account_confirmation'] ?? '').toString(),
       confirm: (json['confirm'] ?? '').toString(),
-      cancel: (json['cancel'] ?? '').toString(),
       editProfileTitle: (json['edit_profile_title'] ?? '').toString(),
       saveChangesButton: (json['save_changes_button'] ?? '').toString(),
       firstNameLabel: (json['first_name_label'] ?? '').toString(),
@@ -839,6 +851,13 @@ class LocalizationMessages {
   final String retry;
   final String continueShopping;
   final String viewCart;
+  final String cancel;
+  final String signIn;
+  final String loginRequired;
+  final String loginRequiredToAccess;
+  final String loginToViewCart;
+  final String loginToViewProfile;
+  final String loginToSelectCity;
   final String emailLabel;
   final String passwordLabel;
   final String signInButton;
@@ -1024,7 +1043,6 @@ class LocalizationMessages {
   final String deleteAccount;
   final String deleteAccountConfirmation;
   final String confirm;
-  final String cancel;
   final String editProfileTitle;
   final String saveChangesButton;
   final String firstNameLabel;
@@ -1237,6 +1255,13 @@ class LocalizationMessages {
         r'''retry''': retry,
         r'''continue_shopping''': continueShopping,
         r'''view_cart''': viewCart,
+        r'''cancel''': cancel,
+        r'''sign_in''': signIn,
+        r'''loginRequired''': loginRequired,
+        r'''loginRequiredToAccess''': loginRequiredToAccess,
+        r'''loginToViewCart''': loginToViewCart,
+        r'''loginToViewProfile''': loginToViewProfile,
+        r'''loginToSelectCity''': loginToSelectCity,
         r'''email_label''': emailLabel,
         r'''password_label''': passwordLabel,
         r'''sign_in_button''': signInButton,
@@ -1422,7 +1447,6 @@ class LocalizationMessages {
         r'''delete_account''': deleteAccount,
         r'''delete_account_confirmation''': deleteAccountConfirmation,
         r'''confirm''': confirm,
-        r'''cancel''': cancel,
         r'''edit_profile_title''': editProfileTitle,
         r'''save_changes_button''': saveChangesButton,
         r'''first_name_label''': firstNameLabel,
@@ -1664,6 +1688,13 @@ final LocalizationMessages en = LocalizationMessages(
   retry: 'Retry',
   continueShopping: 'Continue Shopping',
   viewCart: 'View Cart',
+  cancel: 'Cancel',
+  signIn: 'Sign In',
+  loginRequired: 'Login Required',
+  loginRequiredToAccess: 'You need to sign in to access this feature.',
+  loginToViewCart: 'Sign in to view your cart',
+  loginToViewProfile: 'Sign in to view your profile',
+  loginToSelectCity: 'Sign in to change delivery location',
   emailLabel: 'Email',
   passwordLabel: 'Password',
   signInButton: 'Sign In',
@@ -1850,7 +1881,6 @@ Need help with something?''',
   deleteAccount: 'Delete My Account',
   deleteAccountConfirmation: 'Are you sure you want to delete your account? This action cannot be undone.',
   confirm: 'Confirm',
-  cancel: 'Cancel',
   editProfileTitle: 'Edit Profile',
   saveChangesButton: 'Save',
   firstNameLabel: 'First Name',
@@ -2067,6 +2097,13 @@ final LocalizationMessages ar = LocalizationMessages(
   retry: 'إعادة المحاولة',
   continueShopping: 'مواصلة التسوق',
   viewCart: 'عرض السلة',
+  cancel: 'إلغاء',
+  signIn: 'تسجيل الدخول',
+  loginRequired: 'تسجيل الدخول مطلوب',
+  loginRequiredToAccess: 'تسجيل الدخول مطلوب للوصول إلى هذه الصفحة',
+  loginToViewCart: 'تسجيل الدخول لعرض سلة التسوق',
+  loginToViewProfile: 'تسجيل الدخول لعرض الملف الشخصي',
+  loginToSelectCity: 'تسجيل الدخول لاختيار المدينة',
   emailLabel: 'البريد الإلكتروني',
   passwordLabel: 'كلمة المرور',
   signInButton: 'تسجيل الدخول',
@@ -2253,7 +2290,6 @@ final LocalizationMessages ar = LocalizationMessages(
   deleteAccount: 'حذف حسابي',
   deleteAccountConfirmation: 'هل أنت متأكد أنك تريد حذف حسابك؟ هذا الإجراء لا يمكن التراجع عنه.',
   confirm: 'تأكيد',
-  cancel: 'إلغاء',
   editProfileTitle: 'تعديل الملف الشخصي',
   saveChangesButton: 'حفظ',
   firstNameLabel: 'الاسم الأول',
