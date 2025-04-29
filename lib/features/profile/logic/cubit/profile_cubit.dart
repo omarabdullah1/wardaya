@@ -71,9 +71,12 @@ class ProfileCubit extends Cubit<ProfileState> {
         ),
       );
       SharedPrefHelper.removeSecuredString(SharedPrefKeys.userToken);
-      SharedPrefHelper.removeSecuredString(SharedPrefKeys.userData);
+      SharedPrefHelper.removeSecuredString(SharedPrefKeys.userAreaId);
+      SharedPrefHelper.removeSecuredString(SharedPrefKeys.userID);
+      isLoggedInUser = false;
+      context.read<LayoutCubit>().close();
       context.pushNamedAndRemoveUntil(
-        Routes.loginScreen,
+        Routes.homeLayout,
         predicate: (route) => false,
       );
     }
@@ -115,7 +118,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
         // Navigate to login screen
         context.pushNamedAndRemoveUntil(
-          Routes.loginScreen,
+          Routes.homeLayout,
           predicate: (route) => false,
         );
       } else {
@@ -126,9 +129,9 @@ class ProfileCubit extends Cubit<ProfileState> {
       }
     }, failure: (error) {
       // API returned an error
+      _showErrorSnackBar(context, error.message ?? 'Failed to delete account');
       emit(ProfileState.error(
           error: error.message ?? 'Failed to delete account'));
-      _showErrorSnackBar(context, error.message ?? 'Failed to delete account');
     });
   }
 
