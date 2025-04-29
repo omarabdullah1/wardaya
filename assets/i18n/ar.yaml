@@ -20,6 +20,17 @@ create_account: "إنشاء حساب"
 divider_text: "أو"
 sign_in_with: "سجل دخول باستخدام"
 
+# Common actions
+cancel: "إلغاء"
+sign_in: "تسجيل الدخول"
+
+# Login Required Dialog
+loginRequired: "تسجيل الدخول مطلوب"
+loginRequiredToAccess: "تسجيل الدخول مطلوب للوصول إلى هذه الصفحة"
+loginToViewCart: "تسجيل الدخول لعرض سلة التسوق"
+loginToViewProfile: "تسجيل الدخول لعرض الملف الشخصي"
+loginToSelectCity: "تسجيل الدخول لاختيار المدينة"
+
 # Authentication validation and messages
 validation_email_password_required: "البريد الإلكتروني وكلمة المرور مطلوبان"
 google_sign_in_success: "تم تسجيل الدخول بنجاح باستخدام Google"
@@ -239,7 +250,6 @@ logout: "تسجيل خروج"
 delete_account: "حذف حسابي"
 delete_account_confirmation: "هل أنت متأكد أنك تريد حذف حسابك؟ هذا الإجراء لا يمكن التراجع عنه."
 confirm: "تأكيد"
-cancel: "إلغاء"
 
 # Edit Profile texts
 edit_profile_title: "تعديل الملف الشخصي"

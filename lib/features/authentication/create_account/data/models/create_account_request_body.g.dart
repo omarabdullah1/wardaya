@@ -13,8 +13,8 @@ CreateAccountRequestBody _$CreateAccountRequestBodyFromJson(
       password: json['password'] as String,
       firstName: json['first_name'] as String,
       lastName: json['last_name'] as String,
-      countryCode: json['country_code'] as String,
-      phoneNumber: json['phone_number'] as String,
+      countryCode: json['country_code'] as String?,
+      phoneNumber: json['phone_number'] as String?,
       birthDate: json['birth_date'] as String,
       gender: json['gender'] as String,
     );

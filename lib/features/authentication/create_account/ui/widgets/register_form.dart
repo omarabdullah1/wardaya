@@ -214,12 +214,12 @@ class RegisterForm extends StatelessWidget {
                       ),
                       labelStyle: TextStylesInter.font15GreyRegular,
                     ),
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(errorText: ''),
-                      FormBuilderValidators.minLength(10, errorText: ''),
-                      FormBuilderValidators.maxLength(11, errorText: ''),
-                      FormBuilderValidators.numeric(errorText: ''),
-                    ]),
+                    // validator: FormBuilderValidators.compose([
+                    //   // Phone number is now optional, removed required validator
+                    //   FormBuilderValidators.minLength(10, errorText: ''),
+                    //   FormBuilderValidators.maxLength(11, errorText: ''),
+                    //   FormBuilderValidators.numeric(errorText: ''),
+                    // ]),
                   ),
                 ),
               ],

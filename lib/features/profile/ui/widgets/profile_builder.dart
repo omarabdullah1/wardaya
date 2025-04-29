@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+import '../../../../core/helpers/constants.dart';
 import '../../../../core/widgets/loading_widget.dart';
 import '../../logic/cubit/profile_cubit.dart';
 import '../../logic/cubit/profile_state.dart';
+import 'guest_profile_body.dart';
 import 'profile_body.dart';
 
 class ProfileBuilder extends StatelessWidget {
@@ -12,6 +14,11 @@ class ProfileBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Check if user is logged in
+    if (!isLoggedInUser) {
+      return const GuestProfileBody();
+    }
+
     return BlocBuilder<ProfileCubit, ProfileState>(
       buildWhen: (previous, current) =>
           current is ProfileSuccess || current is Error || current is Loading,

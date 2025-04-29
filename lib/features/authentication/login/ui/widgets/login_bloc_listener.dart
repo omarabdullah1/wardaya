@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wardaya/core/helpers/constants.dart';
 
 import '../../../../../core/helpers/extensions.dart';
 import '../../../../../core/routing/routes.dart';
@@ -31,6 +32,7 @@ class LoginBlocListener extends StatelessWidget {
           success: (loginResponse) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               Navigator.of(context).popUntil((route) => route.isFirst);
+              isLoggedInUser = true;
               context.pushNamedAndRemoveUntil(
                 Routes.homeLayout,
                 predicate: (route) => false,

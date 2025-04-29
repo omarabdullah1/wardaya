@@ -75,6 +75,52 @@ class _TransparentAppBarState extends State<TransparentAppBar> {
     }
   }
 
+  void _showLoginPrompt(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          context.el.loginRequired,
+          style: GoogleFonts.inter(
+            fontSize: 18.sp,
+            fontWeight: FontWeight.bold,
+            color: ColorsManager.mainRose,
+          ),
+        ),
+        content: Text(
+          context.el.loginToSelectCity,
+          style: GoogleFonts.inter(
+            fontSize: 14.sp,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              context.el.cancel,
+              style: GoogleFonts.inter(
+                color: ColorsManager.grey,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              context.pushNamed(Routes.loginScreen);
+            },
+            child: Text(
+              context.el.signIn,
+              style: GoogleFonts.inter(
+                color: ColorsManager.mainRose,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -171,6 +217,12 @@ class _TransparentAppBarState extends State<TransparentAppBar> {
           onTap: () async {
             if (_isLoading) return;
 
+            // Check if user is logged in
+            if (!isLoggedInUser) {
+              _showLoginPrompt(context);
+              return;
+            }
+
             // If we don't have delivery areas loaded, fetch them and wait
             if (state is! Success) {
               setState(() => _isLoading = true);
@@ -241,16 +293,22 @@ class _TransparentAppBarState extends State<TransparentAppBar> {
                               color: ColorsManager.white,
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
+                              decoration: !isLoggedInUser
+                                  ? TextDecoration.underline
+                                  : null,
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       const SizedBox(width: 4),
-                      const Icon(
+                      Icon(
                         Icons.keyboard_arrow_down,
                         color: ColorsManager.white,
                         size: 18,
+                        semanticLabel: !isLoggedInUser
+                            ? context.el.loginToSelectCity
+                            : null,
                       ),
                     ],
                   ),

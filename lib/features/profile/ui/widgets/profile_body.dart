@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
+import 'package:wardaya/core/routing/router_imports.dart';
 import 'package:wardaya/core/theming/styles.dart';
 
 import '../../../../core/assets/assets.dart';
@@ -311,8 +312,10 @@ class ProfileBody extends StatelessWidget {
                     SharedPrefHelper.removeSecuredString(
                         SharedPrefKeys.userAreaId);
                     SharedPrefHelper.removeSecuredString(SharedPrefKeys.userID);
+                    isLoggedInUser = false;
+                    context.read<LayoutCubit>().close();
                     context.pushNamedAndRemoveUntil(
-                      Routes.loginScreen,
+                      Routes.homeLayout,
                       predicate: (route) => false,
                     );
                   },

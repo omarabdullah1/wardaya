@@ -4,9 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
+import 'package:wardaya/core/helpers/extensions.dart';
+import 'package:wardaya/core/routing/routes.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import '../../../../core/assets/assets.dart';
 import '../../../../core/blocs/general/cubit/general_cubit.dart';
+import '../../../../core/helpers/constants.dart';
 import '../../../cart/logic/getCart/cubit/get_cart_cubit.dart';
 import '../../../cart/logic/getCart/cubit/get_cart_state.dart';
 import '../../logic/cubit/layout_cubit.dart';
@@ -63,6 +66,7 @@ class BottomNavBarWidget extends StatelessWidget {
                               2,
                               context,
                               height: 14.0.h,
+                              requiresAuth: true,
                             ),
                           )
                         : _buildNavItem(
@@ -71,6 +75,7 @@ class BottomNavBarWidget extends StatelessWidget {
                             2,
                             context,
                             height: 14.0.h,
+                            requiresAuth: true,
                           );
                   },
                 ),
@@ -80,6 +85,7 @@ class BottomNavBarWidget extends StatelessWidget {
                   3,
                   context,
                   height: 14.0.h,
+                  requiresAuth: true,
                 ),
               ],
             ),
@@ -91,11 +97,20 @@ class BottomNavBarWidget extends StatelessWidget {
 
   Widget _buildNavItem(
       String icon, String label, int index, BuildContext context,
-      {double height = 31}) {
+      {double height = 31, bool requiresAuth = false}) {
     final currentIndex = context.watch<LayoutCubit>().currentIndex;
     return InkWell(
       onTap: () {
-        context.read<LayoutCubit>().changeIndex(index);
+        // Check if authentication is required and user is not logged in
+        if (index != 3) {
+          if (requiresAuth && !isLoggedInUser) {
+            _showLoginPrompt(context);
+          } else {
+            context.read<LayoutCubit>().changeIndex(index);
+          }
+        } else {
+          context.read<LayoutCubit>().changeIndex(index);
+        }
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -105,7 +120,9 @@ class BottomNavBarWidget extends StatelessWidget {
             colorFilter: ColorFilter.mode(
               currentIndex == index
                   ? ColorsManager.mainRose
-                  : ColorsManager.grey,
+                  : (requiresAuth && !isLoggedInUser)
+                      ? ColorsManager.grey.withOpacity(0.5)
+                      : ColorsManager.grey,
               BlendMode.srcIn,
             ),
             height: height,
@@ -117,9 +134,57 @@ class BottomNavBarWidget extends StatelessWidget {
               fontSize: 10.sp,
               color: currentIndex == index
                   ? ColorsManager.mainRose
-                  : ColorsManager.grey,
+                  : (requiresAuth && !isLoggedInUser)
+                      ? ColorsManager.grey.withOpacity(0.5)
+                      : ColorsManager.grey,
               fontWeight:
                   currentIndex == index ? FontWeight.bold : FontWeight.w400,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showLoginPrompt(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          context.el.loginRequired,
+          style: GoogleFonts.inter(
+            fontSize: 18.sp,
+            fontWeight: FontWeight.bold,
+            color: ColorsManager.mainRose,
+          ),
+        ),
+        content: Text(
+          context.el.loginRequiredToAccess,
+          style: GoogleFonts.inter(
+            fontSize: 14.sp,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              context.el.cancel,
+              style: GoogleFonts.inter(
+                color: ColorsManager.grey,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              context.pushNamed(Routes.loginScreen);
+            },
+            child: Text(
+              context.el.signIn,
+              style: GoogleFonts.inter(
+                color: ColorsManager.mainRose,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],
