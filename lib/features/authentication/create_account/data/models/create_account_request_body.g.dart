@@ -15,7 +15,7 @@ CreateAccountRequestBody _$CreateAccountRequestBodyFromJson(
       lastName: json['last_name'] as String,
       countryCode: json['country_code'] as String?,
       phoneNumber: json['phone_number'] as String?,
-      birthDate: json['birth_date'] as String,
+      birthDate: json['birth_date'] as String?,
       gender: json['gender'] as String,
     );
 
