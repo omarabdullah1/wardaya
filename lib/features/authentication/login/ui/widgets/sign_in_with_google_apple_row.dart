@@ -16,19 +16,21 @@ class SignInWithGoogleAppleRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // InkWell(
-        //   onTap: cubit.isSigningIn ? null : cubit.handleSignInWithApple,
-        //   child: Material(
-        //     elevation: 2,
-        //     borderRadius: BorderRadius.circular(6),
-        //     color: ColorsManager.black,
-        //     child: SvgPicture.asset(
-        //       Assets.of(context).svgs.apple_svg,
-        //       height: 40.0.h,
-        //     ),
-        //   ),
-        // ),
-        // SizedBox(width: 18.w),
+        InkWell(
+          onTap: cubit.isSigningIn
+              ? null
+              : () => cubit.handleSignInWithApple(context),
+          child: Material(
+            elevation: 2,
+            borderRadius: BorderRadius.circular(6),
+            color: ColorsManager.black,
+            child: SvgPicture.asset(
+              Assets.of(context).svgs.apple_svg,
+              height: 40.0.h,
+            ),
+          ),
+        ),
+        SizedBox(width: 18.w),
         InkWell(
           onTap: cubit.isSigningIn
               ? null

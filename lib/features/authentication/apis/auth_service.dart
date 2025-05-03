@@ -8,6 +8,7 @@ import '../create_account/data/models/create_account_request_body.dart';
 import '../create_account/data/models/create_account_response.dart';
 import '../login/data/models/login_request_body.dart';
 import '../login/data/models/login_response.dart';
+import '../models/apple_login_request.dart';
 import '../models/google_login_request.dart';
 import 'auth_api_constants.dart';
 
@@ -25,6 +26,11 @@ abstract class AuthenticationService {
   @POST(AuthenticationApiConstants.loginGoogle)
   Future<LoginResponse> loginWithGoogle(
     @Body() GoogleLoginRequest googleLoginRequest,
+  );
+
+  @POST(AuthenticationApiConstants.loginApple)
+  Future<LoginResponse> loginWithApple(
+    @Body() AppleLoginRequest appleLoginRequest,
   );
 
   @POST(AuthenticationApiConstants.createAccount)

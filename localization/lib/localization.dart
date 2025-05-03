@@ -51,6 +51,9 @@ class LocalizationMessages {
     required this.googleSignInSuccess,
     required this.googleSignInFailed,
     required this.googleTokenError,
+    required this.appleSignInSuccess,
+    required this.appleSignInFailed,
+    required this.appleTokenError,
     required this.loginFailed,
     required this.registrationFailed,
     required this.generalError,
@@ -457,6 +460,9 @@ class LocalizationMessages {
       googleSignInSuccess: (json['google_sign_in_success'] ?? '').toString(),
       googleSignInFailed: (json['google_sign_in_failed'] ?? '').toString(),
       googleTokenError: (json['google_token_error'] ?? '').toString(),
+      appleSignInSuccess: (json['apple_sign_in_success'] ?? '').toString(),
+      appleSignInFailed: (json['apple_sign_in_failed'] ?? '').toString(),
+      appleTokenError: (json['apple_token_error'] ?? '').toString(),
       loginFailed: (json['login_failed'] ?? '').toString(),
       registrationFailed: (json['registration_failed'] ?? '').toString(),
       generalError: (json['general_error'] ?? '').toString(),
@@ -869,6 +875,9 @@ class LocalizationMessages {
   final String googleSignInSuccess;
   final String googleSignInFailed;
   final String googleTokenError;
+  final String appleSignInSuccess;
+  final String appleSignInFailed;
+  final String appleTokenError;
   final String loginFailed;
   final String registrationFailed;
   final String generalError;
@@ -1273,6 +1282,9 @@ class LocalizationMessages {
         r'''google_sign_in_success''': googleSignInSuccess,
         r'''google_sign_in_failed''': googleSignInFailed,
         r'''google_token_error''': googleTokenError,
+        r'''apple_sign_in_success''': appleSignInSuccess,
+        r'''apple_sign_in_failed''': appleSignInFailed,
+        r'''apple_token_error''': appleTokenError,
         r'''login_failed''': loginFailed,
         r'''registration_failed''': registrationFailed,
         r'''general_error''': generalError,
@@ -1706,6 +1718,9 @@ final LocalizationMessages en = LocalizationMessages(
   googleSignInSuccess: 'Successfully signed in with Google',
   googleSignInFailed: 'Google login failed',
   googleTokenError: 'Failed to get authentication token from Google',
+  appleSignInSuccess: 'Successfully signed in with Apple',
+  appleSignInFailed: 'Apple login failed',
+  appleTokenError: 'Failed to get authentication token from Apple',
   loginFailed: 'Login failed',
   registrationFailed: 'Registration failed',
   generalError: 'An error occurred. Please try again.',
@@ -2115,6 +2130,9 @@ final LocalizationMessages ar = LocalizationMessages(
   googleSignInSuccess: 'تم تسجيل الدخول بنجاح باستخدام Google',
   googleSignInFailed: 'فشل تسجيل الدخول باستخدام Google',
   googleTokenError: 'فشل في الحصول على رمز المصادقة من Google',
+  appleSignInSuccess: 'تم تسجيل الدخول بنجاح باستخدام Apple',
+  appleSignInFailed: 'فشل تسجيل الدخول باستخدام Apple',
+  appleTokenError: 'فشل في الحصول على رمز المصادقة من Apple',
   loginFailed: 'فشل تسجيل الدخول',
   registrationFailed: 'فشل التسجيل',
   generalError: 'حدث خطأ. يرجى المحاولة مرة أخرى.',

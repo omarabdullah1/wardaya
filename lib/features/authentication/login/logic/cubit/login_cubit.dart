@@ -14,6 +14,7 @@ import 'package:wardaya/features/authentication/models/google_login_request.dart
 import '../../../../../core/helpers/constants.dart';
 import '../../../../../core/helpers/shared_pref_helper.dart';
 import '../../../../../core/networking/dio_factory.dart';
+import '../../../models/apple_login_request.dart';
 import '../../data/models/login_request_body.dart';
 import '../../data/repos/login_repo.dart';
 import 'login_state.dart';
@@ -174,6 +175,12 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   Future<void> handleSignInWithApple(BuildContext context) async {
+    if (isSigningIn) {
+      return; // Prevent concurrent calls
+    }
+    isSigningIn = true;
+    emit(const LoginState.loading());
+
     try {
       // Apple sign-in implementation
       final credential = await SignInWithApple.getAppleIDCredential(
@@ -182,15 +189,78 @@ class LoginCubit extends Cubit<LoginState> {
           AppleIDAuthorizationScopes.fullName,
         ],
       );
-      log('Apple User: ${credential.email}');
-      log('Apple ID Token: ${credential.identityToken}');
+
+      if (credential.identityToken != null &&
+          credential.identityToken!.isNotEmpty) {
+        log('Apple ID Token: ${credential.identityToken}');
+        log('Apple userIdentifier: ${credential.userIdentifier}');
+        log('Apple authorizationCode: ${credential.authorizationCode}');
+
+        ///TODO: check if the userIdentifier identityToken
+        ///TODO: and authorizationCode are needed.
+        // Send the identity token to your backend
+        final appleLoginRequest =
+            AppleLoginRequest(identityToken: credential.userIdentifier!);
+        final response = await _loginRepo.loginWithApple(appleLoginRequest);
+
+        response.when(success: (loginResponse) async {
+          // Check if the response contains a valid token
+          if (loginResponse.token == null || loginResponse.token!.isEmpty) {
+            emit(LoginState.error(
+                error: loginResponse.message ?? context.el.loginFailed));
+            return;
+          }
+
+          // Save user area ID and name
+          await SharedPrefHelper.setSecuredString(SharedPrefKeys.userAreaId,
+              loginResponse.user?.selectedDeliveryArea ?? '');
+          await SharedPrefHelper.setSecuredString(SharedPrefKeys.userName,
+              '${loginResponse.user!.firstName ?? ''} ${loginResponse.user!.lastName ?? ''}');
+
+          // Save token and user data
+          await saveUserToken(loginResponse.token ?? '');
+          if (context.mounted) {
+            await userDataToString(loginResponse, context);
+          }
+          emit(LoginState.success(loginResponse));
+          if (context.mounted) {
+            snackbarShow(
+              context.mounted ? context : context,
+              context.el.appleSignInSuccess,
+              color: ColorsManager.mintGreen,
+            );
+          }
+        }, failure: (error) {
+          log('Apple login error: ${error.message}');
+          emit(LoginState.error(
+              error: error.message ?? context.el.appleSignInFailed));
+          snackbarShow(
+            context.mounted ? context : context,
+            error.message ?? context.el.appleSignInFailed,
+            color: ColorsManager.red,
+          );
+        });
+      } else {
+        emit(LoginState.error(
+            error: context.mounted
+                ? (context.el.appleTokenError)
+                : 'Error occurred'));
+        snackbarShow(
+          context.mounted ? context : context,
+          context.mounted ? (context.el.appleTokenError) : 'Error occurred',
+          color: ColorsManager.red,
+        );
+      }
     } catch (error) {
+      emit(LoginState.error(error: error.toString()));
       log('Error signing in with Apple: $error');
       snackbarShow(
         context.mounted ? context : context,
-        error.toString(),
+        context.mounted ? context.el.generalError : 'An error occurred',
         color: ColorsManager.red,
       );
+    } finally {
+      isSigningIn = false;
     }
   }
 
