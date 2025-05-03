@@ -15,7 +15,7 @@ class CreateAccountRequestBody {
   @JsonKey(name: 'phone_number')
   final String? phoneNumber;
   @JsonKey(name: 'birth_date')
-  final String birthDate;
+  final String? birthDate;
   final String gender;
 
   CreateAccountRequestBody({
@@ -25,7 +25,7 @@ class CreateAccountRequestBody {
     required this.lastName,
     this.countryCode,
     this.phoneNumber,
-    required this.birthDate,
+    this.birthDate,
     required this.gender,
   });
 
