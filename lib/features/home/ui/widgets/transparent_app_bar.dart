@@ -328,7 +328,11 @@ class _TransparentAppBarState extends State<TransparentAppBar> {
         color: ColorsManager.black.withAlpha(45),
       ),
       child: IconButton(
-        icon: const Icon(Icons.search, color: ColorsManager.white),
+        icon: Icon(
+          Icons.search,
+          color: ColorsManager.white,
+          size: 20.r,
+        ),
         onPressed: () {
           context.pushNamed(Routes.searchScreen);
         },
