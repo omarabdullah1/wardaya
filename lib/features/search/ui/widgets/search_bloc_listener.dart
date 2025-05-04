@@ -56,9 +56,16 @@ class _SearchBlocListenerState extends State<SearchBlocListener> {
   void _setupShowFilterBottomSheet(
       BuildContext context, FilterDataResponse response) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Check if device is iPad
+      final bool isIpad = MediaQuery.of(context).size.shortestSide >= 600;
+
       showModalBottomSheet(
         context: context,
         isScrollControlled: true,
+        // Force full width on iPad
+        constraints: isIpad
+            ? BoxConstraints(maxWidth: MediaQuery.of(context).size.width)
+            : null,
         builder: (_) => BlocProvider.value(
           value: context.read<SearchCubit>(),
           child: FilterBottomSheet(

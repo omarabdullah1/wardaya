@@ -144,21 +144,19 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                   ],
                 ),
               ),
-              Flexible(
-                flex: 1,
-                child: InkWell(
-                  onTap: () => Navigator.pop(context),
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: ColorsManager.lighterGrey,
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.close,
-                        color: ColorsManager.mainRose,
-                      ),
+              InkWell(
+                onTap: () => Navigator.pop(context),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: ColorsManager.lighterGrey,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.close,
+                      color: ColorsManager.mainRose,
+                      size: 20.r,
                     ),
                   ),
                 ),
