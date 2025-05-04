@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
 import 'package:wardaya/core/assets/assets.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
+import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:wardaya/core/routing/routes.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/features/explore/logic/cubit/explore_cubit.dart';
@@ -33,6 +34,7 @@ class ExploreScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
+        toolbarHeight: 80.h,
         backgroundColor:
             ColorsManager.transparent, // Make the AppBar transparent
         elevation: 0, // Remove AppBar shadow
@@ -51,7 +53,7 @@ class ExploreScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SearchBox(),
-                  SizedBox(height: 20.h),
+                  VerticalSpace(height: 20.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

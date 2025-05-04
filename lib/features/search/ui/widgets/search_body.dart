@@ -99,7 +99,11 @@ class SearchBody extends StatelessWidget {
                           const Icon(Icons.search, color: ColorsManager.white),
                         ]
                       : [
-                          const Icon(Icons.search, color: ColorsManager.white),
+                          Icon(
+                            Icons.search,
+                            color: ColorsManager.white,
+                            size: 20.r,
+                          ),
                           const SizedBox(width: 8.0),
                           Text(
                             context.el.searchButton,

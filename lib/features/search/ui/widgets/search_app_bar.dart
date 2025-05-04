@@ -16,12 +16,15 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Check if the device is an iPad (shortestSide >= 600)
+    final bool isIpad = MediaQuery.of(context).size.shortestSide >= 600;
+    final double factor = isIpad ? 1.5 : 1.0;
+
     return BlocBuilder<SearchCubit, SearchState>(
       builder: (context, state) {
         final cubit = context.read<SearchCubit>();
         return PreferredSize(
-          preferredSize: Size.fromHeight(
-              kToolbarHeight + 30.h), // Add some extra space for padding
+          preferredSize: Size.fromHeight(kToolbarHeight * factor.h + 30.h),
           child: Container(
             padding: const EdgeInsets.symmetric(
               horizontal: 16,
@@ -51,14 +54,15 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
                       elevation: 2.8,
                       borderRadius: BorderRadius.circular(30.0),
                       child: SizedBox(
-                        height: 40.h,
+                        height: 60.h,
                         child: CupertinoSearchTextField(
                           placeholder: context.el.searchPlaceholder,
                           controller: cubit.searchController,
                           style: TextStylesInter.font13GreyRegular,
-                          prefixIcon: const Icon(
+                          prefixIcon: Icon(
                             CupertinoIcons.search,
                             color: ColorsManager.mainRose,
+                            size: 20.r,
                           ),
                           itemSize: 24,
                           itemColor: ColorsManager.black,
@@ -96,5 +100,16 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize {
+    // Get the current platform width to determine device type
+    final double shortestSide = WidgetsBinding
+            .instance.platformDispatcher.views.first.physicalSize.shortestSide /
+        WidgetsBinding.instance.platformDispatcher.views.first.devicePixelRatio;
+
+    // Use the shortestSide to determine if it's an iPad (>= 600) or other device
+    final bool isIpad = shortestSide >= 600;
+    final double factor = isIpad ? 1.5 : 0.5;
+
+    return Size.fromHeight(kToolbarHeight * factor.h);
+  }
 }

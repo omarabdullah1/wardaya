@@ -28,6 +28,8 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
           fontSize: 37.0.sp,
         ),
       ),
+      toolbarHeight: 80.h,
+
       leading: showBackButton
           ? IconButton(
               onPressed: onBackButtonPressed ?? () => Navigator.pop(context),
@@ -44,5 +46,5 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(kToolbarHeight * 0.9.h);
 }

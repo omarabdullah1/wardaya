@@ -89,7 +89,7 @@ class _LoginFormState extends State<LoginForm> {
             buttonText: context.el.signInButton,
             textStyle: TextStylesInter.font15WhiteRegular,
             borderRadius: 5,
-            buttonHeight: 50.h,
+            buttonHeight: 60.h,
             onPressed: () => validateThenDoLogin(context),
           ),
           // Rest of the form remains unchanged

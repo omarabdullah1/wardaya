@@ -384,7 +384,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           buttonText: context.el.saveChangesButton,
           textStyle: TextStylesInter.font15WhiteRegular,
           borderRadius: 5,
-          buttonHeight: 45.h,
           onPressed: () {
             // Validate form first
             if (formKey.currentState!.saveAndValidate()) {
