@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/config/env_config.dart';
 import 'package:wardaya/core/routing/router_imports.dart';
+import 'package:wardaya/core/networking/dio_factory.dart';
 
 import 'core/helpers/constants.dart';
 import 'core/helpers/shared_pref_helper.dart';
@@ -18,6 +19,10 @@ Future<void> main() async {
   await EasyLocalization.ensureInitialized();
 
   await setupGetIt();
+
+  // Apply SSL certificate bypass directly to handle expired certificates
+  DioFactory.applySslBypass();
+
   String? token =
       await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
   isLoggedInUser = token.isNullOrEmpty() ? false : true;
