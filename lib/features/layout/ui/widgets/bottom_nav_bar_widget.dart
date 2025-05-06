@@ -57,6 +57,12 @@ class BottomNavBarWidget extends StatelessWidget {
                         ? Badge.count(
                             count: context.read<GetCartCubit>().cartItems,
                             backgroundColor: ColorsManager.mainRose,
+                            largeSize: 14.h,
+                            textStyle: GoogleFonts.inter(
+                              fontSize: 8.sp,
+                              color: ColorsManager.white,
+                            ),
+                            padding: EdgeInsets.all(1.h),
                             offset: context.read<GeneralCubit>().lang == 'ar'
                                 ? const Offset(-10, -3.0)
                                 : const Offset(15, -5.0),
