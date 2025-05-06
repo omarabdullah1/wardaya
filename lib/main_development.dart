@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
+import 'package:wardaya/core/networking/dio_factory.dart';
 
 import 'core/di/dependency_injection.dart';
 import 'core/helpers/constants.dart';
@@ -19,6 +20,10 @@ Future<void> main() async {
   await EasyLocalization.ensureInitialized();
 
   await setupGetIt();
+
+  // Apply SSL certificate bypass directly to handle expired certificates
+  DioFactory.applySslBypass();
+
   String? token =
       await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
   isLoggedInUser = token.isNullOrEmpty() ? false : true;

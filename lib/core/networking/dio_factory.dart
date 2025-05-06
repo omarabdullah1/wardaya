@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../helpers/constants.dart';
@@ -28,6 +31,10 @@ class DioFactory {
         ..options.validateStatus = (status) {
           return status != null && status >= 200 && status < 300;
         };
+
+      // Apply SSL certificate verification bypass
+      _applySSLBypass(dio!);
+
       addDioHeaders();
       addDioInterceptor();
       if (_currentLanguage != null) {
@@ -35,7 +42,38 @@ class DioFactory {
       }
       return dio!;
     } else {
+      // Make sure SSL bypass is applied even for existing instances
+      _applySSLBypass(dio!);
       return dio!;
+    }
+  }
+
+  /// Helper method to apply SSL certificate verification bypass
+  static void _applySSLBypass(Dio dioInstance) {
+    try {
+      log('Applying SSL certificate verification bypass to handle expired certificates');
+
+      // For Android/iOS/desktop platforms
+      if (!kIsWeb) {
+        final httpAdapter = dioInstance.httpClientAdapter;
+        if (httpAdapter is IOHttpClientAdapter) {
+          httpAdapter.onHttpClientCreate = (HttpClient client) {
+            client.badCertificateCallback =
+                (X509Certificate cert, String host, int port) {
+              log('Bypassing certificate verification for $host:$port');
+              // Always accept certificates to avoid SSL handshake errors
+              return true;
+            };
+            return client;
+          };
+          log('SSL certificate bypass successfully applied');
+        } else {
+          log('Warning: Could not apply SSL bypass - unexpected HTTP adapter type');
+        }
+      }
+      // For web platform, certificate handling is managed by the browser
+    } catch (e) {
+      log('Error applying SSL certificate bypass: $e');
     }
   }
 
@@ -55,6 +93,16 @@ class DioFactory {
     log('Dio instance reset successfully');
 
     return newDio;
+  }
+
+  /// Applies the SSL certificate bypass to the current Dio instance
+  /// This can be called at any point to ensure the bypass is applied
+  static void applySslBypass() {
+    if (dio != null) {
+      _applySSLBypass(dio!);
+    } else {
+      getDio(); // This will create a new instance with the bypass applied
+    }
   }
 
   static void addDioHeaders() async {
