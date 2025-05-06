@@ -117,21 +117,6 @@ class _LoginFormState extends State<LoginForm> {
               ),
             ],
           ),
-          const VerticalSpace(height: 18),
-          Row(
-            children: [
-              const Expanded(child: Divider()),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Text(
-                  context.el.dividerText,
-                  style: TextStylesInter.font14BlackRegular,
-                ),
-              ),
-              const Expanded(child: Divider()),
-            ],
-          ),
-          const VerticalSpace(height: 8),
         ],
       ),
     );

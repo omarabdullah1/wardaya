@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io' show Platform;
 
 import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:localization/localization.dart';
@@ -33,13 +34,30 @@ class SignInScreen extends StatelessWidget {
               const VerticalSpace(height: 18),
               const LoginForm(),
               const LoginBlocListener(),
-              Text(
-                context.el.signInWith,
-                style: TextStylesInter.font14BlackRegular,
-                textAlign: TextAlign.center,
-              ),
-              const VerticalSpace(height: 18),
-              const SignInWithGoogleAppleRow(),
+              if (!Platform.isIOS) ...[
+                const VerticalSpace(height: 18),
+                Row(
+                  children: [
+                    const Expanded(child: Divider()),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        context.el.dividerText,
+                        style: TextStylesInter.font14BlackRegular,
+                      ),
+                    ),
+                    const Expanded(child: Divider()),
+                  ],
+                ),
+                const VerticalSpace(height: 8),
+                Text(
+                  context.el.signInWith,
+                  style: TextStylesInter.font14BlackRegular,
+                  textAlign: TextAlign.center,
+                ),
+                const VerticalSpace(height: 18),
+                const SignInWithGoogleAppleRow(),
+              ],
             ],
           ),
         ),
