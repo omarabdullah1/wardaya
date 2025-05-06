@@ -46,18 +46,24 @@ class CitySelectionBottomSheet extends StatelessWidget {
       useRootNavigator: true,
       isDismissible: true,
       enableDrag: true,
+      constraints: BoxConstraints(
+        maxWidth: MediaQuery.of(context).size.width,
+      ),
       builder: (BuildContext bottomSheetContext) {
-        return DraggableScrollableSheet(
-          initialChildSize: 0.8,
-          minChildSize: 0.3,
-          maxChildSize: 0.85,
-          expand: false,
-          builder: (_, scrollController) {
-            return CitySelectionBottomSheet(
-              deliveryAreas: deliveryAreas,
-              currentCityId: currentCityId,
-            );
-          },
+        return SizedBox(
+          width: MediaQuery.of(bottomSheetContext).size.width,
+          child: DraggableScrollableSheet(
+            initialChildSize: 0.8,
+            minChildSize: 0.3,
+            maxChildSize: 0.85,
+            expand: false,
+            builder: (_, scrollController) {
+              return CitySelectionBottomSheet(
+                deliveryAreas: deliveryAreas,
+                currentCityId: currentCityId,
+              );
+            },
+          ),
         );
       },
     );

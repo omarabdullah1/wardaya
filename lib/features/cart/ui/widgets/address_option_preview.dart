@@ -30,6 +30,9 @@ class AddressOptionPreview extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
+      constraints: BoxConstraints(
+        maxWidth: MediaQuery.of(context).size.width,
+      ),
       builder: (context) => RecipientAddressSheet(
         initialLocation: location,
         initialAddress: address,
