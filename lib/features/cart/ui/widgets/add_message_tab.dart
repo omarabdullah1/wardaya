@@ -158,6 +158,8 @@ class _AddMessageTabState extends State<AddMessageTab> {
                           onTap: () => _showSignatureBottomSheet(context),
                           child: InkWell(
                             child: Row(
+                              mainAxisSize:
+                                  MainAxisSize.min, // Prevent overflow
                               children: [
                                 SvgPicture.asset(
                                   Assets.of(context).svgs.signature_svg,
@@ -192,6 +194,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                       ? Padding(
                           padding: const EdgeInsets.all(8),
                           child: Row(
+                            mainAxisSize: MainAxisSize.min, // Prevent overflow
                             children: [
                               Container(
                                 width: 80.w,
@@ -208,10 +211,10 @@ class _AddMessageTabState extends State<AddMessageTab> {
                                 ),
                               ),
                               SizedBox(width: 10.w),
-                              FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: SizedBox(
-                                  width: context.screenWidth * 0.4.w,
+                              Expanded(
+                                // Use Expanded instead of fixed width
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -227,6 +230,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                                           fontSize: 16.sp,
                                         ),
                                         overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
                                       ),
                                       Text(
                                         context.el.qrCodeLabel,
@@ -240,7 +244,6 @@ class _AddMessageTabState extends State<AddMessageTab> {
                                   ),
                                 ),
                               ),
-                              const Spacer(),
                               Padding(
                                 padding:
                                     EdgeInsets.symmetric(horizontal: 16.0.w),
@@ -351,6 +354,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                   : Padding(
                       padding: const EdgeInsets.all(8),
                       child: Row(
+                        mainAxisSize: MainAxisSize.min, // Prevent overflow
                         children: [
                           Container(
                             width: 80.w,
@@ -365,10 +369,10 @@ class _AddMessageTabState extends State<AddMessageTab> {
                             ),
                           ),
                           SizedBox(width: 10.w),
-                          FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: SizedBox(
-                              width: context.screenWidth * 0.4.w,
+                          Expanded(
+                            // Use Expanded instead of fixed width
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -382,6 +386,7 @@ class _AddMessageTabState extends State<AddMessageTab> {
                                       fontSize: 16.sp,
                                     ),
                                     overflow: TextOverflow.ellipsis,
+                                    maxLines: 1, // Limit to one line
                                   ),
                                   Text(
                                     context.el.qrCodeLabel,
@@ -395,7 +400,6 @@ class _AddMessageTabState extends State<AddMessageTab> {
                               ),
                             ),
                           ),
-                          const Spacer(),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                             child: InkWell(
@@ -444,6 +448,8 @@ class _AddMessageTabState extends State<AddMessageTab> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Row(
+            // Adding mainAxisSize to prevent overflow
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 label,
@@ -453,10 +459,10 @@ class _AddMessageTabState extends State<AddMessageTab> {
                   fontSize: 14.sp,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsetsDirectional.only(start: 4.0),
-                child: SizedBox(
-                  width: (context.screenWidth * widthFactor).w,
+              Expanded(
+                // Use Expanded instead of SizedBox with fixed width
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.only(start: 4.0),
                   child: TextField(
                     controller: controller,
                     maxLength: 32,

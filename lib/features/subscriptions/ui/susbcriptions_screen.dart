@@ -27,9 +27,9 @@ class SusbcriptionsScreen extends StatelessWidget {
         titleSpacing: 20,
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back_ios_rounded,
-            size: 28.sp,
-            color: ColorsManager.white,
+            Icons.arrow_back_ios,
+            color: ColorsManager.mainRose,
+            size: 18.0.h,
           ),
           onPressed: () {
             context.pop();

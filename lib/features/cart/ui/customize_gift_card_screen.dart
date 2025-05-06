@@ -112,9 +112,14 @@ class _CustomizeGiftCardScreenState extends State<CustomizeGiftCardScreen>
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
-          color: ColorsManager.mainRose,
-          onPressed: () => Navigator.pop(context),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: ColorsManager.mainRose,
+            size: 18.0.h,
+          ),
+          onPressed: () {
+            context.pop();
+          },
         ),
         bottom: TabBar(
           controller: _tabController,

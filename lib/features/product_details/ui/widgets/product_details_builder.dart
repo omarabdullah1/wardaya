@@ -156,6 +156,9 @@ class _ProductDetailsBuilderState extends State<ProductDetailsBuilder> {
                     showModalBottomSheet(
                       context: context,
                       isScrollControlled: true,
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width,
+                      ),
                       shape: const RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.vertical(top: Radius.circular(20)),

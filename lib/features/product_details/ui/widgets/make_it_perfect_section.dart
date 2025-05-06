@@ -76,7 +76,7 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection>
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
+    // double screenWidth = MediaQuery.of(context).size.width;
 
     return MultiBlocProvider(
       providers: [
@@ -99,7 +99,7 @@ class _MakeItPerfectSectionState extends State<MakeItPerfectSection>
                   : []);
 
           return Container(
-            width: screenWidth * 0.9.w,
+            width: double.infinity,
             height: 600.h,
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(

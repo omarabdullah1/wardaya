@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/styles.dart';
 
@@ -30,6 +31,7 @@ class AppBackAppBar extends StatelessWidget implements PreferredSizeWidget {
         icon: Icon(
           iconData,
           color: iconColor,
+          size: 18.0.h,
         ),
         onPressed: onBack ??
             () {

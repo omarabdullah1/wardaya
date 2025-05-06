@@ -26,10 +26,11 @@ class SubMenuItemsScreen extends StatelessWidget {
       backgroundColor: ColorsManager.white,
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back_ios,
             color: ColorsManager.mainRose,
-          ), // Back button
+            size: 18.0.h,
+          ),
           onPressed: () {
             context.pop();
           },

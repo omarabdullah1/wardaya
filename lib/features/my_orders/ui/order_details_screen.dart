@@ -31,6 +31,16 @@ class OrderDetailsScreen extends StatelessWidget {
           '${context.el.orderNumber} ${order.orderId}',
           style: TextStylesInter.font16BlackSemiBold,
         ),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: ColorsManager.mainRose,
+            size: 18.0.h,
+          ),
+          onPressed: () {
+            context.pop();
+          },
+        ),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(vertical: 16.r),

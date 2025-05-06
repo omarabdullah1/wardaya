@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wardaya/core/assets/assets.dart';
+import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 import 'package:wardaya/core/helpers/share_service.dart';
 import 'package:wardaya/features/favorites/logic/cubit/favorites_cubit.dart';
@@ -24,9 +25,16 @@ class ProductDetailsAppBar extends StatelessWidget
       backgroundColor: ColorsManager.transparent,
       elevation: 0,
       leadingWidth: 45.w, // Set the leadingWidth
-      leading: _buildIconButton(icon: Icons.arrow_back_ios_new, () {
-        Navigator.pop(context);
-      }),
+      leading: IconButton(
+        icon: Icon(
+          Icons.arrow_back_ios,
+          color: ColorsManager.mainRose,
+          size: 18.0.h,
+        ),
+        onPressed: () {
+          context.pop();
+        },
+      ),
       actions: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),

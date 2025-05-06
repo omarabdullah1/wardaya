@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wardaya/core/helpers/extensions.dart';
 import 'dart:io' show Platform;
 
 import 'package:wardaya/core/helpers/spacing.dart';
 import 'package:localization/localization.dart';
 import 'package:wardaya/core/theming/styles.dart';
 import 'package:wardaya/features/authentication/login/ui/widgets/sign_in_with_google_apple_row.dart';
+import '../../../../core/theming/colors.dart';
 import 'widgets/login_bloc_listener.dart';
 import 'widgets/login_form.dart';
 
@@ -17,6 +20,16 @@ class SignInScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: ColorsManager.mainRose,
+            size: 18.0.h,
+          ),
+          onPressed: () {
+            context.pop();
+          },
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

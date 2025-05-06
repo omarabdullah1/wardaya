@@ -36,6 +36,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
               icon: Icon(
                 Icons.arrow_back_ios,
                 color: backButtonColor,
+                size: 18.0.h,
               ),
             )
           : null,

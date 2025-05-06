@@ -266,7 +266,7 @@ class _FullScreenMapPickerState extends State<FullScreenMapPicker> {
           icon: Icon(
             Icons.arrow_back_ios,
             color: ColorsManager.black,
-            size: 20.sp,
+            size: 18.0.h,
           ),
           onPressed: () {
             Navigator.pop(context);

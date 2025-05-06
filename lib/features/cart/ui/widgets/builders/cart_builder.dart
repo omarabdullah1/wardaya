@@ -293,6 +293,7 @@ class CartBuilder extends StatelessWidget {
                                                 Assets.of(context)
                                                     .svgs
                                                     .remove_svg,
+                                                height: 18.h,
                                               ),
                                             ),
                                             Padding(
@@ -320,10 +321,10 @@ class CartBuilder extends StatelessWidget {
                                                           .toList(),
                                                     );
                                               },
-                                              child: const Icon(
+                                              child: Icon(
                                                 Icons.add,
                                                 color: ColorsManager.mainRose,
-                                                size: 18.0,
+                                                size: 18.0.h,
                                               ),
                                             ),
                                           ],

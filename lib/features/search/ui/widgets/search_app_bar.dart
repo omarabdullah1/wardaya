@@ -36,9 +36,10 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: Row(
               children: [
                 IconButton(
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.arrow_back_ios,
                     color: ColorsManager.mainRose,
+                    size: 18.0.h,
                   ),
                   onPressed: () {
                     context.pop();

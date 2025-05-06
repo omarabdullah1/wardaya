@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
+import 'package:wardaya/core/helpers/extensions.dart';
 import 'package:wardaya/core/theming/colors.dart';
 
 class SuggestedMessagesBottomSheet extends StatefulWidget {
@@ -59,9 +60,14 @@ class _SuggestedMessagesBottomSheetState
           ),
           centerTitle: true,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new),
-            color: ColorsManager.mainRose,
-            onPressed: () => Navigator.pop(context),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: ColorsManager.mainRose,
+              size: 18.0.h,
+            ),
+            onPressed: () {
+              context.pop();
+            },
           ),
           bottom: widget.occassions.isEmpty
               ? null
