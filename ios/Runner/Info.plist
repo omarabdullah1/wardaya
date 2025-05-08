@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
     <key>NSCameraUsageDescription</key>
-    <string>your usage description here</string>
+    <string>We need camera access to allow you to take photos of special occasions for personalized gift selections and to scan QR codes for payment and order tracking.</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>your usage description here</string>
+    <string>We need microphone access when you record video messages to add to your gift orders, allowing you to send personalized video greetings with your gifts.</string>
     <key>CADisableMinimumFrameDurationOnPhone</key>
     <true/>
     <key>CFBundleDevelopmentRegion</key>
