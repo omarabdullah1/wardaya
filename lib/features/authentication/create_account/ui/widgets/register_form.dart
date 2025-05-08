@@ -32,12 +32,17 @@ class RegisterForm extends StatelessWidget {
       key: cubit.formKey,
       child: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const RegisterBlocListener(),
+
+            // Full Name Field with required indicator above
+            _buildFieldLabel(context.el.fullNameLabel, isRequired: true),
             FormBuilderTextField(
               name: FormFieldsKeys.fullName,
               decoration: InputDecoration(
                 labelText: context.el.fullNameLabel,
+                labelStyle: TextStylesInter.font15GreyRegular,
                 border: const OutlineInputBorder(
                   borderSide: BorderSide(
                     color: ColorsManager.grey,
@@ -62,19 +67,21 @@ class RegisterForm extends StatelessWidget {
                     );
                   },
                 ),
-                labelStyle: TextStylesInter.font15GreyRegular,
               ),
-              // Re-enable the validator
               validator: FormBuilderValidators.compose([
                 FormBuilderValidators.required(errorText: ''),
               ]),
             ),
             const VerticalSpace(height: 10.0),
+
+            // Email Field with required indicator above
+            _buildFieldLabel(context.el.emailAddressLabel, isRequired: true),
             FormBuilderTextField(
               key: cubit.emailFieldKey,
               name: FormFieldsKeys.email,
               decoration: InputDecoration(
                 labelText: context.el.emailAddressLabel,
+                labelStyle: TextStylesInter.font15GreyRegular,
                 border: borderStyle(),
                 enabledBorder: borderStyle(),
                 suffixIcon: FormBuilderField(
@@ -89,7 +96,6 @@ class RegisterForm extends StatelessWidget {
                     );
                   },
                 ),
-                labelStyle: TextStylesInter.font15GreyRegular,
               ),
               validator: FormBuilderValidators.compose([
                 FormBuilderValidators.required(errorText: ''),
@@ -97,12 +103,16 @@ class RegisterForm extends StatelessWidget {
               ]),
             ),
             const VerticalSpace(height: 10.0),
+
+            // Password Field with required indicator above
+            _buildFieldLabel(context.el.passwordLabel, isRequired: true),
             BlocBuilder<RegisterCubit, RegisterState>(
               builder: (context, state) {
                 return FormBuilderTextField(
                   name: FormFieldsKeys.password,
                   decoration: InputDecoration(
                     labelText: context.el.passwordLabel,
+                    labelStyle: TextStylesInter.font15GreyRegular,
                     border: borderStyle(),
                     enabledBorder: borderStyle(),
                     suffixIcon: FormBuilderField(
@@ -136,7 +146,6 @@ class RegisterForm extends StatelessWidget {
                         );
                       },
                     ),
-                    labelStyle: TextStylesInter.font15GreyRegular,
                   ),
                   obscureText: !cubit.isPasswordVisible,
                   validator: FormBuilderValidators.compose([
@@ -147,6 +156,9 @@ class RegisterForm extends StatelessWidget {
               },
             ),
             const VerticalSpace(height: 10.0),
+
+            // Phone Field (optional)
+            _buildFieldLabel(context.el.phoneLabel, isRequired: false),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -188,6 +200,7 @@ class RegisterForm extends StatelessWidget {
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                       labelText: context.el.phoneLabel,
+                      labelStyle: TextStylesInter.font15GreyRegular,
                       suffixIcon: FormBuilderField(
                         name: FormFieldsKeys.phoneErrorListner,
                         builder: (FormFieldState<dynamic> field) {
@@ -212,7 +225,6 @@ class RegisterForm extends StatelessWidget {
                           width: 1.0,
                         ),
                       ),
-                      labelStyle: TextStylesInter.font15GreyRegular,
                     ),
                     // validator: FormBuilderValidators.compose([
                     //   // Phone number is now optional, removed required validator
@@ -225,8 +237,29 @@ class RegisterForm extends StatelessWidget {
               ],
             ),
             const VerticalSpace(height: 10.0),
+
+            // Birthday Picker
+            _buildFieldLabel(context.el.birthdayLabel, isRequired: false),
             const CreateAccountBirthdayPicker(),
-            const VerticalSpace(height: 30.0),
+
+            const VerticalSpace(height: 15.0),
+
+            // Required fields note
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5.0),
+              child: Text(
+                context.el.fieldsMarkedRequired,
+                style: TextStylesInter.font14BlackRegular.copyWith(
+                  color: ColorsManager.grey,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 12.sp,
+                ),
+              ),
+            ),
+
+            const VerticalSpace(height: 15.0),
+
+            // Create Account Button
             bottomCreateAccount(
               context: context,
               onPressed: () {
@@ -244,6 +277,30 @@ class RegisterForm extends StatelessWidget {
       borderSide: BorderSide(
         color: ColorsManager.grey,
         width: 1.0,
+      ),
+    );
+  }
+
+  // Method to build field label with optional required indicator
+  Widget _buildFieldLabel(String labelText, {required bool isRequired}) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 5.0, bottom: 5.0),
+      child: Row(
+        children: [
+          Text(
+            labelText,
+            style: TextStylesInter.font14BlackRegular,
+          ),
+          if (isRequired)
+            const Text(
+              ' *',
+              style: TextStyle(
+                color: ColorsManager.red,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+        ],
       ),
     );
   }

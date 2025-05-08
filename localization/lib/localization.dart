@@ -59,6 +59,7 @@ class LocalizationMessages {
     required this.generalError,
     required this.formAllFieldRequired,
     required this.fieldRequired,
+    required this.fieldsMarkedRequired,
     required this.forgetPasswordTitle,
     required this.forgetPasswordInstruction,
     required this.resetPasswordButton,
@@ -468,6 +469,7 @@ class LocalizationMessages {
       generalError: (json['general_error'] ?? '').toString(),
       formAllFieldRequired: (json['form_all_field_required'] ?? '').toString(),
       fieldRequired: (json['field_required'] ?? '').toString(),
+      fieldsMarkedRequired: (json['fields_marked_required'] ?? '').toString(),
       forgetPasswordTitle: (json['forget_password_title'] ?? '').toString(),
       forgetPasswordInstruction: (json['forget_password_instruction'] ?? '').toString(),
       resetPasswordButton: (json['reset_password_button'] ?? '').toString(),
@@ -883,6 +885,7 @@ class LocalizationMessages {
   final String generalError;
   final String formAllFieldRequired;
   final String fieldRequired;
+  final String fieldsMarkedRequired;
   final String forgetPasswordTitle;
   final String forgetPasswordInstruction;
   final String resetPasswordButton;
@@ -1290,6 +1293,7 @@ class LocalizationMessages {
         r'''general_error''': generalError,
         r'''form_all_field_required''': formAllFieldRequired,
         r'''field_required''': fieldRequired,
+        r'''fields_marked_required''': fieldsMarkedRequired,
         r'''forget_password_title''': forgetPasswordTitle,
         r'''forget_password_instruction''': forgetPasswordInstruction,
         r'''reset_password_button''': resetPasswordButton,
@@ -1726,6 +1730,7 @@ final LocalizationMessages en = LocalizationMessages(
   generalError: 'An error occurred. Please try again.',
   formAllFieldRequired: 'Make sure to fill all fields',
   fieldRequired: 'Required',
+  fieldsMarkedRequired: 'Fields marked with red * are required',
   forgetPasswordTitle: 'Forget Password?',
   forgetPasswordInstruction: 'Enter the email address associated with your account',
   resetPasswordButton: 'Reset Password',
@@ -2138,6 +2143,7 @@ final LocalizationMessages ar = LocalizationMessages(
   generalError: 'حدث خطأ. يرجى المحاولة مرة أخرى.',
   formAllFieldRequired: 'جميع الحقول مطلوبة',
   fieldRequired: 'هذا الحقل مطلوب',
+  fieldsMarkedRequired: 'الحقول المميزة بعلامة * الحمراء مطلوبة',
   forgetPasswordTitle: 'نسيت كلمة المرور؟',
   forgetPasswordInstruction: 'أدخل البريد الإلكتروني المرتبط بحسابك',
   resetPasswordButton: 'إعادة تعيين كلمة المرور',

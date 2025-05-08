@@ -44,6 +44,7 @@ registration_failed: "فشل التسجيل"
 general_error: "حدث خطأ. يرجى المحاولة مرة أخرى."
 form_all_field_required: "جميع الحقول مطلوبة"
 field_required: "هذا الحقل مطلوب"
+fields_marked_required: "الحقول المميزة بعلامة * الحمراء مطلوبة"
 
 # ForgetPasswordScreen texts
 forget_password_title: "نسيت كلمة المرور؟"

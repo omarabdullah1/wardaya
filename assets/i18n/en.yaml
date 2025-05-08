@@ -42,6 +42,7 @@ registration_failed: "Registration failed"
 general_error: "An error occurred. Please try again."
 form_all_field_required: "Make sure to fill all fields"
 field_required: "Required"
+fields_marked_required: "Fields marked with red * are required"
 
 # ForgetPasswordScreen texts
 forget_password_title: "Forget Password?"
