@@ -195,7 +195,9 @@ class _FullScreenMapPickerState extends State<FullScreenMapPicker> {
       serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
         // Location services are not enabled
-        _showSnackBar(context.el.locationServicesDisabled);
+        if (mounted) {
+          _showSnackBar(context.el.locationServicesDisabled);
+        }
         return;
       }
 
@@ -203,13 +205,17 @@ class _FullScreenMapPickerState extends State<FullScreenMapPicker> {
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
         if (permission == LocationPermission.denied) {
-          _showSnackBar(context.el.locationPermissionsDenied);
+          if (mounted) {
+            _showSnackBar(context.el.locationPermissionsDenied);
+          }
           return;
         }
       }
 
       if (permission == LocationPermission.deniedForever) {
-        _showSnackBar(context.el.locationPermissionsPermanentlyDenied);
+        if (mounted) {
+          _showSnackBar(context.el.locationPermissionsPermanentlyDenied);
+        }
         return;
       }
 
@@ -231,10 +237,14 @@ class _FullScreenMapPickerState extends State<FullScreenMapPicker> {
         CameraUpdate.newLatLngZoom(currentLocation, 15),
       );
 
-      _showSnackBar(context.el.currentLocationPinned);
+      if (mounted) {
+        _showSnackBar(context.el.currentLocationPinned);
+      }
     } catch (e) {
       log('Error getting current location: $e');
-      _showSnackBar(context.el.couldNotGetCurrentLocation);
+      if (mounted) {
+        _showSnackBar(context.el.couldNotGetCurrentLocation);
+      }
     }
   }
 

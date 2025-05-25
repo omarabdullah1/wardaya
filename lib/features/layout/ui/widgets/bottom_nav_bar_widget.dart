@@ -127,7 +127,7 @@ class BottomNavBarWidget extends StatelessWidget {
               currentIndex == index
                   ? ColorsManager.mainRose
                   : (requiresAuth && !isLoggedInUser)
-                      ? ColorsManager.grey.withOpacity(0.5)
+                      ? ColorsManager.grey.withAlpha((0.5 * 255).toInt())
                       : ColorsManager.grey,
               BlendMode.srcIn,
             ),
@@ -141,7 +141,7 @@ class BottomNavBarWidget extends StatelessWidget {
               color: currentIndex == index
                   ? ColorsManager.mainRose
                   : (requiresAuth && !isLoggedInUser)
-                      ? ColorsManager.grey.withOpacity(0.5)
+                      ? ColorsManager.grey.withAlpha((0.5 * 255).toInt())
                       : ColorsManager.grey,
               fontWeight:
                   currentIndex == index ? FontWeight.bold : FontWeight.w400,

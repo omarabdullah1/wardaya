@@ -4,13 +4,14 @@
 
 import 'dart:developer' show log;
 
-import 'package:easiest_localization/easiest_localization.dart' show LocalizationProvider;
+import 'package:easiest_localization/easiest_localization.dart'
+    show LocalizationProvider;
 import 'package:flutter/foundation.dart' show kDebugMode;
-import 'package:flutter/widgets.dart' show BuildContext, Locale, Localizations, LocalizationsDelegate;
-import 'package:flutter_localizations/flutter_localizations.dart' show GlobalMaterialLocalizations;
+import 'package:flutter/widgets.dart'
+    show BuildContext, Locale, Localizations, LocalizationsDelegate;
+import 'package:flutter_localizations/flutter_localizations.dart'
+    show GlobalMaterialLocalizations;
 import 'package:intl/intl.dart' show Intl;
-
-final RegExp _variableRegExp = RegExp(r'\$\{[^}]+\} ?');
 
 typedef Checker<T> = bool Function(T value);
 
@@ -457,7 +458,8 @@ class LocalizationMessages {
       createAccount: (json['create_account'] ?? '').toString(),
       dividerText: (json['divider_text'] ?? '').toString(),
       signInWith: (json['sign_in_with'] ?? '').toString(),
-      validationEmailPasswordRequired: (json['validation_email_password_required'] ?? '').toString(),
+      validationEmailPasswordRequired:
+          (json['validation_email_password_required'] ?? '').toString(),
       googleSignInSuccess: (json['google_sign_in_success'] ?? '').toString(),
       googleSignInFailed: (json['google_sign_in_failed'] ?? '').toString(),
       googleTokenError: (json['google_token_error'] ?? '').toString(),
@@ -471,26 +473,37 @@ class LocalizationMessages {
       fieldRequired: (json['field_required'] ?? '').toString(),
       fieldsMarkedRequired: (json['fields_marked_required'] ?? '').toString(),
       forgetPasswordTitle: (json['forget_password_title'] ?? '').toString(),
-      forgetPasswordInstruction: (json['forget_password_instruction'] ?? '').toString(),
+      forgetPasswordInstruction:
+          (json['forget_password_instruction'] ?? '').toString(),
       resetPasswordButton: (json['reset_password_button'] ?? '').toString(),
-      passwordResetLinkSent: (json['password_reset_link_sent'] ?? '').toString(),
+      passwordResetLinkSent:
+          (json['password_reset_link_sent'] ?? '').toString(),
       createAccountTitle: (json['create_account_title'] ?? '').toString(),
       createAccountButton: (json['create_account_button'] ?? '').toString(),
       nameLabel: (json['name_label'] ?? '').toString(),
       phoneLabel: (json['phone_label'] ?? '').toString(),
       selectCountryLabel: (json['select_country_label'] ?? '').toString(),
-      homeGiftsForEveryMoment: (json['home_gifts_for_every_moment'] ?? '').toString(),
-      homeExploreUniqueGiftIdeas: (json['home_explore_unique_gift_ideas'] ?? '').toString(),
+      homeGiftsForEveryMoment:
+          (json['home_gifts_for_every_moment'] ?? '').toString(),
+      homeExploreUniqueGiftIdeas:
+          (json['home_explore_unique_gift_ideas'] ?? '').toString(),
       homeChooseGiftsNow: (json['home_choose_gifts_now'] ?? '').toString(),
-      homeRoundedBeautyEndlessCharm: (json['home_rounded_beauty_endless_charm'] ?? '').toString(),
-      homeStartTheYearWithTulips: (json['home_start_the_year_with_tulips'] ?? '').toString(),
-      homeWoodntYouLoveThis: (json['home_woodnt_you_love_this'] ?? '').toString(),
-      homeAnExtraLuxuriousTouch: (json['home_an_extra_luxurious_touch'] ?? '').toString(),
+      homeRoundedBeautyEndlessCharm:
+          (json['home_rounded_beauty_endless_charm'] ?? '').toString(),
+      homeStartTheYearWithTulips:
+          (json['home_start_the_year_with_tulips'] ?? '').toString(),
+      homeWoodntYouLoveThis:
+          (json['home_woodnt_you_love_this'] ?? '').toString(),
+      homeAnExtraLuxuriousTouch:
+          (json['home_an_extra_luxurious_touch'] ?? '').toString(),
       homeBestSellers: (json['home_best_sellers'] ?? '').toString(),
-      homeCaptivationAromasOfMubkhar: (json['home_captivation_aromas_of_mubkhar'] ?? '').toString(),
-      homeGiftYourLovedOnes: (json['home_gift_your_loved_ones'] ?? '').toString(),
+      homeCaptivationAromasOfMubkhar:
+          (json['home_captivation_aromas_of_mubkhar'] ?? '').toString(),
+      homeGiftYourLovedOnes:
+          (json['home_gift_your_loved_ones'] ?? '').toString(),
       homeNaturesMagic: (json['home_natures_magic'] ?? '').toString(),
-      homeLatestAndLoveliest: (json['home_latest_and_loveliest'] ?? '').toString(),
+      homeLatestAndLoveliest:
+          (json['home_latest_and_loveliest'] ?? '').toString(),
       homeGiftsForEveryone: (json['home_gifts_for_everyone'] ?? '').toString(),
       homeBrandsYoullLove: (json['home_brands_youll_love'] ?? '').toString(),
       bottomNavHome: (json['bottom_nav_home'] ?? '').toString(),
@@ -501,20 +514,32 @@ class LocalizationMessages {
       exploreSearchHint: (json['explore_search_hint'] ?? '').toString(),
       exploreCardMoments: (json['explore_card_moments'] ?? '').toString(),
       exploreCardRecipients: (json['explore_card_recipients'] ?? '').toString(),
-      exploreCategoryFlowersPlants: (json['explore_category_flowers_plants'] ?? '').toString(),
-      exploreCategoryFlowersGifts: (json['explore_category_flowers_gifts'] ?? '').toString(),
-      exploreCategoryExpressDelivery: (json['explore_category_express_delivery'] ?? '').toString(),
-      exploreCategoryFloralSubscription: (json['explore_category_floral_subscription'] ?? '').toString(),
-      exploreBrandsYoullLove: (json['explore_brands_youll_love'] ?? '').toString(),
-      discoverNewIdeasTitle: (json['discover_new_ideas_title'] ?? '').toString(),
-      discoverCardExpressDeliveryTitle: (json['discover_card_express_delivery_title'] ?? '').toString(),
-      discoverCardExpressDeliveryButton: (json['discover_card_express_delivery_button'] ?? '').toString(),
-      discoverCardWeeklySurpriseTitle: (json['discover_card_weekly_surprise_title'] ?? '').toString(),
-      discoverCardWeeklySurpriseButton: (json['discover_card_weekly_surprise_button'] ?? '').toString(),
+      exploreCategoryFlowersPlants:
+          (json['explore_category_flowers_plants'] ?? '').toString(),
+      exploreCategoryFlowersGifts:
+          (json['explore_category_flowers_gifts'] ?? '').toString(),
+      exploreCategoryExpressDelivery:
+          (json['explore_category_express_delivery'] ?? '').toString(),
+      exploreCategoryFloralSubscription:
+          (json['explore_category_floral_subscription'] ?? '').toString(),
+      exploreBrandsYoullLove:
+          (json['explore_brands_youll_love'] ?? '').toString(),
+      discoverNewIdeasTitle:
+          (json['discover_new_ideas_title'] ?? '').toString(),
+      discoverCardExpressDeliveryTitle:
+          (json['discover_card_express_delivery_title'] ?? '').toString(),
+      discoverCardExpressDeliveryButton:
+          (json['discover_card_express_delivery_button'] ?? '').toString(),
+      discoverCardWeeklySurpriseTitle:
+          (json['discover_card_weekly_surprise_title'] ?? '').toString(),
+      discoverCardWeeklySurpriseButton:
+          (json['discover_card_weekly_surprise_button'] ?? '').toString(),
       momentsScreenTitle: (json['moments_screen_title'] ?? '').toString(),
       recipientsScreenTitle: (json['recipients_screen_title'] ?? '').toString(),
-      flowersPlanetsScreenTitle: (json['flowers_planets_screen_title'] ?? '').toString(),
-      flowersGiftsScreenTitle: (json['flowers_gifts_screen_title'] ?? '').toString(),
+      flowersPlanetsScreenTitle:
+          (json['flowers_planets_screen_title'] ?? '').toString(),
+      flowersGiftsScreenTitle:
+          (json['flowers_gifts_screen_title'] ?? '').toString(),
       searchPlaceholder: (json['search_placeholder'] ?? '').toString(),
       searchButton: (json['search_button'] ?? '').toString(),
       filterTitle: (json['filter_title'] ?? '').toString(),
@@ -551,7 +576,8 @@ class LocalizationMessages {
       productDetailsTitle: (json['product_details_title'] ?? '').toString(),
       wardayaPoints: (json['wardaya_points'] ?? '').toString(),
       currencySar: (json['currency_sar'] ?? '').toString(),
-      splitPaymentsWithTamara: (json['split_payments_with_tamara'] ?? '').toString(),
+      splitPaymentsWithTamara:
+          (json['split_payments_with_tamara'] ?? '').toString(),
       earn: (json['earn'] ?? '').toString(),
       similarProducts: (json['similarProducts'] ?? '').toString(),
       noSimilarProducts: (json['noSimilarProducts'] ?? '').toString(),
@@ -574,8 +600,10 @@ class LocalizationMessages {
       toLabel: (json['to_label'] ?? '').toString(),
       fromLabel: (json['from_label'] ?? '').toString(),
       optionalHint: (json['optional_hint'] ?? '').toString(),
-      suggestedMessagesPromptPart1: (json['suggested_messages_prompt_part1'] ?? '').toString(),
-      suggestedMessagesPromptPart2: (json['suggested_messages_prompt_part2'] ?? '').toString(),
+      suggestedMessagesPromptPart1:
+          (json['suggested_messages_prompt_part1'] ?? '').toString(),
+      suggestedMessagesPromptPart2:
+          (json['suggested_messages_prompt_part2'] ?? '').toString(),
       signatureButton: (json['signature_button'] ?? '').toString(),
       qrCodeLabel: (json['qr_code_label'] ?? '').toString(),
       recordVideoButton: (json['record_video_button'] ?? '').toString(),
@@ -596,7 +624,8 @@ class LocalizationMessages {
       mediaIntroText: (json['media_intro_text'] ?? '').toString(),
       howItWorks: (json['how_it_works'] ?? '').toString(),
       pasteLinkInstruction: (json['paste_link_instruction'] ?? '').toString(),
-      recordVideoInstruction: (json['record_video_instruction'] ?? '').toString(),
+      recordVideoInstruction:
+          (json['record_video_instruction'] ?? '').toString(),
       qrCodeNote: (json['qr_code_note'] ?? '').toString(),
       freeLabel: (json['free_label'] ?? '').toString(),
       pasteLinkHint: (json['paste_link_hint'] ?? '').toString(),
@@ -637,7 +666,8 @@ class LocalizationMessages {
       english: (json['english'] ?? '').toString(),
       logout: (json['logout'] ?? '').toString(),
       deleteAccount: (json['delete_account'] ?? '').toString(),
-      deleteAccountConfirmation: (json['delete_account_confirmation'] ?? '').toString(),
+      deleteAccountConfirmation:
+          (json['delete_account_confirmation'] ?? '').toString(),
       confirm: (json['confirm'] ?? '').toString(),
       editProfileTitle: (json['edit_profile_title'] ?? '').toString(),
       saveChangesButton: (json['save_changes_button'] ?? '').toString(),
@@ -651,24 +681,34 @@ class LocalizationMessages {
       birthdayLabel: (json['birthday_label'] ?? '').toString(),
       mySubscriptionsTitle: (json['my_subscriptions_title'] ?? '').toString(),
       wardayaSubscriptions: (json['wardaya_subscriptions'] ?? '').toString(),
-      subscriptionDescription: (json['subscription_description'] ?? '').toString(),
-      subscriptionHowItWorks: (json['subscription_how_it_works'] ?? '').toString(),
-      subscriptionSelectYourPlan: (json['subscription_select_your_plan'] ?? '').toString(),
-      subscriptionChooseWhatFitsYourNeeds: (json['subscription_choose_what_fits_your_needs'] ?? '').toString(),
-      subscriptionCustomizeDelivery: (json['subscription_customize_delivery'] ?? '').toString(),
+      subscriptionDescription:
+          (json['subscription_description'] ?? '').toString(),
+      subscriptionHowItWorks:
+          (json['subscription_how_it_works'] ?? '').toString(),
+      subscriptionSelectYourPlan:
+          (json['subscription_select_your_plan'] ?? '').toString(),
+      subscriptionChooseWhatFitsYourNeeds:
+          (json['subscription_choose_what_fits_your_needs'] ?? '').toString(),
+      subscriptionCustomizeDelivery:
+          (json['subscription_customize_delivery'] ?? '').toString(),
       subscriptionSetDeliveryFrequencyAndPayment:
-          (json['subscription_set_delivery_frequency_and_payment'] ?? '').toString(),
-      subscriptionEnjoyFreshFlowers: (json['subscription_enjoy_fresh_flowers'] ?? '').toString(),
+          (json['subscription_set_delivery_frequency_and_payment'] ?? '')
+              .toString(),
+      subscriptionEnjoyFreshFlowers:
+          (json['subscription_enjoy_fresh_flowers'] ?? '').toString(),
       subscriptionReceiveFreshFlowersEveryTime:
-          (json['subscription_receive_fresh_flowers_every_time'] ?? '').toString(),
+          (json['subscription_receive_fresh_flowers_every_time'] ?? '')
+              .toString(),
       subscriptionPlans: (json['subscription_plans'] ?? '').toString(),
-      subscriptionStartingFrom: (json['subscription_starting_from'] ?? '').toString(),
+      subscriptionStartingFrom:
+          (json['subscription_starting_from'] ?? '').toString(),
       subscriptionButton: (json['subscription_button'] ?? '').toString(),
       more: (json['more'] ?? '').toString(),
       less: (json['less'] ?? '').toString(),
       startingFrom: (json['starting_from'] ?? '').toString(),
       perDelivery: (json['per_delivery'] ?? '').toString(),
-      subscriptionDurationTitle: (json['subscription_duration_title'] ?? '').toString(),
+      subscriptionDurationTitle:
+          (json['subscription_duration_title'] ?? '').toString(),
       deliveryFrequency: (json['deliveryـfrequency'] ?? '').toString(),
       onceAWeek: (json['once_a_week'] ?? '').toString(),
       everyTwoWeeks: (json['every_two_weeks'] ?? '').toString(),
@@ -678,41 +718,58 @@ class LocalizationMessages {
       total: (json['total'] ?? '').toString(),
       startingDate: (json['starting_date'] ?? '').toString(),
       selectOtherDate: (json['select_other_date'] ?? '').toString(),
-      weSelectDeleveryBasedArea: (json['we_select_delevery_based_area'] ?? '').toString(),
+      weSelectDeleveryBasedArea:
+          (json['we_select_delevery_based_area'] ?? '').toString(),
       off: (json['off'] ?? '').toString(),
       perDelivery1: (json['perـdelivery'] ?? '').toString(),
       favoritesScreenTitle: (json['favorites_screen_title'] ?? '').toString(),
       favoritesEmptyTitle: (json['favorites_empty_title'] ?? '').toString(),
       favoritesEmptyButton: (json['favorites_empty_button'] ?? '').toString(),
-      subMenuItemsScreenTitle: (json['sub_menu_items_screen_title'] ?? '').toString(),
-      subMenuItemsEmptyTitle: (json['sub_menu_items_empty_title'] ?? '').toString(),
+      subMenuItemsScreenTitle:
+          (json['sub_menu_items_screen_title'] ?? '').toString(),
+      subMenuItemsEmptyTitle:
+          (json['sub_menu_items_empty_title'] ?? '').toString(),
       addressesScreenTitle: (json['addresses_screen_title'] ?? '').toString(),
-      addressesScreenAddNewAddressButton: (json['addresses_screen_add_new_address_button'] ?? '').toString(),
-      addressesScreenNoAddressesFound: (json['addresses_screen_no_addresses_found'] ?? '').toString(),
-      addressSavedSuccessfully: (json['address_saved_successfully'] ?? '').toString(),
-      addressUpdatedSuccessfully: (json['address_updated_successfully'] ?? '').toString(),
-      addressDeletedSuccessfully: (json['address_deleted_successfully'] ?? '').toString(),
+      addressesScreenAddNewAddressButton:
+          (json['addresses_screen_add_new_address_button'] ?? '').toString(),
+      addressesScreenNoAddressesFound:
+          (json['addresses_screen_no_addresses_found'] ?? '').toString(),
+      addressSavedSuccessfully:
+          (json['address_saved_successfully'] ?? '').toString(),
+      addressUpdatedSuccessfully:
+          (json['address_updated_successfully'] ?? '').toString(),
+      addressDeletedSuccessfully:
+          (json['address_deleted_successfully'] ?? '').toString(),
       fillRequiredFields: (json['fill_required_fields'] ?? '').toString(),
       dropAddressFromMap: (json['drop_address_from_map'] ?? '').toString(),
       enterAddressDetails: (json['enter_address_details'] ?? '').toString(),
       enterPhoneNumber: (json['enter_phone_number'] ?? '').toString(),
       enterRecipientName: (json['enter_recipient_name'] ?? '').toString(),
       defaultAddressTitle: (json['default_address_title'] ?? '').toString(),
-      defaultAddressWithArea: (json['default_address_with_area'] ?? '').toString(),
+      defaultAddressWithArea:
+          (json['default_address_with_area'] ?? '').toString(),
       addressLabelHint: (json['address_label_hint'] ?? '').toString(),
-      extraAddressLabelHint: (json['extra_address_label_hint'] ?? '').toString(),
-      recipientDetailsScreenTitle: (json['recipient_details_screen_title'] ?? '').toString(),
-      recipientDetailsScreenContinueButton: (json['recipient_details_screen_continue_button'] ?? '').toString(),
+      extraAddressLabelHint:
+          (json['extra_address_label_hint'] ?? '').toString(),
+      recipientDetailsScreenTitle:
+          (json['recipient_details_screen_title'] ?? '').toString(),
+      recipientDetailsScreenContinueButton:
+          (json['recipient_details_screen_continue_button'] ?? '').toString(),
       recipientDetailsScreenRecipientNameLabel:
-          (json['recipient_details_screen_recipient_name_label'] ?? '').toString(),
+          (json['recipient_details_screen_recipient_name_label'] ?? '')
+              .toString(),
       recipientDetailsScreenRecipientPhoneLabel:
-          (json['recipient_details_screen_recipient_phone_label'] ?? '').toString(),
+          (json['recipient_details_screen_recipient_phone_label'] ?? '')
+              .toString(),
       recipientDetailsScreenRecipientAreaLabel:
-          (json['recipient_details_screen_recipient_area_label'] ?? '').toString(),
+          (json['recipient_details_screen_recipient_area_label'] ?? '')
+              .toString(),
       recipientDetailsScreenRecipientAddressLabel:
-          (json['recipient_details_screen_recipient_address_label'] ?? '').toString(),
+          (json['recipient_details_screen_recipient_address_label'] ?? '')
+              .toString(),
       recipientDetailsScreenRecipientExtraAddressLabel:
-          (json['recipient_details_screen_recipient_extra_address_label'] ?? '').toString(),
+          (json['recipient_details_screen_recipient_extra_address_label'] ?? '')
+              .toString(),
       orderNumber: (json['orderNumber'] ?? '').toString(),
       date: (json['date'] ?? '').toString(),
       orderId: (json['orderId'] ?? '').toString(),
@@ -737,7 +794,8 @@ class LocalizationMessages {
       deliveryCharges: (json['deliveryCharges'] ?? '').toString(),
       vatLabel: (json['vatLabel'] ?? '').toString(),
       paymentMethod: (json['paymentMethod'] ?? '').toString(),
-      searchOrderPlaceholder: (json['search_order_placeholder'] ?? '').toString(),
+      searchOrderPlaceholder:
+          (json['search_order_placeholder'] ?? '').toString(),
       paymentTitle: (json['paymentTitle'] ?? '').toString(),
       cancelPaymentTitle: (json['cancelPaymentTitle'] ?? '').toString(),
       cancelPaymentMessage: (json['cancelPaymentMessage'] ?? '').toString(),
@@ -755,7 +813,8 @@ class LocalizationMessages {
       paymentMethodsTitle: (json['paymentMethodsTitle'] ?? '').toString(),
       proceedToPaymentButton: (json['proceedToPaymentButton'] ?? '').toString(),
       creditDebitCardTitle: (json['creditDebitCardTitle'] ?? '').toString(),
-      creditDebitCardDescription: (json['creditDebitCardDescription'] ?? '').toString(),
+      creditDebitCardDescription:
+          (json['creditDebitCardDescription'] ?? '').toString(),
       madaTitle: (json['madaTitle'] ?? '').toString(),
       madaDescription: (json['madaDescription'] ?? '').toString(),
       applePayTitle: (json['applePayTitle'] ?? '').toString(),
@@ -769,7 +828,8 @@ class LocalizationMessages {
       sendYourGiftTo: (json['SendYourGiftTo'] ?? '').toString(),
       myOccasions: (json['myOccasions'] ?? '').toString(),
       quickAdd: (json['quickAdd'] ?? '').toString(),
-      selectAnOccasionToCreateAreminder: (json['selectAnOccasionToCreateAReminder'] ?? '').toString(),
+      selectAnOccasionToCreateAreminder:
+          (json['selectAnOccasionToCreateAReminder'] ?? '').toString(),
       yourUpcomingOccasion: (json['yourUpcomingOccasion'] ?? '').toString(),
       noUpcomingOccasions: (json['noUpcomingOccasions'] ?? '').toString(),
       noOccasionsAvailable: (json['noOccasionsAvailable'] ?? '').toString(),
@@ -786,17 +846,20 @@ class LocalizationMessages {
       noInvoicesTitle: (json['noInvoicesTitle'] ?? '').toString(),
       noInvoicesSubtitle: (json['noInvoicesSubtitle'] ?? '').toString(),
       invoiceDetails: (json['invoiceDetails'] ?? '').toString(),
-      subscriptionCheckoutTitle: (json['subscription_checkout_title'] ?? '').toString(),
+      subscriptionCheckoutTitle:
+          (json['subscription_checkout_title'] ?? '').toString(),
       recipientDetailsTitle: (json['recipient_details_title'] ?? '').toString(),
       paymentMethodTitle: (json['payment_method_title'] ?? '').toString(),
       paymentDetailsTitle: (json['payment_details_title'] ?? '').toString(),
-      proceedToPaymentButton1: (json['proceed_to_payment_button'] ?? '').toString(),
+      proceedToPaymentButton1:
+          (json['proceed_to_payment_button'] ?? '').toString(),
       useSavedAddresses: (json['use_saved_addresses'] ?? '').toString(),
       recipientNameLabel: (json['recipient_name_label'] ?? '').toString(),
       recipientNameHint: (json['recipient_name_hint'] ?? '').toString(),
       recipientPhoneLabel: (json['recipient_phone_label'] ?? '').toString(),
       deliveryAddressLabel: (json['delivery_address_label'] ?? '').toString(),
-      askRecipientForAddress: (json['ask_recipient_for_address'] ?? '').toString(),
+      askRecipientForAddress:
+          (json['ask_recipient_for_address'] ?? '').toString(),
       enterRecipientAddress: (json['enter_recipient_address'] ?? '').toString(),
       selectSavedAddress: (json['select_saved_address'] ?? '').toString(),
       noSavedAddresses: (json['no_saved_addresses'] ?? '').toString(),
@@ -808,34 +871,43 @@ class LocalizationMessages {
       googlePay: (json['google_pay'] ?? '').toString(),
       applePay: (json['apple_pay'] ?? '').toString(),
       stcPay: (json['stc_pay'] ?? '').toString(),
-      firstDeliveryPaymentDetails: (json['first_delivery_payment_details'] ?? '').toString(),
+      firstDeliveryPaymentDetails:
+          (json['first_delivery_payment_details'] ?? '').toString(),
       subtotalLabel: (json['subtotal_label'] ?? '').toString(),
       deliveryChargesLabel: (json['delivery_charges_label'] ?? '').toString(),
       totalVatIncluded: (json['total_vat_included'] ?? '').toString(),
-      totalVatIncludedLabel: (json['total_vat_included_label'] ?? '').toString(),
+      totalVatIncludedLabel:
+          (json['total_vat_included_label'] ?? '').toString(),
       nextPaymentLabel: (json['next_payment_label'] ?? '').toString(),
       pleaseFillFields: (json['please_fill_fields'] ?? '').toString(),
       selectLocation: (json['selectLocation'] ?? '').toString(),
       searchForLocation: (json['searchForLocation'] ?? '').toString(),
-      dragMapToAdjustLocation: (json['dragMapToAdjustLocation'] ?? '').toString(),
+      dragMapToAdjustLocation:
+          (json['dragMapToAdjustLocation'] ?? '').toString(),
       selectedLocation: (json['selectedLocation'] ?? '').toString(),
       confirmLocation: (json['confirmLocation'] ?? '').toString(),
-      locationServicesDisabled: (json['locationServicesDisabled'] ?? '').toString(),
-      locationPermissionsDenied: (json['locationPermissionsDenied'] ?? '').toString(),
-      locationPermissionsPermanentlyDenied: (json['locationPermissionsPermanentlyDenied'] ?? '').toString(),
+      locationServicesDisabled:
+          (json['locationServicesDisabled'] ?? '').toString(),
+      locationPermissionsDenied:
+          (json['locationPermissionsDenied'] ?? '').toString(),
+      locationPermissionsPermanentlyDenied:
+          (json['locationPermissionsPermanentlyDenied'] ?? '').toString(),
       currentLocationPinned: (json['currentLocationPinned'] ?? '').toString(),
-      couldNotGetCurrentLocation: (json['couldNotGetCurrentLocation'] ?? '').toString(),
+      couldNotGetCurrentLocation:
+          (json['couldNotGetCurrentLocation'] ?? '').toString(),
       voucherCode: (json['voucher_code'] ?? '').toString(),
       addVoucherCode: (json['add_voucher_code'] ?? '').toString(),
       validatingPromoCode: (json['validating_promo_code'] ?? '').toString(),
       promoCodeApplied: (json['promo_code_applied'] ?? '').toString(),
       discount: (json['discount'] ?? '').toString(),
       invalidPromoCode: (json['invalid_promo_code'] ?? '').toString(),
-      pleaseEnterVoucherCode: (json['please_enter_voucher_code'] ?? '').toString(),
+      pleaseEnterVoucherCode:
+          (json['please_enter_voucher_code'] ?? '').toString(),
       applied: (json['applied'] ?? '').toString(),
       apply: (json['apply'] ?? '').toString(),
       startTypingToSearch: (json['start_typing_to_search'] ?? '').toString(),
-      toBeProvidedByRecipient: (json['to_be_provided_by_recipient'] ?? '').toString(),
+      toBeProvidedByRecipient:
+          (json['to_be_provided_by_recipient'] ?? '').toString(),
       tomorrow: (json['tomorrow'] ?? '').toString(),
       editOccasion: (json['editOccasion'] ?? '').toString(),
       remindMeAbout: (json['remindMeAbout'] ?? '').toString(),
@@ -1281,7 +1353,8 @@ class LocalizationMessages {
         r'''create_account''': createAccount,
         r'''divider_text''': dividerText,
         r'''sign_in_with''': signInWith,
-        r'''validation_email_password_required''': validationEmailPasswordRequired,
+        r'''validation_email_password_required''':
+            validationEmailPasswordRequired,
         r'''google_sign_in_success''': googleSignInSuccess,
         r'''google_sign_in_failed''': googleSignInFailed,
         r'''google_token_error''': googleTokenError,
@@ -1311,7 +1384,8 @@ class LocalizationMessages {
         r'''home_woodnt_you_love_this''': homeWoodntYouLoveThis,
         r'''home_an_extra_luxurious_touch''': homeAnExtraLuxuriousTouch,
         r'''home_best_sellers''': homeBestSellers,
-        r'''home_captivation_aromas_of_mubkhar''': homeCaptivationAromasOfMubkhar,
+        r'''home_captivation_aromas_of_mubkhar''':
+            homeCaptivationAromasOfMubkhar,
         r'''home_gift_your_loved_ones''': homeGiftYourLovedOnes,
         r'''home_natures_magic''': homeNaturesMagic,
         r'''home_latest_and_loveliest''': homeLatestAndLoveliest,
@@ -1327,14 +1401,20 @@ class LocalizationMessages {
         r'''explore_card_recipients''': exploreCardRecipients,
         r'''explore_category_flowers_plants''': exploreCategoryFlowersPlants,
         r'''explore_category_flowers_gifts''': exploreCategoryFlowersGifts,
-        r'''explore_category_express_delivery''': exploreCategoryExpressDelivery,
-        r'''explore_category_floral_subscription''': exploreCategoryFloralSubscription,
+        r'''explore_category_express_delivery''':
+            exploreCategoryExpressDelivery,
+        r'''explore_category_floral_subscription''':
+            exploreCategoryFloralSubscription,
         r'''explore_brands_youll_love''': exploreBrandsYoullLove,
         r'''discover_new_ideas_title''': discoverNewIdeasTitle,
-        r'''discover_card_express_delivery_title''': discoverCardExpressDeliveryTitle,
-        r'''discover_card_express_delivery_button''': discoverCardExpressDeliveryButton,
-        r'''discover_card_weekly_surprise_title''': discoverCardWeeklySurpriseTitle,
-        r'''discover_card_weekly_surprise_button''': discoverCardWeeklySurpriseButton,
+        r'''discover_card_express_delivery_title''':
+            discoverCardExpressDeliveryTitle,
+        r'''discover_card_express_delivery_button''':
+            discoverCardExpressDeliveryButton,
+        r'''discover_card_weekly_surprise_title''':
+            discoverCardWeeklySurpriseTitle,
+        r'''discover_card_weekly_surprise_button''':
+            discoverCardWeeklySurpriseButton,
         r'''moments_screen_title''': momentsScreenTitle,
         r'''recipients_screen_title''': recipientsScreenTitle,
         r'''flowers_planets_screen_title''': flowersPlanetsScreenTitle,
@@ -1478,11 +1558,14 @@ class LocalizationMessages {
         r'''subscription_description''': subscriptionDescription,
         r'''subscription_how_it_works''': subscriptionHowItWorks,
         r'''subscription_select_your_plan''': subscriptionSelectYourPlan,
-        r'''subscription_choose_what_fits_your_needs''': subscriptionChooseWhatFitsYourNeeds,
+        r'''subscription_choose_what_fits_your_needs''':
+            subscriptionChooseWhatFitsYourNeeds,
         r'''subscription_customize_delivery''': subscriptionCustomizeDelivery,
-        r'''subscription_set_delivery_frequency_and_payment''': subscriptionSetDeliveryFrequencyAndPayment,
+        r'''subscription_set_delivery_frequency_and_payment''':
+            subscriptionSetDeliveryFrequencyAndPayment,
         r'''subscription_enjoy_fresh_flowers''': subscriptionEnjoyFreshFlowers,
-        r'''subscription_receive_fresh_flowers_every_time''': subscriptionReceiveFreshFlowersEveryTime,
+        r'''subscription_receive_fresh_flowers_every_time''':
+            subscriptionReceiveFreshFlowersEveryTime,
         r'''subscription_plans''': subscriptionPlans,
         r'''subscription_starting_from''': subscriptionStartingFrom,
         r'''subscription_button''': subscriptionButton,
@@ -1509,8 +1592,10 @@ class LocalizationMessages {
         r'''sub_menu_items_screen_title''': subMenuItemsScreenTitle,
         r'''sub_menu_items_empty_title''': subMenuItemsEmptyTitle,
         r'''addresses_screen_title''': addressesScreenTitle,
-        r'''addresses_screen_add_new_address_button''': addressesScreenAddNewAddressButton,
-        r'''addresses_screen_no_addresses_found''': addressesScreenNoAddressesFound,
+        r'''addresses_screen_add_new_address_button''':
+            addressesScreenAddNewAddressButton,
+        r'''addresses_screen_no_addresses_found''':
+            addressesScreenNoAddressesFound,
         r'''address_saved_successfully''': addressSavedSuccessfully,
         r'''address_updated_successfully''': addressUpdatedSuccessfully,
         r'''address_deleted_successfully''': addressDeletedSuccessfully,
@@ -1524,12 +1609,18 @@ class LocalizationMessages {
         r'''address_label_hint''': addressLabelHint,
         r'''extra_address_label_hint''': extraAddressLabelHint,
         r'''recipient_details_screen_title''': recipientDetailsScreenTitle,
-        r'''recipient_details_screen_continue_button''': recipientDetailsScreenContinueButton,
-        r'''recipient_details_screen_recipient_name_label''': recipientDetailsScreenRecipientNameLabel,
-        r'''recipient_details_screen_recipient_phone_label''': recipientDetailsScreenRecipientPhoneLabel,
-        r'''recipient_details_screen_recipient_area_label''': recipientDetailsScreenRecipientAreaLabel,
-        r'''recipient_details_screen_recipient_address_label''': recipientDetailsScreenRecipientAddressLabel,
-        r'''recipient_details_screen_recipient_extra_address_label''': recipientDetailsScreenRecipientExtraAddressLabel,
+        r'''recipient_details_screen_continue_button''':
+            recipientDetailsScreenContinueButton,
+        r'''recipient_details_screen_recipient_name_label''':
+            recipientDetailsScreenRecipientNameLabel,
+        r'''recipient_details_screen_recipient_phone_label''':
+            recipientDetailsScreenRecipientPhoneLabel,
+        r'''recipient_details_screen_recipient_area_label''':
+            recipientDetailsScreenRecipientAreaLabel,
+        r'''recipient_details_screen_recipient_address_label''':
+            recipientDetailsScreenRecipientAddressLabel,
+        r'''recipient_details_screen_recipient_extra_address_label''':
+            recipientDetailsScreenRecipientExtraAddressLabel,
         r'''orderNumber''': orderNumber,
         r'''date''': date,
         r'''orderId''': orderId,
@@ -1586,7 +1677,8 @@ class LocalizationMessages {
         r'''SendYourGiftTo''': sendYourGiftTo,
         r'''myOccasions''': myOccasions,
         r'''quickAdd''': quickAdd,
-        r'''selectAnOccasionToCreateAReminder''': selectAnOccasionToCreateAreminder,
+        r'''selectAnOccasionToCreateAReminder''':
+            selectAnOccasionToCreateAreminder,
         r'''yourUpcomingOccasion''': yourUpcomingOccasion,
         r'''noUpcomingOccasions''': noUpcomingOccasions,
         r'''noOccasionsAvailable''': noOccasionsAvailable,
@@ -1639,7 +1731,8 @@ class LocalizationMessages {
         r'''confirmLocation''': confirmLocation,
         r'''locationServicesDisabled''': locationServicesDisabled,
         r'''locationPermissionsDenied''': locationPermissionsDenied,
-        r'''locationPermissionsPermanentlyDenied''': locationPermissionsPermanentlyDenied,
+        r'''locationPermissionsPermanentlyDenied''':
+            locationPermissionsPermanentlyDenied,
         r'''currentLocationPinned''': currentLocationPinned,
         r'''couldNotGetCurrentLocation''': couldNotGetCurrentLocation,
         r'''voucher_code''': voucherCode,
@@ -1732,7 +1825,8 @@ final LocalizationMessages en = LocalizationMessages(
   fieldRequired: 'Required',
   fieldsMarkedRequired: 'Fields marked with red * are required',
   forgetPasswordTitle: 'Forget Password?',
-  forgetPasswordInstruction: 'Enter the email address associated with your account',
+  forgetPasswordInstruction:
+      'Enter the email address associated with your account',
   resetPasswordButton: 'Reset Password',
   passwordResetLinkSent: 'Password reset link sent to your email',
   createAccountTitle: 'Create Account',
@@ -1869,7 +1963,8 @@ final LocalizationMessages en = LocalizationMessages(
   frontSideLabel: 'Front Side (Message)',
   backSideLabel: 'Back Side (Cover)',
   qrQuestion: 'Did you enjoy this gift?',
-  qrInstruction: 'Scan the QR code to share your heartfelt message with the sender.',
+  qrInstruction:
+      'Scan the QR code to share your heartfelt message with the sender.',
   signatureTitle: 'Your Signature',
   drawInstruction: 'Draw your signature inside the frame',
   clearButton: 'Clear',
@@ -1899,7 +1994,8 @@ Need help with something?''',
   english: 'English',
   logout: 'Logout',
   deleteAccount: 'Delete My Account',
-  deleteAccountConfirmation: 'Are you sure you want to delete your account? This action cannot be undone.',
+  deleteAccountConfirmation:
+      'Are you sure you want to delete your account? This action cannot be undone.',
   confirm: 'Confirm',
   editProfileTitle: 'Edit Profile',
   saveChangesButton: 'Save',
@@ -1920,7 +2016,8 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   subscriptionSelectYourPlan: 'Select Your Plan:',
   subscriptionChooseWhatFitsYourNeeds: 'Choose what fits your needs.',
   subscriptionCustomizeDelivery: 'Customize Delivery:',
-  subscriptionSetDeliveryFrequencyAndPayment: 'Set delivery frequency and payment.',
+  subscriptionSetDeliveryFrequencyAndPayment:
+      'Set delivery frequency and payment.',
   subscriptionEnjoyFreshFlowers: 'Enjoy Fresh Flowers:',
   subscriptionReceiveFreshFlowersEveryTime: 'Receive fresh flowers every time.',
   subscriptionPlans: 'Subscription Plans',
@@ -1940,7 +2037,8 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   total: 'Total',
   startingDate: 'Starting Date',
   selectOtherDate: 'Select Other Date',
-  weSelectDeleveryBasedArea: 'We’ll select the best delivery time based on your area and delivery date',
+  weSelectDeleveryBasedArea:
+      'We’ll select the best delivery time based on your area and delivery date',
   off: 'OFF',
   perDelivery1: 'Per delivery',
   favoritesScreenTitle: 'Favorites',
@@ -1969,7 +2067,8 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   recipientDetailsScreenRecipientPhoneLabel: 'Phone Number',
   recipientDetailsScreenRecipientAreaLabel: 'Area',
   recipientDetailsScreenRecipientAddressLabel: 'Address',
-  recipientDetailsScreenRecipientExtraAddressLabel: 'Extra address details(optional)',
+  recipientDetailsScreenRecipientExtraAddressLabel:
+      'Extra address details(optional)',
   orderNumber: 'Order Number',
   date: 'Date',
   orderId: 'Order ID',
@@ -2007,7 +2106,8 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   paymentSuccessTitle: 'Payment Successful',
   paymentSuccessMessage: 'Your payment has been processed successfully.',
   paymentFailedTitle: 'Payment Failed',
-  paymentFailedMessage: 'Your payment could not be processed. Please try again.',
+  paymentFailedMessage:
+      'Your payment could not be processed. Please try again.',
   paymentOkButton: 'OK',
   paymentMethodsTitle: 'Payment Methods',
   proceedToPaymentButton: 'Proceed to Payment',
@@ -2077,8 +2177,10 @@ Enjoy the magic of regular fresh flower deliveries that transofrm your space, up
   dragMapToAdjustLocation: 'Drag map to adjust location',
   selectedLocation: 'Selected Location',
   confirmLocation: 'Confirm Location',
-  locationServicesDisabled: 'Location services are disabled. Please enable them in settings.',
-  locationPermissionsDenied: 'Location permissions denied. Please grant permission to use your location.',
+  locationServicesDisabled:
+      'Location services are disabled. Please enable them in settings.',
+  locationPermissionsDenied:
+      'Location permissions denied. Please grant permission to use your location.',
   locationPermissionsPermanentlyDenied:
       'Location permissions are permanently denied. Please enable them in app settings.',
   currentLocationPinned: 'Current location pinned',
@@ -2147,7 +2249,8 @@ final LocalizationMessages ar = LocalizationMessages(
   forgetPasswordTitle: 'نسيت كلمة المرور؟',
   forgetPasswordInstruction: 'أدخل البريد الإلكتروني المرتبط بحسابك',
   resetPasswordButton: 'إعادة تعيين كلمة المرور',
-  passwordResetLinkSent: 'تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني',
+  passwordResetLinkSent:
+      'تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني',
   createAccountTitle: 'إنشاء حساب',
   createAccountButton: 'إنشاء حساب',
   nameLabel: 'الاسم',
@@ -2312,7 +2415,8 @@ final LocalizationMessages ar = LocalizationMessages(
   english: 'الإنجليزية',
   logout: 'تسجيل خروج',
   deleteAccount: 'حذف حسابي',
-  deleteAccountConfirmation: 'هل أنت متأكد أنك تريد حذف حسابك؟ هذا الإجراء لا يمكن التراجع عنه.',
+  deleteAccountConfirmation:
+      'هل أنت متأكد أنك تريد حذف حسابك؟ هذا الإجراء لا يمكن التراجع عنه.',
   confirm: 'تأكيد',
   editProfileTitle: 'تعديل الملف الشخصي',
   saveChangesButton: 'حفظ',
@@ -2353,7 +2457,8 @@ final LocalizationMessages ar = LocalizationMessages(
   total: 'الإجمالي',
   startingDate: 'تاريخ البدء',
   selectOtherDate: 'اختر تاريخًا آخر',
-  weSelectDeleveryBasedArea: 'سنختار أفضل وقت توصيل بناءً على منطقتك وتاريخ التوصيل',
+  weSelectDeleveryBasedArea:
+      'سنختار أفضل وقت توصيل بناءً على منطقتك وتاريخ التوصيل',
   off: 'خصم',
   perDelivery1: '',
   favoritesScreenTitle: 'المفضلة',
@@ -2420,7 +2525,8 @@ final LocalizationMessages ar = LocalizationMessages(
   paymentSuccessTitle: 'تم الدفع بنجاح',
   paymentSuccessMessage: 'تمت معالجة عملية الدفع الخاصة بك بنجاح.',
   paymentFailedTitle: 'فشلت عملية الدفع',
-  paymentFailedMessage: 'تعذر معالجة عملية الدفع الخاصة بك. يرجى المحاولة مرة أخرى.',
+  paymentFailedMessage:
+      'تعذر معالجة عملية الدفع الخاصة بك. يرجى المحاولة مرة أخرى.',
   paymentOkButton: 'موافق',
   paymentMethodsTitle: 'طرق الدفع',
   proceedToPaymentButton: 'المتابعة للدفع',
@@ -2491,8 +2597,10 @@ final LocalizationMessages ar = LocalizationMessages(
   selectedLocation: 'الموقع المحدد',
   confirmLocation: 'تأكيد الموقع',
   locationServicesDisabled: 'خدمات الموقع معطلة. يرجى تفعيلها في الإعدادات.',
-  locationPermissionsDenied: 'تم رفض أذونات الموقع. يرجى منح الإذن لاستخدام موقعك.',
-  locationPermissionsPermanentlyDenied: 'تم رفض أذونات الموقع بشكل دائم. يرجى تمكينها في إعدادات التطبيق.',
+  locationPermissionsDenied:
+      'تم رفض أذونات الموقع. يرجى منح الإذن لاستخدام موقعك.',
+  locationPermissionsPermanentlyDenied:
+      'تم رفض أذونات الموقع بشكل دائم. يرجى تمكينها في إعدادات التطبيق.',
   currentLocationPinned: 'تم تحديد موقعك الحالي',
   couldNotGetCurrentLocation: 'تعذر الحصول على موقعك الحالي',
   voucherCode: 'كود الخصم',
@@ -2528,7 +2636,8 @@ final Map<Locale, LocalizationMessages> _languageMap = {
 
 final Map<Locale, LocalizationMessages> _providersLanguagesMap = {};
 
-class EasiestLocalizationDelegate extends LocalizationsDelegate<LocalizationMessages> {
+class EasiestLocalizationDelegate
+    extends LocalizationsDelegate<LocalizationMessages> {
   EasiestLocalizationDelegate({
     List<LocalizationProvider<LocalizationMessages>> providers = const [],
   }) {
@@ -2543,7 +2652,8 @@ class EasiestLocalizationDelegate extends LocalizationsDelegate<LocalizationMess
 
   @override
   bool isSupported(Locale locale) {
-    final bool supportedByProviders = _providers.any((LocalizationProvider value) => value.canLoad(locale));
+    final bool supportedByProviders =
+        _providers.any((LocalizationProvider value) => value.canLoad(locale));
     if (supportedByProviders) {
       return true;
     }
@@ -2564,7 +2674,8 @@ class EasiestLocalizationDelegate extends LocalizationsDelegate<LocalizationMess
 
     LocalizationProvider<LocalizationMessages>? localizationProvider;
 
-    for (final LocalizationProvider<LocalizationMessages> provider in _providers) {
+    for (final LocalizationProvider<LocalizationMessages> provider
+        in _providers) {
       if (provider.canLoad(locale)) {
         localizationProvider = provider;
         break;
@@ -2588,20 +2699,26 @@ class EasiestLocalizationDelegate extends LocalizationsDelegate<LocalizationMess
   }
 
   @override
-  bool shouldReload(LocalizationsDelegate<LocalizationMessages> old) => old != this;
+  bool shouldReload(LocalizationsDelegate<LocalizationMessages> old) =>
+      old != this;
 }
 
 class Messages {
-  static LocalizationMessages of(BuildContext context) => Localizations.of(context, LocalizationMessages)!;
+  static LocalizationMessages of(BuildContext context) =>
+      Localizations.of(context, LocalizationMessages)!;
 
-  static LocalizationMessages? getContent(Locale locale) => _loadLocalLocale(locale);
+  static LocalizationMessages? getContent(Locale locale) =>
+      _loadLocalLocale(locale);
 
   static LocalizationMessages get el {
     final String? defaultLocaleString = Intl.defaultLocale;
-    final List<String> localeParticles = defaultLocaleString == null ? [] : defaultLocaleString.split(RegExp(r'[_-]'));
+    final List<String> localeParticles = defaultLocaleString == null
+        ? []
+        : defaultLocaleString.split(RegExp(r'[_-]'));
     final Locale? defaultLocale = localeParticles.isEmpty
         ? null
-        : Locale(localeParticles.first, localeParticles.length > 1 ? localeParticles[1] : null);
+        : Locale(localeParticles.first,
+            localeParticles.length > 1 ? localeParticles[1] : null);
     LocalizationMessages? localeContent = _providersLanguagesMap[defaultLocale];
     localeContent ??= _languageMap[defaultLocale] ?? _languageMap.values.first;
     return localeContent;
@@ -2642,8 +2759,11 @@ const List<Locale> supportedLocales = [
   Locale('ar'),
 ];
 
-List<Locale> supportedLocalesWithProviders(List<LocalizationProvider<LocalizationMessages>> providers) => [
-      for (final LocalizationProvider provider in providers) ...provider.supportedLocales,
+List<Locale> supportedLocalesWithProviders(
+        List<LocalizationProvider<LocalizationMessages>> providers) =>
+    [
+      for (final LocalizationProvider provider in providers)
+        ...provider.supportedLocales,
       ...supportedLocales,
     ];
 

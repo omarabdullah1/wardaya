@@ -57,7 +57,8 @@ class DioFactory {
       if (!kIsWeb) {
         final httpAdapter = dioInstance.httpClientAdapter;
         if (httpAdapter is IOHttpClientAdapter) {
-          httpAdapter.onHttpClientCreate = (HttpClient client) {
+          httpAdapter.createHttpClient = () {
+            final client = HttpClient();
             client.badCertificateCallback =
                 (X509Certificate cert, String host, int port) {
               log('Bypassing certificate verification for $host:$port');

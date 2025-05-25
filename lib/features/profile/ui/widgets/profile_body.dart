@@ -1,7 +1,5 @@
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,9 +12,7 @@ import '../../../../core/assets/assets.dart';
 import '../../../../core/blocs/general/cubit/general_cubit.dart';
 import '../../../../core/helpers/constants.dart';
 import '../../../../core/helpers/shared_pref_helper.dart';
-import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
-import '../../logic/cubit/profile_cubit.dart';
 
 class ProfileBody extends StatelessWidget {
   const ProfileBody({super.key});
