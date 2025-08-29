@@ -161,6 +161,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact
 
 - **Project Owner**: Omar Abdullah
+- - **Email**: [omar.abdullah9825@gmail.com]
 - **GitHub**: [@omarabdullah1](https://github.com/omarabdullah1)
 
 ## 🙏 Acknowledgments
