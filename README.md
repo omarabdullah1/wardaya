@@ -3,13 +3,13 @@
 [![Flutter](https://img.shields.io/badge/Flutter-3.0+-02569B?style=for-the-badge&logo=flutter)](https://flutter.dev/)
 [![Dart](https://img.shields.io/badge/Dart-3.0+-0175C2?style=for-the-badge&logo=dart)](https://dart.dev/)
 [![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS-25D366?style=for-the-badge&logo=apple)](https://flutter.dev/)
+[![Download on the App Store](https://img.shields.io/badge/Download_on_the_App_Store-0D96F6?style=for-the-badge&logo=apple&logoColor=white)](https://apps.apple.com/us/app/wardaya/id6741480542)
 
 Wardaya is a comprehensive mobile application for ordering and delivering flowers, gifts, and celebration items. Built with Flutter, it provides a seamless cross-platform experience for customers to browse, order, and track deliveries of floral arrangements, chocolates, balloons, jewelry, and other special occasion items.
-#### 🤩 Looks
 
-<tr>
-   ![Wardaya](https://github.com/user-attachments/assets/38a1c129-eb1b-4724-8b46-d3fe917d6b67)
-</tr>
+## 🤩 App Preview
+
+![Wardaya App](https://github.com/user-attachments/assets/38a1c129-eb1b-4724-8b46-d3fe917d6b67)
 
 ## 🌟 Features
 
